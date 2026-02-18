@@ -1,21 +1,34 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b95fdd8310ef467305015ece1b0f9411",
-  "translation_date": "2025-08-29T10:08:23+00:00",
-  "source_file": "2-js-basics/1-data-types/README.md",
-  "language_code": "sw"
-}
--->
-# Msingi wa JavaScript: Aina za Data
+# Misingi ya JavaScript: Aina za Data
 
-![Msingi wa JavaScript - Aina za Data](../../../../translated_images/webdev101-js-datatypes.4cc470179730702c756480d3ffa46507f746e5975ebf80f99fdaaf1cff09a7f4.sw.png)
+![Misingi ya JavaScript - Aina za data](../../../../translated_images/sw/webdev101-js-datatypes.4cc470179730702c.webp)  
 > Sketchnote na [Tomomi Imura](https://twitter.com/girlie_mac)
 
-## Jaribio la Kabla ya Somo
-[Jaribio la kabla ya somo](https://ff-quizzes.netlify.app/web/)
+```mermaid
+journey
+    title Safari Yako ya Aina za Data za JavaScript
+    section Msingi
+      Vigezo & Thamani Dumu: 5: You
+      Muundo wa Tangazo: 4: You
+      Dhana za Uteuzi: 5: You
+    section Aina Kuu
+      Nambari & Hisabati: 4: You
+      Mitindo & Maandishi: 5: You
+      Booleans & Mantiki: 4: You
+    section Tumia Maarifa
+      Ubadilishaji Aina: 4: You
+      Mifano Halisi: 5: You
+      Mbinu Bora: 5: You
+```  
+Aina za data ni mojawapo ya dhana za msingi katika JavaScript ambazo utakutana nazo katika kila programu unayoandika. Fikiria aina za data kama mfumo wa kuhifadhi uliotumiwa na maktaba za zamani huko Alexandria – walikuwa na sehemu maalum za mikokoteni yenye shairi, hisabati, na kumbukumbu za kihistoria. JavaScript huandaa taarifa kwa njia kama hiyo kwa makundi tofauti ya aina tofauti za data.
 
-Somo hili linashughulikia misingi ya JavaScript, lugha inayowezesha mwingiliano kwenye wavuti.
+Katika somo hili, tutaangazia aina nyeti za data zinazofanya JavaScript ifanye kazi. Utajifunza jinsi ya kushughulikia nambari, maandishi, thamani za kweli/sifuri, na kuelewa kwa nini kuchagua aina sahihi ni muhimu kwa programu zako. Dhana hizi zinaweza kuonekana kuwa za dhahania mwanzoni, lakini kwa mazoezi, zitakuwa za asili kabisa.
+
+Kuelewa aina za data kutafanya kila kitu kingine katika JavaScript kuwa wazi zaidi. Kama wahandisi wa majengo wanavyohitaji kuelewa vifaa tofauti kabla ya kujenga kanisa kuu, misingi hii itasaidia kila kitu utakachojenga baadaye.
+
+## Mtihani wa Kabla ya Mada  
+[Mtihani wa kabla ya mada](https://ff-quizzes.netlify.app/web/)
+
+Somo hili linahusu misingi ya JavaScript, lugha inayotoa mwingiliano kwenye wavuti.
 
 > Unaweza kuchukua somo hili kwenye [Microsoft Learn](https://docs.microsoft.com/learn/modules/web-development-101-variables/?WT.mc_id=academic-77807-sagibbon)!
 
@@ -23,193 +36,574 @@ Somo hili linashughulikia misingi ya JavaScript, lugha inayowezesha mwingiliano 
 
 [![Data Types in JavaScript](https://img.youtube.com/vi/AWfA95eLdq8/0.jpg)](https://youtube.com/watch?v=AWfA95eLdq8 "Data Types in JavaScript")
 
-> 🎥 Bonyeza picha hapo juu kwa video kuhusu variables na aina za data
+> 🎥 Bonyeza picha zilizo juu kwa video kuhusu vigezo na aina za data
 
-Tuanze na variables na aina za data zinazojaza hizo variables!
+Tuanze na vigezo na aina za data zinazojaza!
 
-## Variables
+```mermaid
+mindmap
+  root((Data za JavaScript))
+    Variables
+      let myVar
+      const PI = 3.14
+      var oldStyle
+    Primitive Types
+      number
+        42
+        3.14
+        -5
+      string
+        "Hello"
+        'Dunia'
+        `Kiolezo`
+      boolean
+        kweli
+        uongo
+      undefined
+      null
+    Operations
+      Arithmetic
+        + - * / %
+      String Methods
+        uunganishaji
+        herufi za kiolezo
+      Type Conversion
+        ya siri
+        waziwazi
+```  
+## Vigezo
 
-Variables huhifadhi thamani ambazo zinaweza kutumika na kubadilishwa katika msimbo wako.
+Vigezo ni vipengele vya msingi katika programu. Kama chupa zilizo lebo zilizotumika na wananayotajiri wa karne za kati kuhifadhi vitu mbalimbali, vigezo hukuruhusu kuhifadhi taarifa na kutoa jina la kuelezea ili uziwekeze tena baadaye. Unahitaji kukumbuka umri wa mtu? Hifadhi katika kigezo kinachoitwa `age`. Unataka kufuatilia jina la mtumiaji? Hifadhi kwenye kigezo kinachoitwa `userName`.
 
-Kuunda na **kutangaza** variable kuna sintaksia ifuatayo **[keyword] [name]**. Inajumuisha sehemu mbili:
+Tutazingatia njia ya kisasa ya kuunda vigezo katika JavaScript. Mbinu utakazojifunza hapa zinawakilisha miaka ya maendeleo ya lugha na mbinu bora zilizotengenezwa na jamii ya programu.
 
-- **Keyword**. Keywords zinaweza kuwa `let` au `var`.  
+Kuunda na **kutangaza** kigezo kuna sintaksia ifuatayo **[keyword] [name]**. Inaundwa na sehemu mbili:
 
-✅ Neno kuu `let` lilianzishwa katika ES6 na linatoa kile kinachoitwa _block scope_ kwa variable yako. Inapendekezwa kutumia `let` badala ya `var`. Tutajadili block scopes kwa kina zaidi katika sehemu zijazo.
-- **Jina la variable**, hili ni jina unalochagua mwenyewe.
+- **Neno kuu (Keyword)**. Tumia `let` kwa vigezo vinavyoweza kubadilika, au `const` kwa thamani zinazoendelea kuwa zile zile.
+- **Jina la kigezo**, hili ni jina lenye maelezo unalochagua mwenyewe.
 
-### Kazi - Kufanya kazi na variables
+✅ Neno kuu `let` lilianzishwa katika ES6 na linatoa kigezo chako kile kinachoitwa _block scope_. Inapendekezwa utumie `let` au `const` badala ya neno la zamani `var`. Tutaangazia block scopes zaidi kwa kina katika sehemu zijazo.
 
-1. **Tangaza variable**. Tuseme tunatangaza variable kwa kutumia neno kuu `let`:
+### Kazi - kufanya kazi na vigezo
+
+1. **Tangaza kigezo**. Tuanze kwa kuunda kigezo chetu cha kwanza:
 
     ```javascript
     let myVariable;
     ```
+  
+   **Hili linalofanikisha:**  
+   - Hii inamuambia JavaScript kuunda sehemu ya kuhifadhi inayoitwa `myVariable`  
+   - JavaScript inapatia nafasi ya kumbukumbu kwa kigezo hiki  
+   - Kigezo kwa sasa hakina thamani (undefined)  
 
-   `myVariable` sasa imetangazwa kwa kutumia neno kuu `let`. Kwa sasa haina thamani.
-
-1. **Weka thamani**. Hifadhi thamani kwenye variable kwa kutumia operator `=` ikifuatiwa na thamani inayotarajiwa.
+2. **Mpa thamani**. Sasa tuweke kitu katika kigezo chetu:
 
     ```javascript
     myVariable = 123;
     ```
+  
+   **Jinsi ya kugawa thamani:**  
+   - Operator `=` huagiza thamani 123 kwa kigezo chetu  
+   - Kigezo sasa kina thamani hii badala ya kuwa undefined  
+   - Unaweza kurejelea thamani hii katika msimbo wako ukitumia `myVariable`  
 
-   > Kumbuka: matumizi ya `=` katika somo hili yanamaanisha tunatumia "assignment operator", inayotumika kuweka thamani kwenye variable. Haimaanishi usawa.
+   > Kumbuka: matumizi ya `=` katika somo hili yanamaanisha tunatumia "operator wa kugawa", inayotumika kuweka thamani kwa kigezo. Hailaani usawa wa thamani.
 
-   `myVariable` sasa imepewa thamani ya 123.
-
-1. **Badilisha msimbo**. Badilisha msimbo wako na kauli ifuatayo.
+3. **Fanya kwa njia sahihi**. Kwa kweli, tuunganishe hatua hizo mbili:
 
     ```javascript
     let myVariable = 123;
     ```
+  
+    **Njia hii ni bora zaidi:**  
+    - Unatangaza kigezo na kugawa thamani katika kauli moja  
+    - Hii ni njia ya kawaida miongoni mwa waendelezaji  
+    - Inapunguza urefu wa msimbo huku ikibaki wazi  
 
-    Hii inaitwa _explicit initialization_ ambapo variable inatangazwa na kupewa thamani kwa wakati mmoja.
-
-1. **Badilisha thamani ya variable**. Badilisha thamani ya variable kwa njia ifuatayo:
+4. **Badilisha mawazo**. Ikiwa tutataka kuhifadhi nambari tofauti?
 
    ```javascript
    myVariable = 321;
    ```
+  
+   **Kuelewa kugawanya upya thamani:**  
+   - Kigezo sasa kina 321 badala ya 123  
+   - Thamani ya awali imebadilishwa – vigezo huhifadhi thamani moja kwa wakati  
+   - Ubadilishaji huu ndio tabia kuu ya vigezo vilivyotangazwa kwa `let`  
 
-   Mara variable inapokuwa imetangazwa, unaweza kubadilisha thamani yake wakati wowote katika msimbo wako kwa kutumia operator `=` na thamani mpya.
+   ✅ Jaribu! Unaweza kuandika JavaScript moja kwa moja kwenye kivinjari chako. Fungua dirisha la kivinjari na nenda kwenye Developer Tools. Katika console, utaona mwaliko; andika `let myVariable = 123`, bonyeza kuingia, kisha andika `myVariable`. Nini kinatokea? Kumbuka, utajifunza zaidi kuhusu dhana hizi katika masomo yajayo.
 
-   ✅ Jaribu! Unaweza kuandika JavaScript moja kwa moja kwenye kivinjari chako. Fungua dirisha la kivinjari na uende kwenye Developer Tools. Katika console, utapata prompt; andika `let myVariable = 123`, bonyeza return, kisha andika `myVariable`. Nini kinatokea? Kumbuka, utajifunza zaidi kuhusu dhana hizi katika masomo yajayo.
+### 🧠 **Mtiifu wa Vigezo: Kujisikiza Vizuri**
 
-## Constants
+**Tuchunguze jinsi unavyohisi kuhusu vigezo:**  
+- Unaweza kuelezea tofauti kati ya kutangaza na kugawa thamani ya kigezo?  
+- Nini kinatokea ikiwa utajaribu kutumia kigezo kabla ya kukitangaza?  
+- Utachagua lini `let` badala ya `const` kwa kigezo?
 
-Kutangaza na kuanzisha constant hufuata dhana sawa na variable, isipokuwa kwa neno kuu `const`. Constants kwa kawaida hutangazwa kwa herufi kubwa zote.
+```mermaid
+stateDiagram-v2
+    [*] --> Declared: let myVar
+    Declared --> Assigned: myVar = 123
+    Assigned --> Reassigned: myVar = 456
+    Assigned --> [*]: Kigezo tayari!
+    Reassigned --> [*]: Thamani imeboreshwa
+    
+    note right of Declared
+        Kigezo kipo lakini
+        hakina thamani (haijafafanuliwa)
+    end note
+    
+    note right of Assigned
+        Kigezo kina
+        thamani 123
+    end note
+```  
+> **Vidokezo vya haraka**: Fikiria vigezo kama maboksi ya kuhifadhi yenye lebo. Unaunda boksi (`let`), unaweka kitu ndani (`=`), na baadaye unaweza kubadilisha yaliyomo ikiwa ni lazima!
+
+## Visaidizi (Constants)
+
+Wakati mwingine unahitaji kuhifadhi taarifa ambazo hazipaswi kubadilika wakati wa utekelezaji wa programu. Fikiria visaidi kama kanuni za kihisabati ambazo Euclid aliwanzisha huko Ugiriki wa kale – mara tu zilithibitishwa na kuandikwa, zilibaki thabiti kwa rejeleo zote zijazo.
+
+Visaidizi hufanya kazi kama vigezo, lakini na kizuizi muhimu: mara unapopewa thamani, haiwezi kubadilishwa. Uisumbufu huu husaidia kuzuia mabadiliko yasiyotakiwa kwa thamani muhimu katika programu yako.
+
+Kutangaza na kuanzisha kisaidizi kunafuata dhana sawa na kigezo, isipokuwa kwa neno kuu `const`. Visaidizi kwa kawaida huandikwa kwa herufi kubwa kabisa.
 
 ```javascript
 const MY_VARIABLE = 123;
 ```
+  
+**Hiki ndicho msimbo huu unachofanya:**  
+- **Huunda** kisaidizi kinachoitwa `MY_VARIABLE` chenye thamani 123  
+- **Hutumia** mtindo wa majina kwa herufi kubwa kwa visaidizi  
+- **Huzuia** mabadiliko yoyote ya baadaye kwa thamani hii  
 
-Constants zinafanana na variables, isipokuwa kwa tofauti mbili:
+Visaidizi vina kanuni kuu mbili:
 
-- **Lazima ziwe na thamani**. Constants lazima ziwe zimeanzishwa, vinginevyo kosa litatokea wakati wa kuendesha msimbo.
-- **Marejeleo hayawezi kubadilishwa**. Marejeleo ya constant hayawezi kubadilishwa mara baada ya kuanzishwa, vinginevyo kosa litatokea wakati wa kuendesha msimbo. Hebu tuangalie mifano miwili:
-   - **Thamani rahisi**. Ifuatayo HAIRUHUSIWI:
-   
+- **Lazima uwapatie thamani mara moja** – visaidizi tupu haviruhusiwi!  
+- **Haiwezi kubadilishwa thamani hiyo** – JavaScript itatoa kosa ikiwa utajaribu. Tazama ninachomaanisha:
+
+   **Thamani rahisi** - Ifuatayo HAIRUHUSIWI:
+
       ```javascript
       const PI = 3;
-      PI = 4; // not allowed
+      PI = 4; // hairuhusiwi
       ```
- 
-   - **Marejeleo ya kitu yanalindwa**. Ifuatayo HAIRUHUSIWI.
-   
+
+   **Kile unachopaswa kukumbuka:**  
+   - **Jaribio** la kugawanya upya kisaidizi husababisha kosa  
+   - **Hulinda** thamani muhimu kutokana na mabadiliko yasiyotakiwa  
+   - **Hakikisha** thamani inabaki kuwa sawa katika programu yako
+
+   **Kuhifadhi rejeleo la kitu** - Ifuatayo HAIRUHUSIWI:
+
       ```javascript
       const obj = { a: 3 };
-      obj = { b: 5 } // not allowed
+      obj = { b: 5 } // hairuhusiwi
       ```
 
-    - **Thamani ya kitu haijalindwa**. Ifuatayo INARUHUSIWA:
-    
+   **Kuelewa dhana hizi:**  
+   - **Huzuia** kubadilisha kitu kizima kwa kipya  
+   - **Hulinda** rejeleo la kitu cha awali  
+   - **Hudumisha** utambulisho wa kitu kwenye kumbukumbu  
+
+    **Thamani ya kitu haileveriwi** - Ifuatayo INARUHUSIWA:
+
       ```javascript
       const obj = { a: 3 };
-      obj.a = 5;  // allowed
+      obj.a = 5;  // inaruhusiwa
       ```
 
-      Hapo juu unabadilisha thamani ya kitu lakini si marejeleo yenyewe, jambo linaloruhusiwa.
+      **Maelezo ya kile kinachotokea hapa:**  
+      - **Hubadilisha** thamani ya mali ndani ya kitu  
+      - **Hushikilia** rejeleo sawa la kitu  
+      - **Inaonyesha** kuwa yaliyomo kwenye kitu yanaweza kubadilika huku rejeleo likiendelea thabiti  
 
-   > Kumbuka, `const` inamaanisha marejeleo yanalindwa dhidi ya kupewa upya. Hata hivyo, thamani si _immutable_ na inaweza kubadilika, hasa ikiwa ni muundo changamano kama kitu.
+   > Kumbuka, `const` inamaanisha rejeleo linahifadhiwa dhidi ya kugawanywa upya. Thamani si _isiyobadilika_ na inaweza kubadilika, hasa kama ni muundo tata kama kitu.
 
 ## Aina za Data
 
-Variables zinaweza kuhifadhi aina nyingi tofauti za thamani, kama namba na maandishi. Aina hizi mbalimbali za thamani zinajulikana kama **aina za data**. Aina za data ni sehemu muhimu ya maendeleo ya programu kwa sababu husaidia watengenezaji kufanya maamuzi kuhusu jinsi msimbo unavyopaswa kuandikwa na jinsi programu inavyopaswa kufanya kazi. Zaidi ya hayo, baadhi ya aina za data zina sifa za kipekee zinazosaidia kubadilisha au kutoa taarifa za ziada kwenye thamani.
+JavaScript huandaa taarifa katika makundi tofauti yanayojulikana kama aina za data. Dhana hii inafanana na jinsi wasomi wa zamani walivyogawa maarifa – Aristotle alitofautisha aina tofauti za hoja, akijua kwamba kanuni za mantiki haziwezi kutumika sawa katika shairi, hisabati, na filosofia ya asili.
 
-✅ Aina za Data pia hujulikana kama JavaScript data primitives, kwani ni aina za data za kiwango cha chini kabisa zinazotolewa na lugha. Kuna aina 7 za msingi: string, number, bigint, boolean, undefined, null na symbol. Chukua dakika moja kufikiria kila moja ya hizi primitives inawakilisha nini. `zebra` ni nini? Je, `0`? `true`?
+Aina za data ni muhimu kwa sababu shughuli tofauti hufanya kazi na aina tofauti za taarifa. Kama huwezi kufanya hisabati kwa jina la mtu au kupanga kwa alfabeti hesabu ya hisabati, JavaScript inahitaji aina sahihi ya data kwa kila operesheni. Kuelewa hili huzuia makosa na kufanya msimbo wako kuwa imara zaidi.
 
-### Namba
+Vigezo vinaweza kuhifadhi aina mbalimbali za thamani, kama nambari na maandishi. Aina hizi mbalimbali zinajulikana kama **aina ya data**. Aina za data ni sehemu muhimu ya maendeleo ya programu kwa sababu husaidia waendelezaji kufanya maamuzi jinsi msimbo unavyopaswa kuandikwa na programu inavyopaswa kuendeshwa. Zaidi ya hayo, baadhi ya aina za data zina sifa za kipekee zinazosaidia kubadilisha au kutoa taarifa zaidi katika thamani.
 
-Katika sehemu iliyopita, thamani ya `myVariable` ilikuwa aina ya data ya namba.
+✅ Aina za Data pia huitwa data primitives za JavaScript, kwa kuwa ni aina za data za ngazi ya chini kabisa zinazotolewa na lugha. Kuna aina 7 za primitive: string, number, bigint, boolean, undefined, null, na symbol. Chukua dakika kufikiria kinachoweza kuwakilishwa na kila moja ya primitives hizi. `zebra` ni nini? Vipi kuhusu `0`? `true`?
 
-`let myVariable = 123;`
+### Nambari
 
-Variables zinaweza kuhifadhi aina zote za namba, ikiwa ni pamoja na desimali au namba hasi. Namba pia zinaweza kutumika na arithmetic operators, ambazo zitajadiliwa katika [sehemu inayofuata](../../../../2-js-basics/1-data-types).
+Nambari ni aina ya data rahisi zaidi katika JavaScript. Iwapo unatumia nambari kamili kama 42, desimali kama 3.14, au nambari hasi kama -5, JavaScript hufanya kazi nao sawia.
 
-### Arithmetic Operators
+Kumbuka kigezo chetu cha awali? Hiyo 123 tuliyoihifadhi ilikuwa aina ya nambari:
 
-Kuna aina kadhaa za operators za kutumia wakati wa kufanya kazi za hesabu, na baadhi zimeorodheshwa hapa:
+```javascript
+let myVariable = 123;
+```
+  
+**Sifa kuu:**  
+- JavaScript hutambua moja kwa moja thamani za nambari  
+- Unaweza kufanya operesheni za kihisabati kwa vigezo hivi  
+- Hakuna haja ya kutangaza aina rasmi  
 
-| Alama  | Maelezo                                                               | Mfano                           |
-| ------ | --------------------------------------------------------------------- | -------------------------------- |
-| `+`    | **Kuongeza**: Inahesabu jumla ya namba mbili                          | `1 + 2 //jibu linalotarajiwa ni 3`   |
-| `-`    | **Kutoa**: Inahesabu tofauti ya namba mbili                           | `1 - 2 //jibu linalotarajiwa ni -1`  |
-| `*`    | **Kuzidisha**: Inahesabu bidhaa ya namba mbili                        | `1 * 2 //jibu linalotarajiwa ni 2`   |
-| `/`    | **Kugawanya**: Inahesabu mgawanyo wa namba mbili                      | `1 / 2 //jibu linalotarajiwa ni 0.5` |
-| `%`    | **Remainder**: Inahesabu mabaki kutoka mgawanyo wa namba mbili        | `1 % 2 //jibu linalotarajiwa ni 1`   |
+Vigezo vinaweza kuhifadhi aina zote za nambari, ikiwemo desimali au nambari hasi. Nambari pia zinaweza kutumika na waendeshaji wa kihisabati, waliodhihirishwa katika [sehemu inayofuata](../../../../2-js-basics/1-data-types).
 
-✅ Jaribu! Jaribu operesheni ya hesabu kwenye console ya kivinjari chako. Je, matokeo yanakushangaza?
+```mermaid
+flowchart LR
+    A["🔢 Nambari"] --> B["➕ Ujumlisho"]
+    A --> C["➖ Utoaji"]
+    A --> D["✖️ Kuzidisha"]
+    A --> E["➗ Kugawanya"]
+    A --> F["📊 Salio %"]
+    
+    B --> B1["1 + 2 = 3"]
+    C --> C1["5 - 3 = 2"]
+    D --> D1["4 * 3 = 12"]
+    E --> E1["10 / 2 = 5"]
+    F --> F1["7 % 3 = 1"]
+    
+    style A fill:#e3f2fd
+    style B fill:#e8f5e8
+    style C fill:#fff3e0
+    style D fill:#f3e5f5
+    style E fill:#e0f2f1
+    style F fill:#fce4ec
+```  
+### Waendeshaji wa Kihisabati
 
-### Strings
+Waendeshaji wa kihisabati wanakuwezesha kufanya mahesabu ya kihisabati katika JavaScript. Waendeshaji hawa hufuata kanuni zile zile zilizotumika na waandishi wa hisabati kwa karne nyingi – alama zile zile zilizojitokeza katika kazi za wasomi kama Al-Khwarizmi, aliyebuni noti za aljebra.
 
-Strings ni seti za herufi zinazokaa kati ya alama za nukuu moja au mbili.
+Waendeshaji hufanya kazi kama unavyotarajia kutoka kwa hisabati ya jadi: ongeza kwa kuongeza, toa kwa kutoa, na kadhalika.
 
-- `'Hii ni string'`
-- `"Hii pia ni string"`
-- `let myString = 'Hii ni thamani ya string iliyohifadhiwa kwenye variable';`
+Kuna aina kadhaa za waendeshaji za kutumia wakati wa kufanya kazi za kihisabati, na baadhi yao yamo hapa:
 
-Kumbuka kutumia nukuu unapokuwa unaandika string, vinginevyo JavaScript itadhani ni jina la variable.
+| Alama | Maelezo                                                               | Mfano                         |
+| ------| ----------------------------------------------------------------------| -----------------------------|
+| `+`   | **Ujumlishaji**: Huhesabu jumla ya nambari mbili                      | `1 + 2 //jibu linatarajiwa ni 3`  |
+| `-`   | **Tofauti**: Huhesabu tofauti ya nambari mbili                        | `1 - 2 //jibu linatarajiwa ni -1` |
+| `*`   | **Mnozalishaji**: Huhesabu bidhaa ya nambari mbili                   | `1 * 2 //jibu linatarajiwa ni 2`  |
+| `/`   | **Mgawanyiko**: Huhesabu sehemu ya nambari mbili                      | `1 / 2 //jibu linatarajiwa ni 0.5`|
+| `%`   | **Baki**: Huhesabu mabaki kutoka mgawanyiko wa nambari mbili         | `1 % 2 //jibu linatarajiwa ni 1`  |
 
-### Kuweka Muundo wa Strings
+✅ Jaribu! Jaribu kufanya operesheni ya kihisabati kwenye console ya kivinjari chako. Je, matokeo yanakushangaza?
 
-Strings ni maandishi, na mara kwa mara zitahitaji kuwekwa muundo.
+### 🧮 **Jaribu Uwezo wa Hisabati: Kuhesabu kwa Kujiamini**
 
-Ili **kuunganisha** strings mbili au zaidi, au kuziunganisha pamoja, tumia operator `+`.
+**Jaribu uelewa wako wa hisabati:**  
+- Tofautisha kati ya `/` (mgawanyiko) na `%` (baki)?  
+- Unaweza kutabiri nini `10 % 3` ni sawa na? (Kibukizi: sio 3.33...)  
+- Kwa nini operator wa baki unaweza kuwa na manufaa kwa programu?
+
+```mermaid
+pie title "Matumizi ya Operesheni za Nambari za JavaScript"
+    "Mkusanyo (+)" : 35
+    "Tofauti (-)" : 20
+    "Mnozina (*)" : 20
+    "Mgawanyiko (/)" : 15
+    "Mabaki (%)" : 10
+```  
+> **Maelezo ya dunia halisi**: Operator wa baki (%) ni muhimu sana kuchunguza kama nambari ni hata/idaha, kutengeneza mifumo, au kuzunguka kwenye arrays!
+
+### Mionesho (Strings)
+
+Katika JavaScript, data ya maandishi huonyeshwa kama mionesho. Neno "string" linatoka dhana ya herufi zilizounganishwa mfululizo, kama walivyotumia waandishi wa karne za kati kuunganisha herufi kuunda maneno na sentensi katika nakala zao.
+
+Mionesho ni msingi wa maendeleo ya wavuti. Kila kipande cha maandishi kinachoonyeshwa kwenye tovuti – majina ya watumiaji, lebo za vitufe, ujumbe wa makosa, maudhui – hutunzwa kama data ya string. Kuelewa mionesho ni muhimu kwa kuunda sehemu za mtumiaji zenye kazi.
+
+Mionesho ni seti za herufi zilizoko kati ya alama za nukuu moja au mbili.
+
+```javascript
+'This is a string'
+"This is also a string"
+let myString = 'This is a string value stored in a variable';
+```
+  
+**Kuelewa dhana hizi:**  
+- **Inatumia** nukuu moja `'` au nukuu mbili `"` kufafanua mionesho  
+- **Huhinidhi** data ya maandishi inayoweza kujumuisha herufi, nambari, na alama  
+- **Huagiza** thamani ya mionesho kwa vigezo kwa matumizi baadaye  
+- **Inahitaji** nukuu kutofautisha maandishi na majina ya vigezo  
+
+Kumbuka kutumia nukuu unapoongeza string, vinginevyo JavaScript itadhani ni jina la kigezo.
+
+```mermaid
+flowchart TD
+    A["📝 Mifano ya Mishale"] --> B["Nukuu Moja"]
+    A --> C["Nukuu Mbili"]
+    A --> D["Mifano ya Kiolezo"]
+    
+    B --> B1["'Habari Dunia'"]
+    C --> C1["\"Habari Dunia\""]
+    D --> D1["`Habari \${name}`"]
+    
+    E["Uendeshaji wa Mifano"] --> F["Uunganishaji"]
+    E --> G["Uingiza Kiolezo"]
+    E --> H["Ugumu & Mbinu"]
+    
+    F --> F1["'Habari' + ' ' + 'Dunia'"]
+    G --> G1["`Habari \${firstName} \${lastName}`"]
+    H --> H1["myString.length"]
+    
+    style A fill:#e3f2fd
+    style E fill:#fff3e0
+    style D fill:#e8f5e8
+    style G fill:#e8f5e8
+```  
+### Kuunda Mionesho
+
+Manipulate mionesho hukuwezesha kuunganisha vipengele vya maandishi, kuingiza vigezo, na kuunda maudhui yanayobadilika kulingana na hali ya programu. Mbinu hii inakuwezesha kujenga maandishi kwa njia ya programu.
+
+Mara nyingi unahitaji kuunganisha mionesho mingi pamoja – mchakato huu huitwa concatenation.
+Ili **kuunganisha** mnyororo wa herufi mbili au zaidi, au kuziunganisha pamoja, tumia kiendeshaji `+`.
 
 ```javascript
 let myString1 = "Hello";
 let myString2 = "World";
 
-myString1 + myString2 + "!"; //HelloWorld!
-myString1 + " " + myString2 + "!"; //Hello World!
-myString1 + ", " + myString2 + "!"; //Hello, World!
-
+myString1 + myString2 + "!"; //HaloDunia!
+myString1 + " " + myString2 + "!"; //Halo Dunia!
+myString1 + ", " + myString2 + "!"; //Halo, Dunia!
 ```
 
-✅ Kwa nini `1 + 1 = 2` katika JavaScript, lakini `'1' + '1' = 11?` Fikiria kuhusu hilo. Je, vipi kuhusu `'1' + 1`?
+**Hatua kwa hatua, hii ndicho kinachotokea:**
+- **Inachanganya** mnyororo wa herufi nyingi kwa kutumia kiendeshaji `+`
+- **Inaunda** mnyororo wa herufi moja kwa moja bila nafasi katika mfano wa kwanza
+- **Inaongeza** nafasi `" "` kati ya mnyororo kwa usomeji mzuri
+- **Inaweka** alama za uamuzi kama vile koma ili kuunda muundo sahihi
 
-**Template literals** ni njia nyingine ya kuweka muundo wa strings, isipokuwa badala ya nukuu, backtick hutumika. Kitu chochote ambacho si maandishi ya kawaida lazima kiwekwe ndani ya placeholders `${ }`. Hii inajumuisha variables zozote ambazo zinaweza kuwa strings.
+✅ Kwa nini `1 + 1 = 2` katika JavaScript, lakini `'1' + '1' = 11?` Fikiria. Je, vipi kuhusu `'1' + 1`?
+
+**Liturari za templeti** ni njia nyingine ya kuunda mnyororo wa herufi, isipokuwa badala ya nukuu, hutumika alama ya kurudisha nyuma (backtick). Kila kitu ambacho si maandishi ya kawaida lazima kiwe ndani ya sehemu za kuweka thamani `${ }`. Hii ni pamoja na mabadiliko yoyote yanayoweza kuwa mnyororo wa herufi.
 
 ```javascript
 let myString1 = "Hello";
 let myString2 = "World";
 
-`${myString1} ${myString2}!` //Hello World!
-`${myString1}, ${myString2}!` //Hello, World!
+`${myString1} ${myString2}!` //Hujambo Dunia!
+`${myString1}, ${myString2}!` //Hujambo, Dunia!
 ```
 
-Unaweza kufanikisha malengo yako ya kuweka muundo kwa njia yoyote, lakini template literals zitaheshimu nafasi na mistari mipya.
+**Tuelewee kila sehemu:**
+- **Inatumia** alama za kurudisha nyuma `` ` `` badala ya nukuu za kawaida kuunda liturari za templeti
+- **Inaingiza** mabadiliko moja kwa moja kwa kutumia muundo wa `${}` 
+- **Inahifadhi** nafasi na muundo kama ilivyoandikwa
+- **Inatoa** njia safi ya kuunda mnyororo tata zenye mabadiliko
 
-✅ Ni lini utatumia template literal badala ya string ya kawaida?
+Unaweza kufanikisha malengo yako ya muundo kwa njia yoyote, lakini liturari za templeti zitaenzi nafasi zote na virukizo vya mistari.
 
-### Booleans
+✅ Ungetumia lini liturari za templeti badala ya mnyororo wa herufi wa kawaida?
 
-Booleans zinaweza kuwa na thamani mbili tu: `true` au `false`. Booleans zinaweza kusaidia kufanya maamuzi kuhusu mistari gani ya msimbo inapaswa kuendeshwa wakati masharti fulani yanapokamilika. Katika hali nyingi, [operators](../../../../2-js-basics/1-data-types) husaidia kuweka thamani ya Boolean na mara nyingi utaona na kuandika variables zikianzishwa au thamani zao zikisasishwa kwa operator.
+### 🔤 **Ukaguzi wa Uwezo wa Mnyororo wa Herufi: Kujiamini Katika Ubadilishaji wa Maandishi**
 
-- `let myTrueBool = true`
-- `let myFalseBool = false`
+**Tathmini ujuzi wako wa mnyororo wa herufi:**
+- Je, unaweza kueleza kwa nini `'1' + '1'` ni sawa na `'11'` badala ya `2`?
+- Ni njia gani ya mnyororo unayoona ni rahisi kusoma zaidi: kuunganisha au liturari za templeti?
+- Nini kinatokea ikiwa utasahau nukuu kuzunguka mnyororo?
 
-✅ Variable inaweza kuchukuliwa kuwa 'truthy' ikiwa inatathminiwa kuwa boolean `true`. Cha kushangaza, katika JavaScript, [thamani zote ni truthy isipokuwa zimedhamiriwa kuwa falsy](https://developer.mozilla.org/docs/Glossary/Truthy).
+```mermaid
+stateDiagram-v2
+    [*] --> PlainText: "Hello"
+    [*] --> Variable: name = "Alice"
+    PlainText --> Concatenated: + " " + name
+    Variable --> Concatenated
+    PlainText --> Template: `Hello ${name}`
+    Variable --> Template
+    Concatenated --> Result: "Hello Alice"
+    Template --> Result
+    
+    note right of Concatenated
+        Njia ya jadi
+        Zaidi ya maelezo
+    end note
+    
+    note right of Template
+        Sarufi ya kisasa ya ES6
+        Safi & yenye kusomeka zaidi
+    end note
+```
+> **Ushauri wa mtaalamu**: Liturari za templeti kwa kawaida zinapendekezwa kwa ajili ya kuunda mnyororo tata kwa sababu ni rahisi kusoma na zinaweza kushughulikia mistari mingi kwa ufanisi!
+
+### Boolean
+
+Boolean zinawakilisha aina rahisi kabisa ya data: zinaweza kushikilia tu mojawapo ya thamani mbili – `true` au `false`. Mfumo huu wa kiakili wa binary unatokana na kazi ya George Boole, mtaalamu wa hesabu wa karne ya 19 aliyebuni algebra ya Boolean.
+
+Licha ya urahisi wake, boolean ni muhimu kwa mantiki ya programu. Zinawawezesha msimbo wako kufanya maamuzi kulingana na masharti – kama mtumiaji ameingia, kama kitufe kilibonyea, au ikiwa vigezo fulani vimetimizwa.
+
+Boolean zinaweza kuwa na thamani mbili tu: `true` au `false`. Boolean zinaweza kusaidia kufanya maamuzi ni mistari gani ya msimbo inapaswa kuendeshwa pale ambapo masharti fulani yanatimizwa. Katika hali nyingi, [vaidhibiti](../../../../2-js-basics/1-data-types) husaidia kuweka thamani ya Boolean na mara nyingi utagundua na kuandika mabadiliko yanayoanzishwa au yenye kuwekwa upya kwa kutumia vaidhibiti.
+
+```javascript
+let myTrueBool = true;
+let myFalseBool = false;
+```
+
+**Juu tulikuwa:**
+- **Tumeunda** mabadiliko yanayohifadhi thamani ya Boolean `true`
+- **Tumeonyesha** jinsi ya kuhifadhi thamani ya Boolean `false`
+- **Tume tumia** maneno halisi `true` na `false` (pasipo nukuu)
+- **Tumeandaa** mabadiliko haya kwa matumizi katika masharti ya hali
+
+✅ Mabadiliko yanaweza kuchukuliwa kuwa 'truthy' ikiwa yanathibitishwa kuwa boolean `true`. Vilevile, katika JavaScript, [thamani zote ni truthy isipokuwa zilizoainishwa kuwa falsy](https://developer.mozilla.org/docs/Glossary/Truthy).
+
+```mermaid
+flowchart LR
+    A["🔘 Thamani za Boolean"] --> B["true"]
+    A --> C["false"]
+    
+    D["Thamani za Kweli"] --> D1["'hello'"]
+    D --> D2["42"]
+    D --> D3["[]"]
+    D --> D4["{}"]
+    
+    E["Thamani za Uongo"] --> E1["false"]
+    E --> E2["0"]
+    E --> E3["''"]
+    E --> E4["null"]
+    E --> E5["undefined"]
+    E --> E6["NaN"]
+    
+    style B fill:#e8f5e8
+    style C fill:#ffebee
+    style D fill:#e3f2fd
+    style E fill:#fff3e0
+```
+### 🎯 **Ukaguzi wa Mantiki ya Boolean: Ujuzi wa Kufanya Maamuzi**
+
+**Jaribu uelewa wako wa boolean:**
+- Kwa nini unadhani JavaScript ina thamani "truthy" na "falsy" zaidi ya `true` na `false` peke yake?
+- Je, unaweza kutabiri ni ipi kati ya hizi ni falsy: `0`, `"0"`, `[]`, `"false"`?
+- Je, boolean zinaweza kusaidiaje katika kudhibiti mtiririko wa programu?
+
+```mermaid
+pie title "Matumizi ya Kawaida ya Boolean"
+    "Mantiki ya Masharti" : 40
+    "Hali ya Mtumiaji" : 25
+    "Mabadiliko ya Kipengele" : 20
+    "Uthibitishaji" : 15
+```
+> **Kumbuka**: Katika JavaScript, thamani 6 tu ndizo ni falsy: `false`, `0`, `""`, `null`, `undefined`, na `NaN`. Kila kitu kingine ni truthy!
 
 ---
+
+## 📊 **Muhtasari wa Zana Zako za Aina za Data**
+
+```mermaid
+graph TD
+    A["🎯 Aina za Data za JavaScript"] --> B["📦 Vigezo"]
+    A --> C["🔢 Nambari"]
+    A --> D["📝 Mstari wa maandishi"]
+    A --> E["🔘 Booleans"]
+    
+    B --> B1["let inayobadilika"]
+    B --> B2["const isiyobadilika"]
+    
+    C --> C1["42, 3.14, -5"]
+    C --> C2["+ - * / %"]
+    
+    D --> D1["'nukuu' au \\\"nukuu\\\""]
+    D --> D2["`herufi za templeti`"]
+    
+    E --> E1["kweli au potofu"]
+    E --> E2["kweli dhidi ya uongo"]
+    
+    F["⚡ Dhana Muhimu"] --> F1["Aina ni muhimu kwa shughuli"]
+    F --> F2["JavaScript ina aina zinazobadilika"]
+    F --> F3["Vigezo vinaweza kubadilisha aina"]
+    F --> F4["Kuhesabu ni kwa herufi kubwa na ndogo"]
+    
+    style A fill:#e3f2fd
+    style B fill:#e8f5e8
+    style C fill:#fff3e0
+    style D fill:#f3e5f5
+    style E fill:#e0f2f1
+    style F fill:#fce4ec
+```
+## Changamoto ya Wakala wa GitHub Copilot 🚀
+
+Tumia hali ya Wakala kukamilisha changamoto ifuatayo:
+
+**Maelezo:** Unda meneja wa taarifa binafsi anayetoa mfano wa aina zote za data za JavaScript ulizojifunza katika somo hili huku ukishughulikia hali halisi za data.
+
+**Onyo:** Jenga programu ya JavaScript inayounda kitu cha wasifu wa mtumiaji kinachoonyesha: jina la mtu (mnyororo), umri (nambari), hali ya kuwa mwanafunzi (boolean), rangi anazopenda kama mpangilio, na kitu chenye anwani yenye barabara, jiji, na msimbo wa posta. Jumuisha kazi za kuonyesha taarifa za wasifu na kusasisha nyanja binafsi. Hakikisha unaonyesha kuunganisha mnyororo, liturari za templeti, operesheni za hisabati na umri, na mantiki ya boolean kwa hali ya mwanafunzi.
+
+Jifunze zaidi kuhusu [hali ya wakala](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) hapa.
 
 ## 🚀 Changamoto
 
-JavaScript inajulikana kwa njia zake za kushangaza za kushughulikia aina za data mara nyingine. Fanya utafiti kidogo kuhusu 'mambo ya kushangaza' haya. Kwa mfano: usikivu wa herufi kubwa na ndogo unaweza kukusumbua! Jaribu hili kwenye console yako: `let age = 1; let Age = 2; age == Age` (inatoa `false` -- kwa nini?). Ni mambo gani mengine ya kushangaza unaweza kupata?
+JavaScript ina tabia kadhaa zinazoweza kumshangaza mendelevu. Hapa kuna mfano wa kuwaeleza: jaribu kuandika hii kwenye konsole ya kivinjari chako: `let age = 1; let Age = 2; age == Age` na tazama matokeo. Inarudisha `false` – unaweza kubaini kwa nini?
 
-## Jaribio la Baada ya Somo
-[Jaribio la baada ya somo](https://ff-quizzes.netlify.app)
+Hii ni mojawapo ya tabia nyingi za JavaScript zinazostahili kueleweka. Uelewa wa tabia hizi utakusaidia kuandika msimbo imara zaidi na kutatua matatizo kwa ufanisi zaidi.
 
-## Mapitio na Kujisomea
+## Mtihani wa Baada ya Mafunzo
+[Mtihani wa baada ya mafundisho](https://ff-quizzes.netlify.app)
 
-Angalia [orodha hii ya mazoezi ya JavaScript](https://css-tricks.com/snippets/javascript/) na ujaribu moja. Umejifunza nini?
+## Mapitio & Kujifunza Binafsi
 
-## Kazi
+Tazama [orujo la mazoezi ya JavaScript](https://css-tricks.com/snippets/javascript/) na jaribu moja. Umejifunza nini?
 
-[Mazoezi ya Aina za Data](assignment.md)
+## Kazi ya Nyumbani
+
+[Kazi ya Aina za Data](assignment.md)
+
+## 🚀 Ratiba Yako ya Uwezo wa Aina za Data za JavaScript
+
+### ⚡ **Unachoweza Kufanya Dakika 5 Zijazo**
+- [ ] Fungua konsole ya kivinjari na tengeneza mabadiliko 3 yenye aina tofauti za data
+- [ ] Jaribu changamoto: `let age = 1; let Age = 2; age == Age` na gundua kwa nini ni false
+- [ ] Fanya mazoezi ya kuunganisha mnyororo na jina lako na nambari unayopenda
+- [ ] Jaribu kuona kinachotokea unapoongeza nambari kwenye mnyororo
+
+### 🎯 **Unachoweza Kufanikisha Saa Hili**
+- [ ] Kamilisha mtihani wa baada ya somo na pitia dhana yoyote ngumu
+- [ ] Unda kalkuleta ndogo inayoongeza, kutoa, kuzidisha, na kugawa nambari mbili
+- [ ] Tengeneza mtafsiri wa majina kwa kutumia liturari za templeti
+- [ ] Chunguza tofauti kati ya vaidhibiti `==` na `===`
+- [ ] Fanya mazoezi ya kubadilisha kati ya aina tofauti za data
+
+### 📅 **Msingi Wako wa JavaScript kwa Wiki Nzima**
+- [ ] Kamilisha kazi ya nyumbani kwa kujiamini na ubunifu
+- [ ] Unda kitu cha wasifu binafsi ukitumia aina zote za data ulizojifunza
+- [ ] Fanya mazoezi na [mazoezi ya JavaScript kutoka CSS-Tricks](https://css-tricks.com/snippets/javascript/)
+- [ ] Unda kipimaji rahisi cha fomu kwa kutumia mantiki ya boolean
+- [ ] Jaribu aina za data za mpangilio (array) na kitu (object) (mapitio ya masomo yanayokuja)
+- [ ] Jiunge na jamii ya JavaScript na uliza maswali kuhusu aina za data
+
+### 🌟 **Mabadiliko Yako kwa Mwezi Mzima**
+- [ ] Unganisha maarifa ya aina za data katika miradi mikubwa ya programu
+- [ ] Elewa lini na kwa nini utumie aina mbalimbali za data katika matumizi halisi
+- [ ] Saidia wanaoanza kuelewa misingi ya JavaScript
+- [ ] Tengeneza programu ndogo inayosimamia aina mbalimbali za data za watumiaji
+- [ ] Chunguza dhana za juu za aina za data kama vile coercion ya aina na usawa mkali
+- [ ] Changia katika miradi ya chanzo huria ya JavaScript kwa kuboresha nyaraka
+
+### 🧠 **Ukaguzi wa Mwisho wa Uwezo wa Aina za Data**
+
+**Sherehekea msingi wako wa JavaScript:**
+- Ni aina gani ya data ilikushangaza zaidi kwa tabia yake?
+- Je, unahisi vipi kueleza mabadiliko dhidi ya constants kwa rafiki?
+- Nini kitu cha kuvutia zaidi ulicho kugundua kuhusu mfumo wa aina za JavaScript?
+- Ni programu gani halisi unaweza kufikiria kuunda ukitumia misingi hii?
+
+```mermaid
+journey
+    title Safari Yako ya Kujiamini Kwenye JavaScript
+    section Leo
+      Confused: 3: You
+      Curious: 4: You
+      Excited: 5: You
+    section Wiki Hii
+      Practicing: 4: You
+      Understanding: 5: You
+      Building: 5: You
+    section Mwezi Ujao
+      Problem Solving: 5: You
+      Teaching Others: 5: You
+      Real Projects: 5: You
+```
+> 💡 **Umejenga msingi!** Kuelewa aina za data ni kama kujifunza alfabeti kabla ya kuandika hadithi. Kila programu ya JavaScript utakayoiandika itatumia dhana hizi msingi. Sasa una vifaa vya kuunda tovuti zenye mwingiliano, programu zenye nguvu, na kutatua matatizo halisi kwa msimbo. Karibu kwenye dunia nzuri ya JavaScript! 🎉
 
 ---
 
-**Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Tangazo la Kawia**:
+Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Nyaraka ya asili katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inashauriwa. Hatuwajibiki kwa kutoelewana au tafsiri potofu zitokanazo na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

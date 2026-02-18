@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "04683f4cfa46004179b0404b89a3065c",
-  "translation_date": "2025-08-27T23:12:37+00:00",
-  "source_file": "1-getting-started-lessons/README.md",
-  "language_code": "vi"
-}
--->
 # Bắt đầu với Phát triển Web
 
-Trong phần này của chương trình học, bạn sẽ được giới thiệu về các khái niệm không dựa trên dự án nhưng rất quan trọng để trở thành một nhà phát triển chuyên nghiệp.
+Trong phần này của chương trình học, bạn sẽ được giới thiệu các khái niệm không dựa trên dự án nhưng rất quan trọng để trở thành một nhà phát triển chuyên nghiệp.
 
-### Chủ đề
+### Các chủ đề
 
 1. [Giới thiệu về Ngôn ngữ Lập trình và Công cụ cần thiết](1-intro-to-programming-languages/README.md)
 2. [Giới thiệu về GitHub](2-github-basics/README.md)

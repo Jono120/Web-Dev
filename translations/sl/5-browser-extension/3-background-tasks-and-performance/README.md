@@ -1,176 +1,587 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "49b58721a71cfda824e2f3e1f46908c6",
-  "translation_date": "2025-08-29T12:48:11+00:00",
-  "source_file": "5-browser-extension/3-background-tasks-and-performance/README.md",
-  "language_code": "sl"
-}
--->
-# Projekt razširitve brskalnika, 3. del: Spoznajte ozadna opravila in zmogljivost
+# Razširitev brskalnika, del 3: Spoznajte ozadna opravila in zmogljivost
 
-## Predhodni kviz
+```mermaid
+journey
+    title Vaša pot optimizacije zmogljivosti
+    section Osnova
+      Nauči se orodja brskalnika: 3: Študent
+      Razumeti profiliranje: 4: Študent
+      Prepoznati ozka grla: 4: Študent
+    section Razširitvene funkcije
+      Ustvari barvni sistem: 4: Študent
+      Ustvari ozadna opravila: 5: Študent
+      Dinamično posodobi ikone: 5: Študent
+    section Optimizacija
+      Spremljaj zmogljivost: 5: Študent
+      Odpravi težave: 4: Študent
+      Izboljšaj uporabniško izkušnjo: 5: Študent
+```
+Ste se kdaj spraševali, kaj naredi nekatere razširitve brskalnika tako odzivne in hitre, medtem ko se druge zdijo počasne? Skrivnost je v tistem, kar se dogaja za kulisami. Medtem ko uporabniki klikajo po vmesniku vaše razširitve, obstaja cel svet ozadnih procesov, ki tiho upravljajo zajem podatkov, posodobitve ikon in sistemske vire.
 
-[Predhodni kviz](https://ff-quizzes.netlify.app/web/quiz/27)
+To je naša zadnja lekcija v seriji o razširitvah brskalnika in naredili bomo, da vaš sledilnik ogljičnega odtisa deluje gladko. Dodali boste dinamične posodobitve ikon in se naučili, kako prepoznati težave z zmogljivostjo, preden postanejo problemi. To je kot uglaševanje dirkalnega avtomobila - majhne optimizacije lahko naredijo ogromno razliko pri delovanju vsega.
+
+Ko bomo končali, boste imeli dodelano razširitev in razumeli principe zmogljivosti, ki ločijo dobre spletne aplikacije od odličnih. Potopimo se v svet optimizacije brskalnika.
+
+## Predpredavalni kviz
+
+[Predpredavalni kviz](https://ff-quizzes.netlify.app/web/quiz/27)
 
 ### Uvod
 
-V zadnjih dveh lekcijah tega modula ste se naučili, kako zgraditi obrazec in prikazno območje za podatke, pridobljene iz API-ja. To je zelo standarden način ustvarjanja spletne prisotnosti. Naučili ste se tudi, kako obravnavati pridobivanje podatkov asinhrono. Vaša razširitev brskalnika je skoraj končana.
+V prejšnjih lekcijah ste zgradili obrazec, ga povezali z API-jem ter se spopadli z asinhronim zajemom podatkov. Vaša razširitev dobiva lepo obliko.
 
-Ostaja še upravljanje nekaterih ozadnih opravil, vključno z osveževanjem barve ikone razširitve, zato je to odličen trenutek, da se pogovorimo o tem, kako brskalnik upravlja tovrstna opravila. Razmislimo o teh nalogah brskalnika v kontekstu zmogljivosti vaših spletnih sredstev med njihovim razvojem.
+Zdaj moramo dodati še končne popravke - na primer, da ikona razširitve spremeni barve glede na podatke o ogljiku. To me spominja na to, kako je NASA morala optimizirati vsak sistem na vesoljski ladji Apollo. Niso si mogli privoščiti izgubljenih ciklov ali pomnilnika, ker je zmogljivost odločala o življenjih. Čeprav naša razširitev ni tako kritična, enaki principi veljajo - učinkovit koda ustvarja boljšo uporabniško izkušnjo.
 
+```mermaid
+mindmap
+  root((Zmogljivost & Ozadna opravila))
+    Browser Performance
+      Rendering Pipeline
+      Optimizacija sredstev
+      Manipulacija DOM-a
+      Izvajanje JavaScripta
+    Profiling Tools
+      Orodja za razvijalce
+      Zavihek z zmogljivostjo
+      Analiza časovnice
+      Odkrivanje ozkih grl
+    Extension Architecture
+      Ozadni skripti
+      Skripti vsebine
+      Prenos sporočil
+      Upravljanje ikon
+    Optimization Strategies
+      Delitev kode
+      Lenobno nalaganje
+      Predpomnjenje
+      Stiskanje virov
+    Visual Feedback
+      Dinamične ikone
+      Barvno kodiranje
+      Posodobitve v realnem času
+      Uporniška izkušnja
+```
 ## Osnove spletne zmogljivosti
 
-> "Zmogljivost spletne strani je odvisna od dveh stvari: kako hitro se stran naloži in kako hitro se koda na njej izvaja." -- [Zack Grossbart](https://www.smashingmagazine.com/2012/06/javascript-profiling-chrome-developer-tools/)
+Ko vaša koda deluje učinkovito, ljudje to lahko dejansko *občutijo*. Poznate tisti trenutek, ko se stran naloži takoj ali animacija teče gladko? To je dobra zmogljivost v akciji.
 
-Tema, kako narediti vaše spletne strani izjemno hitre na vseh vrstah naprav, za vse vrste uporabnikov in v vseh situacijah, je pričakovano obsežna. Tukaj je nekaj točk, ki jih je treba upoštevati pri gradnji standardnega spletnega projekta ali razširitve brskalnika.
+Zmogljivost ne pomeni samo hitrosti - gre za ustvarjanje spletnih izkušenj, ki se zdijo naravne, ne okorne in frustrirajoče. V zgodnjih dneh računalništva je Grace Hopper znano imela na svoji mizi nanosekundo (kos žice dolžine približno 30 cm), da je pokazala, kako daleč svetloba prepotuje v eno milijardinko sekunde. Bil je njen način razlage, zakaj šteje vsak mikrosekund v računalništvu. Raziščimo detektivska orodja, ki vam pomagajo ugotoviti, kaj povzroča počasnost.
 
-Prva stvar, ki jo morate storiti, da zagotovite učinkovito delovanje vaše strani, je zbiranje podatkov o njeni zmogljivosti. Prvo mesto za to so orodja za razvijalce v vašem spletnem brskalniku. V brskalniku Edge lahko izberete gumb "Nastavitve in več" (ikona treh pik v zgornjem desnem kotu brskalnika), nato pa se pomaknete na Več orodij > Orodja za razvijalce in odprete zavihek Zmogljivost. Orodja za razvijalce lahko odprete tudi s kombinacijo tipk `Ctrl` + `Shift` + `I` v sistemu Windows ali `Option` + `Command` + `I` v sistemu Mac.
+> "Zmogljivost spletne strani je sestavljena iz dveh stvari: kako hitro se stran naloži in kako hitro na njej teče koda." -- [Zack Grossbart](https://www.smashingmagazine.com/2012/06/javascript-profiling-chrome-developer-tools/)
 
-Zavihek Zmogljivost vsebuje orodje za profiliranje. Odprite spletno stran (poskusite na primer [https://www.microsoft.com](https://www.microsoft.com/?WT.mc_id=academic-77807-sagibbon)) in kliknite gumb 'Record', nato osvežite stran. Snemanje lahko kadar koli ustavite, nato pa boste lahko videli rutine, ki se generirajo za 'script', 'render' in 'paint' strani:
+Tema, kako narediti vaše spletne strani izjemno hitre na vseh vrstah naprav, za vse vrste uporabnikov, v vseh vrstah situacij, je na srečo obsežna. Tukaj je nekaj točk, ki jih imejte v mislih, ko gradite standardni spletni projekt ali razširitev brskalnika.
 
-![Edge profiler](../../../../translated_images/profiler.5a4a62479c5df01cfec9aab74173dba13f91d2c968e1a1ae434c26165792df15.sl.png)
+Prvi korak pri optimizaciji vaše strani je razumevanje, kaj se dejansko dogaja v ozadju. Na srečo ima vaš brskalnik zmogljiva detektivska orodja že vgrajena.
 
-✅ Obiščite [Microsoftovo dokumentacijo](https://docs.microsoft.com/microsoft-edge/devtools-guide/performance/?WT.mc_id=academic-77807-sagibbon) o zavihku Zmogljivost v brskalniku Edge.
+```mermaid
+flowchart LR
+    A[HTML] --> B[Analiza]
+    B --> C[DOM Drevo]
+    D[CSS] --> E[Analiza]
+    E --> F[CSSOM]
+    G[JavaScript] --> H[Izvajanje]
+    
+    C --> I[Upodobitveno Drevo]
+    F --> I
+    H --> I
+    
+    I --> J[Postavitev]
+    J --> K[Barvanje]
+    K --> L[Sestavljanje]
+    L --> M[Prikaz]
+    
+    subgraph "Kritična pot upodabljanja"
+        N["1. Analiza HTML"]
+        O["2. Analiza CSS"]
+        P["3. Izvajanje JS"]
+        Q["4. Izgradnja upodobitvenega drevesa"]
+        R["5. Postavitev elementov"]
+        S["6. Barvanje slikovnih pik"]
+        T["7. Sestavljanje plasti"]
+    end
+    
+    style M fill:#e8f5e8
+    style I fill:#fff3e0
+    style H fill:#ffebee
+```
+Če želite odpreti Orodja za razvijalce v Edge, kliknite na tiste tri pikice zgoraj desno, nato pojdite na Več orodij > Orodja za razvijalce. Ali uporabite bližnjico na tipkovnici: `Ctrl` + `Shift` + `I` v Windows ali `Option` + `Command` + `I` na Macu. Ko ste tam, kliknite na zavihek Performance - tukaj boste opravili svojo preiskavo.
 
-> Nasvet: za natančno merjenje časa zagona vaše spletne strani počistite predpomnilnik brskalnika.
+**Tukaj je vaš detektivski komplet za zmogljivost:**
+- **Odprite** Orodja za razvijalce (te boste kot razvijalec uporabljali nenehno!)
+- **Pojdite** na zavihek Performance - mislite nanj kot na fitnes sledilec vaše spletne aplikacije
+- **Pritisnite** gumb Record in opazujte vašo stran v akciji
+- **Preučite** rezultate, da odkrijete, kaj upočasnjuje stvari
 
-Izberite elemente časovnice profila, da povečate dogodke, ki se zgodijo med nalaganjem vaše strani.
+Poskusimo to. Odprite spletno stran (Microsoft.com je primerna) in kliknite tisti gumb 'Record'. Zdaj osvežite stran in opazujte, kako profiler zajema vse, kar se dogaja. Ko prenehate snemati, boste videli podroben pregled, kako brskalnik 'skriptira', 'renderira' in 'riše' stran. Spomni me na to, kako nadzor misije spremlja vsak sistem med izstrelitvijo rakete - dobite podatke v realnem času o tem, kaj se dogaja in kdaj.
 
-Pridobite posnetek zmogljivosti vaše strani tako, da izberete del časovnice profila in si ogledate povzetek v stranskem podoknu:
+![Edge profiler](../../../../translated_images/sl/profiler.5a4a62479c5df01c.webp)
 
-![Edge profiler snapshot](../../../../translated_images/snapshot.97750180ebcad73794a3594b36925eb5c8dbaac9e03fec7f9b974188c9ac63c7.sl.png)
+✅ [Microsoftova dokumentacija](https://docs.microsoft.com/microsoft-edge/devtools-guide/performance/?WT.mc_id=academic-77807-sagibbon) ima še veliko več podrobnosti, če želite poglobiti znanje
 
-Preverite podokno dnevnika dogodkov, da vidite, ali je kateri dogodek trajal dlje kot 15 ms:
+> Namig strokovnjaka: Pred testiranjem počistite predpomnilnik brskalnika, da vidite, kako vaša stran deluje za prve obiskovalce - ponavadi je precej drugače kot pri ponovnih obiskih!
 
-![Edge event log](../../../../translated_images/log.804026979f3707e00eebcfa028b2b5a88cec6292f858767bb6703afba65a7d9c.sl.png)
+Izberite elemente časovnice profila, da povečate dogodke, ki se zgodijo med nalaganjem strani.
 
-✅ Spoznajte svoj profiler! Odprite orodja za razvijalce na tej strani in preverite, ali obstajajo ozka grla. Katero sredstvo se nalaga najpočasneje? Katero najhitreje?
+Dobite posnetek zmogljivosti strani tako, da izberete del časovnice in pogledate povzetek:
 
-## Preverjanje profiliranja
+![Edge profiler snapshot](../../../../translated_images/sl/snapshot.97750180ebcad737.webp)
 
-Na splošno obstajajo nekatera "problematična področja", na katera bi moral biti pozoren vsak spletni razvijalec pri gradnji strani, da se izogne neprijetnim presenečenjem ob času objave v produkciji.
+Preverite podokno Dnevnik dogodkov, da vidite, ali je kateri dogodek trajal dlje od 15 ms:
 
-**Velikosti sredstev**: Splet je v zadnjih nekaj letih postal 'težji' in zato počasnejši. Del te teže je povezan z uporabo slik.
+![Edge event log](../../../../translated_images/sl/log.804026979f3707e0.webp)
 
-✅ Prebrskajte [Internetni arhiv](https://httparchive.org/reports/page-weight) za zgodovinski pregled teže strani in več.
+✅ Spoznajte svoj profiler! Odprite orodja za razvijalce na tej strani in preverite, ali obstajajo ozka grla. Katera datoteka se nalaga najpočasneje? Najhitrejše?
 
-Dobra praksa je zagotoviti, da so vaše slike optimizirane in dostavljene v ustrezni velikosti in ločljivosti za vaše uporabnike.
+```mermaid
+flowchart TD
+    A[Odpri DevTools] --> B[Navigiraj na zavihek Performance]
+    B --> C[Klikni gumb Snemaj]
+    C --> D[Izvedi dejanja]
+    D --> E[Ustavi snemanje]
+    E --> F{Analiziraj rezultate}
+    
+    F --> G[Preveri časovnico]
+    F --> H[Preglej omrežje]
+    F --> I[Preuči skripte]
+    F --> J[Prepoznaj dogodke risanja]
+    
+    G --> K{Dolgi postopki?}
+    H --> L{Veliki viri?}
+    I --> M{Blokiranje upodabljanja?}
+    J --> N{Dragi čopiči?}
+    
+    K -->|Da| O[Optimiziraj JavaScript]
+    L -->|Da| P[Stisni vire]
+    M -->|Da| Q[Dodaj Async/Defer]
+    N -->|Da| R[Poenostavi stile]
+    
+    O --> S[Preizkusi znova]
+    P --> S
+    Q --> S
+    R --> S
+    
+    style A fill:#e1f5fe
+    style F fill:#fff3e0
+    style S fill:#e8f5e8
+```
+## Kaj iskati pri profiliranju
 
-**Prehodi po DOM-u**: Brskalnik mora zgraditi svoj model dokumenta (DOM) na podlagi kode, ki jo napišete, zato je v interesu dobre zmogljivosti strani, da ohranite oznake minimalne, pri čemer uporabljate in oblikujete le tisto, kar stran potrebuje. Na primer, odvečni CSS, povezan s stranjo, bi lahko bil optimiziran; slogi, ki jih je treba uporabiti le na eni strani, ni treba vključiti v glavno slogovno datoteko.
+Zagon profila je šele začetek - prava veščina je vedeti, kaj vam ti pisani grafi dejansko sporočajo. Brez skrbi, naučili se boste njih brati. Izkušeni razvijalci so se naučili prepoznati opozorilne znake, preden postanejo polni problemi.
 
-**JavaScript**: Vsak razvijalec JavaScripta bi moral paziti na 'skripte, ki blokirajo upodabljanje', ki jih je treba naložiti, preden se lahko prehodi in nariše preostali DOM v brskalniku. Razmislite o uporabi `defer` z vašimi vgrajenimi skripti (kot je storjeno v modulu Terrarium).
+Pogovorimo se o običajnih osumljencih - povzročiteljih težav z zmogljivostjo, ki se radi prikradejo v spletne projekte. Tako kot je Marie Curie skrbno nadzorovala raven sevanja v svojem laboratoriju, moramo tudi mi paziti na nekatere vzorce, ki kažejo na težave, ki se kuhajo. Zgodnje odkrivanje vam bo prihranilo veliko frustracij (vam in uporabnikom).
 
-✅ Preizkusite nekaj strani na [spletni strani za testiranje hitrosti strani](https://www.webpagetest.org/), da se naučite več o običajnih preverjanjih, ki se izvajajo za določanje zmogljivosti strani.
+**Velikost sredstev**: Spletne strani so skozi čas postajale "težje", in veliko dodatne teže prihaja iz slik. To je kot da bi v digitalne kovčke dodajali vedno več in več.
 
-Zdaj, ko imate predstavo o tem, kako brskalnik upodablja sredstva, ki mu jih pošljete, si poglejmo zadnje stvari, ki jih morate storiti za dokončanje vaše razširitve:
+✅ Oglejte si [Internet Archive](https://httparchive.org/reports/page-weight), da vidite, kako so se velikosti strani skozi čas povečevale - presenetljivo.
+
+**Tukaj je, kako ohraniti sredstva optimizirana:**
+- **Stisnite** slike! Sodobni formati, kot je WebP, lahko drastično zmanjšajo velikost datotek
+- **Ponudite** pravo velikost slike za vsako napravo - ni potrebe po pošiljanju velikih namiznih slik na telefone
+- **Minificirajte** CSS in JavaScript - vsak bajt šteje
+- **Uporabite** leno nalaganje, da se slike prenesejo le, ko uporabniki dejansko drsijo do njih
+
+**Prehodi DOM**: Brskalnik mora zgraditi svoj Dokumentni objektni model na podlagi kode, ki jo napišete, zato je v interesu dobre zmogljivosti strani, da so vaši oznaki minimalni, uporabljate in oblikujete samo tisto, kar stran potrebuje. V tem smislu bi bilo možno optimizirati odvečen CSS, posebej tisti, ki ga je treba uporabiti samo na eni strani, ni ga treba vključevati v glavni slogovni list.
+
+**Ključne strategije za optimizacijo DOM:**
+- **Zmanjšajte** število HTML elementov in globino gnezdenja
+- **Odstranite** neuporabljena pravila CSS in učinkovito združite slogovne liste
+- **Organizirajte** CSS tako, da se naloži samo, kar je potrebno za vsako stran
+- **Strukturirajte** HTML semantično za boljše razčlenjevanje brskalnika
+
+**JavaScript**: Vsak JavaScript razvijalec naj pazi na 'render-blocking' skripte, ki jih je treba naložiti, preden se lahko preostanek DOM prehodi in nariše brskalnik. Razmislite o uporabi `defer` v svojih vstavljenih skriptah (kot je to narejeno v modulu Terrarium).
+
+**Sodobne tehnike optimizacije JavaScript:**
+- **Uporaba** atributa `defer` za nalaganje skript po parsiranju DOM
+- **Implementacija** delitve kode za nalaganje samo potrebnega JavaScript
+- **Uporaba** lenega nalaganja za nekritične funkcionalnosti
+- **Zmanjševanje** uporabe velikih knjižnic in ogrodij, kjer je mogoče
+
+✅ Preizkusite nekaj strani na [Site Speed Test spletni strani](https://www.webpagetest.org/), da se naučite več o pogostih preverjanjih zmogljivosti strani.
+
+### 🔄 **Pedagoški pregled**
+**Razumevanje zmogljivosti**: Pred gradnjo funkcij razširitve poskrbite, da lahko:
+- ✅ Razložite kritično pot upodabljanja od HTML do slikovnih pik
+- ✅ Prepoznate pogosta ozka grla zmogljivosti v spletnih aplikacijah
+- ✅ Uporabite brskalniška orodja za razvijalce za profiliranje zmogljivosti strani
+- ✅ Razumete, kako velikost sredstev in kompleksnost DOM vplivata na hitrost
+
+**Hiter samopreizkus**: Kaj se zgodi, ko imate JavaScript, ki blokira upodabljanje?
+*Odgovor: Brskalnik mora prenesti in zagnati skript, preden lahko nadaljuje s parsiranjem HTML in upodabljanjem strani*
+
+**Vpliv na zmogljivost v resničnem svetu**:
+- **100 ms zakašnjevanja**: uporabniki opazijo upočasnitev
+- **1 sekunda**: uporabniki začnejo izgubljati osredotočenost
+- **3+ sekunde**: 40 % uporabnikov zapusti stran
+- **Mobilna omrežja**: zmogljivost postane še pomembnejša
+
+Zdaj, ko imate predstavo, kako brskalnik upodablja sredstva, ki jih pošljete, poglejmo zadnje stvari, ki jih morate narediti, da dokončate svojo razširitev:
 
 ### Ustvarite funkcijo za izračun barve
 
-V datoteki `/src/index.js` dodajte funkcijo z imenom `calculateColor()` za serijo spremenljivk `const`, ki jih nastavite za dostop do DOM-a:
+Zdaj bomo ustvarili funkcijo, ki pretvori številčne podatke v smiselne barve. Predstavljajte si to kot sistem semaforja - zeleno za čisto energijo, rdeče za visoko ogljično intenzivnost.
 
-```JavaScript
+Ta funkcija bo vzela CO2 podatke iz našega API in določila, katera barva najbolje predstavlja okoljski vpliv. Podobno kot znanstveniki uporabljajo barvno kodiranje na toplotnih zemljevidih za vizualizacijo zapletenih vzorcev podatkov - od temperaturnih vzorcev oceanov do tvorbe zvezd. Dodajmo to v `/src/index.js`, takoj za tistimi `const` spremenljivkami, ki smo jih definirali prej:
+
+```mermaid
+flowchart LR
+    A[CO2 Vrednost] --> B[Najdi Najbližjo Skalo]
+    B --> C[Pridobi Indeks Skale]
+    C --> D[Preslika na Barvo]
+    D --> E[Pošlji na Ozadje]
+    
+    subgraph "Barvna Skala"
+        F["0-150: Zeleno (Čisto)"]
+        G["150-600: Rumeno (Zmerno)"]
+        H["600-750: Oranžno (Visoko)"]
+        I["750+: Rjavo (Zelo Visoko)"]
+    end
+    
+    subgraph "Sporočanje"
+        J[Vsebinski Skript]
+        K[chrome.runtime.sendMessage]
+        L[Ozadje Skript]
+        M[Posodobitev Ikone]
+    end
+    
+    style A fill:#e1f5fe
+    style D fill:#e8f5e8
+    style E fill:#fff3e0
+```
+```javascript
 function calculateColor(value) {
-	let co2Scale = [0, 150, 600, 750, 800];
-	let colors = ['#2AA364', '#F5EB4D', '#9E4229', '#381D02', '#381D02'];
+	// Določite lestvico intenzivnosti CO2 (grami na kWh)
+	const co2Scale = [0, 150, 600, 750, 800];
+	// Ustrezne barve od zelene (čista) do temno rjave (visoka vsebnost ogljika)
+	const colors = ['#2AA364', '#F5EB4D', '#9E4229', '#381D02', '#381D02'];
 
-	let closestNum = co2Scale.sort((a, b) => {
+	// Poiščite najbližjo vrednost lestvice naši vhodni vrednosti
+	const closestNum = co2Scale.sort((a, b) => {
 		return Math.abs(a - value) - Math.abs(b - value);
 	})[0];
-	console.log(value + ' is closest to ' + closestNum);
-	let num = (element) => element > closestNum;
-	let scaleIndex = co2Scale.findIndex(num);
+	
+	console.log(`${value} is closest to ${closestNum}`);
+	
+	// Poiščite indeks za barvno preslikavo
+	const num = (element) => element > closestNum;
+	const scaleIndex = co2Scale.findIndex(num);
 
-	let closestColor = colors[scaleIndex];
+	const closestColor = colors[scaleIndex];
 	console.log(scaleIndex, closestColor);
 
+	// Pošljite sporočilo o posodobitvi barve ozadju skripte
 	chrome.runtime.sendMessage({ action: 'updateIcon', value: { color: closestColor } });
 }
 ```
 
-Kaj se tukaj dogaja? Posredujete vrednost (intenzivnost ogljika) iz klica API-ja, ki ste ga dokončali v zadnji lekciji, nato pa izračunate, kako blizu je njena vrednost indeksu, predstavljenemu v polju barv. Nato pošljete to najbližjo vrednost barve prek runtime okolja Chrome.
+**Poglejmo si to pametno majhno funkcijo:**
+- **Nastavi** dva niza - enega za ravni CO2, drugega za barve (zeleno = čisto, rjavo = umazano!)
+- **Najde** najbližje ujemanje z našo dejansko CO2 vrednostjo z uporabo ureditev polja
+- **Pridobi** ujemajočo barvo z uporabo metode findIndex()
+- **Pošlje** sporočilo Chromovemu skriptu v ozadju z izbrano barvo
+- **Uporabi** predloge nizov (tiste nazaj obrnjene vejice) za čistejše oblikovanje niza
+- **Ohranja** organiziranost z uporabo const deklaracij
 
-Runtime okolje Chrome ima [API](https://developer.chrome.com/extensions/runtime), ki obravnava vse vrste ozadnih opravil, vaša razširitev pa ga izkorišča:
+`chrome.runtime` [API](https://developer.chrome.com/extensions/runtime) je kot živčni sistem vaše razširitve - upravlja z vsemi komunikacijami in opravili za kulisami:
 
-> "Uporabite API chrome.runtime za pridobitev ozadja strani, vrnitev podrobnosti o manifestu ter poslušanje in odzivanje na dogodke v življenjskem ciklu aplikacije ali razširitve. Ta API lahko uporabite tudi za pretvorbo relativne poti URL-jev v popolnoma kvalificirane URL-je."
+> "Uporabite chrome.runtime API za pridobivanje ozadnega strani, vračanje podrobnosti o manifestu ter poslušanje in odzivanje na dogodke v življenjskem ciklu aplikacije ali razširitve. Prav tako lahko ta API uporabite za pretvorbo relativnih poti URL-jev v popolnoma kvalificirane URL-je."
 
-✅ Če razvijate to razširitev brskalnika za Edge, vas morda preseneča, da uporabljate API Chrome. Novejše različice brskalnika Edge delujejo na brskalniškem pogonu Chromium, zato lahko izkoristite ta orodja.
+**Zakaj je Chrome Runtime API tako uporaben:**
+- **Omogoča**, da različni deli vaše razširitve komunicirajo med seboj
+- **Upravlja** delo v ozadju brez zmrzovanja uporabniškega vmesnika
+- **Obvladuje** življenjske dogodke vaše razširitve
+- **Poenostavi** pošiljanje sporočil med skripti
 
-> Opomba: če želite profilirati razširitev brskalnika, zaženite orodja za razvijalce znotraj same razširitve, saj je to ločen brskalniški primerek.
+✅ Če razvijate to razširitev za Edge, vas lahko preseneti, da uporabljate chrome API. Novejše različice brskalnika Edge tečejo na Chromium jedru, zato lahko izkoristite ta orodja.
+
+```mermaid
+architecture-beta
+    group browser(logos:chrome)[Brskalnik]
+    
+    service popup(logos:html5)[Vnosno Okno] in browser
+    service content(logos:javascript)[Vsebinski Skript] in browser
+    service background(database)[Ozadje Skripta] in browser
+    service api(logos:api)[Zunanji API] in browser
+    
+    popup:R -- L:content
+    content:R -- L:background
+    background:T -- B:api
+    content:T -- B:api
+    
+    junction junctionCenter in browser
+    popup:R -- L:junctionCenter
+    junctionCenter:R -- L:background
+```
+> **Namig strokovnjaka**: Če želite profilirati razširitev brskalnika, zaženite orodja za razvijalce znotraj same razširitve, saj je to njen ločen brskalniški primer. Tako boste imeli dostop do zmogljivostnih meritev, specifičnih za razširitev.
 
 ### Nastavite privzeto barvo ikone
 
-Zdaj v funkciji `init()` nastavite ikono na generično zeleno barvo, tako da znova pokličete akcijo `updateIcon` v okolju Chrome:
+Preden začnemo z zbiranjem pravih podatkov, dajmo naši razširitvi izhodišče. Nihče ne mara gledati prazne ali pokvarjene ikone. Začeli bomo z zeleno barvo, da uporabniki vedo, da razširitev deluje takoj, ko jo namestijo.
 
-```JavaScript
+V funkciji `init()` nastavite to privzeto zeleno ikono:
+
+```javascript
 chrome.runtime.sendMessage({
 	action: 'updateIcon',
-		value: {
-			color: 'green',
-		},
+	value: {
+		color: 'green',
+	},
 });
 ```
 
+**Kaj ta inicializacija doseže:**
+- **Nastavi** nevtralno zeleno barvo kot privzeto stanje
+- **Nudi** takojšen vizualni odziv ob nalaganju razširitve
+- **Vzpostavi** vzorec komunikacije z ozadnim skriptom
+- **Zagotovi**, da uporabniki vidijo delujočo razširitev pred nalaganjem podatkov
 ### Pokličite funkcijo, izvedite klic
 
-Nato pokličite funkcijo, ki ste jo pravkar ustvarili, tako da jo dodate obljubi, ki jo vrne API C02Signal:
+Zdaj vse povežimo skupaj, da se ko prispejo sveži podatki o CO2, vaša ikona samodejno posodobi z ustrezno barvo. To je kot povezovanje zadnjega vezja v elektronski napravi - nenadoma vsi posamezni deli delujejo kot en sistem.
 
-```JavaScript
-//let CO2...
+Dodajte to vrstico takoj za pridobitvijo podatkov CO2 iz API-ja:
+
+```javascript
+// Po pridobitvi podatkov o CO2 iz API-ja
+// naj bo CO2 = data.data[0].intensity.actual;
 calculateColor(CO2);
 ```
 
-In na koncu, v datoteki `/dist/background.js`, dodajte poslušalca za te klice ozadnih akcij:
+**Ta integracija doseže:**
+- **Poveže** tok podatkov API-ja s sistemom vizualnih indikatorjev
+- **Sproži** samodejne posodobitve ikone, ko prispejo novi podatki
+- **Zagotovi** vizualni odziv v realnem času glede na trenutno ogljično intenzivnost
+- **Ohranja** ločenost med zajemom podatkov in logiko prikaza
 
-```JavaScript
+In nazadnje v `/dist/background.js` dodajte poslušalca za te klice ozadnih opravil:
+
+```javascript
+// Poslušaj sporočila iz vsebinskega skripta
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 	if (msg.action === 'updateIcon') {
-		chrome.browserAction.setIcon({ imageData: drawIcon(msg.value) });
+		chrome.action.setIcon({ imageData: drawIcon(msg.value) });
 	}
 });
-//borrowed from energy lollipop extension, nice feature!
-function drawIcon(value) {
-	let canvas = document.createElement('canvas');
-	let context = canvas.getContext('2d');
 
+// Nariši dinamično ikono z uporabo Canvas API
+// Posojeno iz razširitve energy lollipop - lepa funkcija!
+function drawIcon(value) {
+	// Ustvari platno brez zaslona za boljšo zmogljivost
+	const canvas = new OffscreenCanvas(200, 200);
+	const context = canvas.getContext('2d');
+
+	// Nariši barvni krog, ki predstavlja ogljično intenzivnost
 	context.beginPath();
 	context.fillStyle = value.color;
 	context.arc(100, 100, 50, 0, 2 * Math.PI);
 	context.fill();
 
+	// Vrni podatke slike za ikono brskalnika
 	return context.getImageData(50, 50, 100, 100);
 }
 ```
 
-V tej kodi dodajate poslušalca za kakršna koli sporočila, ki prihajajo v upravitelja ozadnih opravil. Če je klic imenovan 'updateIcon', se nato izvede naslednja koda za risanje ikone ustrezne barve z uporabo API-ja Canvas.
+**Tukaj je, kaj počne ta ozadni skript:**
+- **Posluša** sporočila iz glavnega skripta (kot receptor, ki sprejema klice)
+- **Obravnava** zahteve 'updateIcon' za spremembo ikonke v orodni vrstici
+- **Ustvari** nove ikone sproti z uporabo Canvas API-ja
+- **Nariše** preprost obarvan krog, ki kaže trenutno ogljično intenzivnost
+- **Posodobi** orodno vrstico brskalnika z novo ikono
+- **Uporablja** OffscreenCanvas za gladko zmogljivost (brez blokiranja UI)
 
-✅ Več o API-ju Canvas boste izvedeli v [lekcijah o vesoljski igri](../../6-space-game/2-drawing-to-canvas/README.md).
+✅ Več o Canvas API-ju se boste naučili v [Space Game lekcijah](../../6-space-game/2-drawing-to-canvas/README.md).
 
-Zdaj ponovno zgradite svojo razširitev (`npm run build`), osvežite in zaženite svojo razširitev ter opazujte spremembo barve. Je pravi čas za opravilo ali pomivanje posode? Zdaj veste!
+```mermaid
+sequenceDiagram
+    participant CS as Skripta vsebine
+    participant BG as Skripta v ozadju
+    participant Canvas as OffscreenCanvas
+    participant Browser as Ikona brskalnika
+    
+    CS->>BG: sendMessage({action: 'updateIcon', color})
+    BG->>Canvas: new OffscreenCanvas(200, 200)
+    Canvas->>Canvas: getContext('2d')
+    Canvas->>Canvas: beginPath() + fillStyle + arc()
+    Canvas->>Canvas: fill() + getImageData()
+    Canvas->>BG: Vrni podatke slike
+    BG->>Browser: chrome.action.setIcon(imageData)
+    Browser->>Browser: Posodobi ikono orodne vrstice
+```
+### 🔄 **Pedagoški pregled**
+**Celostno razumevanje razširitve**: Preverite svoje znanje celotnega sistema:
+- ✅ Kako poteka pošiljanje sporočil med različnimi skripti razširitve?
+- ✅ Zakaj uporabljamo OffscreenCanvas namesto običajnega Canvas za zmogljivost?
+- ✅ Kakšno vlogo ima Chrome Runtime API v arhitekturi razširitve?
+- ✅ Kako algoritem za izračun barv preslika podatke v vizualne povratne informacije?
 
-Čestitamo, zgradili ste uporabno razširitev brskalnika in se naučili več o delovanju brskalnika ter profiliranju njegove zmogljivosti.
+**Upoštevanje zmogljivosti**: Vaša razširitev zdaj prikazuje:
+- **Učinkovito sporočanje**: Čista komunikacija med skriptnimi konteksti
+- **Optimizirano upodabljanje**: OffscreenCanvas preprečuje blokiranje uporabniškega vmesnika
+- **Posodobitve v realnem času**: Dinamične spremembe ikone glede na žive podatke
+- **Upravljanje pomnilnika**: Pravilno čiščenje in upravljanje virov
 
----
+**Čas je za testiranje vaše razširitve:**
+- **Zgradite** vse z `npm run build`
+- **Ponovno naložite** vašo razširitev v brskalniku (ne pozabite tega koraka)
+- **Odprite** vašo razširitev in opazujte, kako ikona spreminja barve
+- **Preverite**, kako se odziva na dejanske podatke o ogljiku z vsega sveta
+
+Zdaj boste na prvi pogled vedeli, ali je pravi čas za pranje perila ali počakati na čistejšo energijo. Pravkar ste ustvarili nekaj res uporabnega in se pri tem naučili o zmogljivosti brskalnika.
+
+## Izziv GitHub Copilot agenta 🚀
+
+Uporabite način Agent za dokončanje naslednjega izziva:
+
+**Opis:** Izboljšajte zmogljivost spremljanja vaše brskalniške razširitve z dodajanjem funkcije, ki sledi in prikazuje čas nalaganja različnih komponent razširitve.
+
+**Navodilo:** Ustvarite sistem za spremljanje zmogljivosti brskalniške razširitve, ki meri in beleži čas, potreben za pridobivanje podatkov o CO2 iz API-ja, izračun barv in posodobitev ikone. Dodajte funkcijo `performanceTracker`, ki uporablja Performance API za merjenje teh operacij in prikazuje rezultate v konzoli brskalnika s časovnimi žigi in metrikami trajanja.
+
+Več o [načinu agent](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) izveste tukaj.
 
 ## 🚀 Izziv
 
-Raziskujte nekatere odprtokodne spletne strani, ki obstajajo že dolgo, in na podlagi njihove zgodovine na GitHubu preverite, ali lahko ugotovite, kako so bile optimizirane skozi leta za zmogljivost, če sploh. Kaj je najpogostejša težava?
+Tukaj je zanimiva detektivska misija: izberite nekaj odprtokodnih spletnih mest, ki delujejo že leta (recimo Wikipedia, GitHub ali Stack Overflow) in preglejte njihovo zgodovino commitov. Ali lahko ugotovite kje so naredili izboljšave zmogljivosti? Katere težave so se ponavljale?
 
-## Kviz po lekciji
+**Vaš pristop k preiskavi:**
+- **Iščite** sporočila commitov po besedah kot so "optimiziraj", "zmogljivost" ali "hitreje"
+- **Poglejte** za vzorce - ali popravljajo iste vrste težav?
+- **Prepoznajte** pogoste vzroke, ki upočasnjujejo spletna mesta
+- **Delite** svoja odkritja - drugi razvijalci se učijo iz primerov iz resničnega sveta
 
-[Kviz po lekciji](https://ff-quizzes.netlify.app/web/quiz/28)
+## Kviz po predavanju
 
-## Pregled in samostojno učenje
+[Post-lecture quiz](https://ff-quizzes.netlify.app/web/quiz/28)
 
-Razmislite o prijavi na [novice o zmogljivosti](https://perf.email/).
+## Pregled & Samostojno učenje
 
-Raziskujte nekatere načine, kako brskalniki ocenjujejo spletno zmogljivost, tako da pregledate zavihke zmogljivosti v njihovih orodjih za razvijalce. Ali opazite kakšne večje razlike?
+Razmislite o naročnini na [novičnik o zmogljivosti](https://perf.email/)
+
+Preučite nekatere načine, kako brskalniki merijo spletno zmogljivost, tako da pogledate zavihke za zmogljivost v njihovih orodjih za razvijalce. Ali opazite kakšne večje razlike?
+
+### ⚡ **Kaj lahko storite v naslednjih 5 minutah**
+- [ ] Odprite Upravljalnik opravil brskalnika (Shift+Esc v Chromu) in si oglejte uporabo virov razširitve
+- [ ] Uporabite zavihek Performance v DevTools za zajem in analizo zmogljivosti spletne strani
+- [ ] Preverite stran z razširitvami v brskalniku, katere razširitve vplivajo na čas zagona
+- [ ] Poskusite začasno onemogočiti razširitve, da vidite spremembe zmogljivosti
+
+### 🎯 **Posebno za ta časovni okvir**
+- [ ] Dokončajte kviz po lekciji in razumite koncepte zmogljivosti
+- [ ] Implementirajte ozadni skript za vašo razširitev brskalnika
+- [ ] Naučite se uporabljati browser.alarms za učinkovita opravila v ozadju
+- [ ] Vaja v prenosu sporočil med vsebinskimi in ozadnimi skripti
+- [ ] Merite in optimizirajte rabo virov vaše razširitve
+
+### 📅 **Vaše tedensko potovanje do zmogljivosti**
+- [ ] Dokončajte zmogljivo razširitev za brskalnik z ozadnimi funkcionalnostmi
+- [ ] Obvladujte storitvene delavce in sodobno arhitekturo razširitev
+- [ ] Implementirajte učinkovite strategije sinhronizacije podatkov in predpomnjenja
+- [ ] Naučite se naprednih tehnik odpravljanja napak za zmogljivost razširitev
+- [ ] Optimizirajte vašo razširitev za funkcionalnost in učinkovitost virov
+- [ ] Ustvarite celovite teste za scenarije zmogljivosti razširitev
+
+### 🌟 **Vaša mesečna mojstrska optimizacija**
+- [ ] Zgradite razširitve za brskalnike na nivoju podjetij z optimalno zmogljivostjo
+- [ ] Spoznajte Web Workers, Service Workers in sodobno spletno zmogljivost
+- [ ] Prispevajte k odprtokodnim projektom, osredotočenim na optimizacijo zmogljivosti
+- [ ] Obvladajte notranjost brskalnikov in napredne tehnike odpravljanja napak
+- [ ] Ustvarite orodja za spremljanje zmogljivosti in vodiče za najboljše prakse
+- [ ] Postanite strokovnjak za zmogljivost, ki pomaga optimizirati spletne aplikacije
+
+## 🎯 Časovnica mojstrstva vaše razširitve za brskalnik
+
+```mermaid
+timeline
+    title Popolna Razvojna Pot Razširitve
+    
+    section Osnove Uspešnosti (20 minut)
+        Profiliranje Brskalnika: Obvladovanje DevTools
+                         : Analiza časovne premice
+                         : Identifikacija ozkih grl
+                         : Kritična pot upodabljanja
+        
+    section Ozadna Opravila (25 minut)
+        Arhitektura Razširitve: Prenos sporočil
+                              : Ozadinski skripti
+                              : Uporaba Runtime API
+                              : Komunikacija med konteksti
+        
+    section Vizualna Povratna Informacija (30 minut)
+        Dinamični UI: Algoritmi za izračun barv
+                  : Integracija Canvas API
+                  : Generiranje ikon
+                  : Posodobitve v realnem času
+        
+    section Optimizacija Uspešnosti (35 minut)
+        Učinkovita Koda: Asinhrone operacije
+                      : Upravljanje spomina
+                      : Čiščenje virov
+                      : Spremljanje uspešnosti
+        
+    section Pripravljeno za Produkcijo (45 minut)
+        Dodelava & Testiranje: Združljivost med brskalniki
+                        : Ravnanje z napakami
+                        : Uporniška izkušnja
+                        : Validacija uspešnosti
+        
+    section Napredne Funkcije (1 teden)
+        Ekosistem Razširitve: Chrome Web Store
+                           : Povratne informacije uporabnikov
+                           : Integracija analitike
+                           : Upravljanje posodobitev
+        
+    section Profesionalni Razvoj (2 tedna)
+        Podjetniške Razširitve: Sodelovanje ekipe
+                             : Pregledi kode
+                             : CI/CD poteki
+                             : Varnostni pregledi
+        
+    section Strokovno Mojstrstvo (1 mesec)
+        Strokovnost Platforme: Napredni Chrome API-ji
+                          : Optimizacija uspešnosti
+                          : Arhitekturni vzorci
+                          : Prispevanje k odprti kodi
+```
+### 🛠️ Vaše popolno orodje za razvoj razširitev
+
+Po zaključku te trilogije ste obvladali:
+- **Arhitekturo brskalnika**: Globoko razumevanje, kako se razširitve povezujejo z brskalniškimi sistemi
+- **Profiliranje zmogljivosti**: Sposobnost prepoznavanja in odpravljanja ozkih grl z uporabo orodij za razvijalce
+- **Asinhrono programiranje**: Sodobne vzorce JavaScripta za odzivne, neblokirne operacije
+- **Integracija API-jev**: Pridobivanje zunanjih podatkov z avtentikacijo in obravnavo napak
+- **Vizualni dizajn**: Dinamične posodobitve uporabniškega vmesnika in generiranje grafike na podlagi Canvas
+- **Prenos sporočil**: Komunikacija med skriptami v arhitekturah razširitev
+- **Uporabniška izkušnja**: Naložni stanja, obravnava napak in intuitivna interakcija
+- **Produkcijske veščine**: Testiranje, odpravljanje napak in optimizacija za realno uporabo
+
+**Uporabnost v resničnem svetu**: Vaše veščine razvoja razširitev so neposredno uporabne pri:
+- **Progresivnih spletnh aplikacijah**: Podobna arhitektura in vzorci zmogljivosti
+- **Electron namiznih aplikacijah**: Večplatformne aplikacije, ki uporabljajo spletne tehnologije
+- **Mobilnih hibridnih aplikacijah**: Razvoj Cordova/PhoneGap z uporabo spletnih API-jev
+- **Podjetniških spletnh aplikacijah**: Kompleksna orodja za nadzorne plošče in produktivnost
+- **Razširitvah za Chrome DevTools**: Napredna orodja za razvijalce in odpravljanje napak
+- **Integraciji spletnih API-jev**: Katerekoli aplikacije, ki komunicirajo z zunanjimi storitvami
+
+**Poklicni vpliv**: Zdaj lahko:
+- **Zgradite** razširitve za brskalnike, pripravljene za proizvodnjo, od koncepta do uvedbe
+- **Optimizirate** zmogljivost spletnih aplikacij z uporabo industrijsko priznanih orodij za profiliranje
+- **Arhitektirate** razširljive sisteme z ustreznim ločevanjem odgovornosti
+- **Odpravljate napake** kompleksnih asinhronih operacij in komunikacije med konteksti
+- **Prispevate** k odprtokodnim razširitvenim projektom in standardom brskalnikov
+
+**Priložnosti za naslednjo stopnjo:**
+- **Razvijalec v Chrome Web Store**: Objavite razširitve za milijone uporabnikov
+- **Inženir spletne zmogljivosti**: Specializirajte se za optimizacijo in uporabniško izkušnjo
+- **Razvijalec platforme brskalnika**: Prispevajte k razvoju pogona brskalnika
+- **Ustvarjalec ogrodja za razširitve**: Gradite orodja, ki pomagajo drugim razvijalcem
+- **Odnosi z razvijalci**: Delite znanje v obliki izobraževanja in ustvarjanja vsebin
+
+🌟 **Dosežek odklenjen**: Zgradili ste popolno, funkcionalno razširitev za brskalnik, ki prikazuje profesionalne razvojne prakse in sodobne spletne standarde!
 
 ## Naloga
 
-[Analizirajte zmogljivost strani](assignment.md)
+[Analizirajte spletno mesto za zmogljivost](assignment.md)
 
 ---
 
-**Omejitev odgovornosti**:  
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, vas prosimo, da upoštevate, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem maternem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo profesionalni človeški prevod. Ne prevzemamo odgovornosti za morebitna nesporazumevanja ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Omejitev odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvorni jeziku velja za verodostojen vir. Za ključne informacije priporočamo strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

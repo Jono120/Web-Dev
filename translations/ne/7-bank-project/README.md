@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "830359535306594b448db6575ce5cdee",
-  "translation_date": "2025-08-26T00:03:12+00:00",
-  "source_file": "7-bank-project/README.md",
-  "language_code": "ne"
-}
--->
 # :dollar: बैंक बनाउनुहोस्
 
 यस परियोजनामा, तपाईंले एक काल्पनिक बैंक कसरी निर्माण गर्ने भनेर सिक्नुहुनेछ। यी पाठहरूले वेब एपको लेआउट कसरी बनाउने र रुटहरू प्रदान गर्ने, फारमहरू निर्माण गर्ने, स्टेट व्यवस्थापन गर्ने, र API बाट डेटा कसरी ल्याउने भन्ने निर्देशनहरू समावेश गर्दछ, जसबाट तपाईं बैंकको डेटा प्राप्त गर्न सक्नुहुन्छ।
 
-| ![Screen1](../../../translated_images/screen1.baccbba0f1f93364672eb250d2fbd21574bb1caf79a2155022dc098a741cbdfe.ne.png) | ![Screen2](../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.ne.png) |
+| ![Screen1](../../../translated_images/ne/screen1.baccbba0f1f93364.webp) | ![Screen2](../../../translated_images/ne/screen2.123c82a831a1d14a.webp) |
 |--------------------------------|--------------------------------|
 
 ## पाठहरू

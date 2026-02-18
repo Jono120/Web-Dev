@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b121a279a6ab39878491f3e572673515",
-  "translation_date": "2025-08-26T22:31:15+00:00",
-  "source_file": "5-browser-extension/README.md",
-  "language_code": "da"
-}
--->
 # Bygning af en browserudvidelse
 
 At bygge browserudvidelser er en sjov og interessant måde at tænke over dine apps' ydeevne, samtidig med at du skaber en anden type webressource. Dette modul indeholder lektioner om, hvordan browsere fungerer, hvordan man implementerer en browserudvidelse, hvordan man bygger en formular, kalder et API og bruger lokal lagring, samt hvordan man vurderer og forbedrer ydeevnen på din hjemmeside.
@@ -23,7 +14,7 @@ Denne udvidelse kan bruges ad hoc af en bruger, når en API-nøgle og regionskod
 
 ### Krediteringer
 
-![en grøn browserudvidelse](../../../translated_images/extension-screenshot.0e7f5bfa110e92e3875e1bc9405edd45a3d2e02963e48900adb91926a62a5807.da.png)
+![en grøn browserudvidelse](../../../translated_images/da/extension-screenshot.0e7f5bfa110e92e3.webp)
 
 ## Krediteringer
 

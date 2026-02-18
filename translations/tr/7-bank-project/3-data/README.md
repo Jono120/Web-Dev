@@ -1,67 +1,239 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "89d0df9854ed020f155e94882ae88d4c",
-  "translation_date": "2025-08-29T00:18:13+00:00",
-  "source_file": "7-bank-project/3-data/README.md",
-  "language_code": "tr"
-}
--->
-# Bankacılık Uygulaması Yapımı Bölüm 3: Veri Alma ve Kullanma Yöntemleri
+# Bankacılık Uygulaması Geliştirme Bölüm 3: Verileri Alma ve Kullanma Yöntemleri
 
-## Ders Öncesi Test
+Star Trek'teki Enterprise'ın bilgisayarını düşünün - Kaptan Picard geminin durumunu sorduğunda, bilgi anında görünür ve tüm arayüz kapanıp yeniden inşa edilmez. İşte burada, dinamik veri alma ile bu kesintisiz bilgi akışını oluşturuyoruz.
 
-[Ders öncesi test](https://ff-quizzes.netlify.app/web/quiz/45)
+Şu anda bankacılık uygulamanız basılı bir gazete gibi - bilgilendirici ama statik. Bunu NASA'nın görev kontrol merkezi gibi bir şeye dönüştüreceğiz; burada veriler sürekli akar ve gerçek zamanlı olarak güncellenir, kullanıcıların iş akışını kesintiye uğratmadan.
 
-### Giriş
+Sunucularla asenkron olarak nasıl iletişim kuracağınızı, farklı zamanlarda gelen verileri nasıl yöneteceğinizi ve ham bilgileri kullanıcılarınız için anlamlı bir şeye nasıl dönüştüreceğinizi öğreneceksiniz. Bu, bir demo ile üretime hazır bir yazılım arasındaki farktır.
 
-Her web uygulamasının temelinde *veri* bulunur. Veri birçok biçimde olabilir, ancak temel amacı her zaman kullanıcıya bilgi sunmaktır. Web uygulamaları giderek daha etkileşimli ve karmaşık hale geldikçe, kullanıcının bilgiye erişimi ve bu bilgiyle etkileşimi web geliştirme sürecinin önemli bir parçası haline gelmiştir.
+## ⚡ Sonraki 5 Dakikada Yapabilecekleriniz
 
-Bu derste, bir sunucudan verileri asenkron olarak nasıl alacağımızı ve bu verileri HTML'yi yeniden yüklemeden bir web sayfasında nasıl göstereceğimizi göreceğiz.
+**Yoğun Geliştiriciler için Hızlı Başlangıç Yolu**
 
-### Ön Koşul
-
-Bu ders için web uygulamasının [Giriş ve Kayıt Formu](../2-forms/README.md) bölümünü oluşturmuş olmanız gerekiyor. Ayrıca [Node.js](https://nodejs.org) kurmanız ve [sunucu API'sini](../api/README.md) yerel olarak çalıştırmanız gerekiyor, böylece hesap verilerine erişebilirsiniz.
-
-Sunucunun düzgün çalıştığını test etmek için bir terminalde şu komutu çalıştırabilirsiniz:
-
-```sh
-curl http://localhost:5000/api
-# -> should return "Bank API v1.0.0" as a result
+```mermaid
+flowchart LR
+    A[⚡ 5 minutes] --> B[Set up API server]
+    B --> C[Test fetch with curl]
+    C --> D[Create login function]
+    D --> E[See data in action]
 ```
+
+- **Dakika 1-2**: API sunucunuzu başlatın (`cd api && npm start`) ve bağlantıyı test edin
+- **Dakika 3**: `getAccount()` adlı temel bir işlev oluşturun ve fetch kullanın
+- **Dakika 4**: Giriş formunu `action="javascript:login()"` ile bağlayın
+- **Dakika 5**: Girişi test edin ve hesap verilerinin konsolda göründüğünü izleyin
+
+**Hızlı Test Komutları**:
+```bash
+# Verify API is running
+curl http://localhost:5000/api
+
+# Test account data fetch
+curl http://localhost:5000/api/accounts/test
+```
+
+**Neden Önemli**: 5 dakika içinde, modern web uygulamalarını canlı ve duyarlı hissettiren asenkron veri almanın büyüsünü göreceksiniz. Bu, uygulamaları profesyonel ve kullanıcı dostu yapan temeldir.
+
+## 🗺️ Veri Odaklı Web Uygulamaları Öğrenme Yolculuğunuz
+
+```mermaid
+journey
+    title From Static Pages to Dynamic Applications
+    section Understanding the Evolution
+      Traditional page reloads: 3: You
+      Discover AJAX/SPA benefits: 5: You
+      Master Fetch API patterns: 7: You
+    section Building Authentication
+      Create login functions: 4: You
+      Handle async operations: 6: You
+      Manage user sessions: 8: You
+    section Dynamic UI Updates
+      Learn DOM manipulation: 5: You
+      Build transaction displays: 7: You
+      Create responsive dashboards: 9: You
+    section Professional Patterns
+      Template-based rendering: 6: You
+      Error handling strategies: 7: You
+      Performance optimization: 8: You
+```
+
+**Hedefiniz**: Bu dersin sonunda, modern web uygulamalarının verileri nasıl aldığını, işlediğini ve dinamik olarak görüntülediğini anlayacaksınız. Bu, profesyonel uygulamalardan beklediğimiz kesintisiz kullanıcı deneyimlerini yaratır.
+
+## Ön Ders Testi
+
+[Ön ders testi](https://ff-quizzes.netlify.app/web/quiz/45)
+
+### Ön Koşullar
+
+Veri alma işlemine başlamadan önce, şu bileşenlerin hazır olduğundan emin olun:
+
+- **Önceki Ders**: [Giriş ve Kayıt Formu](../2-forms/README.md) dersini tamamlayın - bu temelin üzerine inşa edeceğiz
+- **Yerel Sunucu**: [Node.js](https://nodejs.org) yükleyin ve [sunucu API'sini çalıştırın](../api/README.md) hesap verilerini sağlamak için
+- **API Bağlantısı**: Sunucu bağlantınızı şu komutla test edin:
+
+```bash
+curl http://localhost:5000/api
+# Expected response: "Bank API v1.0.0"
+```
+
+Bu hızlı test, tüm bileşenlerin düzgün iletişim kurduğunu doğrular:
+- Node.js'in sisteminizde doğru çalıştığını doğrular
+- API sunucunuzun aktif ve yanıt verdiğini onaylar
+- Uygulamanızın sunucuya ulaşabildiğini doğrular (bir görev öncesi radyo iletişimini kontrol etmek gibi)
+
+## 🧠 Veri Yönetimi Ekosistemi Genel Bakış
+
+```mermaid
+mindmap
+  root((Data Management))
+    Authentication Flow
+      Login Process
+        Form Validation
+        Credential Verification
+        Session Management
+      User State
+        Global Account Object
+        Navigation Guards
+        Error Handling
+    API Communication
+      Fetch Patterns
+        GET Requests
+        POST Requests
+        Error Responses
+      Data Formats
+        JSON Processing
+        URL Encoding
+        Response Parsing
+    Dynamic UI Updates
+      DOM Manipulation
+        Safe Text Updates
+        Element Creation
+        Template Cloning
+      User Experience
+        Real-time Updates
+        Error Messages
+        Loading States
+    Security Considerations
+      XSS Prevention
+        textContent Usage
+        Input Sanitization
+        Safe HTML Creation
+      CORS Handling
+        Cross-Origin Requests
+        Header Configuration
+        Development Setup
+```
+
+**Temel İlke**: Modern web uygulamaları, kullanıcı arayüzleri, sunucu API'leri ve tarayıcı güvenlik modelleri arasında koordinasyon sağlayan veri orkestrasyon sistemleridir. Bu, kesintisiz ve duyarlı deneyimler yaratır.
 
 ---
 
-## AJAX ve veri alma
+## Modern Web Uygulamalarında Veri Alma Sürecini Anlamak
 
-Geleneksel web siteleri, kullanıcı bir bağlantı seçtiğinde veya bir form aracılığıyla veri gönderdiğinde, tam HTML sayfasını yeniden yükleyerek görüntülenen içeriği günceller. Yeni veriler her yüklendiğinde, web sunucusu tarayıcı tarafından işlenmesi gereken tamamen yeni bir HTML sayfası döndürür. Bu işlem, mevcut kullanıcı eylemini kesintiye uğratır ve yeniden yükleme sırasında etkileşimleri sınırlar. Bu iş akışı *Çok Sayfalı Uygulama* veya *MPA* olarak adlandırılır.
+Web uygulamalarının verileri işleme şekli son yirmi yılda dramatik bir şekilde değişti. Bu evrimi anlamak, modern tekniklerin neden bu kadar güçlü olduğunu ve neden web geliştiricileri için vazgeçilmez araçlar haline geldiğini anlamanıza yardımcı olacaktır.
 
-![Çok sayfalı uygulamada güncelleme iş akışı](../../../../translated_images/mpa.7f7375a1a2d4aa779d3f928a2aaaf9ad76bcdeb05cfce2dc27ab126024050f51.tr.png)
+Geleneksel web sitelerinin nasıl çalıştığını, bugün oluşturduğumuz dinamik ve duyarlı uygulamalarla karşılaştırarak inceleyelim.
 
-Web uygulamaları daha karmaşık ve etkileşimli hale gelmeye başladığında, [AJAX (Asynchronous JavaScript and XML)](https://en.wikipedia.org/wiki/Ajax_(programming)) adı verilen yeni bir teknik ortaya çıktı. Bu teknik, JavaScript kullanarak verileri bir sunucudan asenkron olarak göndermeye ve almaya olanak tanır, HTML sayfasını yeniden yüklemeye gerek kalmadan daha hızlı güncellemeler ve daha akıcı kullanıcı etkileşimleri sağlar. Sunucudan yeni veriler alındığında, mevcut HTML sayfası JavaScript kullanılarak [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model) API'si ile güncellenebilir. Zamanla bu yaklaşım, günümüzde [*Tek Sayfalı Uygulama* veya *SPA*](https://en.wikipedia.org/wiki/Single-page_application) olarak adlandırılan bir yapıya evrilmiştir.
+### Geleneksel Çoklu Sayfa Uygulamaları (MPA)
 
-![Tek sayfalı uygulamada güncelleme iş akışı](../../../../translated_images/spa.268ec73b41f992c2a21ef9294235c6ae597b3c37e2c03f0494c2d8857325cc57.tr.png)
+Web'in ilk günlerinde, her tıklama eski bir televizyon kanalını değiştirmek gibiydi - ekran boşalır, ardından yeni içerik yavaşça yüklenirdi. Bu, her etkileşimin tüm sayfayı baştan sona yeniden inşa etmek anlamına geldiği erken web uygulamalarının gerçekliğiydi.
 
-AJAX ilk tanıtıldığında, verileri asenkron olarak almak için mevcut olan tek API [`XMLHttpRequest`](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest) idi. Ancak modern tarayıcılar artık JSON verilerini manipüle etmek için daha uygun ve güçlü olan, sözler (promises) kullanan [`Fetch` API](https://developer.mozilla.org/docs/Web/API/Fetch_API)'yi de destekliyor.
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Server
+    
+    User->>Browser: Clicks link or submits form
+    Browser->>Server: Requests new HTML page
+    Note over Browser: Page goes blank
+    Server->>Browser: Returns complete HTML page
+    Browser->>User: Displays new page (flash/reload)
+```
 
-> Tüm modern tarayıcılar `Fetch API`'yi desteklerken, web uygulamanızın eski veya eski tarayıcılarda çalışmasını istiyorsanız, öncelikle [caniuse.com'daki uyumluluk tablosunu](https://caniuse.com/fetch) kontrol etmek her zaman iyi bir fikirdir.
+![Çoklu sayfa uygulamasında güncelleme iş akışı](../../../../translated_images/tr/mpa.7f7375a1a2d4aa77.webp)
 
-### Görev
+**Bu yaklaşım neden hantal hissettiriyordu:**
+- Her tıklama tüm sayfanın baştan sona yeniden inşa edilmesi anlamına geliyordu
+- Kullanıcılar, bu rahatsız edici sayfa yanıp sönmeleriyle düşüncelerinin ortasında kesintiye uğruyordu
+- İnternet bağlantınız aynı başlık ve altbilgiyi tekrar tekrar indirerek fazla çalışıyordu
+- Uygulamalar, bir dosya dolabında gezinmekten çok yazılım kullanmak gibi hissettiriyordu
 
-[Önceki derste](../2-forms/README.md) bir hesap oluşturmak için kayıt formunu uygulamıştık. Şimdi mevcut bir hesapla giriş yapmayı ve verilerini almayı sağlayacak kodu ekleyeceğiz. `app.js` dosyasını açın ve yeni bir `login` fonksiyonu ekleyin:
+### Modern Tek Sayfa Uygulamaları (SPA)
 
-```js
+AJAX (Asenkron JavaScript ve XML) bu paradigmayı tamamen değiştirdi. Uluslararası Uzay İstasyonu'nun modüler tasarımı gibi, astronotlar tüm yapıyı yeniden inşa etmek zorunda kalmadan bireysel bileşenleri değiştirebilirler. AJAX, bir web sayfasının belirli bölümlerini yeniden yüklemeden güncellememize olanak tanır. İsmi XML'den bahsetse de, bugün çoğunlukla JSON kullanıyoruz, ancak temel ilke aynı: yalnızca değişmesi gerekeni güncellemek.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant JavaScript
+    participant Server
+    
+    User->>Browser: Interacts with page
+    Browser->>JavaScript: Triggers event handler
+    JavaScript->>Server: Fetches only needed data
+    Server->>JavaScript: Returns JSON data
+    JavaScript->>Browser: Updates specific page elements
+    Browser->>User: Shows updated content (no reload)
+```
+
+![Tek sayfa uygulamasında güncelleme iş akışı](../../../../translated_images/tr/spa.268ec73b41f992c2.webp)
+
+**SPA'lar neden daha iyi hissettiriyor:**
+- Sadece gerçekten değişen bölümler güncellenir (akıllıca, değil mi?)
+- Artık rahatsız edici kesintiler yok - kullanıcılar akışlarında kalır
+- Daha az veri aktarımı daha hızlı yükleme anlamına gelir
+- Her şey telefonunuzdaki uygulamalar gibi hızlı ve duyarlı hissedilir
+
+### Modern Fetch API'ye Evrim
+
+Modern tarayıcılar, eski [`XMLHttpRequest`](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest) yerine [`Fetch` API'sini](https://developer.mozilla.org/docs/Web/API/Fetch_API) sağlar. Telgraf kullanmak ile e-posta göndermek arasındaki fark gibi, Fetch API, temiz asenkron kod için sözler kullanır ve JSON'u doğal olarak işler.
+
+| Özellik | XMLHttpRequest | Fetch API |
+|---------|----------------|----------|
+| **Sözdizimi** | Karmaşık geri çağrı tabanlı | Temiz söz tabanlı |
+| **JSON İşleme** | Manuel ayrıştırma gerekli | Dahili `.json()` yöntemi |
+| **Hata Yönetimi** | Sınırlı hata bilgisi | Kapsamlı hata detayları |
+| **Modern Destek** | Eski uyumluluk | ES6+ sözler ve async/await |
+
+> 💡 **Tarayıcı Uyumluluğu**: İyi haber - Fetch API tüm modern tarayıcılarda çalışır! Belirli sürümler hakkında merak ediyorsanız, [caniuse.com](https://caniuse.com/fetch) tam uyumluluk hikayesini sunar.
+> 
+**Sonuç:**
+- Chrome, Firefox, Safari ve Edge'de harika çalışır (temelde kullanıcılarınızın olduğu her yerde)
+- Sadece Internet Explorer ek yardıma ihtiyaç duyar (ve dürüst olmak gerekirse, IE'yi bırakmanın zamanı geldi)
+- Daha sonra kullanacağımız zarif async/await desenleri için sizi mükemmel bir şekilde hazırlar
+
+### Kullanıcı Girişi ve Veri Alma İşlemini Uygulama
+
+Şimdi bankacılık uygulamanızı statik bir ekrandan işlevsel bir uygulamaya dönüştüren giriş sistemini uygulayalım. Güvenli askeri tesislerde kullanılan kimlik doğrulama protokolleri gibi, kullanıcı kimlik bilgilerini doğrulayacağız ve ardından belirli verilerine erişim sağlayacağız.
+
+Bunu temel kimlik doğrulama ile başlayarak ve ardından veri alma yeteneklerini ekleyerek kademeli olarak oluşturacağız.
+
+#### Adım 1: Giriş Fonksiyonu Temeli Oluşturma
+
+`app.js` dosyanızı açın ve yeni bir `login` fonksiyonu ekleyin. Bu, kullanıcı kimlik doğrulama sürecini yönetecek:
+
+```javascript
 async function login() {
-  const loginForm = document.getElementById('loginForm')
+  const loginForm = document.getElementById('loginForm');
   const user = loginForm.user.value;
 }
 ```
 
-Burada `getElementById()` ile form öğesini alarak başlıyoruz ve ardından `loginForm.user.value` ile giriş formundaki kullanıcı adını alıyoruz. Her form kontrolü, HTML'de `name` özelliği ile ayarlanmış adıyla formun bir özelliği olarak erişilebilir.
+**Bunu açıklayalım:**
+- `async` anahtar kelimesi, JavaScript'e "hey, bu işlevin bazı şeyler için beklemesi gerekebilir" diyor
+- Sayfadan formumuzu alıyoruz (sadece ID'sine göre buluyoruz)
+- Ardından, kullanıcının kullanıcı adı olarak yazdığı şeyi alıyoruz
+- İşte güzel bir numara: Herhangi bir form girdisine `name` özelliğiyle erişebilirsiniz - ekstra getElementById çağrılarına gerek yok!
 
-Kayıt işlemi için yaptığımız gibi, hesap verilerini almak için bir sunucu isteği gerçekleştiren başka bir fonksiyon oluşturacağız:
+> 💡 **Form Erişim Deseni**: Her form kontrolüne, HTML'de `name` özelliği kullanılarak form öğesinin bir özelliği olarak erişilebilir. Bu, form verilerini almak için temiz ve okunabilir bir yol sağlar.
 
-```js
+#### Adım 2: Hesap Verilerini Alma Fonksiyonu Oluşturma
+
+Sonraki adımda, sunucudan hesap verilerini almak için özel bir işlev oluşturacağız. Bu, kayıt işlevinizle aynı deseni takip eder ancak veri alımına odaklanır:
+
+```javascript
 async function getAccount(user) {
   try {
     const response = await fetch('//localhost:5000/api/accounts/' + encodeURIComponent(user));
@@ -72,15 +244,59 @@ async function getAccount(user) {
 }
 ```
 
-Verileri sunucudan asenkron olarak almak için `fetch` API'sini kullanıyoruz, ancak bu sefer yalnızca veri sorguladığımız için URL dışında başka bir parametreye ihtiyacımız yok. Varsayılan olarak, `fetch` bir [`GET`](https://developer.mozilla.org/docs/Web/HTTP/Methods/GET) HTTP isteği oluşturur, ki bu burada aradığımız şeydir.
+**Bu kodun başardıkları:**
+- Modern `fetch` API'sini kullanarak verileri asenkron olarak talep eder
+- Kullanıcı adı parametresiyle bir GET isteği URL'si oluşturur
+- URL'deki özel karakterleri güvenli bir şekilde işlemek için `encodeURIComponent()` uygular
+- Yanıtı JSON formatına dönüştürür ve verileri kolayca işler
+- Hataları zarif bir şekilde ele alır ve çökme yerine bir hata nesnesi döndürür
 
-✅ `encodeURIComponent()` URL için özel karakterleri kaçış karakterine dönüştüren bir fonksiyondur. Bu fonksiyonu çağırmaz ve doğrudan `user` değerini URL'de kullanırsak ne tür sorunlarla karşılaşabiliriz?
+> ⚠️ **Güvenlik Notu**: `encodeURIComponent()` işlevi, URL'lerdeki özel karakterleri işler. Denizcilik iletişim sistemlerinde kullanılan kodlama sistemleri gibi, mesajınızın tam olarak amaçlandığı şekilde ulaşmasını sağlar ve "#" veya "&" gibi karakterlerin yanlış yorumlanmasını önler.
+> 
+**Neden önemli:**
+- Özel karakterlerin URL'leri bozmasını önler
+- URL manipülasyon saldırılarına karşı korur
+- Sunucunuzun amaçlanan verileri almasını sağlar
+- Güvenli kodlama uygulamalarını takip eder
 
-Şimdi `login` fonksiyonumuzu `getAccount` fonksiyonunu kullanacak şekilde güncelleyelim:
+#### HTTP GET İsteklerini Anlamak
 
-```js
+Şaşırtıcı gelebilir: `fetch`i herhangi bir ek seçenek olmadan kullandığınızda, otomatik olarak bir [`GET`](https://developer.mozilla.org/docs/Web/HTTP/Methods/GET) isteği oluşturur. Bu, "hey, bu kullanıcının hesap verilerini görebilir miyim?" diye sunucuya sormak için mükemmeldir.
+
+GET isteklerini bir kütüphaneden ödünç kitap istemek gibi düşünün - zaten var olan bir şeyi görmek istiyorsunuz. POST istekleri (kayıt için kullandığımız) ise koleksiyona eklenmesi için yeni bir kitap göndermek gibidir.
+
+| GET İsteği | POST İsteği |
+|------------|-------------|
+| **Amaç** | Mevcut verileri almak | Sunucuya yeni veri göndermek |
+| **Parametreler** | URL yolu/sorgu dizesinde | İstek gövdesinde |
+| **Önbellekleme** | Tarayıcılar tarafından önbelleğe alınabilir | Genellikle önbelleğe alınmaz |
+| **Güvenlik** | URL/günlüklerde görünür | İstek gövdesinde gizli |
+
+```mermaid
+sequenceDiagram
+    participant B as Browser
+    participant S as Server
+    
+    Note over B,S: GET Request (Data Retrieval)
+    B->>S: GET /api/accounts/test
+    S-->>B: 200 OK + Account Data
+    
+    Note over B,S: POST Request (Data Submission)
+    B->>S: POST /api/accounts + New Account Data
+    S-->>B: 201 Created + Confirmation
+    
+    Note over B,S: Error Handling
+    B->>S: GET /api/accounts/nonexistent
+    S-->>B: 404 Not Found + Error Message
+```
+
+#### Adım 3: Her Şeyi Bir Araya Getirme
+
+Şimdi tatmin edici kısma geldik - hesap alma işlevinizi giriş sürecine bağlayalım. İşte her şeyin yerine oturduğu yer:
+
+```javascript
 async function login() {
-  const loginForm = document.getElementById('loginForm')
+  const loginForm = document.getElementById('loginForm');
   const user = loginForm.user.value;
   const data = await getAccount(user);
 
@@ -93,94 +309,273 @@ async function login() {
 }
 ```
 
-Öncelikle, `getAccount` asenkron bir fonksiyon olduğu için sunucu sonucunu beklemek için `await` anahtar kelimesini kullanmamız gerekiyor. Herhangi bir sunucu isteğinde olduğu gibi, hata durumlarıyla da başa çıkmamız gerekiyor. Şimdilik yalnızca bir hata mesajı göstermek için bir log mesajı ekleyeceğiz ve daha sonra buna geri döneceğiz.
+Bu işlev açık bir sırayı takip eder:
+- Form girişinden kullanıcı adını çıkarır
+- Sunucudan kullanıcının hesap verilerini talep eder
+- İşlem sırasında meydana gelen hataları ele alır
+- Hesap verilerini saklar ve başarı durumunda kontrol paneline yönlendirir
 
-Daha sonra verileri bir yere kaydetmemiz gerekiyor, böylece daha sonra gösterge paneli bilgilerini göstermek için kullanabiliriz. `account` değişkeni henüz mevcut olmadığından, dosyamızın en üstünde bir global değişken oluşturacağız:
+> 🎯 **Async/Await Deseni**: `getAccount` asenkron bir işlev olduğundan, kodun sunucudan yanıt alana kadar duraklaması için `await` anahtar kelimesini kullanıyoruz. Bu, kodun tanımsız verilerle devam etmesini önler.
 
-```js
+#### Adım 4: Verileriniz İçin Bir Alan Oluşturma
+
+Uygulamanız, yüklendikten sonra hesap bilgilerini hatırlayacak bir yere ihtiyaç duyar. Bunu uygulamanızın kısa süreli belleği gibi düşünün - mevcut kullanıcının verilerini elinizin altında tutmak için bir yer. `app.js` dosyanızın en üstüne şu satırı ekleyin:
+
+```javascript
+// This holds the current user's account data
 let account = null;
 ```
 
-Kullanıcı verileri bir değişkene kaydedildikten sonra, *giriş* sayfasından *gösterge paneli*ne `navigate()` fonksiyonunu kullanarak geçiş yapabiliriz.
+**Neden buna ihtiyacımız var:**
+- Hesap verilerini uygulamanızın herhangi bir yerinden erişilebilir tutar
+- `null` ile başlamak "henüz kimse giriş yapmadı" anlamına gelir
+- Birisi başarıyla giriş yaptığında veya kaydolduğunda güncellenir
+- Tek bir doğru kaynak gibi davranır - kimin giriş yaptığını anlamada karışıklık olmaz
 
-Son olarak, giriş formu gönderildiğinde `login` fonksiyonumuzu çağırmamız gerekiyor. HTML'yi şu şekilde değiştirerek bunu yapabiliriz:
+#### Adım 5: Formunuzu Bağlayın
+
+Şimdi yeni giriş işlevinizi HTML formunuza bağlayalım. Form etiketinizi şu şekilde güncelleyin:
 
 ```html
 <form id="loginForm" action="javascript:login()">
+  <!-- Your existing form inputs -->
+</form>
 ```
 
-Her şeyin düzgün çalıştığını test etmek için yeni bir hesap oluşturun ve aynı hesapla giriş yapmayı deneyin.
+**Bu küçük değişiklik ne yapar:**
+- Formun varsayılan "tüm sayfayı yeniden yükleme" davranışını durdurur
+- Bunun yerine özel JavaScript işlevinizi çağırır
+- Her şeyi sorunsuz ve tek sayfa uygulaması gibi tutar
+- Kullanıcılar "Giriş Yap" düğmesine bastığında ne olacağı üzerinde tam kontrol sağlar
 
-Bir sonraki bölüme geçmeden önce, `register` fonksiyonunu şu kodu ekleyerek tamamlayabiliriz:
+#### Adım 6: Kayıt Fonksiyonunuzu Geliştirin
 
-```js
+Tutarlılık için, kayıt fonksiyonunuzu da hesap verilerini saklayacak ve kontrol paneline yönlendirecek şekilde güncelleyin:
+
+```javascript
+// Add these lines at the end of your register function
 account = result;
 navigate('/dashboard');
 ```
 
-✅ Varsayılan olarak, yalnızca *görüntülediğiniz web sayfasıyla aynı alan adı ve porttan* sunucu API'lerini çağırabilirsiniz. Bu, tarayıcılar tarafından uygulanan bir güvenlik mekanizmasıdır. Ama bekleyin, web uygulamamız `localhost:3000` üzerinde çalışırken sunucu API'si `localhost:5000` üzerinde çalışıyor, neden çalışıyor? [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS) adı verilen bir teknik kullanılarak, sunucu yanıtına özel başlıklar eklenirse belirli alan adları için istisnalar tanımlanabilir.
+**Bu geliştirme şunları sağlar:**
+- **Kesintisiz** bir geçiş sağlar: kayıttan kontrol paneline
+- **Tutarlı** bir kullanıcı deneyimi sunar: giriş ve kayıt akışları arasında
+- **Anında** erişim sağlar: başarılı bir kayıttan sonra hesap verilerine
 
-> API'ler hakkında daha fazla bilgi edinmek için bu [dersi](https://docs.microsoft.com/learn/modules/use-apis-discover-museum-art/?WT.mc_id=academic-77807-sagibbon) alın.
+#### Uygulamanızı Test Etme
 
-## HTML'yi veri göstermek için güncelleme
-
-Artık kullanıcı verilerine sahibiz, mevcut HTML'yi bu verileri göstermek için güncellememiz gerekiyor. Örneğin, bir öğeyi DOM'dan almak için `document.getElementById()` kullanmayı zaten biliyoruz. Bir temel öğeye sahip olduktan sonra, onu değiştirmek veya alt öğeler eklemek için kullanabileceğiniz bazı API'ler şunlardır:
-
-- [`textContent`](https://developer.mozilla.org/docs/Web/API/Node/textContent) özelliğini kullanarak bir öğenin metnini değiştirebilirsiniz. Bu değeri değiştirmek, öğenin tüm alt öğelerini (varsa) kaldırır ve sağlanan metinle değiştirir. Bu nedenle, bir öğenin tüm alt öğelerini kaldırmak için boş bir dize `''` atamak da etkili bir yöntemdir.
-
-- [`document.createElement()`](https://developer.mozilla.org/docs/Web/API/Document/createElement) ve [`append()`](https://developer.mozilla.org/docs/Web/API/ParentNode/append) yöntemlerini kullanarak bir veya daha fazla yeni alt öğe oluşturabilir ve ekleyebilirsiniz.
-
-✅ Bir öğenin HTML içeriğini değiştirmek için [`innerHTML`](https://developer.mozilla.org/docs/Web/API/Element/innerHTML) özelliğini kullanmak da mümkündür, ancak bu özellik [cross-site scripting (XSS)](https://developer.mozilla.org/docs/Glossary/Cross-site_scripting) saldırılarına karşı savunmasız olduğu için kaçınılmalıdır.
-
-### Görev
-
-Gösterge paneli ekranına geçmeden önce, *giriş* sayfasında yapmamız gereken bir şey daha var. Şu anda, var olmayan bir kullanıcı adıyla giriş yapmaya çalışırsanız, konsolda bir mesaj gösteriliyor ancak normal bir kullanıcı için hiçbir şey değişmiyor ve ne olduğunu anlamıyorsunuz.
-
-Giriş `<button>` öğesinin hemen öncesine bir hata mesajı gösterebileceğimiz bir yer tutucu öğe ekleyelim:
-
-```html
-...
-<div id="loginError"></div>
-<button>Login</button>
-...
+```mermaid
+flowchart TD
+    A[User enters credentials] --> B[Login function called]
+    B --> C[Fetch account data from server]
+    C --> D{Data received successfully?}
+    D -->|Yes| E[Store account data globally]
+    D -->|No| F[Display error message]
+    E --> G[Navigate to dashboard]
+    F --> H[User stays on login page]
 ```
 
-Bu `<div>` öğesi boş, yani ekrana hiçbir şey gösterilmeyecek. Ancak JavaScript ile içerik eklediğimizde görünür hale gelecek. Ayrıca `id` özelliği ekleyerek JavaScript ile kolayca erişilebilir hale getiriyoruz.
+**Şimdi bir deneme yapma zamanı:**
+1. Her şeyin çalıştığından emin olmak için yeni bir hesap oluşturun
+2. Aynı kimlik bilgileriyle giriş yapmayı deneyin
+3. Bir şeyler ters gidiyorsa tarayıcınızın konsoluna (F12) göz atın
+4. Başarılı bir girişten sonra kontrol paneline ulaştığınızdan emin olun
 
-`app.js` dosyasına geri dönün ve yeni bir yardımcı fonksiyon `updateElement` oluşturun:
+Bir şeyler çalışmıyorsa, panik yapmayın! Çoğu sorun, yazım hataları veya API sunucusunu başlatmayı unutmak gibi basit düzeltmelerdir.
 
-```js
+#### Farklı Köken Sihri Hakkında Kısa Bir Not
+
+Şunu merak ediyor olabilirsiniz: "Web uygulamam bu API sunucusuyla farklı portlarda çalışırken nasıl iletişim kuruyor?" Harika bir soru! Bu, her web geliştiricisinin eninde sonunda karşılaştığı bir konudur.
+
+> 🔒 **Farklı Köken Güvenliği**: Tarayıcılar, farklı alanlar arasında yetkisiz iletişimi önlemek için "aynı köken politikası" uygular. Pentagon'daki kontrol noktası sistemi gibi, veri aktarımına izin vermeden önce iletişimin yetkilendirildiğini doğrular.
+> 
+**Bizim kurulumumuzda:**
+- Web uygulamanız `localhost:3000` üzerinde çalışıyor (geliştirme sunucusu)
+- API sunucunuz `localhost:5000` üzerinde çalışıyor (arka uç sunucusu)
+- API sunucusu, [CORS başlıkları](https://developer.mozilla.org/docs/Web/HTTP/CORS) içerir ve web uygulamanızdan iletişimi açıkça yetkilendirir
+
+Bu yapılandırma, genellikle ön uç ve arka uç uygulamalarının ayrı sunucularda çalıştığı gerçek dünya geliştirme ortamını yansıtır.
+
+> 📚 **Daha Fazla Bilgi Edinin**: API'ler ve veri alma hakkında daha fazla bilgi edinmek için bu kapsamlı [Microsoft Learn modülüne](https://docs.microsoft.com/learn/modules/use-apis-discover-museum-art/?WT.mc_id=academic-77807-sagibbon) göz atın.
+
+## Verilerinizi HTML'de Hayata Geçirme
+
+Şimdi alınan verileri, kullanıcıların görebileceği ve etkileşimde bulunabileceği şekilde DOM manipülasyonu ile görselleştireceğiz. Bir karanlık odada fotoğraf geliştirme süreci gibi, görünmez verileri alıp kullanıcıların görebileceği ve etkileşimde bulunabileceği bir şeye dönüştüreceğiz.
+DOM manipülasyonu, statik web sayfalarını kullanıcı etkileşimleri ve sunucu yanıtlarına göre içeriklerini güncelleyen dinamik uygulamalara dönüştüren bir tekniktir.
+
+### İş İçin Doğru Aracı Seçmek
+
+HTML'inizi JavaScript ile güncellemek söz konusu olduğunda, birkaç seçeneğiniz var. Bunları bir alet çantasında farklı araçlar gibi düşünün - her biri belirli işler için mükemmel:
+
+| Yöntem | Harika olduğu alan | Ne zaman kullanılır | Güvenlik seviyesi |
+|--------|---------------------|--------------------|-------------------|
+| `textContent` | Kullanıcı verilerini güvenli bir şekilde göstermek | Metin gösterdiğiniz her zaman | ✅ Çok güvenli |
+| `createElement()` + `append()` | Karmaşık düzenler oluşturmak | Yeni bölümler/listeler oluşturmak | ✅ Çok güvenli |
+| `innerHTML` | HTML içeriği ayarlamak | ⚠️ Bundan kaçınmaya çalışın | ❌ Riskli iş |
+
+#### Metni Güvenli Bir Şekilde Gösterme: textContent
+
+[`textContent`](https://developer.mozilla.org/docs/Web/API/Node/textContent) özelliği, kullanıcı verilerini gösterirken en iyi dostunuzdur. Bu, web sayfanız için bir güvenlik görevlisi gibidir - zararlı hiçbir şey geçemez:
+
+```javascript
+// The safe, reliable way to update text
+const balanceElement = document.getElementById('balance');
+balanceElement.textContent = account.balance;
+```
+
+**textContent'in Faydaları:**
+- Her şeyi düz metin olarak işler (script çalıştırmayı önler)
+- Mevcut içeriği otomatik olarak temizler
+- Basit metin güncellemeleri için verimli
+- Zararlı içeriklere karşı yerleşik güvenlik sağlar
+
+#### Dinamik HTML Elemanları Oluşturma
+
+Daha karmaşık içerikler için [`document.createElement()`](https://developer.mozilla.org/docs/Web/API/Document/createElement) ile [`append()`](https://developer.mozilla.org/docs/Web/API/ParentNode/append) yöntemini birleştirin:
+
+```javascript
+// Safe way to create new elements
+const transactionItem = document.createElement('div');
+transactionItem.className = 'transaction-item';
+transactionItem.textContent = `${transaction.date}: ${transaction.description}`;
+container.append(transactionItem);
+```
+
+**Bu yaklaşımı anlamak:**
+- **Yeni** DOM elemanlarını programlı olarak oluşturur
+- **Eleman** özellikleri ve içerik üzerinde tam kontrol sağlar
+- **Karmaşık**, iç içe geçmiş eleman yapıları oluşturmanıza olanak tanır
+- **Güvenliği** korur, yapıyı içerikten ayırır
+
+> ⚠️ **Güvenlik Düşüncesi**: [`innerHTML`](https://developer.mozilla.org/docs/Web/API/Element/innerHTML) birçok öğreticide yer alsa da, gömülü scriptleri çalıştırabilir. CERN'deki güvenlik protokolleri gibi, yetkisiz kod çalıştırmayı önler. `textContent` ve `createElement` kullanımı daha güvenli alternatifler sunar.
+> 
+**innerHTML'nin Riskleri:**
+- Kullanıcı verisindeki `<script>` etiketlerini çalıştırır
+- Kod enjeksiyon saldırılarına karşı savunmasızdır
+- Potansiyel güvenlik açıkları oluşturur
+- Kullandığımız güvenli alternatifler eşdeğer işlevsellik sağlar
+
+### Hataları Kullanıcı Dostu Hale Getirme
+
+Şu anda, giriş hataları yalnızca kullanıcılar tarafından görünmeyen tarayıcı konsolunda görünüyor. Pilotun iç tanı sistemi ile yolcu bilgi sistemi arasındaki fark gibi, önemli bilgileri uygun kanal aracılığıyla iletmemiz gerekiyor.
+
+Görünür hata mesajları uygulayarak, kullanıcıların neyin yanlış gittiğini ve nasıl devam edeceklerini hemen anlamalarını sağlayabilirsiniz.
+
+#### Adım 1: Hata Mesajları İçin Bir Alan Ekleyin
+
+Öncelikle, hata mesajlarına HTML'nizde bir yer açalım. Bunu giriş düğmenizin hemen önüne ekleyin, böylece kullanıcılar doğal olarak görebilir:
+
+```html
+<!-- This is where error messages will appear -->
+<div id="loginError" role="alert"></div>
+<button>Login</button>
+```
+
+**Burada olanlar:**
+- Görünmez bir şekilde kalan boş bir konteyner oluşturuyoruz
+- "Giriş" düğmesine tıkladıktan sonra kullanıcıların doğal olarak baktığı yere yerleştiriliyor
+- `role="alert"` ekran okuyucular için güzel bir dokunuş - yardımcı teknolojilere "hey, bu önemli!" diyor
+- Benzersiz `id`, JavaScript'imize kolay bir hedef sağlıyor
+
+#### Adım 2: Kullanışlı Bir Yardımcı Fonksiyon Oluşturun
+
+Herhangi bir elemanın metnini güncelleyebilecek küçük bir yardımcı fonksiyon yapalım. Bu, "bir kez yaz, her yerde kullan" türünden bir fonksiyon olacak ve size zaman kazandıracak:
+
+```javascript
 function updateElement(id, text) {
   const element = document.getElementById(id);
   element.textContent = text;
 }
 ```
 
-Bu fonksiyon oldukça basit: bir öğe *id* ve *metin* verildiğinde, DOM'daki eşleşen `id` öğesinin metin içeriğini günceller. Bu yöntemi `login` fonksiyonundaki önceki hata mesajı yerine kullanalım:
+**Fonksiyonun faydaları:**
+- Sadece bir eleman ID'si ve metin içeriği gerektiren basit bir arayüz
+- DOM elemanlarını güvenli bir şekilde bulur ve günceller
+- Kod tekrarını azaltan yeniden kullanılabilir bir model
+- Uygulama genelinde tutarlı güncelleme davranışını korur
 
-```js
+#### Adım 3: Hataları Kullanıcıların Görebileceği Yerde Gösterin
+
+Şimdi gizli konsol mesajını kullanıcıların gerçekten görebileceği bir şeyle değiştirelim. Giriş fonksiyonunuzu güncelleyin:
+
+```javascript
+// Instead of just logging to console, show the user what's wrong
 if (data.error) {
   return updateElement('loginError', data.error);
 }
 ```
 
-Şimdi geçersiz bir hesapla giriş yapmaya çalışırsanız, şöyle bir şey görmelisiniz:
+**Bu küçük değişiklik büyük bir fark yaratır:**
+- Hata mesajları kullanıcıların baktığı yerde görünür
+- Artık gizemli sessiz hatalar yok
+- Kullanıcılar anında, uygulanabilir geri bildirim alır
+- Uygulamanız profesyonel ve düşünceli hissettirmeye başlar
 
-![Giriş sırasında gösterilen hata mesajını gösteren ekran görüntüsü](../../../../translated_images/login-error.416fe019b36a63276764c2349df5d99e04ebda54fefe60c715ee87a28d5d4ad0.tr.png)
+Şimdi geçersiz bir hesapla test ettiğinizde, sayfada yardımcı bir hata mesajı göreceksiniz!
 
-Artık görsel olarak bir hata metni gösteriliyor, ancak bir ekran okuyucu ile denediğinizde hiçbir şeyin duyurulmadığını fark edeceksiniz. Bir sayfaya dinamik olarak eklenen metnin ekran okuyucular tarafından duyurulabilmesi için [Live Region](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) adı verilen bir şey kullanılması gerekir. Burada bir uyarı olarak adlandırılan özel bir tür canlı bölge kullanacağız:
+![Giriş sırasında hata mesajını gösteren ekran görüntüsü](../../../../translated_images/tr/login-error.416fe019b36a6327.webp)
+
+#### Adım 4: Erişilebilirlik ile Kapsayıcı Olmak
+
+Daha önce eklediğimiz `role="alert"` hakkında ilginç bir şey var - bu sadece bir süs değil! Bu küçük özellik, ekran okuyuculara değişiklikleri hemen duyuran bir [Canlı Bölge](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) oluşturur:
 
 ```html
 <div id="loginError" role="alert"></div>
 ```
 
-Aynı davranışı `register` fonksiyon hataları için de uygulayın (HTML'yi güncellemeyi unutmayın).
+**Neden önemli:**
+- Ekran okuyucu kullanıcıları hata mesajını hemen duyabilir
+- Herkes, nasıl gezindiğine bakılmaksızın aynı önemli bilgiyi alır
+- Uygulamanızın daha fazla kişi için çalışmasını sağlamak için basit bir yol
+- Kapsayıcı deneyimler yaratmaya önem verdiğinizi gösterir
 
-## Gösterge panelinde bilgi gösterme
+Bu tür küçük dokunuşlar, iyi geliştiricileri harika olanlardan ayırır!
 
-Az önce gördüğümüz teknikleri kullanarak, hesap bilgilerini gösterge paneli sayfasında da göstereceğiz.
+### 🎯 Pedagojik Kontrol: Kimlik Doğrulama Modelleri
 
-Sunucudan alınan bir hesap nesnesi şu şekilde görünüyor:
+**Dur ve Düşün**: Tam bir kimlik doğrulama akışı uyguladınız. Bu, web geliştirmede temel bir modeldir.
+
+**Hızlı Öz Değerlendirme**:
+- API çağrıları için neden async/await kullandığımızı açıklayabilir misiniz?
+- `encodeURIComponent()` fonksiyonunu unutursak ne olurdu?
+- Hata yönetimimiz kullanıcı deneyimini nasıl iyileştiriyor?
+
+**Gerçek Dünya Bağlantısı**: Burada öğrendiğiniz modeller (asenkron veri alma, hata yönetimi, kullanıcı geri bildirimi), sosyal medya platformlarından e-ticaret sitelerine kadar her büyük web uygulamasında kullanılır. Üretim seviyesinde beceriler geliştiriyorsunuz!
+
+**Zorluk Sorusu**: Bu kimlik doğrulama sistemini birden fazla kullanıcı rolünü (müşteri, yönetici, veznedar) ele alacak şekilde nasıl değiştirebilirsiniz? Gerekli veri yapısı ve UI değişikliklerini düşünün.
+
+#### Adım 5: Aynı Modeli Kayıt İşlemine Uygulama
+
+Tutarlılık için, kayıt formunuzda aynı hata yönetimini uygulayın:
+
+1. **Kayıt** HTML'nize bir hata gösterim elemanı ekleyin:
+```html
+<div id="registerError" role="alert"></div>
+```
+
+2. **Kayıt** fonksiyonunuzu aynı hata gösterim modelini kullanacak şekilde güncelleyin:
+```javascript
+if (data.error) {
+  return updateElement('registerError', data.error);
+}
+```
+
+**Tutarlı hata yönetiminin faydaları:**
+- **Tüm formlarda** tutarlı kullanıcı deneyimi sağlar
+- **Tanıdık** modeller kullanarak bilişsel yükü azaltır
+- **Bakımı** yeniden kullanılabilir kodla basitleştirir
+- **Erişilebilirlik** standartlarının uygulama genelinde karşılanmasını sağlar
+
+## Dinamik Kontrol Panelinizi Oluşturma
+
+Şimdi statik kontrol panelinizi, gerçek hesap verilerini gösteren dinamik bir arayüze dönüştüreceğiz. Basılı bir uçuş programı ile havaalanlarındaki canlı kalkış panoları arasındaki fark gibi, statik bilgiden gerçek zamanlı, duyarlı ekranlara geçiyoruz.
+
+Öğrendiğiniz DOM manipülasyon tekniklerini kullanarak, mevcut hesap bilgileriyle otomatik olarak güncellenen bir kontrol paneli oluşturacağız.
+
+### Verilerinizi Tanımak
+
+Başlamadan önce, sunucunuzun geri gönderdiği veri türüne bir göz atalım. Bir kişi başarılı bir şekilde giriş yaptığında, işte çalışabileceğiniz bilgi hazinesi:
 
 ```json
 {
@@ -192,15 +587,50 @@ Sunucudan alınan bir hesap nesnesi şu şekilde görünüyor:
     { "id": "1", "date": "2020-10-01", "object": "Pocket money", "amount": 50 },
     { "id": "2", "date": "2020-10-03", "object": "Book", "amount": -10 },
     { "id": "3", "date": "2020-10-04", "object": "Sandwich", "amount": -5 }
-  ],
+  ]
 }
 ```
 
-> Not: işinizi kolaylaştırmak için, önceden doldurulmuş verilerle `test` hesabını kullanabilirsiniz.
+**Bu veri yapısı şunları sağlar:**
+- **`user`**: Deneyimi kişiselleştirmek için mükemmel ("Tekrar hoş geldin, Sarah!")
+- **`currency`**: Para miktarlarını doğru şekilde göstermenizi sağlar
+- **`description`**: Hesap için dostça bir ad
+- **`balance`**: En önemli mevcut bakiye
+- **`transactions`**: Tüm detaylarıyla tam işlem geçmişi
 
-### Görev
+Profesyonel görünümlü bir banka kontrol paneli oluşturmak için ihtiyacınız olan her şey!
 
-HTML'deki "Bakiye" bölümünü yer tutucu öğeler eklemek için değiştirelim:
+```mermaid
+flowchart TD
+    A[User Login] --> B[Fetch Account Data]
+    B --> C{Data Valid?}
+    C -->|Yes| D[Store in Global Variable]
+    C -->|No| E[Show Error Message]
+    D --> F[Navigate to Dashboard]
+    F --> G[Update UI Elements]
+    G --> H[Display Balance]
+    G --> I[Show Description]
+    G --> J[Render Transactions]
+    J --> K[Create Table Rows]
+    K --> L[Format Currency]
+    L --> M[User Sees Live Data]
+```
+
+> 💡 **İpucu**: Kontrol panelinizi hemen çalışırken görmek ister misiniz? Giriş yaparken `test` kullanıcı adını kullanın - önceden yüklenmiş örnek verilerle gelir, böylece her şeyi ilk önce işlem oluşturmadan görebilirsiniz.
+> 
+**Test hesabının neden kullanışlı olduğu:**
+- Gerçekçi örnek verilerle önceden yüklenmiştir
+- İşlemlerin nasıl görüntülendiğini görmek için mükemmel
+- Kontrol paneli özelliklerinizi test etmek için harika
+- Sahte veri oluşturma zahmetinden kurtarır
+
+### Kontrol Paneli Görüntü Elemanlarını Oluşturma
+
+Hesap özet bilgileriyle başlayarak, ardından işlem listeleri gibi daha karmaşık özelliklere geçerek kontrol paneli arayüzünüzü adım adım oluşturalım.
+
+#### Adım 1: HTML Yapınızı Güncelleyin
+
+Öncelikle, statik "Bakiye" bölümünü JavaScript'in doldurabileceği dinamik yer tutucu elemanlarla değiştirin:
 
 ```html
 <section>
@@ -208,17 +638,25 @@ HTML'deki "Bakiye" bölümünü yer tutucu öğeler eklemek için değiştirelim
 </section>
 ```
 
-Ayrıca, hesap açıklamasını göstermek için hemen altına yeni bir bölüm ekleyeceğiz:
+Sonra, hesap açıklaması için bir bölüm ekleyin. Bu, kontrol paneli içeriği için bir başlık görevi gördüğünden, semantik HTML kullanın:
 
 ```html
 <h2 id="description"></h2>
 ```
 
-✅ Hesap açıklaması, altındaki içeriğin başlığı olarak işlev gördüğü için semantik olarak bir başlık olarak işaretlenmiştir. [Başlık yapısının](https://www.nomensa.com/blog/2017/how-structure-headings-web-accessibility) erişilebilirlik için neden önemli olduğunu öğrenin ve sayfayı eleştirel bir gözle inceleyerek başka nelerin başlık olabileceğini belirleyin.
+**HTML yapısını anlama:**
+- **Ayrı** `<span>` elemanlarını bakiye ve para birimi için bireysel kontrol sağlar
+- **Benzersiz** ID'ler her bir elemanı JavaScript ile hedeflemek için uygulanır
+- **Semantik HTML** kullanarak hesap açıklaması için `<h2>` kullanılır
+- **Ekran okuyucular ve SEO** için mantıklı bir hiyerarşi oluşturur
 
-Şimdi `app.js` dosyasına yeni bir fonksiyon ekleyerek yer tutucuyu dolduralım:
+> ✅ **Erişilebilirlik Bilgisi**: Hesap açıklaması, kontrol paneli içeriği için bir başlık işlevi görür, bu nedenle semantik olarak bir başlık olarak işaretlenmiştir. [Başlık yapısının](https://www.nomensa.com/blog/2017/how-structure-headings-web-accessibility) erişilebilirliği nasıl etkilediği hakkında daha fazla bilgi edinin. Sayfanızdaki diğer elemanların başlık etiketlerinden faydalanabileceğini belirleyebilir misiniz?
 
-```js
+#### Adım 2: Kontrol Paneli Güncelleme Fonksiyonunu Oluşturun
+
+Şimdi kontrol panelinizi gerçek hesap verileriyle dolduran bir fonksiyon oluşturun:
+
+```javascript
 function updateDashboard() {
   if (!account) {
     return navigate('/login');
@@ -230,40 +668,89 @@ function updateDashboard() {
 }
 ```
 
-Öncelikle, devam etmeden önce ihtiyacımız olan hesap verilerine sahip olduğumuzu kontrol ediyoruz. Ardından, daha önce oluşturduğumuz `updateElement()` fonksiyonunu kullanarak HTML'yi güncelliyoruz.
+**Adım adım bu fonksiyonun yaptığı:**
+- **Hesap** verilerinin mevcut olduğunu doğrular
+- **Kimliği doğrulanmamış** kullanıcıları giriş sayfasına yönlendirir
+- **Hesap** açıklamasını yeniden kullanılabilir `updateElement` fonksiyonunu kullanarak günceller
+- **Bakiyeyi** her zaman iki ondalık basamak gösterecek şekilde biçimlendirir
+- **Uygun** para birimi simgesini gösterir
 
-> Bakiye görüntüsünü daha güzel hale getirmek için, değeri ondalık noktadan sonra 2 basamakla zorlamak için [`toFixed(2)`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) yöntemini kullanıyoruz.
+> 💰 **Para Biçimlendirme**: [`toFixed(2)`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) yöntemi hayat kurtarıcıdır! Bakiyenizin her zaman gerçek para gibi görünmesini sağlar - "75.00" yerine sadece "75". Kullanıcılarınız tanıdık para biçimlendirmesini görmeyi takdir edecektir.
 
-Şimdi `updateDashboard()` fonksiyonumuzu her gösterge paneli yüklendiğinde çağırmamız gerekiyor. [Ders 1 ödevini](../1-template-route/assignment.md) zaten tamamladıysanız bu oldukça basit olmalı, aksi takdirde aşağıdaki uygulamayı kullanabilirsiniz.
+#### Adım 3: Kontrol Panelinizin Güncellendiğinden Emin Olun
 
-`updateRoute()` fonksiyonunun sonuna şu kodu ekleyin:
+Birinin kontrol panelini her ziyaret ettiğinde güncel verilerle yenilenmesini sağlamak için navigasyon sisteminize bağlanmamız gerekiyor. [Ders 1 ödevini](../1-template-route/assignment.md) tamamladıysanız, bu tanıdık gelecektir. Eğer değilse, endişelenmeyin - ihtiyacınız olan şey burada:
 
-```js
+`updateRoute()` fonksiyonunuzun sonuna bunu ekleyin:
+
+```javascript
 if (typeof route.init === 'function') {
   route.init();
 }
 ```
 
-Ve rota tanımlarını şu şekilde güncelleyin:
+Sonra rotalarınızı kontrol paneli başlatma kodunu içerecek şekilde güncelleyin:
 
-```js
+```javascript
 const routes = {
   '/login': { templateId: 'login' },
   '/dashboard': { templateId: 'dashboard', init: updateDashboard }
 };
 ```
 
-Bu değişiklikle, her gösterge paneli sayfası görüntülendiğinde `updateDashboard()` fonksiyonu çağrılır. Giriş yaptıktan sonra hesap bakiyesini, para birimini ve açıklamayı görebilmelisiniz.
+**Bu akıllı kurulumun yaptığı:**
+- Bir rotanın özel başlatma kodu olup olmadığını kontrol eder
+- Rota yüklendiğinde bu kodu otomatik olarak çalıştırır
+- Kontrol panelinizin her zaman güncel, mevcut verileri göstermesini sağlar
+- Yönlendirme mantığınızı temiz ve düzenli tutar
 
-## HTML şablonlarıyla tablo satırlarını dinamik olarak oluşturma
+#### Kontrol Panelinizi Test Etme
 
-[Birinci derste](../1-template-route/README.md) uygulamamızdaki navigasyonu uygulamak için HTML şablonlarını ve [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) yöntemini kullandık. Şablonlar daha küçük olabilir ve bir sayfanın tekrarlayan bölümlerini dinamik olarak doldurmak için kullanılabilir.
+Bu değişiklikleri uyguladıktan sonra kontrol panelinizi test edin:
 
-Aynı yaklaşımı HTML tablosundaki işlem listesini göstermek için kullanacağız.
+1. **Test hesabıyla giriş yapın**
+2. **Kontrol paneline yönlendirildiğinizi doğrulayın**
+3. **Hesap açıklaması, bakiye ve para biriminin doğru şekilde görüntülendiğini kontrol edin**
+4. **Çıkış yapıp tekrar giriş yapmayı deneyin** ve verilerin düzgün şekilde yenilendiğinden emin olun
 
-### Görev
+Kontrol paneliniz artık giriş yapan kullanıcının verilerine dayalı olarak dinamik hesap bilgilerini göstermelidir!
 
-HTML `<body>` içinde yeni bir şablon ekleyin:
+## Şablonlarla Akıllı İşlem Listeleri Oluşturma
+
+Her işlem için manuel olarak HTML oluşturmak yerine, tutarlı biçimlendirmeyi otomatik olarak oluşturmak için şablonları kullanacağız. Uzay aracı üretiminde kullanılan standart bileşenler gibi, şablonlar her işlem satırının aynı yapıyı ve görünümü takip etmesini sağlar.
+
+Bu teknik, birkaç işlemden binlerce işleme kadar verimli bir şekilde ölçeklenir ve tutarlı performans ve sunum sağlar.
+
+```mermaid
+graph LR
+    A[HTML Template] --> B[JavaScript Clone]
+    B --> C[Populate with Data]
+    C --> D[Add to Fragment]
+    D --> E[Batch Insert to DOM]
+    
+    subgraph "Performance Benefits"
+        F[Single DOM Update]
+        G[Consistent Formatting]
+        H[Reusable Pattern]
+    end
+    
+    E --> F
+    E --> G
+    E --> H
+```
+
+```mermaid
+flowchart LR
+    A[Transaction Data] --> B[HTML Template]
+    B --> C[Clone Template]
+    C --> D[Populate with Data]
+    D --> E[Add to DOM]
+    E --> F[Repeat for Each Transaction]
+```
+
+### Adım 1: İşlem Şablonunu Oluşturun
+
+Öncelikle, HTML `<body>` içinde işlem satırları için yeniden kullanılabilir bir şablon ekleyin:
 
 ```html
 <template id="transaction">
@@ -275,17 +762,30 @@ HTML `<body>` içinde yeni bir şablon ekleyin:
 </template>
 ```
 
-Bu şablon, bir işlem için *tarih*, *nesne* ve *miktar* gibi 3 sütunu doldurmak istediğimiz tek bir tablo satırını temsil eder.
+**HTML şablonlarını anlama:**
+- **Tek bir tablo satırı** için yapıyı tanımlar
+- **JavaScript ile klonlanıp doldurulana kadar** görünmez kalır
+- **Tarih, açıklama ve miktar için** üç hücre içerir
+- **Tutarlı biçimlendirme için** yeniden kullanılabilir bir model sağlar
 
-Ardından, JavaScript ile kolayca bulabilmek için gösterge paneli şablonundaki tablonun `<tbody>` öğesine şu `id` özelliğini ekleyin:
+### Adım 2: Tabloyu Dinamik İçerik İçin Hazırlayın
+
+Sonra, JavaScript'in kolayca hedef alabilmesi için tablo gövdesine bir `id` ekleyin:
 
 ```html
 <tbody id="transactions"></tbody>
 ```
 
-HTML'miz hazır, şimdi JavaScript koduna geçelim ve yeni bir `createTransactionRow` fonksiyonu oluşturalım:
+**Bu ne sağlar:**
+- **İşlem satırlarını eklemek için** net bir hedef oluşturur
+- **Tablo yapısını dinamik içerikten** ayırır
+- **İşlem verilerini temizleme ve yeniden doldurma** işlemini kolaylaştırır
 
-```js
+### Adım 3: İşlem Satırı Fabrika Fonksiyonunu Oluşturun
+
+Şimdi işlem verilerini HTML elemanlarına dönüştüren bir fonksiyon oluşturun:
+
+```javascript
 function createTransactionRow(transaction) {
   const template = document.getElementById('transaction');
   const transactionRow = template.content.cloneNode(true);
@@ -297,9 +797,19 @@ function createTransactionRow(transaction) {
 }
 ```
 
-Bu fonksiyon tam olarak adının ima ettiği şeyi yapar: daha önce oluşturduğumuz şablonu kullanarak yeni bir tablo satırı oluşturur ve işlem verilerini kullanarak içeriğini doldurur. Bunu `updateDashboard()` fonksiyonumuzda tabloyu doldurmak için kullanacağız:
+**Bu fabrika fonksiyonunun ayrıntıları:**
+- **Şablon elemanını** ID'sine göre alır
+- **Şablon içeriğini** güvenli bir şekilde klonlar
+- **Klonlanmış içerikteki** tablo satırını seçer
+- **Her hücreyi** işlem verileriyle doldurur
+- **Miktarı** doğru ondalık basamakları gösterecek şekilde biçimlendirir
+- **Tamamlanmış satırı** eklemeye hazır şekilde döndürür
 
-```js
+### Adım 4: Birden Fazla İşlem Satırını Verimli Bir Şekilde Oluşturun
+
+Tüm işlemleri göstermek için `updateDashboard()` fonksiyonunuza şu kodu ekleyin:
+
+```javascript
 const transactionsRows = document.createDocumentFragment();
 for (const transaction of account.transactions) {
   const transactionRow = createTransactionRow(transaction);
@@ -308,11 +818,19 @@ for (const transaction of account.transactions) {
 updateElement('transactions', transactionsRows);
 ```
 
-Burada, üzerinde çalışabileceğimiz yeni bir DOM parçası oluşturan [`document.createDocumentFragment()`](https://developer.mozilla.org/docs/Web/API/Document/createDocumentFragment) yöntemini kullanıyoruz ve sonunda HTML tablomuzla iliştiriyoruz.
+**Bu verimli yaklaşımı anlama:**
+- **DOM işlemlerini toplamak için** bir belge parçası oluşturur
+- **Hesap verilerindeki tüm işlemleri** döngüyle iter
+- **Fabrika fonksiyonunu kullanarak** her işlem için bir satır oluşturur
+- **Tüm satırları** DOM'a eklemeden önce parçada toplar
+- **Birden fazla bireysel ekleme yerine** tek bir DOM güncellemesi gerçekleştirir
+> ⚡ **Performans Optimizasyonu**: [`document.createDocumentFragment()`](https://developer.mozilla.org/docs/Web/API/Document/createDocumentFragment), Boeing'deki montaj süreci gibi çalışır - bileşenler ana hattın dışında hazırlanır ve ardından tam bir birim olarak monte edilir. Bu toplu işlem yaklaşımı, birden fazla bireysel işlem yerine tek bir ekleme yaparak DOM yeniden akışlarını en aza indirir.
 
-Bu kodun çalışabilmesi için hala yapmamız gereken bir şey var, çünkü `updateElement()` fonksiyonumuz şu anda yalnızca metin içeriğini destekliyor. Kodunu biraz değiştirelim:
+### Adım 5: Karışık İçerik için Güncelleme Fonksiyonunu Geliştirin
 
-```js
+`updateElement()` fonksiyonunuz şu anda yalnızca metin içeriğini işliyor. Bunu hem metin hem de DOM düğümleriyle çalışacak şekilde güncelleyin:
+
+```javascript
 function updateElement(id, textOrNode) {
   const element = document.getElementById(id);
   element.textContent = ''; // Removes all children
@@ -320,18 +838,123 @@ function updateElement(id, textOrNode) {
 }
 ```
 
-[`append()`](https://developer.mozilla.org/docs/Web/API/ParentNode/append) yöntemini kullanıyoruz çünkü bu yöntem bir üst öğeye metin veya [DOM Düğümleri](https://developer.mozilla.org/docs/Web/API/Node) eklemeye olanak tanır, bu da tüm kullanım durumlarımız için mükemmeldir.
-Eğer `test` hesabını kullanarak giriş yapmayı denerseniz, artık kontrol panelinde bir işlem listesi görmelisiniz 🎉.
+**Bu güncellemedeki önemli iyileştirmeler:**
+- **Mevcut içeriği temizler** ve yeni içerik ekler
+- **Metin dizelerini veya DOM düğümlerini** parametre olarak kabul eder
+- Esneklik için [`append()`](https://developer.mozilla.org/docs/Web/API/ParentNode/append) yöntemini kullanır
+- Mevcut metin tabanlı kullanım ile **geriye dönük uyumluluğu korur**
+
+### Panonuzu Test Etme Zamanı
+
+Gerçek an geldi! Dinamik panonuzu çalışırken görelim:
+
+1. Örnek verilerle hazır olan `test` hesabıyla giriş yapın
+2. Panonuza gidin
+3. İşlem satırlarının doğru formatta göründüğünden emin olun
+4. Tarihlerin, açıklamaların ve tutarların düzgün göründüğünden emin olun
+
+Her şey çalışıyorsa, panonuzda tamamen işlevsel bir işlem listesi görmelisiniz! 🎉
+
+**Başardıklarınız:**
+- Herhangi bir miktarda veriyle ölçeklenebilen bir pano oluşturmak
+- Tutarlı formatlama için yeniden kullanılabilir şablonlar oluşturmak
+- Verimli DOM manipülasyon tekniklerini uygulamak
+- Üretim bankacılık uygulamalarıyla karşılaştırılabilir işlevsellik geliştirmek
+
+Statik bir web sayfasını dinamik bir web uygulamasına başarıyla dönüştürdünüz.
+
+### 🎯 Pedagojik Kontrol: Dinamik İçerik Üretimi
+
+**Mimari Anlayış**: React, Vue ve Angular gibi çerçevelerde kullanılan desenleri yansıtan sofistike bir veri-UI hattı uyguladınız.
+
+**Öğrenilen Temel Kavramlar**:
+- **Şablon tabanlı render**: Yeniden kullanılabilir UI bileşenleri oluşturma
+- **Belge parçacıkları**: DOM performansını optimize etme
+- **Güvenli DOM manipülasyonu**: Güvenlik açıklarını önleme
+- **Veri dönüşümü**: Sunucu verilerini kullanıcı arayüzlerine dönüştürme
+
+**Sektör Bağlantısı**: Bu teknikler modern frontend çerçevelerinin temelini oluşturur. React'ın sanal DOM'u, Vue'nun şablon sistemi ve Angular'ın bileşen mimarisi bu temel kavramlar üzerine inşa edilmiştir.
+
+**Düşünme Sorusu**: Bu sistemi gerçek zamanlı güncellemeleri (örneğin, yeni işlemlerin otomatik olarak görünmesi) işlemek için nasıl genişletirsiniz? WebSockets veya Server-Sent Events'i düşünün.
 
 ---
 
+## 📈 Veri Yönetimi Uzmanlık Zaman Çizelgeniz
+
+```mermaid
+timeline
+    title Data-Driven Development Journey
+    
+    section Foundation Building
+        API Setup & Testing
+            : Understand client-server communication
+            : Master HTTP request/response cycle
+            : Learn debugging techniques
+    
+    section Authentication Mastery
+        Async Function Patterns
+            : Write clean async/await code
+            : Handle promises effectively
+            : Implement error boundaries
+        User Session Management
+            : Create global state patterns
+            : Build navigation guards
+            : Design user feedback systems
+    
+    section Dynamic UI Development
+        Safe DOM Manipulation
+            : Prevent XSS vulnerabilities
+            : Use textContent over innerHTML
+            : Create accessibility-friendly interfaces
+        Template Systems
+            : Build reusable UI components
+            : Optimize performance with fragments
+            : Scale to handle large datasets
+    
+    section Professional Patterns
+        Production-Ready Code
+            : Implement comprehensive error handling
+            : Follow security best practices
+            : Create maintainable architectures
+        Modern Web Standards
+            : Master Fetch API patterns
+            : Understand CORS configurations
+            : Build responsive, accessible UIs
+```
+
+**🎓 Mezuniyet Dönüm Noktası**: Modern JavaScript desenlerini kullanarak eksiksiz bir veri odaklı web uygulaması başarıyla oluşturdunuz. Bu beceriler, React, Vue veya Angular gibi çerçevelerle çalışmaya doğrudan çevrilebilir.
+
+**🔄 Bir Sonraki Seviye Yetkinlikler**:
+- Bu kavramlar üzerine inşa edilen frontend çerçevelerini keşfetmeye hazır
+- WebSockets ile gerçek zamanlı özellikler uygulamaya hazır
+- Çevrimdışı özelliklere sahip Progressive Web Apps oluşturmaya hazır
+- Gelişmiş durum yönetimi desenlerini öğrenmek için temel oluşturuldu
+
+## GitHub Copilot Agent Challenge 🚀
+
+Agent modunu kullanarak aşağıdaki meydan okumayı tamamlayın:
+
+**Açıklama:** Kullanıcıların tarih aralığı, tutar veya açıklama ile belirli işlemleri bulmasını sağlayan bir işlem arama ve filtreleme özelliği ekleyerek bankacılık uygulamasını geliştirin.
+
+**İstek:** Bankacılık uygulaması için şu özellikleri içeren bir arama işlevi oluşturun: 1) Tarih aralığı (başlangıç/bitiş), minimum/maksimum tutar ve işlem açıklama anahtar kelimeleri için giriş alanlarına sahip bir arama formu, 2) Arama kriterlerine göre account.transactions dizisini filtreleyen bir `filterTransactions()` fonksiyonu, 3) Filtrelenmiş sonuçları göstermek için `updateDashboard()` fonksiyonunu güncelleyin ve 4) Görünümü sıfırlamak için bir "Filtreleri Temizle" düğmesi ekleyin. Modern JavaScript dizi yöntemlerini, örneğin `filter()` kullanın ve boş arama kriterleri için kenar durumları ele alın.
+
+[Agent modunu](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) burada öğrenin.
+
 ## 🚀 Meydan Okuma
 
-Birlikte çalışarak kontrol paneli sayfasını gerçek bir bankacılık uygulaması gibi görünmesini sağlayın. Eğer uygulamanızı zaten tasarladıysanız, [media queries](https://developer.mozilla.org/docs/Web/CSS/Media_Queries) kullanarak hem masaüstü hem de mobil cihazlarda güzel çalışan bir [duyarlı tasarım](https://developer.mozilla.org/docs/Web/Progressive_web_apps/Responsive/responsive_design_building_blocks) oluşturmayı deneyin.
+Bankacılık uygulamanızı bir üst seviyeye taşımaya hazır mısınız? İşte uygulamanızı gerçekten kullanmak isteyeceğiniz bir şeye dönüştürmek için bazı fikirler:
 
-İşte tasarlanmış bir kontrol paneli sayfası örneği:
+**Güzel hale getirin**: İşlevsel panonuzu görsel olarak çekici bir şeye dönüştürmek için CSS stil ekleyin. Temiz çizgiler, iyi boşluklar ve belki de bazı ince animasyonlar düşünün.
 
-![Kontrol panelinin tasarlandıktan sonraki örnek sonucunun ekran görüntüsü](../../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.tr.png)
+**Duyarlı hale getirin**: [Medya sorgularını](https://developer.mozilla.org/docs/Web/CSS/Media_Queries) kullanarak telefonlarda, tabletlerde ve masaüstlerinde harika çalışan bir [duyarlı tasarım](https://developer.mozilla.org/docs/Web/Progressive_web_apps/Responsive/responsive_design_building_blocks) oluşturmayı deneyin. Kullanıcılarınız size teşekkür edecek!
+
+**Biraz renk katın**: İşlemleri renklendirmeyi düşünün (gelir için yeşil, giderler için kırmızı), simgeler ekleyin veya arayüzü daha etkileşimli hale getiren üzerine gelme efektleri oluşturun.
+
+İşte cilalanmış bir pano böyle görünebilir:
+
+![Panonun stil eklenmiş örnek sonucu ekran görüntüsü](../../../../translated_images/tr/screen2.123c82a831a1d14a.webp)
+
+Bunu tam olarak eşleştirmek zorunda hissetmeyin - ilham kaynağı olarak kullanın ve kendi tarzınızı yaratın!
 
 ## Ders Sonrası Test
 
@@ -344,4 +967,4 @@ Birlikte çalışarak kontrol paneli sayfasını gerçek bir bankacılık uygula
 ---
 
 **Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.

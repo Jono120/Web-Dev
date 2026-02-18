@@ -1,37 +1,105 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a7587943d38d095de8613e1b508609f5",
-  "translation_date": "2025-08-29T08:33:15+00:00",
-  "source_file": "5-browser-extension/2-forms-browsers-local-storage/README.md",
-  "language_code": "no"
-}
--->
-# Nettleserutvidelsesprosjekt Del 2: Kall en API, bruk Local Storage
+# Nettleserutvidelsesprosjekt Del 2: Kall et API, bruk Lokal Lagre
 
-## Quiz før forelesning
+```mermaid
+journey
+    title Din API-integrasjon og lagringsreise
+    section Grunnlag
+      Sett opp DOM-referanser: 3: Student
+      Legg til hendelseslyttere: 4: Student
+      Håndter skjema innsending: 4: Student
+    section Databehandling
+      Implementer lokal lagring: 4: Student
+      Bygg API-kall: 5: Student
+      Håndter asynkrone operasjoner: 5: Student
+    section Brukeropplevelse
+      Legg til feilhåndtering: 5: Student
+      Lag lastetilstander: 4: Student
+      Forbedre interaksjoner: 5: Student
+```
+## Forberedende quiz
 
-[Quiz før forelesning](https://ff-quizzes.netlify.app/web/quiz/25)
+[Forberedende quiz](https://ff-quizzes.netlify.app/web/quiz/25)
 
-### Introduksjon
+## Introduksjon
 
-I denne leksjonen skal du kalle en API ved å sende inn skjemaet til nettleserutvidelsen din og vise resultatene i utvidelsen. I tillegg vil du lære hvordan du kan lagre data i nettleserens lokale lagring for fremtidig referanse og bruk.
+Husker du den nettleserutvidelsen du begynte å lage? Akkurat nå har du et pent utseende skjema, men det er i praksis statisk. I dag skal vi gi det liv ved å koble det til ekte data og gi det hukommelse.
 
-✅ Følg de nummererte segmentene i de relevante filene for å vite hvor du skal plassere koden din.
+Tenk på Apollo oppskytingskontrollens datamaskiner - de viste ikke bare fast informasjon. De kommuniserte kontinuerlig med romfartøyene, oppdaterte med telemetridata, og husket viktige oppdragsparametere. Det er den typen dynamisk oppførsel vi bygger i dag. Utvidelsen din vil hente data fra internett, hente ekte miljødata og huske innstillingene dine til neste gang.
 
-### Sett opp elementene som skal manipuleres i utvidelsen:
+API-integrasjon kan høres komplisert ut, men det handler egentlig bare om å lære koden din å kommunisere med andre tjenester. Enten du henter værdata, sosiale medier-feed eller karbonavtrykksinformasjon som vi skal gjøre i dag, handler det om å etablere disse digitale forbindelsene. Vi skal også utforske hvordan nettlesere kan lagre informasjon - på samme måte som biblioteker har brukt kortkataloger for å huske hvor bøkene tilhører.
 
-På dette tidspunktet har du laget HTML-en for skjemaet og `<div>`-elementet for resultatene i nettleserutvidelsen din. Fra nå av må du jobbe i `/src/index.js`-filen og bygge utvidelsen din steg for steg. Se tilbake på [forrige leksjon](../1-about-browsers/README.md) for å sette opp prosjektet ditt og lære om byggeprosessen.
+Ved slutten av denne leksjonen vil du ha en nettleserutvidelse som henter ekte data, lagrer brukerpreferanser og gir en jevn opplevelse. La oss komme i gang!
 
-Jobb i `index.js`-filen din, og start med å opprette noen `const`-variabler for å holde verdiene knyttet til ulike felt:
+```mermaid
+mindmap
+  root((Dynamiske Utvidelser))
+    DOM Manipulering
+      Elementvalg
+      Hendelseshåndtering
+      Tilstandsstyring
+      UI Oppdateringer
+    Lokal Lagring
+      Datapersistens
+      Nøkkel-verdi Par
+      Sesjonsstyring
+      Brukerpreferanser
+    API Integrasjon
+      HTTP Forespørsler
+      Autentisering
+      Dataparsering
+      Feilhåndtering
+    Asynkron Programmering
+      Løfter
+      Async/Await
+      Feilfangst
+      Ikke-blokkerende Kode
+    Brukeropplevelse
+      Lastetilstander
+      Feilmeldinger
+      Glatte Overganger
+      Datavalidering
+```
+✅ Følg de nummererte segmentene i de aktuelle filene for å vite hvor du skal plassere koden din
 
-```JavaScript
-// form fields
+## Sett opp elementene som skal manipuleres i utvidelsen
+
+Før JavaScript-en din kan manipulere grensesnittet, trenger det referanser til spesifikke HTML-elementer. Tenk på det som et teleskop som må peke på bestemte stjerner - før Galileo kunne studere Jupiters måner, måtte han finne og fokusere på selve Jupiter.
+
+I `index.js`-filen din skal vi lage `const`-variabler som fanger opp referanser til hvert viktige skjemafelt. Dette ligner på hvordan forskere merker utstyret sitt - i stedet for å lete gjennom hele laboratoriet hver gang, kan de direkte få tilgang til det de trenger.
+
+```mermaid
+flowchart LR
+    A[JavaScript-kode] --> B[document.querySelector]
+    B --> C[CSS-selektorer]
+    C --> D[HTML-elementer]
+    
+    D --> E[".form-data"]
+    D --> F[".region-navn"]
+    D --> G[".api-nøkkel"]
+    D --> H[".laster"]
+    D --> I[".feil"]
+    D --> J[".resultat-beholder"]
+    
+    E --> K[Formelement]
+    F --> L[Inndatafelt]
+    G --> M[Inndatafelt]
+    H --> N[UI-element]
+    I --> O[UI-element]
+    J --> P[UI-element]
+    
+    style A fill:#e1f5fe
+    style D fill:#e8f5e8
+    style K fill:#fff3e0
+    style L fill:#fff3e0
+    style M fill:#fff3e0
+```
+```javascript
+// skjema felt
 const form = document.querySelector('.form-data');
 const region = document.querySelector('.region-name');
 const apiKey = document.querySelector('.api-key');
 
-// results
+// resultater
 const errors = document.querySelector('.errors');
 const loading = document.querySelector('.loading');
 const results = document.querySelector('.result-container');
@@ -41,200 +109,546 @@ const myregion = document.querySelector('.my-region');
 const clearBtn = document.querySelector('.clear-btn');
 ```
 
-Alle disse feltene refereres til via deres CSS-klasser, slik du satte det opp i HTML-en i forrige leksjon.
+**Dette gjør koden:**
+- **Fanger opp** skjemaelementer ved hjelp av `document.querySelector()` med CSS-klasseselektor
+- **Oppretter** referanser til inputfelter for regionsnavn og API-nøkkel
+- **Etablerer** koblinger til resultatvisningselementer for karbondatabruk
+- **Setter opp** tilgang til UI-elementer som lastindikatorer og feilmeldinger
+- **Lagrer** hver elementreferanse i en `const`-variabel for enkel gjenbruk i hele koden
 
-### Legg til lyttere
+## Legg til hendelseslyttere
 
-Deretter legger du til event-lyttere for skjemaet og tilbakestillingsknappen som nullstiller skjemaet. Dette sikrer at noe skjer når en bruker sender inn skjemaet eller klikker på tilbakestillingsknappen. Legg også til kallet for å initialisere appen nederst i filen:
+Nå skal vi få utvidelsen til å reagere på brukerhandlinger. Hendelseslyttere er koden din sin måte å overvåke brukerinteraksjoner på. Tenk på dem som operatørene i tidlige telefonvekslinger - de lyttet etter innkommende anrop og koblet de riktige kretsene når noen ønsket å opprette forbindelse.
 
-```JavaScript
+```mermaid
+sequenceDiagram
+    participant User
+    participant Form
+    participant JavaScript
+    participant API
+    participant Storage
+    
+    User->>Form: Fyller ut region/API-nøkkel
+    User->>Form: Klikker send inn
+    Form->>JavaScript: Utløser send inn-hendelse
+    JavaScript->>JavaScript: handleSubmit(e)
+    JavaScript->>Storage: Lagre brukerinnstillinger
+    JavaScript->>API: Hent karbondata
+    API->>JavaScript: Returnerer data
+    JavaScript->>Form: Oppdaterer brukergrensesnitt med resultater
+    
+    User->>Form: Klikker på rydd-knapp
+    Form->>JavaScript: Utløser klikk-hendelse
+    JavaScript->>Storage: Tøm lagrede data
+    JavaScript->>Form: Tilbakestill til opprinnelig tilstand
+```
+```javascript
 form.addEventListener('submit', (e) => handleSubmit(e));
 clearBtn.addEventListener('click', (e) => reset(e));
 init();
 ```
 
-✅ Legg merke til den forkortede måten å lytte etter en submit- eller klikkhendelse på, og hvordan hendelsen sendes til handleSubmit- eller reset-funksjonene. Kan du skrive en lengre versjon av denne forkortelsen? Hvilken foretrekker du?
+**Forstå disse konseptene:**
+- **Legger til** en submit-lytter på skjemaet som utløses når brukere trykker Enter eller klikker send inn
+- **Kobler til** en klikk-lytter på tøm-knappen for å tilbakestille skjemaet
+- **Sender med** hendelsesobjektet `(e)` til håndteringsfunksjonene for ekstra kontroll
+- **Kaller** `init()`-funksjonen umiddelbart for å sette opp initial tilstand for utvidelsen
 
-### Bygg ut init()-funksjonen og reset()-funksjonen:
+✅ Legg merke til den forkortede pilfunksjons-syntaksen som brukes her. Denne moderne JavaScript-tilnærmingen er renere enn tradisjonelle funksjonsuttrykk, men begge fungerer like bra!
 
-Nå skal du bygge funksjonen som initialiserer utvidelsen, kalt init():
+### 🔄 **Pedagogisk sjekkpunkt**
+**Forståelse av hendelseshåndtering**: Før du går videre til initialisering, sørg for at du kan:
+- ✅ Forklare hvordan `addEventListener` kobler brukerhandlinger til JavaScript-funksjoner
+- ✅ Forstå hvorfor vi sender med hendelsesobjektet `(e)` til håndteringsfunksjoner
+- ✅ Gjenkjenne forskjellen mellom `submit` og `click` hendelser
+- ✅ Beskrive når `init()`-funksjonen kjører og hvorfor
 
-```JavaScript
+**Rask selvtest**: Hva skjer om du glemmer `e.preventDefault()` ved skjemainnsending?
+*Svar: Siden vil lastes på nytt, alle JavaScript-tilstander går tapt, og brukeropplevelsen avbrytes*
+
+## Bygg initialiserings- og tilbakestillingsfunksjonene
+
+La oss lage initialiseringslogikken for utvidelsen din. `init()`-funksjonen er som et skips navigasjonssystem som sjekker instrumentene sine - den bestemmer gjeldende tilstand og justerer grensesnittet tilsvarende. Den sjekker om noen har brukt utvidelsen før og laster inn deres tidligere innstillinger.
+
+`reset()`-funksjonen gir brukerne en frisk start - likt som forskere som tilbakestiller instrumentene mellom eksperimenter for å sikre rene data.
+
+```javascript
 function init() {
-	//if anything is in localStorage, pick it up
+	// Sjekk om brukeren tidligere har lagret API-legitimasjon
 	const storedApiKey = localStorage.getItem('apiKey');
 	const storedRegion = localStorage.getItem('regionName');
 
-	//set icon to be generic green
-	//todo
+	// Sett utvidelsesikon til generisk grønt (plassholder for neste leksjon)
+	// TODO: Implementer oppdatering av ikon i neste leksjon
 
 	if (storedApiKey === null || storedRegion === null) {
-		//if we don't have the keys, show the form
+		// Førstegangsbruker: vis oppsettsskjemaet
 		form.style.display = 'block';
 		results.style.display = 'none';
 		loading.style.display = 'none';
 		clearBtn.style.display = 'none';
 		errors.textContent = '';
 	} else {
-        //if we have saved keys/regions in localStorage, show results when they load
-        displayCarbonUsage(storedApiKey, storedRegion);
+		// Tilbakevendende bruker: last inn deres lagrede data automatisk
+		displayCarbonUsage(storedApiKey, storedRegion);
 		results.style.display = 'none';
 		form.style.display = 'none';
 		clearBtn.style.display = 'block';
 	}
-};
+}
 
 function reset(e) {
 	e.preventDefault();
-	//clear local storage for region only
+	// Tøm lagret region for å la brukeren velge en ny plassering
 	localStorage.removeItem('regionName');
+	// Start initialiseringsprosessen på nytt
 	init();
 }
-
 ```
 
-I denne funksjonen er det noe interessant logikk. Når du leser gjennom den, kan du se hva som skjer?
+**Bryter ned hva som skjer her:**
+- **Henter** lagret API-nøkkel og region fra nettleserens lokale lagring
+- **Sjekker** om dette er en førstegangsbruker (ingen lagrede legitimasjoner) eller en som kommer tilbake
+- **Viser** oppsett-skjemaet for nye brukere og skjuler andre grensesnitt-elementer
+- **Laster** automatisk inn lagrede data for tilbakevendende brukere og viser tilbakestillingsvalget
+- **Styrer** brukergrensesnittets tilstand basert på tilgjengelige data
 
-- To `const` opprettes for å sjekke om brukeren har lagret en APIKey og regionkode i lokal lagring.
-- Hvis en av disse er null, vis skjemaet ved å endre stilen til 'block'.
-- Skjul resultatene, lasteskjermen og clearBtn, og sett eventuell feilmeldingstekst til en tom streng.
-- Hvis det finnes en nøkkel og en region, start en rutine for å:
-  - Kalle API-en for å hente data om karbonbruk.
-  - Skjule resultatområdet.
-  - Skjule skjemaet.
-  - Vise tilbakestillingsknappen.
+**Nøkkelpunkter om Lokal lagring:**
+- **Bevarer** data mellom nettleserøkter (i motsetning til session storage)
+- **Lagrer** data som nøkkel-verdi-par via `getItem()` og `setItem()`
+- **Returnerer** `null` når det ikke finnes data for en gitt nøkkel
+- **Gir** en enkel måte å huske brukerpreferanser og innstillinger
 
-Før du går videre, er det nyttig å lære om et veldig viktig konsept som er tilgjengelig i nettlesere: [LocalStorage](https://developer.mozilla.org/docs/Web/API/Window/localStorage). LocalStorage er en nyttig måte å lagre strenger i nettleseren som et `key-value`-par. Denne typen nettlagring kan manipuleres med JavaScript for å håndtere data i nettleseren. LocalStorage utløper ikke, mens SessionStorage, en annen type nettlagring, tømmes når nettleseren lukkes. De ulike typene lagring har fordeler og ulemper.
+> 💡 **Forståelse av Nettleserlager**: [LocalStorage](https://developer.mozilla.org/docs/Web/API/Window/localStorage) gir utvidelsen din vedvarende hukommelse. Tenk analogt på det gamle Alexandria-biblioteket der håndskrifter ble bevart - informasjon var tilgjengelig selv når lærde reiste bort og kom tilbake.
+>
+> **Nøkkelfunksjoner:**
+> - **Bevarer** data selv når du lukker nettleseren
+> - **Overlever** datamaskin-omstarter og nettleserkrasj
+> - **Tilbyr** betydelig lagringsplass for brukerpreferanser
+> - **Gir** umiddelbar tilgang uten nettverksforsinkelser
 
-> Merk - nettleserutvidelsen din har sin egen lokale lagring; hovednettleservinduet er en annen instans og oppfører seg separat.
+> **Viktig merknad**: Din nettleserutvidelse har sin egen isolerte lokale lagring som er adskilt fra vanlige nettsider. Dette gir sikkerhet og forhindrer konflikter med andre nettsteder.
 
-Du setter APIKey til å ha en strengverdi, for eksempel, og du kan se at den er satt i Edge ved å "inspisere" en nettside (høyreklikk i nettleseren for å inspisere) og gå til Applikasjoner-fanen for å se lagringen.
+Du kan se lagrede data ved å åpne nettleserens utviklerverktøy (F12), gå til **Application**-fanen, og utvide **Local Storage**-seksjonen.
 
-![Local storage-panelet](../../../../translated_images/localstorage.472f8147b6a3f8d141d9551c95a2da610ac9a3c6a73d4a1c224081c98bae09d9.no.png)
+```mermaid
+stateDiagram-v2
+    [*] --> CheckStorage: Utvidelsen starter
+    CheckStorage --> FirstTime: Ingen lagrede data
+    CheckStorage --> Returning: Data funnet
+    
+    FirstTime --> ShowForm: Vis oppsettskjema
+    ShowForm --> UserInput: Bruker skriver inn data
+    UserInput --> SaveData: Lagre i localStorage
+    SaveData --> FetchAPI: Hent karbondata
+    
+    Returning --> LoadData: Les fra localStorage
+    LoadData --> FetchAPI: Hent karbondata
+    
+    FetchAPI --> ShowResults: Vis data
+    ShowResults --> UserAction: Bruker samhandler
+    
+    UserAction --> Reset: Tilbakestill knapp trykket
+    UserAction --> ShowResults: Se data
+    
+    Reset --> ClearStorage: Fjern lagrede data
+    ClearStorage --> FirstTime: Tilbake til oppsett
+```
+![Local storage pane](../../../../translated_images/no/localstorage.472f8147b6a3f8d1.webp)
 
-✅ Tenk på situasjoner der du IKKE vil lagre noen data i LocalStorage. Generelt er det en dårlig idé å plassere API-nøkler i LocalStorage! Kan du se hvorfor? I vårt tilfelle, siden appen vår kun er for læring og ikke skal distribueres til en appbutikk, vil vi bruke denne metoden.
+> ⚠️ **Sikkerhetshensyn**: I produksjonsapplikasjoner utgjør lagring av API-nøkler i LocalStorage sikkerhetsrisiko siden JavaScript har tilgang til disse dataene. For læringsformål fungerer denne tilnærmingen greit, men ekte apper bør bruke sikker server-side lagring for sensitive legitimasjoner.
 
-Legg merke til at du bruker Web API for å manipulere LocalStorage, enten ved å bruke `getItem()`, `setItem()` eller `removeItem()`. Det støttes bredt på tvers av nettlesere.
+## Håndter skjemainnsending
 
-Før du bygger `displayCarbonUsage()`-funksjonen som kalles i `init()`, la oss bygge funksjonaliteten for å håndtere den første skjema-innsendingen.
+Nå skal vi håndtere hva som skjer når noen sender inn skjemaet ditt. Som standard laster nettlesere siden på nytt ved innsending, men vi skal avbryte denne oppførselen for å gi en bedre opplevelse.
 
-### Håndter skjema-innsendingen
+Denne tilnærmingen speiler hvordan oppskytingskontrollen håndterer kommunikasjon med romfartøy - i stedet for å tilbakestille hele systemet ved hver overføring, opprettholder de kontinuerlig drift mens nye data behandles.
 
-Lag en funksjon kalt `handleSubmit` som aksepterer et hendelsesargument `(e)`. Stopp hendelsen fra å propagere (i dette tilfellet vil vi stoppe nettleseren fra å oppdatere) og kall en ny funksjon, `setUpUser`, med argumentene `apiKey.value` og `region.value`. På denne måten bruker du de to verdiene som hentes inn via det første skjemaet når de relevante feltene er fylt ut.
+Lag en funksjon som fanger opp skjemaets innsending og henter brukerens innspill:
 
-```JavaScript
+```javascript
 function handleSubmit(e) {
 	e.preventDefault();
 	setUpUser(apiKey.value, region.value);
 }
 ```
 
-✅ Frisk opp hukommelsen - HTML-en du satte opp i forrige leksjon har to input-felt hvis `values` fanges opp via `const`-variablene du satte opp øverst i filen, og de er begge `required`, slik at nettleseren hindrer brukere i å legge inn nullverdier.
+**I koden ovenfor har vi:**
+- **Forhindret** standard skjemainnsending som ville oppdatert siden
+- **Hentet ut** brukerinndata fra API-nøkkel- og regionfeltene
+- **Sendt** skjemadata til `setUpUser()`-funksjonen for behandling
+- **Opprettholdt** single-page-applikasjonsatferd ved å unngå sidereferanser
 
-### Sett opp brukeren
+✅ Husk at HTML-skjemaene dine har `required`-attributter, så nettleseren validerer automatisk at brukeren har oppgitt både API-nøkkel og region før denne funksjonen kjører.
 
-Gå videre til `setUpUser`-funksjonen. Her setter du verdier for apiKey og regionName i lokal lagring. Legg til en ny funksjon:
+## Sett opp brukerpreferanser
 
-```JavaScript
+`setUpUser`-funksjonen er ansvarlig for å lagre brukerens legitimasjon og starte det første API-kallet. Dette gir en sømløs overgang fra oppsett til resultater.
+
+```javascript
 function setUpUser(apiKey, regionName) {
+	// Lagre brukerlegitimasjon for fremtidige økter
 	localStorage.setItem('apiKey', apiKey);
 	localStorage.setItem('regionName', regionName);
+	
+	// Oppdater brukergrensesnittet for å vise lastetilstand
 	loading.style.display = 'block';
 	errors.textContent = '';
 	clearBtn.style.display = 'block';
-	//make initial call
+	
+	// Hent data om karbonbruk med brukerens legitimasjon
 	displayCarbonUsage(apiKey, regionName);
 }
 ```
 
-Denne funksjonen viser en lastemelding mens API-en kalles. På dette tidspunktet har du kommet til å lage den viktigste funksjonen i denne nettleserutvidelsen!
+**Trinnvis oversikt over hva som skjer:**
+- **Lagrer** API-nøkkel og regionsnavn til lokal lagring for senere bruk
+- **Viser** en lastindikator for å informere brukeren om at data hentes
+- **Fjerner** eventuelle tidligere feilmeldinger fra visningen
+- **Avslører** tømmeknappen slik at brukeren kan tilbakestille innstillinger senere
+- **Starter** API-kallet for å hente ekte karbondatakonsum
 
-### Vis karbonbruk
+Denne funksjonen skaper en sømløs brukeropplevelse ved å styre både datalagring og brukergrensesnittoppdateringer i én koordinert handling.
 
-Endelig er det tid for å spørre API-en!
+## Vis karbondatabruk
 
-Før vi går videre, bør vi diskutere API-er. API-er, eller [Application Programming Interfaces](https://www.webopedia.com/TERM/A/API.html), er et kritisk element i verktøykassen til en webutvikler. De gir standardiserte måter for programmer å samhandle og grensesnitt med hverandre. For eksempel, hvis du bygger et nettsted som trenger å spørre en database, kan noen ha laget en API for deg å bruke. Selv om det finnes mange typer API-er, er en av de mest populære en [REST API](https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/).
+Nå skal vi koble utvidelsen til eksterne datakilder via API-er. Dette forvandler utvidelsen fra et frittstående verktøy til noe som kan hente sanntidsinformasjon fra hele internett.
 
-✅ Begrepet 'REST' står for 'Representational State Transfer' og innebærer bruk av ulike konfigurerte URL-er for å hente data. Gjør litt research på de ulike typene API-er som er tilgjengelige for utviklere. Hvilket format appellerer til deg?
+**Forstå API-er**
 
-Det er viktige ting å merke seg om denne funksjonen. Først, legg merke til [`async`-nøkkelordet](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function). Å skrive funksjonene dine slik at de kjører asynkront betyr at de venter på at en handling, som at data returneres, skal fullføres før de fortsetter.
+[API-er](https://www.webopedia.com/TERM/A/API.html) er hvordan forskjellige applikasjoner kommuniserer med hverandre. Tenk på det som telegrafsystemet som forbandt fjerne byer på 1800-tallet - operatører sendte forespørsler til fjerne stasjoner og mottok svar med etterspurt informasjon. Hver gang du sjekker sosiale medier, spør en taleassistent et spørsmål, eller bruker en leveringsapp, legger API-ene til rette for disse datautvekslingene.
+
+```mermaid
+flowchart TD
+    A[Din utvidelse] --> B[HTTP-forespørsel]
+    B --> C[CO2 Signal API]
+    C --> D{Gyldig forespørsel?}
+    D -->|Ja| E[Spørringsdatabase]
+    D -->|Nei| F[Returner feil]
+    E --> G[Karbondata]
+    G --> H[JSON-svar]
+    H --> I[Din utvidelse]
+    F --> I
+    I --> J[Oppdater brukergrensesnitt]
+    
+    subgraph "API-forespørsel"
+        K[Overskrifter: auth-token]
+        L[Parametre: countryCode]
+        M[Metode: GET]
+    end
+    
+    subgraph "API-svar"
+        N[Karbonintensitet]
+        O[Andel fossilt drivstoff %]
+        P[Tidsstempel]
+    end
+    
+    style C fill:#e8f5e8
+    style G fill:#fff3e0
+    style I fill:#e1f5fe
+```
+**Nøkkelpunkter om REST API-er:**
+- **REST** står for 'Representational State Transfer'
+- **Bruker** standard HTTP-metoder (GET, POST, PUT, DELETE) for å samhandle med data
+- **Returnerer** data i forutsigbare formater, vanligvis JSON
+- **Tilbyr** konsistente URL-baserte endepunkter for ulike typer forespørsler
+
+✅ [CO2 Signal API](https://www.co2signal.com/) vi bruker, gir sanntidsdata om karbonintensiteten i elektrisitetsnett verden over. Dette hjelper brukere å forstå miljøpåvirkningen av strømforbruket sitt!
+
+> 💡 **Forstå Asynkron JavaScript**: [`async` nøkkelordet](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function) gjør det mulig for koden å håndtere flere operasjoner samtidig. Når du ber om data fra en server, vil du ikke at hele utvidelsen skal fryse - det ville være som om flykontrollen stopper all drift mens den venter på ett fly.
+>
+> **Hovedfordeler:**
+> - **Opprettholder** utvidelsens responsivitet mens data lastes
+> - **Lar** annen kode fortsette å kjøre under nettverksforespørsler
+> - **Forbedrer** kode-lesbarheten sammenlignet med tradisjonell callback-mønster
+> - **Muliggjør** elegant håndtering av nettverksfeil
 
 Her er en kort video om `async`:
 
-[![Async og Await for å håndtere løfter](https://img.youtube.com/vi/YwmlRkrxvkk/0.jpg)](https://youtube.com/watch?v=YwmlRkrxvkk "Async og Await for å håndtere løfter")
+[![Async and Await for managing promises](https://img.youtube.com/vi/YwmlRkrxvkk/0.jpg)](https://youtube.com/watch?v=YwmlRkrxvkk "Async and Await for managing promises")
 
 > 🎥 Klikk på bildet over for en video om async/await.
 
-Lag en ny funksjon for å spørre C02Signal API-en:
+### 🔄 **Pedagogisk sjekkpunkt**
+**Forståelse av asynkron programmering**: Før du går inn i API-funksjonen, forsikre deg om at du forstår:
+- ✅ Hvorfor vi bruker `async/await` i stedet for å blokkere hele utvidelsen
+- ✅ Hvordan `try/catch`-blokker elegant håndterer nettverksfeil
+- ✅ Forskjellen mellom synkrone og asynkrone operasjoner
+- ✅ Hvorfor API-kall kan feile og hvordan feilhåndtering gjøres
 
-```JavaScript
-import axios from '../node_modules/axios';
+**Virkelige eksempler på async**:
+- **Bestille mat**: Du venter ikke i kjøkkenet - du får kvittering og fortsetter med andre ting
+- **Sende e-post**: E-postappen fryser ikke mens meldinger sendes - du kan begynne å skrive flere e-poster
+- **Laste websider**: Bilder lastes inn gradvis mens du allerede kan lese teksten
 
+**Flyt for API-autentisering**:
+```mermaid
+sequenceDiagram
+    participant Ext as Extension
+    participant API as CO2 Signal API
+    participant DB as Database
+    
+    Ext->>API: Forespørsel med auth-token
+    API->>API: Valider token
+    API->>DB: Hent karbondata
+    DB->>API: Returner data
+    API->>Ext: JSON-respons
+    Ext->>Ext: Oppdater UI
+```
+Lag funksjonen som henter og viser karbondatabruken:
+
+```javascript
+// Moderne fetch API-tilnærming (ingen eksterne avhengigheter nødvendig)
 async function displayCarbonUsage(apiKey, region) {
 	try {
-		await axios
-			.get('https://api.co2signal.com/v1/latest', {
-				params: {
-					countryCode: region,
-				},
-				headers: {
-					'auth-token': apiKey,
-				},
-			})
-			.then((response) => {
-				let CO2 = Math.floor(response.data.data.carbonIntensity);
+		// Hent karbonintensitetsdata fra CO2 Signal API
+		const response = await fetch('https://api.co2signal.com/v1/latest', {
+			method: 'GET',
+			headers: {
+				'auth-token': apiKey,
+				'Content-Type': 'application/json'
+			},
+			// Legg til spørringsparametere for den spesifikke regionen
+			...new URLSearchParams({ countryCode: region }) && {
+				url: `https://api.co2signal.com/v1/latest?countryCode=${region}`
+			}
+		});
 
-				//calculateColor(CO2);
+		// Sjekk om API-forespørselen var vellykket
+		if (!response.ok) {
+			throw new Error(`API request failed: ${response.status}`);
+		}
 
-				loading.style.display = 'none';
-				form.style.display = 'none';
-				myregion.textContent = region;
-				usage.textContent =
-					Math.round(response.data.data.carbonIntensity) + ' grams (grams C02 emitted per kilowatt hour)';
-				fossilfuel.textContent =
-					response.data.data.fossilFuelPercentage.toFixed(2) +
-					'% (percentage of fossil fuels used to generate electricity)';
-				results.style.display = 'block';
-			});
+		const data = await response.json();
+		const carbonData = data.data;
+
+		// Beregn avrundet karbonintensitetsverdi
+		const carbonIntensity = Math.round(carbonData.carbonIntensity);
+
+		// Oppdater brukergrensesnittet med hentede data
+		loading.style.display = 'none';
+		form.style.display = 'none';
+		myregion.textContent = region.toUpperCase();
+		usage.textContent = `${carbonIntensity} grams (grams CO₂ emitted per kilowatt hour)`;
+		fossilfuel.textContent = `${carbonData.fossilFuelPercentage.toFixed(2)}% (percentage of fossil fuels used to generate electricity)`;
+		results.style.display = 'block';
+
+		// TODO: calculateColor(carbonIntensity) - implementer i neste leksjon
+
 	} catch (error) {
-		console.log(error);
+		console.error('Error fetching carbon data:', error);
+		
+		// Vis brukervennlig feilmelding
 		loading.style.display = 'none';
 		results.style.display = 'none';
-		errors.textContent = 'Sorry, we have no data for the region you have requested.';
+		errors.textContent = 'Sorry, we couldn\'t fetch data for that region. Please check your API key and region code.';
 	}
 }
 ```
 
-Dette er en stor funksjon. Hva skjer her?
+**Analyse av hva som skjer her:**
+- **Bruker** den moderne `fetch()` API-en i stedet for eksterne biblioteker som Axios for en renere, avhengighetsfri kode
+- **Implementerer** korrekt feilkontroll med `response.ok` for å fange opp API-feil tidlig
+- **Håndterer** asynkrone operasjoner med `async/await` for mer lesbar kodestrøm
+- **Autentiserer** med CO2 Signal API ved hjelp av `auth-token`-header
+- **Parser** JSON-responsdata og henter ut karbonintensitetsinformasjonen
+- **Oppdaterer** flere UI-elementer med formaterte miljødata
+- **Gir** brukervennlige feilmeldinger når API-kall feiler
 
-- I tråd med beste praksis bruker du `async`-nøkkelordet for å få denne funksjonen til å oppføre seg asynkront. Funksjonen inneholder en `try/catch`-blokk, da den vil returnere et løfte når API-en returnerer data. Fordi du ikke har kontroll over hastigheten API-en svarer med (den kan hende ikke svarer i det hele tatt!), må du håndtere denne usikkerheten ved å kalle den asynkront.
-- Du spør co2signal API-en for å hente data om regionen din, ved å bruke API-nøkkelen din. For å bruke den nøkkelen må du bruke en type autentisering i header-parametrene.
-- Når API-en svarer, tilordner du ulike elementer av responsdataene til delene av skjermen du satte opp for å vise disse dataene.
-- Hvis det oppstår en feil, eller hvis det ikke finnes noe resultat, viser du en feilmelding.
+**Viktige moderne JavaScript-konsepter vist:**
+- **Template literals** med `${}` syntaks for ren strengformatering
+- **Feilhåndtering** med try/catch-blokker for robuste applikasjoner
+- **Async/await** mønster for elegant nettverksforespørselshåndtering
+- **Objektdestrukturering** for å hente spesifikke data fra API-responser
+- **Metodekjedet calls** for flere DOM-manipulasjoner
 
-✅ Å bruke asynkrone programmeringsmønstre er et annet veldig nyttig verktøy i verktøykassen din. Les [om de ulike måtene](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function) du kan konfigurere denne typen kode.
+✅ Denne funksjonen viser flere viktige webutviklingskonsepter - kommunikasjon med eksterne servere, håndtering av autentisering, databehandling, oppdatering av grensesnitt, og skånsom feilhåndtering. Dette er fundamentale ferdigheter profesjonelle utviklere bruker daglig.
 
-Gratulerer! Hvis du bygger utvidelsen din (`npm run build`) og oppdaterer den i utvidelsespanelet ditt, har du en fungerende utvidelse! Det eneste som ikke fungerer er ikonet, og det skal du fikse i neste leksjon.
+```mermaid
+flowchart TD
+    A[Start API-kall] --> B[Hent forespørsel]
+    B --> C{Nettverk suksess?}
+    C -->|Nei| D[Nettverksfeil]
+    C -->|Ja| E{Respons OK?}
+    E -->|Nei| F[API-feil]
+    E -->|Ja| G[Tolk JSON]
+    G --> H{Gyldige data?}
+    H -->|Nei| I[Datafeil]
+    H -->|Ja| J[Oppdater UI]
+    
+    D --> K[Vis feilmelding]
+    F --> K
+    I --> K
+    J --> L[Skjul lading]
+    K --> L
+    
+    style A fill:#e1f5fe
+    style J fill:#e8f5e8
+    style K fill:#ffebee
+    style L fill:#f3e5f5
+```
+### 🔄 **Pedagogisk sjekkpunkt**
+**Fullstendig systemforståelse**: Bekreft mestring av hele flyten:
+- ✅ Hvordan DOM-referanser gjør at JavaScript kan kontrollere grensesnittet
+- ✅ Hvorfor lokal lagring gir persistens mellom nettleserøkter
+- ✅ Hvordan async/await gjør API-kall uten å fryse utvidelsen
+- ✅ Hva som skjer ved API-feil og hvordan feilmeldinger håndteres
+- ✅ Hvorfor brukeropplevelsen inkluderer lastetilstander og feilmeldinger
+
+🎉 **Det du har oppnådd:** Du har laget en nettleserutvidelse som:
+- **Kobler** til internett og henter ekte miljødata
+- **Bevarer** brukerinnstillinger mellom økter
+- **Håndterer** feil på en elegant måte uten krasj
+- **Tilbyr** en jevn, profesjonell brukeropplevelse
+
+Test arbeidet ditt ved å kjøre `npm run build` og oppdatere utvidelsen din i nettleseren. Du har nå en funksjonell karbonavtrykksmåler. Neste leksjon vil legge til dynamisk ikonfunksjonalitet for å fullføre utvidelsen.
 
 ---
 
+## GitHub Copilot Agent Challenge 🚀
+
+Bruk Agent-modus for å fullføre følgende utfordring:
+**Beskrivelse:** Forbedre nettleserutvidelsen ved å legge til forbedringer for feilhåndtering og brukeropplevelse. Denne utfordringen vil hjelpe deg å øve på å jobbe med APIer, lokal lagring og DOM-manipulering ved bruk av moderne JavaScript-mønstre.
+
+**Oppgave:** Lag en forbedret versjon av displayCarbonUsage-funksjonen som inkluderer: 1) En retry-mekanisme for mislykkede API-kall med eksponentiell tilbakekobling, 2) Validering av input for regionkode før API-kallet utføres, 3) En lastingsanimasjon med fremdriftsindikatorer, 4) Caching av API-responser i localStorage med utløpstidspunkt (cache i 30 minutter), og 5) En funksjon for å vise historiske data fra tidligere API-kall. Legg også til korrekte JSDoc-kommentarer i TypeScript-stil for å dokumentere alle funksjonsparametere og returtyper.
+
+Lær mer om [agent mode](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) her.
+
 ## 🚀 Utfordring
 
-Vi har diskutert flere typer API-er så langt i disse leksjonene. Velg en web-API og undersøk i dybden hva den tilbyr. For eksempel, ta en titt på API-er som er tilgjengelige i nettlesere, som [HTML Drag and Drop API](https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API). Hva mener du kjennetegner en god API?
+Utvid din forståelse av APIer ved å utforske det brede utvalget av nettleserbaserte APIer tilgjengelig for webutvikling. Velg ett av disse nettleser-APIene og lag en liten demonstrasjon:
+
+- [Geolocation API](https://developer.mozilla.org/docs/Web/API/Geolocation_API) - Få brukerens nåværende posisjon
+- [Notification API](https://developer.mozilla.org/docs/Web/API/Notifications_API) - Send skrivebordsvarsler
+- [HTML Drag and Drop API](https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API) - Lag interaktive dra-og-slipp-grensesnitt
+- [Web Storage API](https://developer.mozilla.org/docs/Web/API/Web_Storage_API) - Avanserte teknikker for lokal lagring
+- [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) - Moderne alternativ til XMLHttpRequest
+
+**Forskningsspørsmål å vurdere:**
+- Hvilke reelle problemer løser dette APIet?
+- Hvordan håndterer APIet feil og kanttilfeller?
+- Hvilke sikkerhetsbetraktninger finnes ved bruk av dette APIet?
+- Hvor bredt støttet er dette APIet i forskjellige nettlesere?
+
+Etter forskningen, identifiser hvilke egenskaper som gjør et API utviklervennlig og pålitelig.
 
 ## Quiz etter forelesning
 
 [Quiz etter forelesning](https://ff-quizzes.netlify.app/web/quiz/26)
 
-## Gjennomgang og selvstudium
+## Gjennomgang og egenstudie
 
-Du lærte om LocalStorage og API-er i denne leksjonen, begge svært nyttige for profesjonelle webutviklere. Kan du tenke på hvordan disse to tingene fungerer sammen? Tenk på hvordan du ville arkitektet et nettsted som lagrer elementer som skal brukes av en API.
+Du lærte om LocalStorage og APIer i denne leksjonen, begge svært nyttige for profesjonelle webutviklere. Kan du tenke på hvordan disse to tingene fungerer sammen? Tenk på hvordan du ville arkitektureret et nettsted som lagrer elementer for bruk av et API.
+
+### ⚡ **Hva du kan gjøre de neste 5 minuttene**
+- [ ] Åpne DevTools Application-fanen og utforsk localStorage på et hvilket som helst nettsted
+- [ ] Lag et enkelt HTML-skjema og test validering av skjema i nettleseren
+- [ ] Prøv å lagre og hente data ved bruk av localStorage i nettleserkonsollen
+- [ ] Inspiser skjema-data som blir sendt inn ved bruk av Network-fanen
+
+### 🎯 **Hva du kan oppnå denne timen**
+- [ ] Fullfør quiz etter leksjonen og forstå konsepter for skjema-håndtering
+- [ ] Lag et nettleserutvidelses-skjema som lagrer brukerpreferanser
+- [ ] Implementer klient-side skjema-validering med hjelpsomme feilmeldinger
+- [ ] Øv på bruk av chrome.storage API for lagring av utvidelsesdata
+- [ ] Lag et brukergrensesnitt som reagerer på gitte brukersettinger
+
+### 📅 **Din ukelange utvidelsesbygging**
+- [ ] Fullfør en fullverdig nettleserutvidelse med skjema-funksjonalitet
+- [ ] Bli ekspert på forskjellige lagringsalternativer: local, sync og session storage
+- [ ] Implementer avanserte skjema-funksjoner som autofullføring og validering
+- [ ] Legg til import-/eksportfunksjonalitet for brukerdata
+- [ ] Test utvidelsen grundig på ulike nettlesere
+- [ ] Poler brukeropplevelsen og feilhåndteringen i utvidelsen
+
+### 🌟 **Din månedslange web API-mestring**
+- [ ] Bygg komplekse applikasjoner med ulike nettleser-lagrings-APIer
+- [ ] Lær om offline-first utviklingsmønstre
+- [ ] Bidra til åpne kildeprosjekter knyttet til datalagring
+- [ ] Mestre personvernfokusert utvikling og GDPR-samsvar
+- [ ] Lag gjenbrukbare biblioteker for skjema-håndtering og datastyring
+- [ ] Del kunnskap om web APIer og utvidelsesutvikling
+
+## 🎯 Din tidslinje for mestring av utvidelsesutvikling
+
+```mermaid
+timeline
+    title API-integrasjon og lagringslæringsprogresjon
+    
+    section DOM-grunnleggende (15 minutter)
+        Elementreferanser: querySelector-mestring
+                          : Oppsett av hendelseslytter
+                          : Grunnleggende tilstandsadministrasjon
+        
+    section Lokal lagring (20 minutter)
+        Datapersistens: Nøkkel-verdi-lagring
+                        : Øktadministrasjon
+                        : Håndtering av brukerpreferanser
+                        : Verktøy for inspeksjon av lagring
+        
+    section Skjemahåndtering (25 minutter)
+        Brukerinput: Skjemavalidering
+                  : Forebygging av hendelser
+                  : Datauttrekking
+                  : UI-tilstandsoverganger
+        
+    section API-integrasjon (35 minutter)
+        Ekstern kommunikasjon: HTTP-forespørsler
+                              : Autentiseringsmønstre
+                              : JSON-dataparsering
+                              : Responsbehandling
+        
+    section Asynkron programmering (40 minutter)
+        Moderne JavaScript: Promise-håndtering
+                         : Async/await-mønstre
+                         : Feilhåndtering
+                         : Ikke-blokkerende operasjoner
+        
+    section Feilhåndtering (30 minutter)
+        Robust applikasjoner: Try/catch-blokker
+                           : Brukervennlige meldinger
+                           : Grasiøs degradering
+                           : Feilsøkningsteknikker
+        
+    section Avanserte mønstre (1 uke)
+        Profesjonell utvikling: Caching-strategier
+                                : Ratebegrensning
+                                : Gjenforsøksmekanismer
+                                : Ytelsesoptimalisering
+        
+    section Produksjonsferdigheter (1 måned)
+        Enterprise-funksjoner: Sikkerhetsbeste praksis
+                           : API-versjonering
+                           : Overvåking og logging
+                           : Skalerbar arkitektur
+```
+### 🛠️ Sammendrag av din full-stack utviklingsverktøykasse
+
+Etter å ha fullført denne leksjonen, har du nå:
+- **DOM-mestring**: Presis målretting og manipulering av elementer
+- **Lagringsekspertise**: Vedvarende datastyring med localStorage
+- **API-integrasjon**: Henting av sanntidsdata og autentisering
+- **Asynkron programmering**: Ikke-blokkerende operasjoner med moderne JavaScript
+- **Feilhåndtering**: Robust applikasjoner som håndterer feil elegant
+- **Brukeropplevelse**: Lastetilstander, validering og smidige interaksjoner
+- **Moderne mønstre**: fetch API, async/await og ES6+-funksjoner
+
+**Profesjonelle ferdigheter oppnådd**: Du har implementert mønstre brukt i:
+- **Webapplikasjoner**: Enkle SPAer med eksterne datakilder
+- **Mobilutvikling**: API-drevne apper med offline-kapasiteter
+- **Desktopprogramvare**: Electron-apper med vedvarende lagring
+- **Enterprise-systemer**: Autentisering, caching og feilhåndtering
+- **Moderne rammeverk**: React/Vue/Angular datastyringsmønstre
+
+**Neste nivå**: Du er klar til å utforske avanserte temaer som cache-strategier, sanntid WebSocket-tilkoblinger eller kompleks tilstandshåndtering!
 
 ## Oppgave
 
-[Adopter en API](assignment.md)
+[Ta i bruk et API](assignment.md)
 
 ---
 
-**Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi tilstreber nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Ansvarsfraskrivelse**:
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på det opprinnelige språket skal anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

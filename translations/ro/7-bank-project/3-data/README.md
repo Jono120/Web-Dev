@@ -1,67 +1,234 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "89d0df9854ed020f155e94882ae88d4c",
-  "translation_date": "2025-08-29T11:24:23+00:00",
-  "source_file": "7-bank-project/3-data/README.md",
-  "language_code": "ro"
-}
--->
-# Construirea unei aplicații bancare Partea 3: Metode de preluare și utilizare a datelor
+# Construiește o Aplicație Bancară Partea 3: Metode de Preluare și Utilizare a Datelor
 
-## Chestionar înainte de curs
+Gândește-te la computerul Enterprise din Star Trek - când Căpitanul Picard cere starea navei, informația apare instantaneu fără ca întreaga interfață să se închidă și să se reconstruiască. Acest flux lin de informații este exact ceea ce construim aici cu preluarea dinamică a datelor.
 
-[Chestionar înainte de curs](https://ff-quizzes.netlify.app/web/quiz/45)
+În acest moment, aplicația ta bancară este ca un ziar tipărit - informativă, dar statică. Vom transforma aplicația într-un ceva mai asemănător centrului de comandă de la NASA, unde datele curg continuu și se actualizează în timp real fără a întrerupe fluxul de lucru al utilizatorului.
 
-### Introducere
+Vei învăța cum să comunici cu serverele asincron, să gestionezi datele care sosesc în momente diferite și să transformi informațiile brute în ceva semnificativ pentru utilizatorii tăi. Aceasta este diferența dintre un demo și un software gata pentru producție.
 
-La baza fiecărei aplicații web se află *datele*. Datele pot lua multe forme, dar scopul lor principal este întotdeauna să afișeze informații utilizatorului. Pe măsură ce aplicațiile web devin din ce în ce mai interactive și complexe, modul în care utilizatorul accesează și interacționează cu informațiile a devenit o parte esențială a dezvoltării web.
+## ⚡ Ce Poți Face în Următoarele 5 Minute
 
-În această lecție, vom vedea cum să preluăm date de pe un server în mod asincron și să folosim aceste date pentru a afișa informații pe o pagină web fără a reîncărca HTML-ul.
+**Cale Rapidă pentru Dezvoltatori Ocupați**
 
-### Prerechizite
-
-Trebuie să fi construit [Formularul de autentificare și înregistrare](../2-forms/README.md) al aplicației web pentru această lecție. De asemenea, trebuie să instalați [Node.js](https://nodejs.org) și să [rulați API-ul serverului](../api/README.md) local pentru a obține datele contului.
-
-Puteți testa dacă serverul funcționează corect executând această comandă într-un terminal:
-
-```sh
-curl http://localhost:5000/api
-# -> should return "Bank API v1.0.0" as a result
+```mermaid
+flowchart LR
+    A[⚡ 5 minute] --> B[Configurează serverul API]
+    B --> C[Testare preluare cu curl]
+    C --> D[Creează funcția de autentificare]
+    D --> E[Vezi datele în acțiune]
 ```
+- **Minutele 1-2**: Pornește serverul tău API (`cd api && npm start`) și testează conexiunea
+- **Minutul 3**: Creează o funcție simplă `getAccount()` folosind fetch
+- **Minutul 4**: Leagă formularul de login cu `action="javascript:login()"`
+- **Minutul 5**: Testează login-ul și urmărește cum datele contului apar în consolă
+
+**Comenzi rapide pentru testare**:
+```bash
+# Verificați dacă API-ul rulează
+curl http://localhost:5000/api
+
+# Testați preluarea datelor contului
+curl http://localhost:5000/api/accounts/test
+```
+
+**De ce este important**: În 5 minute vei vedea magia preluării asincrone a datelor care alimentează orice aplicație web modernă. Aceasta este fundația care face ca aplicațiile să pară receptive și vii.
+
+## 🗺️ Călătoria Ta de Învățare prin Aplicații Web Bazate pe Date
+
+```mermaid
+journey
+    title De la pagini statice la aplicații dinamice
+    section Înțelegerea evoluției
+      Reîncărcări tradiționale de pagini: 3: You
+      Descoperă beneficiile AJAX/SPA: 5: You
+      Stăpânește modelele Fetch API: 7: You
+    section Construirea autentificării
+      Creează funcții de autentificare: 4: You
+      Gestionează operații asincrone: 6: You
+      Administrează sesiunile utilizatorului: 8: You
+    section Actualizări dinamice ale UI-ului
+      Învață manipularea DOM-ului: 5: You
+      Creează afișaje pentru tranzacții: 7: You
+      Creează tablouri de bord responsive: 9: You
+    section Modele profesionale
+      Redare bazată pe șabloane: 6: You
+      Strategii de gestionare a erorilor: 7: You
+      Optimizarea performanței: 8: You
+```
+**Destinația Călătoriei Tale**: La finalul acestei lecții, vei înțelege cum aplicațiile web moderne preiau, procesează și afișează date dinamic, creând experiențe de utilizator fluide pe care le așteptăm de la aplicațiile profesionale.
+
+## Test Preliminar
+
+[Test preliminar](https://ff-quizzes.netlify.app/web/quiz/45)
+
+### Cerințe Prealabile
+
+Înainte de a te avânta în preluarea datelor, asigură-te că ai următoarele componente pregătite:
+
+- **Lecția Anterioară**: Finalizează [Formularul de Login și Înregistrare](../2-forms/README.md) - vom construi pe această bază
+- **Server Local**: Instalează [Node.js](https://nodejs.org) și [pornește serverul API](../api/README.md) pentru a furniza datele contului
+- **Conexiune API**: Testează conexiunea serverului cu această comandă:
+
+```bash
+curl http://localhost:5000/api
+# Răspuns așteptat: "Bank API v1.0.0"
+```
+
+Acest test rapid asigură că toate componentele comunică corect:
+- Verifică că Node.js rulează corect pe sistemul tău
+- Confirmă că serverul tău API este activ și răspunde
+- Validatează că aplicația ta poate accesa serverul (ca un control radio înainte de o misiune)
+
+## 🧠 Prezentare Generală a Ecosistemului de Management al Datelor
+
+```mermaid
+mindmap
+  root((Gestionarea Datelor))
+    Authentication Flow
+      Login Process
+        Validarea Formularului
+        Verificarea Credențialelor
+        Gestionarea Sesiunii
+      User State
+        Obiectul Global al Contului
+        Gardieni de Navigare
+        Tratarea Erorilor
+    API Communication
+      Fetch Patterns
+        Cereri GET
+        Cereri POST
+        Raspunsuri cu Erori
+      Data Formats
+        Procesarea JSON
+        Codificarea URL
+        Parsarea Raspunsurilor
+    Dynamic UI Updates
+      DOM Manipulation
+        Actualizări Sigure de Text
+        Crearea Elementelor
+        Clonarea Șabloanelor
+      User Experience
+        Actualizări în Timp Real
+        Mesaje de Eroare
+        Stări de Încărcare
+    Security Considerations
+      XSS Prevention
+        Utilizarea textContent
+        Sanitizarea Inputului
+        Crearea HTML Sigur
+      CORS Handling
+        Cereri Cross-Origin
+        Configurarea Header-ului
+        Configurare pentru Dezvoltare
+```
+**Principiu de bază**: Aplicațiile web moderne sunt sisteme de orchestrare a datelor - ele coordonează între interfețele utilizator, API-urile serverelor și modelele de securitate ale browserelor pentru a crea experiențe fluide și receptive.
 
 ---
 
-## AJAX și preluarea datelor
+## Înțelegerea Preluării Datelor în Aplicațiile Web Moderne
 
-Site-urile web tradiționale actualizează conținutul afișat atunci când utilizatorul selectează un link sau trimite date printr-un formular, reîncărcând întreaga pagină HTML. De fiecare dată când trebuie încărcate date noi, serverul web returnează o pagină HTML complet nouă care trebuie procesată de browser, întrerupând acțiunea curentă a utilizatorului și limitând interacțiunile în timpul reîncărcării. Acest flux de lucru este cunoscut și sub denumirea de *Aplicație Multi-Pagină* sau *MPA*.
+Modul în care aplicațiile web gestionează datele s-a schimbat dramatic în ultimele două decenii. Înțelegerea acestei evoluții te va ajuta să apreciezi de ce tehnici moderne precum AJAX și Fetch API sunt atât de puternice și de ce au devenit instrumente esențiale pentru dezvoltatorii web.
 
-![Fluxul de actualizare într-o aplicație multi-pagină](../../../../translated_images/mpa.7f7375a1a2d4aa779d3f928a2aaaf9ad76bcdeb05cfce2dc27ab126024050f51.ro.png)
+Să explorăm cum funcționau site-urile tradiționale comparativ cu aplicațiile dinamice și receptive pe care le construim astăzi.
 
-Când aplicațiile web au început să devină mai complexe și interactive, a apărut o tehnică nouă numită [AJAX (JavaScript și XML asincron)](https://en.wikipedia.org/wiki/Ajax_(programming)). Această tehnică permite aplicațiilor web să trimită și să preia date de pe un server în mod asincron folosind JavaScript, fără a reîncărca pagina HTML, rezultând actualizări mai rapide și interacțiuni mai fluide pentru utilizator. Când sunt primite date noi de la server, pagina HTML curentă poate fi actualizată cu JavaScript folosind API-ul [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model). În timp, această abordare a evoluat în ceea ce se numește acum o [*Aplicație Single-Page* sau *SPA*](https://en.wikipedia.org/wiki/Single-page_application).
+### Aplicații Multi-Pagină Tradiționale (MPA)
 
-![Fluxul de actualizare într-o aplicație single-page](../../../../translated_images/spa.268ec73b41f992c2a21ef9294235c6ae597b3c37e2c03f0494c2d8857325cc57.ro.png)
+În primele zile ale web-ului, fiecare clic era ca schimbarea canalelor la un televizor vechi - ecranul devenea gol, apoi se ajusta încet către noul conținut. Aceasta era realitatea aplicațiilor web timpurii, unde fiecare interacțiune însemna reconstrucția completă a întregii pagini de la zero.
 
-Când AJAX a fost introdus pentru prima dată, singurul API disponibil pentru preluarea datelor în mod asincron era [`XMLHttpRequest`](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest). Dar browserele moderne implementează acum și API-ul mai convenabil și mai puternic [`Fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API), care folosește promisiuni și este mai potrivit pentru manipularea datelor JSON.
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Server
+    
+    User->>Browser: Apasă pe link sau trimite formular
+    Browser->>Server: Solicită o pagină HTML nouă
+    Note over Browser: Pagina devine goală
+    Server->>Browser: Returnează pagina HTML completă
+    Browser->>User: Afișează pagina nouă (clipire/reîncărcare)
+```
+![Fluxul de actualizare într-o aplicație multi-pagină](../../../../translated_images/ro/mpa.7f7375a1a2d4aa77.webp)
 
-> Deși toate browserele moderne acceptă `Fetch API`, dacă doriți ca aplicația dvs. web să funcționeze pe browsere mai vechi, este întotdeauna o idee bună să verificați mai întâi [tabelul de compatibilitate pe caniuse.com](https://caniuse.com/fetch).
+**De ce această abordare părea stângace:**
+- Fiecare clic implica reconstruirea completă a paginii de la zero
+- Utilizatorii erau întrerupți în miezul gândului de acele flash-uri enervante ale paginii
+- Conexiunea ta la internet lucra în exces descărcând repetat același antet și subsol
+- Aplicațiile păreau mai mult ca navigarea prin dosare fizice decât ca utilizarea unui software
 
-### Sarcină
+### Aplicații Moderne Single-Page (SPA)
 
-În [lecția anterioară](../2-forms/README.md) am implementat formularul de înregistrare pentru a crea un cont. Acum vom adăuga cod pentru autentificarea folosind un cont existent și pentru preluarea datelor acestuia. Deschideți fișierul `app.js` și adăugați o nouă funcție `login`:
+AJAX (JavaScript asincron și XML) a schimbat complet acest paradigm. Ca designul modular al Stației Spațiale Internaționale, unde astronauții pot înlocui componente individuale fără a reconstrui întreaga structură, AJAX ne permite să actualizăm părți specifice ale unei pagini web fără a reîncărca totul. Deși numele menționează XML, folosim în principal JSON astăzi, dar principiul de bază rămâne: actualizează doar ceea ce trebuie schimbat.
 
-```js
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant JavaScript
+    participant Server
+    
+    User->>Browser: Interacționează cu pagina
+    Browser->>JavaScript: Declanșează handler-ul de eveniment
+    JavaScript->>Server: Preia doar datele necesare
+    Server->>JavaScript: Returnează date JSON
+    JavaScript->>Browser: Actualizează elemente specifice ale paginii
+    Browser->>User: Afișează conținut actualizat (fără reîncărcare)
+```
+![Fluxul de actualizare într-o aplicație single-page](../../../../translated_images/ro/spa.268ec73b41f992c2.webp)
+
+**De ce SPA-urile se simt mult mai bine:**
+- Doar părțile care s-au schimbat de fapt sunt actualizate (inteligent, nu?)
+- Fără întreruperi deranjante - utilizatorii rămân în fluxul lor
+- Mai puține date călătorind în rețea înseamnă încărcare mai rapidă
+- Totul se simte rapid și receptiv, ca aplicațiile de pe telefonul tău
+
+### Evoluția către API-ul Modern Fetch
+
+Browserele moderne oferă [`Fetch` API](https://developer.mozilla.org/docs/Web/API/Fetch_API), care înlocuiește vechiul [`XMLHttpRequest`](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest). Ca diferența dintre a opera un telegraf și a folosi email-ul, Fetch API folosește promisiuni pentru un cod asincron mai curat și gestionează JSON-ul în mod natural.
+
+| Caracteristică | XMLHttpRequest | Fetch API |
+|---------|----------------|----------|
+| **Sintaxă** | Bazată pe callback-uri complexe | Curată, bazată pe promisiuni |
+| **Gestionarea JSON** | Necesită parsare manuală | Metodă `.json()` integrată |
+| **Gestionarea erorilor** | Informații limitate despre erori | Detalii complete despre erori |
+| **Compatibilitate modernă** | Compatibilitate legacy | Promisiuni ES6+ și async/await |
+
+> 💡 **Compatibilitatea browserelor**: Vești bune - Fetch API funcționează în toate browserele moderne! Dacă ești curios despre versiuni specifice, [caniuse.com](https://caniuse.com/fetch) are povestea completă a compatibilității.
+> 
+**Pe scurt:**
+- Funcționează excelent în Chrome, Firefox, Safari și Edge (practic oriunde se află utilizatorii tăi)
+- Doar Internet Explorer are nevoie de ajutor suplimentar (și sincer, e timpul să îl lași în urmă)
+- Te pregătește perfect pentru elegantele modele async/await pe care le vom folosi mai târziu
+
+### Implementarea Login-ului și Preluarea Datelor
+
+Acum să implementăm sistemul de autentificare care transformă aplicația ta bancară dintr-un afișaj static într-o aplicație funcțională. Ca protocoalele de autentificare folosite în facilități militare sigure, vom verifica credențialele utilizatorului și apoi vom oferi acces la datele specifice ale acestuia.
+
+Vom construi acest sistem incremental, începând cu autentificarea de bază și apoi adăugând capabilitățile de preluare a datelor.
+
+#### Pasul 1: Creează Baza Funcției de Login
+
+Deschide fișierul `app.js` și adaugă o nouă funcție `login`. Aceasta va gestiona procesul de autentificare a utilizatorului:
+
+```javascript
 async function login() {
-  const loginForm = document.getElementById('loginForm')
+  const loginForm = document.getElementById('loginForm');
   const user = loginForm.user.value;
 }
 ```
 
-Aici începem prin a prelua elementul formularului cu `getElementById()`, iar apoi obținem numele de utilizator din câmpul de intrare cu `loginForm.user.value`. Fiecare control al formularului poate fi accesat prin numele său (setat în HTML folosind atributul `name`) ca proprietate a formularului.
+**Să descompunem acest cod:**
+- Cuvântul cheie `async`? Indică JavaScript-ului „hei, această funcție s-ar putea să aștepte niște lucruri”
+- Luăm formularul de pe pagină (nimic complicat, doar îl găsim după ID)
+- Extragem ceea ce a introdus utilizatorul ca nume de utilizator
+- Un truc util: poți accesa orice câmp de formular după atributul său `name` - fără apeluri suplimentare getElementById!
 
-În mod similar cu ceea ce am făcut pentru înregistrare, vom crea o altă funcție pentru a efectua o cerere către server, dar de data aceasta pentru a prelua datele contului:
+> 💡 **Model de acces la Formular**: Fiecare control al formularului poate fi accesat prin numele său (setat în HTML folosind atributul `name`) ca o proprietate a elementului formular. Acesta oferă o modalitate curată și lizibilă de a obține datele formularului.
 
-```js
+#### Pasul 2: Creează Funcția pentru Preluarea Datelor Contului
+
+Apoi, vom crea o funcție dedicată pentru a prelua datele contului de la server. Aceasta urmează același model ca funcția ta de înregistrare, dar se concentrează pe preluarea datelor:
+
+```javascript
 async function getAccount(user) {
   try {
     const response = await fetch('//localhost:5000/api/accounts/' + encodeURIComponent(user));
@@ -72,15 +239,58 @@ async function getAccount(user) {
 }
 ```
 
-Folosim API-ul `fetch` pentru a solicita datele în mod asincron de la server, dar de data aceasta nu avem nevoie de alți parametri în afară de URL-ul pe care să-l apelăm, deoarece doar interogăm date. Implicit, `fetch` creează o cerere HTTP [`GET`](https://developer.mozilla.org/docs/Web/HTTP/Methods/GET), ceea ce este exact ceea ce căutăm aici.
+**Ce face acest cod:**
+- **Folosește** API-ul modern `fetch` pentru a cere date asincron
+- **Construiește** un URL pentru o cerere GET cu parametrul numelui de utilizator
+- **Aplică** `encodeURIComponent()` pentru a trata în siguranță caractere speciale din URL
+- **Convertește** răspunsul în format JSON pentru manipulare ușoară
+- **Gestionează** erorile într-un mod grațios, întorcând un obiect eroare în loc să se prăbușească
 
-✅ `encodeURIComponent()` este o funcție care scapă caracterele speciale pentru URL. Ce probleme am putea avea dacă nu apelăm această funcție și folosim direct valoarea `user` în URL?
+> ⚠️ **Notă de securitate**: Funcția `encodeURIComponent()` gestionează caracterele speciale din URL-uri. Ca sistemele de codare folosite în comunicațiile navale, se asigură că mesajul tău ajunge exact așa cum l-ai trimis, prevenind interpretarea greșită a caracterelor precum "#" sau "&".
+> 
+**De ce contează asta:**
+- Previne problemele cauzate de caractere speciale în URL-uri
+- Protejează împotriva atacurilor de manipulare URL
+- Asigură că serverul primește datele așa cum trebuie
+- Urmează practici de codare securizate
 
-Acum să actualizăm funcția noastră `login` pentru a folosi `getAccount`:
+#### Înțelegerea Cererilor HTTP GET
 
-```js
+Iată ceva ce te-ar putea surprinde: când folosești `fetch` fără opțiuni suplimentare, acesta creează automat o cerere [`GET`](https://developer.mozilla.org/docs/Web/HTTP/Methods/GET). Acest lucru este perfect pentru ceea ce facem noi – cerem serverului „hei, pot vedea datele contului acestui utilizator?”
+
+Gândește-te la cererile GET ca la a cere politicos să împrumuți o carte de la bibliotecă - ceri să vezi ceva ce există deja. Cererile POST (pe care le-am folosit la înregistrare) sunt mai mult ca a trimite o carte nouă pentru a fi adăugată în colecție.
+
+| Cerere GET | Cerere POST |
+|-------------|-------------|
+| **Scop** | Preluare date existente | Trimitere date noi către server |
+| **Parametri** | În URL (cale/șir de interogare) | În corpul cererii |
+| **Caching** | Poate fi cached de browsere | De obicei nu este cached |
+| **Securitate** | Vizibil în URL/jurnale | Ascuns în corpul cererii |
+
+```mermaid
+sequenceDiagram
+    participant B as Browser
+    participant S as Server
+    
+    Note over B,S: Cerere GET (Preluare Date)
+    B->>S: GET /api/accounts/test
+    S-->>B: 200 OK + Date Cont
+    
+    Note over B,S: Cerere POST (Trimitere Date)
+    B->>S: POST /api/accounts + Date Cont Nou
+    S-->>B: 201 Creat + Confirmare
+    
+    Note over B,S: Gestionare Eroare
+    B->>S: GET /api/accounts/nonexistent
+    S-->>B: 404 Neprezent + Mesaj Eroare
+```
+#### Pasul 3: Asamblarea Întregului Proces
+
+Acum partea satisfăcătoare - să conectăm funcția de preluare a contului cu procesul de login. Aici totul se leagă:
+
+```javascript
 async function login() {
-  const loginForm = document.getElementById('loginForm')
+  const loginForm = document.getElementById('loginForm');
   const user = loginForm.user.value;
   const data = await getAccount(user);
 
@@ -93,94 +303,272 @@ async function login() {
 }
 ```
 
-Mai întâi, deoarece `getAccount` este o funcție asincronă, trebuie să o asociem cu cuvântul cheie `await` pentru a aștepta rezultatul serverului. Ca în cazul oricărei cereri către server, trebuie să gestionăm și cazurile de eroare. Deocamdată vom adăuga doar un mesaj de jurnal pentru a afișa eroarea și vom reveni la aceasta mai târziu.
+Această funcție urmează o secvență clară:
+- Extrage numele de utilizator din input-ul formularului
+- Cere datele contului acestui utilizator de la server
+- Gestionează eventualele erori
+- Stochează datele contului și navighează către dashboard la succes
 
-Apoi trebuie să stocăm datele undeva pentru a le putea folosi ulterior pentru a afișa informațiile pe tabloul de bord. Deoarece variabila `account` nu există încă, vom crea o variabilă globală pentru aceasta în partea de sus a fișierului nostru:
+> 🎯 **Model Async/Await**: Deoarece `getAccount` este o funcție asincronă, folosim cuvântul cheie `await` pentru a opri execuția până când serverul răspunde. Astfel prevenim continuarea codului cu date nedefinite.
 
-```js
+#### Pasul 4: Creează un Loc pentru Datele Tale
+
+Aplicația ta are nevoie de un loc unde să păstreze informațiile contului odată ce sunt încărcate. Gândește-te la asta ca la memoria pe termen scurt a aplicației – un loc unde să ții datele utilizatorului curent la îndemână. Adaugă această linie în partea de sus a fișierului `app.js`:
+
+```javascript
+// Acesta conține datele contului utilizatorului curent
 let account = null;
 ```
 
-După ce datele utilizatorului sunt salvate într-o variabilă, putem naviga de la pagina de *login* la *dashboard* folosind funcția `navigate()` pe care o avem deja.
+**De ce avem nevoie de asta:**
+- Menține datele contului accesibile din orice parte a aplicației
+- Pornind de la `null` înseamnă „nimeni nu este logat încă”
+- Se actualizează când cineva se loghează sau se înregistrează cu succes
+- Acționează ca o sursă unică de adevăr - fără confuzie cine este logat
 
-În cele din urmă, trebuie să apelăm funcția noastră `login` atunci când formularul de autentificare este trimis, modificând HTML-ul:
+#### Pasul 5: Leagă Formularul Tău
+
+Acum să conectăm funcția ta nouă de login la formularul HTML. Actualizează tag-ul formular astfel:
 
 ```html
 <form id="loginForm" action="javascript:login()">
+  <!-- Your existing form inputs -->
+</form>
 ```
 
-Testați că totul funcționează corect înregistrând un cont nou și încercând să vă autentificați folosind același cont.
+**Ce face această mică schimbare:**
+- Oprește formularul să facă comportamentul lui implicit de „reîncărcare a întregii pagini”
+- Apelează funcția ta personalizată JavaScript în loc
+- Menține totul fluid și cu aspectul unei aplicații single-page
+- Îți oferă controlul complet asupra a ceea ce se întâmplă când utilizatorii apasă „Login”
 
-Înainte de a trece la partea următoare, putem completa și funcția `register` adăugând acest cod la sfârșitul funcției:
+#### Pasul 6: Îmbunătățește Funcția ta de Înregistrare
 
-```js
+Pentru consistență, actualizează funcția `register` să salveze și ea datele contului și să navigheze către dashboard:
+
+```javascript
+// Adaugă aceste linii la sfârșitul funcției tale de înregistrare
 account = result;
 navigate('/dashboard');
 ```
 
-✅ Știați că, în mod implicit, puteți apela API-uri ale serverului doar de pe *același domeniu și port* ca pagina web pe care o vizualizați? Acesta este un mecanism de securitate impus de browsere. Dar stați, aplicația noastră web rulează pe `localhost:3000`, în timp ce API-ul serverului rulează pe `localhost:5000`, de ce funcționează? Folosind o tehnică numită [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS), este posibil să efectuați cereri HTTP între origini diferite dacă serverul adaugă antete speciale la răspuns, permițând excepții pentru domenii specifice.
+**Această îmbunătățire oferă:**
+- **Tranziție lină** de la înregistrare la dashboard
+- **Experiență consistentă** pentru utilizatori între fluxurile de login și înregistrare
+- **Acces imediat** la datele contului după înregistrare reușită
 
-> Aflați mai multe despre API-uri urmând această [lecție](https://docs.microsoft.com/learn/modules/use-apis-discover-museum-art/?WT.mc_id=academic-77807-sagibbon)
+#### Testarea Implementării Tale
 
-## Actualizarea HTML-ului pentru afișarea datelor
+```mermaid
+flowchart TD
+    A[Utilizator introduce datele de autentificare] --> B[Funcția de autentificare apelată]
+    B --> C[Preia datele contului de pe server]
+    C --> D{Date primite cu succes?}
+    D -->|Da| E[Stochează datele contului global]
+    D -->|Nu| F[Afișează mesaj de eroare]
+    E --> G[Navighează către tabloul de bord]
+    F --> H[Utilizatorul rămâne pe pagina de autentificare]
+```
+**E timpul să testezi implementarea:**
+1. Creează un cont nou pentru a verifica dacă totul funcționează
+2. Încearcă să te loghezi cu aceleași credențiale
+3. Aruncă o privire în consola browserului (F12) dacă ceva pare în neregulă
+4. Asigură-te că ajungi pe dashboard după un login reușit
 
-Acum că avem datele utilizatorului, trebuie să actualizăm HTML-ul existent pentru a le afișa. Știm deja cum să preluăm un element din DOM folosind, de exemplu, `document.getElementById()`. După ce aveți un element de bază, iată câteva API-uri pe care le puteți folosi pentru a-l modifica sau pentru a adăuga elemente copil:
+Dacă ceva nu funcționează, nu intra în panică! Majoritatea problemelor sunt corectări simple, cum ar fi greșeli de scriere sau uitarea de a porni serverul API.
 
-- Folosind proprietatea [`textContent`](https://developer.mozilla.org/docs/Web/API/Node/textContent) puteți schimba textul unui element. Rețineți că schimbarea acestei valori elimină toți copiii elementului (dacă există) și îi înlocuiește cu textul furnizat. Astfel, este și o metodă eficientă de a elimina toți copiii unui element dat atribuindu-i un șir gol `''`.
+#### Un Cuvânt Rapid Despre Magia Cross-Origin
 
-- Folosind [`document.createElement()`](https://developer.mozilla.org/docs/Web/API/Document/createElement) împreună cu metoda [`append()`](https://developer.mozilla.org/docs/Web/API/ParentNode/append) puteți crea și atașa unul sau mai multe elemente copil noi.
+Te-ai putea întreba: „Cum conversa aplicația mea web cu acest server API dacă rulează pe porturi diferite?” Bună întrebare! Aceasta atinge un aspect cu care orice dezvoltator web se confruntă la un moment dat.
 
-✅ Folosind proprietatea [`innerHTML`](https://developer.mozilla.org/docs/Web/API/Element/innerHTML) a unui element este, de asemenea, posibil să-i schimbați conținutul HTML, dar aceasta ar trebui evitată deoarece este vulnerabilă la atacuri de tip [cross-site scripting (XSS)](https://developer.mozilla.org/docs/Glossary/Cross-site_scripting).
+> 🔒 **Securitate Cross-Origin**: Browserele aplică o „politică de același origini” pentru a preveni comunicările neautorizate între domenii diferite. Ca un sistem de control la Pentagon, ele verifică dacă comunicarea este autorizată înainte de a permite transferul de date.
+> 
+**În configurația noastră:**
+- Aplicația web rulează pe `localhost:3000` (server de dezvoltare)
+- Serverul API rulează pe `localhost:5000` (server backend)
+- Serverul API include [anteturile CORS](https://developer.mozilla.org/docs/Web/HTTP/CORS) care autorizează explicit comunicarea din partea aplicației web
 
-### Sarcină
+Această configurație reflectă dezvoltarea reală unde aplicațiile frontend și backend rulează de obicei pe servere separate.
 
-Înainte de a trece la ecranul tabloului de bord, mai este un lucru pe care ar trebui să-l facem pe pagina de *login*. În prezent, dacă încercați să vă autentificați cu un nume de utilizator care nu există, un mesaj este afișat în consolă, dar pentru un utilizator obișnuit nu se întâmplă nimic și nu știți ce se întâmplă.
+> 📚 **Află mai multe**: Explorează mai profund API-urile și preluarea datelor cu acest modul complet [Microsoft Learn despre API-uri](https://docs.microsoft.com/learn/modules/use-apis-discover-museum-art/?WT.mc_id=academic-77807-sagibbon).
 
-Să adăugăm un element placeholder în formularul de autentificare unde putem afișa un mesaj de eroare, dacă este necesar. Un loc bun ar fi chiar înainte de butonul de *login*:
+## Transformă Datele în Viață în HTML
 
-```html
-...
-<div id="loginError"></div>
-<button>Login</button>
-...
+Acum vom face datele preluate vizibile utilizatorilor prin manipularea DOM-ului. Ca procesul de dezvoltare a fotografiilor într-o cameră obscură, luăm date invizibile și le redăm într-un format pe care utilizatorii îl pot vedea și cu care pot interacționa.
+Manipularea DOM este tehnica care transformă paginile web statice în aplicații dinamice care își actualizează conținutul în funcție de interacțiunile utilizatorilor și răspunsurile serverului.
+
+### Alegerea Uneltei Potrivite pentru Fiecare Sarcină
+
+Când vine vorba de actualizarea HTML-ului cu JavaScript, ai mai multe opțiuni. Gândește-le ca pe diferite unelte dintr-o cutie de scule - fiecare perfectă pentru anumite joburi:
+
+| Metodă | Pentru ce este excelentă | Când să o folosești | Nivel de siguranță |
+|--------|-------------------------|--------------------|--------------------|
+| `textContent` | Afișarea sigură a datelor utilizatorului | Oricând afișezi text | ✅ Foarte sigur |
+| `createElement()` + `append()` | Construirea de layout-uri complexe | Crearea de secțiuni/listări noi | ✅ Impecabil |
+| `innerHTML` | Setarea conținutului HTML | ⚠️ Încearcă să eviți aceasta | ❌ Riscuri mari |
+
+#### Modalitatea Sigură de a Afișa Text: textContent
+
+Proprietatea [`textContent`](https://developer.mozilla.org/docs/Web/API/Node/textContent) este cea mai bună prietenă când afișezi date provenite de la utilizatori. E ca un portar la intrarea în pagina ta web - nu lasă să treacă nimic periculos:
+
+```javascript
+// Mod sigur și fiabil de a actualiza textul
+const balanceElement = document.getElementById('balance');
+balanceElement.textContent = account.balance;
 ```
 
-Acest element `<div>` este gol, ceea ce înseamnă că nimic nu va fi afișat pe ecran până când nu adăugăm conținut în el. Îi dăm, de asemenea, un `id` pentru a-l putea prelua ușor cu JavaScript.
+**Beneficiile textContent:**
+- Tratează totul ca text simplu (previne executarea scripturilor)
+- Șterge automat conținutul existent
+- Eficient pentru actualizări simple de text
+- Oferă securitate încorporată împotriva conținutului rău intenționat
 
-Reveniți la fișierul `app.js` și creați o nouă funcție helper `updateElement`:
+#### Crearea Elementelor HTML Dinamice
 
-```js
+Pentru conținut mai complex, combină [`document.createElement()`](https://developer.mozilla.org/docs/Web/API/Document/createElement) cu metoda [`append()`](https://developer.mozilla.org/docs/Web/API/ParentNode/append):
+
+```javascript
+// Mod sigur de a crea elemente noi
+const transactionItem = document.createElement('div');
+transactionItem.className = 'transaction-item';
+transactionItem.textContent = `${transaction.date}: ${transaction.description}`;
+container.append(transactionItem);
+```
+
+**Cum funcționează această abordare:**
+- **Creează** elemente DOM noi programatic
+- **Păstrează** control complet asupra atributelor și conținutului elementelor
+- **Permite** structuri complexe și imbricate de elemente
+- **Asigură** securitate prin separarea structurii de conținut
+
+> ⚠️ **Considerații de Securitate**: Deși [`innerHTML`](https://developer.mozilla.org/docs/Web/API/Element/innerHTML) apare în multe tutoriale, poate executa scripturi încorporate. La fel ca protocoalele de securitate CERN care previn execuția neautorizată de cod, folosirea `textContent` și `createElement` oferă alternative mai sigure.
+> 
+**Riscurile innerHTML:**
+- Execută orice tag `<script>` din datele utilizatorului
+- Vulnerabil la atacuri de tip injectare de cod
+- Creează potențiale breșe de securitate
+- Alternativele mai sigure pe care le folosim oferă funcționalitate echivalentă
+
+### Transformarea Erorilor în Mesaje Prietenoase pentru Utilizatori
+
+În prezent, erorile de autentificare apar doar în consola browserului, care este invizibilă pentru utilizatori. La fel cum diferă diagnosticul intern al unui pilot de sistemul de informare pentru pasageri, trebuie să comunicăm informații importante prin canale potrivite.
+
+Implementarea mesajelor de eroare vizibile oferă utilizatorilor un feedback imediat despre ce nu a mers bine și cum să procedeze.
+
+#### Pasul 1: Adaugă un Loc pentru Mesajele de Eroare
+
+Mai întâi, oferă un spațiu pentru mesajele de eroare în HTML-ul tău. Adaugă asta fix înaintea butonului de login, ca utilizatorii să îl vadă natural:
+
+```html
+<!-- This is where error messages will appear -->
+<div id="loginError" role="alert"></div>
+<button>Login</button>
+```
+
+**Ce se întâmplă aici:**
+- Creăm un container gol care rămâne invizibil până e nevoie
+- Este poziționat unde utilizatorii se uită natural după ce apasă pe „Login”
+- Atributul `role="alert"` este o atenție pentru cititoarele de ecran - spune tehnologiei asistive „hei, asta e important!”
+- ID-ul unic oferă JavaScript-ului nostru o țintă ușoară
+
+#### Pasul 2: Creează o Funcție Utilitară Practică
+
+Să facem o funcție mică care poate actualiza textul oricărui element. Este un gen de funcție „scrie o dată, folosește oriunde” ce îți va economisi timp:
+
+```javascript
 function updateElement(id, text) {
   const element = document.getElementById(id);
   element.textContent = text;
 }
 ```
 
-Aceasta este destul de simplă: dat un *id* de element și un *text*, va actualiza conținutul text al elementului DOM cu `id`-ul corespunzător. Să folosim această metodă în locul mesajului de eroare anterior din funcția `login`:
+**Beneficiile funcției:**
+- Interfață simplă, care cere doar ID-ul elementului și textul
+- Găsește și actualizează elementele DOM în siguranță
+- Model reutilizabil ce reduce codul duplicat
+- Menține o actualizare consistentă în întreaga aplicație
 
-```js
+#### Pasul 3: Afișează Erorile Unde Le Pot Vedea Utilizatorii
+
+Acum să înlocuim mesajul ascuns din consolă cu ceva vizibil utilizatorilor. Actualizează funcția ta de login:
+
+```javascript
+// În loc să înregistrezi doar în consolă, arată utilizatorului ce este în neregulă
 if (data.error) {
   return updateElement('loginError', data.error);
 }
 ```
 
-Acum, dacă încercați să vă autentificați cu un cont invalid, ar trebui să vedeți ceva de genul acesta:
+**Această schimbare mică aduce un beneficiu mare:**
+- Mesajele de eroare apar fix acolo unde utilizatorii se uită
+- Niciun eșec misterios și tăcut
+- Utilizatorii primesc feedback imediat și util
+- Aplicația ta devine mai profesională și atentă la utilizator
 
-![Captură de ecran care arată mesajul de eroare afișat în timpul autentificării](../../../../translated_images/login-error.416fe019b36a63276764c2349df5d99e04ebda54fefe60c715ee87a28d5d4ad0.ro.png)
+Acum, când testezi cu un cont invalid, vei vedea un mesaj de eroare util chiar pe pagină!
 
-Acum avem un text de eroare care apare vizual, dar dacă îl încercați cu un cititor de ecran, veți observa că nu se anunță nimic. Pentru ca textul adăugat dinamic pe o pagină să fie anunțat de cititoarele de ecran, va trebui să folosească ceva numit [Live Region](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/ARIA_Live_Regions). Aici vom folosi un tip specific de live region numit alertă:
+![Screenshot showing the error message displayed during login](../../../../translated_images/ro/login-error.416fe019b36a6327.webp)
+
+#### Pasul 4: Incluzivitate și Accesibilitate
+
+Un lucru fain la atributul `role="alert"` adăugat mai devreme - nu e doar decorativ! Acest atribut creează o [Regiune Live](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) care anunță imediat schimbările către cititoarele de ecran:
 
 ```html
 <div id="loginError" role="alert"></div>
 ```
 
-Implementați același comportament pentru erorile funcției `register` (nu uitați să actualizați HTML-ul).
+**De ce contează asta:**
+- Utilizatorii cu cititoare de ecran aud mesajul de eroare imediat ce apare
+- Toată lumea primește aceeași informație importantă, indiferent cum navighează
+- Este o metodă simplă de a face aplicația ta accesibilă pentru mai mulți oameni
+- Arată că îți pasă de experiențe incluzive
 
-## Afișarea informațiilor pe tabloul de bord
+Detalii mici ca acestea diferențiază dezvoltatorii buni de cei grozavi!
 
-Folosind aceleași tehnici pe care tocmai le-am văzut, ne vom ocupa și de afișarea informațiilor contului pe pagina tabloului de bord.
+### 🎯 Verificare Pedagogică: Modele de Autentificare
 
-Acesta este aspectul unui obiect cont primit de la server:
+**Pauză și Reflectare**: Tocmai ai implementat un flux complet de autentificare. Acesta este un model fundamental în dezvoltarea web.
+
+**Autoevaluare rapidă**:
+- Poți explica de ce folosim async/await pentru apelurile API?
+- Ce s-ar întâmpla dacă am uita funcția `encodeURIComponent()`?
+- Cum îmbunătățește tratarea erorilor experiența utilizatorului?
+
+**Legătura cu lumea reală**: Modelele învățate aici (preluarea asincronă a datelor, tratarea erorilor, feedback-ul utilizatorului) se folosesc în toate aplicațiile web majore, de la platforme sociale la site-uri de comerț electronic. Îți construiești abilități la nivel de producție!
+
+**Întrebare provocatoare**: Cum ai modifica sistemul de autentificare să suporte roluri multiple de utilizatori (client, administrator, casier)? Gândește-te la structura datelor și la schimbările UI necesare.
+
+#### Pasul 5: Aplică Același Model și la Înregistrare
+
+Pentru consecvență, implementează aceeași tratare a erorilor în formularul de înregistrare:
+
+1. **Adaugă** un element pentru afișarea erorilor în HTML-ul de înregistrare:
+```html
+<div id="registerError" role="alert"></div>
+```
+
+2. **Actualizează** funcția de înregistrare să folosească același model de afișare a erorilor:
+```javascript
+if (data.error) {
+  return updateElement('registerError', data.error);
+}
+```
+
+**Beneficiile tratării consecvente a erorilor:**
+- **Oferă** o experiență uniformă pe toate formularele
+- **Reduce** încărcarea cognitivă folosind modele familiare
+- **Simplifică** întreținerea prin cod reutilizabil
+- **Asigură** respectarea standardelor de accesibilitate în aplicație
+
+## Crearea unui Dashboard Dinamic
+
+Acum vom transforma dashboard-ul tău static într-o interfață dinamică ce afișează date reale de cont. La fel cum diferența este între un orar de zbor tipărit și panourile live din aeroporturi, trecem de la informație statică la afișări în timp real și reactive.
+
+Folosind tehnicile de manipulare DOM învățate, vom crea un dashboard care sare în evidență prin actualizarea automată cu informații curente despre cont.
+
+### Să Cunoaștem Datele Tale
+
+Înainte să începem construcția, să aruncăm o privire la ce tip de date trimite serverul. Când cineva se autentifică cu succes, iată comoara de informații la care ai acces:
 
 ```json
 {
@@ -192,15 +580,49 @@ Acesta este aspectul unui obiect cont primit de la server:
     { "id": "1", "date": "2020-10-01", "object": "Pocket money", "amount": 50 },
     { "id": "2", "date": "2020-10-03", "object": "Book", "amount": -10 },
     { "id": "3", "date": "2020-10-04", "object": "Sandwich", "amount": -5 }
-  ],
+  ]
 }
 ```
 
-> Notă: pentru a vă ușura munca, puteți folosi contul `test` preexistent, care este deja populat cu date.
+**Această structură de date oferă:**
+- **`user`**: Perfect pentru personalizarea experienței („Bine ai revenit, Sarah!”)
+- **`currency`**: Asigură afișarea corectă a sumelor de bani
+- **`description`**: Un nume prietenos pentru cont
+- **`balance`**: Soldul curent, cel mai important
+- **`transactions`**: Istoricul complet al tranzacțiilor cu toate detaliile
 
-### Sarcină
+Tot ce ai nevoie ca să construiești un dashboard bancar profesional!
 
-Să începem prin a înlocui secțiunea "Balance" din HTML pentru a adăuga elemente placeholder:
+```mermaid
+flowchart TD
+    A[Autentificare Utilizator] --> B[Preia Datele Contului]
+    B --> C{Date Valide?}
+    C -->|Da| D[Stochează în Variabilă Globală]
+    C -->|Nu| E[Afișează Mesaj de Eroare]
+    D --> F[Navighează la Panoul de Control]
+    F --> G[Actualizează Elementele UI]
+    G --> H[Afișează Soldul]
+    G --> I[Arată Descrierea]
+    G --> J[Redă Tranzacțiile]
+    J --> K[Creează Rânduri în Tabel]
+    K --> L[Formatează Moneda]
+    L --> M[Utilizatorul Vede Date în Timp Real]
+```
+> 💡 **Sfat practic**: Vrei să vezi dashboard-ul în acțiune imediat? Folosește numele de utilizator `test` când te loghezi — vine deja încărcat cu date de exemplu ca să vezi totul funcționând fără să creezi tranzacții mai întâi.
+> 
+**De ce e contul de test util:**
+- Vine cu date realiste deja încărcate
+- Perfect pentru a vedea cum se afișează tranzacțiile
+- Grozav pentru testarea funcțiilor dashboard-ului tău
+- Te scutește de crearea manuală a datelor false
+
+### Crearea Elementelor de Afișare ale Dashboard-ului
+
+Să construim interfața dashboard-ului pas cu pas, începând cu informația sumar a contului, apoi trecând la caracteristici mai complexe cum sunt listele de tranzacții.
+
+#### Pasul 1: Actualizează Structura HTML
+
+În primul rând, înlocuiește secțiunea statică „Balance” cu elemente dinamice placeholder pe care JavaScript-ul tău să le completeze:
 
 ```html
 <section>
@@ -208,17 +630,25 @@ Să începem prin a înlocui secțiunea "Balance" din HTML pentru a adăuga elem
 </section>
 ```
 
-Vom adăuga, de asemenea, o nouă secțiune chiar dedesubt pentru a afișa descrierea contului:
+Adaugă apoi o secțiune pentru descrierea contului. Pentru că asta funcționează ca titlu al conținutului dashboard-ului, folosește HTML semantic:
 
 ```html
 <h2 id="description"></h2>
 ```
 
-✅ Deoarece descrierea contului funcționează ca un titlu pentru conținutul de dedesubt, este marcată semantic ca un titlu. Aflați mai multe despre cât de importantă este [structura titlurilor](https://www.nomensa.com/blog/2017/how-structure-headings-web-accessibility) pentru accesibilitate și analizați critic pagina pentru a determina ce altceva ar putea fi un titlu.
+**Ce înțelegem din structura HTML:**
+- **Folosește** elemente `<span>` separate pentru sold și monedă, pentru control individual
+- **Aplică** ID-uri unice fiecărui element ca să poată fi accesat de JavaScript
+- **Respectă** semantică HTML folosind `<h2>` pentru descrierea contului
+- **Creează** o ierarhie logică pentru cititoarele de ecran și SEO
 
-În continuare, vom crea o nouă funcție în `app.js` pentru a completa placeholder-ul:
+> ✅ **Observație de accesibilitate**: Descrierea contului funcționează ca titlu pentru conținutul dashboard-ului, așa că e marcată semantic ca un heading. Află mai multe despre cum [structura heading](https://www.nomensa.com/blog/2017/how-structure-headings-web-accessibility) impactează accesibilitatea. Poți identifica și alte elemente de pe pagina ta care ar beneficia de taguri de titlu?
 
-```js
+#### Pasul 2: Creează Funcția de Actualizare a Dashboard-ului
+
+Acum creează o funcție care populatează dashboard-ul cu date reale ale contului:
+
+```javascript
 function updateDashboard() {
   if (!account) {
     return navigate('/login');
@@ -230,40 +660,87 @@ function updateDashboard() {
 }
 ```
 
-Mai întâi, verificăm că avem datele contului de care avem nevoie înainte de a merge mai departe. Apoi folosim funcția `updateElement()` pe care am creat-o mai devreme pentru a actualiza HTML-ul.
+**Pas cu pas, ce face această funcție:**
+- **Verifică** existența datelor de cont înainte de a continua
+- **Redirecționează** utilizatorii neinregistrați înapoi la pagina de login
+- **Actualizează** descrierea contului folosind funcția reutilizabilă `updateElement`
+- **Formatează** soldul să afișeze mereu două zecimale
+- **Afișează** simbolul corect al monedei
 
-> Pentru a face afișarea soldului mai atractivă, folosim metoda [`toFixed(2)`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) pentru a afișa valoarea cu 2 zecimale.
+> 💰 **Formatarea banilor**: Metoda [`toFixed(2)`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) este salvatoare! Asigură că soldul tău arată mereu ca niște bani adevărați – „75.00” în loc de „75”. Utilizatorii tăi vor aprecia afișarea familiară a monedei.
 
-Acum trebuie să apelăm funcția noastră `updateDashboard()` de fiecare dată când tabloul de bord este încărcat. Dacă ați terminat deja [tema lecției 1](../1-template-route/assignment.md), acest lucru ar trebui să fie simplu, altfel puteți folosi următoarea implementare.
+#### Pasul 3: Asigură-te că Dashboard-ul se Actualizează
 
-Adăugați acest cod la sfârșitul funcției `updateRoute()`:
+Ca să se reîmprospăteze dashboard-ul cu date actualizate de fiecare dată când cineva îl vizitează, trebuie să te conectezi la sistemul tău de navigație. Dacă ai finalizat [tema lecției 1](../1-template-route/assignment.md), asta ar trebui să îți fie familiar. Dacă nu, iată ce ai nevoie:
 
-```js
+Adaugă asta la finalul funcției tale `updateRoute()`:
+
+```javascript
 if (typeof route.init === 'function') {
   route.init();
 }
 ```
 
-Și actualizați definiția rutelor cu:
+Apoi actualizează-ți rutele să includă inițializarea dashboard-ului:
 
-```js
+```javascript
 const routes = {
   '/login': { templateId: 'login' },
   '/dashboard': { templateId: 'dashboard', init: updateDashboard }
 };
 ```
 
-Cu această modificare, de fiecare dată când pagina tabloului de bord este afișată, funcția `updateDashboard()` este apelată. După o autentificare, ar trebui să puteți vedea soldul contului, moneda și descrierea.
+**Ce face această setare istetă:**
+- Verifică dacă o rută are cod special de inițializare
+- Rulează automat acel cod când ruta se încarcă
+- Asigură că dashboard-ul tău afișează întotdeauna date proaspete, actuale
+- Menține logica de rutare curată și organizată
 
-## Crearea rândurilor tabelului dinamic cu șabloane HTML
+#### Testează-ți Dashboard-ul
 
-În [prima lecție](../1-template-route/README.md) am folosit șabloane HTML împreună cu metoda [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) pentru a implementa navigarea în aplicația noastră. Șabloanele pot fi, de asemenea, mai mici și utilizate pentru a popula dinamic părți repetitive ale unei pagini.
+După ce ai făcut aceste modificări, testează dashboard-ul:
 
-Vom folosi o abordare similară pentru a afișa lista tranzacțiilor în tabelul HTML.
+1. **Loghează-te** cu un cont de test
+2. **Verifică** dacă ești redirecționat către dashboard
+3. **Verifică** dacă descrierea contului, soldul și moneda se afișează corect
+4. **Încearcă să te deloghezi și să te loghezi din nou** ca să te asiguri că datele se reîmprospătează corespunzător
 
-### Sarcină
+Dashboard-ul tău ar trebui să afișeze acum informații dinamice despre cont, actualizate în funcție de datele utilizatorului autentificat!
 
-Adăugați un nou șablon în `<body>`:
+## Construirea Listelor Inteligente de Tranzacții cu Template-uri
+
+În loc să creezi manual HTML pentru fiecare tranzacție, vom folosi template-uri pentru a genera automat formatarea consecventă. La fel cum componentele standardizate utilizate în fabricarea navelor spațiale asigură că fiecare piesă este uniformă, template-urile garantează că fiecare rând de tranzacție are aceeași structură și aspect.
+
+Această tehnică scalează eficient de la câteva tranzacții până la mii, menținând performanța și prezentarea constantă.
+
+```mermaid
+graph LR
+    A[Șablon HTML] --> B[Clon JavaScript]
+    B --> C[Populează cu date]
+    C --> D[Adaugă la fragment]
+    D --> E[Inserare în lot în DOM]
+    
+    subgraph "Beneficii de performanță"
+        F[Actualizare unică DOM]
+        G[Formatare consecventă]
+        H[Model reutilizabil]
+    end
+    
+    E --> F
+    E --> G
+    E --> H
+```
+```mermaid
+flowchart LR
+    A[Date Tranzacție] --> B[Șablon HTML]
+    B --> C[Clonează Șablonul]
+    C --> D[Populează cu Date]
+    D --> E[Adaugă în DOM]
+    E --> F[Repetă pentru Fiecare Tranzacție]
+```
+### Pasul 1: Creează Template-ul pentru Tranzacție
+
+Mai întâi, adaugă un template reutilizabil pentru rândurile de tranzacții în `<body>`-ul tău HTML:
 
 ```html
 <template id="transaction">
@@ -275,17 +752,30 @@ Adăugați un nou șablon în `<body>`:
 </template>
 ```
 
-Acest șablon reprezintă un singur rând al tabelului, cu cele 3 coloane pe care dorim să le populăm: *data*, *obiectul* și *suma* unei tranzacții.
+**Înțelegerea template-urilor HTML:**
+- **Definește** structura pentru un singur rând de tabel
+- **Rămâne** invizibil până este clonat și populat cu JavaScript
+- **Include** trei celule pentru dată, descriere și sumă
+- **Oferă** un model reutilizabil pentru formatare consistentă
 
-Apoi, adăugați această proprietate `id` elementului `<tbody>` al tabelului din șablonul tabloului de bord pentru a-l găsi mai ușor folosind JavaScript:
+### Pasul 2: Pregătește Tabelul Pentru Conținut Dinamic
+
+Apoi, adaugă un `id` la corpul tabelului ca JavaScript să îl poată accesa ușor:
 
 ```html
 <tbody id="transactions"></tbody>
 ```
 
-HTML-ul nostru este gata, să trecem la codul JavaScript și să creăm o nouă funcție `createTransactionRow`:
+**Ce realizează asta:**
+- **Creează** o țintă clară pentru inserarea rândurilor de tranzacții
+- **Separă** structura tabelului de conținutul dinamic
+- **Permite** golirea și reumplerea ușoară a datelor tranzacțiilor
 
-```js
+### Pasul 3: Creează Funcția Fabrica de Rânduri de Tranzacții
+
+Acum creează o funcție care transformă datele tranzacțiilor în elemente HTML:
+
+```javascript
 function createTransactionRow(transaction) {
   const template = document.getElementById('transaction');
   const transactionRow = template.content.cloneNode(true);
@@ -297,9 +787,19 @@ function createTransactionRow(transaction) {
 }
 ```
 
-Această funcție face exact ceea ce sugerează numele său: folosind șablonul pe care l-am creat mai devreme, creează un nou rând de tabel și completează conținutul acestuia folosind datele tranzacției. Vom folosi aceasta în funcția noastră `updateDashboard()` pentru a popula tabelul:
+**Detalierea funcției fabrica:**
+- **Recuperează** elementul template după ID
+- **Clonează** conținutul template-ului pentru manipulare sigură
+- **Selectează** rândul de tabel din conținutul clonat
+- **Completează** fiecare celulă cu datele tranzacției
+- **Formatează** suma să afișeze numărul corect de zecimale
+- **Returnează** rândul gata de inserare
 
-```js
+### Pasul 4: Generează Eficient Mai Multe Rânduri de Tranzacții
+
+Adaugă acest cod în funcția ta `updateDashboard()` pentru a afișa toate tranzacțiile:
+
+```javascript
 const transactionsRows = document.createDocumentFragment();
 for (const transaction of account.transactions) {
   const transactionRow = createTransactionRow(transaction);
@@ -308,11 +808,19 @@ for (const transaction of account.transactions) {
 updateElement('transactions', transactionsRows);
 ```
 
-Aici folosim metoda [`document.createDocumentFragment()`](https://developer.mozilla.org/docs/Web/API/Document/createDocumentFragment) care creează un nou fragment DOM pe care putem lucra, înainte de a-l atașa în final tabelului nostru HTML.
+**De ce este eficientă această abordare:**
+- **Creează** un fragment de document pentru a grupa operațiunile pe DOM
+- **Iterează** prin toate tranzacțiile din datele contului
+- **Generează** un rând pentru fiecare tranzacție folosind funcția fabrica
+- **Colectează** toate rândurile în fragment înainte de a le adăuga în DOM
+- **Execută** o singură actualizare a DOM-ului în loc de multiple inserții individuale și ineficiente
+> ⚡ **Optimizarea Performanței**: [`document.createDocumentFragment()`](https://developer.mozilla.org/docs/Web/API/Document/createDocumentFragment) funcționează ca procesul de asamblare la Boeing - componentele sunt pregătite în afara liniei principale, apoi instalate ca o unitate completă. Această abordare în loturi minimizează reflow-urile DOM prin efectuarea unei singure inserții în loc de multiple operațiuni individuale.
 
-Mai este un lucru pe care trebuie să-l facem înainte ca acest cod să funcționeze, deoarece funcția noastră `updateElement()` acceptă în prezent doar conținut text. Să modificăm puțin codul acesteia:
+### Pasul 5: Îmbunătățește Funcția Update pentru Conținut Mixt
 
-```js
+Funcția ta `updateElement()` se ocupă în prezent doar de conținut text. Actualizeaz-o să funcționeze atât cu text, cât și cu noduri DOM:
+
+```javascript
 function updateElement(id, textOrNode) {
   const element = document.getElementById(id);
   element.textContent = ''; // Removes all children
@@ -320,28 +828,134 @@ function updateElement(id, textOrNode) {
 }
 ```
 
-Folosim metoda [`append()`](https://developer.mozilla.org/docs/Web/API/ParentNode/append) deoarece permite atașarea fie a textului, fie a [nodurilor DOM](https://developer.mozilla.org/docs/Web/API/Node) unui element părinte, ceea ce este perfect pentru toate cazurile noastre de utilizare.
-Dacă încercați să vă autentificați folosind contul `test`, ar trebui să vedeți acum o listă de tranzacții pe tabloul de bord 🎉.
+**Îmbunătățirile cheie în această actualizare:**
+- **Șterge** conținutul existent înainte de a adăuga conținut nou
+- **Acceptă** fie șiruri de text, fie noduri DOM ca parametri
+- **Folosește** metoda [`append()`](https://developer.mozilla.org/docs/Web/API/ParentNode/append) pentru flexibilitate
+- **Menține** compatibilitatea inversă cu utilizarea bazată pe text existentă
+
+### Testează-ți Dashboard-ul
+
+Momentul adevărului! Hai să vedem dashboard-ul tău dinamic în acțiune:
+
+1. Conectează-te folosind contul `test` (are date de probă gata pregătite)
+2. Navighează la dashboard-ul tău
+3. Verifică dacă rândurile de tranzacții apar cu formatarea corectă
+4. Asigură-te că datele, descrierile și sumele arată bine
+
+Dacă totul funcționează, ar trebui să vezi o listă complet funcțională de tranzacții pe dashboard-ul tău! 🎉
+
+**Ce ai realizat:**
+- Ai construit un dashboard care se scalează cu orice cantitate de date
+- Ai creat șabloane reutilizabile pentru formatare consistentă
+- Ai implementat tehnici eficiente de manipulare a DOM-ului
+- Ai dezvoltat funcționalități comparabile cu aplicații bancare de producție
+
+Ai transformat cu succes o pagină web statică într-o aplicație web dinamică.
+
+### 🎯 Verificare Pedagogică: Generarea de Conținut Dinamic
+
+**Înțelegerea Arhitecturii**: Ai implementat un pipeline sofisticat de date către UI care reflectă modelele folosite în framework-uri precum React, Vue și Angular.
+
+**Concepte Cheie Stăpânite**:
+- **Randare bazată pe șabloane**: Crearea de componente UI reutilizabile
+- **Fragmente de document**: Optimizarea performanței DOM
+- **Manipulare sigură a DOM-ului**: Prevenirea vulnerabilităților de securitate
+- **Transformarea datelor**: Conversia datelor serverului în interfețe pentru utilizator
+
+**Legătura cu Industria**: Aceste tehnici formează baza framework-urilor frontend moderne. DOM-ul virtual al React, sistemul de șabloane din Vue și arhitectura componentelor din Angular se bazează toate pe aceste concepte fundamentale.
+
+**Întrebare de reflecție**: Cum ai extinde acest sistem pentru a gestiona actualizările în timp real (de exemplu, tranzacții noi care apar automat)? Ia în considerare WebSockets sau Server-Sent Events.
 
 ---
+
+## 📈 Cronologia Stăpânirii Managementului Datelor
+
+```mermaid
+timeline
+    title Călătoria Dezvoltării Bazate pe Date
+    
+    section Construirea Fundației
+        Configurare & Testare API
+            : Înțelege comunicarea client-server
+            : Stăpânește ciclul cerere/răspuns HTTP
+            : Învață tehnici de depanare
+    
+    section Măiestria Autentificării
+        Tipare Funcții Async
+            : Scrie cod async/await curat
+            : Gestionează promisiunile eficient
+            : Implementează limite de eroare
+        Gestionarea Sesiunii Utilizatorului
+            : Creează tipare de stare globală
+            : Construiește gardieni de navigare
+            : Proiectează sisteme de feedback pentru utilizator
+    
+    section Dezvoltarea UI Dinamică
+        Manipulare Sigură a DOM
+            : Previne vulnerabilitățile XSS
+            : Folosește textContent în loc de innerHTML
+            : Creează interfețe prietenoase accesibilității
+        Sisteme de Șabloane
+            : Construiește componente UI reutilizabile
+            : Optimizează performanța cu fragmente
+            : Scalează pentru a gestiona seturi mari de date
+    
+    section Tipare Profesionale
+        Cod Pregătit pentru Producție
+            : Implementează gestionare cuprinzătoare a erorilor
+            : Urmează cele mai bune practici de securitate
+            : Creează arhitecturi ușor de întreținut
+        Standarde Web Moderne
+            : Stăpânește tiparele API Fetch
+            : Înțelege configurațiile CORS
+            : Construiește UI-uri responsive și accesibile
+```
+**🎓 Pragul absolvirii**: Ai construit cu succes o aplicație web complet bazată pe date folosind modele moderne JavaScript. Aceste abilități se traduc direct în lucru cu framework-uri precum React, Vue sau Angular.
+
+**🔄 Capacități de nivel următor**:
+- Pregătit să explorezi framework-uri frontend care se bazează pe aceste concepte
+- Pregătit să implementezi funcții în timp real cu WebSockets
+- Echipat să construiești aplicații web progresive cu capabilități offline
+- Fundament pus pentru învățarea unor modele avansate de gestionare a stării
+
+## Provocarea Agentului GitHub Copilot 🚀
+
+Folosește modul Agent pentru a completa următoarea provocare:
+
+**Descriere:** Îmbunătățește aplicația bancară prin implementarea unei funcții de căutare și filtrare a tranzacțiilor care permite utilizatorilor să găsească tranzacții specifice după interval de date, sumă sau descriere.
+
+**Prompt:** Creează o funcționalitate de căutare pentru aplicația bancară care să includă: 1) Un formular de căutare cu câmpuri de introducere pentru intervalul de date (de la/până la), suma minimă/maximă și cuvinte cheie din descrierea tranzacției, 2) O funcție `filterTransactions()` care filtrează array-ul account.transactions pe baza criteriilor de căutare, 3) Actualizează funcția `updateDashboard()` pentru a afișa rezultatele filtrate și 4) Adaugă un buton "Clear Filters" pentru resetarea vizualizării. Folosește metode moderne de array în JavaScript precum `filter()` și gestionează cazurile limită pentru criterii de căutare goale.
+
+Află mai multe despre [modul agent](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) aici.
 
 ## 🚀 Provocare
 
-Lucrați împreună pentru a face pagina tabloului de bord să arate ca o aplicație bancară reală. Dacă deja ați stilizat aplicația, încercați să folosiți [media queries](https://developer.mozilla.org/docs/Web/CSS/Media_Queries) pentru a crea un [design responsiv](https://developer.mozilla.org/docs/Web/Progressive_web_apps/Responsive/responsive_design_building_blocks) care funcționează bine atât pe dispozitive desktop, cât și pe cele mobile.
+Ești gata să duci aplicația ta bancară la nivelul următor? Hai să o facem să arate și să se simtă ca ceva ce chiar ai vrea să folosești. Iată câteva idei pentru a-ți stimula creativitatea:
 
-Iată un exemplu de pagină de tabloul de bord stilizată:
+**Fă-o frumoasă**: Adaugă stiluri CSS pentru a transforma dashboard-ul funcțional într-unul vizual atractiv. Gândește-te la linii curate, spațiere bună și poate chiar niște animații subtile.
 
-![Captură de ecran a unui exemplu de rezultat al tabloului de bord după stilizare](../../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.ro.png)
+**Fă-o responsivă**: Încearcă să folosești [media queries](https://developer.mozilla.org/docs/Web/CSS/Media_Queries) pentru a crea un [design responsiv](https://developer.mozilla.org/docs/Web/Progressive_web_apps/Responsive/responsive_design_building_blocks) care să funcționeze excelent pe telefoane, tablete și desktop-uri. Utilizatorii tăi îți vor mulțumi!
 
-## Quiz de după lecție
+**Adaugă un plus de farmec**: Ia în considerare codificarea tranzacțiilor după culoare (verde pentru venituri, roșu pentru cheltuieli), adăugarea de icoane sau crearea de efecte hover care să facă interfața să pară interactivă.
 
-[Quiz de după lecție](https://ff-quizzes.netlify.app/web/quiz/46)
+Iată cum ar putea arăta un dashboard finisat:
 
-## Temă
+![Screenshot of an example result of the dashboard after styling](../../../../translated_images/ro/screen2.123c82a831a1d14a.webp)
 
-[Refactorizați și comentați codul](assignment.md)
+Nu trebuie să se potrivească exact - folosește-l ca inspirație și fă-l să fie al tău!
+
+## Quiz Post-Lecție
+
+[Quiz post-lectură](https://ff-quizzes.netlify.app/web/quiz/46)
+
+## Tema
+
+[Refactorizează și comentează codul](assignment.md)
 
 ---
 
-**Declinarea responsabilității**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși depunem eforturi pentru a asigura acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Declinare de responsabilitate**:  
+Acest document a fost tradus utilizând serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un traducător uman. Nu suntem responsabili pentru eventualele neînțelegeri sau interpretări greșite care pot apărea în urma utilizării acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

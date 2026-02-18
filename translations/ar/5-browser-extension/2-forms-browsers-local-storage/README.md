@@ -1,31 +1,102 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a7587943d38d095de8613e1b508609f5",
-  "translation_date": "2025-08-28T15:00:44+00:00",
-  "source_file": "5-browser-extension/2-forms-browsers-local-storage/README.md",
-  "language_code": "ar"
-}
--->
-# مشروع إضافة المتصفح الجزء الثاني: استدعاء API واستخدام التخزين المحلي
+# مشروع إضافة المتصفح الجزء الثاني: الاتصال بـ API واستخدام التخزين المحلي
+
+```mermaid
+journey
+    title Your API Integration & Storage Journey
+    section Foundation
+      Setup DOM references: 3: Student
+      Add event listeners: 4: Student
+      Handle form submission: 4: Student
+    section Data Management
+      Implement local storage: 4: Student
+      Build API calls: 5: Student
+      Handle async operations: 5: Student
+    section User Experience
+      Add error handling: 5: Student
+      Create loading states: 4: Student
+      Polish interactions: 5: Student
+```
 
 ## اختبار ما قبل المحاضرة
 
 [اختبار ما قبل المحاضرة](https://ff-quizzes.netlify.app/web/quiz/25)
 
-### المقدمة
+## المقدمة
 
-في هذا الدرس، ستقوم باستدعاء API من خلال إرسال نموذج إضافة المتصفح الخاص بك وعرض النتائج في الإضافة. بالإضافة إلى ذلك، ستتعلم كيفية تخزين البيانات في التخزين المحلي للمتصفح لاستخدامها لاحقًا.
+هل تتذكر إضافة المتصفح التي بدأت في بنائها؟ في الوقت الحالي لديك نموذج جميل المظهر، لكنه في الأساس ثابت. اليوم سنجعلها تنبض بالحياة من خلال الاتصال ببيانات حقيقية ومنحها ذاكرة.
 
-✅ اتبع الأجزاء المرقمة في الملفات المناسبة لمعرفة أين تضع الكود الخاص بك.
+فكر في أجهزة الكمبيوتر الخاصة بمهمة أبولو - لم تكن تعرض معلومات ثابتة فقط. بل كانت تتواصل باستمرار مع المركبة الفضائية، وتُحدث البيانات التليمترية، وتحتفظ بمعايير المهمة الحرجة. هذا هو نوع السلوك الديناميكي الذي نبنيه اليوم. ستقوم الإضافة الخاصة بك بالاتصال بالإنترنت، وجلب بيانات بيئية حقيقية، وتذكر إعداداتك للمرة القادمة.
 
-### إعداد العناصر للتعامل معها في الإضافة:
+قد يبدو تكامل API معقدًا، لكنه في الحقيقة مجرد تعليم الكود الخاص بك كيفية التواصل مع الخدمات الأخرى. سواء كنت تجلب بيانات الطقس، أو خلاصات وسائل التواصل الاجتماعي، أو معلومات البصمة الكربونية كما سنفعل اليوم، فإن الأمر كله يتعلق بإنشاء هذه الروابط الرقمية. سنستكشف أيضًا كيف يمكن للمتصفحات الاحتفاظ بالمعلومات - مثلما استخدمت المكتبات بطاقات الفهرسة لتذكر مكان الكتب.
 
-بحلول هذه المرحلة، قمت ببناء ملف HTML للنموذج وعناصر النتائج `<div>` لإضافة المتصفح الخاصة بك. من الآن فصاعدًا، ستحتاج إلى العمل في ملف `/src/index.js` وبناء الإضافة خطوة بخطوة. ارجع إلى [الدرس السابق](../1-about-browsers/README.md) للحصول على إعداد المشروع وعملية البناء.
+بنهاية هذا الدرس، سيكون لديك إضافة متصفح تجلب بيانات حقيقية، تخزن تفضيلات المستخدم، وتوفر تجربة سلسة. لنبدأ!
 
-أثناء العمل في ملف `index.js`، ابدأ بإنشاء بعض المتغيرات `const` للاحتفاظ بالقيم المرتبطة بالحقول المختلفة:
+```mermaid
+mindmap
+  root((Dynamic Extensions))
+    DOM Manipulation
+      Element Selection
+      Event Handling
+      State Management
+      UI Updates
+    Local Storage
+      Data Persistence
+      Key-Value Pairs
+      Session Management
+      User Preferences
+    API Integration
+      HTTP Requests
+      Authentication
+      Data Parsing
+      Error Handling
+    Async Programming
+      Promises
+      Async/Await
+      Error Catching
+      Non-blocking Code
+    User Experience
+      Loading States
+      Error Messages
+      Smooth Transitions
+      Data Validation
+```
 
-```JavaScript
+✅ اتبع الأجزاء المرقمة في الملفات المناسبة لمعرفة مكان وضع الكود الخاص بك
+
+## إعداد العناصر للتعامل معها في الإضافة
+
+قبل أن يتمكن JavaScript الخاص بك من التعامل مع الواجهة، يحتاج إلى مراجع لعناصر HTML محددة. فكر في الأمر مثل التلسكوب الذي يحتاج إلى أن يتم توجيهه نحو نجوم معينة - قبل أن يتمكن غاليليو من دراسة أقمار المشتري، كان عليه أن يحدد موقع المشتري نفسه ويركز عليه.
+
+في ملف `index.js` الخاص بك، سنقوم بإنشاء متغيرات `const` تلتقط مراجع لكل عنصر مهم في النموذج. هذا مشابه لكيفية تسمية العلماء لمعداتهم - بدلاً من البحث في المختبر بأكمله في كل مرة، يمكنهم الوصول مباشرة إلى ما يحتاجونه.
+
+```mermaid
+flowchart LR
+    A[JavaScript Code] --> B[document.querySelector]
+    B --> C[CSS Selectors]
+    C --> D[HTML Elements]
+    
+    D --> E[".form-data"]
+    D --> F[".region-name"]
+    D --> G[".api-key"]
+    D --> H[".loading"]
+    D --> I[".errors"]
+    D --> J[".result-container"]
+    
+    E --> K[Form Element]
+    F --> L[Input Field]
+    G --> M[Input Field]
+    H --> N[UI Element]
+    I --> O[UI Element]
+    J --> P[UI Element]
+    
+    style A fill:#e1f5fe
+    style D fill:#e8f5e8
+    style K fill:#fff3e0
+    style L fill:#fff3e0
+    style M fill:#fff3e0
+```
+
+```javascript
 // form fields
 const form = document.querySelector('.form-data');
 const region = document.querySelector('.region-name');
@@ -41,186 +112,433 @@ const myregion = document.querySelector('.my-region');
 const clearBtn = document.querySelector('.clear-btn');
 ```
 
-جميع هذه الحقول يتم الإشارة إليها باستخدام css class، كما قمت بإعدادها في ملف HTML في الدرس السابق.
+**ما الذي يفعله هذا الكود:**
+- **يلتقط** عناصر النموذج باستخدام `document.querySelector()` مع محددات CSS
+- **ينشئ** مراجع لحقول الإدخال لاسم المنطقة ومفتاح API
+- **يؤسس** اتصالات لعناصر عرض النتائج لبيانات استخدام الكربون
+- **يُعد** الوصول إلى عناصر واجهة المستخدم مثل مؤشرات التحميل ورسائل الخطأ
+- **يخزن** كل مرجع عنصر في متغير `const` لإعادة الاستخدام بسهولة في الكود الخاص بك
 
-### إضافة المستمعات
+## إضافة مستمعي الأحداث
 
-بعد ذلك، أضف مستمعات الأحداث للنموذج وزر الإعادة الذي يعيد تعيين النموذج، بحيث إذا قام المستخدم بإرسال النموذج أو النقر على زر الإعادة، يحدث شيء ما. أضف أيضًا استدعاء لتهيئة التطبيق في نهاية الملف:
+الآن سنجعل الإضافة الخاصة بك تستجيب لإجراءات المستخدم. مستمعو الأحداث هم طريقة الكود الخاص بك لمراقبة تفاعلات المستخدم. فكر فيهم مثل مشغلي الهواتف في التبادلات الهاتفية المبكرة - كانوا يستمعون للمكالمات الواردة ويصلون الدوائر الصحيحة عندما يريد شخص ما إجراء اتصال.
 
-```JavaScript
+```mermaid
+sequenceDiagram
+    participant User
+    participant Form
+    participant JavaScript
+    participant API
+    participant Storage
+    
+    User->>Form: Fills out region/API key
+    User->>Form: Clicks submit
+    Form->>JavaScript: Triggers submit event
+    JavaScript->>JavaScript: handleSubmit(e)
+    JavaScript->>Storage: Save user preferences
+    JavaScript->>API: Fetch carbon data
+    API->>JavaScript: Returns data
+    JavaScript->>Form: Update UI with results
+    
+    User->>Form: Clicks clear button
+    Form->>JavaScript: Triggers click event
+    JavaScript->>Storage: Clear saved data
+    JavaScript->>Form: Reset to initial state
+```
+
+```javascript
 form.addEventListener('submit', (e) => handleSubmit(e));
 clearBtn.addEventListener('click', (e) => reset(e));
 init();
 ```
 
-✅ لاحظ الاختصار المستخدم للاستماع إلى حدث الإرسال أو النقر، وكيف يتم تمرير الحدث إلى دوال `handleSubmit` أو `reset`. هل يمكنك كتابة المكافئ لهذا الاختصار بصيغة أطول؟ أيهما تفضل؟
+**فهم هذه المفاهيم:**
+- **يربط** مستمع إرسال بالنموذج الذي يتم تشغيله عندما يضغط المستخدمون على Enter أو ينقرون على إرسال
+- **يتصل** بمستمع النقر على زر المسح لإعادة تعيين النموذج
+- **يمرر** كائن الحدث `(e)` إلى وظائف المعالجة للتحكم الإضافي
+- **يستدعي** وظيفة `init()` فورًا لإعداد الحالة الأولية للإضافة الخاصة بك
 
-### بناء دالتي `init()` و `reset()`:
+✅ لاحظ اختصار صيغة وظيفة السهم المستخدمة هنا. هذا النهج الحديث في JavaScript أنظف من تعبيرات الوظائف التقليدية، لكن كلاهما يعمل بشكل جيد!
 
-الآن ستقوم ببناء الدالة التي تهيئ الإضافة، والتي تسمى `init()`:
+### 🔄 **توقف تربوي**
+**فهم التعامل مع الأحداث**: قبل الانتقال إلى التهيئة، تأكد من أنك تستطيع:
+- ✅ شرح كيف يربط `addEventListener` إجراءات المستخدم بوظائف JavaScript
+- ✅ فهم لماذا نمرر كائن الحدث `(e)` إلى وظائف المعالجة
+- ✅ التعرف على الفرق بين أحداث `submit` و `click`
+- ✅ وصف متى تعمل وظيفة `init()` ولماذا
 
-```JavaScript
+**اختبار ذاتي سريع**: ماذا سيحدث إذا نسيت `e.preventDefault()` في إرسال النموذج؟
+*الإجابة: ستتم إعادة تحميل الصفحة، مما يؤدي إلى فقدان حالة JavaScript بالكامل وتعطيل تجربة المستخدم*
+
+## بناء وظائف التهيئة وإعادة التعيين
+
+لنقم بإنشاء منطق التهيئة للإضافة الخاصة بك. وظيفة `init()` تشبه نظام الملاحة للسفينة الذي يتحقق من أدواته - تحدد الحالة الحالية وتضبط الواجهة وفقًا لذلك. تتحقق مما إذا كان شخص ما قد استخدم الإضافة الخاصة بك من قبل وتحمل إعداداته السابقة.
+
+وظيفة `reset()` توفر للمستخدمين بداية جديدة - مشابهة لكيفية إعادة العلماء ضبط أدواتهم بين التجارب لضمان بيانات نظيفة.
+
+```javascript
 function init() {
-	//if anything is in localStorage, pick it up
+	// Check if user has previously saved API credentials
 	const storedApiKey = localStorage.getItem('apiKey');
 	const storedRegion = localStorage.getItem('regionName');
 
-	//set icon to be generic green
-	//todo
+	// Set extension icon to generic green (placeholder for future lesson)
+	// TODO: Implement icon update in next lesson
 
 	if (storedApiKey === null || storedRegion === null) {
-		//if we don't have the keys, show the form
+		// First-time user: show the setup form
 		form.style.display = 'block';
 		results.style.display = 'none';
 		loading.style.display = 'none';
 		clearBtn.style.display = 'none';
 		errors.textContent = '';
 	} else {
-        //if we have saved keys/regions in localStorage, show results when they load
-        displayCarbonUsage(storedApiKey, storedRegion);
+		// Returning user: load their saved data automatically
+		displayCarbonUsage(storedApiKey, storedRegion);
 		results.style.display = 'none';
 		form.style.display = 'none';
 		clearBtn.style.display = 'block';
 	}
-};
+}
 
 function reset(e) {
 	e.preventDefault();
-	//clear local storage for region only
+	// Clear stored region to allow user to choose a new location
 	localStorage.removeItem('regionName');
+	// Restart the initialization process
 	init();
 }
-
 ```
 
-في هذه الدالة، هناك منطق مثير للاهتمام. عند قراءته، هل يمكنك معرفة ما يحدث؟
+**تفصيل ما يحدث هنا:**
+- **يسترجع** مفتاح API والمنطقة المخزنة من التخزين المحلي للمتصفح
+- **يتحقق** مما إذا كان هذا مستخدمًا لأول مرة (لا توجد بيانات مخزنة) أو مستخدمًا عائدًا
+- **يعرض** نموذج الإعداد للمستخدمين الجدد ويخفي عناصر الواجهة الأخرى
+- **يحمل** البيانات المحفوظة تلقائيًا للمستخدمين العائدين ويعرض خيار إعادة التعيين
+- **يدير** حالة واجهة المستخدم بناءً على البيانات المتاحة
 
-- يتم إعداد متغيرين `const` للتحقق مما إذا كان المستخدم قد قام بتخزين APIKey ورمز المنطقة في التخزين المحلي.
-- إذا كانت أي من هذه القيم تساوي null، يتم عرض النموذج عن طريق تغيير نمط العرض إلى 'block'.
-- يتم إخفاء منطقة النتائج، والتحميل، وزر الإعادة، ويتم تعيين أي نص خطأ إلى سلسلة فارغة.
-- إذا كان هناك مفتاح ورمز منطقة، يتم بدء روتين لـ:
-  - استدعاء API للحصول على بيانات استخدام الكربون.
-  - إخفاء منطقة النتائج.
-  - إخفاء النموذج.
-  - عرض زر الإعادة.
+**مفاهيم رئيسية حول التخزين المحلي:**
+- **يحافظ** على البيانات بين جلسات المتصفح (على عكس تخزين الجلسة)
+- **يخزن** البيانات كأزواج مفتاح-قيمة باستخدام `getItem()` و `setItem()`
+- **يعيد** `null` عندما لا توجد بيانات لمفتاح معين
+- **يوفر** طريقة بسيطة لتذكر تفضيلات وإعدادات المستخدم
 
-قبل المتابعة، من المفيد التعرف على مفهوم مهم جدًا متاح في المتصفحات: [التخزين المحلي](https://developer.mozilla.org/docs/Web/API/Window/localStorage). التخزين المحلي هو طريقة مفيدة لتخزين النصوص في المتصفح كزوج `key-value`. يمكن التلاعب بهذا النوع من التخزين باستخدام JavaScript لإدارة البيانات في المتصفح. التخزين المحلي لا ينتهي صلاحيته، بينما يتم مسح التخزين المؤقت (SessionStorage) عند إغلاق المتصفح. لكل نوع من التخزين مزايا وعيوب.
+> 💡 **فهم تخزين المتصفح**: [LocalStorage](https://developer.mozilla.org/docs/Web/API/Window/localStorage) يشبه إعطاء الإضافة الخاصة بك ذاكرة دائمة. فكر في كيفية تخزين مكتبة الإسكندرية القديمة لللفائف - المعلومات ظلت متاحة حتى عندما غادر العلماء وعادوا.
+>
+> **خصائص رئيسية:**
+> - **يحافظ** على البيانات حتى بعد إغلاق المتصفح
+> - **ينجو** من إعادة تشغيل الكمبيوتر وتعطل المتصفح
+> - **يوفر** مساحة تخزين كبيرة لتفضيلات المستخدم
+> - **يقدم** وصولًا فوريًا بدون تأخير الشبكة
 
-> ملاحظة - تحتوي إضافة المتصفح الخاصة بك على تخزين محلي خاص بها؛ نافذة المتصفح الرئيسية هي مثيل مختلف وتعمل بشكل منفصل.
+> **ملاحظة مهمة**: الإضافة الخاصة بك لديها تخزين محلي معزول خاص بها منفصل عن صفحات الويب العادية. هذا يوفر الأمان ويمنع التعارض مع مواقع الويب الأخرى.
 
-يمكنك تعيين قيمة نصية لـ APIKey، على سبيل المثال، ويمكنك رؤية أنه تم تعيينها في Edge عن طريق "فحص" صفحة ويب (يمكنك النقر بزر الماوس الأيمن على المتصفح للفحص) والانتقال إلى علامة تبويب التطبيقات لرؤية التخزين.
+يمكنك عرض البيانات المخزنة الخاصة بك عن طريق فتح أدوات المطور في المتصفح (F12)، الانتقال إلى علامة التبويب **Application**، وتوسيع قسم **Local Storage**.
 
-![لوحة التخزين المحلي](../../../../translated_images/localstorage.472f8147b6a3f8d141d9551c95a2da610ac9a3c6a73d4a1c224081c98bae09d9.ar.png)
+```mermaid
+stateDiagram-v2
+    [*] --> CheckStorage: Extension starts
+    CheckStorage --> FirstTime: No stored data
+    CheckStorage --> Returning: Data found
+    
+    FirstTime --> ShowForm: Display setup form
+    ShowForm --> UserInput: User enters data
+    UserInput --> SaveData: Store in localStorage
+    SaveData --> FetchAPI: Get carbon data
+    
+    Returning --> LoadData: Read from localStorage
+    LoadData --> FetchAPI: Get carbon data
+    
+    FetchAPI --> ShowResults: Display data
+    ShowResults --> UserAction: User interacts
+    
+    UserAction --> Reset: Clear button clicked
+    UserAction --> ShowResults: View data
+    
+    Reset --> ClearStorage: Remove saved data
+    ClearStorage --> FirstTime: Back to setup
+```
 
-✅ فكر في المواقف التي لا ترغب فيها بتخزين بعض البيانات في التخزين المحلي. بشكل عام، وضع مفاتيح API في التخزين المحلي فكرة سيئة! هل يمكنك معرفة السبب؟ في حالتنا، نظرًا لأن تطبيقنا مخصص للتعلم فقط ولن يتم نشره في متجر التطبيقات، سنستخدم هذه الطريقة.
+![لوحة التخزين المحلي](../../../../translated_images/ar/localstorage.472f8147b6a3f8d1.webp)
 
-لاحظ أنك تستخدم Web API للتعامل مع التخزين المحلي، إما باستخدام `getItem()`، أو `setItem()`، أو `removeItem()`. يتم دعمها على نطاق واسع عبر المتصفحات.
+> ⚠️ **اعتبار أمني**: في التطبيقات الإنتاجية، تخزين مفاتيح API في LocalStorage يشكل مخاطر أمنية لأن JavaScript يمكنه الوصول إلى هذه البيانات. لأغراض التعلم، هذا النهج يعمل بشكل جيد، لكن التطبيقات الحقيقية يجب أن تستخدم تخزين آمن على الخادم للمعلومات الحساسة.
 
-قبل بناء دالة `displayCarbonUsage()` التي يتم استدعاؤها في `init()`، دعنا نبني الوظيفة التي تتعامل مع إرسال النموذج الأولي.
+## التعامل مع إرسال النموذج
 
-### التعامل مع إرسال النموذج
+الآن سنتعامل مع ما يحدث عندما يرسل شخص ما النموذج الخاص بك. بشكل افتراضي، تقوم المتصفحات بإعادة تحميل الصفحة عند إرسال النماذج، لكننا سنعترض هذا السلوك لإنشاء تجربة أكثر سلاسة.
 
-قم بإنشاء دالة تسمى `handleSubmit` تقبل وسيط حدث `(e)`. أوقف انتشار الحدث (في هذه الحالة، نريد إيقاف المتصفح من التحديث) واستدعِ دالة جديدة، `setUpUser`، مع تمرير الوسيطين `apiKey.value` و `region.value`. بهذه الطريقة، تستخدم القيمتين اللتين يتم إدخالهما عبر النموذج الأولي عند تعبئة الحقول المناسبة.
+يشبه هذا النهج كيفية تعامل مركز التحكم مع اتصالات المركبة الفضائية - بدلاً من إعادة ضبط النظام بالكامل لكل إرسال، يحافظون على التشغيل المستمر أثناء معالجة المعلومات الجديدة.
 
-```JavaScript
+قم بإنشاء وظيفة تلتقط حدث إرسال النموذج وتستخرج إدخال المستخدم:
+
+```javascript
 function handleSubmit(e) {
 	e.preventDefault();
 	setUpUser(apiKey.value, region.value);
 }
 ```
 
-✅ قم بتحديث ذاكرتك - ملف HTML الذي قمت بإعداده في الدرس السابق يحتوي على حقلين إدخال يتم التقاط قيمهما عبر `const` التي قمت بإعدادها في أعلى الملف، وكلاهما `required` لذا يمنع المتصفح المستخدمين من إدخال قيم فارغة.
+**في ما سبق، قمنا بـ:**
+- **منع** السلوك الافتراضي لإرسال النموذج الذي كان سيؤدي إلى تحديث الصفحة
+- **استخراج** قيم إدخال المستخدم من حقول مفتاح API والمنطقة
+- **تمرير** بيانات النموذج إلى وظيفة `setUpUser()` للمعالجة
+- **الحفاظ** على سلوك تطبيق الصفحة الواحدة عن طريق تجنب تحديث الصفحة
 
-### إعداد المستخدم
+✅ تذكر أن حقول النموذج HTML الخاصة بك تتضمن السمة `required`، لذا يقوم المتصفح تلقائيًا بالتحقق من أن المستخدمين يقدمون مفتاح API والمنطقة قبل تشغيل هذه الوظيفة.
 
-بالانتقال إلى دالة `setUpUser`، هنا يتم تعيين قيم التخزين المحلي لـ apiKey و regionName. أضف دالة جديدة:
+## إعداد تفضيلات المستخدم
 
-```JavaScript
+وظيفة `setUpUser` مسؤولة عن حفظ بيانات اعتماد المستخدم وبدء أول اتصال API. هذا يخلق انتقالًا سلسًا من الإعداد إلى عرض النتائج.
+
+```javascript
 function setUpUser(apiKey, regionName) {
+	// Save user credentials for future sessions
 	localStorage.setItem('apiKey', apiKey);
 	localStorage.setItem('regionName', regionName);
+	
+	// Update UI to show loading state
 	loading.style.display = 'block';
 	errors.textContent = '';
 	clearBtn.style.display = 'block';
-	//make initial call
+	
+	// Fetch carbon usage data with user's credentials
 	displayCarbonUsage(apiKey, regionName);
 }
 ```
 
-تقوم هذه الدالة بعرض رسالة تحميل أثناء استدعاء API. في هذه المرحلة، وصلت إلى إنشاء أهم دالة في هذه الإضافة!
+**خطوة بخطوة، إليك ما يحدث:**
+- **يحفظ** مفتاح API واسم المنطقة في التخزين المحلي للاستخدام المستقبلي
+- **يعرض** مؤشر التحميل لإعلام المستخدمين بأن البيانات يتم جلبها
+- **يمسح** أي رسائل خطأ سابقة من العرض
+- **يكشف** زر المسح للمستخدمين لإعادة تعيين إعداداتهم لاحقًا
+- **يبدأ** اتصال API لجلب بيانات استخدام الكربون الحقيقية
 
-### عرض استخدام الكربون
+هذه الوظيفة تخلق تجربة مستخدم سلسة من خلال إدارة كل من استمرارية البيانات وتحديثات واجهة المستخدم في إجراء واحد منسق.
 
-أخيرًا، حان الوقت لاستدعاء API!
+## عرض بيانات استخدام الكربون
 
-قبل المتابعة، يجب أن نناقش APIs. APIs، أو [واجهات برمجة التطبيقات](https://www.webopedia.com/TERM/A/API.html)، هي عنصر أساسي في أدوات مطوري الويب. توفر طرقًا قياسية لتفاعل البرامج مع بعضها البعض. على سبيل المثال، إذا كنت تبني موقع ويب يحتاج إلى استعلام قاعدة بيانات، قد يكون هناك API تم إنشاؤه لتستخدمه. بينما هناك أنواع عديدة من APIs، أحد الأنواع الأكثر شيوعًا هو [REST API](https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/).
+الآن سنقوم بربط الإضافة الخاصة بك بمصادر البيانات الخارجية عبر APIs. هذا يحول الإضافة الخاصة بك من أداة مستقلة إلى شيء يمكنه الوصول إلى معلومات الوقت الفعلي من جميع أنحاء الإنترنت.
 
-✅ يشير مصطلح 'REST' إلى 'نقل الحالة التمثيلية' ويتميز باستخدام عناوين URL مهيأة بطرق مختلفة لجلب البيانات. قم ببعض البحث حول الأنواع المختلفة من APIs المتاحة للمطورين. أي نوع يثير اهتمامك؟
+**فهم APIs**
 
-هناك أشياء مهمة يجب ملاحظتها حول هذه الدالة. أولاً، لاحظ الكلمة المفتاحية [`async`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function). كتابة الدوال بحيث تعمل بشكل غير متزامن يعني أنها تنتظر إكمال إجراء معين، مثل استرجاع البيانات، قبل المتابعة.
+[APIs](https://www.webopedia.com/TERM/A/API.html) هي الطريقة التي تتواصل بها التطبيقات المختلفة مع بعضها البعض. فكر فيها مثل نظام التلغراف الذي ربط المدن البعيدة في القرن التاسع عشر - كان المشغلون يرسلون طلبات إلى المحطات البعيدة ويتلقون الردود بالمعلومات المطلوبة. كل مرة تتحقق فيها من وسائل التواصل الاجتماعي، تسأل مساعد صوتي سؤالًا، أو تستخدم تطبيق توصيل، فإن APIs تسهل هذه التبادلات البيانات.
 
-إليك فيديو سريع حول `async`:
+```mermaid
+flowchart TD
+    A[Your Extension] --> B[HTTP Request]
+    B --> C[CO2 Signal API]
+    C --> D{Valid Request?}
+    D -->|Yes| E[Query Database]
+    D -->|No| F[Return Error]
+    E --> G[Carbon Data]
+    G --> H[JSON Response]
+    H --> I[Your Extension]
+    F --> I
+    I --> J[Update UI]
+    
+    subgraph "API Request"
+        K[Headers: auth-token]
+        L[Parameters: countryCode]
+        M[Method: GET]
+    end
+    
+    subgraph "API Response"
+        N[Carbon Intensity]
+        O[Fossil Fuel %]
+        P[Timestamp]
+    end
+    
+    style C fill:#e8f5e8
+    style G fill:#fff3e0
+    style I fill:#e1f5fe
+```
+
+**مفاهيم رئيسية حول REST APIs:**
+- **REST** تعني 'نقل الحالة التمثيلية'
+- **تستخدم** طرق HTTP القياسية (GET, POST, PUT, DELETE) للتفاعل مع البيانات
+- **تعيد** البيانات بتنسيقات متوقعة، عادة JSON
+- **توفر** نقاط نهاية متسقة تعتمد على URL لأنواع مختلفة من الطلبات
+
+✅ [CO2 Signal API](https://www.co2signal.com/) الذي سنستخدمه يوفر بيانات كثافة الكربون في الوقت الفعلي من شبكات الكهرباء حول العالم. هذا يساعد المستخدمين على فهم تأثير استخدامهم للكهرباء على البيئة!
+
+> 💡 **فهم JavaScript غير المتزامن**: الكلمة المفتاحية [`async`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function) تمكن الكود الخاص بك من التعامل مع عمليات متعددة في وقت واحد. عندما تطلب بيانات من خادم، لا تريد أن تتجمد الإضافة الخاصة بك بالكامل - سيكون ذلك مثل توقف مراقبة الحركة الجوية عن جميع العمليات أثناء انتظار استجابة طائرة واحدة.
+>
+> **فوائد رئيسية:**
+> - **يحافظ** على استجابة الإضافة أثناء تحميل البيانات
+> - **يسمح** للكود الآخر بالاستمرار في التنفيذ أثناء طلبات الشبكة
+> - **يحسن** قابلية قراءة الكود مقارنة بأنماط الاستدعاء التقليدية
+> - **يمكن** من التعامل مع الأخطاء بشكل سلس لمشاكل الشبكة
+
+إليك فيديو سريع عن `async`:
 
 [![Async و Await لإدارة الوعود](https://img.youtube.com/vi/YwmlRkrxvkk/0.jpg)](https://youtube.com/watch?v=YwmlRkrxvkk "Async و Await لإدارة الوعود")
 
-> 🎥 انقر على الصورة أعلاه لمشاهدة فيديو حول async/await.
+> 🎥 انقر على الصورة أعلاه لمشاهدة فيديو عن async/await.
 
-قم بإنشاء دالة جديدة لاستعلام API الخاص بـ C02Signal:
+### 🔄 **توقف تربوي**
+**فهم البرمجة غير المتزامنة**: قبل الغوص في وظيفة API، تحقق من أنك تفهم:
+- ✅ لماذا نستخدم `async/await` بدلاً من تجميد الإضافة بالكامل
+- ✅ كيف تتعامل كتل `try/catch` مع أخطاء الشبكة بشكل سلس
+- ✅ الفرق بين العمليات المتزامنة وغير المتزامنة
+- ✅ لماذا يمكن أن تفشل طلبات API وكيفية التعامل مع تلك الفشل
 
-```JavaScript
-import axios from '../node_modules/axios';
+**اتصال بالعالم الحقيقي**: فكر في هذه الأمثلة غير المتزامنة اليومية:
+- **طلب الطعام**: لا تنتظر بجانب المطبخ - تحصل على إيصال وتواصل أنشطتك الأخرى
+- **إرسال البريد الإلكتروني**: تطبيق البريد الإلكتروني الخاص بك لا يتجمد أثناء الإرسال - يمكنك كتابة المزيد من الرسائل
+- **تحميل صفحات الويب**: الصور يتم تحميلها تدريجيًا بينما يمكنك بالفعل قراءة النص
 
+**تدفق المصادقة API**:
+```mermaid
+sequenceDiagram
+    participant Ext as Extension
+    participant API as CO2 Signal API
+    participant DB as Database
+    
+    Ext->>API: Request with auth-token
+    API->>API: Validate token
+    API->>DB: Query carbon data
+    DB->>API: Return data
+    API->>Ext: JSON response
+    Ext->>Ext: Update UI
+```
+
+قم بإنشاء الوظيفة لجلب وعرض بيانات استخدام الكربون:
+
+```javascript
+// Modern fetch API approach (no external dependencies needed)
 async function displayCarbonUsage(apiKey, region) {
 	try {
-		await axios
-			.get('https://api.co2signal.com/v1/latest', {
-				params: {
-					countryCode: region,
-				},
-				headers: {
-					'auth-token': apiKey,
-				},
-			})
-			.then((response) => {
-				let CO2 = Math.floor(response.data.data.carbonIntensity);
+		// Fetch carbon intensity data from CO2 Signal API
+		const response = await fetch('https://api.co2signal.com/v1/latest', {
+			method: 'GET',
+			headers: {
+				'auth-token': apiKey,
+				'Content-Type': 'application/json'
+			},
+			// Add query parameters for the specific region
+			...new URLSearchParams({ countryCode: region }) && {
+				url: `https://api.co2signal.com/v1/latest?countryCode=${region}`
+			}
+		});
 
-				//calculateColor(CO2);
+		// Check if the API request was successful
+		if (!response.ok) {
+			throw new Error(`API request failed: ${response.status}`);
+		}
 
-				loading.style.display = 'none';
-				form.style.display = 'none';
-				myregion.textContent = region;
-				usage.textContent =
-					Math.round(response.data.data.carbonIntensity) + ' grams (grams C02 emitted per kilowatt hour)';
-				fossilfuel.textContent =
-					response.data.data.fossilFuelPercentage.toFixed(2) +
-					'% (percentage of fossil fuels used to generate electricity)';
-				results.style.display = 'block';
-			});
+		const data = await response.json();
+		const carbonData = data.data;
+
+		// Calculate rounded carbon intensity value
+		const carbonIntensity = Math.round(carbonData.carbonIntensity);
+
+		// Update the user interface with fetched data
+		loading.style.display = 'none';
+		form.style.display = 'none';
+		myregion.textContent = region.toUpperCase();
+		usage.textContent = `${carbonIntensity} grams (grams CO₂ emitted per kilowatt hour)`;
+		fossilfuel.textContent = `${carbonData.fossilFuelPercentage.toFixed(2)}% (percentage of fossil fuels used to generate electricity)`;
+		results.style.display = 'block';
+
+		// TODO: calculateColor(carbonIntensity) - implement in next lesson
+
 	} catch (error) {
-		console.log(error);
+		console.error('Error fetching carbon data:', error);
+		
+		// Show user-friendly error message
 		loading.style.display = 'none';
 		results.style.display = 'none';
-		errors.textContent = 'Sorry, we have no data for the region you have requested.';
+		errors.textContent = 'Sorry, we couldn\'t fetch data for that region. Please check your API key and region code.';
 	}
 }
 ```
 
-هذه دالة كبيرة. ما الذي يحدث هنا؟
+**تفصيل ما يحدث هنا:**
+- **يستخدم** API `fetch()` الحديث بدلاً من المكتبات الخارجية مثل Axios للحصول على كود أنظف وخالي من التبعيات
+- **ينفذ** فحص الأخطاء المناسب باستخدام `response.ok` لالتقاط فشل API مبكرًا
+- **يتعامل** مع العمليات غير المتزامنة باستخدام `async/await` لتدفق كود أكثر قابلية للقراءة
+- **يصادق** مع CO2 Signal API باستخدام رأس `auth-token`
+- **يحلل** بيانات استجابة JSON ويستخرج معلومات كثافة الكربون
+- **يحدث** عناصر واجهة المستخدم المتعددة ببيانات بيئية مهيأة
+- **يوفر** رسائل خطأ سهلة الاستخدام عندما تفشل طلبات API
 
-- باتباع أفضل الممارسات، تستخدم الكلمة المفتاحية `async` لجعل هذه الدالة تعمل بشكل غير متزامن. تحتوي الدالة على كتلة `try/catch` لأنها ستعيد وعدًا عند استرجاع البيانات من API. نظرًا لأنك لا تتحكم في سرعة استجابة API (قد لا يستجيب على الإطلاق!)، تحتاج إلى التعامل مع هذا الأمر عن طريق استدعائه بشكل غير متزامن.
-- تقوم باستعلام API الخاص بـ co2signal للحصول على بيانات منطقتك، باستخدام مفتاح API الخاص بك. لاستخدام هذا المفتاح، تحتاج إلى استخدام نوع من المصادقة في معلمات الرأس.
-- بمجرد استجابة API، تقوم بتعيين عناصر مختلفة من بيانات الاستجابة إلى الأجزاء التي قمت بإعدادها لعرض هذه البيانات.
-- إذا كان هناك خطأ، أو إذا لم تكن هناك نتيجة، تعرض رسالة خطأ.
+**مفاهيم JavaScript الحديثة الرئيسية التي تم توضيحها:**
+- **القوالب النصية** باستخدام صياغة `${}` لتنسيق النصوص النظيفة
+- **التعامل مع الأخطاء** باستخدام كتل try/catch للتطبيقات القوية
+- **نمط async/await** للتعامل مع طلبات الشبكة بشكل سلس
+- **تفكيك الكائنات** لاستخراج بيانات محددة من استجابات API
+- **تسلسل الطرق** للعديد من التلاعبات DOM
 
-✅ استخدام أنماط البرمجة غير المتزامنة هو أداة مفيدة أخرى في صندوق أدواتك. اقرأ [عن الطرق المختلفة](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function) التي يمكنك من خلالها تكوين هذا النوع من الكود.
+✅ هذه الوظيفة توضح العديد من مفاهيم تطوير الويب المهمة - التواصل مع الخوادم الخارجية، التعامل مع المصادقة، معالجة البيانات، تحديث الواجهات، وإدارة الأخطاء بشكل سلس. هذه مهارات أساسية يستخدمها المطورون المحترفون بانتظام.
 
-تهانينا! إذا قمت ببناء الإضافة الخاصة بك (`npm run build`) وقمت بتحديثها في لوحة الإضافات، لديك الآن إضافة تعمل! الشيء الوحيد الذي لا يعمل هو الأيقونة، وستقوم بإصلاح ذلك في الدرس التالي.
+```mermaid
+flowchart TD
+    A[Start API Call] --> B[Fetch Request]
+    B --> C{Network Success?}
+    C -->|No| D[Network Error]
+    C -->|Yes| E{Response OK?}
+    E -->|No| F[API Error]
+    E -->|Yes| G[Parse JSON]
+    G --> H{Valid Data?}
+    H -->|No| I[Data Error]
+    H -->|Yes| J[Update UI]
+    
+    D --> K[Show Error Message]
+    F --> K
+    I --> K
+    J --> L[Hide Loading]
+    K --> L
+    
+    style A fill:#e1f5fe
+    style J fill:#e8f5e8
+    style K fill:#ffebee
+    style L fill:#f3e5f5
+```
+
+### 🔄 **توقف تربوي**
+**فهم النظام بالكامل**: تحقق من إتقانك للتدفق الكامل:
+- ✅ كيف تمكن مراجع DOM JavaScript من التحكم في الواجهة
+- ✅ لماذا يخلق التخزين المحلي استمرارية بين جلسات المتصفح
+- ✅ كيف يجعل async/await طلبات API دون تجميد الإضافة
+- ✅ ماذا يحدث عندما تفشل طلبات API وكيفية التعامل مع الأخطاء
+- ✅ لماذا تتضمن تجربة المستخدم حالات التحميل ورسائل الخطأ
+
+🎉 **ما الذي أنجزته:** لقد أنشأت إضافة متصفح:
+- **تتصل** بالإنترنت وتجلب بيانات بيئية حقيقية
+- **تحافظ** على إعدادات المستخدم بين الجلسات
+- **تتعامل** مع الأخطاء بشكل سلس بدلاً من التعطل
+- **توفر** تجربة مستخدم سلسة واحترافية
+
+اختبر عملك عن طريق تشغيل `npm run build` وتحديث الإضافة الخاصة بك في المتصفح. لديك الآن متتبع بصمة كربونية وظيفي. الدرس التالي سيضيف وظيفة أيقونة ديناميكية لإكمال الإضافة.
 
 ---
 
+## تحدي GitHub Copilot Agent 🚀
+
+استخدم وضع الوكيل لإكمال التحدي التالي:
+**الوصف:** تحسين امتداد المتصفح من خلال إضافة تحسينات في معالجة الأخطاء وميزات تجربة المستخدم. سيساعدك هذا التحدي على ممارسة العمل مع واجهات برمجة التطبيقات (APIs)، التخزين المحلي، والتعامل مع DOM باستخدام أنماط JavaScript الحديثة.
+
+**المهمة:** قم بإنشاء نسخة محسّنة من وظيفة displayCarbonUsage تتضمن: 1) آلية إعادة المحاولة لاستدعاءات API الفاشلة باستخدام التراجع الأسي، 2) التحقق من صحة إدخال رمز المنطقة قبل إجراء استدعاء API، 3) رسوم متحركة للتحميل مع مؤشرات تقدم، 4) تخزين استجابات API في localStorage مع طوابع زمنية لانتهاء الصلاحية (التخزين لمدة 30 دقيقة)، و5) ميزة لعرض البيانات التاريخية من استدعاءات API السابقة. أضف أيضًا تعليقات JSDoc بأسلوب TypeScript لتوثيق جميع معلمات الوظائف وأنواع الإرجاع.
+
+تعرف على المزيد حول [وضع الوكيل](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) هنا.
+
 ## 🚀 التحدي
 
-لقد ناقشنا عدة أنواع من APIs حتى الآن في هذه الدروس. اختر API على الويب وابحث بعمق عما يقدمه. على سبيل المثال، ألقِ نظرة على APIs المتاحة داخل المتصفحات مثل [HTML Drag and Drop API](https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API). ما الذي يجعل API رائعًا في رأيك؟
+وسع فهمك لواجهات برمجة التطبيقات (APIs) من خلال استكشاف الثروة المتاحة من واجهات برمجة التطبيقات المستندة إلى المتصفح لتطوير الويب. اختر واحدة من هذه الواجهات وقم ببناء عرض صغير:
+
+- [واجهة Geolocation API](https://developer.mozilla.org/docs/Web/API/Geolocation_API) - الحصول على الموقع الحالي للمستخدم
+- [واجهة Notification API](https://developer.mozilla.org/docs/Web/API/Notifications_API) - إرسال إشعارات سطح المكتب
+- [واجهة HTML Drag and Drop API](https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API) - إنشاء واجهات سحب تفاعلية
+- [واجهة Web Storage API](https://developer.mozilla.org/docs/Web/API/Web_Storage_API) - تقنيات تخزين محلية متقدمة
+- [واجهة Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) - بديل حديث لـ XMLHttpRequest
+
+**أسئلة البحث التي يجب مراعاتها:**
+- ما هي المشاكل الواقعية التي تحلها هذه الواجهة؟
+- كيف تتعامل الواجهة مع الأخطاء والحالات الحافة؟
+- ما هي الاعتبارات الأمنية عند استخدام هذه الواجهة؟
+- ما مدى دعم هذه الواجهة عبر المتصفحات المختلفة؟
+
+بعد البحث، حدد الخصائص التي تجعل واجهة برمجة التطبيقات سهلة الاستخدام وموثوقة للمطورين.
 
 ## اختبار ما بعد المحاضرة
 
@@ -228,13 +546,116 @@ async function displayCarbonUsage(apiKey, region) {
 
 ## المراجعة والدراسة الذاتية
 
-تعلمت عن التخزين المحلي وAPIs في هذا الدرس، وكلاهما مفيد جدًا لمطور الويب المحترف. هل يمكنك التفكير في كيفية عمل هذين الشيئين معًا؟ فكر في كيفية تصميم موقع ويب يقوم بتخزين العناصر لاستخدامها بواسطة API.
+تعلمت عن LocalStorage وواجهات برمجة التطبيقات (APIs) في هذا الدرس، وكلاهما مفيد جدًا للمطورين المحترفين. هل يمكنك التفكير في كيفية عمل هذين العنصرين معًا؟ فكر في كيفية تصميم موقع ويب يقوم بتخزين العناصر لاستخدامها بواسطة واجهة برمجة التطبيقات.
 
-## الواجب
+### ⚡ **ما يمكنك القيام به في الدقائق الخمس القادمة**
+- [ ] افتح علامة تبويب DevTools Application واستكشف localStorage على أي موقع ويب
+- [ ] أنشئ نموذج HTML بسيطًا واختبر التحقق من صحة النموذج في المتصفح
+- [ ] جرب تخزين واسترجاع البيانات باستخدام localStorage في وحدة التحكم بالمتصفح
+- [ ] قم بفحص بيانات النموذج التي يتم إرسالها باستخدام علامة تبويب الشبكة
 
-[تبنَّ API](assignment.md)
+### 🎯 **ما يمكنك إنجازه خلال الساعة**
+- [ ] أكمل اختبار ما بعد الدرس وافهم مفاهيم التعامل مع النماذج
+- [ ] قم ببناء نموذج امتداد متصفح يحفظ تفضيلات المستخدم
+- [ ] نفذ التحقق من صحة النموذج على الجانب العميل مع رسائل خطأ مفيدة
+- [ ] مارس استخدام واجهة chrome.storage لتخزين بيانات الامتداد
+- [ ] أنشئ واجهة مستخدم تستجيب لإعدادات المستخدم المحفوظة
+
+### 📅 **ما يمكنك إنجازه خلال أسبوع**
+- [ ] أكمل امتداد متصفح كامل الميزات مع وظائف النموذج
+- [ ] أتقن خيارات التخزين المختلفة: التخزين المحلي، التخزين المتزامن، والتخزين المؤقت
+- [ ] نفذ ميزات نموذج متقدمة مثل الإكمال التلقائي والتحقق من الصحة
+- [ ] أضف وظيفة استيراد/تصدير لبيانات المستخدم
+- [ ] اختبر امتدادك بدقة عبر المتصفحات المختلفة
+- [ ] قم بتحسين تجربة المستخدم ومعالجة الأخطاء في امتدادك
+
+### 🌟 **ما يمكنك إنجازه خلال شهر**
+- [ ] قم ببناء تطبيقات معقدة باستخدام واجهات تخزين المتصفح المختلفة
+- [ ] تعلم أنماط التطوير التي تعتمد على العمل دون اتصال
+- [ ] ساهم في مشاريع مفتوحة المصدر تتعلق باستمرارية البيانات
+- [ ] أتقن تطوير الخصوصية والامتثال لـ GDPR
+- [ ] أنشئ مكتبات قابلة لإعادة الاستخدام للتعامل مع النماذج وإدارة البيانات
+- [ ] شارك المعرفة حول واجهات برمجة التطبيقات وتطوير الامتدادات
+
+## 🎯 جدول زمني لإتقان تطوير الامتدادات
+
+```mermaid
+timeline
+    title API Integration & Storage Learning Progression
+    
+    section DOM Fundamentals (15 minutes)
+        Element References: querySelector mastery
+                          : Event listener setup
+                          : State management basics
+        
+    section Local Storage (20 minutes)
+        Data Persistence: Key-value storage
+                        : Session management
+                        : User preference handling
+                        : Storage inspection tools
+        
+    section Form Handling (25 minutes)
+        User Input: Form validation
+                  : Event prevention
+                  : Data extraction
+                  : UI state transitions
+        
+    section API Integration (35 minutes)
+        External Communication: HTTP requests
+                              : Authentication patterns
+                              : JSON data parsing
+                              : Response handling
+        
+    section Async Programming (40 minutes)
+        Modern JavaScript: Promise handling
+                         : Async/await patterns
+                         : Error management
+                         : Non-blocking operations
+        
+    section Error Handling (30 minutes)
+        Robust Applications: Try/catch blocks
+                           : User-friendly messages
+                           : Graceful degradation
+                           : Debugging techniques
+        
+    section Advanced Patterns (1 week)
+        Professional Development: Caching strategies
+                                : Rate limiting
+                                : Retry mechanisms
+                                : Performance optimization
+        
+    section Production Skills (1 month)
+        Enterprise Features: Security best practices
+                           : API versioning
+                           : Monitoring & logging
+                           : Scalable architecture
+```
+
+### 🛠️ ملخص أدوات تطوير الويب الكاملة
+
+بعد إكمال هذا الدرس، لديك الآن:
+- **إتقان DOM**: استهداف العناصر بدقة والتعامل معها
+- **خبرة التخزين**: إدارة البيانات المستمرة باستخدام localStorage
+- **تكامل API**: جلب البيانات في الوقت الحقيقي والمصادقة
+- **برمجة غير متزامنة**: عمليات غير معيقة باستخدام JavaScript الحديث
+- **معالجة الأخطاء**: تطبيقات قوية تتعامل مع الفشل بسلاسة
+- **تجربة المستخدم**: حالات التحميل، التحقق من الصحة، وتفاعلات سلسة
+- **أنماط حديثة**: واجهة fetch، async/await، وميزات ES6+
+
+**المهارات المهنية المكتسبة:** لقد نفذت أنماطًا مستخدمة في:
+- **تطبيقات الويب**: تطبيقات صفحة واحدة مع مصادر بيانات خارجية
+- **تطوير الهواتف المحمولة**: تطبيقات تعتمد على واجهات برمجة التطبيقات مع إمكانيات العمل دون اتصال
+- **برامج سطح المكتب**: تطبيقات Electron مع تخزين مستمر
+- **أنظمة المؤسسات**: المصادقة، التخزين المؤقت، ومعالجة الأخطاء
+- **الأطر الحديثة**: أنماط إدارة البيانات في React/Vue/Angular
+
+**المستوى التالي:** أنت جاهز لاستكشاف مواضيع متقدمة مثل استراتيجيات التخزين المؤقت، اتصالات WebSocket في الوقت الحقيقي، أو إدارة الحالة المعقدة!
+
+## المهمة
+
+[تبني واجهة برمجة التطبيقات](assignment.md)
 
 ---
 
 **إخلاء المسؤولية**:  
-تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو معلومات غير دقيقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالاستعانة بترجمة بشرية احترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالترجمة البشرية الاحترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.

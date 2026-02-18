@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "830359535306594b448db6575ce5cdee",
-  "translation_date": "2025-08-27T22:00:38+00:00",
-  "source_file": "7-bank-project/README.md",
-  "language_code": "id"
-}
--->
 # :dollar: Membangun Bank
 
 Dalam proyek ini, Anda akan belajar cara membangun bank fiksi. Pelajaran ini mencakup instruksi tentang cara merancang aplikasi web dan menyediakan rute, membuat formulir, mengelola state, serta mengambil data dari API yang memungkinkan Anda mendapatkan data bank.
 
-| ![Screen1](../../../translated_images/screen1.baccbba0f1f93364672eb250d2fbd21574bb1caf79a2155022dc098a741cbdfe.id.png) | ![Screen2](../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.id.png) |
+| ![Screen1](../../../translated_images/id/screen1.baccbba0f1f93364.webp) | ![Screen2](../../../translated_images/id/screen2.123c82a831a1d14a.webp) |
 |--------------------------------|--------------------------------|
 
 ## Pelajaran

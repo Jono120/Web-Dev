@@ -1,284 +1,726 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "acb5ae00cde004304296bb97da8ff4c3",
-  "translation_date": "2025-08-29T10:33:28+00:00",
-  "source_file": "3-terrarium/2-intro-to-css/README.md",
-  "language_code": "hu"
-}
--->
-# Terrárium Projekt 2. rész: Bevezetés a CSS-be
+# Terrarium Project 2. rész: Bemutatás a CSS-hez
 
-![Bevezetés a CSS-be](../../../../translated_images/webdev101-css.3f7af5991bf53a200d79e7257e5e450408d8ea97f5b531d31b2e3976317338ee.hu.png)
-> Sketchnote készítette: [Tomomi Imura](https://twitter.com/girlie_mac)
+```mermaid
+journey
+    title Az Ön CSS Stílusútja
+    section Alapok
+      Link CSS fájl: 3: Student
+      Értsd meg a kaszkádot: 4: Student
+      Tanuld meg az öröklődést: 4: Student
+    section Szelektorok
+      Elem célozás: 4: Student
+      Osztály minták: 5: Student
+      ID specifikusság: 5: Student
+    section Elrendezés
+      Elek elhelyezése: 4: Student
+      Konténerek létrehozása: 5: Student
+      Terrárium építése: 5: Student
+    section Csiszolás
+      Vizuális effektek hozzáadása: 5: Student
+      Reszponzív tervezés: 5: Student
+      Üveg visszatükröződés: 5: Student
+```
+![Bemutatás a CSS-hez](../../../../translated_images/hu/webdev101-css.3f7af5991bf53a20.webp)
+> Sketchnote szerzője: [Tomomi Imura](https://twitter.com/girlie_mac)
 
-## Előadás előtti kvíz
+Emlékszel, hogy a HTML terráriumod meglehetősen egyszerűnek tűnt? A CSS az, ahol azt az egyszerű szerkezetet vizuálisan vonzóvá alakítjuk.
 
-[Előadás előtti kvíz](https://ff-quizzes.netlify.app/web/quiz/17)
+Ha a HTML olyan, mint egy ház keretének megépítése, akkor a CSS mindaz, ami otthonossá teszi – a festék színei, a bútorok elrendezése, a világítás és a helyiségek közötti áramlás. Gondoljunk arra, hogy a Versailles-i Palota egyszerű vadászházként kezdődött, de a gondos dekoráció és elrendezés a világ egyik leglenyűgözőbb épületévé tette.
 
-### Bevezetés
+Ma a terráriumodat a funkcionálistól a kifinomultig alakítjuk át. Megtanulod, hogyan helyezd el az elemeket pontosan, hogyan reagáljanak a különböző képernyőméretekhez az elrendezések, és hogyan teremtsd meg a vizuális vonzerőt, amely leköti a webhelyek látogatóit.
 
-A CSS, vagyis a Cascading Style Sheets, egy fontos problémát old meg a webfejlesztésben: hogyan tegyük szebbé a weboldalunkat. Az alkalmazások stílusossá tétele nemcsak esztétikusabbá, hanem használhatóbbá is teszi őket; a CSS segítségével Responsive Web Design-t (RWD) is készíthetünk, amely lehetővé teszi, hogy az alkalmazások bármilyen képernyőméreten jól mutassanak. A CSS nem csupán az alkalmazások megjelenésének javításáról szól; a specifikációja tartalmaz animációkat és transzformációkat is, amelyekkel kifinomult interakciókat valósíthatunk meg. A CSS Munkacsoport segít a jelenlegi CSS specifikációk karbantartásában; munkájukat követheted a [World Wide Web Consortium oldalán](https://www.w3.org/Style/CSS/members).
+A lecke végére meglátod, hogyan javíthatja drámaian a projektedet a stratégiai CSS-stílusadás. Adjunk stílust a terráriumodnak.
 
-> Fontos megjegyezni, hogy a CSS egy folyamatosan fejlődő nyelv, mint minden a weben, és nem minden böngésző támogatja a specifikáció újabb részeit. Mindig ellenőrizd a megvalósításaidat a [CanIUse.com](https://caniuse.com) segítségével.
+```mermaid
+mindmap
+  root((CSS Alapok))
+    Cascade
+      Specificity szabályok
+      Öröklődés
+      Prioritási sorrend
+      Konfliktus feloldás
+    Selectors
+      Elemcímkék
+      Osztályok (.class)
+      Azonosítók (#id)
+      Kombinátorok
+    Box Model
+      Margó
+      Szegély
+      Kitöltés
+      Tartalom
+    Layout
+      Pozicionálás
+      Megjelenítési típusok
+      Flexbox
+      Grid
+    Visual Effects
+      Színek
+      Árnyékok
+      Átmenetek
+      Animációk
+    Responsive Design
+      Média lekérdezések
+      Rugalmas egységek
+      Nézetport meta
+      Mobil első
+```
+## Előzetes kvíz
 
-Ebben a leckében stílusokat adunk az online terráriumunkhoz, és megismerkedünk több CSS fogalommal: a kaszkáddal, az öröklődéssel, a szelektorok használatával, a pozicionálással, valamint a CSS-el történő elrendezések készítésével. A folyamat során elrendezzük a terráriumot, és magát a terráriumot is elkészítjük.
+[Előzetes kvíz](https://ff-quizzes.netlify.app/web/quiz/17)
+
+## Kezdés a CSS-sel
+
+A CSS-t gyakran csak „szépítésnek” gondolják, de sokkal szélesebb célt szolgál. A CSS olyan, mintha film rendezője lennél – nem csak azt szabályozod, hogy minden hogyan néz ki, hanem azt is, hogy mozog, hogyan reagál az interakciókra, és hogyan alkalmazkodik különböző helyzetekhez.
+
+A modern CSS rendkívül sokoldalú. Írhatsz olyan kódot, ami automatikusan igazítja az elrendezéseket telefonokhoz, tabletekhez és asztali gépekhez. Létrehozhatsz sima animációkat, amelyek irányítják a felhasználók figyelmét, ahol éppen szükséges. Az eredmények lenyűgözőek lehetnek, ha minden együtt működik.
+
+> 💡 **Pro Tipp**: A CSS folyamatosan fejlődik új funkciókkal és képességekkel. Mindig ellenőrizd a [CanIUse.com](https://caniuse.com) oldalt, hogy meggyőződj a böngészők támogatásáról az új CSS-funkciók használata előtt.
+
+**Amit ebben a leckében elérünk:**
+- **Készítünk** egy teljes vizuális tervezést a terráriumodhoz modern CSS technikákkal
+- **Felfedezünk** alapfogalmakat, mint a kaskád, öröklődés és CSS szelektorok
+- **Megvalósítunk** reszponzív pozicionálást és elrendezési stratégiákat
+- **Megépítjük** a terrárium konténert CSS alakzatokkal és stílusokkal
 
 ### Előfeltétel
 
-A terrárium HTML-jének már készen kell lennie, hogy stílusokat tudjunk hozzáadni.
+El kell készülnöd a terráriumod HTML szerkezetével az előző leckéből, hogy készen álljon a stílusozásra.
 
-> Nézd meg a videót
+> 📺 **Videó forrás**: Nézd meg ezt a hasznos videós áttekintőt
+>
+> [![CSS alapok oktatóvideó](https://img.youtube.com/vi/6yIdOIV9p1I/0.jpg)](https://www.youtube.com/watch?v=6yIdOIV9p1I)
 
-> 
-> [![Git és GitHub alapok videó](https://img.youtube.com/vi/6yIdOIV9p1I/0.jpg)](https://www.youtube.com/watch?v=6yIdOIV9p1I)
+### A CSS fájl beállítása
 
-### Feladat
+Mielőtt megkezdhetnénk a stílusozást, csatlakoztatnunk kell a CSS-t a HTML-hez. Ez a kapcsolat mondja meg a böngészőnek, hol találhatók a terrárium stílusai.
 
-A terrárium mappádban hozz létre egy új fájlt `style.css` néven. Importáld ezt a fájlt a `<head>` szekcióba:
+A terrárium mappádban hozz létre egy új fájlt `style.css` néven, majd linkeld be a HTML dokumentumod `<head>` részében:
 
 ```html
 <link rel="stylesheet" href="./style.css" />
 ```
 
----
+**Ezt a funkciót látja el ez a kód:**
+- **Kapcsolatot teremt** a HTML és CSS fájlok között
+- **Mondja meg** a böngészőnek, hogy töltse be és alkalmazza a `style.css` stílusokat
+- **Használja** a `rel="stylesheet"` attribútumot, jelezve, hogy CSS fájlról van szó
+- **Hivatkozik** a fájl elérési útjára a `href="./style.css"`-sel
 
-## A kaszkád
+## A CSS kaskád megértése
 
-A Cascading Style Sheets (kaszkádoló stíluslapok) alapelve, hogy a stílusok "kaszkádolnak", vagyis a stílus alkalmazását a prioritása határozza meg. A weboldal készítője által beállított stílusok elsőbbséget élveznek a böngésző által beállítottakkal szemben. Az "inline" stílusok pedig elsőbbséget élveznek a külső stíluslapokon beállítottakkal szemben.
+Gondolkodtál már rajta, hogy miért hívják a CSS-t Kaskád Stíluslapoknak? A stílusok olyanok, mint egy vízesés, lefelé folynak, és néha ütköznek egymással.
 
-### Feladat
+Vegyük például a katonai parancsrendszert – egy tábornoki parancs mondhatja, hogy „minden katona zöldet viseljen,” de az adott egységednek kiadott külön parancs „viseljék az ünnepi kék egyenruhát.” A specifikusabb utasítás élvez elsőbbséget. A CSS hasonló logikát követ, és ennek a hierarchiának megértése sokkal könnyebbé teszi a hibakeresést.
 
-Adj hozzá egy "color: red" inline stílust az `<h1>` címkéhez:
+### Kísérlet a kaskád prioritásával
 
-```HTML
+Nézzük meg a kaskádot akcióban, egy stílusütközés létrehozásával. Először adj egy inline stílust a `<h1>` címkéhez:
+
+```html
 <h1 style="color: red">My Terrarium</h1>
 ```
 
-Ezután add hozzá a következő kódot a `style.css` fájlodhoz:
+**Mit tesz ez a kód:**
+- **Közvetlenül alkalmaz** piros színt a `<h1>` elemre inline stílus segítségével
+- **Használja** a `style` attribútumot, hogy CSS-t közvetlenül a HTML-ben ágyazzon be
+- **Létrehoz** ezzel a legmagasabb prioritású stílus szabályt erre az adott elemre
 
-```CSS
+Ezután add hozzá ezt a szabályt a `style.css` fájlodhoz:
+
+```css
 h1 {
- color: blue;
+  color: blue;
 }
 ```
 
-✅ Milyen szín jelenik meg a webalkalmazásodban? Miért? Meg tudod találni a módját a stílusok felülírásának? Mikor lenne erre szükséged, vagy miért nem?
+**Ebben a részben:**
+- **Meghatározunk** egy CSS szabályt, amely az összes `<h1>` elemet célozza
+- **Beállítjuk** a szöveg színét kékre egy külső stíluslap segítségével
+- **Alacsonyabb prioritású szabályt hoztunk létre** az inline stílusokhoz képest
 
----
+✅ **Tudásellenőrzés**: Milyen szín jelenik meg a webalkalmazásodban? Miért ez a szín győz? Tudsz olyan helyzeteket elképzelni, amikor felül szeretnéd írni a stílusokat?
 
-## Öröklődés
+```mermaid
+flowchart TD
+    A["A böngésző találkozik egy h1 elemmel"] --> B{"Ellenőrizze az inline stílusokat"}
+    B -->|Talált| C["style='color: red'"] 
+    B -->|Nincs| D{"Ellenőrizze az ID szabályokat"}
+    C --> E["Alkalmazza a piros színt (1000 pont)"]
+    D -->|Talált| F["#heading { color: green }"]
+    D -->|Nincs| G{"Ellenőrizze az osztályszabályokat"}
+    F --> H["Alkalmazza a zöld színt (100 pont)"]
+    G -->|Talált| I[".title { color: blue }"]
+    G -->|Nincs| J{"Ellenőrizze az elem szabályokat"}
+    I --> K["Alkalmazza a kék színt (10 pont)"]
+    J -->|Talált| L["h1 { color: purple }"]
+    J -->|Nincs| M["Használja a böngésző alapértelmezettjét"]
+    L --> N["Alkalmazza az ibolyaszínt (1 pont)"]
+    
+    style C fill:#ff6b6b
+    style F fill:#51cf66
+    style I fill:#339af0
+    style L fill:#9775fa
+```
+> 💡 **CSS prioritási sorrend (legmagasabbtól legalacsonyabbig):**
+> 1. **Inline stílusok** (style attribútum)
+> 2. **ID-k** (#myId)
+> 3. **Osztályok** (.myClass) és attribútumok
+> 4. **Elem szelektorok** (h1, div, p)
+> 5. **Böngésző alapértelmezettek**
 
-A stílusok öröklődnek egy ős stílusból egy leszármazottra, így a beágyazott elemek öröklik a szülőik stílusait.
+## CSS öröklődés működés közben
 
-### Feladat
+A CSS öröklődés olyan, mint a genetika – az elemek bizonyos tulajdonságokat örökölnek a szülőelemeiktől. Ha a `body` elemre beállítod a betűtípust, az összes benne lévő szöveg automatikusan azt a betűtípust használja. Ez hasonló ahhoz, amikor a Habsburg család jellegzetes álla generációkon keresztül jelent meg, anélkül hogy minden egyedinek külön meg kellett volna mondani.
 
-Állítsd be a body betűtípusát egy adott betűtípusra, és ellenőrizd, hogy egy beágyazott elem betűtípusa öröklődik-e:
+Azonban nem minden öröklődik. A betűtípusokhoz és színekhez hasonló szövegstílusok öröklődnek, de az elrendezés tulajdonságai, mint a margók és határok nem. Ahogy a gyerekek örökölhetnek fizikai jegyeket, de nem feltétlenül ruházati ízlést a szüleiktől.
 
-```CSS
+### A betűtípus öröklődésének megfigyelése
+
+Nézzük meg az öröklődést azzal, hogy beállítunk egy betűtípust a `<body>` elemre:
+
+```css
 body {
-	font-family: helvetica, arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 ```
 
-Nyisd meg a böngésződ konzolját az 'Elements' fülön, és figyeld meg az H1 betűtípusát. Ez örökli a betűtípust a body-tól, ahogy azt a böngésző is jelzi:
+**Mit történik itt:**
+- **Beállítjuk** az egész oldal betűtípusát a `<body>` elem célzásával
+- **Használunk** betűhalmazt (font stack) tartalék opciókkal a jobb böngésző-kompatibilitásért
+- **Alkalmazunk** modern rendszerbetűket, amelyek jól néznek ki több operációs rendszeren is
+- **Biztosítjuk**, hogy minden gyermekelem örökölje ezt a betűtípust, kivéve, ha máshogy van kijelölve
 
-![örökölt betűtípus](../../../../translated_images/1.cc07a5cbe114ad1d4728c35134584ac1b87db688eff83cf75985cf31fe0ed95c.hu.png)
+Nyisd meg a böngésződ fejlesztői eszközeit (F12), menj az Elements fülre, és nézd meg a `<h1>` elemedet. Láthatod, hogy a betűtípust a `body`-tól örökli:
 
-✅ Meg tudsz adni egy beágyazott stílusnak egy másik tulajdonságot öröklés helyett?
+![örökölt betűtípus](../../../../translated_images/hu/1.cc07a5cbe114ad1d.webp)
 
----
+✅ **Kísérlet**: Próbálj meg más öröklődő tulajdonságokat is beállítani a `<body>`-n, mint a `color`, `line-height` vagy `text-align`. Mi történik a címmel és más elemekkel?
 
-## CSS Szelektorok
+> 📝 **Öröklődő tulajdonságok**: `color`, `font-family`, `font-size`, `line-height`, `text-align`, `visibility`
+>
+> **Nem öröklődő tulajdonságok**: `margin`, `padding`, `border`, `width`, `height`, `position`
 
-### Címkék
+### 🔄 **Pedagógiai ellenőrzőpont**
+**CSS alapok megértése**: Mielőtt a szelektorokra lépnél, győződj meg, hogy:
+- ✅ Képes vagy elmagyarázni a kaskád és öröklődés közötti különbséget
+- ✅ Meg tudod jósolni, melyik stílus nyer túlzott specifikusság esetén
+- ✅ Ismered, mely tulajdonságok öröklődnek a szülőelemtől
+- ✅ Helyesen tudod a CSS fájlokat csatolni a HTML-hez
 
-Eddig a `style.css` fájlodban csak néhány címke van stílusozva, és az alkalmazás elég furcsán néz ki:
+**Gyors teszt**: Ha ezek a stílusok léteznek, milyen színű lesz egy `<h1>` egy `<div class="special">`-en belül?
+```css
+div { color: blue; }
+.special { color: green; }
+h1 { color: red; }
+```
+*Válasz: Piros (elem szelektor közvetlenül célozza a h1-et)*
 
-```CSS
+## A CSS szelektorok mestersége
+
+A CSS szelektorok segítségével célzottan választhatsz ki konkrét elemeket stílusozásra. Olyanok, mint a pontos instrukciók – ahelyett, hogy azt mondanád „az a ház,” mondhatod azt, hogy „a kék ház, aminek piros ajtaja van a Maple utcában.”
+
+A CSS többféle módot kínál a részletességre, és a megfelelő szelekció kiválasztása olyan, mintha a munkához való eszközt választanád ki. Néha minden ajtót meg kell stílusoznod a környéken, máskor csak egy konkrét ajtót.
+
+### Elem szelektorok (címkék)
+
+Az elem szelektorok az HTML-elemeket a címkéjük neve alapján célozzák meg. Tökéletesek az alapstílusok beállítására, amelyek széles körben alkalmazhatók az oldalon:
+
+```css
 body {
-	font-family: helvetica, arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
-	color: #3a241d;
-	text-align: center;
+  color: #3a241d;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
 ```
 
-Ez a címkék stílusozásának módja lehetővé teszi, hogy egyedi elemeket irányíts, de szükséged van arra, hogy sok növény stílusát irányítsd a terráriumodban. Ehhez a CSS szelektorokat kell használnod.
+**Ezeknek a stílusoknak a magyarázata:**
+- **Egységes tipográfiát állít be** az oldalon a `body` szelektorral
+- **Eltávolítja** az alap böngészői margókat és paddingokat jobb vezérlésért
+- **Stílusozza** az összes címsort színnel, igazítással és távolsággal
+- **`rem` egységeket használ** méretezhető, akadálymentes betűméretezéshez
 
-### Azonosítók
+Bár az elem szelektorok jól működnek az általános stílusokhoz, szükséged lesz konkrétabb szelektorokra az egyes terráriumi növényekhez.
 
-Adj stílust a bal és jobb konténerek elrendezéséhez. Mivel csak egy bal és egy jobb konténer van, azokat azonosítókkal látták el a jelölésben. A stílusozásukhoz használd a `#` jelet:
+### ID szelektorok egyedi elemekhez
 
-```CSS
+Az ID szelektorok a `#` jellel kezdődnek, és az `id` attribútummal rendelkező egyedi elemeket célozzák. Az ID-k egy oldalon egyediek kell legyenek, ezért tökéletesek egyedi, különleges elemek, például a bal és jobb növénytartók stílusozására.
+
+Készítsük el a terrárium oldal konténereinek stílusát, ahol a növények laknak:
+
+```css
 #left-container {
-	background-color: #eee;
-	width: 15%;
-	left: 0px;
-	top: 0px;
-	position: absolute;
-	height: 100%;
-	padding: 10px;
+  background-color: #f5f5f5;
+  width: 15%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 #right-container {
-	background-color: #eee;
-	width: 15%;
-	right: 0px;
-	top: 0px;
-	position: absolute;
-	height: 100%;
-	padding: 10px;
+  background-color: #f5f5f5;
+  width: 15%;
+  right: 0;
+  top: 0;
+  position: absolute;
+  height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 ```
 
-Itt a konténereket abszolút pozicionálással helyezted el a képernyő bal és jobb szélén, és százalékokat használtál a szélességükhöz, hogy kicsi mobilképernyőkön is méretezhetők legyenek.
+**Mit tesz ez a kód:**
+- **Az abszolút pozicionálás segítségével** a konténereket a bal és jobb szélekre helyezi
+- **A `vh` (viewport magasság) egységet használja**, hogy az elemek magassága reagáljon a képernyő méretére
+- **Alkalmazza a `box-sizing: border-box`-ot**, hogy a padding is beletartozzon a teljes szélességbe
+- **Eltávolítja a szükségtelen `px` egységeket nullánál** a tisztább kódért
+- **Beállít egy finom háttérszínt**, amely kevésbé zavaró, mint az élénk szürke
 
-✅ Ez a kód elég ismétlődő, tehát nem "DRY" (Don't Repeat Yourself); találsz egy jobb módot az azonosítók stílusozására, például egy azonosító és egy osztály kombinációjával? Ehhez módosítanod kellene a jelölést és újra kellene strukturálnod a CSS-t:
+✅ **Kódminőség kihívás**: Figyeld meg, hogy ez a CSS megsérti a DRY (Don't Repeat Yourself) elvet. Tudod úgy átalakítani, hogy ID és osztály kombinációját használod?
 
+**Javított megoldás:**
 ```html
 <div id="left-container" class="container"></div>
+<div id="right-container" class="container"></div>
 ```
 
-### Osztályok
+```css
+.container {
+  background-color: #f5f5f5;
+  width: 15%;
+  top: 0;
+  position: absolute;
+  height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
+}
 
-A fenti példában két egyedi elemet stílusoztál a képernyőn. Ha azt szeretnéd, hogy a stílusok több elemre is vonatkozzanak a képernyőn, használhatsz CSS osztályokat. Ezt tedd a növények elrendezéséhez a bal és jobb konténerekben.
+#left-container {
+  left: 0;
+}
 
-Figyeld meg, hogy az egyes növények a HTML jelölésben azonosítók és osztályok kombinációjával rendelkeznek. Az azonosítókat itt a JavaScript használja, amelyet később adsz hozzá, hogy manipulálja a terrárium növényelhelyezését. Az osztályok viszont minden növénynek egy adott stílust adnak.
+#right-container {
+  right: 0;
+}
+```
 
+### Osztály szelektorok újrafelhasználható stílusokhoz
+
+Az osztály szelektorok a `.` jellel kezdődnek, és akkor használatosak, ha ugyanazt a stílust több elemhez akarod alkalmazni. Az ID-kkel ellentétben az osztályok ismételhetőek a HTML-ben, ezért ideálisak egységes stílusmintákhoz.
+
+A terráriumunkban minden növény hasonló stílust igényel, de egyedi elhelyezést is. Osztályokat használunk az általános stílushoz, és ID-ket az egyedi pozicionáláshoz.
+
+**Az egyes növények HTML szerkezete:**
 ```html
 <div class="plant-holder">
-	<img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
+  <img class="plant" alt="Decorative plant for terrarium" id="plant1" src="../../../../translated_images/hu/plant1.d18b18ffe73da18f.png" />
 </div>
 ```
 
-Add hozzá a következőket a `style.css` fájlodhoz:
+**Fontos elemek magyarázata:**
+- **`class="plant-holder"`**: egységes konténer stílus minden növény számára
+- **`class="plant"`**: közös kép-stílus és viselkedés
+- **`id="plant1"`**: egyedi pozíció és JavaScript interakció
+- **Leíró alternatív szöveg** a képernyőolvasók számára
 
-```CSS
+Most add hozzá ezt a stílust a `style.css` fájlodhoz:
+
+```css
 .plant-holder {
-	position: relative;
-	height: 13%;
-	left: -10px;
+  position: relative;
+  height: 13%;
+  left: -0.6rem;
 }
 
 .plant {
-	position: absolute;
-	max-width: 150%;
-	max-height: 150%;
-	z-index: 2;
+  position: absolute;
+  max-width: 150%;
+  max-height: 150%;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.plant:hover {
+  transform: scale(1.05);
 }
 ```
 
-Érdemes megjegyezni ebben a kódrészletben a relatív és abszolút pozicionálás keverékét, amelyet a következő szakaszban tárgyalunk. Nézd meg, hogyan kezelik a magasságokat százalékokkal:
+**Stílusok magyarázata:**
+- **Relatív pozicionálást állít be** a növénytartóra, hogy pozíciós kontextust biztosítson
+- **Minden növénytartót 13% magasságúra állít**, hogy a növények függőlegesen elférjenek görgetés nélkül
+- **Kicsit balra tolja el a tartókat**, hogy jobban középre kerüljenek a növények
+- **Engedi, hogy a növények arányosan méreteződjenek** a `max-width` és `max-height` tulajdonságokkal
+- **`z-index` használatával** a növényeket más elemek fölé helyezi a terráriumban
+- **Finom lebegési effektet ad** CSS átmenetekkel jobb felhasználói élményért
 
-A növénytartó magasságát 13%-ra állítottad, ami jó arány ahhoz, hogy az összes növény megjelenjen minden függőleges konténerben görgetés nélkül.
+✅ **Kritikus gondolkodás**: Miért van szükségünk mind a `.plant-holder`, mind a `.plant` szelektorokra? Mi történne, ha csak egyet használnánk?
 
-A növénytartót balra mozgattad, hogy a növények jobban középre kerüljenek a konténerükben. A képek nagy mennyiségű átlátszó hátteret tartalmaznak, hogy könnyebben mozgathatók legyenek, ezért balra kell tolni őket, hogy jobban illeszkedjenek a képernyőre.
+> 💡 **Tervezési minta**: A konténer (`.plant-holder`) kezeli az elrendezést és pozíciót, míg a tartalom (`.plant`) az megjelenést és méretezést. Ez a szétválasztás fenntarthatóbbá és rugalmasabbá teszi a kódot.
 
-Ezután a növénynek maximális szélességet adtál 150%-ban. Ez lehetővé teszi, hogy a böngésző méretének csökkenésével arányosan zsugorodjon. Próbáld meg átméretezni a böngésződet; a növények a konténereikben maradnak, de zsugorodnak, hogy illeszkedjenek.
+## A CSS pozicionálás megértése
 
-Szintén figyelemre méltó a z-index használata, amely az elem relatív "magasságát" szabályozza (így a növények a konténer tetején helyezkednek el, és úgy tűnik, mintha a terráriumban lennének).
+A CSS pozicionálás olyan, mint egy színdarab rendezője – megmondod, hol álljanak a szereplők és hogyan mozogjanak a színpadon. Egyes szereplők követik az alapelrendezést, míg másoknak speciális pozicionálás kell a drámai hatáshoz.
 
-✅ Miért van szükséged külön növénytartó és növény CSS szelektorra?
+Ha megérted a pozicionálást, sok elrendezési kihívás kezelhetővé válik. Szükséged van egy navigációs sávra, amely a tetején marad görgetés közben? Ezt a pozicionálás megoldja. Egy tooltipet szeretnél egy adott helyen megjeleníteni? Ez is pozicionálás.
 
-## CSS Pozicionálás
+### Az öt pozíció érték
 
-A pozíció tulajdonságok keverése (statikus, relatív, rögzített, abszolút és ragadós pozíciók) kissé bonyolult lehet, de ha helyesen alkalmazzák, jó irányítást biztosít az elemek felett az oldalaidon.
+```mermaid
+quadrantChart
+    title CSS Elhelyezkedési Stratégia
+    x-axis Dokumentumfolyam --> Eltávolítva a folyamból
+    y-axis Statikus Pozíció --> Precíz Irányítás
+    quadrant-1 Abszolút
+    quadrant-2 Rögzített
+    quadrant-3 Statikus
+    quadrant-4 Tapadó
+    
+    Static: [0.2, 0.2]
+    Relative: [0.3, 0.6]
+    Absolute: [0.8, 0.8]
+    Fixed: [0.9, 0.7]
+    Sticky: [0.5, 0.9]
+```
+| Pozíció érték | Viselkedés | Használati eset |
+|----------------|------------|-----------------|
+| `static` | Alapértelmezett áramlás, figyelmen kívül hagyja a top/left/right/bottom értékeket | Normál dokumentum elrendezés |
+| `relative` | Az eredeti helyéhez képest pozíciózott | Kis módosítások, pozícionálási kontextus létrehozása |
+| `absolute` | A legközelebbi pozícionált őstől függő pozíció | Pontos elhelyezés, rétegezés |
+| `fixed` | A viewporthoz képest rögzített pozíció | Navigációs sávok, lebegő elemek |
+| `sticky` | Görgetés alapján vált `relative` és `fixed` érték között | Fejlécek, melyek ragadnak görgetéskor |
 
-Az abszolút pozicionált elemek a legközelebbi pozicionált ősükhöz viszonyítva helyezkednek el, és ha nincs ilyen, akkor a dokumentum törzséhez viszonyítva.
+### Pozicionálás a terráriumunkban
 
-A relatív pozicionált elemek a CSS által megadott irányok alapján helyezkednek el az eredeti pozíciójukhoz képest.
+A terráriumunk tudatosan használja a pozíciótípusok kombinációját az elrendezés megvalósításához:
 
-A példánkban a `plant-holder` egy relatív pozicionált elem, amely egy abszolút pozicionált konténeren belül helyezkedik el. Az eredmény az, hogy az oldalsáv konténerek a bal és jobb oldalon rögzítettek, a növénytartó pedig beágyazott, és az oldalsávokon belül igazodik, helyet adva a növényeknek, hogy függőleges sorban helyezkedjenek el.
+```css
+/* Container positioning */
+.container {
+  position: absolute; /* Removes from normal flow */
+  /* ... other styles ... */
+}
 
-> Maga a `plant` is abszolút pozicionált, ami szükséges ahhoz, hogy mozgatható legyen, ahogy azt a következő leckében felfedezed.
+/* Plant holder positioning */
+.plant-holder {
+  position: relative; /* Creates positioning context */
+  /* ... other styles ... */
+}
 
-✅ Kísérletezz az oldalsó konténerek és a növénytartó pozicionálási típusainak cseréjével. Mi történik?
+/* Plant positioning */
+.plant {
+  position: absolute; /* Allows precise placement within holder */
+  /* ... other styles ... */
+}
+```
 
-## CSS Elrendezések
+**A pozicionálási stratégiát megértve:**
+- **Az abszolút konténerek** elkerülnek a normál dokumentum áramlásából és a képernyő szélére kerülnek
+- **A relatív növénytartók** pozíciós kontextust biztosítanak, miközben a dokumentum részei maradnak
+- **Az abszolút növények** pontosan pozícionálhatóak relatív tartóikon belül
+- **Ez a kombináció** lehetővé teszi, hogy a növények egymás fölé kerüljenek és egyénileg is pozícionálhatóak legyenek
 
-Most azt fogod használni, amit tanultál, hogy elkészítsd magát a terráriumot, mindezt CSS segítségével!
+> 🎯 **Miért fontos ez?** A növény elemeknek abszolút pozíciós érték kell a következő leckében történő húzhatósághoz. Az abszolút pozicionálás kivonja őket a normál elrendezési áramlásból, lehetővé téve a drag-and-drop interakciókat.
 
-Először stílusozd a `.terrarium` div gyermekeit kerekített téglalapként a CSS használatával:
+✅ **Kísérlet**: Próbáld meg megváltoztatni a pozíciós értékeket, és figyeld meg az eredményt:
+- Mi történik, ha a `.container` pozícióját átállítod `absolute`-ról `relative`-re?
+- Hogyan változik a elrendezés, ha a `.plant-holder` `relative` helyett `absolute`-ot használ?
+- Mi történik, ha a `.plant` pozícionálását `relative`-re állítod?
 
-```CSS
+### 🔄 **Pedagógiai állapotfelmérés**
+**CSS pozícionálás mesterfokon**: Állj meg egy pillanatra és ellenőrizd a megértésedet:
+- ✅ El tudod magyarázni, miért szükséges a növényeknek az abszolút pozícionálás a drag-and-drop funkcióhoz?
+- ✅ Érted, hogyan hoznak létre a relatív konténerek pozíciós kontextust?
+- ✅ Miért használnak oldal konténerek abszolút pozícionálást?
+- ✅ Mi történne, ha teljesen eltávolítanád a pozíció deklarációkat?
+
+**Valós kapcsolat**: Gondolkodj el rajta, hogyan tükrözi a CSS pozícionálás a valós világ elrendezését:
+- **Statikus**: Könyvek a polcon (természetes sorrend)
+- **Relatív**: Egy könyv kis elmozgatása, de a helyének megtartása
+- **Abszolút**: Könyvjelző elhelyezése pontos oldalszámnál
+- **Fix**: Egy ragacsos jegyzet, ami látható marad, miközben lapozol
+
+## Üvegpohár (terrárium) építése CSS-sel
+
+Most építsünk fel egy üvegedényt csak CSS segítségével – nem kell képek vagy grafikai szoftver.
+
+Az üveg, árnyékok és mélységrealizmus létrehozása pozícionálással és áttetszőséggel demonstrálja a CSS vizuális képességeit. Ez a megközelítés hasonló, mint ahogy a Bauhaus mozgalom építészei egyszerű geometriai formákkal hoztak létre bonyolult, szép szerkezeteket. Ha megérted ezeket az alapelveket, felismered a CSS technikákat számos webdesign mögött.
+
+```mermaid
+flowchart LR
+    A[Üveg teteje] --> E[Teljes terrárium]
+    B[Üveg falai] --> E
+    C[Földréteg] --> E
+    D[Üveg alja] --> E
+    F[Üveg hatások] --> E
+    
+    A1["50% szélesség<br/>5% magasság<br/>Felső pozíció"] --> A
+    B1["60% szélesség<br/>80% magasság<br/>Lekerekített sarkok<br/>0.5 átlátszóság"] --> B
+    C1["60% szélesség<br/>5% magasság<br/>Sötétbarna<br/>Alsó réteg"] --> C
+    D1["50% szélesség<br/>1% magasság<br/>Alsó pozíció"] --> D
+    F1["Finom árnyékok<br/>Átlátszóság<br/>Z-index rétegezés"] --> F
+    
+    style E fill:#d1e1df,stroke:#3a241d
+    style A fill:#e8f5e8
+    style B fill:#e8f5e8
+    style C fill:#8B4513
+    style D fill:#e8f5e8
+```
+### Az Üvegpohár Alkatrészeinek Létrehozása
+
+Építsük fel a terrárium üveget darabonként. Minden rész abszolút pozícionálást és százalékos méretezést használ a responsív dizájn érdekében:
+
+```css
 .jar-walls {
-	height: 80%;
-	width: 60%;
-	background: #d1e1df;
-	border-radius: 1rem;
-	position: absolute;
-	bottom: 0.5%;
-	left: 20%;
-	opacity: 0.5;
-	z-index: 1;
+  height: 80%;
+  width: 60%;
+  background: #d1e1df;
+  border-radius: 1rem;
+  position: absolute;
+  bottom: 0.5%;
+  left: 20%;
+  opacity: 0.5;
+  z-index: 1;
+  box-shadow: inset 0 0 2rem rgba(0, 0, 0, 0.1);
 }
 
 .jar-top {
-	width: 50%;
-	height: 5%;
-	background: #d1e1df;
-	position: absolute;
-	bottom: 80.5%;
-	left: 25%;
-	opacity: 0.7;
-	z-index: 1;
+  width: 50%;
+  height: 5%;
+  background: #d1e1df;
+  position: absolute;
+  bottom: 80.5%;
+  left: 25%;
+  opacity: 0.7;
+  z-index: 1;
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .jar-bottom {
-	width: 50%;
-	height: 1%;
-	background: #d1e1df;
-	position: absolute;
-	bottom: 0%;
-	left: 25%;
-	opacity: 0.7;
+  width: 50%;
+  height: 1%;
+  background: #d1e1df;
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  opacity: 0.7;
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .dirt {
-	width: 60%;
-	height: 5%;
-	background: #3a241d;
-	position: absolute;
-	border-radius: 0 0 1rem 1rem;
-	bottom: 1%;
-	left: 20%;
-	opacity: 0.7;
-	z-index: -1;
+  width: 60%;
+  height: 5%;
+  background: #3a241d;
+  position: absolute;
+  border-radius: 0 0 1rem 1rem;
+  bottom: 1%;
+  left: 20%;
+  opacity: 0.7;
+  z-index: -1;
 }
 ```
 
-Figyeld meg a százalékok használatát itt. Ha lekicsinyíted a böngésződet, láthatod, hogyan méreteződik a befőttesüveg is. Figyeld meg továbbá a befőttesüveg elemeinek szélesség- és magasság-százalékait, valamint azt, hogy minden elem abszolút módon a középpontban helyezkedik el, az alsó nézetablakhoz rögzítve.
+**A terrárium építésének megértése:**
+- **Százalék alapú** méreteket használ a minden képernyőméreten való adaptív méretezéshez
+- **Abszolút pozícionálással** helyezi el az elemeket, hogy pontosan egymásra kerüljenek és helyezkedjenek el
+- **Különböző átlátszóságokat** alkalmaz az üveghatás létrehozásához
+- **`z-index` rétegzést** valósít meg, hogy a növények a poháron belül jelenjenek meg
+- **Finom dobozárnyékot** és lekerekített széleket ad a valószerűbb megjelenésért
 
-A `rem` használatát is alkalmazzuk a border-radius esetében, amely egy betűmérethez viszonyított hossz. Olvass többet erről a relatív mértékről a [CSS specifikációban](https://www.w3.org/TR/css-values-3/#font-relative-lengths).
+### Responsív tervezés százalékszámítással
 
-✅ Próbáld megváltoztatni a befőttesüveg színeit és átlátszóságát a földhöz képest. Mi történik? Miért?
+Vedd észre, hogy minden méret százalékos, nem fix pixel érték:
+
+**Miért fontos ez:**
+- **Biztosítja**, hogy a terrárium arányosan méreteződik bármilyen képernyőméreten
+- **Megőrzi** a vizuális kapcsolatokat az üveg alkatrészei között
+- **Konzisztens élményt** nyújt mobiltelefontól a nagy asztali monitorokig
+- **Lehetővé teszi**, hogy a dizájn alkalmazkodjon anélkül, hogy összetörné a vizuális elrendezést
+
+### CSS egységek használatban
+
+A `border-radius`-hoz `rem` mértékegységet használunk, ami a gyökér betűmérethez viszonyítva skálázódik. Ez hozzáférhetőbb tervezéseket eredményez, amelyek tiszteletben tartják a felhasználói betűméret beállítást. Tudj meg többet a [CSS relációs egységekről](https://www.w3.org/TR/css-values-3/#font-relative-lengths) a hivatalos specifikációban.
+
+✅ **Vizuális kísérletezés**: Próbáld meg módosítani ezeket az értékeket, és figyeld meg a hatásokat:
+- Módosítsd a pohár átlátszóságát 0.5-ről 0.8-ra – hogyan változik az üveg megjelenése?
+- Állítsd át a föld színét `#3a241d`-ről `#8B4513`-ra – milyen vizuális hatás érvényesül?
+- Változtasd meg a föld `z-index` értékét 2-re – mi történik a rétegzéssel?
+
+### 🔄 **Pedagógiai állapotfelmérés**
+**CSS vizuális tervezés megértése**: Ellenőrizd a CSS látványtervezési ismereteidet:
+- ✅ Hogyan hoznak létre a százalékos méretek responsív dizájnt?
+- ✅ Miért hoz létre az átlátszóság üveghatást?
+- ✅ Milyen szerepe van a `z-index`-nek az elemek rétegzésében?
+- ✅ Hogyan formálják a `border-radius` értékek a pohár alakját?
+
+**Tervezési elv**: Vedd észre, hogy bonyolult képi elemeket egyszerű formákból építünk fel:
+1. **Téglalapok** → **Lekerekített téglalapok** → **Pohár alkatrészek**
+2. **Egyszínű felületek** → **Átlátszóság** → **Üveghatás**
+3. **Egyedi elemek** → **Rétegezett kompozíció** → **3D megjelenés**
 
 ---
 
-## 🚀Kihívás
+## GitHub Copilot Agent kihívás 🚀
 
-Adj egy "buborék" csillogást a befőttesüveg bal alsó részéhez, hogy üvegszerűbbnek tűnjön. A `.jar-glossy-long` és `.jar-glossy-short` elemeket fogod stílusozni, hogy tükröződő csillogást hozz létre. Így fog kinézni:
+Használd az Agent módot a következő kihívás teljesítéséhez:
 
-![kész terrárium](../../../../translated_images/terrarium-final.2f07047ffc597d0a06b06cab28a77801a10dd12fdb6c7fc630e9c40665491c53.hu.png)
+**Leírás:** Készíts egy CSS animációt, amely lágyan ringatja a terrárium növényeit, mintha enyhe szél fújna. Ez segít gyakorolni a CSS animációkat, transzformációkat és kulcskockákat, miközben növeli a terrárium vizuális vonzerejét.
 
-A leckét követő kvíz kitöltéséhez menj végig ezen a Learn modulon: [Stílusozd a HTML alkalmazásodat CSS-sel](https://docs.microsoft.com/learn/modules/build-simple-website/4-css-basics/?WT.mc_id=academic-77807-sagibbon)
+**Feladat:** Adj CSS kulcskocka animációkat, hogy a terrárium növényei enyhén jobbra-balra ringjanak. Készíts egy ringató animációt, amely mindegyik növényt kicsit (2-3 fokkal) jobbra-balra forgat 3-4 másodperces időtartammal, majd alkalmazd a `.plant` osztályra. Gondoskodj róla, hogy az animáció végtelenül fusson és legyen egy sima, természetes mozgást utánzó easing funkciója.
+
+Tudj meg többet az [agent módról](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode).
+
+## 🚀 Kihívás: Üveg fényvisszaverődések hozzáadása
+
+Készen állsz élethű üveg fényvisszaverődésekkel gazdagítani a terráriumot? Ez a technika mélységet és realizmust ad a tervhez.
+
+Finom fénypontokat készítesz, amelyek szimulálják, hogyan tükröződik a fény az üvegfelületen. Ez hasonló ahhoz, ahogy a reneszánsz festők, például Jan van Eyck fénnyel és visszatükröződéssel teszik térhatásúvá az üvegvázlatokat. Itt egy cél, amit meg akarsz valósítani:
+
+![finished terrarium](../../../../translated_images/hu/terrarium-final.2f07047ffc597d0a.webp)
+
+**A kihívásod:**
+- **Hozz létre** finom, fehér vagy világos ovális alakzatokat az üveg fényvisszaverődéséhez
+- **Helyezd el** őket stratégiailag a pohár bal oldalán
+- **Alkalmazz** megfelelő áttetszőséget és elmosódást az élethű fénytükröződéshez
+- **Használj** `border-radius`-t az organikus, buborékszerű formák létrehozásához
+- **Kísérletezz** átmenetekkel vagy dobozárnyékokkal a nagyobb realizmus érdekében
 
 ## Előadás utáni kvíz
 
 [Előadás utáni kvíz](https://ff-quizzes.netlify.app/web/quiz/18)
 
-## Áttekintés és önálló tanulás
+## Bővítsd CSS tudásod
 
-A CSS megtévesztően egyszerűnek tűnik, de számos kihívást jelent, amikor egy alkalmazást tökéletesen szeretnénk stílusozni minden böngészőre és képernyőméretre. A CSS-Grid és a Flexbox olyan eszközök, amelyeket azért fejlesztettek ki, hogy a munka egy kicsit strukturáltabb és megbízhatóbb legyen. Ismerd meg ezeket az eszközöket a [Flexbox Froggy](https://flexboxfroggy.com/) és a [Grid Garden](https://codepip.com/games/grid-garden/) játékokkal.
+A CSS elsőre bonyolultnak tűnhet, de ezeknek az alapelveknek a megértése szilárd alapot ad fejlettebb technikákhoz.
+
+**Következő CSS tanulási területek:**
+- **Flexbox** – leegyszerűsíti az elemek igazítását és elosztását
+- **CSS Grid** – hatékony eszközök a komplex elrendezésekhez
+- **CSS változók** – csökkenti az ismétlést, javítja a karbantartást
+- **Reszponzív tervezés** – biztosítja, hogy az oldalak különböző képernyőkön jól működjenek
+
+### Interaktív tanulási források
+
+Gyakorold ezeket a fogalmakat ezekkel az élvezetes, gyakorlati játékokkal:
+- 🐸 [Flexbox Froggy](https://flexboxfroggy.com/) – Tanuld meg a Flexboxot szórakoztató kihívásokon keresztül
+- 🌱 [Grid Garden](https://codepip.com/games/grid-garden/) – Tanulj CSS Gridet virtuális sárgarépa termesztése közben
+- 🎯 [CSS Battle](https://cssbattle.dev/) – Teszteld CSS tudásod kódolási kihívásokon
+
+### További tanulás
+
+Átfogó CSS alapokért végezd el ezt a Microsoft Learn modult: [Stilizáld HTML alkalmazásod CSS-sel](https://docs.microsoft.com/learn/modules/build-simple-website/4-css-basics/?WT.mc_id=academic-77807-sagibbon)
+
+### ⚡ **Mit tehetsz az elkövetkező 5 percben**
+- [ ] Nyisd meg az DevTools-t, és vizsgáld meg bármely weboldal CSS stílusait az Elements panelen
+- [ ] Készíts egy egyszerű CSS fájlt és csatold egy HTML oldalhoz
+- [ ] Próbálj ki különböző színváltoztatási módokat: hex, RGB és név szerinti színek
+- [ ] Gyakorold a dobozmodellt padding és margin hozzáadásával egy div-hez
+
+### 🎯 **Mit érhetsz el ebben az órában**
+- [ ] Fejezd be az előadás utáni kvízt és ismételd át a CSS alapokat
+- [ ] Stílusozd HTML oldalad betűtípusokkal, színekkel és távolságokkal
+- [ ] Készíts egyszerű elrendezést flexbox vagy grid segítségével
+- [ ] Kísérletezz CSS átmenetekkel a sima hatásokért
+- [ ] Gyakorold a responsív tervezést médiakérdésekkel
+
+### 📅 **Hét napos CSS kalandod**
+- [ ] Fejezd be a terrárium stílusozási feladatot kreatív megoldásokkal
+- [ ] Sajátítsd el a CSS Gridet képgaléria elrendezésének megépítésével
+- [ ] Tanuld meg a CSS animációkat, hogy életre keltsd tervezéseidet
+- [ ] Fedezd fel a CSS preprocessorokat, mint a Sass vagy Less
+- [ ] Tanulmányozd a tervezési elveket és alkalmazd a CSS-ben
+- [ ] Elemezd és másold le az érdekes online terveket
+
+### 🌟 **Hónapra szóló tervezési mesterkedésed**
+- [ ] Építs teljes reszponzív webdesign rendszert
+- [ ] Tanuld meg a CSS-in-JS vagy utility-first keretrendszereket, például Tailwind-et
+- [ ] Vegyél részt nyílt forráskódú projektekben CSS fejlesztésekkel
+- [ ] Sajátítsd el a haladó CSS koncepciókat, mint az egyéni tulajdonságok és konténment
+- [ ] Alkoss újrahasznosítható komponenskönyvtárakat moduláris CSS-sel
+- [ ] Mentoráld CSS-t tanulókat és osszd meg tervezési tudásod
+
+## 🎯 CSS mesteri ütemterved
+
+```mermaid
+timeline
+    title CSS tanulási folyamat
+    
+    section Alapok (10 perc)
+        Fájlkapcsolat: CSS összekapcsolása HTML-lel
+                       : Kaszkád szabályok megértése
+                       : Öröklődés alapjainak elsajátítása
+        
+    section Szelektorok (15 perc)
+        Elem célozás: Elem szelektorok
+                     : Osztály minták
+                     : ID specifikusság
+                     : Kombinátorok
+        
+    section Dobozmodell (20 perc)
+        Elrendezés alapjai: Margó és belső margó
+                          : Szegély tulajdonságok
+                          : Tartalom méretezése
+                          : Box-sizing viselkedés
+        
+    section Pozícionálás (25 perc)
+        Elem elhelyezés: Statikus vs relatív
+                       : Abszolút pozícionálás
+                       : Z-index rétegzés
+                       : Reszponzív egységek
+        
+    section Látványterv (30 perc)
+        Stílus mesterség: Színek és átlátszóság
+                        : Árnyékok és effektusok
+                        : Átmenetek
+                        : Transzform tulajdonságok
+        
+    section Reszponzív tervezés (45 perc)
+        Több eszköz támogatás: Média lekérdezések
+                            : Rugalmas elrendezések
+                            : Mobil első megközelítés
+                            : Nézetablak optimalizálás
+        
+    section Fejlett technikák (1 hét)
+        Modern CSS: Flexbox elrendezések
+                   : CSS Grid rendszerek
+                   : Egyedi tulajdonságok
+                   : Animáció kulcskockák
+        
+    section Professzionális készségek (1 hónap)
+        CSS architektúra: Komponens minták
+                        : Fenntartható kód
+                        : Teljesítmény optimalizálás
+                        : Böngészők közötti kompatibilitás
+```
+### 🛠️ CSS szerszámosládád összefoglalója
+
+Az óra elvégzése után már rendelkezel:
+- **Kaszkád megértéssel**: Hogyan öröklődnek és írhatók felül a stílusok egymást
+- **Szelektorok mesterfogásával**: Precíz célzás elemekre, osztályokra és ID-kre
+- **Pozícionálási képességekkel**: Stratégiai elem elhelyezés és rétegzés
+- **Vizuális tervezéssel**: Üveg effektusok, árnyékok és áttetszőség létrehozása
+- **Reszponzív technikákkal**: Százalékos elrendezések, amelyek alkalmazkodnak bármilyen képernyőhöz
+- **Kód szervezéssel**: Tiszta, karbantartható CSS struktúra
+- **Modern gyakorlatokkal**: Relatív egységek és hozzáférhető tervezési minták használata
+
+**Következő lépések**: A terráriumod most már rendelkezik struktúrával (HTML) és stílussal (CSS). Az utolsó óra interaktivitást ad hozzá JavaScripttel!
 
 ## Feladat
 
-[CSS Refaktorálás](assignment.md)
+[CSS refaktorálás](assignment.md)
 
 ---
 
-**Felelősség kizárása**:  
-Ez a dokumentum az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Jogi nyilatkozat**:  
+Ezt a dokumentumot az AI fordító szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) használatával fordítottuk. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások tartalmazhatnak hibákat vagy pontatlanságokat. Az eredeti dokumentum az eredeti nyelven tekintendő hivatalos forrásnak. Kritikus információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget az ebből a fordításból eredő félreértésekért vagy félreértelmezésekért.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

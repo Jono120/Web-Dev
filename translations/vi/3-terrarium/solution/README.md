@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-27T22:58:22+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "vi"
-}
--->
 # Terrarium của tôi: Một dự án học về HTML, CSS và thao tác DOM bằng JavaScript 🌵🌱
 
 Một bài tập nhỏ về kéo và thả. Với một chút HTML, JS và CSS, bạn có thể tạo giao diện web, định kiểu và thêm tương tác.
 
-![terrarium của tôi](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.vi.png)
+![terrarium của tôi](../../../../translated_images/vi/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## Tín dụng
 

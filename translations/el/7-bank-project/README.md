@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "830359535306594b448db6575ce5cdee",
-  "translation_date": "2025-08-26T22:51:34+00:00",
-  "source_file": "7-bank-project/README.md",
-  "language_code": "el"
-}
--->
 # :dollar: Δημιουργία μιας Τράπεζας
 
 Σε αυτό το έργο, θα μάθετε πώς να δημιουργήσετε μια φανταστική τράπεζα. Αυτά τα μαθήματα περιλαμβάνουν οδηγίες για το πώς να σχεδιάσετε μια web εφαρμογή και να παρέχετε διαδρομές, να δημιουργήσετε φόρμες, να διαχειριστείτε την κατάσταση (state) και να ανακτήσετε δεδομένα από ένα API από το οποίο μπορείτε να αντλήσετε τα δεδομένα της τράπεζας.
 
-| ![Screen1](../../../translated_images/screen1.baccbba0f1f93364672eb250d2fbd21574bb1caf79a2155022dc098a741cbdfe.el.png) | ![Screen2](../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.el.png) |
+| ![Screen1](../../../translated_images/el/screen1.baccbba0f1f93364.webp) | ![Screen2](../../../translated_images/el/screen2.123c82a831a1d14a.webp) |
 |--------------------------------|--------------------------------|
 
 ## Μαθήματα

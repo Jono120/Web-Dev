@@ -1,67 +1,234 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "89d0df9854ed020f155e94882ae88d4c",
-  "translation_date": "2025-08-29T09:58:19+00:00",
-  "source_file": "7-bank-project/3-data/README.md",
-  "language_code": "sw"
-}
--->
-# Jenga Programu ya Benki Sehemu ya 3: Mbinu za Kupata na Kutumia Data
+# Tengeneza Programu ya Benki Sehemu ya 3: Njia za Kupata na Kutumia Data
 
-## Jaribio la Kabla ya Somo
+Fikiria kuhusu kompyuta ya Enterprise katika Star Trek - wakati Kapteni Picard anauliza kuhusu hali ya meli, taarifa zinaonekana mara moja bila kuzuia kiolesura kizima kusimamika na kujijenga upya. Mtiririko wa taarifa usio na mshono ni hasa kile tunachojenga hapa kwa kupata data kwa mabadiliko ya wakati halisi.
 
-[Jaribio la kabla ya somo](https://ff-quizzes.netlify.app/web/quiz/45)
+Hivi sasa, programu yako ya benki ni kama gazeti lililochapishwa - lina habari lakini ni iliyokauka. Tutalibadilisha kuwa kitu kama kituo cha mawasiliano cha NASA, ambako data inatembea mara kwa mara na kusasishwa kwa wakati halisi bila kuingilia kazi ya mtumiaji.
 
-### Utangulizi
+Utafundishwa jinsi ya kuwasiliana na seva kwa njia isiyo ya uwazi (asynchronous), kushughulikia data inayokuja kwa nyakati tofauti, na kubadilisha taarifa ghafi kuwa kitu chenye maana kwa watumiaji wako. Hii ndiyo tofauti kati ya maonyesho na programu inayotengenezwa kwa ajili ya uzalishaji.
 
-Katika msingi wa kila programu ya wavuti kuna *data*. Data inaweza kuwa katika aina nyingi, lakini lengo lake kuu daima ni kuonyesha taarifa kwa mtumiaji. Kwa kuwa programu za wavuti zinazidi kuwa shirikishi na ngumu, jinsi mtumiaji anavyopata na kuingiliana na taarifa sasa ni sehemu muhimu ya maendeleo ya wavuti.
+## ⚡ Unachoweza Kufanya Katika Dakika 5 Zijazo
 
-Katika somo hili, tutaona jinsi ya kupata data kutoka kwa seva kwa njia isiyo ya moja kwa moja, na kutumia data hiyo kuonyesha taarifa kwenye ukurasa wa wavuti bila kupakia upya HTML.
+**Njia ya Kuanzisha Haraka kwa Watengenezaji Wenye Muda Mfupi**
+
+```mermaid
+flowchart LR
+    A[⚡ Dakika 5] --> B[Sanidi seva ya API]
+    B --> C[Jaribu kupokea kwa curl]
+    C --> D[Tengeneza kazi ya kuingia]
+    D --> E[Tazama data ikifanya kazi]
+```
+- **Dakika 1-2**: Anzisha seva yako ya API (`cd api && npm start`) na jaribu muunganisho
+- **Dakika 3**: Unda kazi ya msingi `getAccount()` ukitumia fetch
+- **Dakika 4**: Unganisha fomu ya kuingia na `action="javascript:login()"`
+- **Dakika 5**: Jaribu kuingia na angalia data ya akaunti inaonekana kwenye konsole
+
+**Amri za Kujaribu Haraka**:
+```bash
+# Thibitisha API inaendesha
+curl http://localhost:5000/api
+
+# Jaribu upokeaji data za akaunti
+curl http://localhost:5000/api/accounts/test
+```
+
+**Kwa Nini Hii ni Muhimu**: Ndani ya dakika 5, utaona uchawi wa kupata data kwa njia isiyo ya uwazi (asynchronous) unaoiendesha kila programu ya wavuti ya kisasa. Hii ni msingi unaofanya programu kuwa na mwitikio na hisia za kuishi.
+
+## 🗺️ Safari Yako ya Kujifunza Kupitia Programu za Wavuti Zinazotumia Data
+
+```mermaid
+journey
+    title Kutoka Kurasa Tulivu hadi Programu Zinazobadilika
+    section Kuelewa Mageuzi
+      Upakiaji wa kurasa za jadi: 3: You
+      Kugundua faida za AJAX/SPA: 5: You
+      Kufuata mifumo ya Fetch API: 7: You
+    section Kujenga Uthibitishaji
+      Tengeneza kazi za kuingia: 4: You
+      Shimamia operesheni zisizo za mara moja: 6: You
+      Dhibiti vikao vya mtumiaji: 8: You
+    section Mabadiliko ya Kiolesura Bora
+      Jifunze udhibiti wa DOM: 5: You
+      Tengeneza maonyesho ya miamala: 7: You
+      Tengeneza dashibodi zinazojibika: 9: You
+    section Mifumo ya Kitaalamu
+      Uwasilishaji wa mfano wa template: 6: You
+      Mikakati ya kushughulikia makosa: 7: You
+      Uboreshaji wa utendaji: 8: You
+```
+**Lengo la Safari Yako**: Mwisho wa somo hili, utaelewa jinsi programu za wavuti za kisasa zinavyopata, kushughulikia, na kuonyesha data kwa mabadiliko ya wakati halisi, zikitengeneza uzoefu wa mtumiaji usio na mshono tunao matarajia kutoka kwa programu za kitaalamu.
+
+## Mtihani wa Kabla ya Mafunzo
+
+[Mtihani wa kabla ya somo](https://ff-quizzes.netlify.app/web/quiz/45)
 
 ### Mahitaji ya Awali
 
-Unahitaji kuwa umejenga sehemu ya [Fomu ya Kuingia na Kusajili](../2-forms/README.md) ya programu ya wavuti kwa somo hili. Pia unahitaji kusakinisha [Node.js](https://nodejs.org) na [kuendesha API ya seva](../api/README.md) kwa ndani ili upate data ya akaunti.
+Kabla ya kuingia kwenye kupata data, hakikisha una vipengele hivi tayari:
 
-Unaweza kujaribu kama seva inafanya kazi vizuri kwa kutekeleza amri hii kwenye terminal:
+- **Somo la Awali**: Kamilisha [Fomu ya Kuingia na Usajili](../2-forms/README.md) - tutajenga juu ya msingi huu
+- **Seva ya Ndani**: Sakinisha [Node.js](https://nodejs.org) na [endesha seva ya API](../api/README.md) ili kutoa data za akaunti
+- **Muunganisho wa API**: Jaribu muunganisho wa seva yako kwa amri hii:
 
-```sh
+```bash
 curl http://localhost:5000/api
-# -> should return "Bank API v1.0.0" as a result
+# Jibu lililotarajiwa: "API ya Benki v1.0.0"
 ```
+
+Jaribio hili la haraka linahakikisha vipengele vyote vinaendesha vizuri:
+- Inathibitisha kwamba Node.js inaendeshwa ipasavyo kwenye mfumo wako
+- Inathibitisha seva yako ya API iko hai na inajibu
+- Inathibitisha programu yako inaweza kufikia seva (kama kuangalia mawasiliano ya redio kabla ya misheni)
+
+## 🧠 Muhtasari wa Mfumo wa Usimamizi wa Data
+
+```mermaid
+mindmap
+  root((Usimamizi wa Takwimu))
+    Authentication Flow
+      Login Process
+        Form Validation
+        Credential Verification
+        Session Management
+      User State
+        Kifaa cha Akaunti ya Ulimwengu
+        Vizuizi vya Urambazaji
+        Ushughulikiaji wa Makosa
+    API Communication
+      Fetch Patterns
+        Maombi ya GET
+        Maombi ya POST
+        Majibu ya Makosa
+      Data Formats
+        Usindikaji wa JSON
+        Uandishi wa URL
+        Uchambuzi wa Majibu
+    Dynamic UI Updates
+      DOM Manipulation
+        Maboresho Salama ya Maandishi
+        Uundaji wa Vitu
+        Nakala ya Mifano
+      User Experience
+        Maboresho ya Muda Halisi
+        Ujumbe wa Makosa
+        Hali za Kupakia
+    Security Considerations
+      XSS Prevention
+        Matumizi ya textContent
+        Usafishaji wa Kuingiza Data
+        Uundaji Salama wa HTML
+      CORS Handling
+        Maombi ya Asili Mbalimbali
+        Usanidi wa Vichwa
+        Usanidi wa Maendeleo
+```
+**Kanuni Muhimu**: Programu za wavuti za kisasa ni mifumo ya kuratibu data - zinapanga kati ya violesura vya mtumiaji, seva za API, na mifano ya usalama ya kivinjari ili kuunda uzoefu usio na mshono, wenye mwitikio.
 
 ---
 
-## AJAX na Kupata Data
+## Kuelewa Kupata Data Katika Programu za Wavuti za Kisasa
 
-Tovuti za jadi husasisha maudhui yanayoonyeshwa wakati mtumiaji anapochagua kiungo au kutuma data kwa kutumia fomu, kwa kupakia upya ukurasa mzima wa HTML. Kila wakati data mpya inahitajika kupakiwa, seva ya wavuti inarudisha ukurasa mpya wa HTML ambao unahitaji kuchakatwa na kivinjari, jambo linalokatiza hatua ya sasa ya mtumiaji na kupunguza mwingiliano wakati wa kupakia upya. Mtiririko huu pia huitwa *Programu ya Ukurasa Mbalimbali* au *MPA*.
+Jinsi programu za wavuti zinavyoshughulikia data imebadilika sana katika miongo miwili iliyopita. Kuelewa mabadiliko haya kutakusaidia kufahamu kwa nini mbinu za kisasa kama AJAX na Fetch API ni zenye nguvu na kwa nini zimekuwa zana muhimu kwa watengenezaji wa wavuti.
 
-![Mtiririko wa usasishaji katika programu ya ukurasa mbalimbali](../../../../translated_images/mpa.7f7375a1a2d4aa779d3f928a2aaaf9ad76bcdeb05cfce2dc27ab126024050f51.sw.png)
+Tuchunguze jinsi tovuti za zamani zilivyofanya kazi ikilinganishwa na programu za kisasa, zenye mwitikio, tunazojenga leo.
 
-Wakati programu za wavuti zilianza kuwa ngumu zaidi na shirikishi, mbinu mpya iliyoitwa [AJAX (Asynchronous JavaScript and XML)](https://en.wikipedia.org/wiki/Ajax_(programming)) ilianzishwa. Mbinu hii inaruhusu programu za wavuti kutuma na kupokea data kutoka kwa seva kwa njia isiyo ya moja kwa moja kwa kutumia JavaScript, bila kupakia upya ukurasa wa HTML, na hivyo kusababisha usasishaji wa haraka na mwingiliano laini wa mtumiaji. Wakati data mpya inapokelewa kutoka kwa seva, ukurasa wa sasa wa HTML unaweza pia kusasishwa kwa kutumia API ya [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model). Kwa muda, mbinu hii imebadilika na kuwa kile kinachoitwa sasa [*Programu ya Ukurasa Mmoja* au *SPA*](https://en.wikipedia.org/wiki/Single-page_application).
+### Programu za Wavuti za Kurasa Nyingi za Kiasili (MPA)
 
-![Mtiririko wa usasishaji katika programu ya ukurasa mmoja](../../../../translated_images/spa.268ec73b41f992c2a21ef9294235c6ae597b3c37e2c03f0494c2d8857325cc57.sw.png)
+Katika siku za mwanzo za wavuti, kila bonyeza lilikuwa kama kubadilisha chaneli kwenye televisheni ya zamani - skrini ingekuwa tupu, kisha polepole ikaanza kuonyesha yaliyomo mapya. Hii ilikuwa halisi ya programu za wavuti za zamani, ambapo kila ushirikiano ulimaanisha kujenga upya ukurasa mzima kutoka mwanzoni.
 
-Wakati AJAX ilipoanzishwa kwa mara ya kwanza, API pekee iliyopatikana ya kupata data kwa njia isiyo ya moja kwa moja ilikuwa [`XMLHttpRequest`](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest). Lakini vivinjari vya kisasa sasa pia vinaunga mkono API rahisi na yenye nguvu zaidi [`Fetch` API](https://developer.mozilla.org/docs/Web/API/Fetch_API), ambayo hutumia ahadi (promises) na inafaa zaidi kwa kuchakata data ya JSON.
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant Server
+    
+    User->>Browser: Bonyeza kiungo au tuma fomu
+    Browser->>Server: Inaomba ukurasa mpya wa HTML
+    Note over Browser: Ukurasa unakuwa tupu
+    Server->>Browser: Inarudisha ukurasa kamili wa HTML
+    Browser->>User: Inaonyesha ukurasa mpya (mwanga/upya)
+```
+![Mtiririko wa sasisho katika programu ya kurasa nyingi](../../../../translated_images/sw/mpa.7f7375a1a2d4aa77.webp)
 
-> Ingawa vivinjari vyote vya kisasa vinaunga mkono `Fetch API`, ikiwa unataka programu yako ya wavuti ifanye kazi kwenye vivinjari vya zamani, ni wazo zuri kila wakati kuangalia [jedwali la utangamano kwenye caniuse.com](https://caniuse.com/fetch) kwanza.
+**Kwa nini njia hii ilihisi polepole:**
+- Kila bonyeza lilimaanisha kujenga ukurasa mzima upya kutoka mwanzoni
+- Watumiaji walikatizwa katikati ya mawazo na miale hiyo ya kurasa
+- Muunganisho wako wa intaneti ulifanya kazi nguvu kupakua tena kichwa na futi za ukurasa mara kwa mara
+- Programu zilihisi zaidi kama kubonyeza faili milingoti badala ya kutumia programu
 
-### Kazi
+### Programu za Sasa za Kurasa Moja (SPA)
 
-Katika [somo lililopita](../2-forms/README.md) tulitekeleza fomu ya usajili ili kuunda akaunti. Sasa tutaongeza msimbo wa kuingia kwa kutumia akaunti iliyopo, na kupata data yake. Fungua faili `app.js` na ongeza kazi mpya `login`:
+AJAX (Asynchronous JavaScript and XML) ilibadilisha sura hii kabisa. Kama muundo wa moduli wa Kituo cha Anga cha Kimataifa, ambapo wanaanga wanaweza kubadilisha vipengele binafsi bila kujenga tena miundo yote, AJAX inaruhusu sisi kusasisha sehemu maalum ya ukurasa wa wavuti bila kupakia kila kitu upya. Licha ya jina kutaja XML, sisi mara nyingi tunatumia JSON leo, lakini kanuni kuu inabaki: sasisha tu kile kinachohitaji kubadilika.
 
-```js
+```mermaid
+sequenceDiagram
+    participant User
+    participant Browser
+    participant JavaScript
+    participant Server
+    
+    User->>Browser: Huingiliana na ukurasa
+    Browser->>JavaScript: Huchochea mshughulikiaji wa tukio
+    JavaScript->>Server: Huchukua data inayohitajika tu
+    Server->>JavaScript: Inarejea data ya JSON
+    JavaScript->>Browser: Husaidia vipengele maalum vya ukurasa
+    Browser->>User: Inaonyesha yaliyosasishwa (hakuna upyaaji)
+```
+![Mtiririko wa sasisho katika programu ya ukurasa mmoja](../../../../translated_images/sw/spa.268ec73b41f992c2.webp)
+
+**Kwa nini SPA zinahisi bora zaidi:**
+- Sehemu tu zilizobadilika ndizo zinazosasishwa (tajiri, sivyo?)
+- Hakuna tena katizo la ghafla - watumiaji wako wanaendelea bila kufikia
+- Data kidogo kusafirishwa kwenye waya inamaanisha kupakia haraka
+- Kila kitu kinahisi chapchap na kwa mwitikio, kama programu kwenye simu yako
+
+### Maendeleo ya API ya Fetch ya Kisasa
+
+Vivinjari vya kisasa vinatoa [`Fetch` API](https://developer.mozilla.org/docs/Web/API/Fetch_API), inayobadilisha [`XMLHttpRequest`](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest) ya zamani. Kama tofauti kati ya kutumia telegrafu na barua pepe, Fetch API hutumia ahadi (promises) kwa msimbo safi wa asynchronous na hushughulikia JSON kwa asili.
+
+| Kipengele | XMLHttpRequest | Fetch API |
+|---------|----------------|----------|
+| **Sintaksia** | Callback ngumu | Ahadi safi |
+| **Usindikaji wa JSON** | Inahitaji parsing ya mwongozo | Njia ya kijenzi `.json()` |
+| **Usimamizi wa makosa** | Maelezo machache ya makosa | Maelezo kamili ya makosa |
+| **Msaada wa Kisasa** | Ulinganishaji wa zamani | Ahadi na async/await ya ES6+ |
+
+> 💡 **Ulinganishaji wa Vivinjari**: Habari njema - Fetch API inafanya kazi katika vivinjari vyote vya kisasa! Ikiwa unavutiwa na matoleo maalum, [caniuse.com](https://caniuse.com/fetch) ina habari kamili kuhusu ulinganishaji.
+> 
+**Hitimisho:**
+- Inafanya kazi vizuri Chrome, Firefox, Safari, na Edge (sehemu yote mtumiaji wako yuko)
+- Internet Explorer tu ndilo linahitaji msaada wa ziada (na ukweli, ni wakati wa kuachana na IE)
+- Inakupa msingi mzuri kwa mifumo sugu ya async/await tutakayotumia baadaye
+
+### Kutekeleza Kuingia kwa Mtumiaji na Kupata Data
+
+Sasa tutawekeza mfumo wa kuingia ambao unabadilisha programu yako ya benki kutoka kuonyesha kimya kimya hadi kuwa programu inayofanya kazi. Kama itifaki za uthibitishaji zinazotumika katika maeneo salama ya kijeshi, tutajiridhisha sifa za mtumiaji kisha tutoa ufikiaji kwa data zao maalum.
+
+Tutajenga hatua baada ya hatua, kuanzia na uthibitishaji wa msingi kisha kuongeza uwezo wa kupata data.
+
+#### Hatua ya 1: Tengeneza Msingi wa Kazi ya Kuingia
+
+Fungua faili yako `app.js` na ongeza kazi mpya ya `login`. Hii itashughulikia mchakato wa uthibitishaji wa mtumiaji:
+
+```javascript
 async function login() {
-  const loginForm = document.getElementById('loginForm')
+  const loginForm = document.getElementById('loginForm');
   const user = loginForm.user.value;
 }
 ```
 
-Hapa tunaanza kwa kupata kipengele cha fomu kwa kutumia `getElementById()`, kisha tunapata jina la mtumiaji kutoka kwenye ingizo kwa `loginForm.user.value`. Kila kidhibiti cha fomu kinaweza kupatikana kwa jina lake (lililowekwa kwenye HTML kwa kutumia sifa ya `name`) kama mali ya fomu.
+**Hebu tuchambue hii:**
+- Neno `async`? Inasema JavaScript "hebu, kazi hii inaweza kuhitaji kusubiri mambo"
+- Tunavua fomu yetu kutoka ukurasa (bila mambo ya ziada, tunaitafuta kwa ID yake)
+- Halafu tunachukua kitu chochote mtumiaji aliandika kama jina la mtumiaji
+- Hii ni mbinu nzuri: unaweza kufikia input ya fomu yoyote kwa jina lake `name` - hakuna haja ya getElementById ziada!
 
-Kwa njia sawa na tulivyofanya kwa usajili, tutaunda kazi nyingine ya kutekeleza ombi la seva, lakini wakati huu kwa kupata data ya akaunti:
+> 💡 **Mfumo wa Kufikia Fomu**: Kila udhibiti wa fomu unaweza kufikiwa kwa jina lake (lilowekwa kwenye HTML kwa kutumia sifa ya `name`) kama mali ya kipengele cha fomu. Hii inatoa njia safi, inayosomeka ya kupata data za fomu.
 
-```js
+#### Hatua ya 2: Tengeneza Kazi ya Kupata Data za Akaunti
+
+Ifuatayo, tutaunda kazi maalum ya kupata data za akaunti kutoka seva. Hii inafuata mfano ule ule wa kazi yako ya usajili lakini inazingatia kupata data:
+
+```javascript
 async function getAccount(user) {
   try {
     const response = await fetch('//localhost:5000/api/accounts/' + encodeURIComponent(user));
@@ -72,15 +239,58 @@ async function getAccount(user) {
 }
 ```
 
-Tunatumia `fetch` API kuomba data kwa njia isiyo ya moja kwa moja kutoka kwa seva, lakini wakati huu hatuhitaji vigezo vya ziada zaidi ya URL ya kupiga, kwa kuwa tunatafuta tu data. Kwa chaguo-msingi, `fetch` huunda ombi la HTTP la [`GET`](https://developer.mozilla.org/docs/Web/HTTP/Methods/GET), ambalo ndilo tunalotafuta hapa.
+**Hii msimbo unafanikisha:**
+- **Inatumia** API ya kisasa ya `fetch` kupata data kwa njia isiyo ya wazi
+- **Inajenga** ombi la GET na parameter ya jina la mtumiaji
+- **Inatumia** `encodeURIComponent()` kushughulikia usalama wa herufi maalum kwenye URLs
+- **Inageuza** jibu kuwa fomati ya JSON kwa urahisi wa kusindika data
+- **Inashughulikia** makosa kwa upole kwa kurudisha kitu cha kosa badala ya kusababisha hitilafu
 
-✅ `encodeURIComponent()` ni kazi inayotoroka (escape) herufi maalum kwa URL. Ni matatizo gani yanaweza kutokea ikiwa hatutatumia kazi hii na kutumia moja kwa moja thamani ya `user` kwenye URL?
+> ⚠️ **Kumbuka Usalama**: Kazi ya `encodeURIComponent()` hushughulikia herufi maalum kwenye URLs. Kama mifumo ya usimbaji inayotumika katika mawasiliano ya majini, huhakikisha ujumbe wako unafika kama ulivyokusudishwa, kuzuia herufi kama "#" au "&" kutafsiriwa vibaya.
+> 
+**Kwa nini hii ni muhimu:**
+- Inazuia herufi maalum kuvunja URLs
+- Inalinda dhidi ya mashambulizi ya uchezaji URLs
+- Inahakikisha seva yako inapata data iliyo kusudiwa
+- Inafuata mbinu salama za kuandika msimbo
 
-Sasa wacha tusasishe kazi yetu ya `login` ili kutumia `getAccount`:
+#### Kuelewa Maombi ya HTTP GET
 
-```js
+Hapa kuna kitu ambacho kinaweza kukushangaza: wakati unatumia `fetch` bila chaguzi zozote, inajenga moja kwa moja ombi la [`GET`](https://developer.mozilla.org/docs/Web/HTTP/Methods/GET). Hii ni kamili kwa tunachofanya - kuomba seva "hebu, naweza kuona data za akaunti ya mtumiaji huyu?"
+
+Fikiria maombi ya GET kama kuuliza kwa heshima kukopa kitabu maktaba - unatoa ombi la kuona kitu ambacho tayari kipo. Maombi ya POST (tulitumia kwa usajili) ni zaidi kama kuwasilisha kitabu kipya ili kuongezwa kwenye maktaba.
+
+| OMBI LA GET | OMBI LA POST |
+|-------------|-------------|
+| **Madhumuni** | Kupata data iliyopo | Kutuma data mpya kwa seva |
+| **Vigezo** | Katika URL/kiungo cha uchunguzi | Katika mwili wa ombi |
+| **Kuhifadhi Cache** | Inaweza kuhifadhiwa na vivinjari | Huu siyo kawaida kuhifadhiwa |
+| **Usalama** | Inaonekana katika URL/rekodi | Imefichwa mwilini mwa ombi |
+
+```mermaid
+sequenceDiagram
+    participant B as Browser
+    participant S as Server
+    
+    Note over B,S: Ombi la GET (Kupata Data)
+    B->>S: GET /api/accounts/test
+    S-->>B: 200 OK + Data ya Akaunti
+    
+    Note over B,S: Ombi la POST (Kuwasilisha Data)
+    B->>S: POST /api/accounts + Data Mpya ya Akaunti
+    S-->>B: 201 Created + Thibitisho
+    
+    Note over B,S: Usimamizi wa Makosa
+    B->>S: GET /api/accounts/nonexistent
+    S-->>B: 404 Not Found + Ujumbe wa Hitilafu
+```
+#### Hatua ya 3: Kuleta Kila Kitu Pamoja
+
+Sasa sehemu ya kuridhisha - tuchanganye kazi yako ya kupata akaunti na mchakato wa kuingia. Hapa ndipo kila kitu kinapoungana:
+
+```javascript
 async function login() {
-  const loginForm = document.getElementById('loginForm')
+  const loginForm = document.getElementById('loginForm');
   const user = loginForm.user.value;
   const data = await getAccount(user);
 
@@ -93,94 +303,272 @@ async function login() {
 }
 ```
 
-Kwanza, kwa kuwa `getAccount` ni kazi isiyo ya moja kwa moja, tunahitaji kuifananisha na neno kuu `await` ili kusubiri matokeo ya seva. Kama ilivyo kwa ombi lolote la seva, pia tunapaswa kushughulikia kesi za makosa. Kwa sasa tutaongeza tu ujumbe wa logi kuonyesha kosa, na tutarudi kwenye hili baadaye.
+Kazi hii inafuata mfuatano wazi:
+- Tolea jina la mtumiaji kutoka kwenye fomu
+- Ombwa data ya akaunti ya mtumiaji kutoka seva
+- Shughulikia makosa yoyote yanayotokea wakati wa mchakato
+- Hifadhi data za akaunti na uelekezwe kwenye dashibodi baada ya mafanikio
 
-Kisha tunapaswa kuhifadhi data mahali fulani ili tuweze kuitumia baadaye kuonyesha taarifa za dashibodi. Kwa kuwa kigezo `account` bado hakipo, tutaumba kigezo cha kimataifa kwa ajili yake juu ya faili yetu:
+> 🎯 **Mfumo wa Async/Await**: Kwa kuwa `getAccount` ni kazi isiyo ya mara moja (asynchronous), tunatumia neno `await` kusimamisha utekelezaji hadi seva itakapojibu. Hii inazuia msimbo kuendelea na data isiyo wazi.
 
-```js
+#### Hatua ya 4: Tengeneza Mahali pa Kuhifadhi Data Yako
+
+Programu yako inahitaji mahali pa kukumbuka taarifa za akaunti mara baada ya kupakiwa. Fikiria hii kama kumbukumbu ya muda mfupi ya programu yako - mahali pa kuweka data za mtumiaji wa sasa uwezo. Ongeza mstari huu juu ya faili yako `app.js`:
+
+```javascript
+// Hii ina data za akaunti za mtumiaji wa sasa
 let account = null;
 ```
 
-Baada ya data ya mtumiaji kuhifadhiwa kwenye kigezo, tunaweza kuhamia kutoka ukurasa wa *login* hadi *dashboard* kwa kutumia kazi ya `navigate()` ambayo tayari tunayo.
+**Kwa nini tunahitaji hili:**
+- Hufanya data za akaunti zipatikane kutoka sehemu yoyote ya programu yako
+- Kuanzia na `null` inamaanisha "hakuna aliyelogin bado"
+- Inasasishwa mtu anapofanikisha kuingia au kusajiliwa
+- Inatumika kama chanzo kimoja cha ukweli - hakuna mkanganyiko kuhusu nani ameingia
 
-Hatimaye, tunahitaji kuita kazi yetu ya `login` wakati fomu ya kuingia inapotumwa, kwa kurekebisha HTML:
+#### Hatua ya 5: Unganisha Fomu Yako
+
+Sasa tuunganishie kazi yako mpya ya kuingia kwenye fomu ya HTML. Sasisha lebo la fomu kama hii:
 
 ```html
 <form id="loginForm" action="javascript:login()">
+  <!-- Your existing form inputs -->
+</form>
 ```
 
-Jaribu kama kila kitu kinafanya kazi vizuri kwa kusajili akaunti mpya na kujaribu kuingia kwa kutumia akaunti hiyo hiyo.
+**Mabadiliko haya madogo hufanya:**
+- Kusimamisha fomu kufanya tabia yake ya kawaida ya kupakia ukurasa mzima upya
+- Kupigia simu kazi yako ya JavaScript badala yake
+- Kuacha kila kitu kiende vizuri kama programu ya ukurasa mmoja
+- Kukupa ushawishi kamili juu ya kinachotokea mtumiaji anakabidhi "Login"
 
-Kabla ya kuendelea na sehemu inayofuata, tunaweza pia kukamilisha kazi ya `register` kwa kuongeza hii mwishoni mwa kazi:
+#### Hatua ya 6: Boresheni Kazi Yako ya Usajili
 
-```js
+Kwa usawa, sasisha kazi yako ya `register` kuhifadhi data za akaunti na kupeleka dashibodi pia:
+
+```javascript
+// Ongeza mistari hii mwishoni mwa kazi yako ya kusajili
 account = result;
 navigate('/dashboard');
 ```
 
-✅ Je, ulijua kwamba kwa chaguo-msingi, unaweza tu kuita API za seva kutoka kwa *kikoa na bandari sawa* na ukurasa wa wavuti unaotazama? Hii ni mbinu ya usalama inayotekelezwa na vivinjari. Lakini subiri, programu yetu ya wavuti inaendesha kwenye `localhost:3000` ilhali API ya seva inaendesha kwenye `localhost:5000`, kwa nini inafanya kazi? Kwa kutumia mbinu inayoitwa [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS), inawezekana kutekeleza maombi ya HTTP ya msalaba ikiwa seva itaongeza vichwa maalum kwenye jibu, kuruhusu ubaguzi kwa vikoa maalum.
+**Uboreshaji huu unatoa:**
+- **Mabadiliko yasiyo na mshono** kutoka usajili hadi dashibodi
+- **Uzoefu thabiti** wa mtumiaji kati ya mchakato wa kuingia na usajili
+- **Ufikiaji wa papo hapo** wa data za akaunti baada ya usajili kufanikiwa
 
-> Jifunze zaidi kuhusu API kwa kuchukua [somo hili](https://docs.microsoft.com/learn/modules/use-apis-discover-museum-art/?WT.mc_id=academic-77807-sagibbon)
+#### Jaribu Utekelezaji Wako
 
-## Sasisha HTML Kuonyesha Data
+```mermaid
+flowchart TD
+    A[Mtumiaji aingize nywila] --> B[Kifanyi kazi cha Kuingia kimeitwa]
+    B --> C[Pata data ya akaunti kutoka seva]
+    C --> D{Data imepokelewa kwa mafanikio?}
+    D -->|Ndiyo| E[Hifadhi data ya akaunti ulimwenguni]
+    D -->|Hapana| F[Onyesha ujumbe wa kosa]
+    E --> G[Elekea kwenye dashibodi]
+    F --> H[Mtumiaji abaki kwenye ukurasa wa kuingia]
+```
+**Ni wakati wa kujaribu:**
+1. Unda akaunti mpya kuhakikisha kila kitu kinafanya kazi
+2. Jaribu kuingia kwa kutumia taarifa hizo za akaunti
+3. Angalia konsole ya kivinjari chako (F12) kama kuna kitu kinachoonekana tofauti
+4. Hakikisha unafika kwenye dashibodi baada ya kuingia kwa mafanikio
 
-Sasa kwa kuwa tuna data ya mtumiaji, tunapaswa kusasisha HTML iliyopo ili kuionyesha. Tayari tunajua jinsi ya kupata kipengele kutoka kwa DOM kwa kutumia kwa mfano `document.getElementById()`. Baada ya kuwa na kipengele cha msingi, hapa kuna API unazoweza kutumia kuibadilisha au kuongeza vipengele vya watoto kwake:
+Kama kitu hakifanyi kazi, usijali! Flaws nyingi ni marekebisho rahisi kama makosa ya tahajia au kusahau kuanzisha seva ya API.
 
-- Kwa kutumia mali ya [`textContent`](https://developer.mozilla.org/docs/Web/API/Node/textContent) unaweza kubadilisha maandishi ya kipengele. Kumbuka kwamba kubadilisha thamani hii huondoa watoto wote wa kipengele (ikiwa wapo) na kuibadilisha na maandishi yaliyotolewa. Kwa hivyo, pia ni njia bora ya kuondoa watoto wote wa kipengele fulani kwa kupeana kamba tupu `''` kwake.
+#### Neno Fupi Kuhusu Uchawi wa Cross-Origin
 
-- Kwa kutumia [`document.createElement()`](https://developer.mozilla.org/docs/Web/API/Document/createElement) pamoja na mbinu ya [`append()`](https://developer.mozilla.org/docs/Web/API/ParentNode/append) unaweza kuunda na kuambatisha kipengele kipya au zaidi cha watoto.
+Unaweza kujiuliza: "Je, programu yangu ya wavuti inazungumzaje na seva hii ya API wakati zinaendesha kwenye port tofauti?" Swali zuri! Hii inahusiana na jambo ambalo kila mtengenezaji wa wavuti hukumbana nalo hatimaye.
 
-✅ Kwa kutumia mali ya [`innerHTML`](https://developer.mozilla.org/docs/Web/API/Element/innerHTML) ya kipengele inawezekana pia kubadilisha maudhui yake ya HTML, lakini hii inapaswa kuepukwa kwani ni hatarishi kwa mashambulizi ya [cross-site scripting (XSS)](https://developer.mozilla.org/docs/Glossary/Cross-site_scripting).
+> 🔒 **Usalama wa Cross-Origin**: Vivinjari hutekeleza sera ya "asili sawa" kuzuia mawasiliano yasiyoruhusiwa kati ya maeneo tofauti. Kama mfumo wa mizingatio katika Pentagon, huhakikisha mawasiliano yanaruhusiwa kabla ya kuruhusu usafirishaji wa data.
+> 
+**Katika usanidi wetu:**
+- Programu yako ya wavuti inaendesha kwenye `localhost:3000` (seva ya maendeleo)
+- Seva yako ya API inaendesha kwenye `localhost:5000` (seva ya backend)
+- Seva ya API inaongeza [vichwa vya CORS](https://developer.mozilla.org/docs/Web/HTTP/CORS) vinavyoelezea moja kwa moja mawasiliano kutoka programu yako ya wavuti
 
-### Kazi
+Usanidi huu unaendana na maendeleo halisi ambapo programu za mbele na nyuma kawaida huendesha kwenye seva tofauti.
 
-Kabla ya kuendelea na skrini ya dashibodi, kuna jambo moja zaidi tunalopaswa kufanya kwenye ukurasa wa *login*. Hivi sasa, ikiwa unajaribu kuingia na jina la mtumiaji ambalo halipo, ujumbe unaonyeshwa kwenye console lakini kwa mtumiaji wa kawaida hakuna kinachobadilika na hujui kinachoendelea.
+> 📚 **Jifunze Zaidi**: Jiingize zaidi katika APIs na kupata data kwa kutumia somo hili kamili la [Microsoft Learn kuhusu APIs](https://docs.microsoft.com/learn/modules/use-apis-discover-museum-art/?WT.mc_id=academic-77807-sagibbon).
 
-Wacha tuongeze kipengele cha nafasi kwenye fomu ya kuingia ambapo tunaweza kuonyesha ujumbe wa kosa ikiwa inahitajika. Mahali pazuri litakuwa kabla tu ya kitufe cha `<button>` cha kuingia:
+## Kuleta Data Yako Kuwa Hai Katika HTML
 
-```html
-...
-<div id="loginError"></div>
-<button>Login</button>
-...
+Sasa tutafanya data tuliyopata ionekane kwa watumiaji kupitia usimamizi wa DOM. Kama mchakato wa kukuza picha katika chumba cha giza, tunachukua data isiyoonekana na kuitengeneza kuwa kitu watumiaji wanaweza kuona na kuingiliana nacho.
+Manipuli ya DOM ni mbinu inayobadilisha kurasa za wavuti zisizobadilika kuwa programu zinazobadilika zinazosasisha yaliyomo yao kulingana na mwingiliano wa mtumiaji na majibu ya seva.
+
+### Kuchagua Chombo Sahihi kwa Kazi
+
+Linapokuja suala la kusasisha HTML yako kwa JavaScript, una chaguzi kadhaa. Fikiria hizi kama zana tofauti kwenye sanduku la zana - kila moja ni nzuri kwa kazi maalum:
+
+| Njia | Inafaa kwa ajili ya nini | Lini uitumie | Kiwango cha usalama |
+|--------|---------------------|----------------|--------------|
+| `textContent` | Kuonyesha data ya mtumiaji kwa usalama | Wakati wowote unapoweka maandishi | ✅ Imara kabisa |
+| `createElement()` + `append()` | Kujenga mipangilio tata | Kuunda sehemu/mpangilio mpya | ✅ Salama kabisa |
+| `innerHTML` | Kuweka yaliyomo ya HTML | ⚠️ Jitahidi kuepuka hii | ❌ Kazi yenye hatari |
+
+#### Njia Salama ya Kuweka Maandishi: textContent
+
+Mali ya [`textContent`](https://developer.mozilla.org/docs/Web/API/Node/textContent) ni rafiki yako mkubwa unapoonyesha data ya mtumiaji. Ni kama kuwa na mlinda lango kwa ukurasa wako wa wavuti - hakuna kitu kibaya kinachopitishwa:
+
+```javascript
+// Njia salama, ya kuaminika ya kusasisha maandishi
+const balanceElement = document.getElementById('balance');
+balanceElement.textContent = account.balance;
 ```
 
-Kipengele hiki cha `<div>` ni tupu, ikimaanisha kuwa hakuna kitakachoonyeshwa kwenye skrini hadi tuongeze maudhui kwake. Pia tunakipa `id` ili tuweze kukipata kwa urahisi kwa kutumia JavaScript.
+**Manufaa ya textContent:**
+- Huhandle kila kitu kama maandishi ya kawaida (hutazuia utekelezaji wa skiripti)
+- Hufuta yaliyokuwepo awali kwa moja kwa moja
+- Inafaa kwa masasisho ya maandishi rahisi
+- Hutoa usalama wa ndani dhidi ya yaliyomo yenye madhara
 
-Rudi kwenye faili `app.js` na uunde kazi mpya ya msaidizi `updateElement`:
+#### Kuunda Vipengele vya HTML Vinavyobadilika
 
-```js
+Kwa yaliyomo tata zaidi, ungana [`document.createElement()`](https://developer.mozilla.org/docs/Web/API/Document/createElement) na njia ya [`append()`](https://developer.mozilla.org/docs/Web/API/ParentNode/append):
+
+```javascript
+// Njia salama ya kuunda vipengele vipya
+const transactionItem = document.createElement('div');
+transactionItem.className = 'transaction-item';
+transactionItem.textContent = `${transaction.date}: ${transaction.description}`;
+container.append(transactionItem);
+```
+
+**Kuelewa mbinu hii:**
+- **Hundi** vipengele vipya vya DOM kwa programu
+- **Inadumisha** udhibiti kamili wa sifa za kipengele na yaliyomo
+- **Inaruhusu** muundo tata wa vipengele vilivyo ndani ya vingine
+- **Inahifadhi** usalama kwa kutenganisha muundo na yaliyomo
+
+> ⚠️ **Kuzingatia Usalama**: Ingawa [`innerHTML`](https://developer.mozilla.org/docs/Web/API/Element/innerHTML) huonekana katika mafunzo mengi, inaweza kuendesha skiripti zenye nyongeza ndani. Kama taratibu za usalama CERN zinazozuia utekelezaji wa msimbo usioruhusiwa, kutumia `textContent` na `createElement` ni mbadala salama zaidi.
+> 
+**Hatari za innerHTML:**
+- Huitekeleza yoyote `<script>` katika data ya mtumiaji
+- Inaacha mlango kwa mashambulizi ya sindano ya msimbo
+- Inasababisha hatari za usalama
+- Mbali na mbadala salama tunayotumia: una utendaji sawa
+
+### Kufanya Makosa Kuwa Rahisi kwa Watumiaji
+
+Kwa sasa, makosa ya kuingia hutokea tu kwenye consola ya kivinjari, ambayo mtumiaji haioni. Kama tofauti kati ya uchambuzi wa ndani wa rubani na mfumo wa habari kwa abiria, tunahitaji kuwasilisha taarifa muhimu kupitia njia inayofaa.
+
+Kuweka ujumbe wa kosa unaoonekana huwapa watumiaji mrejesho wa papo hapo juu ya kilichotekea na jinsi ya kuendelea.
+
+#### Hatua ya 1: Ongeza Sehemu kwa Ujumbe wa Makosa
+
+Kwanza, tupatie ujumbe wa kosa makazi katika HTML yako. Ongeza hii kabla ya kitufe chako cha kuingia ili watumiaji waione kwa asili:
+
+```html
+<!-- This is where error messages will appear -->
+<div id="loginError" role="alert"></div>
+<button>Login</button>
+```
+
+**Kinachotokea hapa:**
+- Tunaunda chombo tupu ambalo hukaa kisichoonekana hadi litakapohitajika
+- Kimewekwa mahali watumiaji wanaangalia kawaida baada ya kubofya "Login"
+- Hiyo `role="alert"` ni msaada mzuri kwa wasikilizaji wa skrini - inawaambia teknolojia ya kusaidia "he, hili ni muhimu!"
+- `id` ya kipekee huwapa JavaScript yetu lengo rahisi
+
+#### Hatua ya 2: Unda Kazi Ndogo ya Msaidizi
+
+Tufanye kazi ndogo ya huduma inayoweza kusasisha maandishi ya kipengele yoyote. Hii ni kazi ya "andika mara moja, tumia kila mahali" itakayokuokoa muda:
+
+```javascript
 function updateElement(id, text) {
   const element = document.getElementById(id);
   element.textContent = text;
 }
 ```
 
-Hii ni rahisi sana: kwa kupewa *id* ya kipengele na *maandishi*, itasasisha maudhui ya maandishi ya kipengele cha DOM kinacholingana na `id`. Wacha tutumie mbinu hii badala ya ujumbe wa kosa wa awali kwenye kazi ya `login`:
+**Manufaa ya kazi:**
+- Mwonekano rahisi unaohitaji tu kitambulisho cha kipengele na maandishi
+- Huitambua na kusasisha vipengele vya DOM kwa usalama
+- Mtindo wa matumizi tena unaopunguza rudufu ya msimbo
+- Huhifadhi tabia ya usasishaji imara katika programu nzima
 
-```js
+#### Hatua ya 3: Onyesha Makosa Mahali Watumiaji Wanaweza Kuaona
+
+Sasa tubadilishe ujumbe wa consola uliofichwa na kitu watumiaji wanaweza kuiona kweli. Sasisha kazi yako ya kuingia:
+
+```javascript
+// Badala ya kuandika tu kwenye console, muuoneshe mtumiaji kinachoenda vibaya
 if (data.error) {
   return updateElement('loginError', data.error);
 }
 ```
 
-Sasa ikiwa unajaribu kuingia na akaunti batili, unapaswa kuona kitu kama hiki:
+**Mabadiliko haya madogo yanafanya tofauti kubwa:**
+- Ujumbe wa makosa unaonekana pale watumiaji wanapoangalia
+- Hakuna tena kushindwa kimya kisichoeleweka
+- Watumiaji wanapata mrejesho wa haraka, unaoweza kuchukua hatua
+- Programu yako inaanza kuonekana ya kitaalamu na yenye kufikiria
 
-![Picha ya skrini inayoonyesha ujumbe wa kosa unaoonyeshwa wakati wa kuingia](../../../../translated_images/login-error.416fe019b36a63276764c2349df5d99e04ebda54fefe60c715ee87a28d5d4ad0.sw.png)
+Sasa unapojaribu na akaunti isiyo halali, utaona ujumbe wa kosa unaosaidia moja kwa moja kwenye ukurasa!
 
-Sasa tuna maandishi ya kosa yanayoonekana, lakini ikiwa unajaribu kutumia kisomaji cha skrini utagundua kuwa hakuna kinachotangazwa. Ili maandishi yanayoongezwa kwa nguvu kwenye ukurasa yatangazwe na visomaji vya skrini, yatahitaji kutumia kitu kinachoitwa [Live Region](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/ARIA_Live_Regions). Hapa tutatumia aina maalum ya live region inayoitwa alert:
+![Screenshot showing the error message displayed during login](../../../../translated_images/sw/login-error.416fe019b36a6327.webp)
+
+#### Hatua ya 4: Kuwajumuisha kwa Upatikanaji
+
+Hili ni jambo zuri kuhusu `role="alert"` tuliloiongeza awali - si tu mapambo! Kiadili hiki huunda kinachoitwa [Live Region](https://developer.mozilla.org/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) kinachotangaza mabadiliko moja kwa moja kwa wasomaji wa skrini:
 
 ```html
 <div id="loginError" role="alert"></div>
 ```
 
-Tekeleza tabia sawa kwa makosa ya kazi ya `register` (usisahau kusasisha HTML).
+**Kwa nini hili ni muhimu:**
+- Watumiaji wa wasomaji wa skrini husikia ujumbe wa kosa mara unapoonekana
+- Kila mtu anapata habari muhimu sawa, bila kujali wanaelekeza vipi
+- Ni njia rahisi ya kufanya app yako ifanye kazi kwa watu wengi zaidi
+- Inaonyesha unajali kuhusu kuunda uzoefu jumuishi
 
-## Onyesha Taarifa kwenye Dashibodi
+Mambo madogo kama haya huwatofautisha waendelezaji wazuri na wakubwa!
 
-Kwa kutumia mbinu zile zile tulizoona hivi punde, tutashughulikia pia kuonyesha taarifa za akaunti kwenye ukurasa wa dashibodi.
+### 🎯 Ukaguzi wa Kitaalamu: Mifumo ya Uhakiki
 
-Hivi ndivyo kitu cha akaunti kinachopokelewa kutoka kwa seva kinavyoonekana:
+**Simama na Fikiria**: Umefanya hatua kamili ya mchakato wa uthibitishaji. Hii ni muundo wa msingi katika maendeleo ya wavuti.
+
+**Tathmini ya Haraka:**
+- Unaeleza kwa nini tunatumia async/await kwa miito ya API?
+- Nini kingetokea kama tungesahau `encodeURIComponent()`?
+- Je, usimamizi wetu wa makosa unaboresha vipi uzoefu wa mtumiaji?
+
+**Muunganisho wa Dunia Halisi**: Mifumo uliyojifunza hapa (uvutaji data wa async, usimamizi wa makosa, mrejesho wa mtumiaji) hutumika katika kila programu kuu ya wavuti kuanzia majukwaa ya mitandao ya kijamii hadi maduka ya mtandaoni. Unajenga ujuzi wa kiwango cha uzalishaji!
+
+**Swali la Changamoto**: Unawezaje kubadilisha mfumo huu wa uthibitishaji kushughulikia majukumu mengi ya watumiaji (mteja, msimamizi, muhesabu)? Fikiria muundo wa data na mabadiliko ya UI yanayohitajika.
+
+#### Hatua ya 5: Tumia Mifumo Ile Ile kwa Usajili
+
+Kwa muendelezo, tekeleza usimamizi sawa wa makosa fomu yako ya usajili:
+
+1. **Ongeza** kipengele cha kuonyesha makosa kwenye HTML ya usajili wako:
+```html
+<div id="registerError" role="alert"></div>
+```
+
+2. **Sasisha** kazi yako ya kusajili kutumia mfumo huo huo wa kuonyesha makosa:
+```javascript
+if (data.error) {
+  return updateElement('registerError', data.error);
+}
+```
+
+**Manufaa ya usimamizi sawa wa makosa:**
+- **Hutoa** uzoefu wa mtumiaji unaolingana katika fomu zote
+- **Kupunguza** mzigo wa akili kwa kutumia mifano inayojulikana
+- **Kurasimisha** matengenezo kwa msimbo unaotumika tena
+- **Kuhakikisha** viwango vya upatikanaji vinafuatwa katika programu nzima
+
+## Kuunda Dashibodi Yako Inayobadilika
+
+Sasa tutabadilisha dashibodi yako isiyobadilika kuwa kiolesura kinachobadilika kinachoonyesha data halisi ya akaunti. Kama tofauti kati ya ratiba ya ndege iliyochapishwa na meza za kuondoka za moja kwa moja uwanja wa ndege, tunahamia kutoka kwenye taarifa zisizobadilika kwenda kwenye maonyesho ya wakati halisi.
+
+Kwa kutumia mbinu za manipulil DOM ulizojifunza, tutaunda dashibodi inayosasisha moja kwa moja na taarifa za akaunti za sasa.
+
+### Kufahamu Data Yako
+
+Kabla ya kuanza kujenga, tuangalie aina gani ya data seva yako inatuma. Mtu anapoingia akaunti kwa mafanikio, hii ni hazina ya taarifa unazopata:
 
 ```json
 {
@@ -192,15 +580,49 @@ Hivi ndivyo kitu cha akaunti kinachopokelewa kutoka kwa seva kinavyoonekana:
     { "id": "1", "date": "2020-10-01", "object": "Pocket money", "amount": 50 },
     { "id": "2", "date": "2020-10-03", "object": "Book", "amount": -10 },
     { "id": "3", "date": "2020-10-04", "object": "Sandwich", "amount": -5 }
-  ],
+  ]
 }
 ```
 
-> Kumbuka: ili kurahisisha kazi yako, unaweza kutumia akaunti ya `test` iliyopo tayari na data.
+**Muundo huu wa data unatoa:**
+- **`user`**: Inafaa kwa kubinafsisha uzoefu ("Karibu tena, Sarah!")
+- **`currency`**: Inahakikisha tunaonyesha kiasi cha pesa kwa usahihi
+- **`description`**: Jina rafiki kwa akaunti
+- **`balance`**: Salio la sasa muhimu kabisa
+- **`transactions`**: Historia kamili ya miamala yenye maelezo yote
 
-### Kazi
+Kila unachohitaji kujenga dashibodi ya benki ya kitaalamu!
 
-Wacha tuanze kwa kubadilisha sehemu ya "Balance" kwenye HTML ili kuongeza vipengele vya nafasi:
+```mermaid
+flowchart TD
+    A[Ingia Mtumiaji] --> B[Pata Data ya Akaunti]
+    B --> C{Data Sahihi?}
+    C -->|Ndiyo| D[Hifadhi katika Kigezo cha Dunia]
+    C -->|Hapana| E[Onyesha Ujumbe wa Hitilafu]
+    D --> F[Naviga kwenda Dashibodi]
+    F --> G[Sasisha Vipengele vya UI]
+    G --> H[Onyesha Salio]
+    G --> I[Onyesha Maelezo]
+    G --> J[Onyesha Miamala]
+    J --> K[Tengeneza Mistari ya Jedwali]
+    K --> L[Panga Sarafu]
+    L --> M[Mtumiaji Anaona Data ya Moja kwa Moja]
+```
+> 💡 **Ujanja wa Mtaalam**: Unataka kuona dashibodi yako ikifanya kazi mara moja? Tumia jina la mtumiaji `test` unapoingia - inakuja na data za mfano tayari zilizoingizwa ili uone kila kitu kikifanya kazi bila kuunda miamala kwanza.
+> 
+**Kwa nini akaunti ya majaribio ni nzuri:**
+- Inakuja na data za mfano halisi tayari zilioingizwa
+- Inafaa kuona jinsi miamala inavyoonyeshwa
+- Nzuri kwa kupima vipengele vya dashibodi yako
+- Inakuokoa kuunda data bandia kwa mikono
+
+### Kuunda Vipengele vya Maonyesho ya Dashibodi
+
+Tujenge kiolesura cha dashibodi hatua kwa hatua, kuanzia na taarifa muhtasari ya akaunti kisha kuendelea kwa vipengele tata kama orodha za miamala.
+
+#### Hatua ya 1: Sasisha Muundo wa HTML-Yako
+
+Kwanza, badilisha sehemu ya "Balance" isiyobadilika kuwa sehemu za nafasi zinazobadilika JavaScript yako inaweza kuzidisha:
 
 ```html
 <section>
@@ -208,17 +630,25 @@ Wacha tuanze kwa kubadilisha sehemu ya "Balance" kwenye HTML ili kuongeza vipeng
 </section>
 ```
 
-Pia tutaongeza sehemu mpya chini yake ili kuonyesha maelezo ya akaunti:
+Kisha, ongeza sehemu ya maelezo ya akaunti. Kwa kuwa hili linafanya kazi kama kichwa cha maudhui ya dashibodi, tumia HTML ya maana:
 
 ```html
 <h2 id="description"></h2>
 ```
 
-✅ Kwa kuwa maelezo ya akaunti hufanya kazi kama kichwa cha maudhui yaliyo chini yake, yamewekwa alama kwa njia ya kimaandishi kama kichwa. Jifunze zaidi kuhusu jinsi [muundo wa vichwa](https://www.nomensa.com/blog/2017/how-structure-headings-web-accessibility) ni muhimu kwa ufikivu, na chunguza kwa makini ukurasa ili kubaini nini kingine kinaweza kuwa kichwa.
+**Kuelewa muundo wa HTML:**
+- **Inatumia** vipengele tofauti vya `<span>` kwa salio na sarafu kwa udhibiti binafsi
+- **Inatenga** vitambulisho vya kipekee kwa kila kipengele kwa ajili ya lengo la JavaScript
+- **Inafuata** HTML yenye maana kwa kutumia `<h2>` kwa maelezo ya akaunti
+- **Inaweka** mpangilio wa mantiki kwa wasomaji wa skrini na SEO
 
-Kisha, tutaumba kazi mpya kwenye `app.js` ili kujaza nafasi:
+> ✅ **Ufahamu wa Upatikanaji**: Maelezo ya akaunti hufanya kazi kama kichwa cha maudhui ya dashibodi, hivyo yameandikwa semantically kama kichwa. Jifunze zaidi kuhusu jinsi [muundo wa vichwa](https://www.nomensa.com/blog/2017/how-structure-headings-web-accessibility) unavyoathiri upatikanaji. Unaweza kutambua vipengele vingine kwenye ukurasa wako vinavyoweza kufaidika na vitambulisho vya kichwa?
 
-```js
+#### Hatua ya 2: Unda Kazi ya Kusasisha Dashibodi
+
+Sasa unda kazi itakayojaza dashibodi yako na data halisi za akaunti:
+
+```javascript
 function updateDashboard() {
   if (!account) {
     return navigate('/login');
@@ -230,40 +660,87 @@ function updateDashboard() {
 }
 ```
 
-Kwanza, tunahakikisha kuwa tuna data ya akaunti tunayohitaji kabla ya kuendelea. Kisha tunatumia kazi ya `updateElement()` tuliyoijenga awali kusasisha HTML.
+**Hatua kwa hatua, hii kazi hufanya:**
+- **Inathibitisha** kwamba data ya akaunti ipo kabla ya kuendelea
+- **Inarejesha** watumiaji wasiojulikana kurudi kwenye ukurasa wa kuingia
+- **Inasasisha** maelezo ya akaunti kwa kutumia kazi ya `updateElement` inayotumika tena
+- **Inaweka** salio kuonyesha daima desimali mbili
+- **Inaonyesha** alama sahihi ya sarafu
 
-> Ili kufanya maonyesho ya salio yawe mazuri zaidi, tunatumia mbinu [`toFixed(2)`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) kulazimisha kuonyesha thamani na tarakimu 2 baada ya nukta ya desimali.
+> 💰 **Uwekaji wa Pesa**: Njia hiyo ya [`toFixed(2)`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) ni msaada mkubwa! Inahakikisha salio lako linaonekana kama pesa halisi - "75.00" badala ya "75" tu. Watumiaji wako watathamini kuona muundo wa sarafu unaojulikana.
 
-Sasa tunahitaji kuita kazi yetu ya `updateDashboard()` kila wakati dashibodi inapopakiwa. Ikiwa tayari umemaliza [jukumu la somo la 1](../1-template-route/assignment.md) hili linapaswa kuwa rahisi, vinginevyo unaweza kutumia utekelezaji ufuatao.
+#### Hatua ya 3: Kuhakikisha Dashibodi Yako Inasasishwa
 
-Ongeza msimbo huu mwishoni mwa kazi ya `updateRoute()`:
+Ili kuhakikisha dashibodi yako inasasishwa kila mtu anapoitembelea, tunahitaji kushika mfumo wako wa urambazaji. Ikiwa ulimaliza [zoezi la somo la 1](../1-template-route/assignment.md), hili litakufaa. Kama sivyo, usijali - hapa ni unachohitaji:
 
-```js
+Ongeza hii mwishoni mwa kazi yako ya `updateRoute()`:
+
+```javascript
 if (typeof route.init === 'function') {
   route.init();
 }
 ```
 
-Na sasisha ufafanuzi wa njia na:
+Kisha sasisha njia zako za urambazaji kujumuisha kuanzishwa kwa dashibodi:
 
-```js
+```javascript
 const routes = {
   '/login': { templateId: 'login' },
   '/dashboard': { templateId: 'dashboard', init: updateDashboard }
 };
 ```
 
-Kwa mabadiliko haya, kila wakati ukurasa wa dashibodi unaponyeshwa, kazi ya `updateDashboard()` inaitwa. Baada ya kuingia, unapaswa kuona salio la akaunti, sarafu, na maelezo.
+**Seti hii smart hufanya nini:**
+- Huhakiki kama njia ina nambari maalum ya kuanzisha
+- Inaendesha nambari hiyo moja kwa moja wakati njia inapopakia
+- Inahakikisha dashibodi yako inaonyesha data safi na za sasa kila wakati
+- Huhifadhi mantiki ya urambazaji yako safi na yenye mpangilio
 
-## Unda Mistari ya Jedwali kwa Nguvu kwa Kutumia Violezo vya HTML
+#### Kupima Dashibodi Yako
 
-Katika [somo la kwanza](../1-template-route/README.md) tulitumia violezo vya HTML pamoja na mbinu ya [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) kutekeleza urambazaji katika programu yetu. Violezo vinaweza pia kuwa vidogo na kutumika kujaza sehemu zinazojirudia za ukurasa kwa nguvu.
+Baada ya kutekeleza mabadiliko haya, jaribu dashibodi yako:
 
-Tutatumia mbinu sawa kuonyesha orodha ya miamala kwenye jedwali la HTML.
+1. **Ingia** kwa akaunti ya majaribio
+2. **Hakikisha** umeelekezwa kwenye dashibodi
+3. **Angalia** maelezo ya akaunti, salio, na sarafu zinaonyeshwa kwa usahihi
+4. **Jaribu kutoka na kuingia tena** kuhakikisha data inasasishwa ipasavyo
 
-### Kazi
+Dashibodi yako sasa inapaswa kuonyesha taarifa za akaunti zinazorudishwa kulingana na data ya mtumiaji aliyeingia!
 
-Ongeza kiolezo kipya kwenye `<body>` ya HTML:
+## Kujenga Orodha Mahiri za Miamala kwa Matunzio
+
+Badala ya kuunda HTML kwa kila muamala kwa manual, tutatumia matunzio kuunda muundo unaolingana kwa moja kwa moja. Kama vipengele vilivyosanifishwa vinavyotumika katika utengenezaji wa anga za angani, matunzio huhakikisha kila safu ya muamala inafuata muundo na muonekano sawa.
+
+Hii mbinu huwezesha upanuzi kwa ufanisi kutoka kwa miamala michache hadi maelfu, ikidumisha utendaji na uwasilishaji thabiti.
+
+```mermaid
+graph LR
+    A[Kiolezo cha HTML] --> B[Nakili ya JavaScript]
+    B --> C[Jaza na Data]
+    C --> D[Ongeza kwenye Kipande]
+    D --> E[Weka Mfululizo kwenye DOM]
+    
+    subgraph "Faida za Utendaji"
+        F[Uboreshaji wa DOM Mmoja]
+        G[Mfumo Thabiti]
+        H[Mfumo Unaoweza Kutumika Tena]
+    end
+    
+    E --> F
+    E --> G
+    E --> H
+```
+```mermaid
+flowchart LR
+    A[Takwimu za Muamala] --> B[Kiolezo cha HTML]
+    B --> C[Kubadili Kiolezo]
+    C --> D[Jaza na Takwimu]
+    D --> E[Ongeza kwenye DOM]
+    E --> F[Rudia kwa kila Muamala]
+```
+### Hatua ya 1: Unda Kitembe cha Muamala
+
+Kwanza, ongeza kitembe kinachotumika tena kwa safu za muamala ndani ya `<body>` yako ya HTML:
 
 ```html
 <template id="transaction">
@@ -275,17 +752,30 @@ Ongeza kiolezo kipya kwenye `<body>` ya HTML:
 </template>
 ```
 
-Kiolezo hiki kinawakilisha mstari mmoja wa jedwali, na safu 3 tunazotaka kujaza: *tarehe*, *kitu*, na *kiasi* cha muamala.
+**Kuelewa matunzio ya HTML:**
+- **Hutaja** muundo wa safu moja ya jedwali
+- **Huficha** mpaka ikatolewe na kujazwa na JavaScript
+- **Inajumuisha** seli tatu kwa tarehe, maelezo, na kiasi
+- **Hutoa** mtindo unaotumika tena kwa ulinganifu thabiti
 
-Kisha, ongeza mali hii ya `id` kwenye kipengele cha `<tbody>` cha jedwali ndani ya kiolezo cha dashibodi ili iwe rahisi kukipata kwa kutumia JavaScript:
+### Hatua ya 2: Andaa Jedwali Lako kwa Yaliyomo Yanayobadilika
+
+Kisha, ongeza `id` kwa sehemu ya mwili wa jedwali ili JavaScript iweze kuilenga kwa urahisi:
 
 ```html
 <tbody id="transactions"></tbody>
 ```
 
-HTML yetu iko tayari, wacha tugeukie msimbo wa JavaScript na kuunda kazi mpya `createTransactionRow`:
+**Hili hufanikisha:**
+- **Huunda** lengo wazi kwa kuingiza safu za miamala
+- **Hutenganisha** muundo wa jedwali na yaliyomo yanayobadilika
+- **Huwezesha** kufuta na kujaza upya miamala kwa urahisi
 
-```js
+### Hatua ya 3: Jenga Kazi ya Kiwanda cha Safu za Miamala
+
+Sasa unda kazi inayobadilisha data ya miamala kuwa vipengele vya HTML:
+
+```javascript
 function createTransactionRow(transaction) {
   const template = document.getElementById('transaction');
   const transactionRow = template.content.cloneNode(true);
@@ -297,9 +787,19 @@ function createTransactionRow(transaction) {
 }
 ```
 
-Kazi hii inafanya kile jina lake linavyopendekeza: kwa kutumia kiolezo tulichounda awali, inaunda mstari mpya wa jedwali na kujaza maudhui yake kwa kutumia data ya muamala. Tutatumia hii katika kazi yetu ya `updateDashboard()` kujaza jedwali:
+**Kuvunja kazi ya kiwanda hii:**
+- **Huitafuta** kipengele cha kitembe kwa kitambulisho chake
+- **Hunakili** yaliyomo ya kitembe kwa usalama wa utendaji
+- **Huchagua** safu ya jedwali ndani ya yaliyomo yaliyokiliwa
+- **Huijaza** seli zote na data ya muamala
+- **Huinua** kiasi kuonyesha sehemu za desimali kwa usahihi
+- **Hurejesha** safu kamili tayari kwa kuingizwa
 
-```js
+### Hatua ya 4: Tengeneza Safu Nyingi za Miamala kwa Ufanisi
+
+Ongeza msimbo huu kwenye kazi yako ya `updateDashboard()` kuonyesha miamala yote:
+
+```javascript
 const transactionsRows = document.createDocumentFragment();
 for (const transaction of account.transactions) {
   const transactionRow = createTransactionRow(transaction);
@@ -308,40 +808,156 @@ for (const transaction of account.transactions) {
 updateElement('transactions', transactionsRows);
 ```
 
-Hapa tunatumia mbinu [`document.createDocumentFragment()`](https://developer.mozilla.org/docs/Web/API/Document/createDocumentFragment) ambayo huunda kipande kipya cha DOM ambacho tunaweza kufanya kazi nacho, kabla ya hatimaye kukiambatisha kwenye jedwali letu la HTML.
+**Kuelewa mbinu hii ya ufanisi:**
+- **Huunda** kipande cha hati cha kuunganisha operesheni za DOM
+- **Hupitia** miamala yote katika data ya akaunti
+- **Hutengeneza** safu kwa kila muamala kwa kutumia kazi ya kiwanda
+- **Hukusanya** safu zote kwenye kipande kabla ya kuziweka kwenye DOM
+- **Hufanya** sasisho moja la DOM badala ya kuongeza vipande kwa vipande vingi
 
-Bado kuna jambo moja tunalopaswa kufanya kabla ya msimbo huu kufanya kazi, kwa kuwa kazi yetu ya `updateElement()` kwa sasa inasaidia maudhui ya maandishi pekee. Wacha tubadilishe msimbo wake kidogo:
 
-```js
+> ⚡ **Uboreshaji wa Utendaji**: [`document.createDocumentFragment()`](https://developer.mozilla.org/docs/Web/API/Document/createDocumentFragment) hufanya kazi kama mchakato wa mkusanyiko katika Boeing - vipengele huandaliwa mbali na mstari mkuu, kisha vinasakinishwa kama kitengo kamili. Njia hii ya kukusanya hutumia upunguzaji wa DOM kwa kufanya uingizaji mmoja badala ya operesheni nyingi za kibinafsi.
+
+### Hatua ya 5: Boresha Kazi ya Kusasisha kwa Yaliyomo Mchanganyiko
+
+Kazi yako ya `updateElement()` kwa sasa inashughulikia tu maudhui ya maandishi. Isaidie ifanye kazi na maandishi na nodi za DOM:
+
+```javascript
 function updateElement(id, textOrNode) {
   const element = document.getElementById(id);
-  element.textContent = ''; // Removes all children
+  element.textContent = ''; // Inatoa watoto wote
   element.append(textOrNode);
 }
 ```
 
-Tunatumia mbinu ya [`append()`](https://developer.mozilla.org/docs/Web/API/ParentNode/append) kwa kuwa inaruhusu kuambatisha maandishi au [DOM Nodes](https://developer.mozilla.org/docs/Web/API/Node) kwenye kipengele cha mzazi, ambayo ni kamilifu kwa matumizi yetu yote.
-Ikiwa utajaribu kutumia akaunti ya `test` kuingia, sasa unapaswa kuona orodha ya miamala kwenye dashibodi 🎉.
+**Maboresho muhimu katika sasisho hili:**
+- **Inatamka** maudhui yaliyopo kabla ya kuongeza maudhui mapya
+- **Inakubali** iwe mnyororo wa maandishi au nodi za DOM kama vigezo
+- **Inatumia** njia ya [`append()`](https://developer.mozilla.org/docs/Web/API/ParentNode/append) kwa ajili ya unayofanya kazi wepesi
+- **Inahifadhi** utangamano wa nyuma na matumizi ya maandishi yaliyokuwa yakiendelea
+
+### Kuchukua Dashibodi Yako kwa Mtihani wa Kazi
+
+Wakati wa dakika ya ukweli umewadia! Tujaribu dashibodi yako inayobadilika kwa vitendo:
+
+1. Ingia kwa kutumia akaunti ya `test` (ina data ya mfano tayari)
+2. Elekea dashibodi yako
+3. Angalia kama safu za muamala zinaonekana na muundo sahihi
+4. Hakikisha tarehe, maelezo, na kiasi vyote vinaonekana sawa
+
+Kama kila kitu kinavyoendelea vizuri, utapata orodha kamili ya miamala inayofanya kazi dashibodini mwako! 🎉
+
+**Umefanikisha yafuatayo:**
+- Kuunda dashibodi inayoweza kukua na kiasi chochote cha data
+- Kutengeneza templates zinazoweza kutumika tena kwa muundo unaoendelea
+- Kutekeleza mbinu madhubuti za uendeshaji wa DOM
+- Kuunda utendaji kama zile katika programu za benki za uzalishaji
+
+Umebadilisha kwa mafanikio ukurasa wa wavuti usio na mabadiliko kuwa programu ya wavuti inayobadilika.
+
+### 🎯 Ukaguzi wa Mafunzo: Uundaji wa Maudhui Yanayobadilika
+
+**Uelewa wa Mimarisha**: Umetekeleza njia changamano ya data-kwa-UI inayofanana na mifumo inayotumika katika mifumo kama React, Vue, na Angular.
+
+**Dhana Muhimu Uliyoshikilia**:
+- **Utambuzi wa template**: Kuunda vipengele vya UI vinavyoweza kutumika tena
+- **Vipande vya hati**: Kuboreshaji utendaji kazi wa DOM
+- **Uendeshaji salama wa DOM**: Kuzuia udhaifu wa usalama
+- **Mabadiliko ya data**: Kubadilisha data ya seva kwenda kwenye interfaces za watumiaji
+
+**Uhusiano wa Sekta**: Mbinu hizi ni msingi wa mifumo ya kisasa ya frontend. DOM halisi ya React, mfumo wa template wa Vue, na usanifu wa vipengele wa Angular zote zinajengwa juu ya dhana hizi kuu.
+
+**Swali la Kutafakari**: Utapanuaje mfumo huu kushughulikia masasisho ya wakati halisi (kama miamala mipya kuonekana moja kwa moja)? Fikiria WebSockets au Matukio Yanayotumwa na Seva.
 
 ---
+
+## 📈 Muda Wako wa Ustadi wa Usimamizi wa Data
+
+```mermaid
+timeline
+    title Safari ya Maendeleo Inayotegemea Data
+    
+    section Ujenzi wa Msingi
+        API Setup & Testing
+            : Elewa mawasiliano kati ya mteja na seva
+            : Shuhudia mviringo wa maombi/jawabu za HTTP
+            : Jifunze mbinu za kubaini hitilafu
+    
+    section Utaalamu wa Uthibitishaji
+        Async Function Patterns
+            : Andika msimbo safi wa async/await
+            : Shughulikia ahadi kwa ufanisi
+            : Tekeleza mipaka ya makosa
+        User Session Management
+            : Unda mifumo ya hali ya jumla
+            : Jenga walinzi wa usafiri
+            : Tengeneza mifumo ya maoni ya mtumiaji
+    
+    section Maendeleo ya UI Inayobadilika
+        Safe DOM Manipulation
+            : Zuia udhaifu wa XSS
+            : Tumia textContent badala ya innerHTML
+            : Unda interfaces zinazowezesha upatikanaji
+        Template Systems
+            : Jenga vipengele vya UI vinavyoweza kutumika tena
+            : Boresha ufanisi kwa kipande
+            : Panua kushughulikia seti kubwa za data
+    
+    section Mifumo ya Kitaalamu
+        Production-Ready Code
+            : Tekeleza utunzaji wa makosa kwa kina
+            : Fuata mbinu bora za usalama
+            : Unda miundo inayoweza kudumishwa
+        Modern Web Standards
+            : Shuhudia mifumo ya API za Fetch
+            : Elewa mipangilio ya CORS
+            : Jenga UI zinazojibu, na zinazopatikana
+```
+**🎓 Hatua ya Kuingia**: Umefanikiwa kuunda programu kamili ya wavuti inayotegemea data kwa kutumia mifumo ya kisasa ya JavaScript. Ujuzi huu hutumika moja kwa moja kwenye mifumo kama React, Vue, au Angular.
+
+**🔄 Uwezo wa Ngazi Inayofuata**:
+- Tayari kuanza kuchunguza mifumo ya frontend inayojengwa juu ya dhana hizi
+- Tayari kutekeleza vipengele vya wakati halisi kwa kutumia WebSockets
+- Kuandaa kujenga Progressive Web Apps kuwa na uwezo wa kufanya kazi bila mtandao
+- Msingi umewekwa kwa kujifunza mifumo ya hali ya juu ya usimamizi wa data
+
+## Changamoto ya Mwakala wa GitHub Copilot 🚀
+
+Tumia hali ya Mwakala kukamilisha changamoto ifuatayo:
+
+**Maelezo:** Boresha programu ya benki kwa kutekeleza kipengele cha utafutaji na kuchujwa kwa miamala kinachomruhusu mtumiaji kupata miamala maalum kwa kutumia anuwai ya tarehe, kiasi, au maelezo.
+
+**Amani:** Tengeneza kipengele cha utafutaji kwa programu ya benki kinachojumuisha: 1) Fomu ya utafutaji yenye sehemu za kuingiza anuwai ya tarehe (kutoka/kwenda), kiasi cha chini/juu, na maneno ya maelezo ya muamala, 2) Kazi ya `filterTransactions()` inayochuja array ya account.transactions kulingana na vigezo vya utafutaji, 3) Sasisha kazi ya `updateDashboard()` kuonyesha matokeo yaliyopangwa, na 4) Ongeza kitufe cha "Futa Vichujio" kurudisha muonekano wa awali. Tumia mbinu za kisasa za array kama `filter()` na shughulikia hali za kivuli katika vigezo vya utafutaji.
+
+Jifunze zaidi kuhusu [hali ya mwakAgent](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) hapa.
 
 ## 🚀 Changamoto
 
-Fanyeni kazi pamoja ili kufanya ukurasa wa dashibodi uonekane kama programu halisi ya benki. Ikiwa tayari umeweka mtindo kwenye programu yako, jaribu kutumia [media queries](https://developer.mozilla.org/docs/Web/CSS/Media_Queries) kuunda [muundo unaobadilika](https://developer.mozilla.org/docs/Web/Progressive_web_apps/Responsive/responsive_design_building_blocks) unaofanya kazi vizuri kwenye vifaa vya mezani na simu za mkononi.
+Uko tayari kupeleka programu yako ya benki kwa ngazi inayofuata? Tufanye ionekane na ihisi kama kitu unachotaka kweli kutumia. Hapa kuna mawazo kuamsha ubunifu wako:
 
-Hapa kuna mfano wa ukurasa wa dashibodi uliowekwa mtindo:
+**Iifanye iwe nzuri**: Ongeza mitindo ya CSS kubadilisha dashibodi yako ya kazi kuwa kitu kinachovutia kuona. Fikiria mistari safi, nafasi nzuri, na labda hata michoro midogo midogo.
 
-![Picha ya skrini ya mfano wa matokeo ya dashibodi baada ya kuwekwa mtindo](../../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.sw.png)
+**Iifanye iwe ya kubadilika**: Jaribu kutumia [media queries](https://developer.mozilla.org/docs/Web/CSS/Media_Queries) kuunda [muundo wenye kibadiliko](https://developer.mozilla.org/docs/Web/Progressive_web_apps/Responsive/responsive_design_building_blocks) unaofanya kazi vizuri kwenye simu, vidonge, na kompyuta za mezani. Watumiaji wako watafurahi!
 
-## Jaribio Baada ya Somo
+**Ongeza mvuto fulani**: Fikiria kuandaa miamala kwa rangi (kijani kwa mapato, nyekundu kwa matumizi), kuongeza icons, au kuunda athari za hover zinazofanya kiolesura kihisi cha mwingiliano.
 
-[Jaribio baada ya somo](https://ff-quizzes.netlify.app/web/quiz/46)
+Huu hapa muonekano wa dashibodi iliyopambwa vizuri:
 
-## Kazi
+![Screenshot of an example result of the dashboard after styling](../../../../translated_images/sw/screen2.123c82a831a1d14a.webp)
 
-[Panga upya na toa maelezo kwenye msimbo wako](assignment.md)
+Usijisikie lazima ulingane nalo kwa usahihi - tumia kama msukumo na uibadilishe ipasavyo!
+
+## Mtihani wa Baada ya Masomo
+
+[Mtihani wa baada ya masomo](https://ff-quizzes.netlify.app/web/quiz/46)
+
+## Kazi ya Nyumbani
+
+[Refactor na weka maelezo kwenye msimbo wako](assignment.md)
 
 ---
 
-**Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya kitaalamu ya binadamu. Hatutawajibika kwa maelewano mabaya au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Kiarifa cha Kukataa**:
+Hati hii imetafsiriwa kwa kutumia huduma ya utafsiri wa AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri za moja kwa moja zinaweza kuwa na makosa au kasoro. Hati ya asili kwenye lugha yake ya asili inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, utafsiri wa kitaalamu wa binadamu unashauriwa. Hatubebei dhamana kwa kutoelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

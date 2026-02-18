@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "830359535306594b448db6575ce5cdee",
-  "translation_date": "2025-08-28T07:30:43+00:00",
-  "source_file": "7-bank-project/README.md",
-  "language_code": "bg"
-}
--->
 # :dollar: Създайте Банка
 
 В този проект ще научите как да създадете измислена банка. Тези уроци включват инструкции за това как да изградите уеб приложение, да създадете маршрути, да изградите форми, да управлявате състоянието и да извличате данни от API, от който можете да получите данните на банката.
 
-| ![Екран1](../../../translated_images/screen1.baccbba0f1f93364672eb250d2fbd21574bb1caf79a2155022dc098a741cbdfe.bg.png) | ![Екран2](../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.bg.png) |
+| ![Екран1](../../../translated_images/bg/screen1.baccbba0f1f93364.webp) | ![Екран2](../../../translated_images/bg/screen2.123c82a831a1d14a.webp) |
 |--------------------------------|--------------------------------|
 
 ## Уроци

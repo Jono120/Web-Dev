@@ -1,88 +1,145 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1b0aeccb600f83c603cd70cb42df594d",
-  "translation_date": "2025-08-29T16:37:58+00:00",
-  "source_file": "4-typing-game/typing-game/README.md",
-  "language_code": "pl"
-}
--->
-# Tworzenie gry za pomocą zdarzeń
+# Tworzenie gry z wykorzystaniem zdarzeń
+
+Czy kiedykolwiek zastanawiałeś się, jak strony internetowe wiedzą, kiedy klikniesz przycisk lub wpisujesz tekst w polu? To magia programowania opartego na zdarzeniach! Jaki lepszy sposób na naukę tej niezbędnej umiejętności niż zbudowanie czegoś pożytecznego – gry na szybkość pisania, która reaguje na każdy naciśnięty klawisz.
+
+Zobaczysz na własne oczy, jak przeglądarki internetowe "komunikują się" z Twoim kodem JavaScript. Za każdym razem, gdy klikniesz, wpiszesz znak lub poruszysz myszką, przeglądarka wysyła małe wiadomości (nazywamy je zdarzeniami) do Twojego kodu, a Ty decydujesz, jak na nie zareagować!
+
+Kiedy tu skończymy, stworzysz prawdziwą grę do pisania, która śledzi Twoją szybkość i dokładność. Co ważniejsze, zrozumiesz podstawowe koncepcje, które napędzają każdą interaktywną stronę internetową, jakiej kiedykolwiek używałeś. Zaczynajmy!
 
 ## Quiz przed wykładem
 
 [Quiz przed wykładem](https://ff-quizzes.netlify.app/web/quiz/21)
 
-## Programowanie sterowane zdarzeniami
+## Programowanie zdarzeniowe
 
-Tworząc aplikację przeglądarkową, zapewniamy graficzny interfejs użytkownika (GUI), który umożliwia użytkownikowi interakcję z tym, co stworzyliśmy. Najczęstszym sposobem interakcji z przeglądarką jest klikanie i wpisywanie tekstu w różnych elementach. Wyzwaniem dla nas jako programistów jest to, że nie wiemy, kiedy użytkownik wykona te operacje!
+Pomyśl o swojej ulubionej aplikacji lub stronie – co sprawia, że wydaje się żywa i responsywna? To wszystko zależy od tego, jak reaguje na Twoje działania! Każde stuknięcie, kliknięcie, przesunięcie palcem lub naciśnięcie klawisza tworzy to, co nazywamy „zdarzeniem”, i to właśnie tam dzieje się prawdziwa magia tworzenia stron internetowych.
 
-[Programowanie sterowane zdarzeniami](https://en.wikipedia.org/wiki/Event-driven_programming) to nazwa rodzaju programowania, którego potrzebujemy, aby stworzyć nasz GUI. Jeśli rozłożymy to wyrażenie na części, zauważymy, że kluczowym słowem jest tutaj **zdarzenie**. [Zdarzenie](https://www.merriam-webster.com/dictionary/event), według Merriam-Webster, jest definiowane jako "coś, co się dzieje". To idealnie opisuje naszą sytuację. Wiemy, że coś się wydarzy, co wymaga wykonania kodu w odpowiedzi, ale nie wiemy, kiedy to nastąpi.
+Oto, co sprawia, że programowanie pod kątem internetu jest tak interesujące: nigdy nie wiemy, kiedy ktoś kliknie ten przycisk lub zacznie pisać w polu tekstowym. Może kliknąć od razu, zaczekać pięć minut, a może nigdy nie kliknąć! Ta nieprzewidywalność oznacza, że musimy myśleć inaczej o tym, jak piszemy kod.
 
-Sposobem na oznaczenie sekcji kodu, którą chcemy wykonać, jest utworzenie funkcji. W przypadku [programowania proceduralnego](https://en.wikipedia.org/wiki/Procedural_programming) funkcje są wywoływane w określonej kolejności. To samo dotyczy programowania sterowanego zdarzeniami. Różnica polega na tym, **jak** funkcje są wywoływane.
+Zamiast pisać kod, który działa od góry do dołu niczym przepis kulinarny, piszemy kod, który cierpliwie czeka na zdarzenie. To podobne do tego, jak w XIX wieku telegrafiści siedzieli przy swoich urządzeniach, gotowi zareagować w chwili nadejścia sygnału.
 
-Aby obsłużyć zdarzenia (klikanie przycisków, wpisywanie tekstu itp.), rejestrujemy **nasłuchiwacze zdarzeń**. Nasłuchiwacz zdarzeń to funkcja, która "nasłuchuje", czy zdarzenie wystąpi, i wykonuje się w odpowiedzi. Nasłuchiwacze zdarzeń mogą aktualizować interfejs użytkownika, wykonywać zapytania do serwera lub robić cokolwiek innego, co jest potrzebne w odpowiedzi na akcję użytkownika. Dodajemy nasłuchiwacz zdarzeń za pomocą [addEventListener](https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener) i przekazujemy funkcję do wykonania.
+Czym dokładnie jest „zdarzenie”? To po prostu coś, co się dzieje! Gdy klikniesz przycisk – to zdarzenie. Gdy wpiszesz literę – to zdarzenie. Gdy poruszysz myszką – to kolejne zdarzenie.
 
-> **NOTE:** Warto podkreślić, że istnieje wiele sposobów tworzenia nasłuchiwaczy zdarzeń. Można używać funkcji anonimowych lub tworzyć nazwane. Można korzystać z różnych skrótów, takich jak ustawianie właściwości `click` lub używanie `addEventListener`. W naszym ćwiczeniu skupimy się na `addEventListener` i funkcjach anonimowych, ponieważ jest to prawdopodobnie najczęściej stosowana technika przez programistów webowych. Jest również najbardziej elastyczna, ponieważ `addEventListener` działa dla wszystkich zdarzeń, a nazwę zdarzenia można podać jako parametr.
+Programowanie zdarzeniowe pozwala nam ustawić nasz kod tak, aby nasłuchiwał i reagował. Tworzymy specjalne funkcje nazywane **nasłuchiwaczami zdarzeń**, które cierpliwie czekają na określone zdarzenia, a potem natychmiast przechodzą do akcji.
 
-### Popularne zdarzenia
+Pomyśl o nasłuchiwaczach zdarzeń jak o dzwonku do twojego kodu. Ustawiasz dzwonek (`addEventListener()`), określasz, na jaki dźwięk ma reagować (np. 'click' lub 'keypress'), a potem definiujesz, co ma się wydarzyć, gdy ktoś zadzwoni (Twoja niestandardowa funkcja).
 
-Istnieje [dziesiątki zdarzeń](https://developer.mozilla.org/docs/Web/Events), które można nasłuchiwać podczas tworzenia aplikacji. W zasadzie każda akcja użytkownika na stronie generuje zdarzenie, co daje ogromną moc w zapewnieniu użytkownikowi pożądanego doświadczenia. Na szczęście zazwyczaj potrzebujesz tylko kilku zdarzeń. Oto kilka popularnych (w tym dwa, których użyjemy podczas tworzenia naszej gry):
+**Oto jak działają nasłuchiwacze zdarzeń:**
+- **Nasłuchują** określonych działań użytkownika, takich jak kliknięcia, naciśnięcia klawiszy czy ruchy myszki
+- **Wykonują** Twój niestandardowy kod, gdy wystąpi określone zdarzenie
+- **Reagują** natychmiast na interakcje użytkownika, tworząc płynne doświadczenie
+- **Obsługują** wiele zdarzeń na tym samym elemencie za pomocą różnych nasłuchiwaczy
 
-- [click](https://developer.mozilla.org/docs/Web/API/Element/click_event): Użytkownik kliknął coś, zazwyczaj przycisk lub hiperłącze
-- [contextmenu](https://developer.mozilla.org/docs/Web/API/Element/contextmenu_event): Użytkownik kliknął prawym przyciskiem myszy
-- [select](https://developer.mozilla.org/docs/Web/API/Element/select_event): Użytkownik zaznaczył jakiś tekst
-- [input](https://developer.mozilla.org/docs/Web/API/Element/input_event): Użytkownik wpisał jakiś tekst
+> **UWAGA:** Warto podkreślić, że istnieje wiele sposobów tworzenia nasłuchiwaczy zdarzeń. Można używać funkcji anonimowych lub nazwanych. Można stosować różne skróty, takie jak przypisywanie własności `click`, lub używać `addEventListener()`. W naszym ćwiczeniu skupimy się na `addEventListener()` i funkcjach anonimowych, ponieważ to chyba najpopularniejsza technika używana przez programistów webowych. Jest też najbardziej elastyczna, ponieważ `addEventListener()` działa dla wszystkich zdarzeń, a nazwa zdarzenia może być podana jako parametr.
+
+### Typowe zdarzenia
+
+Chociaż przeglądarki internetowe oferują dziesiątki różnych zdarzeń, na które można nasłuchiwać, większość interaktywnych aplikacji opiera się na zaledwie kilku podstawowych zdarzeniach. Zrozumienie tych kluczowych zdarzeń da Ci fundament do budowania zaawansowanych interakcji użytkownika.
+
+Istnieje [dziesiątki zdarzeń](https://developer.mozilla.org/docs/Web/Events), na które możesz nasłuchiwać podczas tworzenia aplikacji. W zasadzie wszystko, co użytkownik robi na stronie, wywołuje zdarzenie, co daje Ci dużo mocy, aby zapewnić mu doświadczenie, jakiego pragnie. Na szczęście zwykle potrzebujesz tylko niewielkiej liczby zdarzeń. Oto kilka popularnych (w tym dwa, których użyjemy przy tworzeniu naszej gry):
+
+| Zdarzenie | Opis | Typowe zastosowania |
+|-----------|------|--------------------|
+| `click` | Użytkownik kliknął coś | Przyciski, linki, elementy interaktywne |
+| `contextmenu` | Użytkownik kliknął prawym przyciskiem myszy | Niestandardowe menu kontekstowe |
+| `select` | Użytkownik zaznaczył fragment tekstu | Edycja tekstu, operacje kopiowania |
+| `input` | Użytkownik wpisał tekst | Walidacja formularzy, wyszukiwanie w czasie rzeczywistym |
+
+**Zrozumienie tych typów zdarzeń:**
+- **Wywoływane** gdy użytkownicy wchodzą w interakcję z określonymi elementami na stronie
+- **Dostarczają** szczegółowych informacji o działaniu użytkownika przez obiekty zdarzeń
+- **Umożliwiają** tworzenie responsywnych, interaktywnych aplikacji webowych
+- **Działają** spójnie na różnych przeglądarkach i urządzeniach
 
 ## Tworzenie gry
 
-Stworzymy grę, aby zgłębić, jak działają zdarzenia w JavaScript. Nasza gra będzie testować umiejętności pisania na klawiaturze gracza, co jest jedną z najbardziej niedocenianych umiejętności, które powinien posiadać każdy programista. Wszyscy powinniśmy ćwiczyć pisanie! Ogólny przebieg gry będzie wyglądał tak:
+Teraz, gdy rozumiesz, jak działają zdarzenia, zastosujmy tę wiedzę w praktyce, budując coś użytecznego. Stworzymy grę na szybkość pisania, która pokaże obsługę zdarzeń i pomoże Ci rozwinąć ważną umiejętność programisty.
 
-- Gracz klika przycisk start i otrzymuje cytat do przepisania
-- Gracz wpisuje cytat tak szybko, jak potrafi, w polu tekstowym
-  - Po ukończeniu każdego słowa następne zostaje podświetlone
-  - Jeśli gracz popełni literówkę, pole tekstowe zmienia kolor na czerwony
-  - Po ukończeniu cytatu wyświetlana jest wiadomość o sukcesie wraz z czasem, który upłynął
+Stworzymy grę, aby zbadać, jak działają zdarzenia w JavaScript. Nasza gra przetestuje umiejętność pisania gracza, która jest jedną z najbardziej niedocenianych umiejętności, jaką powinni posiadać wszyscy programiści. Ciekawostka: układ klawiatury QWERTY, którego używamy dzisiaj, został zaprojektowany w latach 70. XIX wieku dla maszyn do pisania – a dobre umiejętności pisania na klawiaturze są nadal tak samo cenne dla programistów! Ogólny przebieg gry będzie wyglądać tak:
 
-Zbudujmy naszą grę i nauczmy się o zdarzeniach!
+```mermaid
+flowchart TD
+    A[Gracz klika Start] --> B[Wyświetla się losowy cytat]
+    B --> C[Gracz wpisuje w polu tekstowym]
+    C --> D{Słowo ukończone?}
+    D -->|Tak| E[Podświetl następne słowo]
+    D -->|Nie| F{Dotychczas poprawnie?}
+    F -->|Tak| G[Zachowaj normalny styl]
+    F -->|Nie| H[Pokaż styl błędu]
+    E --> I{Cytat ukończony?}
+    I -->|Nie| C
+    I -->|Tak| J[Pokaż komunikat sukcesu z czasem]
+    G --> C
+    H --> C
+```
+**Oto jak będzie działała nasza gra:**
+- **Zaczyna się** gdy gracz kliknie przycisk start i wyświetli się losowy cytat
+- **Śledzi** postępy gracza w pisaniu słowo po słowie w czasie rzeczywistym
+- **Podświetla** aktualne słowo, aby skupić uwagę gracza
+- **Daje** natychmiastową wizualną informację o błędach w pisaniu
+- **Oblicza** i wyświetla całkowity czas po ukończeniu cytatu
+
+Zbudujmy naszą grę i poznajmy zdarzenia!
 
 ### Struktura plików
 
-Będziemy potrzebować trzech plików: **index.html**, **script.js** i **style.css**. Zacznijmy od ich przygotowania, aby ułatwić sobie pracę.
+Zanim zaczniemy kodować, uporządkujmy wszystko! Posiadanie czystej struktury plików od początku zaoszczędzi Ci bólu głowy później i sprawi, że Twój projekt będzie bardziej profesjonalny. 😊
 
-- Utwórz nowy folder na swoje pliki, otwierając konsolę lub terminal i wydając następujące polecenie:
+Zachowamy prostotę, używając trzech plików: `index.html` dla struktury strony, `script.js` dla całej logiki gry oraz `style.css`, aby wszystko dobrze wyglądało. To klasyczne trio, które napędza większość internetu!
+
+**Utwórz nowy folder na swoje pliki, otwierając konsolę lub terminal i wpisując następujące polecenie:**
 
 ```bash
-# Linux or macOS
+# Linux lub macOS
 mkdir typing-game && cd typing-game
 
 # Windows
 md typing-game && cd typing-game
 ```
 
-- Otwórz Visual Studio Code
+**Oto, co robią te polecenia:**
+- **Tworzy** nowy katalog o nazwie `typing-game` na pliki projektu
+- **Przechodzi** automatycznie do nowo utworzonego katalogu
+- **Ustawia** czyste środowisko pracy do tworzenia gry
+
+**Otwórz Visual Studio Code:**
 
 ```bash
 code .
 ```
 
-- Dodaj trzy pliki do folderu w Visual Studio Code o następujących nazwach:
-  - index.html
-  - script.js
-  - style.css
+**To polecenie:**
+- **Uruchamia** Visual Studio Code w bieżącym katalogu
+- **Otwiera** folder projektu w edytorze
+- **Zapewnia** dostęp do wszystkich potrzebnych narzędzi programistycznych
+
+**Dodaj trzy pliki do folderu w Visual Studio Code o następujących nazwach:**
+- `index.html` - zawiera strukturę i zawartość gry
+- `script.js` - obsługuje całą logikę gry i nasłuchiwacze zdarzeń
+- `style.css` - definiuje wygląd wizualny i stylizację
 
 ## Tworzenie interfejsu użytkownika
 
-Analizując wymagania, wiemy, że będziemy potrzebować kilku elementów na naszej stronie HTML. To trochę jak przepis, gdzie potrzebujemy składników:
+Zbudujmy teraz scenę, na której odbędzie się cała akcja gry! Pomyśl o tym jak o zaprojektowaniu panelu sterowania statku kosmicznego – musimy mieć pewność, że wszystko, czego potrzebują gracze, jest dokładnie tam, gdzie się tego spodziewają.
 
-- Miejsce do wyświetlenia cytatu, który użytkownik ma przepisać
-- Miejsce do wyświetlenia wiadomości, np. wiadomości o sukcesie
-- Pole tekstowe do wpisywania
-- Przycisk start
+Zastanówmy się, czego faktycznie potrzebuje nasza gra. Gdybyś grał w grę na pisanie, co chciałbyś widzieć na ekranie? Oto, czego będziemy potrzebować:
 
-Każdy z tych elementów będzie potrzebował identyfikatorów, abyśmy mogli z nimi pracować w naszym JavaScript. Dodamy również odwołania do plików CSS i JavaScript, które stworzymy.
+| Element UI | Cel | Element HTML |
+|------------|-----|--------------|
+| Wyświetlanie cytatu | Pokazuje tekst do napisania | `<p>` z `id="quote"` |
+| Obszar wiadomości | Wyświetla status i komunikaty o powodzeniu | `<p>` z `id="message"` |
+| Pole tekstowe | Tam, gdzie gracz wpisuje cytat | `<input>` z `id="typed-value"` |
+| Przyciski start | Rozpoczyna grę | `<button>` z `id="start"` |
 
-Utwórz nowy plik o nazwie **index.html**. Dodaj następujący kod HTML:
+**Zrozumienie struktury UI:**
+- **Organizuje** zawartość logicznie od góry do dołu
+- **Przypisuje** unikalne ID elementom do celów JavaScript
+- **Zapewnia** wyraźną hierarchię wizualną dla lepszego doświadczenia użytkownika
+- **Zawiera** semantyczne elementy HTML dla dostępności
+
+Każdemu z tych elementów przypiszemy identyfikatory, aby móc je obsługiwać w JavaScript. Dodamy też odniesienia do plików CSS i JavaScript, które zamierzamy stworzyć.
+
+Utwórz nowy plik o nazwie `index.html`. Dodaj następujący kod HTML:
 
 ```html
 <!-- inside index.html -->
@@ -105,26 +162,52 @@ Utwórz nowy plik o nazwie **index.html**. Dodaj następujący kod HTML:
 </html>
 ```
 
+**Co osiąga ta struktura HTML:**
+- **Łączy** arkusz stylów CSS w sekcji `<head>` dla stylizacji
+- **Tworzy** wyraźny nagłówek i instrukcje dla użytkowników
+- **Ustanawia** akapity zastępcze z określonymi ID dla dynamicznej zawartości
+- **Zawiera** pole input z atrybutami ułatwiającymi dostępność
+- **Dodaje** przycisk start, który uruchomi grę
+- **Ładuje** plik JavaScript na końcu w celu optymalnej wydajności
+
 ### Uruchomienie aplikacji
 
-Zawsze najlepiej jest rozwijać aplikację iteracyjnie, aby zobaczyć, jak wygląda. Uruchommy naszą aplikację. Istnieje świetne rozszerzenie dla Visual Studio Code o nazwie [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon), które będzie hostować Twoją aplikację lokalnie i odświeżać przeglądarkę za każdym razem, gdy zapiszesz zmiany.
+Częste testowanie aplikacji podczas tworzenia pomaga wykryć problemy wcześnie i zobaczyć postępy w czasie rzeczywistym. Live Server to nieocenione narzędzie, które automatycznie odświeża przeglądarkę przy każdej zapisanej zmianie, co znacznie usprawnia rozwój.
 
-- Zainstaluj [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon), klikając **Install**
-  - Przeglądarka poprosi Cię o otwarcie Visual Studio Code, a następnie Visual Studio Code poprosi o wykonanie instalacji
-  - Uruchom ponownie Visual Studio Code, jeśli zostaniesz o to poproszony
-- Po zainstalowaniu, w Visual Studio Code, kliknij Ctrl-Shift-P (lub Cmd-Shift-P), aby otworzyć paletę poleceń
-- Wpisz **Live Server: Open with Live Server**
-  - Live Server zacznie hostować Twoją aplikację
-- Otwórz przeglądarkę i przejdź do **https://localhost:5500**
-- Powinieneś teraz zobaczyć stronę, którą stworzyłeś!
+Zawsze najlepiej rozwijać aplikację iteracyjnie, aby obserwować efekt. Uruchommy naszą aplikację. Istnieje świetne rozszerzenie do Visual Studio Code o nazwie [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon), które hostuje Twoją aplikację lokalnie i odświeża przeglądarkę przy każdej zapisanej zmianie.
 
-Dodajmy trochę funkcjonalności.
+**Zainstaluj [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon) klikając link i przycisk Install:**
 
-## Dodanie CSS
+**Oto, co się stanie podczas instalacji:**
+- **Przekierowuje** Twoją przeglądarkę do Visual Studio Code
+- **Przeprowadza** Cię przez proces instalacji rozszerzenia
+- **Może wymagać** ponownego uruchomienia Visual Studio Code, by zakończyć konfigurację
 
-Po stworzeniu HTML, dodajmy CSS dla podstawowego stylu. Musimy podświetlić słowo, które gracz powinien wpisywać, oraz zmienić kolor pola tekstowego, jeśli wpisane słowo jest niepoprawne. Zrobimy to za pomocą dwóch klas.
+**Po instalacji, w Visual Studio Code naciśnij Ctrl-Shift-P (lub Cmd-Shift-P), aby otworzyć paletę poleceń:**
 
-Utwórz nowy plik o nazwie **style.css** i dodaj następujący kod.
+**Co daje paleta poleceń:**
+- **Zapewnia** szybki dostęp do wszystkich komend VS Code
+- **Wyszukuje** polecenia podczas wpisywania
+- **Oferuje** skróty klawiszowe przyspieszające pracę
+
+**Wpisz "Live Server: Open with Live Server":**
+
+**Co robi Live Server:**
+- **Uruchamia** lokalny serwer deweloperski dla Twojego projektu
+- **Automatycznie** odświeża przeglądarkę po zapisaniu plików
+- **Serwuje** pliki z lokalnego adresu URL (zazwyczaj `localhost:5500`)
+
+**Otwórz przeglądarkę i przejdź do `https://localhost:5500`:**
+
+Powinieneś teraz zobaczyć utworzoną przez siebie stronę! Dodajmy teraz trochę funkcjonalności.
+
+## Dodaj CSS
+
+Zadbajmy teraz o ładny wygląd! Wizualna informacja zwrotna jest kluczowa dla interfejsów użytkownika od wczesnych lat informatyki. W latach 80. badacze odkryli, że natychmiastowa informacja wizualna dramatycznie poprawia wydajność użytkownika i zmniejsza liczbę błędów. Dokładnie to stworzymy.
+
+Nasza gra musi jasno przekazywać, co się dzieje. Gracze powinni od razu wiedzieć, które słowo mają teraz pisać, a jeśli popełnią błąd, powinni go natychmiast zauważyć. Stwórzmy prostą, ale skuteczną stylizację:
+
+Utwórz nowy plik o nazwie `style.css` i dodaj do niego poniższy kod.
 
 ```css
 /* inside style.css */
@@ -138,40 +221,60 @@ Utwórz nowy plik o nazwie **style.css** i dodaj następujący kod.
 }
 ```
 
-✅ Jeśli chodzi o CSS, możesz zaprojektować swoją stronę według własnego uznania. Poświęć trochę czasu, aby uczynić stronę bardziej atrakcyjną:
+**Co oznaczają te klasy CSS:**
+- **Podświetla** aktualne słowo na żółto, zapewniając czytelną wskazówkę wizualną
+- **Sygnalizuje** błędy w pisaniu za pomocą jasnoczerwonego tła
+- **Daje** natychmiastową informację zwrotną, nie zakłócając rytmu pisania
+- **Używa** kontrastujących kolorów dla dostępności i jasnej komunikacji
+
+✅ Jeśli chodzi o CSS, możesz ułożyć stronę według własnego uznania. Poświęć trochę czasu, aby uczynić ją bardziej atrakcyjną:
 
 - Wybierz inną czcionkę
 - Pokoloruj nagłówki
-- Zmień rozmiar elementów
+- Zmień rozmiary elementów
 
 ## JavaScript
 
-Po stworzeniu interfejsu użytkownika, czas skupić się na JavaScript, który dostarczy logikę. Podzielimy to na kilka kroków:
+Tu robi się ciekawie! 🎉 Mamy już strukturę HTML i stylizację CSS, ale nasza gra to teraz jak piękny samochód bez silnika. JavaScript będzie właśnie tym silnikiem – to on sprawi, że wszystko będzie działać i reagować na to, co robią gracze.
 
-- [Tworzenie stałych](../../../../4-typing-game/typing-game)
-- [Nasłuchiwacz zdarzeń do rozpoczęcia gry](../../../../4-typing-game/typing-game)
-- [Nasłuchiwacz zdarzeń do wpisywania](../../../../4-typing-game/typing-game)
+Nasz projekt ożyje na Twoich oczach. Podejdziemy do tego krok po kroku, aby nic Cię nie przytłoczyło:
 
-Najpierw utwórz nowy plik o nazwie **script.js**.
+| Krok | Cel | Czego się nauczysz |
+|------|-----|--------------------|
+| [Dodaj stałe](../../../../4-typing-game/typing-game) | Ustaw cytaty i odwołania do DOM | Zarządzanie zmiennymi i wybór elementów DOM |
+| [Nasłuchiwacz startu gry](../../../../4-typing-game/typing-game) | Obsługa inicjalizacji gry | Obsługa zdarzeń i aktualizacje UI |
+| [Nasłuchiwacz pisania](../../../../4-typing-game/typing-game) | Przetwarzanie wpisu użytkownika w czasie rzeczywistym | Walidacja wpisu i dynamiczna informacja zwrotna |
 
-### Tworzenie stałych
+**Takie podejście pomaga:**
+- **Organizować** kod w logiczne, łatwe do zarządzania sekcje
+- **Budować** funkcjonalność stopniowo dla łatwiejszego debugowania
+- **Zrozumieć** jak różne części aplikacji współpracują ze sobą
+- **Tworzyć** wzorce do ponownego wykorzystania w przyszłych projektach
 
-Będziemy potrzebować kilku elementów, aby ułatwić sobie programowanie. Podobnie jak w przepisie, oto czego będziemy potrzebować:
+Najpierw jednak utwórz nowy plik o nazwie `script.js`.
 
-- Tablica z listą wszystkich cytatów
-- Pusta tablica do przechowywania wszystkich słów z bieżącego cytatu
-- Miejsce do przechowywania indeksu słowa, które gracz aktualnie wpisuje
-- Czas, w którym gracz kliknął start
+### Dodaj stałe
 
-Będziemy również potrzebować odwołań do elementów interfejsu użytkownika:
+Zanim przejdziemy do działania, zgromadźmy wszystkie nasze zasoby! Podobnie jak kontrola misji NASA ustawia swoje systemy monitorujące przed startem, łatwiej jest, gdy wszystko jest przygotowane i gotowe. To oszczędza nam późniejszego szukania rzeczy i zapobiega literówkom.
 
-- Pole tekstowe (**typed-value**)
-- Wyświetlanie cytatu (**quote**)
-- Wiadomość (**message**)
+Oto, co musimy najpierw ustawić:
+
+| Typ danych | Cel | Przykład |
+| Tablica cytatów | Przechowuje wszystkie możliwe cytaty do gry | `['Cytat 1', 'Cytat 2', ...]` |
+| Tablica słów | Dzieli aktualny cytat na pojedyncze słowa | `['Kiedy', 'masz', ...]` |
+| Indeks słowa | Śledzi, które słowo gracz aktualnie wpisuje | `0, 1, 2, 3...` |
+| Czas startu | Oblicza upływ czasu do punktacji | `Date.now()` |
+
+**Potrzebujemy także referencji do naszych elementów UI:**
+| Element | ID | Przeznaczenie |
+|---------|----|--------------|
+| Pole tekstowe | `typed-value` | Miejsce, gdzie gracze wpisują tekst |
+| Wyświetlacz cytatu | `quote` | Pokazuje cytat do wpisania |
+| Obszar wiadomości | `message` | Wyświetla aktualizacje statusu |
 
 ```javascript
-// inside script.js
-// all of our quotes
+// w pliku script.js
+// wszystkie nasze cytaty
 const quotes = [
     'When you have eliminated the impossible, whatever remains, however improbable, must be the truth.',
     'There is nothing more deceptive than an obvious fact.',
@@ -181,166 +284,312 @@ const quotes = [
     'Nothing clears up a case so much as stating it to another person.',
     'Education never ends, Watson. It is a series of lessons, with the greatest for the last.',
 ];
-// store the list of words and the index of the word the player is currently typing
+// przechowuj listę słów i indeks słowa, które gracz aktualnie wpisuje
 let words = [];
 let wordIndex = 0;
-// the starting time
+// czas rozpoczęcia
 let startTime = Date.now();
-// page elements
+// elementy strony
 const quoteElement = document.getElementById('quote');
 const messageElement = document.getElementById('message');
 const typedValueElement = document.getElementById('typed-value');
 ```
 
-✅ Dodaj więcej cytatów do swojej gry
+**Rozbicie tego, co osiąga ten kod konfiguracyjny:**
+- **Przechowuje** tablicę cytatów Sherlocka Holmesa używając `const`, ponieważ cytaty się nie zmieniają
+- **Inicjalizuje** zmienne śledzące przy pomocy `let`, ponieważ wartości te będą się zmieniać podczas gry
+- **Zapisuje** referencje do elementów DOM przy pomocy `document.getElementById()` dla efektywnego dostępu
+- **Tworzy** podstawę dla całej funkcjonalności gry z jasnymi, opisowymi nazwami zmiennych
+- **Organizuje** powiązane dane i elementy logicznie dla łatwiejszej konserwacji kodu
 
-> **NOTE:** Możemy pobierać elementy w dowolnym momencie w kodzie za pomocą `document.getElementById`. Ponieważ będziemy regularnie odwoływać się do tych elementów, unikniemy literówek w ciągach znaków, używając stałych. Frameworki takie jak [Vue.js](https://vuejs.org/) lub [React](https://reactjs.org/) mogą pomóc w lepszym zarządzaniu centralizacją kodu.
+✅ Śmiało dodaj więcej cytatów do swojej gry
 
-Poświęć chwilę na obejrzenie filmu o używaniu `const`, `let` i `var`
+> 💡 **Pro Tip**: Elementy możemy pobierać w kodzie za pomocą `document.getElementById()` w dowolnym momencie. Ponieważ będziemy często odwoływać się do tych elementów, unikniemy literówek, używając stałych. Frameworki takie jak [Vue.js](https://vuejs.org/) czy [React](https://reactjs.org/) pomogą lepiej zarządzać centralizacją kodu.
+>
+**Dlaczego ta metoda działa tak dobrze:**
+- **Zapobiega** błędom literowym podczas wielokrotnego odwoływania się do elementów
+- **Poprawia** czytelność kodu dzięki opisowym nazwom stałych
+- **Umożliwia** lepsze wsparcie IDE z autouzupełnianiem i sprawdzaniem błędów
+- **Ułatwia** refaktoryzację, jeśli zmienią się identyfikatory elementów
 
-[![Rodzaje zmiennych](https://img.youtube.com/vi/JNIXfGiDWM8/0.jpg)](https://youtube.com/watch?v=JNIXfGiDWM8 "Rodzaje zmiennych")
+Poświęć chwilę, by obejrzeć wideo o używaniu `const`, `let` i `var`
 
-> 🎥 Kliknij obrazek powyżej, aby obejrzeć film o zmiennych.
+[![Typy zmiennych](https://img.youtube.com/vi/JNIXfGiDWM8/0.jpg)](https://youtube.com/watch?v=JNIXfGiDWM8 "Typy zmiennych")
 
-### Dodanie logiki startu
+> 🎥 Kliknij powyższy obraz, aby obejrzeć wideo o zmiennych.
 
-Aby rozpocząć grę, gracz kliknie przycisk start. Oczywiście nie wiemy, kiedy to zrobi. Tutaj wkracza [nasłuchiwacz zdarzeń](https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener). Nasłuchiwacz zdarzeń pozwoli nam "nasłuchiwać", czy coś się wydarzy (zdarzenie) i wykonać kod w odpowiedzi. W naszym przypadku chcemy wykonać kod, gdy użytkownik kliknie start.
+### Dodaj logikę startu
 
-Kiedy użytkownik kliknie **start**, musimy wybrać cytat, skonfigurować interfejs użytkownika oraz ustawić śledzenie bieżącego słowa i czasu. Poniżej znajduje się kod JavaScript, który należy dodać; omówimy go zaraz po bloku kodu.
+To tutaj wszystko zaczyna działać! 🚀 Zaraz napiszesz swój pierwszy prawdziwy nasłuchiwacz zdarzeń, a jest coś bardzo satysfakcjonującego w widzeniu, jak twój kod reaguje na kliknięcie przycisku.
+
+Pomyśl o tym: gdzieś tam, gracz kliknie przycisk "Start", a twój kod musi być na to gotowy. Nie wiemy, kiedy to nastąpi - może zaraz, może po chwili przy kawie - ale gdy to zrobi, twoja gra ożyje.
+
+Gdy użytkownik kliknie `start`, musimy wybrać cytat, przygotować interfejs i ustawić śledzenie aktualnego słowa i czasu. Poniżej znajdziesz wymagany JavaScript; omawiamy go zaraz po bloku skryptu.
 
 ```javascript
-// at the end of script.js
+// na końcu script.js
 document.getElementById('start').addEventListener('click', () => {
-  // get a quote
+  // pobierz cytat
   const quoteIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[quoteIndex];
-  // Put the quote into an array of words
+  // Umieść cytat w tablicy słów
   words = quote.split(' ');
-  // reset the word index for tracking
+  // zresetuj indeks słowa do śledzenia
   wordIndex = 0;
 
-  // UI updates
-  // Create an array of span elements so we can set a class
+  // Aktualizacje interfejsu użytkownika
+  // Utwórz tablicę elementów span, aby móc ustawić klasę
   const spanWords = words.map(function(word) { return `<span>${word} </span>`});
-  // Convert into string and set as innerHTML on quote display
+  // Konwertuj na łańcuch znaków i ustaw jako innerHTML na wyświetlaczu cytatu
   quoteElement.innerHTML = spanWords.join('');
-  // Highlight the first word
+  // Podświetl pierwsze słowo
   quoteElement.childNodes[0].className = 'highlight';
-  // Clear any prior messages
+  // Wyczyść wszelkie wcześniejsze wiadomości
   messageElement.innerText = '';
 
-  // Setup the textbox
-  // Clear the textbox
+  // Skonfiguruj pole tekstowe
+  // Wyczyść pole tekstowe
   typedValueElement.value = '';
-  // set focus
+  // ustaw fokus
   typedValueElement.focus();
-  // set the event handler
+  // ustaw obsługę zdarzeń
 
-  // Start the timer
+  // Uruchom timer
   startTime = new Date().getTime();
 });
 ```
 
-Rozbijmy kod na części!
+**Podzielmy kod na logiczne sekcje:**
 
-- Konfiguracja śledzenia słów
-  - Użycie [Math.floor](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/floor) i [Math.random](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/random) pozwala nam losowo wybrać cytat z tablicy `quotes`
-  - Konwertujemy `quote` na tablicę `words`, aby móc śledzić słowo, które gracz aktualnie wpisuje
-  - `wordIndex` ustawiamy na 0, ponieważ gracz zacznie od pierwszego słowa
-- Konfiguracja interfejsu użytkownika
-  - Tworzymy tablicę `spanWords`, która zawiera każde słowo w elemencie `span`
-    - Pozwoli nam to podświetlić słowo na wyświetlaczu
-  - `join` tablicy tworzy ciąg znaków, który możemy użyć do aktualizacji `innerHTML` w `quoteElement`
-    - To wyświetli cytat graczowi
-  - Ustawiamy `className` pierwszego elementu `span` na `highlight`, aby podświetlić go na żółto
-  - Czyścimy `messageElement`, ustawiając `innerText` na `''`
-- Konfiguracja pola tekstowego
-  - Czyścimy bieżącą `value` w `typedValueElement`
-  - Ustawiamy `focus` na `typedValueElement`
-- Rozpoczynamy timer, wywołując `getTime`
+**📊 Konfiguracja śledzenia słów:**
+- **Wybiera** losowy cytat za pomocą `Math.floor()` i `Math.random()` dla urozmaicenia
+- **Konwertuje** cytat na tablicę pojedynczych słów za pomocą `split(' ')`
+- **Resetuje** `wordIndex` do 0, ponieważ gracz zaczyna od pierwszego słowa
+- **Przygotowuje** stan gry na nową rundę
 
-### Dodanie logiki wpisywania
+**🎨 Konfiguracja i wyświetlanie UI:**
+- **Tworzy** tablicę elementów `<span>`, opakowując każde słowo dla indywidualnego stylowania
+- **Łączy** elementy span w jeden ciąg dla efektywnej aktualizacji DOM
+- **Podświetla** pierwsze słowo, dodając klasę CSS `highlight`
+- **Czyści** poprzednie komunikaty gry, by dać czystą przestrzeń
 
-Podczas wpisywania przez gracza generowane jest zdarzenie `input`. Ten nasłuchiwacz zdarzeń sprawdzi, czy gracz poprawnie wpisuje słowo, i obsłuży bieżący status gry. Wracając do **script.js**, dodaj poniższy kod na końcu. Omówimy go zaraz po bloku kodu.
+**⌨️ Przygotowanie pola tekstowego:**
+- **Czyści** istniejący tekst w polu input
+- **Ustawia fokus** na polu tekstowym, aby gracze mogli zacząć pisać natychmiast
+- **Przygotowuje** pole do nowej sesji gry
+
+**⏱️ Inicjalizacja timera:**
+- **Pobiera** aktualny znacznik czasu za pomocą `new Date().getTime()`
+- **Umożliwia** dokładne obliczenia prędkości pisania i czasu ukończenia
+- **Uruchamia** śledzenie czasu sesji gry
+
+### Dodaj logikę pisania
+
+Tu zajmiemy się sednem naszej gry! Nie martw się, jeśli na początku wydaje się tego dużo - przejdziemy przez każdy fragment, a na koniec zobaczysz, jak wszystko jest logiczne.
+
+Budujemy coś dość zaawansowanego: za każdym razem, gdy ktoś wpisze literę, nasz kod sprawdzi, co zostało wpisane, da feedback i zdecyduje, co dalej. To podobne do wczesnych edytorów tekstu jak WordStar z lat 70., które dawały na bieżąco informacje zwrotne piszącym.
 
 ```javascript
-// at the end of script.js
+// na końcu script.js
 typedValueElement.addEventListener('input', () => {
-  // Get the current word
+  // Pobierz aktualne słowo
   const currentWord = words[wordIndex];
-  // get the current value
+  // pobierz aktualną wartość
   const typedValue = typedValueElement.value;
 
   if (typedValue === currentWord && wordIndex === words.length - 1) {
-    // end of sentence
-    // Display success
+    // koniec zdania
+    // Wyświetl sukces
     const elapsedTime = new Date().getTime() - startTime;
     const message = `CONGRATULATIONS! You finished in ${elapsedTime / 1000} seconds.`;
     messageElement.innerText = message;
   } else if (typedValue.endsWith(' ') && typedValue.trim() === currentWord) {
-    // end of word
-    // clear the typedValueElement for the new word
+    // koniec słowa
+    // wyczyść typedValueElement dla nowego słowa
     typedValueElement.value = '';
-    // move to the next word
+    // przejdź do następnego słowa
     wordIndex++;
-    // reset the class name for all elements in quote
+    // zresetuj nazwę klasy dla wszystkich elementów w cytacie
     for (const wordElement of quoteElement.childNodes) {
       wordElement.className = '';
     }
-    // highlight the new word
+    // podświetl nowe słowo
     quoteElement.childNodes[wordIndex].className = 'highlight';
   } else if (currentWord.startsWith(typedValue)) {
-    // currently correct
-    // highlight the next word
+    // aktualnie poprawne
+    // podświetl następne słowo
     typedValueElement.className = '';
   } else {
-    // error state
+    // stan błędu
     typedValueElement.className = 'error';
   }
 });
 ```
 
-Rozbijmy kod na części! Zaczynamy od pobrania bieżącego słowa i wartości, którą gracz wpisał do tej pory. Następnie mamy logikę kaskadową, gdzie sprawdzamy, czy cytat jest ukończony, słowo jest ukończone, słowo jest poprawne, czy (na końcu) wystąpił błąd.
+**Jak działa przepływ logiki pisania:**
 
-- Cytat jest ukończony, co wskazuje, że `typedValue` jest równe `currentWord`, a `wordIndex` jest równy jednemu mniej niż `length` `words`
-  - Obliczamy `elapsedTime`, odejmując `startTime` od bieżącego czasu
-  - Dzielimy `elapsedTime` przez 1,000, aby przeliczyć milisekundy na sekundy
-  - Wyświetlamy wiadomość o sukcesie
-- Słowo jest ukończone, co wskazuje, że `typedValue` kończy się spacją (koniec słowa) i `typedValue` jest równe `currentWord`
-  - Ustawiamy `value` w `typedElement` na `''`, aby umożliwić wpisanie następnego słowa
-  - Zwiększamy `wordIndex`, aby przejść do następnego słowa
-  - Przechodzimy przez wszystkie `childNodes` w `quoteElement`, ustawiając `className` na `''`, aby przywrócić domyślny wygląd
-  - Ustawiamy `className` bieżącego słowa na `highlight`, aby oznaczyć je jako następne słowo do wpisania
-- Słowo jest aktualnie wpisywane poprawnie (ale nie ukończone), co wskazuje, że `currentWord` zaczyna się od `typedValue`
-  - Upewniamy się, że `typedValueElement` jest wyświetlane jako domyślne, czyszcząc `className`
-- Jeśli dotarliśmy do tego miejsca, mamy błąd
-  - Ustawiamy `className` w `typedValueElement` na `error`
+Funkcja działa jak kaskada warunków, sprawdzających od najbardziej specyficznych do najbardziej ogólnych. Rozbijmy każdy scenariusz:
 
-## Testowanie aplikacji
+```mermaid
+flowchart TD
+    A[Gracz wpisuje znak] --> B[Pobierz aktualne słowo i wpisaną wartość]
+    B --> C{Cytat ukończony?}
+    C -->|Tak| D[Pokaż komunikat o ukończeniu z czasem]
+    C -->|Nie| E{Słowo ukończone spacją?}
+    E -->|Tak| F[Wyczyść wpis, przejdź do następnego słowa, zaktualizuj podświetlenie]
+    E -->|Nie| G{Wpisywanie poprawne do tej pory?}
+    G -->|Tak| H[Usuń styl błędu]
+    G -->|Nie| I[Pokaż styl błędu]
+```
+**🏁 Cytat ukończony (Scenariusz 1):**
+- **Sprawdza**, czy wpisany tekst dokładnie odpowiada aktualnemu słowu ORAZ jesteśmy na ostatnim słowie
+- **Oblicza** upływ czasu poprzez odjęcie czasu startu od aktualnego czasu
+- **Konwertuje** milisekundy na sekundy, dzieląc przez 1 000
+- **Wyświetla** gratulacyjną wiadomość z czasem ukończenia
 
-Dotarłeś do końca! Ostatnim krokiem jest upewnienie się, że nasza aplikacja działa. Wypróbuj ją! Nie martw się, jeśli pojawią się błędy; **wszyscy programiści** mają błędy. Przeanalizuj komunikaty i debuguj w razie potrzeby.
+**✅ Słowo ukończone (Scenariusz 2):**
+- **Wykrywa** zakończenie słowa, gdy na końcu wpisu jest spacja
+- **Sprawdza**, czy obcięty tekst dokładnie pasuje do aktualnego słowa
+- **Czyści** pole input na kolejne słowo
+- **Przechodzi** do następnego słowa, zwiększając `wordIndex`
+- **Aktualizuje** wizualne podświetlenie, usuwając wszystkie klasy i podświetlając nowe słowo
 
-Kliknij **start** i zacznij pisać! Powinno to wyglądać trochę jak animacja, którą widzieliśmy wcześniej.
+**📝 Pisanie w toku (Scenariusz 3):**
+- **Weryfikuje**, czy aktualne słowo zaczyna się od tego, co już wpisano
+- **Usuwa** ewentualne błędy stylów, by pokazać poprawność wpisu
+- **Pozwala** na kontynuację pisania bez przerw
+
+**❌ Stan błędu (Scenariusz 4):**
+- **Działa**, gdy wpisany tekst nie pasuje do oczekiwanego początku słowa
+- **Dodaje** klasę błędu CSS, by zapewnić natychmiastową wizualną informację
+- **Pomaga** graczom szybko rozpoznać i poprawić pomyłki
+
+## Przetestuj swoją aplikację
+
+Spójrz, co osiągnąłeś! 🎉 Własnoręcznie stworzyłeś działającą grę w pisanie na podstawie zdarzeń. Poświęć chwilę, aby to docenić — to nie lada wyczyn!
+
+Teraz pora na testy! Czy wszystko działa zgodnie z oczekiwaniami? Czy coś nam umknęło? Otóż jeśli coś nie działa od razu idealnie, to zupełnie normalne. Nawet doświadczeni programiści regularnie znajdują błędy w swoim kodzie. To część procesu tworzenia!
+
+Kliknij `start` i zacznij pisać! Powinno to wyglądać trochę jak animacja, którą widzieliśmy wcześniej.
 
 ![Animacja gry w akcji](../../../../4-typing-game/images/demo.gif)
 
+**Co przetestować w aplikacji:**
+- **Sprawdza**, czy kliknięcie Start wyświetla losowy cytat
+- **Potwierdza**, że wpisywanie prawidłowo podświetla aktualne słowo
+- **Kontroluje**, czy pojawia się styl błędu przy błędnym pisaniu
+- **Zapewnia**, że ukończenie słowa przesuwa podświetlenie odpowiednio do przodu
+- **Testuje**, czy ukończenie cytatu pokazuje komunikat o zakończeniu z czasem
+
+**Typowe wskazówki do debugowania:**
+- **Sprawdź** konsolę przeglądarki (F12) pod kątem błędów JavaScript
+- **Zweryfikuj**, czy wszystkie nazwy plików są dokładne (uwzględniając wielkość liter)
+- **Upewnij się**, że Live Server działa i odświeża poprawnie
+- **Przetestuj** różne cytaty, aby upewnić się, że losowy wybór działa
+
 ---
+
+## Wyzwanie GitHub Copilot Agent 🎮
+
+Użyj trybu Agenta, aby wykonać poniższe zadanie:
+
+**Opis:** Rozszerz grę w pisanie, implementując system trudności, który dostosowuje się do wyników gracza. To wyzwanie pozwoli Ci poćwiczyć zaawansowane zarządzanie zdarzeniami, analizę danych i dynamiczne aktualizacje UI.
+
+**Zadanie:** Stwórz system dostosowania trudności w grze w pisanie, który:
+1. Śledzi prędkość pisania gracza (słów na minutę) oraz procent trafności
+2. Automatycznie dostosowuje się do trzech poziomów trudności: Łatwy (proste cytaty), Średni (obecne cytaty), Trudny (złożone cytaty z interpunkcją)
+3. Wyświetla aktualny poziom trudności i statystyki gracza w interfejsie
+4. Realizuje licznik serii, który po 3 z rzędu dobrych wynikach zwiększa trudność
+5. Dodaje wizualne sprzężenie zwrotne (kolory, animacje) sygnalizujące zmianę trudności
+
+Dodaj niezbędne elementy HTML, style CSS, i funkcje JavaScript, aby zrealizować tę funkcję. Uwzględnij odpowiednie obsługi błędów oraz zapewnij dostępność gry z właściwymi etykietami ARIA.
+
+Dowiedz się więcej o [trybie Agenta](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) tutaj.
 
 ## 🚀 Wyzwanie
 
-Dodaj więcej funkcjonalności
+Chcesz podnieść swoją grę w pisanie na wyższy poziom? Spróbuj zaimplementować te zaawansowane funkcje, by pogłębić zrozumienie obsługi zdarzeń i manipulacji DOM:
 
-- Wyłącz nasłuchiwacz zdarzeń `input` po ukończeniu gry i włącz go ponownie po kliknięciu przycisku
-- Wyłącz pole tekstowe, gdy gracz ukończy cytat
-- Wyświetl okno dialogowe modalne z wiadomością o sukcesie
-- Zapisz najlepsze wyniki za pomocą [localStorage](https://developer.mozilla.org/docs/Web/API/Window/localStorage)
+**Dodaj więcej funkcjonalności:**
+
+| Funkcja | Opis | Umiejętności do przećwiczenia |
+|---------|------|-------------------------------|
+| **Kontrola wejścia** | Wyłącz nasłuchiwacz zdarzenia `input` po ukończeniu i włącz go ponownie po kliknięciu przycisku | Zarządzanie zdarzeniami i kontrola stanu |
+| **Zarządzanie stanem UI** | Wyłącz pole tekstowe po ukończeniu cytatu | Manipulacja właściwościami DOM |
+| **Okno modalne** | Pokaż okno modalne z komunikatem sukcesu | Zaawansowane wzorce UI i dostępność |
+| **System najlepszych wyników** | Przechowuj najlepsze wyniki w `localStorage` | API przechowywania w przeglądarce i trwałość danych |
+
+**Wskazówki do implementacji:**
+- **Zbadaj** `localStorage.setItem()` i `localStorage.getItem()` dla trwałego przechowywania
+- **Ćwicz** dynamiczne dodawanie i usuwanie nasłuchiwaczy zdarzeń
+- **Poznaj** elementy HTML dialog oraz wzorce modalne w CSS
+- **Pamiętaj** o dostępności przy wyłączaniu i włączaniu elementów formularza
+
 ## Quiz po wykładzie
 
 [Quiz po wykładzie](https://ff-quizzes.netlify.app/web/quiz/22)
 
+---
+
+## 🚀 Twoja oś mistrzostwa w grze w pisanie
+
+### ⚡ **Co możesz zrobić w następnych 5 minutach**
+- [ ] Przetestuj swoją grę na różnych cytatach, żeby upewnić się, że działa płynnie
+- [ ] Eksperymentuj ze stylem CSS - zmień kolory podświetlenia i błędów
+- [ ] Otwórz narzędzia deweloperskie przeglądarki (F12) i obserwuj konsolę podczas gry
+- [ ] Spróbuj napisać cytat jak najszybciej
+
+### ⏰ **Co możesz osiągnąć w tym godzinowym bloku**
+- [ ] Dodaj więcej cytatów do tablicy (np. z ulubionych książek lub filmów)
+- [ ] Zaimplementuj system najlepszych wyników w `localStorage` z sekcji wyzwań
+- [ ] Stwórz kalkulator słów na minutę wyświetlany po każdej grze
+- [ ] Dodaj efekty dźwiękowe przy poprawnym pisaniu, błędach i ukończeniu
+
+### 📅 **Twoja przygoda na tydzień**
+- [ ] Zbuduj wersję multiplayer, gdzie znajomi mogą rywalizować obok siebie
+- [ ] Stwórz różne poziomy trudności z różną złożonością cytatów
+- [ ] Dodaj pasek postępu pokazujący, jak dużo cytatu zostało ukończone
+- [ ] Wdroż system kont użytkowników ze śledzeniem osobistych statystyk
+- [ ] Zaprojektuj własne motywy i pozwól użytkownikom wybierać stylizację
+
+### 🗓️ **Twoja transformacja na miesiąc**
+- [ ] Stwórz kurs pisania z lekcjami uczącymi właściwego układu palców
+- [ ] Zbuduj analizy pokazujące, które litery lub słowa sprawiają najwięcej błędów
+- [ ] Dodaj wsparcie dla różnych języków i układów klawiatur
+- [ ] Zintegruj się z edukacyjnymi API, aby pobierać cytaty z baz literatury
+- [ ] Opublikuj rozszerzoną wersję gry, aby inni mogli z niej korzystać i się cieszyć
+
+### 🎯 **Ostateczne podsumowanie**
+
+**Zanim pójdziesz dalej, poświęć chwilę na refleksję:**
+- Jaki moment był najbardziej satysfakcjonujący podczas budowania gry?
+- Jak teraz postrzegasz programowanie zdarzeniowe w porównaniu do początku?
+- Którą funkcję chcesz dodać, by uczynić grę wyjątkową?
+- Jak możesz wykorzystać koncepcje obsługi zdarzeń w innych projektach?
+
+```mermaid
+journey
+    title Twoja Podróż Pewności Siebie w Programowaniu Zdarzeń
+    section Dzisiaj
+      Rozumienie Zdarzeń: 3: You
+      Budowanie UI: 4: You
+      Pisanie Nasłuchiwaczy Zdarzeń: 5: You
+    section Ten Tydzień
+      Dodawanie Funkcji: 4: You
+      Debugowanie Problemów: 5: You
+      Ulepszanie UX: 4: You
+    section Następny Miesiąc
+      Tworzenie Złożonych Aplikacji: 5: You
+      Nauczanie Innych: 5: You
+      Tworzenie Frameworków: 5: You
+```
+> 🌟 **Pamiętaj**: właśnie opanowałeś jeden z kluczowych konceptów napędzających każdą interaktywną stronę i aplikację. Programowanie zdarzeniowe sprawia, że internet jest żywy i responsywny. Za każdym razem, gdy widzisz menu rozwijane, formularz z walidacją w czasie pisania czy grę reagującą na kliknięcia, teraz rozumiesz magię za tym stojącą. Nie uczysz się tylko kodować - uczysz się tworzyć doświadczenia intuicyjne i angażujące! 🎉
+
+---
+
 ## Przegląd i samodzielna nauka
 
-Przeczytaj o [wszystkich dostępnych zdarzeniach](https://developer.mozilla.org/docs/Web/Events) dla programisty w przeglądarce internetowej i zastanów się nad scenariuszami, w których można by użyć każdego z nich.
+Przeczytaj o [wszystkich dostępnych zdarzeniach](https://developer.mozilla.org/docs/Web/Events) udostępnianych developerowi przez przeglądarkę i zastanów się, kiedy użyłbyś każdego z nich.
 
 ## Zadanie
 
@@ -348,5 +597,7 @@ Przeczytaj o [wszystkich dostępnych zdarzeniach](https://developer.mozilla.org/
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego języku źródłowym powinien być uznawany za wiarygodne źródło. W przypadku informacji o kluczowym znaczeniu zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy wszelkich starań, aby zapewnić poprawność tłumaczenia, prosimy mieć na uwadze, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym powinien być uważany za źródło autorytatywne. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za wszelkie nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

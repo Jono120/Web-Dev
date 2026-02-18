@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b121a279a6ab39878491f3e572673515",
-  "translation_date": "2025-08-27T20:42:55+00:00",
-  "source_file": "5-browser-extension/README.md",
-  "language_code": "he"
-}
--->
 # בניית תוסף לדפדפן
 
 בניית תוספים לדפדפן היא דרך מהנה ומעניינת לחשוב על הביצועים של האפליקציות שלכם תוך כדי יצירת נכס אינטרנט מסוג שונה. מודול זה כולל שיעורים על איך דפדפנים עובדים ואיך לפרוס תוסף לדפדפן, איך לבנות טופס, לקרוא ל-API, להשתמש באחסון מקומי, ואיך להעריך את ביצועי האתר שלכם ולשפר אותם.
@@ -23,7 +14,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### קרדיטים
 
-![תוסף דפדפן ירוק](../../../translated_images/extension-screenshot.0e7f5bfa110e92e3875e1bc9405edd45a3d2e02963e48900adb91926a62a5807.he.png)
+![תוסף דפדפן ירוק](../../../translated_images/he/extension-screenshot.0e7f5bfa110e92e3.webp)
 
 ## קרדיטים
 

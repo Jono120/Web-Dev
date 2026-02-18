@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-25T21:30:45+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "bn"
-}
--->
 # আমার টেরারিয়াম: HTML, CSS এবং DOM ম্যানিপুলেশন শিখতে একটি প্রজেক্ট 🌵🌱
 
 একটি ছোট ড্র্যাগ এবং ড্রপ কোড-মেডিটেশন। সামান্য HTML, JS এবং CSS ব্যবহার করে আপনি একটি ওয়েব ইন্টারফেস তৈরি করতে পারেন, সেটিকে স্টাইল করতে পারেন এবং ইন্টারঅ্যাকশন যোগ করতে পারেন।
 
-![আমার টেরারিয়াম](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.bn.png)
+![আমার টেরারিয়াম](../../../../translated_images/bn/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## কৃতজ্ঞতা
 

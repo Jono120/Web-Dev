@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "830359535306594b448db6575ce5cdee",
-  "translation_date": "2025-08-27T21:58:37+00:00",
-  "source_file": "7-bank-project/README.md",
-  "language_code": "my"
-}
--->
 # :dollar: ဘဏ်တစ်ခု တည်ဆောက်ခြင်း
 
 ဒီပရောဂျက်မှာ သင်ဟာ စိတ်ကူးယဉ်ဘဏ်တစ်ခုကို ဘယ်လိုတည်ဆောက်ရမယ်ဆိုတာကို သင်ယူနိုင်ပါမယ်။ ဒီသင်ခန်းစာတွေမှာ ဝက်ဘ်အက်ပ်ကို ဘယ်လိုပုံစံချပြီး လမ်းကြောင်းတွေထည့်ရမယ်၊ ဖောင်တွေတည်ဆောက်ရမယ်၊ state ကို စီမံခန့်ခွဲရမယ်၊ API ကနေ ဒေတာကို ရယူပြီး ဘဏ်ရဲ့ ဒေတာကို ဘယ်လိုရယူရမယ်ဆိုတာကို ရှင်းပြထားပါတယ်။
 
-| ![Screen1](../../../translated_images/screen1.baccbba0f1f93364672eb250d2fbd21574bb1caf79a2155022dc098a741cbdfe.my.png) | ![Screen2](../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.my.png) |
+| ![Screen1](../../../translated_images/my/screen1.baccbba0f1f93364.webp) | ![Screen2](../../../translated_images/my/screen2.123c82a831a1d14a.webp) |
 |--------------------------------|--------------------------------|
 
 ## သင်ခန်းစာများ

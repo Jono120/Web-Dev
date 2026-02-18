@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-28T10:24:07+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "sr"
-}
--->
 # Моја Тераријум: Пројекат за учење о HTML-у, CSS-у и манипулацији DOM-ом помоћу JavaScript-а 🌵🌱
 
 Мала вежба са превлачењем и пуштањем. Уз мало HTML-а, JS-а и CSS-а, можете направити веб интерфејс, стилизовати га и додати интеракцију.
 
-![мој тераријум](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.sr.png)
+![мој тераријум](../../../../translated_images/sr/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## Кредити
 

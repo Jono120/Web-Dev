@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-25T21:30:53+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "mr"
-}
--->
 # माझं टेरॅरियम: HTML, CSS, आणि DOM मॅनिप्युलेशन शिकण्यासाठी JavaScript वापरून एक प्रकल्प 🌵🌱
 
 एक छोटासा ड्रॅग आणि ड्रॉप कोड-मेडिटेशन. थोडं HTML, JS आणि CSS वापरून तुम्ही एक वेब इंटरफेस तयार करू शकता, त्याला स्टाइल देऊ शकता, आणि त्यात इंटरॅक्शन जोडू शकता.
 
-![माझं टेरॅरियम](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.mr.png)
+![माझं टेरॅरियम](../../../../translated_images/mr/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## श्रेय
 

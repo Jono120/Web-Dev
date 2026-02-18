@@ -1,45 +1,96 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "92e136090efc4341b1d51c37924c1802",
-  "translation_date": "2025-08-29T10:30:38+00:00",
-  "source_file": "2-js-basics/2-functions-methods/README.md",
-  "language_code": "hu"
-}
--->
 # JavaScript Alapok: Metódusok és Függvények
 
-![JavaScript Alapok - Függvények](../../../../translated_images/webdev101-js-functions.be049c4726e94f8b7605c36330ac42eeb5cd8ed02bcdd60fdac778174d6cb865.hu.png)
-> Sketchnote készítette: [Tomomi Imura](https://twitter.com/girlie_mac)
+![JavaScript Basics - Functions](../../../../translated_images/hu/webdev101-js-functions.be049c4726e94f8b.webp)
+> Vázlat Tomomi Imura tollából ([Tomomi Imura](https://twitter.com/girlie_mac))
 
-## Előadás előtti kvíz
+```mermaid
+journey
+    title A JavaScript függvényeid kalandja
+    section Alapok
+      Function Syntax: 5: You
+      Calling Functions: 4: You
+      Parameters & Arguments: 5: You
+    section Haladó Fogalmak
+      Return Values: 4: You
+      Default Parameters: 5: You
+      Function Composition: 4: You
+    section Modern JavaScript
+      Arrow Functions: 5: You
+      Anonymous Functions: 4: You
+      Higher-Order Functions: 5: You
+```
+## Előadás Előtti Kvíz
 [Előadás előtti kvíz](https://ff-quizzes.netlify.app)
 
-Amikor kódot írunk, mindig arra törekszünk, hogy az olvasható legyen. Bár ez elsőre ellentmondásosnak tűnhet, a kódot sokkal többször olvassák, mint írják. Az egyik alapvető eszköz a fejlesztők eszköztárában az olvasható és karbantartható kód érdekében a **függvény**.
+Ugyanannak a kódnak az ismételt írása az egyik leggyakoribb frusztráció a programozásban. A függvények ezt a problémát oldják meg azzal, hogy lehetővé teszik a kód újrahasznosítható blokkokba csomagolását. Gondolj a függvényekre úgy, mint azokra a szabványosított alkatrészekre, amelyek Henry Ford futószalagját forradalmivá tették – ha egyszer létrehozol egy megbízható elemet, bárhol használhatod, anélkül, hogy újra kellene építened.
+
+A függvények lehetővé teszik, hogy a kód egy darabját összecsomagold, és aztán újra felhasználd a programod során. Ahelyett, hogy mindenhol ugyanazt a logikát másolnád be, egyszer létrehozod a függvényt, és hívod, amikor szükséges. Ez a megközelítés rendezetté teszi a kódod, és sokkal egyszerűbbé válik a frissítés.
+
+Ebben a leckében megtanulod, hogyan készíts saját függvényeket, hogyan adj át nekik információt, és hogyan kapj vissza hasznos eredményeket. Megismered a függvények és metódusok közötti különbséget, tanulsz modern szintaxisokat, és meglátod, hogyan működhetnek együtt a függvények. Lépésről lépésre átvezetünk ezeken a fogalmakon.
 
 [![Metódusok és Függvények](https://img.youtube.com/vi/XgKsD6Zwvlc/0.jpg)](https://youtube.com/watch?v=XgKsD6Zwvlc "Metódusok és Függvények")
 
-> 🎥 Kattints a fenti képre egy videóért a metódusokról és függvényekről.
+> 🎥 Kattints a fenti képre, hogy megnézz egy videót a metódusokról és függvényekről.
 
-> Ezt a leckét elérheted a [Microsoft Learn](https://docs.microsoft.com/learn/modules/web-development-101-functions/?WT.mc_id=academic-77807-sagibbon) oldalán!
+> Ezt a leckét elvégezheted a [Microsoft Learn oldalán](https://docs.microsoft.com/learn/modules/web-development-101-functions/?WT.mc_id=academic-77807-sagibbon)!
 
+```mermaid
+mindmap
+  root((JavaScript Függvények))
+    Basic Concepts
+      Declaration
+        Hagyományos szintaxis
+        Nyíllal írt függvény szintaxis
+      Calling
+        Zárójelek használata
+        Zárójelek szükségesek
+    Parameters
+      Input Values
+        Több paraméter
+        Alapértelmezett értékek
+      Arguments
+        Átadott értékek
+        Bármilyen típus lehet
+    Return Values
+      Output Data
+        return utasítás
+        Kilépés a függvényből
+      Use Results
+        Változókban tárolás
+        Függvények láncolása
+    Advanced Patterns
+      Higher-Order
+        Függvények paraméterként
+        Visszahívások
+      Anonymous
+        Név nem szükséges
+        Inline definíció
+```
 ## Függvények
 
-A függvény alapvetően egy kódrészlet, amelyet igény szerint végrehajthatunk. Ez tökéletes olyan helyzetekben, amikor ugyanazt a feladatot többször kell elvégezni; ahelyett, hogy a logikát több helyen megismételnénk (ami nehézkessé tenné a frissítést), egy helyre központosíthatjuk, és akkor hívhatjuk meg, amikor szükség van rá – sőt, függvényeket más függvényekből is hívhatunk!
+A függvény egy önállóan zárt kódblokk, amely egy adott feladatot végez el. Olyan logikát foglal magába, amit előhívhatsz, amikor csak szükség van rá.
 
-Ugyanilyen fontos a függvény elnevezése. Bár ez triviálisnak tűnhet, a név gyors módot biztosít a kód egy részének dokumentálására. Ezt úgy is elképzelhetjük, mint egy címkét egy gombon. Ha rákattintok egy "Időzítő törlése" feliratú gombra, tudom, hogy az megállítja az órát.
+Ahelyett, hogy ugyanazt a kódot több helyen írnád meg a programban, csomagold be egy függvénybe, és hívd meg a függvényt, amikor szükséges. Ez a megközelítés megtisztítja a kódod, és a módosításokat sokkal könnyebbé teszi. Gondolj csak bele, milyen nehéz lenne karbantartani, ha egy logikát 20 különböző helyen kellene megváltoztatnod a kódbázisban.
+
+Fontos, hogy leíró neveket adj a függvényeidnek. Egy jól elnevezett függvény világosan kommunikálja a célját – amikor például a `cancelTimer()`-t látod, azonnal érted, mit tesz, ahogyan egy egyértelműen felcímkézett gomb is pontosan megmutatja, mi történik, ha rákattintasz.
 
 ## Függvény létrehozása és meghívása
 
-A függvény szintaxisa a következőképpen néz ki:
+Nézzük meg, hogyan lehet létrehozni egy függvényt. A szintaxis egy következetes mintát követ:
 
 ```javascript
-function nameOfFunction() { // function definition
- // function definition/body
+function nameOfFunction() { // függvény definíció
+ // függvény definíció/törzs
 }
 ```
 
-Ha például egy üdvözlő üzenetet megjelenítő függvényt szeretnék létrehozni, az így nézhet ki:
+Bontsuk le ezt:
+- A `function` kulcsszó jelzi a JavaScriptnek: „Hé, most egy függvényt hozok létre!”
+- A `nameOfFunction` helyére adhatod a függvényed leíró nevét
+- A zárójelek `()` paraméterek helye (erről majd hamarosan szó lesz)
+- A kapcsos zárójelek `{}` tartalmazzák a tényleges kódot, ami akkor fut le, amikor meghívod a függvényt
+
+Most készítsünk egy egyszerű üdvözlő függvényt, hogy lássuk ezt a gyakorlatban:
 
 ```javascript
 function displayGreeting() {
@@ -47,28 +98,57 @@ function displayGreeting() {
 }
 ```
 
-Amikor meg akarjuk hívni (vagy aktiválni) a függvényt, a függvény nevét követjük `()`-kal. Érdemes megjegyezni, hogy a függvényt definiálhatjuk azelőtt vagy azután, hogy meghívnánk; a JavaScript fordító megtalálja nekünk.
+Ez a függvény kiírja a "Hello, world!" üzenetet a konzolra. Miután definiáltad, bármennyiszer használhatod.
+
+A függvény végrehajtásához (vagyis a "meghívásához") írd le a nevét, majd tedd utána a zárójeleket. A JavaScript megengedi, hogy a függvényt a hívás előtt vagy után definiáld – a JavaScript motor kezeli a végrehajtási sorrendet.
 
 ```javascript
-// calling our function
+// a függvényünk hívása
 displayGreeting();
 ```
 
-> **NOTE:** Létezik egy speciális függvénytípus, amelyet **metódusnak** nevezünk, és amelyet már használtál is! Valójában ezt láttuk a fenti példában, amikor a `console.log`-ot használtuk. Ami megkülönbözteti a metódust a függvénytől, az az, hogy a metódus egy objektumhoz van csatolva (például `console`), míg a függvény szabadon lebeg. Sok fejlesztő ezeket a kifejezéseket felcserélve használja.
+Ennek a sor futtatásakor lefut az összes kód a `displayGreeting` függvényen belül, és a böngésző konzolján megjelenik a "Hello, world!" üzenet. Ezt a függvényt többször is meghívhatod.
 
-### Függvényekkel kapcsolatos legjobb gyakorlatok
+### 🧠 **Függvény Alapismeretek Ellenőrzése: Az Első Függvényeid Felépítése**
 
-Néhány legjobb gyakorlatot érdemes szem előtt tartani függvények létrehozásakor:
+**Nézzük, hogy állsz az alapokkal:**
+- Meg tudod magyarázni, miért használunk kapcsos zárójeleket `{}` a függvénydefinícióban?
+- Mi történik, ha a `displayGreeting`-et írod ki zárójelek nélkül?
+- Miért lehet hasznos ugyanazt a függvényt többször meghívni?
 
-- Mindig használj leíró neveket, hogy tudd, mit csinál a függvény
-- Használj **camelCase**-t a szavak összekapcsolásához
-- Tartsd a függvényeket egy adott feladatra fókuszálva
+```mermaid
+flowchart TD
+    A["✏️ Függvény meghatározása"] --> B["📦 Kód csomagolása"]
+    B --> C["🏷️ Nevezd el"]
+    C --> D["📞 Hívás ha szükséges"]
+    D --> E["🔄 Használat újra bárhol"]
+    
+    F["💡 Előnyök"] --> F1["Nincs kódismétlés"]
+    F --> F2["Könnyű karbantartás"]
+    F --> F3["Átlátható szervezés"]
+    F --> F4["Könnyebb tesztelés"]
+    
+    style A fill:#e3f2fd
+    style E fill:#e8f5e8
+    style F fill:#fff3e0
+```
+> **Megjegyzés:** Ezekben a leckékben **metódusokat** is használtál. A `console.log()` egy metódus – lényegében egy olyan függvény, amely a `console` objektumhoz tartozik. A legfőbb különbség, hogy a metódusok objektumokhoz kötöttek, míg a függvények önállóan léteznek. Sok fejlesztő ezeket a kifejezéseket beszélgetésekben szinonimaként használja.
 
-## Információ átadása egy függvénynek
+### Függvényírás legjobb gyakorlatai
 
-Ahhoz, hogy egy függvény rugalmasabb legyen, gyakran szeretnénk információt átadni neki. Ha például a fenti `displayGreeting` példát nézzük, az csak **Hello, world!** üzenetet jelenít meg. Ez nem a leghasznosabb függvény, amit létrehozhatunk. Ha egy kicsit rugalmasabbá szeretnénk tenni, például lehetővé tenni, hogy valaki megadja az üdvözlendő személy nevét, hozzáadhatunk egy **paramétert**. A paraméter (néha **argumentumnak** is nevezik) egy további információ, amelyet a függvénynek küldünk.
+Íme néhány tipp, hogy nagyszerű függvényeket írj:
 
-A paramétereket a definícióban zárójelek között soroljuk fel, és vesszővel választjuk el őket, például így:
+- Adj a függvényeidnek világos, leíró neveket – később hálás leszel magadnak!
+- Használj **camelCase** írásmódot többszavas nevekhez (például `calculateTotal` a `calculate_total` helyett)
+- Törekedj arra, hogy minden függvény egyetlen dolgot csináljon jól
+
+## Információ átvitele függvénynek
+
+A `displayGreeting` függvényünk korlátozott – csak mindenki számára "Hello, world!"-öt tud megjeleníteni. A paraméterek lehetővé teszik, hogy a függvény rugalmasabb és hasznosabb legyen.
+
+A **paraméterek** olyan helyőrzők, ahová minden futtatáskor különböző értékeket adhatsz, így ugyanaz a függvény különböző információkkal dolgozhat.
+
+A paramétereket a zárójelek között sorolod fel a függvény definiálásakor, vesszővel elválasztva:
 
 ```javascript
 function name(param, param2, param3) {
@@ -76,7 +156,9 @@ function name(param, param2, param3) {
 }
 ```
 
-Frissíthetjük a `displayGreeting` függvényt, hogy elfogadjon egy nevet, és azt jelenítse meg.
+Minden paraméter úgy viselkedik, mint egy helyőrző – amikor valaki meghívja a függvényed, ő majd megadja azokat a tényleges értékeket, amelyek ezekbe a helyekbe kerülnek.
+
+Frissítsük az üdvözlő függvényünket úgy, hogy elfogadjon valaki nevét:
 
 ```javascript
 function displayGreeting(name) {
@@ -85,16 +167,44 @@ function displayGreeting(name) {
 }
 ```
 
-Amikor meg akarjuk hívni a függvényt, és átadni a paramétert, azt a zárójelekben adjuk meg.
+Láthatod, hogy hogyan használunk backtickeket (`` ` ``) és `${}`-t, hogy közvetlenül az üzenetbe illesszük be a nevet – ez egy ún. template literal, ami nagyon kényelmes módja a változókat tartalmazó szövegek építésének.
+
+Most már amikor meghívjuk a függvényt, bármilyen nevet átadhatunk neki:
 
 ```javascript
 displayGreeting('Christopher');
-// displays "Hello, Christopher!" when run
+// a program futtatásakor megjeleníti, hogy "Hello, Christopher!"
 ```
 
+A JavaScript a `'Christopher'` stringet a `name` paraméterhez rendeli, így személyre szabott üzenetet hoz létre: "Hello, Christopher!"
+
+```mermaid
+flowchart LR
+    A["🎯 Függvényhívás"] --> B["📥 Paraméterek"]
+    B --> C["⚙️ Függvénytörzs"]
+    C --> D["📤 Eredmény"]
+    
+    A1["displayGreeting('Alice')"] --> A
+    B1["név = 'Alice'"] --> B
+    C1["Sablonszöveg\n\`Helló, \${név}!\`"] --> C
+    D1["'Helló, Alice!'"] --> D
+    
+    E["🔄 Paramétertípusok"] --> E1["Szövegek"]
+    E --> E2["Számok"]
+    E --> E3["Logikai értékek"]
+    E --> E4["Objektumok"]
+    E --> E5["Függvények"]
+    
+    style A fill:#e3f2fd
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+    style E fill:#f3e5f5
+```
 ## Alapértelmezett értékek
 
-Még rugalmasabbá tehetjük a függvényt további paraméterek hozzáadásával. De mi van akkor, ha nem akarjuk, hogy minden értéket kötelezően megadjanak? Az üdvözlési példánál maradva, a nevet kötelezővé tehetjük (hiszen tudnunk kell, kit üdvözlünk), de lehetővé tehetjük, hogy az üdvözlés szövege tetszés szerint testreszabható legyen. Ha valaki nem akarja testreszabni, alapértelmezett értéket adunk meg. Az alapértelmezett érték megadásához a paramétert úgy állítjuk be, mint egy változó értékét - `parameterName = 'defaultValue'`. Egy teljes példa:
+Mi van akkor, ha néhány paramétert opcionálissá szeretnénk tenni? Itt jönnek jól az alapértelmezett értékek!
+
+Tegyük fel, hogy meg akarjuk engedni, hogy a köszönés szavát testre szabják, de ha valaki nem ad meg egyet, akkor alapból "Hello"-t használunk. Alapértelmezett értéket az egyenlőségjellel tudsz megadni, hasonlóan egy változó értékadásához:
 
 ```javascript
 function displayGreeting(name, salutation='Hello') {
@@ -102,29 +212,63 @@ function displayGreeting(name, salutation='Hello') {
 }
 ```
 
-Amikor meghívjuk a függvényt, eldönthetjük, hogy megadunk-e értéket a `salutation` paraméternek.
+Itt a `name` még mindig kötelező, de a `salutation` rendelkezik egy tartalék értékkel `'Hello'`, ha senki nem ad meg más köszöntést.
+
+Most kétféleképpen is meghívhatjuk ezt a függvényt:
 
 ```javascript
 displayGreeting('Christopher');
-// displays "Hello, Christopher"
+// kiírja, hogy "Hello, Christopher"
 
 displayGreeting('Christopher', 'Hi');
-// displays "Hi, Christopher"
+// kiírja, hogy "Hi, Christopher"
 ```
+
+Az első híváskor a JavaScript az alapértelmezett "Hello" szót használja, mivel nem adtunk meg köszöntést. A második híváskor a saját "Hi" köszönésünk jelenik meg. Ez a rugalmasság teszi a függvényeket alkalmazkodóvá különböző helyzetekhez.
+
+### 🎛️ **Paraméterek Mesterellenőrzése: Függvények Rugalmasabbá Tétele**
+
+**Teszteld a paraméterek ismeretét:**
+- Mi a különbség egy paraméter és egy argumentum között?
+- Miért hasznosak az alapértelmezett értékek a valós programozásban?
+- Meg tudod jósolni, mi történik, ha több argumentumot adsz át, mint amennyi paraméter?
+
+```mermaid
+stateDiagram-v2
+    [*] --> NoParams: function greet() {}
+    [*] --> WithParams: function greet(name) {}
+    [*] --> WithDefaults: function greet(name, greeting='Hi') {}
+    
+    NoParams --> Static: Mindig ugyanaz az eredmény
+    WithParams --> Dynamic: Bemenet szerint változik
+    WithDefaults --> Flexible: Opcionális testreszabás
+    
+    Static --> [*]
+    Dynamic --> [*]
+    Flexible --> [*]
+    
+    note right of WithDefaults
+        A legrugalmasabb megközelítés
+        Visszafelé kompatibilis
+    end note
+```
+> **Pro tipp**: Az alapértelmezett paraméterek felhasználóbarátabbá teszik a függvényeidet. A felhasználók gyorsan elkezdhetik használni azokat ésszerű alapértékekkel, és mégis testre szabhatják, ha kell!
 
 ## Visszatérési értékek
 
-Eddig a függvényünk mindig a [konzolra](https://developer.mozilla.org/docs/Web/API/console) írt ki. Néha ez pontosan az, amit keresünk, különösen akkor, amikor olyan függvényeket hozunk létre, amelyek más szolgáltatásokat hívnak meg. De mi van akkor, ha egy segédfüggvényt szeretnék létrehozni, amely egy számítást végez, és visszaadja az értéket, hogy máshol felhasználhassam?
+Eddig a függvényeink csak üzeneteket írtak ki a konzolra, de mi van, ha azt szeretnéd, hogy egy függvény számoljon ki valamit és adja vissza az eredményt?
 
-Ezt úgy tehetjük meg, hogy **visszatérési értéket** használunk. A visszatérési értéket a függvény adja vissza, és ugyanúgy tárolható egy változóban, mint egy szöveg vagy szám.
+Itt jönnek képbe a **visszatérési értékek**. Ahelyett, hogy csak megjelenítene valamit, a függvény visszaadhat egy értéket, amit eltárolhatsz egy változóban vagy más kódrészekben felhasználhatsz.
 
-Ha egy függvény visszaad valamit, akkor a `return` kulcsszót használjuk. A `return` kulcsszó egy értéket vagy hivatkozást vár arra, amit visszaadunk, például így:
+Érték visszaadásához használd a `return` kulcsszót, majd írd meg, mit szeretnél visszaadni:
 
 ```javascript
 return myVariable;
-```  
+```
 
-Létrehozhatunk egy függvényt, amely üdvözlő üzenetet készít, és visszaadja az értéket a hívónak.
+Fontos megjegyezni: amikor egy függvény eléri a `return` utasítást, azonnal leáll, és visszaküldi az értéket annak, aki meghívta.
+
+Alakítsuk át az üdvözlő függvényt úgy, hogy ne írja ki az üzenetet, hanem adja vissza:
 
 ```javascript
 function createGreetingMessage(name) {
@@ -133,35 +277,81 @@ function createGreetingMessage(name) {
 }
 ```
 
-Amikor meghívjuk ezt a függvényt, az értéket egy változóban tároljuk. Ez ugyanaz, mint amikor egy változót statikus értékre állítunk (például `const name = 'Christopher'`).
+Most nem írja ki az üdvözlést, hanem létrehozza az üzenetet és visszaadja nekünk.
+
+A visszaadott értéket el tudjuk tárolni egy változóban, mint bármely más értéket:
 
 ```javascript
 const greetingMessage = createGreetingMessage('Christopher');
 ```
 
-## Függvények mint paraméterek más függvényekhez
+Most a `greetingMessage` változó tartalmazza a "Hello, Christopher" szöveget, és bárhol használhatjuk – megjeleníthetjük egy weboldalon, beilleszthetjük egy emailbe vagy átadhatjuk másik függvénynek.
 
-Ahogy haladsz a programozói pályafutásod során, találkozni fogsz olyan függvényekkel, amelyek más függvényeket fogadnak paraméterként. Ez az ügyes trükk gyakran akkor hasznos, amikor nem tudjuk, mikor fog valami megtörténni vagy befejeződni, de tudjuk, hogy egy műveletet végre kell hajtanunk válaszként.
+```mermaid
+flowchart TD
+    A["🔧 Függvény feldolgozása"] --> B{"return utasítás?"}
+    B -->|Igen| C["📤 Visszatérési érték"]
+    B -->|Nem| D["📭 Visszatérés undefined-del"]
+    
+    C --> E["💾 Változóba tárolás"]
+    C --> F["🔗 Kifejezésben használat"]
+    C --> G["📞 Függvénynek átadás"]
+    
+    D --> H["⚠️ Általában nem hasznos"]
+    
+    I["📋 Visszatérési érték használata"] --> I1["Eredmények kiszámítása"]
+    I --> I2["Bemenet érvényesítése"]
+    I --> I3["Adatok átalakítása"]
+    I --> I4["Objektumok létrehozása"]
+    
+    style C fill:#e8f5e8
+    style D fill:#ffebee
+    style I fill:#e3f2fd
+```
+### 🔄 **Visszatérési Értékek Ellenőrzése: Eredmények Visszakapása**
 
-Például vegyük a [setTimeout](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) függvényt, amely elindít egy időzítőt, és kódot hajt végre, amikor az lejár. Meg kell mondanunk neki, milyen kódot szeretnénk végrehajtani. Ez tökéletes feladat egy függvény számára!
+**Értékeld a visszatérési értékek ismeretét:**
+- Mi történik a függvény visszatérési utasítása után lévő kóddal?
+- Miért jobb gyakran visszaadni értékeket, mint csak kiírni őket a konzolra?
+- Tud egy függvény különböző típusú értékeket (sztring, szám, logikai) visszaadni?
 
-Ha futtatod az alábbi kódot, 3 másodperc múlva megjelenik az üzenet: **3 másodperc telt el**.
+```mermaid
+pie title "Gyakori visszatérési érték típusok"
+    "Sztringek" : 30
+    "Számok" : 25
+    "Objektumok" : 20
+    "Boolean értékek" : 15
+    "Tömbök" : 10
+```
+> **Fontos megfigyelés**: Azok a függvények, amelyek visszatérési értékeket adnak, sokoldalúbbak, mert a hívó dönti el, mi történjen az eredménnyel. Ez modulárisabbá és újrahasználhatóbbá teszi a kódod!
+
+## Függvények paraméterként függvényeknek
+
+Függvényeket átadhatsz paraméterként más függvényeknek. Ez a fogalom eleinte bonyolultnak tűnhet, de egy erős eszköz, amely rugalmas programozási mintákat tesz lehetővé.
+
+Ezt a mintát gyakran használjuk olyan helyeken, ahol azt mondjuk, hogy „amikor valami történik, csináld meg ezt a másik dolgot”. Például: „amikor a számláló végzett, futtasd ezt a kódot”, vagy „amikor a felhasználó rákattint a gombra, hívd ezt a függvényt”.
+
+Nézzük a `setTimeout`-ot, ami beépített függvény: vár egy adott időt, majd lefuttat egy kódot. Meg kell mondanunk, milyen kódot futtasson – erre tökéletes egy függvény átadása!
+
+Próbáld ki ezt a kódot – 3 másodperc múlva egy üzenetet fogsz látni:
 
 ```javascript
 function displayDone() {
   console.log('3 seconds has elapsed');
 }
-// timer value is in milliseconds
+// az időzítő értéke milliszekundumban van
 setTimeout(displayDone, 3000);
 ```
 
-### Névtelen függvények
+Figyeld meg, hogy a `displayDone`-t (zárójelek nélkül) adjuk át a `setTimeout`-nak. Nem mi hívjuk meg a függvényt, hanem átadjuk a `setTimeout`-nak, hogy „3 másodperc múlva hívd ezt meg”.
 
-Nézzük meg újra, mit építettünk. Létrehozunk egy függvényt névvel, amelyet egyszer fogunk használni. Ahogy az alkalmazásunk bonyolultabbá válik, láthatjuk, hogy sok olyan függvényt hozunk létre, amelyeket csak egyszer hívunk meg. Ez nem ideális. Mint kiderült, nem mindig kell nevet adnunk!
+### Név nélküli (anonim) függvények
 
-Amikor egy függvényt paraméterként adunk át, elkerülhetjük, hogy előre létrehozzuk, és helyette a paraméter részeként építhetjük meg. Ugyanazt a `function` kulcsszót használjuk, de a paraméter részeként építjük meg.
+Néha szükség van egy függvényre csak egyetlen alkalommal, és nem akarsz nevet adni neki. Gondolj csak bele – ha csak egyszer használod, miért ne hagynád a kódod tisztán anélkül, hogy egy extra névvel bonyolítanád?
 
-Írjuk át a fenti kódot névtelen függvény használatára:
+A JavaScript lehetővé teszi, hogy **anonim függvényeket** hozz létre – olyan függvényeket, amelyeknek nincs nevük, és ott definiálod őket, ahol éppen szükséged van rájuk.
+
+Így néz ki, ha átírod a számláló példánkat anonim függvénnyel:
 
 ```javascript
 setTimeout(function() {
@@ -169,13 +359,15 @@ setTimeout(function() {
 }, 3000);
 ```
 
-Ha futtatod az új kódot, ugyanazt az eredményt kapod. Létrehoztunk egy függvényt, de nem kellett nevet adnunk neki!
+Ugyanazt az eredményt éri el, de a függvény közvetlenül a `setTimeout` hívásában van definiálva, így nem kell külön függvénydeklaráció.
 
-### Fat arrow függvények
+### Nyílfüggvények (fat arrow functions)
 
-Egy gyakori rövidítés sok programozási nyelvben (beleértve a JavaScriptet is) az úgynevezett **arrow** vagy **fat arrow** függvények használata. Ez egy speciális jelölést használ, `=>`, amely egy nyílra hasonlít – innen ered a neve! A `=>` használatával kihagyhatjuk a `function` kulcsszót.
+A modern JavaScript-ben van egy még rövidebb írásmód a függvényekhez, az úgynevezett **nyílfüggvények**. Ezek `=>` jelölést használnak (ami egy nyílra hasonlít – érted?), és nagyon népszerűek a fejlesztők körében.
 
-Írjuk át a kódot még egyszer, hogy fat arrow függvényt használjunk:
+A nyílfüggvényekkel kihagyhatod a `function` kulcsszót, és tömörebb kódot írhatsz.
+
+Íme a számláló példa nyílfüggvénnyel:
 
 ```javascript
 setTimeout(() => {
@@ -183,28 +375,200 @@ setTimeout(() => {
 }, 3000);
 ```
 
-### Mikor használjuk melyik stratégiát?
+A `()` a paraméterek helye (itt üres), utána jön a nyíl `=>`, majd a függvény törzse kapcsos zárójelben. Ez ugyanazt a funkciót biztosítja, tömörebb szintaxissal.
 
-Most már láttad, hogy három módon adhatunk át függvényt paraméterként, és talán azon tűnődsz, mikor használjuk melyiket. Ha tudod, hogy a függvényt többször fogod használni, hozd létre normál módon. Ha csak egy helyen fogod használni, általában a névtelen függvény a legjobb választás. Hogy fat arrow függvényt vagy a hagyományos `function` szintaxist használod, az rajtad múlik, de észre fogod venni, hogy a modern fejlesztők többsége a `=>`-t részesíti előnyben.
+```mermaid
+flowchart LR
+    A["📝 Függvénystílusok"] --> B["Hagyományos"]
+    A --> C["Nyíl"]
+    A --> D["Névtelen"]
+    
+    B --> B1["function név() {}"]
+    B --> B2["Fel van emelve"]
+    B --> B3["Névvel ellátott"]
+    
+    C --> C1["const név = () => {}"]
+    C --> C2["Tömör szintaxis"]
+    C --> C3["Modern stílus"]
+    
+    D --> D1["function() {}"]
+    D --> D2["Névtelen"]
+    D --> D3["Egyszeri használat"]
+    
+    E["⏰ Mikor használd"] --> E1["Hagyományos: újrahasználható függvények"]
+    E --> E2["Nyíl: rövid visszahívások"]
+    E --> E3["Névtelen: eseménykezelők"]
+    
+    style A fill:#e3f2fd
+    style B fill:#e8f5e8
+    style C fill:#fff3e0
+    style D fill:#f3e5f5
+    style E fill:#e0f2f1
+```
+### Mikor melyiket használjuk?
+
+Mikor használd az egyes megoldásokat? Egy praktikus iránymutatás: ha többször is használni fogod a függvényt, adj neki nevet és definiáld külön. Ha csak egy konkrét, egyszeri célra kell, fontold meg az anonim függvényt. A nyílfüggvények és a hagyományos szintaxis is helyes választás, bár a nyílfüggvények egyre elterjedtebbek a modern JavaScript kódbázisokban.
+
+### 🎨 **Függvény Stílusok Ellenőrzése: A Megfelelő Szintaxis Kiválasztása**
+
+**Teszteld a szintaxis ismereted:**
+- Mikor előnyösebb a nyílfüggvény a hagyományossal szemben?
+- Mi az anonim függvények fő előnye?
+- Tudsz olyan helyzetet mondani, amikor egy névvel ellátott függvény jobb, mint egy anonim?
+
+```mermaid
+quadrantChart
+    title Függvényválasztási döntési mátrix
+    x-axis Egyszerű --> Összetett
+    y-axis Egyszeri használat --> Újrahasznosítható
+    quadrant-1 Nyílfüggvények
+    quadrant-2 Névvel ellátott függvények
+    quadrant-3 Névtelen függvények
+    quadrant-4 Hagyományos függvények
+    
+    Event Handlers: [0.3, 0.2]
+    Utility Functions: [0.7, 0.8]
+    Callbacks: [0.2, 0.3]
+    Class Methods: [0.8, 0.7]
+    Mathematical Operations: [0.4, 0.6]
+```
+> **Modern trend**: A nyílfüggvények egyre inkább az alapértelmezett választássá válnak sok fejlesztőnél, a tömör szintaxisuk miatt, de a hagyományos függvényeknek is megvan a helyük!
 
 ---
 
-## 🚀 Kihívás
 
-Meg tudod fogalmazni egy mondatban a különbséget a függvények és metódusok között? Próbáld meg!
 
-## Előadás utáni kvíz
+## 🚀 Feladat
+
+Meg tudod fogalmazni egy mondatban a függvények és metódusok közti különbséget? Próbáld meg!
+
+## GitHub Copilot Agent Feladat 🚀
+
+Használd az Agent módot az alábbi kihívás teljesítéséhez:
+
+**Leírás:** Készíts egy hasznos matematikai függvénykönyvtárat, amely bemutatja a leckében tárgyalt különböző függvényfogalmakat, beleértve a paramétereket, alapértelmezett értékeket, visszatérési értékeket és a nyílfüggvényeket.
+
+**Prompt:** Hozz létre egy `mathUtils.js` nevű JavaScript fájlt, amely a következő függvényeket tartalmazza:
+1. Egy `add` nevű függvény, amely két paramétert fogad és visszaadja az összegüket
+2. Egy `multiply` nevű függvény alapértelmezett paraméterértékekkel (a második paraméter alapértelmezettként 1)
+3. Egy `square` nevű nyílfüggvény, amely egy számot fogad és visszaadja annak négyzetét
+4. Egy `calculate` nevű függvény, amely paraméterként másik függvényt és két számot fogad, majd alkalmazza a függvényt ezekre a számokra
+5. Mutasd be minden függvény hívását megfelelő tesztesetekkel
+
+További információk az [agent módról](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode).
+
+## Előadás Utáni Kvíz
 [Előadás utáni kvíz](https://ff-quizzes.netlify.app)
 
-## Áttekintés és önálló tanulás
+## Áttekintés & Önálló tanulás
 
-Érdemes [további információkat olvasni a fat arrow függvényekről](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions), mivel egyre gyakrabban használják őket kódbázisokban. Gyakorold egy függvény írását, majd írd át ezt a szintaxist használva.
+Érdemes többet olvasni a [nyílfüggvényekről](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions), mert egyre inkább használatosak a kódbázisokban. Gyakorold, hogy először egy függvényt írsz, aztán újraírjátok ezt a szintaxist használva.
 
-## Feladat
+## Házi feladat
 
-[Szórakozás a függvényekkel](assignment.md)
+[Fun with Functions](assignment.md)
 
 ---
 
-**Felelősségkizárás**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével készült. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt a professzionális, emberi fordítás igénybevétele. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+## 🧰 **A JavaScript Függvények Eszköztára Összefoglaló**
+
+```mermaid
+graph TD
+    A["🎯 JavaScript Függvények"] --> B["📋 Függvénydeklaráció"]
+    A --> C["📥 Paraméterek"]
+    A --> D["📤 Visszatérési értékek"]
+    A --> E["🎨 Modern szintaxis"]
+    
+    B --> B1["function name() {}"]
+    B --> B2["Leíró elnevezés"]
+    B --> B3["Újrafelhasználható kódrészek"]
+    
+    C --> C1["Bemeneti adatok"]
+    C --> C2["Alapértelmezett értékek"]
+    C --> C3["Több paraméter"]
+    
+    D --> D1["return utasítás"]
+    D --> D2["Függvény kilépés"]
+    D --> D3["Adat visszaadása"]
+    
+    E --> E1["Arrow függvények: () =>"]
+    E --> E2["Névtelen függvények"]
+    E --> E3["Magasabb rendű függvények"]
+    
+    F["⚡ Fő előnyök"] --> F1["Kód újrafelhasználhatóság"]
+    F --> F2["Jobb szervezés"]
+    F --> F3["Egyszerűbb tesztelés"]
+    F --> F4["Moduláris tervezés"]
+    
+    style A fill:#e3f2fd
+    style B fill:#e8f5e8
+    style C fill:#fff3e0
+    style D fill:#f3e5f5
+    style E fill:#e0f2f1
+    style F fill:#fce4ec
+```
+---
+
+## 🚀 A JavaScript Függvények Mesteri Használatának Idővonala
+
+### ⚡ **Mit Tudsz Megtenni a Következő 5 Percben**
+- [ ] Írj egy egyszerű függvényt, ami visszaadja a kedvenc számodat
+- [ ] Készíts egy függvényt, aminek két paramétere van, és összeadja azokat
+- [ ] Próbáld meg átalakítani egy hagyományos függvényt arrow function szintaxisra  
+- [ ] Gyakorold a kihívást: magyarázd el a függvények és metódusok közötti különbséget  
+
+### 🎯 **Mit érhetsz el ezen az órán**  
+- [ ] Fejezd be az óra utáni kvízt, és nézd át az esetleg zavaros fogalmakat  
+- [ ] Építsd meg a matematikai segédfüggvények könyvtárát a GitHub Copilot kihívás alapján  
+- [ ] Hozz létre egy függvényt, amely paraméterként egy másik függvényt használ  
+- [ ] Gyakorold alapértelmezett paraméterekkel írt függvények írását  
+- [ ] Kísérletezz template literálokkal a függvények visszatérési értékeiben  
+
+### 📅 **Hét napos függvény mesterkurzusod**  
+- [ ] Fejezd be a „Szórakozás a függvényekkel” feladatot kreatív módon  
+- [ ] Refaktorálj ismétlődő kódot, amit írtál, újrahasználható függvényekké  
+- [ ] Építs egy kis számológépet kizárólag függvények használatával (globális változók nélkül)  
+- [ ] Gyakorold az arrow function-öket tömbmódszerekkel, mint a `map()` és `filter()`  
+- [ ] Hozz létre egy hasznos segédfüggvény gyűjteményt gyakori feladatokhoz  
+- [ ] Tanulmányozd a magasabb rendű függvényeket és a funkcionális programozás fogalmait  
+
+### 🌟 **Hónapos átalakulásod**  
+- [ ] Sajátítsd el a haladó függvényfogalmakat, mint a closures és scope  
+- [ ] Építs egy projektet, amely erősen használ függvénykompozíciót  
+- [ ] Járulj hozzá open source projektekhez a függvény dokumentációk fejlesztésével  
+- [ ] Taníts meg másokat a függvényekről és a különböző szintaxis stílusokról  
+- [ ] Fedezd fel a funkcionális programozási paradigmákat JavaScriptben  
+- [ ] Készíts egy személyes, újrahasználható függvény könyvtárat jövőbeli projektekhez  
+
+### 🏆 **Végső Függvények Bajnoka Ellenőrzés**
+
+**Ünnepeld meg függvénymesterséged:**  
+- Mi a leghasznosabb függvény, amit eddig létrehoztál?  
+- Hogyan változtatta meg a függvények tanulása a kód szervezéséhez való hozzáállásodat?  
+- Melyik függvényszintaxist részesíted előnyben, és miért?  
+- Milyen valós problémát oldanál meg egy függvény megírásával?  
+
+```mermaid
+journey
+    title A függvények iránti magabiztosságod alakulása
+    section Ma
+      Szintaxis zavar: 3: You
+      Alapok megértése: 4: You
+      Egyszerű függvények írása: 5: You
+    section Ezen a héten
+      Paraméterek használata: 4: You
+      Értékek visszaadása: 5: You
+      Modern szintaxis: 5: You
+    section Jövő hónapban
+      Függvénykompozíció: 5: You
+      Haladó minták: 5: You
+      Mások tanítása: 5: You
+```  
+> 🎉 **Mesterévé váltál a programozás egyik legerősebb fogalmának!** A függvények nagyobb programok építőkövei. Minden alkalmazás, amit valaha készítesz, használni fogja a függvényeket a kód szervezésére, újrahasználatára és strukturálására. Most már érted, hogyan csomagolhatod a logikát újrahasználható komponensekbe, így hatékonyabb és eredményesebb programozóvá válsz. Üdvözlünk a moduláris programozás világában! 🚀
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Felelősségkizárás**:
+Ez a dokumentum az AI fordító szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár igyekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti, anyanyelven készült dokumentumot kell tekinteni a hivatalos forrásnak. Fontos információk esetén professzionális, humán fordítást javaslunk. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félrefordításokért.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

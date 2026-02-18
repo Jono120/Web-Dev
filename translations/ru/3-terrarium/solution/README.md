@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-25T21:30:11+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "ru"
-}
--->
 # Мой Террариум: Проект для изучения HTML, CSS и работы с DOM с помощью JavaScript 🌵🌱
 
 Небольшая медитация с перетаскиванием элементов. С помощью немного HTML, JS и CSS вы можете создать веб-интерфейс, стилизовать его и добавить интерактивность.
 
-![мой террариум](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.ru.png)
+![мой террариум](../../../../translated_images/ru/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## Благодарности
 

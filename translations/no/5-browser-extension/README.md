@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b121a279a6ab39878491f3e572673515",
-  "translation_date": "2025-08-26T22:31:25+00:00",
-  "source_file": "5-browser-extension/README.md",
-  "language_code": "no"
-}
--->
 # Bygge en nettleserutvidelse
 
 Å bygge nettleserutvidelser er en morsom og interessant måte å tenke på ytelsen til appene dine samtidig som du lager en annen type nettressurs. Denne modulen inkluderer leksjoner om hvordan nettlesere fungerer, hvordan du distribuerer en nettleserutvidelse, hvordan du bygger et skjema, kaller en API, bruker lokal lagring, og hvordan du vurderer ytelsen til nettstedet ditt og forbedrer det.
@@ -23,7 +14,7 @@ Denne utvidelsen kan kalles ad hoc av en bruker når en API-nøkkel og regionkod
 
 ### Krediteringer
 
-![en grønn nettleserutvidelse](../../../translated_images/extension-screenshot.0e7f5bfa110e92e3875e1bc9405edd45a3d2e02963e48900adb91926a62a5807.no.png)
+![en grønn nettleserutvidelse](../../../translated_images/no/extension-screenshot.0e7f5bfa110e92e3.webp)
 
 ## Krediteringer
 

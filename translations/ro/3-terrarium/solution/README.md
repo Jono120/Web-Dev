@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-28T08:13:18+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "ro"
-}
--->
 # Terariul Meu: Un proiect pentru a învăța despre HTML, CSS și manipularea DOM folosind JavaScript 🌵🌱
 
 Un mic exercițiu de tip drag and drop. Cu puțin HTML, JS și CSS, poți construi o interfață web, să o stilizezi și să adaugi interacțiuni.
 
-![terariul meu](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.ro.png)
+![terariul meu](../../../../translated_images/ro/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## Credite
 

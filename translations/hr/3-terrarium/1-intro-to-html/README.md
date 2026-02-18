@@ -1,84 +1,159 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "89f7f9f800ce7c9f149e98baaae8491a",
-  "translation_date": "2025-08-29T12:37:03+00:00",
-  "source_file": "3-terrarium/1-intro-to-html/README.md",
-  "language_code": "hr"
-}
--->
-# Projekt Terarij, 1. dio: Uvod u HTML
+# Terrarium Projekt Dio 1: Uvod u HTML
 
-![Uvod u HTML](../../../../translated_images/webdev101-html.4389c2067af68e98280c1bde52b6c6269f399eaae3659b7c846018d8a7b0bbd9.hr.png)
-> Sketchnote autor [Tomomi Imura](https://twitter.com/girlie_mac)
+```mermaid
+journey
+    title Vaše putovanje učenja HTML-a
+    section Osnove
+      Create HTML file: 3: Student
+      Add DOCTYPE: 4: Student
+      Structure document: 5: Student
+    section Sadržaj
+      Add metadata: 4: Student
+      Include images: 5: Student
+      Organize layout: 5: Student
+    section Semantika
+      Use proper tags: 4: Student
+      Enhance accessibility: 5: Student
+      Build terrarium: 5: Student
+```
+![Uvod u HTML](../../../../translated_images/hr/webdev101-html.4389c2067af68e98.webp)
+> Sketchnote autora [Tomomi Imura](https://twitter.com/girlie_mac)
 
-## Kviz prije predavanja
+HTML, ili HyperText Markup Language, temelj je svake web stranice koju ste ikada posjetili. Zamislite HTML kao kostur koji daje strukturu web stranicama – on definira gdje sadržaj ide, kako je organiziran i što svaki dio predstavlja. Dok će CSS kasnije "ofarbati" vaš HTML bojama i rasporedima, a JavaScript će ga oživjeti interaktivnošću, HTML pruža osnovnu strukturu koja omogućuje sve ostalo.
 
-[Kviz prije predavanja](https://ff-quizzes.netlify.app/web/quiz/15)
+U ovoj lekciji kreirat ćete HTML strukturu za sučelje virtualnog terarija. Ovaj praktični projekt naučit će vas osnovnim HTML pojmovima dok izrađujete nešto vizualno zanimljivo. Naučit ćete kako organizirati sadržaj pomoću semantičkih elemenata, raditi sa slikama i stvoriti osnovu za interaktivnu web aplikaciju.
 
-> Pogledajte video
+Na kraju ove lekcije imat ćete funkcionalnu HTML stranicu koja prikazuje slike biljaka u organiziranim stupcima, spremnu za stiliziranje u sljedećoj lekciji. Ne brinite ako na početku izgleda jednostavno – upravo tako HTML treba izgledati prije nego što CSS doda vizualne detalje.
 
+```mermaid
+mindmap
+  root((Osnove HTML-a))
+    Structure
+      DOCTYPE deklaracija
+      HTML element
+      Sekcija Head
+      Sadržaj Body
+    Elements
+      Oznake i atributi
+      Samozatvarajuće oznake
+      Ugniježđeni elementi
+      Blok vs Inline
+    Content
+      Tekstualni elementi
+      Slike
+      Kontejneri (div)
+      Liste
+    Semantics
+      Značajne oznake
+      Pristupačnost
+      Čitači zaslona
+      Prednosti SEO-a
+    Best Practices
+      Ispravno ugniježđivanje
+      Valjani markup
+      Opisni alt tekst
+      Organizirana struktura
+```
+## Predpredavanje kviz
+
+[Predpredavanje kviz](https://ff-quizzes.netlify.app/web/quiz/15)
+
+> 📺 **Gledajte i učite**: Pogledajte ovaj korisni video pregled
 > 
-> [![Video o osnovama Gita i GitHuba](https://img.youtube.com/vi/1TvxJKBzhyQ/0.jpg)](https://www.youtube.com/watch?v=1TvxJKBzhyQ)
+> [![HTML Fundamentals Video](https://img.youtube.com/vi/1TvxJKBzhyQ/0.jpg)](https://www.youtube.com/watch?v=1TvxJKBzhyQ)
 
-### Uvod
+## Postavljanje Vašeg Projekta
 
-HTML, ili HyperText Markup Language, je 'kostur' weba. Ako CSS 'odijeva' vaš HTML, a JavaScript ga oživljava, HTML je tijelo vaše web aplikacije. Čak i sintaksa HTML-a odražava tu ideju, jer uključuje oznake "head", "body" i "footer".
+Prije nego što zaronimo u HTML kod, postavimo ispravno radno okruženje za vaš terarij projekt. Izrada organizirane strukture datoteka od početka ključna je navika koja će vam dobro služiti tijekom cijelog vašeg web razvoja.
 
-U ovoj lekciji koristit ćemo HTML za izradu 'kostura' sučelja našeg virtualnog terarija. Imat će naslov i tri stupca: desni i lijevi stupac gdje će se nalaziti biljke koje se mogu povlačiti, te središnji dio koji će predstavljati stakleni terarij. Na kraju ove lekcije moći ćete vidjeti biljke u stupcima, ali sučelje će izgledati pomalo čudno; ne brinite, u sljedećem dijelu dodati ćete CSS stilove kako bi sučelje izgledalo bolje.
+### Zadatak: Kreirajte Strukturu Vašeg Projekta
 
-### Zadatak
+Napravit ćete posebnu mapu za vaš terarij projekt i dodati prvu HTML datoteku. Evo dva pristupa koja možete koristiti:
 
-Na svom računalu stvorite mapu pod nazivom 'terrarium' i unutar nje datoteku pod nazivom 'index.html'. To možete učiniti u Visual Studio Code nakon što stvorite mapu terarija tako da otvorite novi prozor VS Code-a, kliknete 'open folder' i odete do svoje nove mape. Kliknite mali gumb 'file' u Explorer panelu i stvorite novu datoteku:
+**Opcija 1: Korištenje Visual Studio Code**
+1. Otvorite Visual Studio Code
+2. Kliknite "File" → "Open Folder" ili koristite `Ctrl+K, Ctrl+O` (Windows/Linux) ili `Cmd+K, Cmd+O` (Mac)
+3. Kreirajte novu mapu nazvanu `terrarium` i odaberite je
+4. U Explorer panelu kliknite na ikonu "New File"
+5. Nazovite svoju datoteku `index.html`
 
-![explorer u VS Code](../../../../translated_images/vs-code-index.e2986cf919471eb984a0afef231380c8b132b000635105f2397bd2754d1b689c.hr.png)
+![VS Code Explorer prikazuje stvaranje nove datoteke](../../../../translated_images/hr/vs-code-index.e2986cf919471eb9.webp)
 
-Ili
+**Opcija 2: Korištenje naredbi u Terminalu**
+```bash
+mkdir terrarium
+cd terrarium
+touch index.html
+code index.html
+```
 
-Koristite ove naredbe u svom git bashu:
-* `mkdir terrarium`
-* `cd terrarium`
-* `touch index.html`
-* `code index.html` ili `nano index.html`
+**Ovo su funkcije ovih naredbi:**
+- **Kreira** novu mapu nazvanu `terrarium` za vaš projekt
+- **Ulazi** u mapu terrarium 
+- **Stvara** praznu datoteku `index.html`
+- **Otvara** datoteku u Visual Studio Code za uređivanje
 
-> Datoteke index.html označavaju pregledniku da je to zadana datoteka u mapi; URL-ovi poput `https://anysite.com/test` mogu biti izgrađeni pomoću strukture mapa koja uključuje mapu pod nazivom `test` s `index.html` unutar nje; `index.html` ne mora biti prikazan u URL-u.
+> 💡 **Savjet stručnjaka**: Naziv datoteke `index.html` je poseban u web razvoju. Kada netko posjeti web stranicu, preglednici automatski traže `index.html` kao zadanu stranicu za prikaz. To znači da URL poput `https://mysite.com/projects/` automatski prikazuje `index.html` datoteku iz mape `projects` bez potrebe da se ime datoteke navodi u URL-u.
 
----
+## Razumijevanje Strukture HTML Dokumenta
 
-## DocType i html oznake
+Svaki HTML dokument slijedi specifičnu strukturu koju preglednici trebaju razumjeti kako bi ispravno prikazali stranicu. Zamislite ovu strukturu kao formalno pismo – ima obavezne elemente redoslijedom koji pomažu primatelju (u ovom slučaju pregledniku) da pravilno obradi sadržaj.
 
-Prvi redak HTML datoteke je njezin doctype. Pomalo je iznenađujuće da ovaj redak mora biti na samom vrhu datoteke, ali on govori starijim preglednicima da stranica treba biti prikazana u standardnom načinu rada, slijedeći trenutnu HTML specifikaciju.
+```mermaid
+flowchart TD
+    A["<!DOCTYPE html>"] --> B["<html>"]
+    B --> C["<head>"]
+    C --> D["<title>"]
+    C --> E["<meta charset>"]
+    C --> F["<meta viewport>"]
+    B --> G["<body>"]
+    G --> H["<h1> Naslov"]
+    G --> I["<div> Kontejneri"]
+    G --> J["<img> Slike"]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#fff3e0
+    style G fill:#e8f5e8
+```
+Započnimo dodavanjem osnovnog temelja koji svaki HTML dokument treba.
 
-> Savjet: u VS Code-u možete zadržati pokazivač iznad oznake i dobiti informacije o njezinoj upotrebi iz MDN Reference vodiča.
+### DOCTYPE Izjava i Korijenski Element
 
-Drugi redak trebao bi biti početna oznaka `<html>`, odmah praćena završnom oznakom `</html>`. Ove oznake su korijenski elementi vašeg sučelja.
+Prve dvije linije bilo kojeg HTML fajla služe kao "uvod" dokumenta prema pregledniku:
 
-### Zadatak
-
-Dodajte ove retke na vrh svoje datoteke `index.html`:
-
-```HTML
+```html
 <!DOCTYPE html>
 <html></html>
 ```
 
-✅ Postoji nekoliko različitih načina rada koji se mogu odrediti postavljanjem DocType-a s upitnim nizom: [Quirks Mode i Standards Mode](https://developer.mozilla.org/docs/Web/HTML/Quirks_Mode_and_Standards_Mode). Ovi načini rada nekada su podržavali vrlo stare preglednike koji se danas rijetko koriste (Netscape Navigator 4 i Internet Explorer 5). Možete se držati standardne deklaracije doctype-a.
+**Što ovaj kod radi:**
+- **Deklarira** tip dokumenta kao HTML5 koristeći `<!DOCTYPE html>`
+- **Kreira** korijenski `<html>` element koji će sadržavati sav sadržaj stranice
+- **Uspostavlja** moderne web standarde za ispravan prikaz u preglednicima
+- **Osigurava** dosljedan prikaz na različitim preglednicima i uređajima
 
----
+> 💡 **VS Code Savjet**: Zadržite pokazivač iznad bilo kojeg HTML taga u VS Code da vidite korisne informacije iz MDN Web Docs, uključujući primjere upotrebe i detalje o kompatibilnosti preglednika.
 
-## Dokumentov 'head'
+> 📚 **Saznajte Više**: DOCTYPE izjava sprječava da preglednici ulaze u "quirks mode," što se koristilo za podršku vrlo starim web stranicama. Moderni web razvoj koristi jednostavnu `<!DOCTYPE html>` deklaraciju za osiguranje [standardski usklađenog prikaza](https://developer.mozilla.org/docs/Web/HTML/Quirks_Mode_and_Standards_Mode).
 
-Područje 'head' HTML dokumenta uključuje ključne informacije o vašoj web stranici, poznate kao [metapodaci](https://developer.mozilla.org/docs/Web/HTML/Element/meta). U našem slučaju, web poslužitelju kojem će ova stranica biti poslana za prikazivanje, šaljemo ove četiri stvari:
+### 🔄 **Pedagoški Pregled**
+**Pauzirajte i Razmislite**: Prije nego što nastavite, provjerite razumijete li:
+- ✅ Zašto svaki HTML dokument treba DOCTYPE deklaraciju
+- ✅ Što sadrži korijenski `<html>` element
+- ✅ Kako ova struktura pomaže preglednicima da pravilno prikazuju stranice
 
--   naslov stranice
--   metapodaci stranice uključujući:
-    -   'character set', koji govori o tome koja se kodna stranica koristi na stranici
-    -   informacije o pregledniku, uključujući `x-ua-compatible` koji označava da je podržan preglednik IE=edge
-    -   informacije o tome kako bi se viewport trebao ponašati kada se učita. Postavljanje viewporta na početnu skalu od 1 kontrolira razinu zumiranja kada se stranica prvi put učita.
+**Brzi samoprovjera**: Možete li vlastitim riječima objasniti što znači "standardski usklađeni prikaz"?
 
-### Zadatak
+## Dodavanje Bitnih Metapodataka Dokumenta
 
-Dodajte blok 'head' svom dokumentu između početne i završne oznake `<html>`.
+Sekcija `<head>` HTML dokumenta sadrži ključne informacije koje preglednici i tražilice trebaju, ali koje posjetitelji ne vide direktno na stranici. Zamislite je kao "iza kulisa" informacije koje pomažu vašoj stranici da ispravno radi i da se pravilno prikazuje na raznim uređajima i platformama.
+
+Ovi metapodaci kažu preglednicima kako prikazati stranicu, koju kodnu stranicu koristiti i kako se nositi s različitim veličinama ekrana – sve što je ključno za izradu profesionalnih i pristupačnih web stranica.
+
+### Zadatak: Dodajte Dokument Glavu
+
+Umetnite ovaj `<head>` odjeljak između vaših otvarajućih i zatvarajućih `<html>` tagova:
 
 ```html
 <head>
@@ -89,17 +164,28 @@ Dodajte blok 'head' svom dokumentu između početne i završne oznake `<html>`.
 </head>
 ```
 
-✅ Što bi se dogodilo da postavite meta oznaku viewporta ovako: `<meta name="viewport" content="width=600">`? Pročitajte više o [viewportu](https://developer.mozilla.org/docs/Web/HTML/Viewport_meta_tag).
+**Razlaganje što svaki element radi:**
+- **Postavlja** naslov stranice koji se prikazuje u karticama preglednika i rezultatima pretraživanja
+- **Specifikira** UTF-8 kodiranje znakova za ispravan prikaz teksta širom svijeta
+- **Osigurava** kompatibilnost s modernim verzijama Internet Explorera
+- **Konfigurira** responzivni dizajn postavljanjem viewporta da prati širinu uređaja
+- **Kontrolira** početni nivo zumiranja kako bi se sadržaj prikazao u prirodnoj veličini
 
----
+> 🤔 **Razmislite o ovome**: Što bi se dogodilo ako postavite viewport meta tag ovako: `<meta name="viewport" content="width=600">`? Ovo bi prisililo stranicu da uvijek bude široka 600 piksela, čime se primjenjuje lom dizajna prilagođenog zaslonu! Više saznajte o [ispravnoj viewport konfiguraciji](https://developer.mozilla.org/docs/Web/HTML/Viewport_meta_tag).
 
-## Dokumentov `body`
+## Izgradnja Tijela Dokumenta
 
-### HTML oznake
+Element `<body>` sadrži sav vidljivi sadržaj vaše web stranice – sve što korisnici vide i s čim mogu komunicirati. Dok je `<head>` dijelu davao upute pregledniku, sekcija `<body>` sadrži stvarni sadržaj: tekst, slike, gumbe i druge elemente koji stvaraju vaše korisničko sučelje.
 
-U HTML-u dodajete oznake svojoj .html datoteci kako biste stvorili elemente web stranice. Svaka oznaka obično ima početnu i završnu oznaku, poput ove: `<p>hello</p>` za označavanje paragrafa. Stvorite tijelo svog sučelja dodavanjem skupa `<body>` oznaka unutar para `<html>` oznaka; vaš markup sada izgleda ovako:
+Dodajmo tijelo stranice i razumijemo kako HTML tagovi rade zajedno da bi stvorili smisleni sadržaj.
 
-### Zadatak
+### Razumijevanje Strukture HTML Tagova
+
+HTML koristi uparene tagove za definiranje elemenata. Većina tagova ima otvarajući tag poput `<p>` i zatvarajući tag kao `</p>`, s sadržajem između: `<p>Zdravo, svijete!</p>`. Time se stvara paragraf koji sadrži tekst „Zdravo, svijete!“.
+
+### Zadatak: Dodajte Element Body
+
+Ažurirajte vašu HTML datoteku da uključite `<body>` element:
 
 ```html
 <!DOCTYPE html>
@@ -114,100 +200,179 @@ U HTML-u dodajete oznake svojoj .html datoteci kako biste stvorili elemente web 
 </html>
 ```
 
-Sada možete početi graditi svoju stranicu. Obično koristite `<div>` oznake za stvaranje zasebnih elemenata na stranici. Stvorit ćemo niz `<div>` elemenata koji će sadržavati slike.
+**Evo što ova potpuna struktura pruža:**
+- **Uspostavlja** osnovni HTML5 okvir dokumenta
+- **Uključuje** bitne metapodatke za ispravan prikaz u preglednicima
+- **Kreira** prazno tijelo spremno za vaš vidljivi sadržaj
+- **Prati** najbolje prakse modernog web razvoja
 
-### Slike
+Sada ste spremni dodati vidljive elemente svog terarija. Koristit ćemo `<div>` elemente kao kontejnere za organiziranje različitih dijelova sadržaja i `<img>` elemente za prikaz slika biljaka.
 
-Jedna HTML oznaka koja ne treba završnu oznaku je `<img>` oznaka, jer ima element `src` koji sadrži sve informacije potrebne za prikazivanje stavke na stranici.
+### Rad sa Slikama i Kontejnerima za Raspored
 
-Stvorite mapu u svojoj aplikaciji pod nazivom `images` i u nju dodajte sve slike iz [mape izvornog koda](../../../../3-terrarium/solution/images); (ima 14 slika biljaka).
+Slike su posebne u HTML-u jer koriste "samozatvarajuće" tagove. Za razliku od elemenata poput `<p></p>` koji obavijaju sadržaj, `<img>` tag sadrži sve potrebne informacije unutar tag-a pomoću atributa kao što su `src` za putanju slike i `alt` za pristupačnost.
 
-### Zadatak
+Prije nego što dodate slike u HTML, trebate organizirati vaše projektne datoteke pravilno stvaranjem mape za slike i dodavanjem grafika biljaka.
 
-Dodajte te slike biljaka u dva stupca između oznaka `<body></body>`:
+**Prvo, postavite slike:**
+1. Kreirajte mapu nazvanu `images` unutar vaše terarij projektne mape
+2. Preuzmite slike biljaka iz [solution folder](../../../../3-terrarium/solution/images) (ukupno 14 slika biljaka)
+3. Kopirajte sve slike biljaka u vašu novu `images` mapu
+
+### Zadatak: Kreirajte Raspored Prikaza Biljaka
+
+Sada dodajte slikovne prikaze biljaka organiziranih u dva stupca između vaših `<body></body>` tagova:
 
 ```html
 <div id="page">
 	<div id="left-container" class="container">
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
+			<img class="plant" alt="plant" id="plant1" src="../../../../translated_images/hr/plant1.d87946a2ca70cc43.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant2" src="./images/plant2.png" />
+			<img class="plant" alt="plant" id="plant2" src="../../../../translated_images/hr/plant2.8daa1606c9c1ad89.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant3" src="./images/plant3.png" />
+			<img class="plant" alt="plant" id="plant3" src="../../../../translated_images/hr/plant3.8b0d484381a2a2a7.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant4" src="./images/plant4.png" />
+			<img class="plant" alt="plant" id="plant4" src="../../../../translated_images/hr/plant4.656e16ae1df37be2.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant5" src="./images/plant5.png" />
+			<img class="plant" alt="plant" id="plant5" src="../../../../translated_images/hr/plant5.2b41b9355f11ebcc.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant6" src="./images/plant6.png" />
+			<img class="plant" alt="plant" id="plant6" src="../../../../translated_images/hr/plant6.3d1827d03b656994.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant7" src="./images/plant7.png" />
+			<img class="plant" alt="plant" id="plant7" src="../../../../translated_images/hr/plant7.8152c302ac97f621.png" />
 		</div>
 	</div>
 	<div id="right-container" class="container">
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant8" src="./images/plant8.png" />
+			<img class="plant" alt="plant" id="plant8" src="../../../../translated_images/hr/plant8.38d6428174ffa850.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant9" src="./images/plant9.png" />
+			<img class="plant" alt="plant" id="plant9" src="../../../../translated_images/hr/plant9.f0e38d3327c37fc2.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant10" src="./images/plant10.png" />
+			<img class="plant" alt="plant" id="plant10" src="../../../../translated_images/hr/plant10.b159d6d6e985595f.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant11" src="./images/plant11.png" />
+			<img class="plant" alt="plant" id="plant11" src="../../../../translated_images/hr/plant11.2a03a1c2ec8ea84e.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant12" src="./images/plant12.png" />
+			<img class="plant" alt="plant" id="plant12" src="../../../../translated_images/hr/plant12.60e9b53e538fbaf3.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant13" src="./images/plant13.png" />
+			<img class="plant" alt="plant" id="plant13" src="../../../../translated_images/hr/plant13.07a51543c820bcf5.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant14" src="./images/plant14.png" />
+			<img class="plant" alt="plant" id="plant14" src="../../../../translated_images/hr/plant14.6e486371ba7d36ba.png" />
 		</div>
 	</div>
 </div>
 ```
 
-> Napomena: Spans vs. Divs. Divs se smatraju 'blok' elementima, a Spans 'inline'. Što bi se dogodilo da ove divove pretvorite u spanove?
+**Korak po korak, evo što se događa u ovom kodu:**
+- **Kreira** glavni spremnik stranice s `id="page"` koji drži sav sadržaj
+- **Uspostavlja** dva stupčasta spremnika: `left-container` i `right-container`
+- **Organizira** 7 biljaka u lijevom stupcu i 7 biljaka u desnom stupcu
+- **Obavija** svaku sliku biljke u `plant-holder` <div> za individualno pozicioniranje
+- **Primjenjuje** dosljedne nazive klasa za CSS stiliziranje u sljedećoj lekciji
+- **Dodjeljuje** jedinstvene ID-e svakoj slici biljke za JavaScript interakciju kasnije
+- **Uključuje** ispravne putanje do mape sa slikama
 
-S ovim markupom biljke se sada prikazuju na ekranu. Izgledaju prilično loše, jer još nisu stilizirane pomoću CSS-a, što ćemo učiniti u sljedećoj lekciji.
+> 🤔 **Razmislite o ovome**: Primijetite da sve slike trenutno imaju isti alt tekst "plant". Ovo nije idealno za pristupačnost. Korisnici sa čitačima zaslona bi čuli "plant" ponovljeno 14 puta bez znanja o kojoj biljci se radi. Možete li smisliti bolje, opisnije alt tekstove za svaku sliku?
 
-Svaka slika ima alt tekst koji će se pojaviti čak i ako ne možete vidjeti ili prikazati sliku. Ovo je važan atribut za uključivanje radi pristupačnosti. Saznajte više o pristupačnosti u budućim lekcijama; za sada zapamtite da atribut alt pruža alternativne informacije za sliku ako korisnik iz nekog razloga ne može vidjeti sliku (zbog sporog povezivanja, pogreške u atributu src ili ako korisnik koristi čitač ekrana).
+> 📝 **Tipovi HTML Elemenata**: `<div>` elementi su "blok nivo" i zauzimaju punu širinu, dok su `<span>` elementi "inline" i zauzimaju samo potrebnu širinu. Što mislite što bi se dogodilo da sve ove `<div>` tagove promijenite u `<span>` tagove?
 
-✅ Jeste li primijetili da svaka slika ima isti alt tag? Je li to dobra praksa? Zašto ili zašto ne? Možete li poboljšati ovaj kod?
+### 🔄 **Pedagoški Pregled**
+**Razumijevanje Strukture**: Odvojite trenutak za pregled vaše HTML strukture:
+- ✅ Možete li identificirati glavne kontejnere u vašem rasporedu?
+- ✅ Razumijete li zašto svaka slika ima jedinstveni ID?
+- ✅ Kako biste opisali svrhu `plant-holder` divova?
 
----
+**Vizualna Inspekcija**: Otvorite vašu HTML datoteku u pregledniku. Trebali biste vidjeti:
+- Osnovnu listu slika biljaka
+- Slike organizirane u dva stupca
+- Jednostavan, nestiliziran raspored
 
-## Semantički markup
+**Zapamtite**: Ovaj jednostavan izgled je upravo ono što HTML treba izgledati prije CSS stiliziranja!
 
-Općenito, poželjno je koristiti značajne 'semantike' prilikom pisanja HTML-a. Što to znači? To znači da koristite HTML oznake za predstavljanje vrste podataka ili interakcije za koje su dizajnirane. Na primjer, glavni naslov na stranici trebao bi koristiti oznaku `<h1>`.
+S ovim dodanim markupom, biljke će se pojaviti na ekranu, iako još ne izgledaju dotjerano – za to služi CSS u sljedećoj lekciji! Za sada imate čvrst HTML temelj koji ispravno organizira vaš sadržaj i prati najbolje prakse pristupačnosti.
 
-Dodajte sljedeći redak odmah ispod svoje početne oznake `<body>`:
+## Korištenje Semantičkog HTML-a za Pristupačnost
+
+Semantički HTML znači odabir HTML elemenata na temelju njihovog značenja i svrhe, ne samo na temelju njihovog izgleda. Kada koristite semantički markup, komunicirate strukturu i značenje vašeg sadržaja preglednicima, tražilicama i asistivnim tehnologijama poput čitača zaslona.
+
+```mermaid
+flowchart TD
+    A[Trebate li dodati sadržaj?] --> B{Koja vrsta?}
+    B -->|Glavni naslov| C["<h1>"]
+    B -->|Podnaslov| D["<h2>, <h3>, itd."]
+    B -->|Odlomak| E["<p>"]
+    B -->|Lista| F["<ul>, <ol>"]
+    B -->|Navigacija| G["<nav>"]
+    B -->|Članak| H["<article>"]
+    B -->|Sekcija| I["<section>"]
+    B -->|Opći spremnik| J["<div>"]
+    
+    C --> K[Čitači zaslona izvještavaju kao glavni naslov]
+    D --> L[Stvara pravilnu hijerarhiju naslova]
+    E --> M[Omogućuje pravilno razmakivanje teksta]
+    F --> N[Omogućuje prečace za navigaciju po listi]
+    G --> O[Identificira navigacijske oznake]
+    H --> P[Označava samostalan sadržaj]
+    I --> Q[Grupira povezani sadržaj]
+    J --> R[Koristite samo kad nijedan semantički naziv ne odgovara]
+    
+    style C fill:#4caf50
+    style D fill:#4caf50
+    style E fill:#4caf50
+    style F fill:#4caf50
+    style G fill:#2196f3
+    style H fill:#2196f3
+    style I fill:#2196f3
+    style J fill:#ff9800
+```
+Ovaj pristup čini vaše web stranice pristupačnijima korisnicima s invaliditetom i pomaže tražilicama da bolje razumiju vaš sadržaj. To je temeljno načelo modernog web razvoja koje stvara bolje doživljaje za sve.
+
+### Dodavanje Semantičkog Naslova Stranice
+
+Dodajmo ispravan naslov vašoj stranici terarija. Umetnite ovaj red odmah nakon otvarajućeg `<body>` taga:
 
 ```html
 <h1>My Terrarium</h1>
 ```
 
-Korištenje semantičkog markupa, poput korištenja `<h1>` za naslove i `<ul>` za neuređene liste, pomaže čitačima ekrana da se kreću kroz stranicu. Općenito, gumbi bi trebali biti napisani kao `<button>`, a liste kao `<li>`. Iako je _moguće_ koristiti posebno stilizirane `<span>` elemente s click handlerima za simulaciju gumba, bolje je omogućiti korisnicima s invaliditetom da koriste tehnologije za određivanje gdje se na stranici nalazi gumb i da interagiraju s njim ako se element pojavljuje kao gumb. Iz tog razloga, pokušajte koristiti semantički markup što je više moguće.
+**Zašto je semantički markup važan:**
+- **Pomaže** čitačima zaslona navigirati i razumjeti strukturu stranice
+- **Poboljšava** SEO (optimizaciju za tražilice) jasnoćom hijerarhije sadržaja
+- **Unapređuje** pristupačnost korisnicima s oštećenjima vida ili kognitivnim razlikama
+- **Stvara** bolje korisničke doživljaje na svim uređajima i platformama
+- **Prati** web standarde i najbolje prakse za profesionalni razvoj
 
-✅ Pogledajte čitač ekrana i [kako interagira s web stranicom](https://www.youtube.com/watch?v=OUDV1gqs9GA). Možete li vidjeti zašto bi nesemantički markup mogao frustrirati korisnika?
+**Primjeri semantičkih vs. ne-semantčkih izbora:**
 
-## Terarij
+| Svrha | ✅ Semantički Izbor | ❌ Ne-semantički Izbor |
+|---------|-------------------|------------------------|
+| Glavni naslov | `<h1>Naslov</h1>` | `<div class="big-text">Naslov</div>` |
+| Navigacija | `<nav><ul><li></li></ul></nav>` | `<div class="menu"><div></div></div>` |
+| Gumb | `<button>Klikni me</button>` | `<span onclick="...">Klikni me</span>` |
+| Sadržaj članka | `<article><p></p></article>` | `<div class="content"><div></div></div>` |
 
-Posljednji dio ovog sučelja uključuje stvaranje markupa koji će biti stiliziran kako bi se stvorio terarij.
+> 🎥 **Pogledajte u praksi**: Pogledajte [kako čitači zaslona komuniciraju s web stranicama](https://www.youtube.com/watch?v=OUDV1gqs9GA) da shvatite zašto je semantički markup ključan za pristupačnost. Primijetite kako pravilna HTML struktura pomaže korisnicima u efikasnoj navigaciji.
 
-### Zadatak:
+## Kreiranje Kontejnera Terarija
 
-Dodajte ovaj markup iznad posljednje oznake `</div>`:
+Sada dodajmo HTML strukturu za sam terarij – stakleni spremnik u koji će biljke na kraju biti postavljene. Ovaj odsjek pokazuje važan koncept: HTML pruža strukturu, ali bez CSS stiliziranja elementi još uvijek neće biti vidljivi.
+
+Markup terarija koristi opisne nazive klasa koje će CSS stiliziranju u sljedećoj lekciji učiniti intuitivnim i održivim.
+
+### Zadatak: Dodajte Strukturu Terarija
+
+Umetnite ovaj markup iznad zadnjeg `</div>` taga (prije zatvarajućeg taga spremnika stranice):
 
 ```html
 <div id="terrarium">
@@ -221,13 +386,72 @@ Dodajte ovaj markup iznad posljednje oznake `</div>`:
 </div>
 ```
 
-✅ Iako ste dodali ovaj markup na ekran, ne vidite apsolutno ništa prikazano. Zašto?
+**Razumijevanje ove terarijske strukture:**
+- **Kreira** glavni terarijski spremnik s jedinstvenim ID-em za stiliziranje
+- **Definira** odvojene elemente za svaki vizualni dio (gornji dio, zidovi, zemlja, donji dio)
+- **Uključuje** ugniježđene elemente za efekte odraza na staklu (sjajni elementi)
+- **Koristi** opisne nazive klasa koje jasno označavaju svrhu svakog elementa
+- **Priprema** strukturu za CSS stiliziranje koje će stvoriti izgled staklenog terarija
+
+> 🤔 **Primjećujete li nešto?**: Iako ste dodali ovaj markup, ne vidite ništa novo na stranici! Ovo savršeno ilustrira kako HTML pruža strukturu, dok CSS pruža izgled. Ovi `<div>` elementi postoje, ali još nemaju vizualno stiliziranje – to dolazi u sljedećoj lekciji!
+
+```mermaid
+flowchart TD
+    A[HTML Dokument] --> B[Glava Dokumenta]
+    A --> C[Tijelo Dokumenta]
+    B --> D[Element Naslova]
+    B --> E[Meta Charset]
+    B --> F[Meta Viewport]
+    C --> G[Glavni Naslov]
+    C --> H[Kontejner Stranice]
+    H --> I[Lijevi Kontejner sa 7 biljaka]
+    H --> J[Desni Kontejner sa 7 biljaka]
+    H --> K[Struktura Terarija]
+    
+    style A fill:#e1f5fe
+    style B fill:#fff3e0
+    style C fill:#e8f5e8
+    style H fill:#f3e5f5
+```
+### 🔄 **Pedagoška provjera**
+**Savladavanje HTML strukture**: Prije nego krenete dalje, osigurajte da možete:
+- ✅ Objasniti razliku između HTML strukture i vizualnog izgleda
+- ✅ Prepoznati semantičke i nesemantičke HTML elemente
+- ✅ Opišite kako ispravna oznaka koristi pristupačnosti
+- ✅ Prepoznati kompletnu strukturu stabla dokumenta
+
+**Testiranje vašeg razumijevanja**: Probajte otvoriti vaš HTML fajl u pregledniku s onemogućenim Javaskriptom i uklonjenim CSS-om. Ovo vam pokazuje čistu semantičku strukturu koju ste napravili!
 
 ---
 
-## 🚀Izazov
+## Izazov za GitHub Copilot Agenta
 
-Postoje neki zanimljivi 'stariji' HTML tagovi koji su još uvijek zabavni za igranje, iako ne biste trebali koristiti zastarjele oznake poput [ovih oznaka](https://developer.mozilla.org/docs/Web/HTML/Element#Obsolete_and_deprecated_elements) u svom markupu. Ipak, možete li koristiti staru oznaku `<marquee>` da natjerate naslov h1 da se pomiče vodoravno? (ako to učinite, ne zaboravite je ukloniti nakon toga)
+Koristite Agent način rada da dovršite sljedeći izazov:
+
+**Opis:** Izradite semantičku HTML strukturu za odjeljak vodiča za njegu biljaka koju biste mogli dodati projektu terarija.
+
+**Zadatak:** Izradite semantički HTML odjeljak koji uključuje glavni naslov "Vodič za njegu biljaka", tri pododjeljka s naslovima "Zalijevanje", "Zahtjevi za svjetlom" i "Njega tla", svaki sa stilom paragrafa koji sadrži informacije o njezi biljaka. Upotrijebite ispravne semantičke HTML oznake poput `<section>`, `<h2>`, `<h3>`, i `<p>` za odgovarajuću strukturu sadržaja.
+
+Više o [agent načinu](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) saznajte ovdje.
+
+## Izazov istraživanja povijesti HTML-a
+
+**Učenje o evoluciji weba**
+
+HTML se značajno razvio otkad je Tim Berners-Lee 1990. godine na CERN-u stvorio prvi web preglednik. Neki stariji tagovi poput `<marquee>` sada su zastarjeli jer ne funkcioniraju dobro s modernim standardima pristupačnosti i načelima responzivnog dizajna.
+
+**Isprobajte ovaj eksperiment:**
+1. Privremeno omotajte vaš `<h1>` naslov u `<marquee>` tag: `<marquee><h1>Moj terarij</h1></marquee>`
+2. Otvorite svoju stranicu u pregledniku i promatrajte efekt pomicanja
+3. Razmislite zašto je ovaj tag ukinut (nagovještaj: razmislite o korisničkom iskustvu i pristupačnosti)
+4. Uklonite `<marquee>` tag i vratite se na semantički markup
+
+**Pitanja za razmišljanje:**
+- Kako bi pomični naslov mogao utjecati na korisnike s oštećenjima vida ili osjetljivošću na pokret?
+- Koje suvremene CSS tehnike mogu postići slične vizualne efekte na pristupačniji način?
+- Zašto je važno koristiti trenutne web standarde umjesto zastarjelih elemenata?
+
+Istražite više o [zastarjelim i ukinutim HTML elementima](https://developer.mozilla.org/docs/Web/HTML/Element#Obsolete_and_deprecated_elements) da razumijete kako se web standardi razvijaju za poboljšanje korisničkog iskustva.
 
 ## Kviz nakon predavanja
 
@@ -235,15 +459,127 @@ Postoje neki zanimljivi 'stariji' HTML tagovi koji su još uvijek zabavni za igr
 
 ## Pregled i samostalno učenje
 
-HTML je 'provjereni' sustav gradnje koji je pomogao izgraditi web u ono što je danas. Naučite malo o njegovoj povijesti proučavajući neke stare i nove oznake. Možete li shvatiti zašto su neke oznake zastarjele, a neke dodane? Koje bi oznake mogle biti uvedene u budućnosti?
+**Produbite svoje HTML znanje**
 
-Saznajte više o izradi stranica za web i mobilne uređaje na [Microsoft Learn](https://docs.microsoft.com/learn/modules/build-simple-website/?WT.mc_id=academic-77807-sagibbon).
+HTML je temelj weba više od 30 godina, razvijajući se od jednostavnog jezika označavanja dokumenata do sofisticirane platforme za izgradnju interaktivnih aplikacija. Razumijevanje ove evolucije pomaže vam cijeniti moderne web standarde i donositi bolje razvojne odluke.
+
+**Preporučeni putovi učenja:**
+
+1. **Povijest i razvoj HTML-a**
+   - Istražite vremenski slijed od HTML 1.0 do HTML5
+   - Saznajte zašto su određeni tagovi ukinuti (pristupačnost, prilagođenost mobilnim uređajima, održivost)
+   - Istražite nove HTML značajke i prijedloge
+
+2. **Dubinsko razumijevanje semantičkog HTML-a**
+   - Proučite cjeloviti popis [semantičkih elemenata HTML5](https://developer.mozilla.org/docs/Web/HTML/Element)
+   - Vježbajte prepoznavanje kada koristiti `<article>`, `<section>`, `<aside>`, i `<main>`
+   - Naučite o ARIA atributima za poboljšanu pristupačnost
+
+3. **Moderni web razvoj**
+   - Istražite [izgradnju responzivnih web stranica](https://docs.microsoft.com/learn/modules/build-simple-website/?WT.mc_id=academic-77807-sagibbon) na Microsoft Learn
+   - Razumite kako HTML integrira s CSS-om i Javaskriptom
+   - Naučite o web performansama i najboljim SEO praksama
+
+**Pitanja za razmišljanje:**
+- Koje ste zastarjele HTML tagove otkrili i zašto su uklonjeni?
+- Koje se nove HTML značajke predlažu za buduće verzije?
+- Kako semantički HTML pridonosi pristupačnosti weba i SEO-u?
+
+### ⚡ **Što možete učiniti u sljedećih 5 minuta**
+- [ ] Otvorite DevTools (F12) i pregledajte HTML strukturu vaše omiljene web stranice
+- [ ] Izradite jednostavnu HTML datoteku s osnovnim tagovima: `<h1>`, `<p>`, i `<img>`
+- [ ] Validirajte svoj HTML koristeći W3C HTML Validator online
+- [ ] Pokušajte dodati komentar u svoj HTML pomoću `<!-- komentar -->`
+
+### 🎯 **Što možete postići u ovom satu**
+- [ ] Dovršite kviz nakon lekcije i pregledajte koncepte semantičkog HTML-a
+- [ ] Izradite jednostavnu web stranicu o sebi koristeći ispravnu HTML strukturu
+- [ ] Eksperimentirajte s različitim razinama naslova i oznakama za oblikovanje teksta
+- [ ] Dodajte slike i poveznice za vježbanje multimedijske integracije
+- [ ] Istražite HTML5 značajke koje još niste isprobali
+
+### 📅 **Vaše tjedno učenje HTML-a**
+- [ ] Dovršite zadatak projekta terarija sa semantičkim markupom
+- [ ] Izradite pristupačnu web stranicu koristeći ARIA oznake i uloge
+- [ ] Vježbajte izradu obrazaca s različitim vrstama unosa
+- [ ] Istražite HTML5 API-je poput localStorage ili geolocation
+- [ ] Proučite responzivne HTML obrasce i dizajn usmjeren na mobilne uređaje
+- [ ] Pregledajte HTML kod drugih developera za najbolje prakse
+
+### 🌟 **Vaš mjesečni temelj weba**
+- [ ] Izradite portfelj web stranicu koja prikazuje vaše HTML vještine
+- [ ] Naučite HTML templating s frameworkom poput Handlebars
+- [ ] Sudjelujte u open source projektima poboljšavajući HTML dokumentaciju
+- [ ] Savladajte napredne HTML koncepte poput prilagođenih elemenata
+- [ ] Integrirajte HTML s CSS frameworkom i Javaskript bibliotekama
+- [ ] Mentorirajte druge koji uče osnove HTML-a
+
+## 🎯 Vaš vremenski plan za savladavanje HTML-a
+
+```mermaid
+timeline
+    title Napredak u učenju HTML-a
+    
+    section Osnove (5 minuta)
+        Struktura dokumenta: DOCTYPE deklaracija
+                         : HTML korijenski element
+                         : Razumijevanje Head i Body
+        
+    section Metapodaci (10 minuta)
+        Bitni Meta Tagovi: Kodiranje znakova
+                           : Konfiguracija viewporta
+                           : Kompatibilnost preglednika
+        
+    section Izrada sadržaja (15 minuta)
+        Integracija slike: Ispravni putovi datoteka
+                         : Važnost alt teksta
+                         : Samozatvarajući tagovi
+        
+    section Organizacija izgleda (20 minuta)
+        Strategija kontejnera: Div elementi za strukturu
+                          : Imenovanje klasa i ID-a
+                          : Hijerarhija ugniježđenih elemenata
+        
+    section Semantičko usavršavanje (30 minuta)
+        Značajan Markup: Hijerarhija zaglavlja
+                         : Navigacija za čitače ekrana
+                         : Najbolje prakse pristupačnosti
+        
+    section Napredni koncepti (1 sat)
+        Značajke HTML5: Moderni semantički elementi
+                      : ARIA atributi
+                      : Razmatranja performansi
+        
+    section Profesionalne vještine (1 tjedan)
+        Organizacija koda: Uzorci strukture datoteka
+                         : Održivi markup
+                         : Suradnja u timu
+        
+    section Ekspertska razina (1 mjesec)
+        Moderni web standardi: Postupno poboljšanje
+                            : Kompatibilnost između preglednika
+                            : Ažuriranja HTML specifikacije
+```
+### 🛠️ Sažetak vašeg HTML alata
+
+Nakon završetka ove lekcije, sada imate:
+- **Strukturu dokumenta**: Potpun temelj HTML5 s ispravnim DOCTYPE-om
+- **Semantički markup**: Smisleni tagovi koji poboljšavaju pristupačnost i SEO
+- **Integraciju slika**: Ispravnu organizaciju datoteka i praksu alt teksta
+- **Kontejnere za izgled**: Stratešku upotrebu divova s opisnim nazivima klasa
+- **Svijest o pristupačnosti**: Razumijevanje navigacije pomoću čitača zaslona
+- **Moderne standarde**: Trenutne HTML5 prakse i znanje o zastarjelim tagovima
+- **Temelj za projekt**: Čvrst temelj za CSS stiliziranje i JavaScript interaktivnost
+
+**Sljedeći koraci**: Vaša HTML struktura je spremna za CSS stiliziranje! Semantički temelj koji ste izgradili olakšat će razumijevanje sljedeće lekcije.
 
 ## Zadatak
 
-[Vježbajte svoj HTML: Izradite mockup bloga](assignment.md)
+[Vježbajte HTML: Izradite maketu bloga](assignment.md)
 
 ---
 
-**Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane ljudskog prevoditelja. Ne preuzimamo odgovornost za bilo kakve nesporazume ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Odricanje od odgovornosti**:
+Ovaj je dokument preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati službenim i autoritativnim izvorom. Za ključne informacije preporučuje se stručni ljudski prijevod. Ne snosimo odgovornost za bilo kakve nesporazume ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

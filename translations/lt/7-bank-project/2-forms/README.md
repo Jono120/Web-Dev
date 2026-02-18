@@ -1,307 +1,948 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8baca047d77a5f43fa4099c0578afa42",
-  "translation_date": "2025-08-29T16:44:50+00:00",
-  "source_file": "7-bank-project/2-forms/README.md",
-  "language_code": "lt"
-}
--->
-# Sukurkite banko programėlę, 2 dalis: Sukurkite prisijungimo ir registracijos formą
+# Kurkite bankinę programėlę 2 dalis: Sukurkite prisijungimo ir registracijos formą
 
-## Prieš paskaitą – testas
-
-[Prieš paskaitą – testas](https://ff-quizzes.netlify.app/web/quiz/43)
-
-### Įvadas
-
-Beveik visose šiuolaikinėse interneto programėlėse galite susikurti paskyrą, kad turėtumėte savo asmeninę erdvę. Kadangi keli vartotojai gali vienu metu naudotis interneto programėle, reikia mechanizmo, kuris leistų atskirai saugoti kiekvieno vartotojo asmeninius duomenis ir pasirinkti, kokią informaciją rodyti. Mes neaptarsime, kaip saugiai valdyti [vartotojo tapatybę](https://en.wikipedia.org/wiki/Authentication), nes tai yra plati tema, tačiau užtikrinsime, kad kiekvienas vartotojas galėtų sukurti vieną (ar daugiau) banko sąskaitų mūsų programėlėje.
-
-Šioje dalyje naudosime HTML formas, kad pridėtume prisijungimą ir registraciją prie mūsų interneto programėlės. Pamatysime, kaip programiškai siųsti duomenis į serverio API, ir galiausiai apibrėšime pagrindines vartotojo įvesties validacijos taisykles.
-
-### Būtinos sąlygos
-
-Turite būti baigę [HTML šablonų ir maršrutų](../1-template-route/README.md) pamoką, skirtą interneto programėlei. Taip pat turite įdiegti [Node.js](https://nodejs.org) ir [paleisti serverio API](../api/README.md) lokaliai, kad galėtumėte siųsti duomenis sąskaitų kūrimui.
-
-**Svarbu**
-Vienu metu turėsite paleisti du terminalus, kaip nurodyta žemiau:
-1. Pagrindinei banko programėlei, kurią sukūrėme [HTML šablonų ir maršrutų](../1-template-route/README.md) pamokoje.
-2. [Banko programėlės serverio API](../api/README.md), kurią ką tik nustatėme aukščiau.
-
-Norint tęsti pamoką, abu serveriai turi būti paleisti. Jie klausosi skirtinguose portuose (portas `3000` ir portas `5000`), todėl viskas turėtų veikti sklandžiai.
-
-Galite patikrinti, ar serveris veikia tinkamai, vykdydami šią komandą terminale:
-
-```sh
-curl http://localhost:5000/api
-# -> should return "Bank API v1.0.0" as a result
+```mermaid
+journey
+    title Jūsų formos kūrimo kelionė
+    section HTML pamatų
+      Suprasti formos elementus: 3: Studentas
+      Išmokti įvesties tipus: 4: Studentas
+      Įvaldyti prieinamumą: 4: Studentas
+    section JavaScript integracija
+      Tvarkyti formos pateikimą: 4: Studentas
+      Įgyvendinti AJAX komunikaciją: 5: Studentas
+      Apdoroti serverio atsakymus: 5: Studentas
+    section Validavimo sistemos
+      Kurti daugiapakopį validavimą: 5: Studentas
+      Pagerinti naudotojo patirtį: 5: Studentas
+      Užtikrinti duomenų integralumą: 5: Studentas
 ```
+## Priešpaskaitos testas
+
+[Priešpaskaitos testas](https://ff-quizzes.netlify.app/web/quiz/43)
+
+Ar kada nors užpildėte formą internete ir ji atmetė jūsų el. pašto formatą? Ar praradote visą informaciją paspaudę siųsti? Visi esame susidūrę su tokiomis erzinančiomis patirtimis.
+
+Formos yra tiltas tarp jūsų vartotojų ir jūsų programėlės funkcionalumo. Kaip ir oro eismo kontrolieriai naudoja atsargias protokolų taisykles, kad lėktuvai saugiai pasiektų tikslą, taip gerai sukurta forma teikia aiškią grįžtamąją informaciją ir užkerta kelią brangioms klaidoms. Prastos formos gali atbaidyti vartotojus greičiau nei nesusipratimai užimtoje oro uosto aplinkoje.
+
+Šioje pamokoje paversime jūsų statinę bankinę programėlę į interaktyvią aplikaciją. Išmoksite kurti formas, kurios tikrina įvesties duomenis, bendrauja su serveriais ir suteikia naudingą grįžtamąjį ryšį. Įsivaizduokite tai kaip valdymo sąsają, leidžiančią vartotojams naršyti programos funkcijas.
+
+Pamokos pabaigoje turėsite pilną prisijungimo ir registracijos sistemą su validacija, kuri nukreipia vartotojus link sėkmės, o ne frustracijos.
+
+```mermaid
+mindmap
+  root((Formos kūrimas))
+    HTML pagrindas
+      Semantiniai elementai
+      Įvesties tipai
+      Prieinamumas
+      Žymės susiejimas
+    Vartotojo patirtis
+      Patvirtinimo grįžtamasis ryšys
+      Klaidos prevencija
+      Įkėlimo būsena
+      Sėkmės žinutės
+    JavaScript integracija
+      Įvykių valdymas
+      AJAX komunikacija
+      Duomenų apdorojimas
+      Klaidų valdymas
+    Patvirtinimo sluoksniai
+      HTML5 patvirtinimas
+      Kliento pusės logika
+      Serverio pusės saugumas
+      Progresyvus gerinimas
+    Modernūs modeliai
+      Fetch API
+      Async/Await
+      Formos duomenų API
+      Promisų valdymas
+```
+## Priešprielaidos
+
+Prieš pradėdami kurti formas, įsitikinkime, kad viskas tinkamai įdiegta. Ši pamoka tęsia ten, kur baigėme ankstesnėje, tad jei praleidote ankstesnę dalį, verta grįžti ir išmokti pagrindus.
+
+### Reikalinga įranga
+
+| Komponentas | Būsena | Aprašymas |
+|-----------|--------|-------------|
+| [HTML Šablonai](../1-template-route/README.md) | ✅ Būtina | Jūsų pagrindinė bankinės programėlės struktūra |
+| [Node.js](https://nodejs.org) | ✅ Būtina | JavaScript vykdymo aplinka serveriui |
+| [Banko API serveris](../api/README.md) | ✅ Būtina | Užpakalinė paslauga duomenų saugojimui |
+
+> 💡 **Kūrimo patarimas**: Jūs vienu metu paleisite du atskirus serverius – vieną priekinės dalies bankinę programėlę, kitą – užpakalinių API paslaugą. Šis išdėstymas atspindi realų kūrimą, kur frontend ir backend paslaugos veikia nepriklausomai.
+
+### Serverio konfigūracija
+
+**Jūsų kūrimo aplinka apims:**
+- **Priekinės dalies serveris**: aptarnauja jūsų bankinę programėlę (dažniausiai prievadas `3000`)
+- **API užpakalinis serveris**: tvarko duomenų saugojimą ir gavimą (prievadas `5000`)
+- **Abi serveriai** gali veikti vienu metu be konfliktų
+
+**Bandoma API jungtis:**
+```bash
+curl http://localhost:5000/api
+# Tikėtinas atsakymas: "Bank API 1.0.0 versija"
+```
+
+**Jei matote API versijos atsakymą, galite tęsti!**
 
 ---
 
-## Forma ir valdikliai
+## Supratimas apie HTML formas ir valdiklius
 
-`<form>` elementas apima HTML dokumento dalį, kur vartotojas gali įvesti ir pateikti duomenis naudodamas interaktyvius valdiklius. Yra įvairių vartotojo sąsajos (UI) valdiklių, kuriuos galima naudoti formoje, dažniausiai naudojami `<input>` ir `<button>` elementai.
+HTML formos yra vartotojų komunikacija su internetine programa. Įsivaizduokite jas kaip telegrafo sistemą XIX a., sujungusią tolimus taškus – tai komunikacijos protokolas tarp vartotojo ketinimo ir programos atsako. Protingai sukurtos formos aptinka klaidas, gide įvesties formatavimą ir pateikia naudingas užuominas.
 
-Yra daug skirtingų [tipų](https://developer.mozilla.org/docs/Web/HTML/Element/input) `<input>`. Pavyzdžiui, norėdami sukurti lauką, kuriame vartotojas gali įvesti savo vartotojo vardą, galite naudoti:
+Modernios formos yra daug sudėtingesnės už paprastą teksto įvedimą. HTML5 pristatė specializuotus įvesčių tipus, kurie automatiškai atlieka el. pašto validaciją, skaičių formatavimą ir datos parinkimą. Šie patobulinimai naudingesni tiek prieinamumui, tiek mobiliųjų vartotojų patirčiai.
+
+### Esminiai formos elementai
+
+**Pagrindiniai blokai, kurių reikia kiekvienai formoje:**
 
 ```html
-<input id="username" name="username" type="text">
+<!-- Basic form structure -->
+<form id="userForm" method="POST">
+  <label for="username">Username</label>
+  <input id="username" name="username" type="text" required>
+  
+  <button type="submit">Submit</button>
+</form>
 ```
 
-`name` atributas bus naudojamas kaip savybės pavadinimas, kai formos duomenys bus siunčiami. `id` atributas naudojamas `<label>` susieti su formos valdikliu.
+**Šis kodas atlieka:**
+- **Sukuria** formos konteinerį su unikaliu identifikatoriumi
+- **Nurodo** HTTP metodą duomenų siuntimui
+- **Susieja** etiketes su įvestimis dėl prieinamumo
+- **Apibrėžia** siuntimo mygtuką formos apdorojimui
 
-> Peržiūrėkite visą [`<input>` tipų](https://developer.mozilla.org/docs/Web/HTML/Element/input) ir [kitų formos valdiklių](https://developer.mozilla.org/docs/Learn/Forms/Other_form_controls) sąrašą, kad susipažintumėte su visais natyviais UI elementais, kuriuos galite naudoti kurdami savo sąsają.
+### Modernūs įvesčių tipai ir atributai
 
-✅ Atkreipkite dėmesį, kad `<input>` yra [tuščias elementas](https://developer.mozilla.org/docs/Glossary/Empty_element), kuriam *nereikia* pridėti atitinkamos uždarymo žymos. Tačiau galite naudoti savarankiškai užsidarančią `<input/>` notaciją, tačiau tai nėra būtina.
+| Įvesčio tipas | Paskirtis | Naudojimo pavyzdys |
+|------------|---------|---------------|
+| `text` | Bendras teksto įvedimas | `<input type="text" name="username">` |
+| `email` | El. pašto validacija | `<input type="email" name="email">` |
+| `password` | Slapto teksto įvedimas | `<input type="password" name="password">` |
+| `number` | Skaitmeninis įvedimas | `<input type="number" name="balance" min="0">` |
+| `tel` | Telefono numeriai | `<input type="tel" name="phone">` |
 
-`<button>` elementas formoje yra šiek tiek ypatingas. Jei nenurodysite jo `type` atributo, jis automatiškai pateiks formos duomenis serveriui, kai bus paspaustas. Štai galimos `type` reikšmės:
+> 💡 **Modernios HTML5 privalumas**: Naudojant specifinius įvesčių tipus automatiškai vykdoma validacija, pritaikoma tinkama mobiliųjų klaviatūra ir gerinama prieinamumo palaikymas be papildomo JavaScript!
 
-- `submit`: Numatytoji forma, mygtukas inicijuoja formos pateikimo veiksmą.
-- `reset`: Mygtukas atstato visus formos valdiklius į jų pradinius nustatymus.
-- `button`: Neskiria numatytojo elgesio, kai mygtukas paspaudžiamas. Galite priskirti jam pasirinktines funkcijas naudodami JavaScript.
+### Mygtukų tipai ir elgsena
 
-### Užduotis
+```html
+<!-- Different button behaviors -->
+<button type="submit">Save Data</button>     <!-- Submits the form -->
+<button type="reset">Clear Form</button>    <!-- Resets all fields -->
+<button type="button">Custom Action</button> <!-- No default behavior -->
+```
 
-Pradėkime pridėdami formą prie `login` šablono. Mums reikės *vartotojo vardo* lauko ir *Prisijungimo* mygtuko.
+**Ką veikia kiekvieno tipo mygtukas:**
+- **Siuntimo mygtukai**: suaktyvina formos išsiuntimą ir siunčia duomenis į nurodytą galinį tašką
+- **Atstatymo mygtukai**: atkurią visus formos laukus į pradinę būsena
+- **Paprasti mygtukai**: neturi numatytos elgsenos, reikalauja sadomų JavaScript funkcijų
+
+> ⚠️ **Svarbi pastaba**: `<input>` elementas yra savaiminis uždaromas ir nereikalauja uždarančios žymės. Moderni praktika rašyti `<input>` be užbaigiančio brūkšnio.
+
+### Kurkite prisijungimo formą
+
+Dabar sukurkime praktišką prisijungimo formą, demonstruojančią modernias HTML formų praktikas. Pradėsime nuo pagrindinės struktūros ir palaipsniui praturtinsime ją prieinamumo funkcijomis bei validacija.
 
 ```html
 <template id="login">
   <h1>Bank App</h1>
   <section>
     <h2>Login</h2>
-    <form id="loginForm">
-      <label for="username">Username</label>
-      <input id="username" name="user" type="text">
-      <button>Login</button>
+    <form id="loginForm" novalidate>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" name="user" type="text" required 
+               autocomplete="username" placeholder="Enter your username">
+      </div>
+      <button type="submit">Login</button>
     </form>
   </section>
 </template>
 ```
 
-Jei atidžiau pažvelgsite, pastebėsite, kad čia taip pat pridėjome `<label>` elementą. `<label>` elementai naudojami UI valdikliams pavadinti, pvz., mūsų vartotojo vardo laukui. Etiketės yra svarbios formų skaitomumui, tačiau jos taip pat turi papildomų privalumų:
+**Kas čia vyksta:**
+- **Struktūruoja** formą su semantinėmis HTML5 žymėmis
+- **Grupuoja** susijusius elementus `div` konteineriuose su prasmingomis klasėmis
+- **Susieja** etiketes su įvesčių laukais naudodamas `for` ir `id` atributus
+- **Papildo** moderniais atributais, tokiais kaip `autocomplete` ir `placeholder`, geresnei UX
+- **Prideda** `novalidate`, kad validaciją rūpintųsi JavaScript, o ne naršyklė
 
-- Susiejus etiketę su formos valdikliu, tai padeda vartotojams, naudojantiems pagalbines technologijas (pvz., ekrano skaitytuvus), suprasti, kokius duomenis jie turėtų pateikti.
-- Galite spustelėti etiketę, kad tiesiogiai sutelktumėte dėmesį į susijusį įvesties lauką, todėl jį lengviau pasiekti įrenginiuose su jutikliniu ekranu.
+### Teisingų etikčių galia
 
-> [Prieinamumas](https://developer.mozilla.org/docs/Learn/Accessibility/What_is_accessibility) internete yra labai svarbi tema, kuri dažnai ignoruojama. Dėl [semantinių HTML elementų](https://developer.mozilla.org/docs/Learn/Accessibility/HTML) nėra sunku sukurti prieinamą turinį, jei juos tinkamai naudojate. Galite [skaityti daugiau apie prieinamumą](https://developer.mozilla.org/docs/Web/Accessibility), kad išvengtumėte dažniausiai pasitaikančių klaidų ir taptumėte atsakingu kūrėju.
+**Kodėl etiketės svarbios šiuolaikiniame žiniatinklio kūrime:**
 
-Dabar pridėsime antrą formą registracijai, tiesiai po ankstesne:
+```mermaid
+graph TD
+    A[Žymės Elementas] --> B[Ekrano Skaitytuvo Palaikymas]
+    A --> C[Spustelėjimo Taško Išplėtimas]
+    A --> D[Formos Validacija]
+    A --> E[SEO Privalumai]
+    
+    B --> F[Prieinama visiems vartotojams]
+    C --> G[Geresnė mobili patirtis]
+    D --> H[Aiškūs klaidų pranešimai]
+    E --> I[Geresnė paieškos reitingas]
+```
+**Ką užtikrina teisingi etiketės:**
+- **Leidžia** ekrano skaitytuvams aiškiai paskelbti formos laukus
+- **Išplečia** spustelėjimo sritį (spustelėjus etiketę, fokusuojamas laukas)
+- **Gerina** mobiliųjų įrenginių naudojimą su didesnėmis lietimo zonomis
+- **Palaiko** formos validaciją su prasmingomis klaidų žinutėmis
+- **Stiprina** SEO, įtraukiant semantinę prasmę formos elementams
+
+> 🎯 **Prieinamumo tikslas**: Kiekvienas formos laukas turi turėti susijusią etiketę. Ši paprasta praktika leidžia visiems, įskaitant neįgaliuosius, naudotis formomis ir pagerina vartotojų patirtį.
+
+### Registracijos formos kūrimas
+
+Registracijos forma reikalauja daugiau informacijos norint sukurti pilną vartotojo paskyrą. Sukurkime ją su moderniomis HTML5 galimybėmis ir pagerintu prieinamumu.
 
 ```html
 <hr/>
 <h2>Register</h2>
-<form id="registerForm">
-  <label for="user">Username</label>
-  <input id="user" name="user" type="text">
-  <label for="currency">Currency</label>
-  <input id="currency" name="currency" type="text" value="$">
-  <label for="description">Description</label>
-  <input id="description" name="description" type="text">
-  <label for="balance">Current balance</label>
-  <input id="balance" name="balance" type="number" value="0">
-  <button>Register</button>
+<form id="registerForm" novalidate>
+  <div class="form-group">
+    <label for="user">Username</label>
+    <input id="user" name="user" type="text" required 
+           autocomplete="username" placeholder="Choose a username">
+  </div>
+  
+  <div class="form-group">
+    <label for="currency">Currency</label>
+    <input id="currency" name="currency" type="text" value="$" 
+           required maxlength="3" placeholder="USD, EUR, etc.">
+  </div>
+  
+  <div class="form-group">
+    <label for="description">Account Description</label>
+    <input id="description" name="description" type="text" 
+           maxlength="100" placeholder="Personal savings, checking, etc.">
+  </div>
+  
+  <div class="form-group">
+    <label for="balance">Starting Balance</label>
+    <input id="balance" name="balance" type="number" value="0" 
+           min="0" step="0.01" placeholder="0.00">
+  </div>
+  
+  <button type="submit">Create Account</button>
 </form>
 ```
 
-Naudodami `value` atributą galime apibrėžti numatytąją reikšmę tam tikram įvesties laukui.
-Taip pat pastebėkite, kad `balance` įvesties laukas turi `number` tipą. Ar jis atrodo kitaip nei kiti įvesties laukai? Pabandykite su juo sąveikauti.
+**Aukščiau mes:**
+- **Organizavome** kiekvieną lauką konteinerių `div`, kad geriau stilizuoti ir išdėstyti
+- **Pridėjome** tinkamus `autocomplete` atributus, kad naršyklė palaikytų automatinį užpildymą
+- **Įtraukėme** naudingus laikinuosius tekstus, kurie padeda vartotojui įvesti duomenis
+- **Nustatėme** prasmingas numatytąsias reikšmes naudodami `value` atributą
+- **Panaudojome** validavimo atributus, tokius kaip `required`, `maxlength` ir `min`
+- **Naudojome** `type="number"` balanso laukui, palaikant skaitmenis su kableliu
 
-✅ Ar galite naršyti ir sąveikauti su formomis naudodami tik klaviatūrą? Kaip tai padarytumėte?
+### Įvesčių tipų ir elgsenos tyrinėjimas
 
-## Duomenų pateikimas serveriui
+**Modernūs įvesčių tipai suteikia papildomą funkcionalumą:**
 
-Dabar, kai turime funkcionalią vartotojo sąsają, kitas žingsnis yra duomenų siuntimas į serverį. Atlikime greitą testą naudodami dabartinį kodą: kas nutinka, jei spustelėsite *Prisijungti* arba *Registruotis* mygtuką?
+| Funkcija | Nauda | Pavyzdys |
+|---------|---------|----------|
+| `type="number"` | Skaitmeninė klaviatūra mobiliesiems | Lengvesnė balanso įvestis |
+| `step="0.01"` | Dešimtainio tikslumo kontrolė | Leidžia įvesti centus valiutoje |
+| `autocomplete` | Naršyklės automatinis užpildymas | Greitesnis formos užpildymas |
+| `placeholder` | Kontekstinės užuominos | Veda vartotojo lūkesčius |
 
-Ar pastebėjote pokytį naršyklės URL skiltyje?
+> 🎯 **Prieinamumo iššūkis**: Pabandykite naudoti formas naudodami tik klaviatūrą! Naudokite `Tab` judėjimui tarp laukų, `Space` žymėjimo langeliams ir `Enter` siuntimui. Tai padės suprasti, kaip ekrano skaitytuvo vartotojai sąveikauja su jūsų formomis.
 
-![Naršyklės URL pokyčio ekrano nuotrauka po mygtuko Registruotis paspaudimo](../../../../translated_images/click-register.e89a30bf0d4bc9ca867dc537c4cea679a7c26368bd790969082f524fed2355bc.lt.png)
+### 🔄 **Pedagoginis patikrinimas**
+**Formos pagrindo supratimas**: Prieš pradedant naudoti JavaScript, įsitikinkite, kad suprantate:
+- ✅ Kaip semantinis HTML kuria prieinamas formų struktūras
+- ✅ Kodėl įvesčių tipai svarbūs mobiliųjų klaviatūroms ir validacijai
+- ✅ Santykį tarp etikečių ir formos valdiklių
+- ✅ Kaip formos atributai veikia numatytą naršyklės elgseną
 
-Numatytoji `<form>` veiksena yra pateikti formą dabartiniam serverio URL naudojant [GET metodą](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.3), pridedant formos duomenis tiesiai prie URL. Tačiau šis metodas turi keletą trūkumų:
+**Greitas savitikrinimas**: Kas nutinka, jei siunčiate formą be JavaScript tvarkymo?
+*Atsakymas: Naršyklė vykdo numatytą siuntimą, dažniausiai nukreipdama į veiksmo URL*
 
-- Siunčiamų duomenų dydis yra labai ribotas (apie 2000 simbolių).
-- Duomenys tiesiogiai matomi URL (negerai slaptažodžiams).
-- Jis neveikia su failų įkėlimais.
+**HTML5 formų privalumai**: Modernios formos suteikia:
+- **Įmontuotą validaciją**: Automatinį el. pašto ir skaičiaus formato tikrinimą
+- **Mobiliojo optimizavimą**: Tinkamas klaviatūras skirtingiems įvesčių tipams
+- **Prieinamumą**: Ekrano skaitytuvų palaikymą ir klaviatūros navigaciją
+- **Progresyvią gerinimo galimybę**: Veikia net kai JavaScript išjungtas
 
-Todėl galite pakeisti jį naudoti [POST metodą](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.5), kuris siunčia formos duomenis serveriui HTTP užklausos kūne, be ankstesnių apribojimų.
+## Suprasti formos siuntimo metodus
 
-> Nors POST yra dažniausiai naudojamas metodas duomenims siųsti, [tam tikrose specifinėse situacijose](https://www.w3.org/2001/tag/doc/whenToUseGet.html) geriau naudoti GET metodą, pavyzdžiui, įgyvendinant paieškos lauką.
+Kai kas nors užpildo jūsų formą ir paspaudžia siuntimą, tie duomenys turi kur nors patekti – dažniausiai į serverį, kuris gali juos išsaugoti. Yra keletas būdų, kaip tai vyksta, ir žinojimas, kurį naudoti, gali sutaupyti jums bėdų ateityje.
 
-### Užduotis
+Pažiūrėkime, kas iš tikrųjų vyksta, kai kas nors paspaudžia siuntimo mygtuką.
 
-Pridėkite `action` ir `method` atributus registracijos formai:
+### Numatytoji formos elgsena
+
+Pirmiausia pažiūrėkime, kas vyksta su paprastu formos siuntimu:
+
+**Išbandykite savo esamas formas:**
+1. Paspauskite *Registruotis* mygtuką savo formoje
+2. Stebėkite pakeitimus naršyklės adreso juostoje
+3. Atkreipkite dėmesį, kaip puslapis persikrauna ir duomenys atsiranda URL
+
+![Naršyklės adreso juostos pakeitimo ekrano nuotrauka paspaudus Registruotis mygtuką](../../../../translated_images/lt/click-register.e89a30bf0d4bc9ca.webp)
+
+### HTTP metodų palyginimas
+
+```mermaid
+graph TD
+    A[Formos pateikimas] --> B{HTTP metodas}
+    B -->|GET| C[Duomenys URL]
+    B -->|POST| D[Duomenys užklausos kūne]
+    
+    C --> E[Matoma adreso juostoje]
+    C --> F[Ribotas duomenų dydis]
+    C --> G[Galima pažymėti žymę]
+    
+    D --> H[Paslėpta nuo URL]
+    D --> I[Didelė duomenų talpa]
+    D --> J[Saugiau]
+```
+**Suprasti skirtumus:**
+
+| Metodas | Paskirtis | Duomenų vieta | Saugumo lygis | Dydžio limitas |
+|--------|----------|---------------|----------------|-------------|
+| `GET` | Paieškos užklausos, filtrai | URL parametrai | Žemas (matomas) | ~2000 simbolių |
+| `POST` | Vartotojų paskyros, jautri informacija | Užklausos kūnas | Aukštesnis (paslėptas) | Nėra praktiško limito |
+
+**Pagrindiniai skirtumai:**
+- **GET**: Priduria formos duomenis prie URL kaip užklausos parametrus (tinka paieškoms)
+- **POST**: Įtraukia duomenis į užklausos kūną (būtina jautriai informacijai)
+- **GET trūkumai**: Dydžio apribojimai, matomi duomenys, istoriniai naršyklės įrašai
+- **POST privalumai**: Didelė duomenų talpa, privatumo apsauga, failų įkėlimas
+
+> 💡 **Gera praktika**: Naudokite `GET` paieškos formoms ir filtrams (duomenų gavimui), `POST` naudokite vartotojo registracijai, prisijungimui ir duomenų kūrimui.
+
+### Formos siuntimo konfigūravimas
+
+Konfigūruokime registracijos formą taip, kad ji tinkamai bendrautų su užpakalinio API serverio pagalba POST metodu:
 
 ```html
-<form id="registerForm" action="//localhost:5000/api/accounts" method="POST">
+<form id="registerForm" action="//localhost:5000/api/accounts" 
+      method="POST" novalidate>
 ```
 
-Dabar pabandykite užregistruoti naują paskyrą su savo vardu. Paspaudus *Registruotis* mygtuką, turėtumėte pamatyti kažką panašaus:
+**Ši konfigūracija atlieka:**
+- **Nukreipia** formos siuntimą į jūsų API galinį tašką
+- **Naudoja** POST metodą saugiam duomenų perdavimui
+- **Įrašo** `novalidate`, kad validaciją valdyti JavaScript
 
-![Naršyklės langas adresu localhost:5000/api/accounts, rodantis JSON eilutę su vartotojo duomenimis](../../../../translated_images/form-post.61de4ca1b964d91a9e338416e19f218504dd0af5f762fbebabfe7ae80edf885f.lt.png)
+### Formos siuntimo testavimas
 
-Jei viskas vyksta gerai, serveris turėtų atsakyti į jūsų užklausą JSON formatu, kuriame yra sukurti paskyros duomenys.
+**Atlikite šiuos žingsnius formos testavimui:**
+1. **Užpildykite** registracijos formą savo duomenimis
+2. **Spustelėkite** "Sukurti paskyrą" mygtuką
+3. **Stebėkite** serverio atsaką naršyklėje
 
-✅ Pabandykite registruotis dar kartą su tuo pačiu vardu. Kas nutinka?
+![Naršyklės langas adresu localhost:5000/api/accounts, rodantis JSON eilutę su vartotojo duomenimis](../../../../translated_images/lt/form-post.61de4ca1b964d91a.webp)
 
-## Duomenų pateikimas be puslapio perkrovimo
+**Ką turėtumėte pamatyti:**
+- **Naršyklė nukreipia** į API galinį tašką URL
+- **JSON atsakymas** su jūsų ką tik sukurta paskyros informacija
+- **Serverio patvirtinimas**, kad paskyra buvo sėkmingai sukurta
 
-Kaip turbūt pastebėjote, yra nedidelė problema su mūsų naudotu metodu: pateikus formą, išeiname iš savo programėlės, o naršyklė nukreipia į serverio URL. Mes stengiamės išvengti visų puslapio perkrovimų savo interneto programėlėje, nes kuriame [vieno puslapio programėlę (SPA)](https://en.wikipedia.org/wiki/Single-page_application).
+> 🧪 **Eksperimentų laikas**: Pabandykite registruotis su tuo pačiu naudotojo vardu dar kartą. Koks atsakymas? Tai padės suprasti, kaip serveris tvarko dublikatų duomenis ir klaidų situacijas.
 
-Norėdami siųsti formos duomenis serveriui be puslapio perkrovimo, turime naudoti JavaScript kodą. Vietoj URL `action` atributo `<form>` elemente galite naudoti bet kokį JavaScript kodą, pridedant `javascript:` eilutę, kad atliktumėte pasirinktą veiksmą. Naudodami tai taip pat turėsite įgyvendinti kai kurias užduotis, kurias anksčiau automatiškai atlikdavo naršyklė:
+### Supratimas apie JSON atsakymus
 
-- Gauti formos duomenis.
-- Konvertuoti ir užkoduoti formos duomenis tinkamu formatu.
-- Sukurti HTTP užklausą ir išsiųsti ją serveriui.
+**Kai serveris sėkmingai apdoroja jūsų formą:**
+```json
+{
+  "user": "john_doe",
+  "currency": "$",
+  "description": "Personal savings",
+  "balance": 100,
+  "id": "unique_account_id"
+}
+```
 
-### Užduotis
+**Šis atsakymas patvirtina:**
+- **Sukuria** naują paskyrą su jūsų nurodytais duomenimis
+- **Priskiria** unikalų identifikatorių ateičiai
+- **Grąžina** visą paskyros informaciją patikrinimui
+- **Indikuoja** sėkmingą duomenų bazės įrašymą
 
-Pakeiskite registracijos formos `action` į:
+## Modernus formų valdymas su JavaScript
+
+Tradiciškai formos siuntimas sukelia pilną puslapio perkrovimą, panašiai kaip anksčiau kosminiai skrydžiai reikalaudavo visiškų sisteminių iš naujo nustatymų trajektorijos korekcijoms. Šis metodas trikdo vartotojo patirtį ir praranda programos būseną.
+
+JavaScript formų valdymas veikia kaip nuolatinės navigacijos sistemos, naudojamos moderniuose kosminiuose aparatuose – suteikia realaus laiko koregavimus neprarandant navigacijos konteksto. Galime užkirsti formos siuntimą, suteikti momentinį grįžtamąjį ryšį, tvarkyti klaidas maloniai ir atnaujinti sąsają pagal serverio atsakymus išlaikant vartotojo poziciją programoje.
+
+### Kodėl vengti puslapio perkrovimų?
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant SPA
+    participant Server
+    
+    User->>SPA: Pateikia formą
+    SPA->>Server: AJAX užklausa
+    Server-->>SPA: JSON atsakymas
+    SPA->>User: Atnaujina sąsają
+    
+    Note over User,SPA: Nėra puslapio perkrovimo!
+```
+**JavaScript formų valdymo privalumai:**
+- **Išlaiko** programos būseną ir vartotojo kontekstą
+- **Suteikia** momentinį atsaką ir įkėlimo indikatorius
+- **Leidžia** dinamiškai tvarkyti klaidas ir validaciją
+- **Kuria** sklandų, programėlei panašų vartotojo patyrimą
+- **Leidžia** sąlyginę logiką pagal serverio atsakymus
+
+### Pereinamasis laikotarpis nuo tradicinio prie modernaus
+
+**Tradiciniai metodai:**
+- **Peradresuoja** vartotojus iš jūsų programos
+- **Praranda** esamą programos būseną ir kontekstą
+- **Reikalauja** pilno puslapio perkrovimo paprastoms operacijoms
+- **Suteikia** ribotą kontrolę vartotojo grįžtamajam ryšiui
+
+**Modernus JavaScript metodas:**
+- **Laiko** vartotojus programoje
+- **Išlaiko** visą programos būseną ir duomenis
+- **Leidžia** realaus laiko validaciją ir grįžtamąjį ryšį
+- **Palaiko** progresyvų patobulinimą ir prieinamumą
+
+### JavaScript formų valdymo įgyvendinimas
+
+Pakeiskime tradicinį formos siuntimą moderniu JavaScript įvykių valdymu:
 
 ```html
-<form id="registerForm" action="javascript:register()">
+<!-- Remove the action attribute and add event handling -->
+<form id="registerForm" method="POST" novalidate>
 ```
 
-Atidarykite `app.js` ir pridėkite naują funkciją, pavadintą `register`:
+**Pridėkite registracijos logiką į savo `app.js` failą:**
 
-```js
+```javascript
+// Šiuolaikinis įvykių valdomas formos tvarkymas
 function register() {
   const registerForm = document.getElementById('registerForm');
   const formData = new FormData(registerForm);
   const data = Object.fromEntries(formData);
   const jsonData = JSON.stringify(data);
+  
+  console.log('Form data prepared:', data);
 }
+
+// Pridėti įvykio klausytoją, kai įkeliamas puslapis
+document.addEventListener('DOMContentLoaded', () => {
+  const registerForm = document.getElementById('registerForm');
+  registerForm.addEventListener('submit', (event) => {
+    event.preventDefault(); // Užkirsti kelią numatytajam formos pateikimui
+    register();
+  });
+});
 ```
 
-Čia mes gauname formos elementą naudodami `getElementById()` ir naudojame [`FormData`](https://developer.mozilla.org/docs/Web/API/FormData) pagalbinį įrankį, kad išgautume reikšmes iš formos valdiklių kaip raktų/reikšmių poras. Tada konvertuojame duomenis į įprastą objektą naudodami [`Object.fromEntries()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries) ir galiausiai serializuojame duomenis į [JSON](https://www.json.org/json-en.html), formatą, dažnai naudojamą duomenų mainams internete.
+**Kas čia vyksta:**
+- **Užkerta kelią** numatytam formos siuntimui naudojant `event.preventDefault()`
+- **Gauna** formos elementą naudojant šiuolaikinį DOM pasirinkimą
+- **Išgauna** formos duomenis su galingu `FormData` API
+- **Paverčia** FormData į paprastą objektą su `Object.fromEntries()`
+- **Serealizuoja** duomenis į JSON formatą serveriui perduoti
+- **Atspausdina** apdorotus duomenis derinimo ir patikrinimo tikslais
 
-Duomenys dabar paruošti siuntimui serveriui. Sukurkite naują funkciją, pavadintą `createAccount`:
+### FormData API supratimas
 
-```js
+**FormData API suteikia galingą formų valdymą:**
+```javascript
+// FormData pavyzdys, ką jis fiksuoja
+const formData = new FormData(registerForm);
+
+// FormData automatiškai fiksuoja:
+// {
+//   "user": "john_doe",
+//   "currency": "$",
+//   "description": "Asmeninė sąskaita",
+//   "balance": "100"
+// }
+```
+
+**FormData API privalumai:**
+- **Išsamus rinkimas**: surenka visus formos elementus, įskaitant tekstą, failus ir sudėtingus įvesties laukus
+- **Tipų atpažinimas**: automatiškai tvarko skirtingus įvesties tipus be papildomo kodo rašymo
+- **Veiksmingumas**: pašalina rankinį laukų rinkimą vienu API kvietimu
+- **Prisitaikymas**: veikia net keičiasi formos struktūrai
+
+### Serverio komunikacijos funkcijos kūrimas
+
+Dabar sukurkime patikimą funkciją ryšiui su API serveriu, naudojant modernias JavaScript paradigmas:
+
+```javascript
 async function createAccount(account) {
   try {
     const response = await fetch('//localhost:5000/api/accounts', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
       body: account
     });
+    
+    // Patikrinkite, ar atsakymas buvo sėkmingas
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
     return await response.json();
   } catch (error) {
-    return { error: error.message || 'Unknown error' };
+    console.error('Account creation failed:', error);
+    return { error: error.message || 'Network error occurred' };
   }
 }
 ```
 
-Ką daro ši funkcija? Pirmiausia atkreipkite dėmesį į `async` raktinį žodį. Tai reiškia, kad funkcija turi kodą, kuris vykdys [**asinchroniškai**](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function). Naudojant `await` raktinį žodį, galima laukti, kol asinchroninis kodas bus vykdomas – kaip laukiant serverio atsakymo – prieš tęsiant.
+**Asinchroninio JavaScript supratimas:**
 
-Štai trumpas vaizdo įrašas apie `async/await` naudojimą:
-
-[![Async ir Await pažadų valdymui](https://img.youtube.com/vi/YwmlRkrxvkk/0.jpg)](https://youtube.com/watch?v=YwmlRkrxvkk "Async ir Await pažadų valdymui")
-
-> 🎥 Spustelėkite aukščiau esančią nuotrauką, kad pamatytumėte vaizdo įrašą apie async/await.
-
-Naudojame `fetch()` API, kad išsiųstume JSON duomenis serveriui. Šis metodas priima 2 parametrus:
-
-- Serverio URL, todėl čia grąžiname `//localhost:5000/api/accounts`.
-- Užklausos nustatymai. Čia nustatome metodą kaip `POST` ir pateikiame `body` užklausai. Kadangi siunčiame JSON duomenis serveriui, taip pat turime nustatyti `Content-Type` antraštę kaip `application/json`, kad serveris žinotų, kaip interpretuoti turinį.
-
-Kadangi serveris atsakys į užklausą JSON formatu, galime naudoti `await response.json()`, kad išanalizuotume JSON turinį ir grąžintume gautą objektą. Atkreipkite dėmesį, kad šis metodas yra asinchroninis, todėl čia naudojame `await` raktinį žodį, kad įsitikintume, jog bet kokios klaidos analizės metu taip pat bus užfiksuotos.
-
-Dabar pridėkite šiek tiek kodo į `register` funkciją, kad iškviestumėte `createAccount()`:
-
-```js
-const result = await createAccount(jsonData);
+```mermaid
+sequenceDiagram
+    participant JS as JavaScript
+    participant Fetch as Fetch API
+    participant Server as Backend Server
+    
+    JS->>Fetch: fetch() užklausa
+    Fetch->>Server: HTTP POST
+    Server-->>Fetch: JSON atsakymas
+    Fetch-->>JS: laukiamas atsakas
+    JS->>JS: Apdoroti duomenis
 ```
+**Ši moderni įgyvendinimo versija atlieka:**
+- **Naudoja** `async/await` skaitomam asinchroniniam kodui
+- **Įtraukia** tinkamą klaidų tvarkymą su try/catch blokais
+- **Patikrina** atsakymo statusą prieš apdorojimą
+- **Nustato** tinkamus antraščių laukus JSON komunikacijai
+- **Tiekia** išsamius klaidų pranešimus derinimui
+- **Grąžina** nuoseklią duomenų struktūrą sėkmei ir klaidoms
 
-Kadangi čia naudojame `await` raktinį žodį, turime pridėti `async` raktinį žodį prieš register funkciją:
+### Moderniojo Fetch API galia
 
-```js
-async function register() {
-```
+**Fetch API privalumai prieš senesnius metodus:**
 
-Galiausiai pridėkime keletą žurnalų, kad patikrintume rezultatą. Galutinė funkcija turėtų atrodyti taip:
+| Funkcija | Privalumas | Įgyvendinimas |
+|---------|---------|----------------|
+| Promise pagrindu | Švarus asinchroninis kodas | `await fetch()` |
+| Užklausos pritaikymas | Pilnas HTTP valdymas | Antraštės, metodai, turinys |
+| Atsakymo tvarkymas | Lanksti duomenų analizė | `.json()`, `.text()`, `.blob()` |
+| Klaidos tvarkymas | Išsamus klaidų gaudymas | Try/catch blokai |
 
-```js
+> 🎥 **Sužinokite daugiau**: [Async/Await pamoka](https://youtube.com/watch?v=YwmlRkrxvkk) – asinchroninio JavaScript modelių supratimas modernaus žiniatinklio kūrimui.
+
+**Pagrindinės serverio komunikacijos sąvokos:**
+- **Asinchroninės funkcijos** leidžia sustabdyti vykdymą laukiant serverio atsakymų
+- **Await raktinis žodis** verčia asinchroninį kodą skaitytis kaip sinchroninį
+- **Fetch API** teikia modernias, Promise pagrindu veikiančias HTTP užklausas
+- **Klaidų tvarkymas** užtikrina programos gražų reagavimą į tinklo klaidas
+
+### Registracijos funkcijos užbaigimas
+
+Apjungkime viską į pilnai paruoštą gamybai registracijos funkciją:
+
+```javascript
 async function register() {
   const registerForm = document.getElementById('registerForm');
-  const formData = new FormData(registerForm);
-  const jsonData = JSON.stringify(Object.fromEntries(formData));
-  const result = await createAccount(jsonData);
-
-  if (result.error) {
-    return console.log('An error occurred:', result.error);
+  const submitButton = registerForm.querySelector('button[type="submit"]');
+  
+  try {
+    // Rodyti įkėlimo būseną
+    submitButton.disabled = true;
+    submitButton.textContent = 'Creating Account...';
+    
+    // Apdoroti formos duomenis
+    const formData = new FormData(registerForm);
+    const jsonData = JSON.stringify(Object.fromEntries(formData));
+    
+    // Siųsti į serverį
+    const result = await createAccount(jsonData);
+    
+    if (result.error) {
+      console.error('Registration failed:', result.error);
+      alert(`Registration failed: ${result.error}`);
+      return;
+    }
+    
+    console.log('Account created successfully!', result);
+    alert(`Welcome, ${result.user}! Your account has been created.`);
+    
+    // Išvalyti formą po sėkmingos registracijos
+    registerForm.reset();
+    
+  } catch (error) {
+    console.error('Unexpected error:', error);
+    alert('An unexpected error occurred. Please try again.');
+  } finally {
+    // Atstatyti mygtuko būseną
+    submitButton.disabled = false;
+    submitButton.textContent = 'Create Account';
   }
-
-  console.log('Account created!', result);
 }
 ```
 
-Tai buvo šiek tiek ilga, bet mes pasiekėme tikslą! Jei atidarysite [naršyklės kūrėjo įrankius](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools) ir pabandysite užregistruoti naują paskyrą, neturėtumėte matyti jokių pokyčių interneto puslapyje, tačiau konsolėje pasirodys pranešimas, patvirtinantis, kad viskas veikia.
+**Ši patobulinta versija apima:**
+- **Teikia** vizualinį atsiliepimą formos pateikimo metu
+- **Išjungia** mygtuką, kad išvengtų pasikartojančio pateikimo
+- **Tvarko** tiek numatytas, tiek nenumatytas klaidas
+- **Rodo** draugiškus sėkmės ir klaidų pranešimus
+- **Atstato** formą po sėkmingos registracijos
+- **Grąžina** UI būseną nepriklausomai nuo rezultato
 
-![Ekrano nuotrauka, rodanti žurnalo pranešimą naršyklės konsolėje](../../../../translated_images/browser-console.efaf0b51aaaf67782a29e1a0bb32cc063f189b18e894eb5926e02f1abe864ec2.lt.png)
+### Jūsų įgyvendinimo testavimas
 
-✅ Ar manote, kad duomenys siunčiami serveriui saugiai? Kas, jei kas nors galėtų perimti užklausą? Galite perskaityti apie [HTTPS](https://en.wikipedia.org/wiki/HTTPS), kad sužinotumėte daugiau apie saugų duomenų perdavimą.
+**Atidarykite naršyklės kūrėjų įrankius ir patikrinkite registraciją:**
 
-## Duomenų validacija
+1. **Atidarykite** naršyklės konsolę (F12 → Console skirtukas)
+2. **Užpildykite** registracijos formą
+3. **Paspauskite** „Create Account“
+4. **Stebėkite** konsolės žinutes ir vartotojo atsiliepimą
 
-Jei bandysite užregistruoti naują paskyrą, nepateikę vartotojo vardo, galite pamatyti, kad serveris grąžina klaidą su statuso kodu [400 (Bloga užklausa)](https://developer.mozilla.org/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).).
+![Ekrano kopija, rodanti konsolės pranešimą naršyklėje](../../../../translated_images/lt/browser-console.efaf0b51aaaf6778.webp)
 
-Prieš siunčiant duomenis serveriui, gerai praktikuoti [validuoti formos duomenis](https://developer.mozilla.org/docs/Learn/Forms/Form_validation) iš anksto, kai tai įmanoma, kad įsitikintumėte, jog siunčiate galiojančią užklausą. HTML5 formos valdikliai suteikia įmontuotą validaciją naudojant įvairius atributus:
+**Ką turėtumėte pamatyti:**
+- **Įkėlimo būsena** matoma ant pateikimo mygtuko
+- **Konsolės įrašai** demonstruoja detalų procesą
+- **Sėkmės pranešimas** pasirodo, kai paskyros kūrimas pavyksta
+- **Forma išsivalo** automatiškai po sėkmingo įrašymo
 
-- `required`: lauką reikia užpildyti, kitaip forma negali būti pateikta.
-- `minlength` ir `maxlength`: apibrėžia minimalų ir maksimalų simbolių skaičių tekstiniuose laukuose.
-- `min` ir `max`: apibrėžia minimalią ir maksimalią skaitinio lauko reikšmę.
-- `type`: apibrėžia tikėtinų duomenų tipą, pvz., `number`, `email`, `file` ar [kitus įmontuotus tipus](https://developer.mozilla.org/docs/Web/HTML/Element/input). Šis atributas taip pat gali pakeisti formos valdiklio vizualinį vaizdą.
-- `pattern`: leidžia apibrėžti [reguliariąją išraišką](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions), kad patikrintumėte, ar įvesti duomenys yra galiojantys.
-Patarimas: galite pritaikyti formos valdiklių išvaizdą, priklausomai nuo to, ar jie yra galiojantys, ar ne, naudodami CSS pseudo-klases `:valid` ir `:invalid`.
-### Užduotis
+> 🔒 **Saugumo pastaba**: Šiuo metu duomenys perduodami per HTTP, kuris nėra saugus gamybai. Tikrose programose visada naudokite HTTPS duomenų šifravimui. Sužinokite daugiau apie [HTTPS saugumą](https://en.wikipedia.org/wiki/HTTPS) ir kodėl tai svarbu vartotojų duomenų apsaugai.
 
-Norint sukurti galiojančią naują paskyrą, būtini du laukai: vartotojo vardas ir valiuta, o kiti laukai yra neprivalomi. Atnaujinkite formos HTML, naudodami tiek `required` atributą, tiek tekstą lauko etiketėje, kad:
+### 🔄 **Pedagoginis patikrinimas**
+**Modernus JavaScript integravimas**: patikrinkite savo žinias apie asinchroninį formų tvarkymą:
+- ✅ Kaip `event.preventDefault()` keičia numatytą formos veikimą?
+- ✅ Kodėl FormData API yra veiksmingesnis už rankinį laukų rinkimą?
+- ✅ Kaip async/await modeliai pagerina kodo skaitomumą?
+- ✅ Kokią reikšmę turi klaidų tvarkymas vartotojo patirtyje?
 
-```html
-<label for="user">Username (required)</label>
-<input id="user" name="user" type="text" required>
-...
-<label for="currency">Currency (required)</label>
-<input id="currency" name="currency" type="text" value="$" required>
+**Sistemos architektūra**: jūsų formos tvarkymas demonstruoja:
+- **Įvykių valdymą**: formos reaguoja į vartotojo veiksmus be puslapio perkrovimo
+- **Asinchroninę komunikaciją**: serverio užklausos neužblokuoja sąsajos
+- **Klaidų tvarkymą**: gražų elgesį tinklo klaidų atveju
+- **Būsenos valdymą**: UI atnaujinama teisingai pagal serverio atsakymus
+- **Progresyvų tobulinimą**: bazinė funkcija veikia, o JavaScript ją sustiprina
+
+**Profesionalios praktikos**: įgyvendinote:
+- **Vienos atsakomybės principą**: funkcijos turi aiškų ir tikslų tikslą
+- **Klaidų ribojimus**: try/catch blokai apsaugo nuo avarijų
+- **Vartotojo atsiliepimą**: įkėlimo būsena ir sėkmės/klaidų žinutės
+- **Duomenų transformavimą**: FormData į JSON serverio komunikacijai
+
+## Išsamus formos tikrinimas
+
+Formos tikrinimas apsaugo nuo nemalonių klaidų radimo tik po pateikimo. Kaip daugybė perteklinių sistemų Tarptautinėje kosminėje stotyje, efektyvus tikrinimas remiasi keliomis saugumo sluoksniais.
+
+Optimalus metodas apjungia naršyklės lygmens patikrą greitai grįžtamajai informacijai, JavaScript patikrą geresnei vartotojo patirčiai ir serverio pusės patikrą saugumui bei duomenų vientisumui. Ši perteklinė sistema užtikrina tiek vartotojo pasitenkinimą, tiek sistemos apsaugą.
+
+### Tikrinimo sluoksnių supratimas
+
+```mermaid
+graph TD
+    A[Naudotojo Įvestis] --> B[HTML5 Tikrinimas]
+    B --> C[Pasirinktinis JavaScript Tikrinimas]
+    C --> D[Kliento Pusės Baigta]
+    D --> E[Serverio Pusės Tikrinimas]
+    E --> F[Duomenų Saugojimas]
+    
+    B -->|Neteisinga| G[Naršyklės Klaidos Pranešimas]
+    C -->|Neteisinga| H[Pasirinktinis Klaidos Rodymas]
+    E -->|Neteisinga| I[Serverio Klaidos Atsakymas]
+```
+**Daugiapakopis tikrinimo metodas:**
+- **HTML5 tikrinimas**: tiesioginiai naršyklės patikrinimai
+- **JavaScript tikrinimas**: savita logika ir vartotojo patirtis
+- **Serverio tikrinimas**: galutinė sauga ir duomenų vientisumas
+- **Progresyvus tobulinimas**: veikia net kai JavaScript išjungtas
+
+### HTML5 tikrinimo atributai
+
+**Modernūs tikrinimo įrankiai jūsų paslaugoms:**
+
+| Atributas | Paskirtis | Naudojimas | Naršyklės elgesys |
+|-----------|---------|---------------|------------------|
+| `required` | Privalomi laukai | `<input required>` | Neleidžia pateikti tuščio lauko |
+| `minlength`/`maxlength` | Teksto ilgis | `<input maxlength="20">` | Riboja simbolių skaičių |
+| `min`/`max` | Skaitinės ribos | `<input min="0" max="1000">` | Tikrina skaičių intervalus |
+| `pattern` | Individualios regex taisyklės | `<input pattern="[A-Za-z]+">` | Atitinka specifinius formatų reikalavimus |
+| `type` | Duomenų tipas | `<input type="email">` | Tikrina formatą pagal tipą |
+
+### CSS tikrinimo stilius
+
+**Sukurti vizualinį tikrinimo būsenų atvaizdavimą:**
+
+```css
+/* Valid input styling */
+input:valid {
+  border-color: #28a745;
+  background-color: #f8fff9;
+}
+
+/* Invalid input styling */
+input:invalid {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+}
+
+/* Focus states for better accessibility */
+input:focus:valid {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+input:focus:invalid {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
 ```
 
-Nors ši konkreti serverio įgyvendinimo versija nenustato specifinių ribų laukų maksimaliam ilgiui, visada yra gera praktika apibrėžti pagrįstas ribas bet kokiam vartotojo teksto įvedimui.
+**Ką šie vizualiniai signalai reiškia:**
+- **Žali apvadai**: rodo sėkmingą tikrinimą, kaip žalieji signalai valdymo centre
+- **Raudoni apvadai**: signalizuoja klaidas, kurios reikalauja dėmesio
+- **Fokuso paryškinimai**: aiškiai nurodo, kuriuo lauku šiuo metu veikiama
+- **Vienodi stiliai**: sukuria vartotojui pažįstamus sąsajos modelius
 
-Pridėkite `maxlength` atributą teksto laukams:
+> 💡 **Naudingas patarimas**: naudokite CSS pseudo klases `:valid` ir `:invalid`, kad teiktumėte greitą vizualinį atsiliepimą įvedant duomenis ir sukurtumėte dinamišką, naudingą sąsają.
+
+### Išsamus tikrinimo įgyvendinimas
+
+Patobulinkime jūsų registracijos formą su stipriu tikrinimu, kuris užtikrina puikią vartotojo patirtį ir aukštą duomenų kokybę:
 
 ```html
-<input id="user" name="user" type="text" maxlength="20" required>
-...
-<input id="currency" name="currency" type="text" value="$" maxlength="5" required>
-...
-<input id="description" name="description" type="text" maxlength="100">
+<form id="registerForm" method="POST" novalidate>
+  <div class="form-group">
+    <label for="user">Username <span class="required">*</span></label>
+    <input id="user" name="user" type="text" required 
+           minlength="3" maxlength="20" 
+           pattern="[a-zA-Z0-9_]+" 
+           autocomplete="username"
+           title="Username must be 3-20 characters, letters, numbers, and underscores only">
+    <small class="form-text">Choose a unique username (3-20 characters)</small>
+  </div>
+  
+  <div class="form-group">
+    <label for="currency">Currency <span class="required">*</span></label>
+    <input id="currency" name="currency" type="text" required 
+           value="$" maxlength="3" 
+           pattern="[A-Z$€£¥₹]+" 
+           title="Enter a valid currency symbol or code">
+    <small class="form-text">Currency symbol (e.g., $, €, £)</small>
+  </div>
+  
+  <div class="form-group">
+    <label for="description">Account Description</label>
+    <input id="description" name="description" type="text" 
+           maxlength="100" 
+           placeholder="Personal savings, checking, etc.">
+    <small class="form-text">Optional description (up to 100 characters)</small>
+  </div>
+  
+  <div class="form-group">
+    <label for="balance">Starting Balance</label>
+    <input id="balance" name="balance" type="number" 
+           value="0" min="0" step="0.01" 
+           title="Enter a positive number for your starting balance">
+    <small class="form-text">Initial account balance (minimum $0.00)</small>
+  </div>
+  
+  <button type="submit">Create Account</button>
+</form>
 ```
 
-Dabar, jei paspausite mygtuką *Registruotis* ir kuris nors laukas neatitiks mūsų apibrėžtos validacijos taisyklės, turėtumėte pamatyti kažką panašaus į tai:
+**Patobulinto tikrinimo supratimas:**
+- **Derina** privalomų laukų ženklus su naudingais aprašais
+- **Apima** `pattern` atributus formatų tikrinimui
+- **Prideda** `title` atributus prieinamumui ir patarimams
+- **Prideda** pagalbinį tekstą vartotojo nurodymams
+- **Naudoja** semantinę HTML struktūrą geresniam prieinamumui
 
-![Ekrano nuotrauka, rodanti validacijos klaidą bandant pateikti formą](../../../../translated_images/validation-error.8bd23e98d416c22f80076d04829a4bb718e0e550fd622862ef59008ccf0d5dce.lt.png)
+### Išplėstinės tikrinimo taisyklės
 
-Tokio tipo validacija, atliekama *prieš* siunčiant bet kokius duomenis į serverį, vadinama **kliento pusės** validacija. Tačiau atkreipkite dėmesį, kad ne visada įmanoma atlikti visus patikrinimus nesiunčiant duomenų. Pavyzdžiui, mes negalime patikrinti, ar paskyra su tuo pačiu vartotojo vardu jau egzistuoja, nesiuntę užklausos į serverį. Papildoma validacija, atliekama serveryje, vadinama **serverio pusės** validacija.
+**Ką atlieka kiekviena taisyklė:**
 
-Paprastai reikia įgyvendinti abi validacijos rūšis. Nors kliento pusės validacija pagerina vartotojo patirtį, suteikdama greitą grįžtamąjį ryšį, serverio pusės validacija yra būtina, kad užtikrintumėte, jog vartotojo duomenys, su kuriais dirbate, yra patikimi ir saugūs.
+| Laukas | Tikrinimo taisyklės | Vartotojo privalumas |
+|-------|------------------|--------------|
+| Slapyvardis | `required`, `minlength="3"`, `maxlength="20"`, `pattern="[a-zA-Z0-9_]+"` | Užtikrina galiojančius ir unikalius identifikatorius |
+| Valiuta | `required`, `maxlength="3"`, `pattern="[A-Z$€£¥₹]+"` | Priima įprastus valiutų simbolius |
+| Balansas | `min="0"`, `step="0.01"`, `type="number"` | Neleidžia neigiamų likučių |
+| Aprašymas | `maxlength="100"` | Protingi ilgumo apribojimai |
+
+### Tikrinimo elgesio testavimas
+
+**Išbandykite šias situacijas:**
+1. **Pateikite** formą su tuščiais privalomais laukais
+2. **Įveskite** trumpesnį nei 3 simbolių slapyvardį
+3. **Pabandykite** specialius simbolius slapyvardžio lauke
+4. **Įveskite** neigiamą balanso reikšmę
+
+![Ekrano kopija rodanti tikrinimo klaidą kuriant formą](../../../../translated_images/lt/validation-error.8bd23e98d416c22f.webp)
+
+**Ką pastebėsite:**
+- **Naršyklė rodo** vietinius tikrinimo pranešimus
+- **Stilių pasikeitimai** priklausomai nuo `:valid` ir `:invalid` būsenų
+- **Forma nepateikiama** kol visi tikrinimai nepraeina
+- **Fokuso žymeklis automatiškai** pereina prie pirmo netinkamo lauko
+
+### Kliento pusės ir serverio pusės tikrinimas
+
+```mermaid
+graph LR
+    A[Kliento pusės tikrinimas] --> B[Tiesioginis Atsakas]
+    A --> C[Geresnė Vartotojo Patirtis]
+    A --> D[Sumažinta Serverio Apkrova]
+    
+    E[Serverio pusės tikrinimas] --> F[Sauga]
+    E --> G[Duomenų vientisumas]
+    E --> H[Verslo taisyklės]
+    
+    A -.-> I[Abu Reikalingi]
+    E -.-> I
+```
+**Kodėl reikia abiejų sluoksnių:**
+- **Kliento pusės tikrinimas**: suteikia greitą grįžtamąjį ryšį ir gerina vartotojo patirtį
+- **Serverio pusės tikrinimas**: užtikrina saugumą ir apdoroja sudėtingas verslo taisykles
+- **Kombinuotas metodas**: sukuria tvirtas, draugiškas ir saugias programas
+- **Progresyvus tobulinimas**: veikia net kai JavaScript išjungtas
+
+> 🛡️ **Saugumo priminimas**: Niekada netikėkite tik kliento pusės patikra! Kenksmingi vartotojai gali apeiti, todėl serverio pusės tikrinimas būtinas saugumui ir duomenų vientisumui.
+
+### ⚡ **Ką galite padaryti per artimiausias 5 minutes**
+- [ ] Išbandykite formą su neteisingais duomenimis ir pamatykite tikrinimo pranešimus
+- [ ] Pabandykite pateikti formą su išjungtu JavaScript ir pamatykite HTML5 tikrinimą
+- [ ] Atidarykite naršyklės DevTools ir patikrinkite siunčiamus formos duomenis
+- [ ] Eksperimentuokite su skirtingais įvesties tipais ir stebėkite mobiliųjų klaviatūrų pokyčius
+
+### 🎯 **Ką galite pasiekti per šią valandą**
+- [ ] Užbaikite testą po pamokos ir supraskite formų tvarkymo sąvokas
+- [ ] Įgyvendinkite išsamų tikrinimo iššūkį su realaus laiko atsiliepimu
+- [ ] Pridėkite CSS stilių profesionalioms formoms
+- [ ] Sukurkite klaidų tvarkymą dublikuojantiems vartotojo vardus ir serverio klaidas
+- [ ] Pridėkite slaptažodžio patvirtinimo laukus su atitinkamu tikrinimu
+
+### 📅 **Jūsų savaitės formų meistriškumo kelionė**
+- [ ] Užbaikite visą bankinę programėlę su pažangiomis formų funkcijomis
+- [ ] Įgyvendinkite failų įkėlimo galimybes profilio nuotraukoms ar dokumentams
+- [ ] Pridėkite daugiapakopes formas su pažangos indikatoriais ir būsenos valdymu
+- [ ] Sukurkite dinamiškas formas, kurios prisitaiko pagal vartotojo pasirinkimus
+- [ ] Įgyvendinkite formų automatinio išsaugojimo ir atkūrimo funkcijas geresnei vartotojo patirčiai
+- [ ] Pridėkite pažangų tikrinimą, pvz., el. pašto patvirtinimą bei telefono numerių formatavimą
+
+### 🌟 **Jūsų mėnesio frontend kūrimo meistriškumas**
+- [ ] Kurkite sudėtingas formų programas su sąlyginė logika ir darbo eiga
+- [ ] Išmokite formų bibliotekas ir karkasus greitam kūrimui
+- [ ] Įvaldykite prieinamumo gaires ir įtraukiantį dizainą
+- [ ] Įgyvendinkite internacionalizaciją ir lokalizaciją pasaulinėms formoms
+- [ ] Kurkite pakartotinai naudojamas formų komponentų bibliotekas ir dizaino sistemas
+- [ ] Dalyvaukite atviro kodo formų projektuose ir dalinkitės geriausiomis praktikomis
+
+## 🎯 Jūsų formų kūrimo meistriškumo laiko juosta
+
+```mermaid
+timeline
+    title Formos kūrimo ir naudotojo patirties mokymosi progresas
+    
+    section HTML pagrindai (15 minučių)
+        Semantiniai formos elementai: Formos elementai
+                              : Įvedimo tipai
+                              : Žymos ir prieinamumas
+                              : Progresyvus patobulinimas
+        
+    section JavaScript integracija (25 minučių)
+        Įvykių valdymas: Formos pateikimas
+                      : Duomenų rinkimas
+                      : AJAX komunikacija
+                      : Async/await modeliai
+        
+    section Validavimo sistemos (35 minučių)
+        Daugiasluoksnė sauga: HTML5 validacija
+                            : Kliento pusės logika
+                            : Serverio pusės patikrinimas
+                            : Klaidos valdymas
+        
+    section Naudotojo patirtis (45 minučių)
+        Sąsajos patobulinimas: Įkrovimo būsenos
+                            : Sėkmės pranešimai
+                            : Klaidų atstatymas
+                            : Prieinamumo funkcijos
+        
+    section Pažangūs modeliai (1 savaitė)
+        Profesionalios formos: Dinaminis validavimas
+                            : Daugiažingsniai procesai
+                            : Failų įkėlimas
+                            : Realiojo laiko atsiliepimai
+        
+    section Įmonių įgūdžiai (1 mėnuo)
+        Produkcinės programos: Formų bibliotekos
+                            : Testavimo strategijos
+                            : Veikimo optimizavimas
+                            : Geriausios saugumo praktikos
+```
+### 🛠️ Jūsų formų kūrimo įrankių rinkinys santrauka
+
+Baigus šią pamoką, jūs įvaldėte:
+- **HTML5 formos**: semantinė struktūra, įvesties tipai ir prieinamumo funkcijos
+- **JavaScript formų tvarkymą**: įvykių valdymas, duomenų rinkimas ir AJAX komunikacija
+- **Tikrinimo architektūrą**: kelių sluoksnių tikrinimas saugumui ir vartotojo patirčiai
+- **Asinchroninį programavimą**: modernus fetch API ir async/await modeliai
+- **Klaidų valdymą**: išsamus klaidų tvarkymas ir vartotojo atsiliepimai
+- **Vartotojo patirties dizainą**: įkėlimo būsena, sėkmės pranešimai ir klaidų atkūrimas
+- **Progresyvų tobulinimą**: formos, veikiančios visose naršyklėse ir galimybėse
+
+**Realios pasaulio taikomosios sritys**: jūsų formų vystymo įgūdžiai tiesiogiai taikomi:
+- **Elektroninės prekybos programoms**: užsakymų procesai, paskyrų registracija ir mokėjimų formos
+- **Įmonių programinei įrangai**: duomenų įvedimo sistemos, ataskaitų sąsajos ir darbo eiga
+- **Turinio valdymui**: leidybos platformos, vartotojų generuojamas turinys ir administravimo sąsajos
+- **Finansinėms programoms**: bankininkystės sąsajos, investicijų platformos ir sandorių sistemos
+- **Sveikatos priežiūros sistemoms**: pacientų portalai, susitikimų planavimas ir medicininių įrašų formos
+- **Švietimo platformoms**: kursų registracija, vertinimo įrankiai ir mokymosi valdymas
+
+**Įgyti profesiniai įgūdžiai**: dabar galite:
+- **Kurti** prieinamas formas, veikiančias visiems vartotojams, įskaitant su negalia
+- **Įgyvendinti** saugią formų tikrinimą, apsaugančią nuo duomenų korupcijos ir saugumo spragų
+- **Kurkite** reaguojančias vartotojo sąsajas, teikiančias aiškią grįžtamąją informaciją ir nurodymus
+- **Trikčių šalinimas** kompleksiškai formų sąveikai naudojant naršyklės kūrėjų įrankius ir tinklo analizę
+- **Optimizuokite** formų veikimą efektyviu duomenų tvarkymu ir tikrinimo strategijomis
+
+**Frontend kūrimo sąvokos įvaldytos**:
+- **Įvykių varoma architektūra**: vartotojo sąveikos valdymas ir atsako sistemos
+- **Asinchroninis programavimas**: neblokuojanti serverio komunikacija ir klaidų valdymas
+- **Duomenų tikrinimas**: kliento ir serverio saugumo bei vientisumo patikrinimai
+- **Vartotojo patirties dizainas**: intuityvios sąsajos, vedančios vartotojus į sėkmę
+- **Prieinamumo inžinerija**: įtraukiantis dizainas, tinkantis įvairiems vartotojų poreikiams
+
+**Kitas lygis**: esate pasirengęs tyrinėti pažangias formų bibliotekas, įgyvendinti sudėtingas tikrinimo taisykles ar kurti įmonių lygio duomenų rinkimo sistemas!
+
+🌟 **Pasiekimas atrakintas**: sukūrėte pilną formų tvarkymo sistemą su profesionaliu tikrinimu, klaidų valdymu ir vartotojo patirties modeliais!
 
 ---
 
+
+
+---
+
+## GitHub Copilot Agent iššūkis 🚀
+
+Naudokite Agent režimą šiam iššūkiui įgyvendinti:
+
+**Aprašymas:** Patobulinkite registracijos formą išsamiu kliento pusės tikrinimu ir vartotojo atsiliepimais. Šis iššūkis padės jums praktikuotis formų tikrinimą, klaidų valdymą ir vartotojo patirties tobulinimą interaktyviu grįžtamuoju ryšiu.
+**Promptas:** Sukurkite visišką registracijos formos patikrinimo sistemą, kuri apimtų: 1) Realaus laiko patikrinimo atsakymus kiekvienam laukui, kai vartotojas rašo, 2) Pasirinktines patikrinimo žinutes, kurios rodomos po kiekvienu įvesties lauku, 3) Slaptažodžio patvirtinimo lauką su atitikimo patikrinimu, 4) Vizualinius indikatorius (pvz., žalius varnelės ženklus teisingiems laukams ir raudonus įspėjimus neteisingiems), 5) Siuntimo mygtuką, kuris įgalinamas tik kai visi patikrinimai yra sėkmingi. Naudokite HTML5 patikrinimo atributus, CSS stilių patikrinimo būsenoms ir JavaScript interaktyviam elgesiui.
+
+Daugiau apie [agent mode](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) sužinokite čia.
+
 ## 🚀 Iššūkis
 
-Rodykite klaidos pranešimą HTML, jei vartotojas jau egzistuoja.
+HTML faile parodykite klaidos žinutę, jei vartotojas jau egzistuoja.
 
-Štai pavyzdys, kaip gali atrodyti galutinis prisijungimo puslapis po šiek tiek stiliaus pritaikymo:
+Štai pavyzdys, kaip gali atrodyti galutinis prisijungimo puslapis po šiek tiek stiliaus taikymo:
 
-![Ekrano nuotrauka, rodanti prisijungimo puslapį po CSS stilių pridėjimo](../../../../translated_images/result.96ef01f607bf856aa9789078633e94a4f7664d912f235efce2657299becca483.lt.png)
+![Screenshot of the login page after adding CSS styles](../../../../translated_images/lt/result.96ef01f607bf856a.webp)
 
-## Po paskaitos testas
+## Po paskaitos quizas
 
-[Po paskaitos testas](https://ff-quizzes.netlify.app/web/quiz/44)
+[Po paskaitos quizas](https://ff-quizzes.netlify.app/web/quiz/44)
 
 ## Apžvalga ir savarankiškas mokymasis
 
-Programuotojai tapo labai kūrybingi kurdami formas, ypač kalbant apie validacijos strategijas. Sužinokite apie skirtingus formų kūrimo būdus, peržiūrėdami [CodePen](https://codepen.com); ar galite rasti įdomių ir įkvepiančių formų?
+Kūrėjai labai išradingai kuria savo formas, ypač dėl validacijos strategijų. Pažinkite skirtingas formų eigas naršydami per [CodePen](https://codepen.com); ar pavyks rasti įdomių ir įkvepiančių formų?
 
 ## Užduotis
 
@@ -309,5 +950,7 @@ Programuotojai tapo labai kūrybingi kurdami formas, ypač kalbant apie validaci
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Atsakomybės apribojimas**:  
-Šis dokumentas buvo išverstas naudojant AI vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama profesionali žmogaus vertimo paslauga. Mes neprisiimame atsakomybės už nesusipratimus ar klaidingus interpretavimus, atsiradusius naudojant šį vertimą.
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Pirminis dokumentas jo gimtąja kalba laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingą interpretavimą, kilusius dėl šio vertimo naudojimo.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

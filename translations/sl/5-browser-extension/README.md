@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b121a279a6ab39878491f3e572673515",
-  "translation_date": "2025-08-27T22:12:34+00:00",
-  "source_file": "5-browser-extension/README.md",
-  "language_code": "sl"
-}
--->
 # Izdelava razširitve za brskalnik
 
 Izdelava razširitev za brskalnike je zabaven in zanimiv način razmišljanja o zmogljivosti vaših aplikacij, hkrati pa ustvarjate drugačno vrsto spletnega sredstva. Ta modul vključuje lekcije o tem, kako delujejo brskalniki, kako namestiti razširitev za brskalnik, kako zgraditi obrazec, poklicati API, uporabljati lokalno shranjevanje ter kako oceniti zmogljivost vaše spletne strani in jo izboljšati.
@@ -23,7 +14,7 @@ To razširitev lahko uporabnik po potrebi pokliče, ko v obrazec vnese ključ AP
 
 ### Zasluge
 
-![zelena razširitev za brskalnik](../../../translated_images/extension-screenshot.0e7f5bfa110e92e3875e1bc9405edd45a3d2e02963e48900adb91926a62a5807.sl.png)
+![zelena razširitev za brskalnik](../../../translated_images/sl/extension-screenshot.0e7f5bfa110e92e3.webp)
 
 ## Zasluge
 

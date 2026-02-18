@@ -1,247 +1,444 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "bd3aa6d2b879c30ea496c43aec1c49ed",
-  "translation_date": "2025-08-28T17:12:35+00:00",
-  "source_file": "8-code-editor/1-using-a-code-editor/assignment.md",
-  "language_code": "pa"
-}
--->
-# vscode.dev ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੱਕ ਰਿਜ਼ਿਊਮ-ਵੈਬਸਾਈਟ ਬਣਾਓ
+# VSCode.dev ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਰਿਜ਼ਿਊਮ ਵੈਬਸਾਈਟ ਬਣਾਓ
 
-_ਕਿੰਨਾ ਵਧੀਆ ਹੋਵੇਗਾ ਜੇ ਕੋਈ ਰਿਕਰੂਟਰ ਤੁਹਾਡੇ ਰਿਜ਼ਿਊਮ ਦੀ ਮੰਗ ਕਰੇ ਅਤੇ ਤੁਸੀਂ ਉਨ੍ਹਾਂ ਨੂੰ ਇੱਕ URL ਭੇਜੋ?_ 😎
+ਇੱਕ ਇੰਟਰਐਕਟਿਵ ਅਤੇ ਆਧੁਨਿਕ ਫਾਰਮੈਟ ਵਿੱਚ ਆਪਣੀ ਕਾਬਲਿਯਤ ਅਤੇ ਤਜਰਬੇ ਨੂੰ ਦਰਸਾਉਣ ਵਾਲੀ ਪ੍ਰੋਫੈਸ਼ਨਲ ਰਿਜ਼ਿਊਮ ਵੈਬਸਾਈਟ ਬਣਾਕੇ ਆਪਣੇ ਕਰੀਅਰ ਦੇ ਮੌਕਿਆਂ ਨੂੰ ਬਦਲੋ। ਰਵਾਇਤੀ PDF ਭੇਜਣ ਦੀ ਬਜਾਏ, ਸੋਚੋ ਕਿ ਰਿਕਰੂਟਰਾਂ ਨੂੰ ਇੱਕ ਸਲੀਕ ਅਤੇ ਜਵਾਬਦੇਹ ਵੈਬਸਾਈਟ ਪ੍ਰਦਾਨ ਕਰਦੇ ਹੋ ਜੋ ਤੁਹਾਡੇ ਗੁਣਾਂ ਅਤੇ ਵੈਬ ਡਿਵੈਲਪਮੈਂਟ ਦੀ ਯੋਗਤਾ ਦਿਖਾਉਂਦੀ ਹੈ।
 
-## ਉਦੇਸ਼
+ਇਹ ਹੱਥ-ਵਰਤੋਂ ਅਸਾਈਨਮੈਂਟ ਤੁਹਾਡੇ ਸਾਰੇ VSCode.dev ਹੁਨਰਾਂ ਨੂੰ ਅਮਲ ਵਿੱਚ ਲਿਆਉਂਦੀ ਹੈ ਜਦੋਂ ਤੁਸੀਂ ਆਪਣੇ ਕਰੀਅਰ ਲਈ ਸੱਚਮੁੱਚ ਲਾਭਦਾਇਕ ਕੁਝ ਬਣਾਉਂਦੇ ਹੋ। ਤੁਸੀਂ ਪੂਰੇ ਵੈਬ ਡਿਵੈਲਪਮੈਂਟ ਵਰਕਫਲੋ ਦਾ ਅਨੁਭਵ ਕਰੋਗੇ - ਰਿਪੋਜ਼ਟਰੀ ਬਣਾਉਣ ਤੋਂ ਲੈ ਕੇ ਡਿਪਲੌਇਮੈਂਟ ਤੱਕ - ਸਾਰਾ ਕੰਮ ਆਪਣੇ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ।
 
-ਇਸ ਅਸਾਈਨਮੈਂਟ ਦੇ ਬਾਅਦ, ਤੁਸੀਂ ਸਿੱਖੋਗੇ ਕਿ:
+ਇਸ ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਪੂਰਾ ਕਰਕੇ, ਤੁਹਾਡੇ ਕੋਲ ਇੱਕ ਪ੍ਰੋਫੈਸ਼ਨਲ ਆਨਲਾਈਨ ਪ੍ਰਜ਼ੈਂਸ ਹੋਵੇਗੀ ਜਿਸਨੂੰ ਸੰਭਾਵਿਤ ਨੌਕਰੀਦਾਤਿਆਂ ਨਾਲ ਸਾਂਝਾ ਕੀਤਾ ਜਾ ਸਕੇ, ਤੁਹਾਡੇ ਹੁਨਰਾਂ ਦੇ ਵਧਣ ਦੇ ਨਾਲ ਅਪਡੇਟ ਕੀਤਾ ਜਾ ਸਕੇ ਅਤੇ ਤੁਹਾਡੇ ਨਿੱਜੀ ਬ੍ਰਾਂਡ ਨਾਲ ਮੇਲ ਖਾਣ ਲਈ ਕਸਟਮਾਈਜ਼ ਕੀਤਾ ਜਾ ਸਕੇ। ਇਹ ਬਿਲਕੁਲ ਉਹ ਪ੍ਰੈਕਟਿਕਲ ਪ੍ਰੋਜੈਕਟ ਹੈ ਜੋ ਅਸਲ ਦੁਨੀਆ ਦੇ ਵੈਬ ਡਿਵੈਲਪਮੈਂਟ ਹੁਨਰਾਂ ਨੂੰ ਦਰਸਾਉਂਦਾ ਹੈ।
 
-- ਆਪਣਾ ਰਿਜ਼ਿਊਮ ਦਿਖਾਉਣ ਲਈ ਇੱਕ ਵੈਬਸਾਈਟ ਕਿਵੇਂ ਬਣਾਈ ਜਾਵੇ
+## ਸਿੱਖਣ ਦੇ ਉਦੇਸ਼
 
-### ਪੂਰਵ ਸ਼ਰਤਾਂ
+ਇਸ ਅਸਾਈਨਮੈਂਟ ਨੂੰ ਪੂਰਾ ਕਰਨ ਤੋਂ ਬਾਅਦ, ਤੁਸੀਂ ਇਹ ਕਰਨ ਦੇ ਯੋਗ ਹੋਵੋਗੇ:
 
-1. ਇੱਕ GitHub ਖਾਤਾ। [GitHub](https://github.com/) 'ਤੇ ਜਾਓ ਅਤੇ ਜੇਕਰ ਤੁਹਾਡੇ ਕੋਲ ਪਹਿਲਾਂ ਤੋਂ ਖਾਤਾ ਨਹੀਂ ਹੈ ਤਾਂ ਇੱਕ ਖਾਤਾ ਬਣਾਓ।
+- **ਬਣਾਉਣਾ** ਅਤੇ VSCode.dev ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੱਕ ਪੂਰਾ ਵੈਬ ਡਿਵੈਲਪਮੈਂਟ ਪ੍ਰੋਜੈਕਟ ਪ੍ਰਬੰਧਿਤ ਕਰਨਾ
+- **ਸੰਰਚਨਾ** ਇੱਕ ਪ੍ਰੋਫੈਸ਼ਨਲ ਵੈਬਸਾਈਟ ਨੂੰ ਸੈਮਾਂਟਿਕ HTML ਤੱਤਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ
+- **ਸਟਾਈਲ** ਜਵਾਬਦੇਹ ਲੇਆਉਟਸ ਨੂੰ ਆਧੁਨਿਕ CSS ਤਕਨੀਕਾਂ ਨਾਲ
+- **ਲਾਗੂ ਕਰਨਾ** ਬੁਨਿਆਦੀ ਵੈਬ ਤਕਨਾਲੋਜੀਆਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੰਟਰਐਕਟਿਵ ਫੀਚਰ
+- **ਡਿਪਲੌਇ ਕਰਨਾ** ਇੱਕ ਲਾਈਵ ਵੈਬਸਾਈਟ ਜੋ ਸਾਂਝਾ ਕਰਨ ਯੋਗ URL ਦੁਆਰਾ ਪਹੁੰਚਯੋਗ ਹੈ
+- **ਦਿਖਾਉਣਾ** ਵਿਕਾਸ ਪ੍ਰਕਿਰਿਆ ਦੌਰਾਨ ਵਰਜਨ ਕੰਟਰੋਲ ਦੀਆਂ ਵਧੀਆ ਪ੍ਰਥਾਵਾਂ
 
-## ਕਦਮ
+## ਪੂਰਵ-ਸ਼ਰਤਾਂ
 
-**ਕਦਮ 1:** ਇੱਕ ਨਵਾਂ GitHub Repository ਬਣਾਓ ਅਤੇ ਇਸਨੂੰ `my-resume` ਨਾਮ ਦਿਓ।
+ਇਸ ਅਸਾਈਨਮੈਂਟ ਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ, ਇਹ ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਹੈ:
 
-**ਕਦਮ 2:** ਆਪਣੇ Repository ਵਿੱਚ ਇੱਕ `index.html` ਫਾਈਲ ਬਣਾਓ। ਅਸੀਂ github.com 'ਤੇ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਫਾਈਲ ਸ਼ਾਮਲ ਕਰਾਂਗੇ ਕਿਉਂਕਿ ਤੁਸੀਂ vscode.dev 'ਤੇ ਖਾਲੀ Repository ਨਹੀਂ ਖੋਲ੍ਹ ਸਕਦੇ।
+- ਇੱਕ GitHub ਖਾਤਾ ([github.com](https://github.com/) 'ਤੇ ਬਣਾਓ ਜੇ ਲੋੜ ਹੋਵੇ)
+- VSCode.dev ਪਾਠ ਦੀ ਪੂਰੀ ਕੀਤੀ ਗਈ ਸਿਖਲਾਈ ਜੋ ਇੰਟਰਫੇਸ ਨੈਵੀਗੇਸ਼ਨ ਅਤੇ ਬੁਨਿਆਦੀ ਕਾਰਵਾਈਆਂ ਨੂੰ ਕਵਰ ਕਰਦੀ ਹੈ
+- HTML ਸੰਰਚਨਾ ਅਤੇ CSS ਸਟਾਈਲਿੰਗ ਸੰਕਲਪਾਂ ਦੀ ਬੁਨਿਆਦੀ ਸਮਝ
 
-`creating a new file` ਲਿੰਕ 'ਤੇ ਕਲਿਕ ਕਰੋ, `index.html` ਨਾਮ ਟਾਈਪ ਕਰੋ ਅਤੇ `Commit new file` ਬਟਨ ਚੁਣੋ।
+## ਪ੍ਰੋਜੈਕਟ ਸੈਟਅਪ ਅਤੇ ਰਿਪੋਜ਼ਟਰੀ ਬਣਾਉਣਾ
 
-![github.com 'ਤੇ ਨਵੀਂ ਫਾਈਲ ਬਣਾਓ](../../../../translated_images/new-file-github.com.c886796d800e8056561829a181be1382c5303da9d902d8b2dd82b68a4806e21f.pa.png)
+ਆਓ ਆਪਣੇ ਪ੍ਰੋਜੈਕਟ ਦੀ ਬੁਨਿਆਦ ਸੈਟਅਪ ਕਰਕੇ ਸ਼ੁਰੂ ਕਰੀਏ। ਇਹ ਪ੍ਰਕਿਰਿਆ ਅਸਲ ਦੁਨੀਆ ਦੇ ਵਿਕਾਸ ਵਰਕਫਲੋਜ਼ ਨੂੰ ਦਰਸਾਉਂਦੀ ਹੈ ਜਿੱਥੇ ਪ੍ਰੋਜੈਕਟ ਸਹੀ ਰਿਪੋਜ਼ਟਰੀ ਸ਼ੁਰੂਆਤ ਅਤੇ ਸੰਰਚਨਾ ਦੀ ਯੋਜਨਾ ਨਾਲ ਸ਼ੁਰੂ ਹੁੰਦੇ ਹਨ।
 
-**ਕਦਮ 3:** [VSCode.dev](https://vscode.dev) ਖੋਲ੍ਹੋ ਅਤੇ `Open Remote Repository` ਬਟਨ ਚੁਣੋ।
+### ਕਦਮ 1: ਆਪਣਾ GitHub ਰਿਪੋਜ਼ਟਰੀ ਬਣਾਓ
 
-ਤੁਹਾਡੇ ਰਿਜ਼ਿਊਮ ਸਾਈਟ ਲਈ ਹੁਣੇ ਬਣਾਏ Repository ਦਾ URL ਕਾਪੀ ਕਰੋ ਅਤੇ ਇਸਨੂੰ ਇਨਪੁਟ ਬਾਕਸ ਵਿੱਚ ਪੇਸਟ ਕਰੋ:
+ਇੱਕ ਸਮਰਪਿਤ ਰਿਪੋਜ਼ਟਰੀ ਸੈਟਅਪ ਕਰਨਾ ਯਕੀਨੀ ਬਣਾਉਂਦਾ ਹੈ ਕਿ ਤੁਹਾਡਾ ਪ੍ਰੋਜੈਕਟ ਸ਼ੁਰੂ ਤੋਂ ਹੀ ਸਹੀ ਢੰਗ ਨਾਲ ਸੰਗਠਿਤ ਅਤੇ ਵਰਜਨ-ਨਿਯੰਤਰਿਤ ਹੈ।
 
-_`your-username` ਨੂੰ ਆਪਣੇ GitHub ਯੂਜ਼ਰਨੇਮ ਨਾਲ ਬਦਲੋ_
+1. [GitHub.com](https://github.com) 'ਤੇ ਜਾਓ ਅਤੇ ਆਪਣੇ ਖਾਤੇ ਵਿੱਚ ਸਾਈਨ ਇਨ ਕਰੋ
+2. ਹਰੇ "New" ਬਟਨ ਜਾਂ ਉੱਪਰ-ਸੱਜੇ ਕੋਨੇ ਵਿੱਚ "+" ਆਈਕਨ 'ਤੇ ਕਲਿਕ ਕਰੋ
+3. ਆਪਣੇ ਰਿਪੋਜ਼ਟਰੀ ਨੂੰ `my-resume` ਨਾਮ ਦਿਓ (ਜਾਂ `john-smith-resume` ਵਰਗਾ ਨਿੱਜੀਕਰਤ ਨਾਮ ਚੁਣੋ)
+4. ਇੱਕ ਛੋਟਾ ਵੇਰਵਾ ਸ਼ਾਮਲ ਕਰੋ: "HTML ਅਤੇ CSS ਨਾਲ ਬਣਾਈ ਗਈ ਪ੍ਰੋਫੈਸ਼ਨਲ ਰਿਜ਼ਿਊਮ ਵੈਬਸਾਈਟ"
+5. "Public" ਚੁਣੋ ਤਾਂ ਜੋ ਤੁਹਾਡੀ ਰਿਜ਼ਿਊਮ ਸੰਭਾਵਿਤ ਨੌਕਰੀਦਾਤਿਆਂ ਲਈ ਪਹੁੰਚਯੋਗ ਹੋਵੇ
+6. "Add a README file" ਚੈੱਕ ਕਰੋ ਤਾਂ ਜੋ ਇੱਕ ਸ਼ੁਰੂਆਤੀ ਪ੍ਰੋਜੈਕਟ ਵੇਰਵਾ ਬਣੇ
+7. "Create repository" 'ਤੇ ਕਲਿਕ ਕਰਕੇ ਸੈਟਅਪ ਨੂੰ ਅੰਤਮ ਰੂਪ ਦਿਓ
 
+> 💡 **ਰਿਪੋਜ਼ਟਰੀ ਨਾਮਕਰਨ ਟਿੱਪ**: ਵਰਣਨਾਤਮਕ, ਪ੍ਰੋਫੈਸ਼ਨਲ ਨਾਮਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ ਜੋ ਪ੍ਰੋਜੈਕਟ ਦੇ ਉਦੇਸ਼ ਨੂੰ ਸਪਸ਼ਟ ਤੌਰ 'ਤੇ ਦਰਸਾਉਂਦੇ ਹਨ। ਇਹ ਨੌਕਰੀਦਾਤਿਆਂ ਨਾਲ ਸਾਂਝਾ ਕਰਨ ਜਾਂ ਪੋਰਟਫੋਲਿਓ ਸਮੀਖਿਆ ਦੌਰਾਨ ਮਦਦ ਕਰਦਾ ਹੈ।
+
+### ਕਦਮ 2: ਪ੍ਰੋਜੈਕਟ ਸੰਰਚਨਾ ਸ਼ੁਰੂ ਕਰੋ
+
+ਕਿਉਂਕਿ VSCode.dev ਨੂੰ ਰਿਪੋਜ਼ਟਰੀ ਖੋਲ੍ਹਣ ਲਈ ਘੱਟੋ-ਘੱਟ ਇੱਕ ਫਾਈਲ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ, ਅਸੀਂ GitHub 'ਤੇ ਸਿੱਧੇ ਹੀ ਆਪਣੀ ਮੁੱਖ HTML ਫਾਈਲ ਬਣਾਵਾਂਗੇ।
+
+1. ਆਪਣੇ ਨਵੇਂ ਰਿਪੋਜ਼ਟਰੀ ਵਿੱਚ "creating a new file" ਲਿੰਕ 'ਤੇ ਕਲਿਕ ਕਰੋ
+2. ਫਾਈਲ ਨਾਮ ਦੇ ਤੌਰ 'ਤੇ `index.html` ਟਾਈਪ ਕਰੋ
+3. ਇਹ ਸ਼ੁਰੂਆਤੀ HTML ਸੰਰਚਨਾ ਸ਼ਾਮਲ ਕਰੋ:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Professional Resume</title>
+</head>
+<body>
+    <h1>Your Name</h1>
+    <p>Professional Resume Website</p>
+</body>
+</html>
 ```
-https://github.com/your-username/my-resume
-```
 
-✅ ਜੇ ਸਫਲ ਹੋਵੇ, ਤਾਂ ਤੁਸੀਂ ਆਪਣਾ ਪ੍ਰੋਜੈਕਟ ਅਤੇ index.html ਫਾਈਲ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਟੈਕਸਟ ਐਡੀਟਰ 'ਤੇ ਖੁੱਲ੍ਹੇ ਹੋਏ ਦੇਖੋਗੇ।
+4. ਇੱਕ ਕਮਿਟ ਸੁਨੇਹਾ ਲਿਖੋ: "Add initial HTML structure"
+5. "Commit new file" 'ਤੇ ਕਲਿਕ ਕਰਕੇ ਆਪਣੇ ਬਦਲਾਅ ਸੇਵ ਕਰੋ
 
-![ਨਵੀਂ ਫਾਈਲ ਬਣਾਓ](../../../../translated_images/project-on-vscode.dev.e79815a9a95ee7feac72ebe5c941c91279716be37c575dbdbf2f43bea2c7d8b6.pa.png)
+![GitHub 'ਤੇ ਸ਼ੁਰੂਆਤੀ ਫਾਈਲ ਬਣਾਉਣਾ](../../../../translated_images/pa/new-file-github.com.c886796d800e8056.webp)
 
-**ਕਦਮ 4:** `index.html` ਫਾਈਲ ਖੋਲ੍ਹੋ, ਹੇਠਾਂ ਦਿੱਤਾ ਕੋਡ ਆਪਣੇ ਕੋਡ ਖੇਤਰ ਵਿੱਚ ਪੇਸਟ ਕਰੋ ਅਤੇ ਸੇਵ ਕਰੋ।
+**ਇਹ ਸ਼ੁਰੂਆਤੀ ਸੈਟਅਪ ਕੀ ਪ੍ਰਾਪਤ ਕਰਦਾ ਹੈ:**
+- **ਸਥਾਪਿਤ ਕਰਦਾ ਹੈ** ਸਹੀ HTML5 ਦਸਤਾਵੇਜ਼ ਸੰਰਚਨਾ ਸੈਮਾਂਟਿਕ ਤੱਤਾਂ ਨਾਲ
+- **ਸ਼ਾਮਲ ਕਰਦਾ ਹੈ** viewport meta tag ਜਵਾਬਦੇਹ ਡਿਜ਼ਾਈਨ ਅਨੁਕੂਲਤਾ ਲਈ
+- **ਸੈਟ ਕਰਦਾ ਹੈ** ਇੱਕ ਵਰਣਨਾਤਮਕ ਪੇਜ ਟਾਈਟਲ ਜੋ ਬ੍ਰਾਊਜ਼ਰ ਟੈਬ ਵਿੱਚ ਦਿਖਾਈ ਦਿੰਦਾ ਹੈ
+- **ਬਣਾਉਂਦਾ ਹੈ** ਪ੍ਰੋਫੈਸ਼ਨਲ ਸਮੱਗਰੀ ਸੰਗਠਨ ਲਈ ਬੁਨਿਆਦ
+
+## VSCode.dev ਵਿੱਚ ਕੰਮ ਕਰਨਾ
+
+ਹੁਣ ਜਦੋਂ ਤੁਹਾਡੀ ਰਿਪੋਜ਼ਟਰੀ ਦੀ ਬੁਨਿਆਦ ਸਥਾਪਿਤ ਹੋ ਗਈ ਹੈ, ਆਓ ਮੁੱਖ ਵਿਕਾਸ ਕੰਮ ਲਈ VSCode.dev ਵਿੱਚ ਤਬਦੀਲ ਹੋਈਏ। ਇਹ ਵੈਬ-ਅਧਾਰਿਤ ਐਡੀਟਰ ਪ੍ਰੋਫੈਸ਼ਨਲ ਵੈਬ ਡਿਵੈਲਪਮੈਂਟ ਲਈ ਸਾਰੇ ਸੰਦ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ।
+
+### ਕਦਮ 3: ਆਪਣਾ ਪ੍ਰੋਜੈਕਟ VSCode.dev ਵਿੱਚ ਖੋਲ੍ਹੋ
+
+1. [vscode.dev](https://vscode.dev) 'ਤੇ ਇੱਕ ਨਵੇਂ ਬ੍ਰਾਊਜ਼ਰ ਟੈਬ ਵਿੱਚ ਜਾਓ
+2. ਵੈਲਕਮ ਸਕ੍ਰੀਨ 'ਤੇ "Open Remote Repository" 'ਤੇ ਕਲਿਕ ਕਰੋ
+3. GitHub ਤੋਂ ਆਪਣਾ ਰਿਪੋਜ਼ਟਰੀ URL ਕਾਪੀ ਕਰੋ ਅਤੇ ਇਨਪੁਟ ਫੀਲਡ ਵਿੱਚ ਪੇਸਟ ਕਰੋ
+
+   ਫਾਰਮੈਟ: `https://github.com/your-username/my-resume`
+   
+   *`your-username` ਨੂੰ ਆਪਣੇ ਅਸਲ GitHub ਯੂਜ਼ਰਨੇਮ ਨਾਲ ਬਦਲੋ*
+
+4. **Enter ਦਬਾਓ** ਆਪਣਾ ਪ੍ਰੋਜੈਕਟ ਲੋਡ ਕਰਨ ਲਈ
+
+✅ **ਸਫਲਤਾ ਸੂਚਕ**: ਤੁਹਾਨੂੰ ਆਪਣੇ ਪ੍ਰੋਜੈਕਟ ਫਾਈਲਾਂ Explorer ਸਾਈਡਬਾਰ ਵਿੱਚ ਅਤੇ `index.html` ਮੁੱਖ ਐਡੀਟਰ ਖੇਤਰ ਵਿੱਚ ਐਡੀਟ ਕਰਨ ਲਈ ਉਪਲਬਧ ਹੋਣੀਆਂ ਚਾਹੀਦੀਆਂ ਹਨ।
+
+![VSCode.dev ਵਿੱਚ ਪ੍ਰੋਜੈਕਟ ਲੋਡ ਕੀਤਾ](../../../../translated_images/pa/project-on-vscode.dev.e79815a9a95ee7fe.webp)
+
+**ਇੰਟਰਫੇਸ ਵਿੱਚ ਤੁਸੀਂ ਕੀ ਦੇਖੋਗੇ:**
+- **Explorer sidebar**: **ਤੁਹਾਡੇ ਰਿਪੋਜ਼ਟਰੀ ਫਾਈਲਾਂ ਅਤੇ ਫੋਲਡਰ ਸੰਰਚਨਾ ਦਿਖਾਉਂਦਾ ਹੈ**
+- **Editor area**: **ਚੁਣੀ ਗਈ ਫਾਈਲਾਂ ਦੀ ਸਮੱਗਰੀ ਐਡੀਟ ਕਰਨ ਲਈ ਦਿਖਾਉਂਦਾ ਹੈ**
+- **Activity bar**: **Source Control ਅਤੇ Extensions ਵਰਗੇ ਫੀਚਰਾਂ ਤੱਕ ਪਹੁੰਚ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ**
+- **Status bar**: **ਕਨੈਕਸ਼ਨ ਸਥਿਤੀ ਅਤੇ ਮੌਜੂਦਾ ਸ਼ਾਖਾ ਜਾਣਕਾਰੀ ਦਰਸਾਉਂਦਾ ਹੈ**
+
+### ਕਦਮ 4: ਆਪਣੀ ਰਿਜ਼ਿਊਮ ਸਮੱਗਰੀ ਬਣਾਓ
+
+`index.html` ਵਿੱਚ ਪਲੇਸਹੋਲਡਰ ਸਮੱਗਰੀ ਨੂੰ ਇੱਕ ਵਿਸਤ੍ਰਿਤ ਰਿਜ਼ਿਊਮ ਸੰਰਚਨਾ ਨਾਲ ਬਦਲੋ। ਇਹ HTML ਤੁਹਾਡੇ ਗੁਣਾਂ ਦੀ ਪ੍ਰੋਫੈਸ਼ਨਲ ਪੇਸ਼ਕਸ਼ ਲਈ ਬੁਨਿਆਦ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ।
 
 <details>
-    <summary><b>ਤੁਹਾਡੇ ਰਿਜ਼ਿਊਮ ਵੈਬਸਾਈਟ ਦੇ ਸਮੱਗਰੀ ਲਈ HTML ਕੋਡ।</b></summary>
+<summary><b>ਪੂਰੀ HTML ਰਿਜ਼ਿਊਮ ਸੰਰਚਨਾ</b></summary>
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Your Name - Professional Resume</title>
+</head>
+<body>
+    <header id="header">
+        <h1>Your Full Name</h1>
+        <hr>
+        <p class="role">Your Professional Title</p>
+        <hr>
+    </header>
     
-        <html>
-
-            <head>
-                <link href="style.css" rel="stylesheet">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-                <title>ਤੁਹਾਡਾ ਨਾਮ ਇੱਥੇ ਲਿਖੋ!</title>
-            </head>
-            <body>
-                <header id="header">
-                    <!-- ਰਿਜ਼ਿਊਮ ਹੈਡਰ ਤੁਹਾਡੇ ਨਾਮ ਅਤੇ ਟਾਈਟਲ ਨਾਲ -->
-                    <h1>ਤੁਹਾਡਾ ਨਾਮ ਇੱਥੇ ਲਿਖੋ!</h1>
-                    <hr>
-                    ਤੁਹਾਡਾ ਰੋਲ!
-                    <hr>
-                </header>
-                <main>
-                    <article id="mainLeft">
-                        <section>
-                            <h2>ਸੰਪਰਕ</h2>
-                            <!-- ਸੰਪਰਕ ਜਾਣਕਾਰੀ ਸਮੇਤ ਸੋਸ਼ਲ ਮੀਡੀਆ -->
-                            <p>
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                                <a href="mailto:username@domain.top-level domain">ਇੱਥੇ ਆਪਣਾ ਈਮੇਲ ਲਿਖੋ</a>
-                            </p>
-                            <p>
-                                <i class="fab fa-github" aria-hidden="true"></i>
-                                <a href="github.com/yourGitHubUsername">ਇੱਥੇ ਆਪਣਾ ਯੂਜ਼ਰਨੇਮ ਲਿਖੋ!</a>
-                            </p>
-                            <p>
-                                <i class="fab fa-linkedin" aria-hidden="true"></i>
-                                <a href="linkedin.com/yourLinkedInUsername">ਇੱਥੇ ਆਪਣਾ ਯੂਜ਼ਰਨੇਮ ਲਿਖੋ!</a>
-                            </p>
-                        </section>
-                        <section>
-                            <h2>ਹੁਨਰ</h2>
-                            <!-- ਤੁਹਾਡੇ ਹੁਨਰ -->
-                            <ul>
-                                <li>ਹੁਨਰ 1!</li>
-                                <li>ਹੁਨਰ 2!</li>
-                                <li>ਹੁਨਰ 3!</li>
-                                <li>ਹੁਨਰ 4!</li>
-                            </ul>
-                        </section>
-                        <section>
-                            <h2>ਸ਼ਿਕਸ਼ਾ</h2>
-                            <!-- ਤੁਹਾਡੀ ਸ਼ਿਕਸ਼ਾ -->
-                            <h3>ਇੱਥੇ ਆਪਣਾ ਕੋਰਸ ਲਿਖੋ!</h3>
-                            <p>
-                                ਇੱਥੇ ਆਪਣਾ ਸੰਸਥਾਨ ਲਿਖੋ!
-                            </p>
-                            <p>
-                                ਸ਼ੁਰੂ - ਖਤਮ ਮਿਤੀ
-                            </p>
-                        </section>            
-                    </article>
-                    <article id="mainRight">
-                        <section>
-                            <h2>ਬਾਰੇ</h2>
-                            <!-- ਤੁਹਾਡੇ ਬਾਰੇ -->
-                            <p>ਆਪਣੇ ਬਾਰੇ ਕੁਝ ਲਿਖੋ!</p>
-                        </section>
-                        <section>
-                            <h2>ਕੰਮ ਦਾ ਅਨੁਭਵ</h2>
-                            <!-- ਤੁਹਾਡਾ ਕੰਮ ਦਾ ਅਨੁਭਵ -->
-                            <h3>ਨੌਕਰੀ ਦਾ ਟਾਈਟਲ</h3>
-                            <p>
-                                ਇੱਥੇ ਸੰਸਥਾ ਦਾ ਨਾਮ ਲਿਖੋ | ਸ਼ੁਰੂ ਮਹੀਨਾ – ਖਤਮ ਮਹੀਨਾ
-                            </p>
-                            <ul>
-                                    <li>ਟਾਸਕ 1 - ਤੁਸੀਂ ਕੀ ਕੀਤਾ!</li>
-                                    <li>ਟਾਸਕ 2 - ਤੁਸੀਂ ਕੀ ਕੀਤਾ!</li>
-                                    <li>ਤੁਹਾਡੇ ਯੋਗਦਾਨ ਦੇ ਨਤੀਜੇ/ਅਸਰ ਲਿਖੋ</li>
-                                    
-                            </ul>
-                            <h3>ਨੌਕਰੀ ਦਾ ਟਾਈਟਲ 2</h3>
-                            <p>
-                                ਇੱਥੇ ਸੰਸਥਾ ਦਾ ਨਾਮ ਲਿਖੋ | ਸ਼ੁਰੂ ਮਹੀਨਾ – ਖਤਮ ਮਹੀਨਾ
-                            </p>
-                            <ul>
-                                    <li>ਟਾਸਕ 1 - ਤੁਸੀਂ ਕੀ ਕੀਤਾ!</li>
-                                    <li>ਟਾਸਕ 2 - ਤੁਸੀਂ ਕੀ ਕੀਤਾ!</li>
-                                    <li>ਤੁਹਾਡੇ ਯੋਗਦਾਨ ਦੇ ਨਤੀਜੇ/ਅਸਰ ਲਿਖੋ</li>
-                                    
-                            </ul>
-                        </section>
-                    </article>
-                </main>
-            </body>
-        </html>
+    <main>
+        <article id="mainLeft">
+            <section>
+                <h2>CONTACT</h2>
+                <p>
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    <a href="mailto:your.email@domain.com">your.email@domain.com</a>
+                </p>
+                <p>
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                    <a href="https://github.com/your-username">github.com/your-username</a>
+                </p>
+                <p>
+                    <i class="fab fa-linkedin" aria-hidden="true"></i>
+                    <a href="https://linkedin.com/in/your-profile">linkedin.com/in/your-profile</a>
+                </p>
+            </section>
+            
+            <section>
+                <h2>SKILLS</h2>
+                <ul>
+                    <li>HTML5 & CSS3</li>
+                    <li>JavaScript (ES6+)</li>
+                    <li>Responsive Web Design</li>
+                    <li>Version Control (Git)</li>
+                    <li>Problem Solving</li>
+                </ul>
+            </section>
+            
+            <section>
+                <h2>EDUCATION</h2>
+                <h3>Your Degree or Certification</h3>
+                <p>Institution Name</p>
+                <p>Start Date - End Date</p>
+            </section>
+        </article>
+        
+        <article id="mainRight">
+            <section>
+                <h2>ABOUT</h2>
+                <p>Write a compelling summary that highlights your passion for web development, key achievements, and career goals. This section should give employers insight into your personality and professional approach.</p>
+            </section>
+            
+            <section>
+                <h2>WORK EXPERIENCE</h2>
+                <div class="job">
+                    <h3>Job Title</h3>
+                    <p class="company">Company Name | Start Date – End Date</p>
+                    <ul>
+                        <li>Describe a key accomplishment or responsibility</li>
+                        <li>Highlight specific skills or technologies used</li>
+                        <li>Quantify impact where possible (e.g., "Improved efficiency by 25%")</li>
+                    </ul>
+                </div>
+                
+                <div class="job">
+                    <h3>Previous Job Title</h3>
+                    <p class="company">Previous Company | Start Date – End Date</p>
+                    <ul>
+                        <li>Focus on transferable skills and achievements</li>
+                        <li>Demonstrate growth and learning progression</li>
+                        <li>Include any leadership or collaboration experiences</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section>
+                <h2>PROJECTS</h2>
+                <div class="project">
+                    <h3>Project Name</h3>
+                    <p>Brief description of what the project accomplishes and technologies used.</p>
+                    <a href="#" target="_blank">View Project</a>
+                </div>
+            </section>
+        </article>
+    </main>
+</body>
+</html>
+```
 </details>
 
-HTML ਕੋਡ ਵਿੱਚ _placeholder text_ ਨੂੰ ਬਦਲ ਕੇ ਆਪਣੇ ਰਿਜ਼ਿਊਮ ਦੀ ਜਾਣਕਾਰੀ ਸ਼ਾਮਲ ਕਰੋ।
+**ਕਸਟਮਾਈਜ਼ੇਸ਼ਨ ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼:**
+- **ਸਾਰੇ ਪਲੇਸਹੋਲਡਰ ਟੈਕਸਟ ਨੂੰ** ਆਪਣੇ ਅਸਲ ਜਾਣਕਾਰੀ ਨਾਲ ਬਦਲੋ
+- **ਸੈਕਸ਼ਨਾਂ ਨੂੰ** ਆਪਣੇ ਤਜਰਬੇ ਦੇ ਪੱਧਰ ਅਤੇ ਕਰੀਅਰ ਫੋਕਸ ਦੇ ਅਧਾਰ 'ਤੇ ਸਮਾਅਤ ਕਰੋ
+- **ਲੋੜ ਅਨੁਸਾਰ** ਸੈਕਸ਼ਨਾਂ ਨੂੰ ਸ਼ਾਮਲ ਕਰੋ ਜਾਂ ਹਟਾਓ (ਜਿਵੇਂ ਕਿ, ਸਰਟੀਫਿਕੇਸ਼ਨ, ਵੋਲੰਟੀਅਰ ਵਰਕ, ਭਾਸ਼ਾਵਾਂ)
+- **ਆਪਣੇ ਅਸਲ ਪ੍ਰੋਫਾਈਲਾਂ ਅਤੇ ਪ੍ਰੋਜੈਕਟਾਂ ਲਈ** ਲਿੰਕ ਸ਼ਾਮਲ ਕਰੋ
 
-**ਕਦਮ 5:** My-Resume ਫੋਲਡਰ 'ਤੇ ਹਵਰ ਕਰੋ, `New File ...` ਆਈਕਨ 'ਤੇ ਕਲਿਕ ਕਰੋ ਅਤੇ ਆਪਣੇ ਪ੍ਰੋਜੈਕਟ ਵਿੱਚ 2 ਨਵੀਆਂ ਫਾਈਲਾਂ ਬਣਾਓ: `style.css` ਅਤੇ `codeswing.json` ਫਾਈਲਾਂ।
+### ਕਦਮ 5: ਸਹਾਇਕ ਫਾਈਲਾਂ ਬਣਾਓ
 
-**ਕਦਮ 6:** `style.css` ਫਾਈਲ ਖੋਲ੍ਹੋ, ਹੇਠਾਂ ਦਿੱਤਾ ਕੋਡ ਪੇਸਟ ਕਰੋ ਅਤੇ ਸੇਵ ਕਰੋ।
+ਪ੍ਰੋਫੈਸ਼ਨਲ ਵੈਬਸਾਈਟਾਂ ਨੂੰ ਸੰਗਠਿਤ ਫਾਈਲ ਸੰਰਚਨਾ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ। CSS ਸਟਾਈਲਸ਼ੀਟ ਅਤੇ ਕਨਫਿਗਰੇਸ਼ਨ ਫਾਈਲਾਂ ਬਣਾਓ ਜੋ ਇੱਕ ਪੂਰੇ ਪ੍ਰੋਜੈਕਟ ਲਈ ਲੋੜੀਂਦੀਆਂ ਹਨ।
+
+1. **Explorer sidebar ਵਿੱਚ** ਆਪਣੇ ਪ੍ਰੋਜੈਕਟ ਫੋਲਡਰ ਨਾਮ 'ਤੇ ਹਵਰ ਕਰੋ
+2. **"New File" ਆਈਕਨ (📄+)** 'ਤੇ ਕਲਿਕ ਕਰੋ ਜੋ ਦਿਖਾਈ ਦਿੰਦਾ ਹੈ
+3. **ਇਹ ਫਾਈਲਾਂ ਇੱਕ-ਇੱਕ ਕਰਕੇ ਬਣਾਓ:**
+   - `style.css` (ਸਟਾਈਲਿੰਗ ਅਤੇ ਲੇਆਉਟ ਲਈ)
+   - `codeswing.json` (ਪ੍ਰੀਵਿਊ ਐਕਸਟੈਂਸ਼ਨ ਕਨਫਿਗਰੇਸ਼ਨ ਲਈ)
+
+**CSS ਫਾਈਲ ਬਣਾਉਣਾ (`style.css`):**
 
 <details>
-        <summary><b>ਸਾਈਟ ਦੇ ਲੇਆਉਟ ਨੂੰ ਫਾਰਮੈਟ ਕਰਨ ਲਈ CSS ਕੋਡ।</b></summary>
-            
-            body {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                font-size: 16px;
-                max-width: 960px;
-                margin: auto;
-            }
-            h1 {
-                font-size: 3em;
-                letter-spacing: .6em;
-                padding-top: 1em;
-                padding-bottom: 1em;
-            }
+<summary><b>ਪ੍ਰੋਫੈਸ਼ਨਲ CSS ਸਟਾਈਲਿੰਗ</b></summary>
 
-            h2 {
-                font-size: 1.5em;
-                padding-bottom: 1em;
-            }
+```css
+/* Modern Resume Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+    background-color: #f9f9f9;
+}
 
-            h3 {
-                font-size: 1em;
-                padding-bottom: 1em;
-            }
-            main { 
-                display: grid;
-                grid-template-columns: 40% 60%;
-                margin-top: 3em;
-            }
-            header {
-                text-align: center;
-                margin: auto 2em;
-            }
+/* Header Styling */
+header {
+    text-align: center;
+    margin-bottom: 3em;
+    padding: 2em;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-            section {
-                margin: auto 1em 4em 2em;
-            }
+h1 {
+    font-size: 3em;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.2em;
+    font-weight: 300;
+}
 
-            i {
-                margin-right: .5em;
-            }
+.role {
+    font-size: 1.3em;
+    font-weight: 300;
+    margin: 1em 0;
+}
 
-            p {
-                margin: .2em auto
-            }
+/* Main Content Layout */
+main {
+    display: grid;
+    grid-template-columns: 35% 65%;
+    gap: 3em;
+    margin-top: 3em;
+    background: white;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-            hr {
-                border: none;
-                background-color: lightgray;
-                height: 1px;
-            }
+/* Typography */
+h2 {
+    font-size: 1.4em;
+    font-weight: 600;
+    margin-bottom: 1em;
+    color: #667eea;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 0.3em;
+}
 
-            h1, h2, h3 {
-                font-weight: 100;
-                margin-bottom: 0;
-            }
-            #mainLeft {
-                border-right: 1px solid lightgray;
-            }
-            
+h3 {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+    color: #444;
+}
+
+/* Section Styling */
+section {
+    margin-bottom: 2.5em;
+}
+
+#mainLeft {
+    border-right: 1px solid #e0e0e0;
+    padding-right: 2em;
+}
+
+/* Contact Links */
+section a {
+    color: #667eea;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+section a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+
+/* Icons */
+i {
+    margin-right: 0.8em;
+    width: 20px;
+    text-align: center;
+    color: #667eea;
+}
+
+/* Lists */
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+li {
+    margin: 0.5em 0;
+    padding: 0.3em 0;
+    position: relative;
+}
+
+li:before {
+    content: "▸";
+    color: #667eea;
+    margin-right: 0.5em;
+}
+
+/* Work Experience */
+.job, .project {
+    margin-bottom: 2em;
+    padding-bottom: 1.5em;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.company {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 0.5em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr;
+        gap: 2em;
+    }
+    
+    #mainLeft {
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+        padding-right: 0;
+        padding-bottom: 2em;
+    }
+    
+    h1 {
+        font-size: 2.2em;
+    }
+    
+    body {
+        padding: 10px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+        color: black;
+        font-size: 12pt;
+    }
+    
+    header {
+        background: none;
+        color: black;
+        box-shadow: none;
+    }
+    
+    main {
+        box-shadow: none;
+    }
+}
+```
 </details>
 
-**ਕਦਮ 6:** `codeswing.json` ਫਾਈਲ ਖੋਲ੍ਹੋ, ਹੇਠਾਂ ਦਿੱਤਾ ਕੋਡ ਪੇਸਟ ਕਰੋ ਅਤੇ ਸੇਵ ਕਰੋ।
+**ਕਨਫਿਗਰੇਸ਼ਨ ਫਾਈਲ ਬਣਾਉਣਾ (`codeswing.json`):**
 
-    {
+```json
+{
     "scripts": [],
     "styles": []
-    }
+}
+```
 
-**ਕਦਮ 7:** `Codeswing extension` ਇੰਸਟਾਲ ਕਰੋ ਤਾਂ ਜੋ ਰਿਜ਼ਿਊਮ ਵੈਬਸਾਈਟ ਨੂੰ ਕੋਡ ਖੇਤਰ ਵਿੱਚ ਵੇਖਿਆ ਜਾ ਸਕੇ।
+**CSS ਫੀਚਰਾਂ ਦੀ ਸਮਝ:**
+- **CSS Grid ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ** ਜਵਾਬਦੇਹ, ਪ੍ਰੋਫੈਸ਼ਨਲ ਲੇਆਉਟ ਸੰਰਚਨਾ ਲਈ
+- **ਆਧੁਨਿਕ ਰੰਗ ਸਕੀਮਾਂ ਲਾਗੂ ਕਰਦਾ ਹੈ** ਗ੍ਰੇਡੀਅੰਟ ਹੈਡਰਾਂ ਨਾਲ
+- **ਹੋਵਰ ਪ੍ਰਭਾਵ ਅਤੇ ਸਮੂਥ ਟ੍ਰਾਂਜ਼ੀਸ਼ਨ ਸ਼ਾਮਲ ਕਰਦਾ ਹੈ** ਇੰਟਰਐਕਟਿਵਿਟੀ ਲਈ
+- **ਜਵਾਬਦੇਹ ਡਿਜ਼ਾਈਨ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ** ਜੋ ਸਾਰੇ ਡਿਵਾਈਸ ਆਕਾਰਾਂ 'ਤੇ ਕੰਮ ਕਰਦਾ ਹੈ
+- **ਪ੍ਰਿੰਟ-ਫ੍ਰੈਂਡਲੀ ਸਟਾਈਲ ਸ਼ਾਮਲ ਕਰਦਾ ਹੈ** PDF ਜਨਰੇਸ਼ਨ ਲਈ
 
-_`Extensions`_ ਆਈਕਨ 'ਤੇ ਕਲਿਕ ਕਰੋ ਅਤੇ Codeswing ਟਾਈਪ ਕਰੋ। ਜਾਂ ਤਾਂ ਵਧੇਰੇ ਜਾਣਕਾਰੀ ਲੋਡ ਕਰਨ ਲਈ ਐਕਟਿਵਿਟੀ ਬਾਰ 'ਤੇ ਨੀਲਾ ਇੰਸਟਾਲ ਬਟਨ ਚੁਣੋ ਜਾਂ ਕੋਡ ਖੇਤਰ 'ਤੇ ਆਉਣ ਵਾਲੇ ਇੰਸਟਾਲ ਬਟਨ ਦੀ ਵਰਤੋਂ ਕਰੋ। ਐਕਸਟੈਂਸ਼ਨ ਇੰਸਟਾਲ ਕਰਨ ਤੋਂ ਬਾਅਦ, ਆਪਣੇ ਪ੍ਰੋਜੈਕਟ ਵਿੱਚ ਹੋਏ ਬਦਲਾਅ ਨੂੰ ਵੇਖੋ 😃
+### ਕਦਮ 6: ਐਕਸਟੈਂਸ਼ਨ ਇੰਸਟਾਲ ਅਤੇ ਕਨਫਿਗਰ ਕਰੋ
 
-![ਐਕਸਟੈਂਸ਼ਨ ਇੰਸਟਾਲ ਕਰੋ](../../../../8-code-editor/images/install-extension.gif)
+ਐਕਸਟੈਂਸ਼ਨ ਤੁਹਾਡੇ ਵਿਕਾਸ ਅਨੁਭਵ ਨੂੰ ਵਧਾਉਂਦੇ ਹਨ ਜਿਵੇਂ ਕਿ ਲਾਈਵ ਪ੍ਰੀਵਿਊ ਸਮਰੱਥਾ ਅਤੇ ਸੁਧਾਰਿਆ ਵਰਕਫਲੋ ਸੰਦ। CodeSwing ਐਕਸਟੈਂਸ਼ਨ ਵੈਬ ਡਿਵੈਲਪਮੈਂਟ ਪ੍ਰੋਜੈਕਟਾਂ ਲਈ ਖਾਸ ਤੌਰ 'ਤੇ ਲਾਭਦਾਇਕ ਹੈ।
 
-ਇਹ ਤੁਹਾਡੇ ਸਕ੍ਰੀਨ 'ਤੇ ਦਿਖਾਈ ਦੇਵੇਗਾ ਜਦੋਂ ਤੁਸੀਂ ਐਕਸਟੈਂਸ਼ਨ ਇੰਸਟਾਲ ਕਰਦੇ ਹੋ।
+**CodeSwing ਐਕਸਟੈਂਸ਼ਨ ਇੰਸਟਾਲ ਕਰਨਾ:**
 
-![Codeswing ਐਕਸਟੈਂਸ਼ਨ](../../../../translated_images/after-codeswing-extension-pb.0ebddddcf73b550994947a9084e35e2836c713ae13839d49628e3c764c1cfe83.pa.png)
+1. **Activity Bar ਵਿੱਚ** ਐਕਸਟੈਂਸ਼ਨ ਆਈਕਨ (🧩) 'ਤੇ ਕਲ
+- **ਪਹੁੰਚਯੋਗਤਾ**: ਸਮਾਵੇਸ਼ੀ ਵੈੱਬ ਡਿਜ਼ਾਈਨ ਲਈ WCAG ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼ ਸਿੱਖੋ  
+- **ਪ੍ਰਦਰਸ਼ਨ**: ਆਪਟੀਮਾਈਜ਼ੇਸ਼ਨ ਲਈ Lighthouse ਵਰਗੇ ਟੂਲਜ਼ ਦੀ ਖੋਜ ਕਰੋ  
+- **SEO**: ਸਰਚ ਇੰਜਨ ਆਪਟੀਮਾਈਜ਼ੇਸ਼ਨ ਦੇ ਮੂਲ ਸਿਧਾਂਤ ਸਮਝੋ  
 
-ਜੇ ਤੁਸੀਂ ਕੀਤੇ ਬਦਲਾਅ ਤੋਂ ਸੰਤੁਸ਼ਟ ਹੋ, ਤਾਂ `Changes` ਫੋਲਡਰ 'ਤੇ ਹਵਰ ਕਰੋ ਅਤੇ ਬਦਲਾਅ ਨੂੰ ਸਟੇਜ ਕਰਨ ਲਈ `+` ਬਟਨ 'ਤੇ ਕਲਿਕ ਕਰੋ।
-
-ਕਮਿਟ ਮੈਸੇਜ ਟਾਈਪ ਕਰੋ _(ਤੁਹਾਡੇ ਪ੍ਰੋਜੈਕਟ ਵਿੱਚ ਕੀਤੇ ਬਦਲਾਅ ਦਾ ਵੇਰਵਾ)_ ਅਤੇ `check` 'ਤੇ ਕਲਿਕ ਕਰਕੇ ਆਪਣੇ ਬਦਲਾਅ ਨੂੰ ਕਮਿਟ ਕਰੋ। ਜਦੋਂ ਤੁਸੀਂ ਆਪਣੇ ਪ੍ਰੋਜੈਕਟ 'ਤੇ ਕੰਮ ਕਰਨਾ ਖਤਮ ਕਰ ਲੈਂਦੇ ਹੋ, ਤਾਂ GitHub 'ਤੇ Repository 'ਤੇ ਵਾਪਸ ਜਾਣ ਲਈ ਉੱਪਰ ਖੱਬੇ ਹੰਬਰਗਰ ਮੀਨੂ ਆਈਕਨ ਨੂੰ ਚੁਣੋ।
-
-ਵਧਾਈਆਂ 🎉 ਤੁਸੀਂ ਕੁਝ ਕਦਮਾਂ ਵਿੱਚ vscode.dev ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਆਪਣੀ ਰਿਜ਼ਿਊਮ ਵੈਬਸਾਈਟ ਬਣਾਈ ਹੈ।
-
-## 🚀 ਚੁਣੌਤੀ
-
-ਕੋਈ ਰਿਮੋਟ Repository ਖੋਲ੍ਹੋ ਜਿਸ 'ਤੇ ਤੁਹਾਨੂੰ ਬਦਲਾਅ ਕਰਨ ਦੀ ਇਜਾਜ਼ਤ ਹੈ ਅਤੇ ਕੁਝ ਫਾਈਲਾਂ ਅਪਡੇਟ ਕਰੋ। ਅਗਲੇ ਕਦਮ ਵਿੱਚ, ਆਪਣੇ ਬਦਲਾਅ ਨਾਲ ਇੱਕ ਨਵੀਂ ਸ਼ਾਖਾ ਬਣਾਉਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਅਤੇ ਇੱਕ Pull Request ਬਣਾਓ।
-
-## ਸਮੀਖਿਆ ਅਤੇ ਸਵੈ-ਅਧਿਐਨ
-
-[VSCode.dev](https://code.visualstudio.com/docs/editor/vscode-web?WT.mc_id=academic-0000-alfredodeza) ਅਤੇ ਇਸਦੇ ਹੋਰ ਫੀਚਰਾਂ ਬਾਰੇ ਹੋਰ ਪੜ੍ਹੋ।
+**ਪੇਸ਼ੇਵਰ ਵਿਕਾਸ:**  
+- **ਪੋਰਟਫੋਲਿਓ ਬਣਾਉਣਾ**: ਵੱਖ-ਵੱਖ ਹੁਨਰਾਂ ਨੂੰ ਦਰਸਾਉਣ ਲਈ ਵਾਧੂ ਪ੍ਰੋਜੈਕਟ ਬਣਾਓ  
+- **ਓਪਨ ਸੋਰਸ**: ਮੌਜੂਦਾ ਪ੍ਰੋਜੈਕਟਾਂ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਉਣ ਲਈ ਸਹਿਯੋਗ ਦਾ ਅਨੁਭਵ ਪ੍ਰਾਪਤ ਕਰੋ  
+- **ਨੈਟਵਰਕਿੰਗ**: ਡਿਵੈਲਪਰ ਕਮਿਊਨਿਟੀਆਂ ਵਿੱਚ ਆਪਣੀ ਰਿਜ਼ੂਮੇ ਵੈੱਬਸਾਈਟ ਸਾਂਝੀ ਕਰੋ ਅਤੇ ਫੀਡਬੈਕ ਲਵੋ  
+- **ਲਗਾਤਾਰ ਸਿੱਖਣਾ**: ਵੈੱਬ ਡਿਵੈਲਪਮੈਂਟ ਦੇ ਰੁਝਾਨਾਂ ਅਤੇ ਤਕਨਾਲੋਜੀਆਂ ਨਾਲ ਅੱਪਡੇਟ ਰਹੋ  
 
 ---
 
-**ਅਸਵੀਕਰਤੀ**:  
-ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀ ਹੋਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸੁਚੱਜੇਪਣ ਹੋ ਸਕਦੇ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼, ਜੋ ਇਸਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਹੈ, ਨੂੰ ਅਧਿਕਾਰਤ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਅਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+**ਤੁਹਾਡੇ ਅਗਲੇ ਕਦਮ:** ਆਪਣੀ ਰਿਜ਼ੂਮੇ ਵੈੱਬਸਾਈਟ ਦੋਸਤਾਂ, ਪਰਿਵਾਰ ਜਾਂ ਮੈਨਟਰਾਂ ਨਾਲ ਸਾਂਝੀ ਕਰੋ ਫੀਡਬੈਕ ਲਈ। ਉਨ੍ਹਾਂ ਦੇ ਸੁਝਾਅ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਆਪਣੇ ਡਿਜ਼ਾਈਨ ਵਿੱਚ ਸੁਧਾਰ ਕਰੋ। ਯਾਦ ਰੱਖੋ, ਇਹ ਪ੍ਰੋਜੈਕਟ ਸਿਰਫ਼ ਇੱਕ ਰਿਜ਼ੂਮੇ ਨਹੀਂ ਹੈ - ਇਹ ਤੁਹਾਡੇ ਵੈੱਬ ਡਿਵੈਲਪਰ ਵਜੋਂ ਵਿਕਾਸ ਦਾ ਪ੍ਰਦਰਸ਼ਨ ਹੈ!
+
+---
+
+**ਅਸਵੀਕਰਤਾ**:  
+ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀ ਹੋਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸੁੱਤੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਇਸਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਤ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਅਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।

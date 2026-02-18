@@ -1,230 +1,248 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "056641280211e52fd0adb81b6058ec55",
-  "translation_date": "2025-08-28T18:39:45+00:00",
-  "source_file": "6-space-game/2-drawing-to-canvas/README.md",
-  "language_code": "my"
-}
--->
-# အာကာသဂိမ်းတစ်ခုတည်ဆောက်ခြင်း အပိုင်း ၂: ဟီးရိုနှင့် မုဆိုးများကို Canvas ပေါ်တွင် ရေးဆွဲခြင်း
+# အာကာသဂိမ်းတည်ဆောက်ခြင်း အပိုင်း ၂: ဟီးရိုနှင့် မုဆိုးများကို ကန်ဗက်စ်ပေါ်တွင် ရေးဆွဲခြင်း
 
-## မိန့်ခွန်းမတိုင်မီ စစ်တမ်း
+```mermaid
+journey
+    title Your Canvas Graphics Journey
+    section Foundation
+      Understand Canvas API: 3: Student
+      Learn coordinate system: 4: Student
+      Draw basic shapes: 4: Student
+    section Image Handling
+      Load game assets: 4: Student
+      Handle async loading: 5: Student
+      Position sprites: 5: Student
+    section Game Rendering
+      Create game screen: 5: Student
+      Build formations: 5: Student
+      Optimize performance: 4: Student
+```
 
-[မိန့်ခွန်းမတိုင်မီ စစ်တမ်း](https://ff-quizzes.netlify.app/web/quiz/31)
+Canvas API သည် ဘရောက်ဆာတွင် ဒိုင်နမစ်၊ အပြန်အလှန်ဆက်သွယ်နိုင်သော ဂရပ်ဖစ်များကို ဖန်တီးရန်အတွက် ဝက်ဘ်ဖွံ့ဖြိုးရေး၏ အင်အားကြီးသော အင်္ဂါရပ်တစ်ခုဖြစ်သည်။ ဒီသင်ခန်းစာမှာတော့ HTML `<canvas>` element အလွတ်ကို ဟီးရိုများနှင့် မုဆိုးများဖြင့် ပြည့်စုံသောဂိမ်းကမ္ဘာအဖြစ် ပြောင်းလဲသွားမည်ဖြစ်သည်။ ကန်ဗက်စ်ကို သင်၏ ဒစ်ဂျစ်တယ်အနုပညာဘုတ်အဖြစ် စဉ်းစားပါ၊ အဲဒီမှာ ကုဒ်က ဗစ်ရှွယ်အဖြစ် ပြောင်းလဲသွားသည်။
 
-## Canvas
+ယခင်သင်ခန်းစာတွင် သင်လေ့လာခဲ့သောအရာများကို အခြေခံပြီး ယခုအခါ ဗစ်ရှွယ်ပိုင်းဆိုင်ရာများကို ဆွေးနွေးသွားမည်ဖြစ်သည်။ သင်သည် ဂိမ်းစပရိုက်များကို တင်ပြီး ပြသနည်း၊ အစိတ်အပိုင်းများကို တိကျစွာ တည်နေရာချနည်း၊ သင့်အာကာသဂိမ်းအတွက် ဗစ်ရှွယ်အခြေခံအဆောက်အအုံကို ဖန်တီးနည်းကို လေ့လာသွားမည်ဖြစ်သည်။ ဒါဟာ static ဝက်ဘ်စာမျက်နှာများနှင့် ဒိုင်နမစ်၊ အပြန်အလှန်ဆက်သွယ်နိုင်သော အတွေ့အကြုံများအကြားကွာဟချက်ကို ဖြည့်ဆည်းပေးသည်။
 
-Canvas သည် HTML element တစ်ခုဖြစ်ပြီး ပုံမှန်အားဖြင့် အကြောင်းအရာမပါရှိပါဘူး။ ဒါဟာ အလွတ်ဖြစ်ပြီး သင်ရေးဆွဲရမယ်။
+ဒီသင်ခန်းစာအဆုံးတွင် သင်၏ ဟီးရိုသင်္ဘောကို မှန်ကန်စွာ တည်နေရာချပြီး ရန်သူဖွဲ့စည်းမှုများကို တိုက်ခိုက်ရန် ပြင်ဆင်ထားသော ပြည့်စုံသောဂိမ်းမြင်ကွင်းတစ်ခုရရှိမည်ဖြစ်သည်။ ဘရောက်ဆာများတွင် ခေတ်သစ်ဂိမ်းများသည် ဂရပ်ဖစ်များကို render လုပ်ပုံကို နားလည်ပြီး သင့်ကိုယ်ပိုင် အပြန်အလှန်ဆက်သွယ်နိုင်သော ဗစ်ရှွယ်အတွေ့အကြုံများကို ဖန်တီးနိုင်ရန် ကျွမ်းကျင်မှုရရှိမည်ဖြစ်သည်။ ကန်ဗက်စ်ဂရပ်ဖစ်များကို စူးစမ်းပြီး သင့်အာကာသဂိမ်းကို အသက်သွင်းလိုက်ပါ။
 
-✅ [Canvas API](https://developer.mozilla.org/docs/Web/API/Canvas_API) ကို MDN မှာ ပိုမိုလေ့လာပါ။
+```mermaid
+mindmap
+  root((Canvas Graphics))
+    Canvas Element
+      HTML5 Feature
+      2D Context
+      Coordinate System
+      Pixel Control
+    Drawing Operations
+      Basic Shapes
+      Text Rendering
+      Image Display
+      Path Drawing
+    Asset Management
+      Image Loading
+      Async Operations
+      Error Handling
+      Performance
+    Game Rendering
+      Sprite Positioning
+      Formation Layout
+      Scene Composition
+      Frame Updates
+    Visual Effects
+      Colors & Styles
+      Transformations
+      Animations
+      Layering
+```
 
-ဒါကို ပုံမှန်အားဖြင့် စာမျက်နှာရဲ့ body အပိုင်းမှာ ဒီလို သတ်မှတ်ပါတယ်။
+## သင်ခန်းစာမတိုင်မီမေးခွန်း
+
+[သင်ခန်းစာမတိုင်မီမေးခွန်း](https://ff-quizzes.netlify.app/web/quiz/31)
+
+## ကန်ဗက်စ်
+
+ဒီ `<canvas>` element ဆိုတာ တိတိကျကျ ဘာလဲ? ဒါဟာ ဝက်ဘ်ဘရောက်ဆာများတွင် ဒိုင်နမစ်ဂရပ်ဖစ်များနှင့် အနီမေးရှင်းများဖန်တီးရန်အတွက် HTML5 ရဲ့ ဖြေရှင်းချက်ဖြစ်သည်။ ပုံများ သို့မဟုတ် ဗီဒီယိုများက static ဖြစ်သလို ကန်ဗက်စ်ကတော့ မျက်နှာပြင်ပေါ်တွင် ပေါ်လာသော အရာအားလုံးကို pixel-level ထိန်းချုပ်မှုပေးသည်။ ဒါဟာ ဂိမ်းများ၊ ဒေတာ visualization များနှင့် အပြန်အလှန်ဆက်သွယ်နိုင်သော အနုပညာအတွက် အထူးသင့်တော်သည်။ JavaScript က သင်၏ paintbrush ဖြစ်သော programmable drawing surface အဖြစ် စဉ်းစားပါ။
+
+ပုံမှန်အားဖြင့် ကန်ဗက်စ် element က သင့်စာမျက်နှာပေါ်တွင် အလွတ်၊ ပွင့်လင်းသော ထောင့်စက်တစ်ခုလိုပုံပေါ်သည်။ ဒါပေမယ့် အဲဒီမှာပဲ အခွင့်အလမ်းရှိနေပါတယ်! JavaScript ကို အသုံးပြု၍ ပုံသဏ္ဌာန်များရေးဆွဲခြင်း၊ ပုံများတင်ခြင်း၊ အနီမေးရှင်းများဖန်တီးခြင်း၊ အသုံးပြုသူအပြန်အလှန်ဆက်သွယ်မှုများကို ဖန်တီးခြင်းတို့ကို ပြုလုပ်သောအခါ ၎င်း၏ အင်အားအမှန်တစ်ရပ် ပေါ်လာသည်။ Bell Labs မှ ကွန်ပျူတာဂရပ်ဖစ်ပိုင်နင်းများသည် 1960 ခုနှစ်များတွင် ပထမဆုံး digital animation များဖန်တီးရန် pixel တစ်ခုချင်းစီကို အစီအစဉ်ရေးရန်လိုအပ်ခဲ့သည့်နည်းလမ်းနှင့် ဆင်တူသည်။
+
+✅ MDN တွင် [Canvas API အကြောင်းပိုမိုဖတ်ရှုပါ](https://developer.mozilla.org/docs/Web/API/Canvas_API)။
+
+ဒါဟာ 通常 page ရဲ့ body အစိတ်အပိုင်းအဖြစ် ကြေညာပုံဖြစ်သည်-
 
 ```html
 <canvas id="myCanvas" width="200" height="100"></canvas>
 ```
 
-အထက်မှာ `id`, `width` နဲ့ `height` ကို သတ်မှတ်ထားပါတယ်။
+**ဒီကုဒ်က ဘာလုပ်သလဲဆိုတာ:**
+- **Sets** `id` attribute ကို သင်၏ JavaScript မှာ ဒီ canvas element ကို ရည်ညွှန်းနိုင်ရန်
+- **Defines** `width` ကို pixel အဖြစ် သင်၏ canvas ရဲ့ အလျားအကျယ်ကို ထိန်းချုပ်ရန်
+- **Establishes** `height` ကို pixel အဖြစ် သင်၏ canvas ရဲ့ အလျားအနံကို သတ်မှတ်ရန်
 
-- `id`: သင်ရဲ့ interaction အတွက် reference ရယူနိုင်ဖို့ သတ်မှတ်ပါ။
-- `width`: element ရဲ့ အကျယ်ကို သတ်မှတ်ပါ။
-- `height`: element ရဲ့ အမြင့်ကို သတ်မှတ်ပါ။
+## ရိုးရှင်းသော ဂျီဩမေထုပုံသဏ္ဌာန်များရေးဆွဲခြင်း
 
-## ရိုးရှင်းတဲ့ ဂျီဩမေတြီပုံစံများ ရေးဆွဲခြင်း
+အခု သင်က canvas element ဆိုတာ ဘာလဲဆိုတာ သိပြီးသားဖြစ်တော့ ကန်ဗက်စ်ပေါ်မှာ တကယ်ရေးဆွဲတာကို စူးစမ်းကြည့်ရအောင်!
+- **ကိုဩဒိနိတ်စနစ်များ**: သင်္ချာကို မျက်နှာပြင်အနေအထားများသို့ ပြောင်းလဲခြင်း  
+- **Sprite စီမံခန့်ခွဲမှု**: ဂိမ်းရဲ့ ဂရပ်ဖစ်များကို တင်ပြီး ပြသခြင်း  
+- **ဖွဲ့စည်းမှု အယ်လဂိုရီသမ်များ**: စီမံထားသော အနေအထားများအတွက် သင်္ချာပုံစံများ  
+- **Async လုပ်ဆောင်မှုများ**: အသုံးပြုသူအတွေ့အကြုံကို ချောမွေ့စေသော ခေတ်မီ JavaScript  
 
-Canvas သည် Cartesian coordinate system ကို အသုံးပြုပြီး ပုံများကို ရေးဆွဲပါတယ်။ ဒါကြောင့် x-axis နဲ့ y-axis ကို အသုံးပြုပြီး တစ်ခုခုရဲ့ တည်နေရာကို ဖော်ပြပါတယ်။ `0,0` တည်နေရာသည် အပေါ်ဘက် ဘယ်ဖက်နေရာဖြစ်ပြီး အောက်ဘက်ညာဖက်သည် သင်သတ်မှတ်ထားသော Canvas ရဲ့ WIDTH နဲ့ HEIGHT ဖြစ်ပါတယ်။
+## ရလဒ်  
 
-![Canvas ရဲ့ grid](../../../../translated_images/canvas_grid.5f209da785ded492a01ece440e3032afe51efa500cc2308e5ea4252487ceaf0b.my.png)
-> ပုံကို [MDN](https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes) မှာ ရယူထားပါတယ်။
+ပြီးစီးသော ရလဒ်သည် အောက်ပါအတိုင်း ဖြစ်သင့်သည်-  
 
-Canvas element ပေါ်မှာ ရေးဆွဲဖို့ အောက်ပါအဆင့်များကို လိုအပ်ပါတယ်-
+![အနက်ရောင်မျက်နှာပြင်တွင် သူရဲကောင်းနှင့် 5*5 အမှုးများ](../../../../translated_images/my/partI-solution.36c53b48c9ffae2a.webp)  
 
-1. **Reference ရယူပါ** Canvas element အတွက်။
-2. **Reference ရယူပါ** Canvas element ပေါ်မှာရှိတဲ့ Context element အတွက်။
-3. **Drawing operation လုပ်ဆောင်ပါ** Context element ကို အသုံးပြုပြီး။
+## ဖြေရှင်းချက်  
 
-အထက်ပါအဆင့်များအတွက် Code သည် ပုံမှန်အားဖြင့် ဒီလိုပုံစံရှိပါတယ်-
-
-```javascript
-// draws a red rectangle
-//1. get the canvas reference
-canvas = document.getElementById("myCanvas");
-
-//2. set the context to 2D to draw basic shapes
-ctx = canvas.getContext("2d");
-
-//3. fill it with the color red
-ctx.fillStyle = 'red';
-
-//4. and draw a rectangle with these parameters, setting location and size
-ctx.fillRect(0,0, 200, 200) // x,y,width, height
-```
-
-✅ Canvas API သည် အဓိကအားဖြင့် 2D ပုံစံများကို အာရုံစိုက်ထားပြီး သင် 3D element များကိုလည်း ဝဘ်ဆိုဒ်ပေါ်မှာ ရေးဆွဲနိုင်ပါတယ်။ ဒီအတွက် [WebGL API](https://developer.mozilla.org/docs/Web/API/WebGL_API) ကို အသုံးပြုနိုင်ပါတယ်။
-
-Canvas API ကို အသုံးပြုပြီး အမျိုးမျိုးသောအရာများကို ရေးဆွဲနိုင်ပါတယ်-
-
-- **ဂျီဩမေတြီပုံစံများ**၊ rectangle ရေးဆွဲပုံကို ပြထားပြီး အခြားသောအရာများကိုလည်း ရေးဆွဲနိုင်ပါတယ်။
-- **စာသား**၊ သင်လိုချင်တဲ့ font နဲ့ အရောင်ကို အသုံးပြုပြီး စာသားကို ရေးဆွဲနိုင်ပါတယ်။
-- **ပုံများ**၊ .jpg သို့မဟုတ် .png ကဲ့သို့သော ပုံ asset ကို အသုံးပြုပြီး ပုံကို ရေးဆွဲနိုင်ပါတယ်။
-
-✅ စမ်းကြည့်ပါ! Rectangle ရေးဆွဲပုံကို သိပြီးသားဖြစ်လို့ Circle ကို စာမျက်နှာပေါ်မှာ ရေးဆွဲနိုင်ပါသလား? CodePen မှ Canvas ရေးဆွဲမှုများကို စိတ်ဝင်စားဖို့ ကြည့်ပါ။ [အလွန်အံ့ဩဖွယ်ကောင်းတဲ့ ဥပမာ](https://codepen.io/dissimulate/pen/KrAwx) တစ်ခုကို ဒီမှာ ကြည့်နိုင်ပါတယ်။
-
-## ပုံ asset တစ်ခုကို Load လုပ်ပြီး ရေးဆွဲခြင်း
-
-ပုံ asset ကို Load လုပ်ဖို့ `Image` object တစ်ခုကို ဖန်တီးပြီး `src` property ကို သတ်မှတ်ရပါမယ်။ ပြီးရင် `load` event ကို နားထောင်ပြီး အသုံးပြုနိုင်ဖို့ အဆင်သင့်ဖြစ်တဲ့အခါ သိရပါမယ်။ Code သည် ဒီလိုပုံစံရှိပါတယ်-
-
-### Asset Load လုပ်ခြင်း
-
-```javascript
-const img = new Image();
-img.src = 'path/to/my/image.png';
-img.onload = () => {
-  // image loaded and ready to be used
-}
-```
-
-### Asset Load လုပ်ပုံစံ
-
-အထက်ပါကို ဒီလိုပုံစံတစ်ခုအတွင်းမှာ ထည့်သွင်းဖို့ အကြံပြုပါတယ်၊ ဒါကြောင့် အသုံးပြုရလွယ်ကူပြီး အဆင်သင့်ဖြစ်တဲ့အခါမှ Manipulate လုပ်နိုင်ပါတယ်-
-
-```javascript
-function loadAsset(path) {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.src = path;
-    img.onload = () => {
-      // image loaded and ready to be used
-      resolve(img);
-    }
-  })
-}
-
-// use like so
-
-async function run() {
-  const heroImg = await loadAsset('hero.png')
-  const monsterImg = await loadAsset('monster.png')
-}
-
-```
-
-Game asset များကို Screen ပေါ်မှာ ရေးဆွဲဖို့ သင့်ရဲ့ Code သည် ဒီလိုပုံစံရှိပါတယ်-
-
-```javascript
-async function run() {
-  const heroImg = await loadAsset('hero.png')
-  const monsterImg = await loadAsset('monster.png')
-
-  canvas = document.getElementById("myCanvas");
-  ctx = canvas.getContext("2d");
-  ctx.drawImage(heroImg, canvas.width/2,canvas.height/2);
-  ctx.drawImage(monsterImg, 0,0);
-}
-```
-
-## အခု သင့်ဂိမ်းကို တည်ဆောက်ဖို့ အချိန်ရောက်ပါပြီ
-
-### ဘာကို တည်ဆောက်မလဲ
-
-Canvas element ပါတဲ့ ဝဘ်စာမျက်နှာတစ်ခုကို တည်ဆောက်ပါ။ ဒါဟာ `1024*768` အနက်ရောင် Screen ကို Render လုပ်သင့်ပါတယ်။ သင့်ကို ပုံနှစ်ခုပေးထားပါတယ်-
-
-- ဟီးရို ရေယာဉ်
-
-   ![ဟီးရို ရေယာဉ်](../../../../translated_images/player.dd24c1afa8c71e9b82b2958946d4bad13308681392d4b5ddcc61a0e818ef8088.my.png)
-
-- 5*5 မုဆိုး
-
-   ![မုဆိုး ရေယာဉ်](../../../../translated_images/enemyShip.5df2a822c16650c2fb3c06652e8ec8120cdb9122a6de46b9a1a56d54db22657f.my.png)
-
-### တည်ဆောက်မှုကို စတင်ဖို့ အကြံပြုထားသော အဆင့်များ
-
-`your-work` sub folder အတွင်း ဖန်တီးထားသော ဖိုင်များကို ရှာပါ။ ဒါဟာ အောက်ပါအတိုင်း ပါဝင်သင့်ပါတယ်-
-
-```bash
--| assets
-  -| enemyShip.png
-  -| player.png
--| index.html
--| app.js
--| package.json
-```
-
-ဒီ folder ကို Visual Studio Code မှာ ဖွင့်ပါ။ သင့်မှာ Visual Studio Code, NPM နဲ့ Node တို့ပါဝင်တဲ့ Local Development Environment တစ်ခုရှိဖို့ လိုအပ်ပါတယ်။ သင့်ကွန်ပျူတာမှာ `npm` မရှိသေးရင် [ဒီမှာ](https://www.npmjs.com/get-npm) သင့်ရဲ့ setup ကို ပြုလုပ်ပါ။
-
-သင့် project ကို `your_work` folder မှာ စတင်ပါ-
-
-```bash
-cd your-work
-npm start
-```
-
-အထက်ပါသည် `http://localhost:5000` လိပ်စာမှာ HTTP Server တစ်ခုကို စတင်ပါမယ်။ Browser ကို ဖွင့်ပြီး အဲ့ဒီလိပ်စာကို ထည့်ပါ။ အခုတော့ Blank Page ဖြစ်နေပါတယ်၊ ဒါပေမယ့် အဲ့ဒါ ပြောင်းလဲလာပါမယ်။
-
-> မှတ်ချက်- Screen ပေါ်မှာ ပြောင်းလဲမှုများကို ကြည့်ဖို့ Browser ကို Refresh လုပ်ပါ။
-
-### Code ထည့်ပါ
-
-`your-work/app.js` မှာ လိုအပ်သော Code ကို ထည့်ပြီး အောက်ပါအရာများကို ဖြေရှင်းပါ-
-
-1. **Canvas** ကို အနက်ရောင်နောက်ခံနဲ့ ရေးဆွဲပါ
-   > အကြံပြုချက်- `/app.js` မှာ သင့်တော်တဲ့ TODO အောက်မှာ `ctx` element ကို အနက်ရောင် သတ်မှတ်ပြီး Top/Left Coordinates ကို 0,0 နဲ့ Canvas ရဲ့ Height နဲ့ Width ကို သတ်မှတ်ပါ။
-2. **Textures** ကို Load လုပ်ပါ
-   > အကြံပြုချက်- Player နဲ့ Enemy ပုံများကို `await loadTexture` ကို အသုံးပြုပြီး ပုံလမ်းကြောင်းကို Passing လုပ်ပါ။ အခုတော့ Screen ပေါ်မှာ မမြင်ရသေးပါဘူး!
-3. **ဟီးရို** ကို Screen ရဲ့ အောက်ခြေတစ်ဝက်မှာ အလယ်မှာ ရေးဆွဲပါ
-   > အကြံပြုချက်- `drawImage` API ကို အသုံးပြုပြီး heroImg ကို Screen ပေါ်မှာ ရေးဆွဲပါ၊ `canvas.width / 2 - 45` နဲ့ `canvas.height - canvas.height / 4)` ကို သတ်မှတ်ပါ။
-4. **5*5 မုဆိုးများ** ကို ရေးဆွဲပါ
-   > အကြံပြုချက်- အခုတော့ မုဆိုးများကို Screen ပေါ်မှာ ရေးဆွဲဖို့ Code ကို Uncomment လုပ်နိုင်ပါပြီ။ နောက်တစ်ဆင့်မှာ `createEnemies` function ကို သွားပြီး အဲ့ဒါကို တည်ဆောက်ပါ။
-
-   အရင်ဆုံး Constants များကို သတ်မှတ်ပါ-
-
-    ```javascript
-    const MONSTER_TOTAL = 5;
-    const MONSTER_WIDTH = MONSTER_TOTAL * 98;
-    const START_X = (canvas.width - MONSTER_WIDTH) / 2;
-    const STOP_X = START_X + MONSTER_WIDTH;
-    ```
-
-    ပြီးရင် မုဆိုးများ array ကို Screen ပေါ်မှာ ရေးဆွဲဖို့ Loop တစ်ခုကို ဖန်တီးပါ-
-
-    ```javascript
-    for (let x = START_X; x < STOP_X; x += 98) {
-        for (let y = 0; y < 50 * 5; y += 50) {
-          ctx.drawImage(enemyImg, x, y);
-        }
-      }
-    ```
-
-## ရလဒ်
-
-ပြီးဆုံးသော ရလဒ်သည် ဒီလိုပုံစံရှိသင့်ပါတယ်-
-
-![အနက်ရောင် Screen ဟီးရိုနဲ့ 5*5 မုဆိုးများ](../../../../translated_images/partI-solution.36c53b48c9ffae2a5e15496b23b604ba5393433e4bf91608a7a0a020eb7a2691.my.png)
-
-## ဖြေရှင်းချက်
-
-အရင်ဆုံး သင့်ကိုယ်တိုင် ဖြေရှင်းဖို့ ကြိုးစားပါ၊ ဒါပေမယ့် အကူအညီလိုအပ်ရင် [ဖြေရှင်းချက်](../../../../6-space-game/2-drawing-to-canvas/solution/app.js) ကို ကြည့်ပါ။
+အရင်ဆုံး ကိုယ်တိုင်ဖြေရှင်းကြည့်ပါ၊ ဒါပေမယ့် အကူအညီလိုအပ်ပါက [ဖြေရှင်းချက်](../../../../6-space-game/2-drawing-to-canvas/solution/app.js) ကို ကြည့်ပါ။  
 
 ---
 
-## 🚀 စိန်ခေါ်မှု
+## GitHub Copilot Agent စိန်ခေါ်မှု 🚀  
 
-သင် Canvas API ကို အသုံးပြုပြီး 2D ပုံစံများကို ရေးဆွဲဖို့ သင်ယူပြီးသားဖြစ်ပါတယ်။ [WebGL API](https://developer.mozilla.org/docs/Web/API/WebGL_API) ကို ကြည့်ပြီး 3D object တစ်ခုကို ရေးဆွဲကြည့်ပါ။
+Agent mode ကို အသုံးပြု၍ အောက်ပါ စိန်ခေါ်မှုကို ပြီးမြောက်စေပါ-  
 
-## မိန့်ခွန်းပြီးနောက် စစ်တမ်း
+**ဖော်ပြချက်**: သင်၏ အာကာသဂိမ်း canvas ကို Canvas API နည်းလမ်းများကို အသုံးပြု၍ အမြင်အာရုံအကျိုးသက်ရောက်မှုများနှင့် အပြန်အလှန် အစိတ်အပိုင်းများ ထည့်သွင်းပါ။  
 
-[မိန့်ခွန်းပြီးနောက် စစ်တမ်း](https://ff-quizzes.netlify.app/web/quiz/32)
+**အကြံပြုချက်**: `enhanced-canvas.html` ဟုခေါ်သော ဖိုင်အသစ်တစ်ခု ဖန်တီးပြီး နောက်ခံတွင် ကြယ်များကို အနုစိတ်လှုပ်ရှားစေသော canvas ကို ဖော်ပြပါ၊ သူရဲကောင်းရဲ့ ရေရှည်ဘားကို အရောင်ပြောင်းစေပြီး ရန်သူသင်္ဘောများကို အနည်းအကျဉ်းအမြန်နှုန်းဖြင့် အောက်သို့ ရွေ့စေပါ။ ကြယ်များကို အမှတ်တိုင်များနှင့် opacity ကို အသုံးပြု၍ ရေးဆွဲခြင်း၊ ရေရှည်ဘားကို ကျန်းမာရေးအဆင့်အလိုက် အရောင်ပြောင်းခြင်း (အစိမ်း > အဝါ > အနီ)၊ ရန်သူသင်္ဘောများကို မတူညီသောအမြန်နှုန်းဖြင့် မျက်နှာပြင်အောက်သို့ ရွေ့ခြင်းတို့ကို JavaScript ကုဒ်ဖြင့် အကောင်အထည်ဖော်ပါ။  
 
-## ပြန်လည်သုံးသပ်ခြင်းနှင့် ကိုယ်တိုင်လေ့လာခြင်း
+[agent mode](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) အကြောင်းပိုမိုလေ့လာရန် ဒီမှာ ကြည့်ပါ။  
 
-Canvas API အကြောင်းပိုမိုလေ့လာဖို့ [ဒီမှာဖတ်ပါ](https://developer.mozilla.org/docs/Web/API/Canvas_API)။
+## 🚀 စိန်ခေါ်မှု  
 
-## အလုပ်ပေးစာ
+2D အာရုံစိုက်ထားသော Canvas API ဖြင့် ရေးဆွဲခြင်းကို သင်လေ့လာပြီးဖြစ်သည်။ [WebGL API](https://developer.mozilla.org/docs/Web/API/WebGL_API) ကို ကြည့်ပြီး 3D အရာဝတ္ထုတစ်ခုကို ရေးဆွဲကြည့်ပါ။  
 
-[Canvas API ကို စမ်းသပ်ပါ](assignment.md)
+## Post-Lecture Quiz  
+
+[Post-lecture quiz](https://ff-quizzes.netlify.app/web/quiz/32)  
+
+## ပြန်လည်သုံးသပ်ခြင်းနှင့် ကိုယ်တိုင်လေ့လာခြင်း  
+
+Canvas API အကြောင်းပိုမိုလေ့လာရန် [ဖတ်ရှုပါ](https://developer.mozilla.org/docs/Web/API/Canvas_API)။  
+
+### ⚡ **နောက် ၅ မိနစ်အတွင်း သင်လုပ်နိုင်သောအရာများ**  
+- [ ] browser console ကို ဖွင့်ပြီး `document.createElement('canvas')` ဖြင့် canvas element တစ်ခု ဖန်တီးပါ  
+- [ ] canvas context တွင် `fillRect()` ကို အသုံးပြု၍ စတုရန်းတစ်ခု ရေးဆွဲကြည့်ပါ  
+- [ ] `fillStyle` property ကို အသုံးပြု၍ အရောင်များကို စမ်းသပ်ကြည့်ပါ  
+- [ ] `arc()` နည်းလမ်းကို အသုံးပြု၍ ရိုးရှင်းသော စက်ဝိုင်းတစ်ခု ရေးဆွဲပါ  
+
+### 🎯 **နောက် ၁ နာရီအတွင်း သင်အောင်မြင်နိုင်သောအရာများ**  
+- [ ] post-lesson quiz ကို ပြီးမြောက်စေပြီး canvas အခြေခံများကို နားလည်ပါ  
+- [ ] အမျိုးမျိုးသော ပုံသဏ္ဍာန်များနှင့် အရောင်များပါဝင်သော canvas ရေးဆွဲခြင်း application တစ်ခု ဖန်တီးပါ  
+- [ ] သင်၏ဂိမ်းအတွက် ပုံရိပ်တင်ခြင်းနှင့် sprite ပြသခြင်းကို အကောင်အထည်ဖော်ပါ  
+- [ ] canvas ပေါ်တွင် အရာဝတ္ထုများကို ရွေ့လျားစေသော ရိုးရှင်းသော animation တစ်ခု ဖန်တီးပါ  
+- [ ] အရွယ်အစားပြောင်းခြင်း၊ လှည့်ခြင်းနှင့် အနေအထားပြောင်းခြင်းကဲ့သို့သော canvas ပြောင်းလဲမှုများကို လေ့ကျင့်ပါ  
+
+### 📅 **သင်၏ တစ်ပတ်တာ Canvas ခရီး**  
+- [ ] polished graphics နှင့် sprite animations ပါဝင်သော အာကာသဂိမ်းကို ပြီးမြောက်စေပါ  
+- [ ] gradients, patterns, compositing ကဲ့သို့သော canvas နည်းလမ်းများကို ကျွမ်းကျင်ပါ  
+- [ ] canvas ကို အသုံးပြု၍ အပြန်အလှန်အမြင်အာရုံဖော်ပြချက်များ ဖန်တီးပါ  
+- [ ] ချောမွေ့သော စွမ်းဆောင်ရည်အတွက် canvas optimization နည်းလမ်းများကို လေ့လာပါ  
+- [ ] အမျိုးမျိုးသော tools များပါဝင်သော ရေးဆွဲခြင်း သို့မဟုတ် ပန်းချီ application တစ်ခု ဖန်တီးပါ  
+- [ ] canvas ကို အသုံးပြု၍ ဖန်တီးမှုအနုပညာပုံစံများနှင့် generative art ကို စူးစမ်းပါ  
+
+### 🌟 **သင်၏ တစ်လတာ ဂရပ်ဖစ်ကျွမ်းကျင်မှု**  
+- [ ] Canvas 2D နှင့် WebGL ကို အသုံးပြု၍ ရှုပ်ထွေးသော အမြင်အာရုံ application များ ဖန်တီးပါ  
+- [ ] ဂရပ်ဖစ် programming အယူအဆများနှင့် shader အခြေခံများကို လေ့လာပါ  
+- [ ] open source ဂရပ်ဖစ် library များနှင့် visualization tools များတွင် ပါဝင်ပါ  
+- [ ] ဂရပ်ဖစ်-intensive application များအတွက် စွမ်းဆောင်ရည် optimization ကို ကျွမ်းကျင်ပါ  
+- [ ] canvas programming နှင့် computer graphics အကြောင်း ပညာပေးအကြောင်းအရာများ ဖန်တီးပါ  
+- [ ] အခြားသူများကို အမြင်အာရုံအတွေ့အကြုံများ ဖန်တီးနိုင်စေရန် ကူညီသော ဂရပ်ဖစ် programming ကျွမ်းကျင်သူ ဖြစ်ပါ  
+
+## 🎯 သင်၏ Canvas Graphics ကျွမ်းကျင်မှု အချိန်ဇယား  
+
+```mermaid
+timeline
+    title Canvas API Learning Progression
+    
+    section Canvas Fundamentals (15 minutes)
+        Basic Operations: Element reference
+                        : 2D context access
+                        : Coordinate system
+                        : Simple shape drawing
+        
+    section Drawing Techniques (20 minutes)
+        Graphics Primitives: Rectangles and circles
+                           : Colors and styles
+                           : Text rendering
+                           : Path operations
+        
+    section Image Handling (25 minutes)
+        Asset Management: Image object creation
+                        : Async loading patterns
+                        : Error handling
+                        : Performance optimization
+        
+    section Game Graphics (30 minutes)
+        Sprite Rendering: Positioning algorithms
+                        : Formation calculations
+                        : Scene composition
+                        : Frame rendering
+        
+    section Advanced Techniques (40 minutes)
+        Visual Effects: Transformations
+                      : Animations
+                      : Layering
+                      : State management
+        
+    section Performance (35 minutes)
+        Optimization: Efficient drawing
+                    : Memory management
+                    : Frame rate control
+                    : Asset caching
+        
+    section Professional Skills (1 week)
+        Production Graphics: WebGL integration
+                           : Canvas libraries
+                           : Game engines
+                           : Cross-platform considerations
+        
+    section Advanced Graphics (1 month)
+        Specialized Applications: Data visualization
+                                : Interactive art
+                                : Real-time effects
+                                : 3D graphics
+```
+  
+### 🛠️ သင်၏ Canvas Graphics Toolkit အကျဉ်းချုပ်  
+
+ဒီသင်ခန်းစာကို ပြီးမြောက်ပြီးနောက် သင်မှာ-  
+- **Canvas API ကျွမ်းကျင်မှု**: 2D ဂရပ်ဖစ် programming ကို အပြည့်အဝ နားလည်မှု  
+- **ကိုဩဒိနိတ် သင်္ချာ**: တိကျသော အနေအထားနှင့် layout အယ်လဂိုရီသမ်များ  
+- **Asset စီမံခန့်ခွဲမှု**: ပုံရိပ်တင်ခြင်းနှင့် အမှားကိုင်တွယ်မှု  
+- **Rendering Pipeline**: scene composition အတွက် စနစ်တကျ approach  
+- **ဂိမ်းဂရပ်ဖစ်**: sprite အနေအထားနှင့် ဖွဲ့စည်းမှု calculation  
+- **Async Programming**: ခေတ်မီ JavaScript ပုံစံများဖြင့် ချောမွေ့သော စွမ်းဆောင်ရည်  
+- **Visual Programming**: သင်္ချာအယူအဆများကို မျက်နှာပြင်ဂရပ်ဖစ်များသို့ ပြောင်းလဲခြင်း  
+
+**အမှန်တကယ်အသုံးဝင်သော အရာများ**: သင်၏ Canvas ကျွမ်းကျင်မှုများသည် တိုက်ရိုက်အသုံးဝင်သည်-  
+- **Data Visualization**: ဇယားများ၊ အရေအတွက်များနှင့် အပြန်အလှန် dashboard များ  
+- **ဂိမ်းဖွံ့ဖြိုးမှု**: 2D ဂိမ်းများ၊ simulation များနှင့် အပြန်အလှန် အတွေ့အကြုံများ  
+- **ဒစ်ဂျစ်တယ်အနုပညာ**: ဖန်တီးမှု coding နှင့် generative art project များ  
+- **UI/UX ဒီဇိုင်း**: စိတ်ကြိုက်ဂရပ်ဖစ်များနှင့် အပြန်အလှန်အစိတ်အပိုင်းများ  
+- **ပညာရေးဆော့ဖ်ဝဲ**: အမြင်အာရုံသင်ကြားမှု tools များနှင့် simulation များ  
+- **ဝက်ဘ်အပလီကေးရှင်းများ**: ဒိုင်နမစ်ဂရပ်ဖစ်များနှင့် အချိန်နှင့်တပြေးညီ အမြင်အာရုံဖော်ပြချက်များ  
+
+**ပရော်ဖက်ရှင်နယ်ကျွမ်းကျင်မှုများရရှိသည်**: သင်အခု-  
+- **ဖန်တီးနိုင်သည်**: အပြင်ပ library များမပါဘဲ စိတ်ကြိုက်ဂရပ်ဖစ်ဖြေရှင်းချက်များ  
+- **Optimize**: ချောမွေ့သော အသုံးပြုသူအတွေ့အကြုံအတွက် rendering စွမ်းဆောင်ရည်  
+- **Debug**: browser developer tools ကို အသုံးပြု၍ ရှုပ်ထွေးသော visual ပြဿနာများ  
+- **Design**: သင်္ချာအခြေခံများကို အသုံးပြု၍ scalable graphics system များ  
+- **Integrate**: Canvas graphics ကို ခေတ်မီ web application framework များနှင့်  
+
+**သင်ကျွမ်းကျင်ခဲ့သော Canvas API နည်းလမ်းများ**:  
+- **Element စီမံခန့်ခွဲမှု**: getElementById, getContext  
+- **ရေးဆွဲလုပ်ဆောင်မှုများ**: fillRect, drawImage, fillStyle  
+- **Asset တင်ခြင်း**: Image objects, Promise patterns  
+- **သင်္ချာအနေအထား**: ကိုဩဒိနိတ် calculation, formation algorithms  
+
+**နောက်တစ်ဆင့်**: သင် animation, အသုံးပြုသူအပြန်အလှန်, collision detection ထည့်သွင်းရန် သို့မဟုတ် WebGL ကို စူးစမ်းရန် အဆင်သင့်ဖြစ်ပါပြီ!  
+
+🌟 **Achievement Unlocked**: သင်သည် အခြေခံ Canvas API နည်းလမ်းများကို အသုံးပြု၍ ပြည့်စုံသော ဂိမ်း rendering system တစ်ခုကို ဖန်တီးပြီးဖြစ်သည်!  
+
+## လုပ်ငန်းတာဝန်  
+
+[Canvas API နှင့် ဆော့ကစားပါ](assignment.md)  
 
 ---
 
 **အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါရှိနိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရားရှိသော ရင်းမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူက ဘာသာပြန်မှု ဝန်ဆောင်မှုကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်ခြင်းတွင် အမှားများ သို့မဟုတ် မမှန်ကန်မှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းဘာသာစကားဖြင့် ရေးသားထားသော စာရွက်စာတမ်းကို အာဏာတရားရှိသော အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအမှားများ သို့မဟုတ် အနားလွဲမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။

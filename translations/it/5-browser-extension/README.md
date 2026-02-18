@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b121a279a6ab39878491f3e572673515",
-  "translation_date": "2025-08-25T23:27:15+00:00",
-  "source_file": "5-browser-extension/README.md",
-  "language_code": "it"
-}
--->
 # Creare un'estensione per browser
 
 Creare estensioni per browser è un modo divertente e interessante per riflettere sulle prestazioni delle tue applicazioni mentre sviluppi un tipo diverso di risorsa web. Questo modulo include lezioni su come funzionano i browser, come distribuire un'estensione per browser, come creare un modulo, chiamare un'API, utilizzare l'archiviazione locale e come valutare e migliorare le prestazioni del tuo sito web.
@@ -23,7 +14,7 @@ Questa estensione può essere utilizzata ad hoc da un utente una volta che una c
 
 ### Crediti
 
-![un'estensione per browser verde](../../../translated_images/extension-screenshot.0e7f5bfa110e92e3875e1bc9405edd45a3d2e02963e48900adb91926a62a5807.it.png)
+![un'estensione per browser verde](../../../translated_images/it/extension-screenshot.0e7f5bfa110e92e3.webp)
 
 ## Crediti
 

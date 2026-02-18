@@ -1,88 +1,145 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1b0aeccb600f83c603cd70cb42df594d",
-  "translation_date": "2025-08-29T11:38:23+00:00",
-  "source_file": "4-typing-game/typing-game/README.md",
-  "language_code": "ro"
-}
--->
 # Crearea unui joc folosind evenimente
 
-## Chestionar înainte de curs
+Te-ai întrebat vreodată cum știu site-urile când apeși un buton sau tastezi într-o casetă de text? Asta este magia programării bazate pe evenimente! Ce metodă mai bună de a învăța această abilitate esențială decât construind ceva util - un joc de viteză la tastare care reacționează la fiecare apăsare de tastă pe care o faci.
 
-[Chestionar înainte de curs](https://ff-quizzes.netlify.app/web/quiz/21)
+Vei vedea cu ochii tăi cum browserele web „vorbesc” cu codul tău JavaScript. De fiecare dată când apeși, tastezi sau muți mouse-ul, browserul trimite mesaje mici (le numim evenimente) către codul tău, iar tu decizi cum să răspunzi!
 
-## Programare bazată pe evenimente
+Până la finalul acestui material, vei fi construit un joc real de tastare care urmărește viteza și acuratețea. Mai important, vei înțelege conceptele fundamentale care stau la baza fiecărui site interactiv pe care l-ai folosit vreodată. Hai să începem!
 
-Când creăm o aplicație bazată pe browser, oferim o interfață grafică pentru utilizator (GUI) pe care acesta o poate folosi pentru a interacționa cu ceea ce am construit. Cea mai comună modalitate de a interacționa cu browserul este prin clicuri și tastare în diverse elemente. Provocarea noastră ca dezvoltatori este că nu știm când utilizatorul va efectua aceste operațiuni!
+## Chestionar pre-lecture
 
-[Programarea bazată pe evenimente](https://en.wikipedia.org/wiki/Event-driven_programming) este denumirea tipului de programare pe care trebuie să o folosim pentru a crea GUI-ul nostru. Dacă analizăm puțin această expresie, vedem că termenul central este **eveniment**. [Eveniment](https://www.merriam-webster.com/dictionary/event), conform Merriam-Webster, este definit ca „ceva care se întâmplă”. Aceasta descrie perfect situația noastră. Știm că ceva se va întâmpla și dorim să executăm un cod ca răspuns, dar nu știm când va avea loc.
+[Pre-lecture quiz](https://ff-quizzes.netlify.app/web/quiz/21)
 
-Modalitatea prin care marcăm o secțiune de cod pe care dorim să o executăm este prin crearea unei funcții. Când ne gândim la [programarea procedurală](https://en.wikipedia.org/wiki/Procedural_programming), funcțiile sunt apelate într-o ordine specifică. Același lucru este valabil și pentru programarea bazată pe evenimente. Diferența constă în **modul** în care funcțiile vor fi apelate.
+## Programarea bazată pe evenimente
 
-Pentru a gestiona evenimentele (clicuri pe butoane, tastare etc.), înregistrăm **ascultători de evenimente**. Un ascultător de evenimente este o funcție care „ascultă” un eveniment și se execută ca răspuns. Ascultătorii de evenimente pot actualiza interfața grafică, pot face apeluri către server sau orice altceva este necesar ca răspuns la acțiunea utilizatorului. Adăugăm un ascultător de evenimente folosind [addEventListener](https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener) și furnizând o funcție de executat.
+Gândește-te la aplicația sau site-ul tău preferat - ce îl face să se simtă viu și receptiv? Totul ține de modul în care reacționează la ceea ce faci! Fiecare apăsare, clic, glisare sau apăsare de tastă creează ceea ce numim un „eveniment”, și aici se întâmplă adevărata magie a dezvoltării web.
 
-> **NOTE:** Merită menționat că există numeroase modalități de a crea ascultători de evenimente. Poți folosi funcții anonime sau poți crea funcții denumite. Poți utiliza diverse scurtături, cum ar fi setarea proprietății `click` sau utilizarea `addEventListener`. În exercițiul nostru, ne vom concentra pe `addEventListener` și funcții anonime, deoarece aceasta este probabil cea mai comună tehnică folosită de dezvoltatorii web. Este, de asemenea, cea mai flexibilă, deoarece `addEventListener` funcționează pentru toate evenimentele, iar numele evenimentului poate fi furnizat ca parametru.
+Iată ce face programarea pentru web atât de interesantă: niciodată nu știm când cineva va face clic pe un buton sau va începe să tasteze într-o casetă de text. Poate face clic imediat, poate aștepta cinci minute sau poate niciodată să nu facă clic! Această imprevizibilitate înseamnă că trebuie să ne gândim diferit la modul în care scriem codul.
+
+În loc să scriem cod care rulează de sus în jos ca o rețetă, scriem cod care așteaptă cu răbdare să se întâmple ceva. Este similar cu modul în care operatorii de telegraf din anii 1800 stăteau lângă mașinile lor, gata să răspundă în momentul în care un mesaj trecea prin fir.
+
+Deci, ce este exact un „eveniment”? Simplu spus, este ceva care se întâmplă! Când apeși un buton - asta este un eveniment. Când tastezi o literă - asta este un eveniment. Când muți mouse-ul - asta este un alt eveniment.
+
+Programarea bazată pe evenimente ne permite să configurăm codul pentru a asculta și răspunde. Creăm funcții speciale numite **ascultători de evenimente** care așteaptă cu răbdare ca lucruri specifice să se întâmple, apoi sar în acțiune când se întâmplă.
+
+Gândește-te la ascultătorii de evenimente ca la un sonerie pentru codul tău. Îl configurezi pe sonerie (`addEventListener()`), îi spui la ce sunet să asculte (cum ar fi un 'click' sau 'keypress'), apoi specifici ce ar trebui să se întâmple când cineva o sună (funcția ta personalizată).
+
+**Iată cum funcționează ascultătorii de evenimente:**
+- **Ascultă** acțiuni specifice ale utilizatorului precum clicuri, apăsări de tastă sau mișcări ale mouse-ului
+- **Execută** codul tău personalizat când apare evenimentul specificat
+- **Răspunde** imediat la interacțiunile utilizatorului, creând o experiență fluentă
+- **Gestionează** multiple evenimente pe același element folosind ascultători diferiți
+
+> **NOTE:** Merită subliniat că există numeroase moduri de a crea ascultători de evenimente. Poți folosi funcții anonime sau poți crea unele cu nume. Poți folosi diverse scurtături, cum ar fi setarea proprietății `click`, sau utilizarea `addEventListener()`. În exercițiul nostru ne vom concentra pe `addEventListener()` și funcții anonime, deoarece probabil este cea mai comună tehnică folosită de dezvoltatorii web. Este și cea mai flexibilă, deoarece `addEventListener()` funcționează pentru toate evenimentele, iar numele evenimentului poate fi furnizat ca parametru.
 
 ### Evenimente comune
 
-Există [zeci de evenimente](https://developer.mozilla.org/docs/Web/Events) disponibile pentru a le asculta atunci când creezi o aplicație. Practic, orice face un utilizator pe o pagină declanșează un eveniment, ceea ce îți oferă multă putere pentru a te asigura că utilizatorul are experiența dorită. Din fericire, de obicei vei avea nevoie doar de câteva evenimente. Iată câteva dintre cele mai comune (inclusiv cele două pe care le vom folosi pentru a crea jocul nostru):
+Deși browserele web oferă zeci de evenimente diferite pe care le poți asculta, majoritatea aplicațiilor interactive se bazează doar pe câteva evenimente esențiale. Înțelegerea acestor evenimente de bază îți va oferi fundația pentru a construi interacțiuni sofisticate cu utilizatorul.
 
-- [click](https://developer.mozilla.org/docs/Web/API/Element/click_event): Utilizatorul a dat clic pe ceva, de obicei un buton sau un hyperlink
-- [contextmenu](https://developer.mozilla.org/docs/Web/API/Element/contextmenu_event): Utilizatorul a dat clic pe butonul din dreapta al mouse-ului
-- [select](https://developer.mozilla.org/docs/Web/API/Element/select_event): Utilizatorul a selectat un text
-- [input](https://developer.mozilla.org/docs/Web/API/Element/input_event): Utilizatorul a introdus un text
+Există [zeci de evenimente](https://developer.mozilla.org/docs/Web/Events) disponibile pentru a fi ascultate când creezi o aplicație. Practic, orice face un utilizator pe o pagină declanșează un eveniment, ceea ce îți oferă multă putere pentru a te asigura că obțin experiența dorită. Din fericire, de obicei vei avea nevoie doar de un număr mic de evenimente. Iată câteva comune (inclusiv cele două pe care le vom folosi la crearea jocului nostru):
+
+| Eveniment | Descriere | Cazuri comune de utilizare |
+|-----------|-----------|----------------------------|
+| `click` | Utilizatorul a apăsat pe ceva | Butoane, linkuri, elemente interactive |
+| `contextmenu` | Utilizatorul a apăsat butonul drept al mouse-ului | Meniuri de clic dreapta personalizate |
+| `select` | Utilizatorul a evidențiat text | Editare text, operațiuni de copiere |
+| `input` | Utilizatorul a introdus text | Validarea formularelor, căutare în timp real |
+
+**Înțelegerea acestor tipuri de evenimente:**
+- **Se declanșează** când utilizatorii interacționează cu elemente specifice din pagina ta
+- **Oferă** informații detaliate despre acțiunea utilizatorului prin obiectele eveniment
+- **Îți permit să creezi** aplicații web interactive și receptive
+- **Funcționează** consecvent pe diferite browsere și dispozitive
 
 ## Crearea jocului
 
-Vom crea un joc pentru a explora modul în care funcționează evenimentele în JavaScript. Jocul nostru va testa abilitățile de tastare ale unui jucător, una dintre cele mai subestimate abilități pe care toți dezvoltatorii ar trebui să le aibă. Cu toții ar trebui să ne exersăm tastarea! Fluxul general al jocului va arăta astfel:
+Acum că înțelegi cum funcționează evenimentele, hai să punem acea cunoștință în practică construind ceva util. Vom crea un joc de viteză la tastare care demonstrează gestionarea evenimentelor, ajutându-te să dezvolți o abilitate importantă de dezvoltator.
 
-- Jucătorul dă clic pe butonul de start și i se afișează un citat de tastat
-- Jucătorul tastează citatul cât de repede poate într-o casetă de text
-  - Pe măsură ce fiecare cuvânt este completat, următorul este evidențiat
-  - Dacă jucătorul face o greșeală, caseta de text devine roșie
-  - Când jucătorul finalizează citatul, se afișează un mesaj de succes cu timpul scurs
+Vom crea un joc pentru a explora cum funcționează evenimentele în JavaScript. Jocul nostru va testa abilitățile de tastare ale unui jucător, una dintre cele mai subestimate abilități pe care toți dezvoltatorii ar trebui să le aibă. Un fapt amuzant: aspectul tastaturii QWERTY pe care îl folosim azi a fost conceput de fapt în anii 1870 pentru mașinile de scris - și abilitățile bune de tastare sunt încă la fel de valoroase pentru programatori astăzi! Fluxul general al jocului va arăta astfel:
 
-Să construim jocul și să învățăm despre evenimente!
+```mermaid
+flowchart TD
+    A[Jucătorul face clic pe Start] --> B[Apare un citat aleatoriu]
+    B --> C[Jucătorul scrie în câmpul de text]
+    C --> D{Cuvântul este complet?}
+    D -->|Da| E[Subliniază următorul cuvânt]
+    D -->|Nu| F{Corect până acum?}
+    F -->|Da| G[Păstrează stilul normal]
+    F -->|Nu| H[Afișează stilul de eroare]
+    E --> I{Citatul este complet?}
+    I -->|Nu| C
+    I -->|Da| J[Afișează mesaj de succes cu timpul]
+    G --> C
+    H --> C
+```
+**Iată cum va funcționa jocul nostru:**
+- **Pornește** când jucătorul apasă butonul de start și afișează un citat aleatoriu
+- **Urmărește** progresul tastării jucătorului cuvânt cu cuvânt în timp real
+- **Evidențiază** cuvântul curent pentru a ghida atenția jucătorului
+- **Oferă** feedback vizual imediat pentru erorile de tastare
+- **Calculează** și afișează timpul total când citatul este completat
+
+Hai să construim jocul nostru și să învățăm despre evenimente!
 
 ### Structura fișierelor
 
-Vom avea nevoie de trei fișiere: **index.html**, **script.js** și **style.css**. Să le configurăm pentru a ne ușura munca.
+Înainte să începem să scriem cod, haide să ne organizăm! Un structura curată a fișierelor încă de la început îți va economisi dureri de cap mai târziu și va face proiectul tău mai profesionist. 😊
 
-- Creează un folder nou pentru proiect deschizând o consolă sau o fereastră de terminal și rulând următoarea comandă:
+Vom păstra lucrurile simple cu doar trei fișiere: `index.html` pentru structura paginii, `script.js` pentru toată logica jocului, și `style.css` pentru a face totul să arate grozav. Acesta este trio-ul clasic ce alimentează majoritatea webului!
+
+**Creează un dosar nou pentru proiectul tău deschizând o consolă sau terminal și executând următoarea comandă:**
 
 ```bash
-# Linux or macOS
+# Linux sau macOS
 mkdir typing-game && cd typing-game
 
 # Windows
 md typing-game && cd typing-game
 ```
 
-- Deschide Visual Studio Code
+**Iată ce fac aceste comenzi:**
+- **Creează** un director nou numit `typing-game` pentru fișierele proiectului tău
+- **Navighează** automat în directorul nou creat
+- **Configurază** un spațiu de lucru curat pentru dezvoltarea jocului tău
+
+**Deschide Visual Studio Code:**
 
 ```bash
 code .
 ```
 
-- Adaugă trei fișiere în folderul din Visual Studio Code cu următoarele nume:
-  - index.html
-  - script.js
-  - style.css
+**Această comandă:**
+- **Pornește** Visual Studio Code în directorul curent
+- **Deschide** folderul proiectului tău în editor
+- **Oferă** acces la toate uneltele de dezvoltare de care ai nevoie
 
-## Crearea interfeței utilizator
+**Adaugă trei fișiere în dosar în Visual Studio Code cu următoarele nume:**
+- `index.html` - Conține structura și conținutul jocului tău
+- `script.js` - Gestionează toată logica jocului și ascultătorii de evenimente
+- `style.css` - Definește aspectul vizual și stilizarea
 
-Dacă analizăm cerințele, știm că vom avea nevoie de câteva elemente pe pagina noastră HTML. Este ca o rețetă, unde avem nevoie de câteva ingrediente:
+## Crearea interfeței utilizatorului
 
-- Un loc pentru afișarea citatului pe care utilizatorul trebuie să-l tasteze
-- Un loc pentru afișarea mesajelor, cum ar fi un mesaj de succes
-- O casetă de text pentru tastare
-- Un buton de start
+Acum să construim scena unde se va desfășura toată acțiunea jocului! Gândește-te la asta ca la proiectarea panoului de control pentru o navă spațială - trebuie să ne asigurăm că tot ce au nevoie jucătorii noștri este exact acolo unde se așteaptă.
 
-Fiecare dintre acestea va avea nevoie de ID-uri pentru a putea lucra cu ele în JavaScript. Vom adăuga, de asemenea, referințe la fișierele CSS și JavaScript pe care le vom crea.
+Hai să vedem de ce are nevoie efectiv jocul nostru. Dacă ai juca un joc de tastare, ce ai vrea să vezi pe ecran? Iată ce vom avea nevoie:
 
-Creează un fișier nou numit **index.html**. Adaugă următorul cod HTML:
+| Element UI | Scop | Element HTML |
+|------------|------|--------------|
+| Afișaj Citat | Afișează textul de tastat | `<p>` cu `id="quote"` |
+| Zona de Mesaje | Afișează mesaje de stare și succes | `<p>` cu `id="message"` |
+| Câmp Text | Unde jucătorii tastează citatul | `<input>` cu `id="typed-value"` |
+| Buton Start | Pornește jocul | `<button>` cu `id="start"` |
+
+**Înțelegerea structurii UI:**
+- **Organizează** conținutul logic de sus în jos
+- **Atribuie** ID-uri unice elementelor pentru țintirea în JavaScript
+- **Oferă** o ierarhie vizuală clară pentru o experiență mai bună a utilizatorului
+- **Include** elemente HTML semantice pentru accesibilitate
+
+Fiecare dintre acestea va avea nevoie de ID-uri ca să putem lucra cu ele în JavaScript-ul nostru. Vom adăuga și referințe către fișierele CSS și JavaScript pe care urmează să le creăm.
+
+Creează un fișier nou numit `index.html`. Adaugă următorul HTML:
 
 ```html
 <!-- inside index.html -->
@@ -105,26 +162,52 @@ Creează un fișier nou numit **index.html**. Adaugă următorul cod HTML:
 </html>
 ```
 
+**Ce realizează această structură HTML:**
+- **Leagă** fișierul de stil CSS în `<head>` pentru stilizare
+- **Creează** un titlu clar și instrucțiuni pentru utilizatori
+- **Stabilește** paragrafe spațiu rezervat cu ID-uri specifice pentru conținut dinamic
+- **Include** un câmp de input cu atribute de accesibilitate
+- **Oferă** un buton de start pentru a lansa jocul
+- **Încarcă** fișierul JavaScript la final pentru performanță optimă
+
 ### Lansarea aplicației
 
-Este întotdeauna cel mai bine să dezvolți iterativ pentru a vedea cum arată lucrurile. Să lansăm aplicația. Există o extensie minunată pentru Visual Studio Code numită [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon) care va găzdui aplicația local și va reîmprospăta browserul de fiecare dată când salvezi.
+Testarea frecventă a aplicației în timpul dezvoltării te ajută să identifici problemele din timp și să vezi progresul în timp real. Live Server este un instrument de neprețuit care reîncarcă automat browserul ori de câte ori salvezi modificări, făcând dezvoltarea mult mai eficientă.
 
-- Instalează [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon) urmând linkul și făcând clic pe **Install**
-  - Browserul te va solicita să deschizi Visual Studio Code, iar apoi Visual Studio Code te va solicita să efectuezi instalarea
-  - Repornește Visual Studio Code dacă ți se cere
-- Odată instalat, în Visual Studio Code, apasă Ctrl-Shift-P (sau Cmd-Shift-P) pentru a deschide paleta de comenzi
-- Tastează **Live Server: Open with Live Server**
-  - Live Server va începe să găzduiască aplicația
-- Deschide un browser și navighează la **https://localhost:5500**
-- Acum ar trebui să vezi pagina pe care ai creat-o!
+Este întotdeauna cel mai bine să dezvolți iterativ pentru a vedea cum arată lucrurile. Hai să lansăm aplicația noastră. Există o extensie minunată pentru Visual Studio Code numită [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon) care va găzdui aplicația local și va reîmprospăta browserul de fiecare dată când salvezi.
 
-Să adăugăm funcționalitate.
+**Instalează [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon) urmând linkul și făcând clic pe Install:**
 
-## Adăugarea CSS-ului
+**Iată ce se întâmplă în timpul instalării:**
+- **Îți solicită** browserul să deschidă Visual Studio Code
+- **Te ghidează** prin procesul de instalare a extensiei
+- **Poate necesita** repornirea Visual Studio Code pentru a finaliza configurarea
 
-Cu HTML-ul creat, să adăugăm CSS-ul pentru stilizarea de bază. Trebuie să evidențiem cuvântul pe care jucătorul ar trebui să-l tasteze și să colorăm caseta de text dacă ceea ce a tastat este incorect. Vom face acest lucru cu două clase.
+**Odată instalat, în Visual Studio Code, apasă Ctrl-Shift-P (sau Cmd-Shift-P) pentru a deschide paleta de comenzi:**
 
-Creează un fișier nou numit **style.css** și adaugă următoarea sintaxă.
+**Înțelegerea paletei de comenzi:**
+- **Oferă** acces rapid la toate comenzile VS Code
+- **Caută** comenzile în timp ce tastezi
+- **Oferă** scurtături de tastatură pentru dezvoltare mai rapidă
+
+**Tastează „Live Server: Open with Live Server”:**
+
+**Ce face Live Server:**
+- **Pornește** un server local de dezvoltare pentru proiectul tău
+- **Reîncarcă automat** browserul când salvezi fișierele
+- **Servește** fișierele tale de pe o adresă URL locală (de obicei `localhost:5500`)
+
+**Deschide un browser și navighează la `https://localhost:5500`:**
+
+Ar trebui acum să vezi pagina pe care ai creat-o! Hai să adăugăm funcționalitate.
+
+## Adaugă CSS-ul
+
+Acum să facem lucrurile să arate bine! Feedback-ul vizual a fost crucial pentru interfețele de utilizator încă din primele zile ale calculatoarelor. În anii 1980, cercetătorii au descoperit că feedback-ul vizual imediat îmbunătățește dramatic performanța utilizatorului și reduce erorile. Asta este exact ce vom crea.
+
+Jocul nostru trebuie să fie clar ca lumina zilei în legătură cu ce se întâmplă. Jucătorii ar trebui să știe imediat ce cuvânt trebuie să tasteze și dacă greșesc, să vadă asta pe loc. Hai să creăm o stilizare simplă, dar eficientă:
+
+Creează un fișier nou numit `style.css` și adaugă următorul conținut.
 
 ```css
 /* inside style.css */
@@ -138,40 +221,60 @@ Creează un fișier nou numit **style.css** și adaugă următoarea sintaxă.
 }
 ```
 
-✅ Când vine vorba de CSS, poți să-ți aranjezi pagina așa cum îți place. Petrece puțin timp pentru a face pagina mai atractivă:
+**Înțelegerea acestor clase CSS:**
+- **Evidențiază** cuvântul curent cu un fundal galben pentru o ghidare vizuală clară
+- **Semnalizează** erorile de tastare cu o culoare de fundal coral deschis
+- **Oferă** feedback imediat fără a perturba fluxul de tastare al utilizatorului
+- **Folosește** culori contrastante pentru accesibilitate și comunicare vizuală clară
+
+✅ Când vine vorba de CSS poți aranja pagina cum vrei. Petrece puțin timp și fă pagina mai atractivă:
 
 - Alege un font diferit
-- Colorează anteturile
+- Colorează antetele
 - Redimensionează elementele
 
 ## JavaScript
 
-Cu interfața creată, este timpul să ne concentrăm pe JavaScript, care va oferi logica. Vom împărți acest proces în câțiva pași:
+Aici începe partea interesantă! 🎉 Avem structura HTML și stilizarea CSS, dar acum jocul nostru este ca o mașină frumoasă fără motor. JavaScript va fi acel motor - este ceea ce face totul să funcționeze și să răspundă la ceea ce fac jucătorii.
 
-- [Crearea constantelor](../../../../4-typing-game/typing-game)
-- [Ascultător de evenimente pentru a începe jocul](../../../../4-typing-game/typing-game)
-- [Ascultător de evenimente pentru tastare](../../../../4-typing-game/typing-game)
+Aici vei vedea creația ta prindând viață. Vom aborda pas cu pas ca să nu te simți copleșit:
 
-Dar mai întâi, creează un fișier nou numit **script.js**.
+| Pas | Scop | Ce vei învăța |
+|-----|------|---------------|
+| [Crearea constantelor](../../../../4-typing-game/typing-game) | Setarea citatelor și referințelor DOM | Managementul variabilelor și selecția DOM |
+| [Ascultător de eveniment pentru start joc](../../../../4-typing-game/typing-game) | Gestionarea inițierii jocului | Manipularea evenimentelor și actualizări UI |
+| [Ascultător de eveniment pentru tastare](../../../../4-typing-game/typing-game) | Procesarea inputului utilizatorului în timp real | Validarea inputului și feedback dinamic |
 
-### Adăugarea constantelor
+**Această abordare structurată te ajută să:**
+- **Organizezi** codul în secțiuni logice și gestionabile
+- **Construiești** funcționalitate treptat pentru depanare mai ușoară
+- **Înțelegi** cum funcționează împreună diferitele părți ale aplicației tale
+- **Creezi** modele reutilizabile pentru proiectele viitoare
 
-Vom avea nevoie de câteva elemente pentru a ne ușura programarea. Din nou, similar cu o rețetă, iată de ce avem nevoie:
+Dar mai întâi, creează un fișier nou numit `script.js`.
 
-- Un array cu lista tuturor citatelor
-- Un array gol pentru a stoca toate cuvintele din citatul curent
-- Un spațiu pentru a stoca indexul cuvântului pe care jucătorul îl tastează în prezent
-- Timpul la care jucătorul a dat clic pe start
+### Adaugă constantele
 
-De asemenea, vom dori referințe la elementele UI:
+Înainte să intrăm în acțiune, hai să adunăm toate resursele! Așa cum centrul de comandă NASA configurează toate sistemele lor de monitorizare înainte de lansare, este mult mai ușor când ai totul pregătit și gata de folosit. Ne salvează de căutările ulterioare și ajută la prevenirea greșelilor de tipar.
 
-- Caseta de text (**typed-value**)
-- Afișajul citatului (**quote**)
-- Mesajul (**message**)
+Iată ce trebuie să configurăm mai întâi:
+
+| Tip de date | Scop | Exemplu |
+| Array de citate | Stochează toate citatele posibile pentru joc | `['Quote 1', 'Quote 2', ...]` |
+| Array de cuvinte | Desparte citatul curent în cuvinte individuale | `['When', 'you', 'have', ...]` |
+| Index cuvânt | Urmărește care cuvânt scrie jucătorul | `0, 1, 2, 3...` |
+| Timp de început | Calculează timpul scurs pentru punctaj | `Date.now()` |
+
+**De asemenea, vom avea nevoie de referințe către elementele UI:**
+| Element | ID | Scop |
+|---------|----|---------|
+| Câmp text | `typed-value` | Unde scriu jucătorii |
+| Afișare citat | `quote` | Arată citatul de tastat |
+| Zonă mesaje | `message` | Afișează actualizări de stare |
 
 ```javascript
-// inside script.js
-// all of our quotes
+// în interiorul script.js
+// toate citatele noastre
 const quotes = [
     'When you have eliminated the impossible, whatever remains, however improbable, must be the truth.',
     'There is nothing more deceptive than an obvious fact.',
@@ -181,172 +284,320 @@ const quotes = [
     'Nothing clears up a case so much as stating it to another person.',
     'Education never ends, Watson. It is a series of lessons, with the greatest for the last.',
 ];
-// store the list of words and the index of the word the player is currently typing
+// stochează lista de cuvinte și indexul cuvântului pe care jucătorul îl tastează în prezent
 let words = [];
 let wordIndex = 0;
-// the starting time
+// timpul de început
 let startTime = Date.now();
-// page elements
+// elementele paginii
 const quoteElement = document.getElementById('quote');
 const messageElement = document.getElementById('message');
 const typedValueElement = document.getElementById('typed-value');
 ```
 
-✅ Adaugă mai multe citate în jocul tău
+**Descompunând ce realizează acest cod de configurare:**
+- **Stochează** un array cu citate Sherlock Holmes folosind `const` deoarece citatele nu se vor schimba
+- **Initializează** variabilele de urmărire cu `let` deoarece aceste valori se vor actualiza în timpul jocului
+- **Capturază** referințe către elementele DOM folosind `document.getElementById()` pentru acces eficient
+- **Configurează** baza pentru toată funcționalitatea jocului cu nume de variabile clare și descriptive
+- **Organizează** datele și elementele asociate logic pentru o mentenanță mai ușoară a codului
 
-> **NOTE:** Putem prelua elementele oricând dorim în cod folosind `document.getElementById`. Deoarece ne vom referi la aceste elemente în mod regulat, vom evita greșelile de tipar cu șiruri literale folosind constante. Framework-uri precum [Vue.js](https://vuejs.org/) sau [React](https://reactjs.org/) te pot ajuta să gestionezi mai bine centralizarea codului.
+✅ Mergi înainte și adaugă mai multe citate în jocul tău
 
-Petrece un minut pentru a urmări un videoclip despre utilizarea `const`, `let` și `var`.
+> 💡 **Sfat util**: Putem recupera elementele ori de câte ori vrem în cod folosind `document.getElementById()`. Deoarece vom face referire la aceste elemente frecvent, vom evita greșelile de scriere în șiruri literale folosind constante. Framework-uri precum [Vue.js](https://vuejs.org/) sau [React](https://reactjs.org/) te pot ajuta să gestionezi mai bine centralizarea codului tău.
+>
+**Iată de ce această abordare funcționează atât de bine:**
+- **Previne** erorile de ortografie când se face referire la elemente de mai multe ori
+- **Îmbunătățește** lizibilitatea codului cu nume constante descriptive
+- **Activează** suport mai bun al IDE-ului cu autocomplete și verificare de erori
+- **Facilitează** refactorizarea dacă ID-urile elementelor se schimbă ulterior
+
+Acordă-ți un minut să vizionezi un videoclip despre folosirea `const`, `let` și `var`
 
 [![Tipuri de variabile](https://img.youtube.com/vi/JNIXfGiDWM8/0.jpg)](https://youtube.com/watch?v=JNIXfGiDWM8 "Tipuri de variabile")
 
-> 🎥 Fă clic pe imaginea de mai sus pentru un videoclip despre variabile.
+> 🎥 Apasă pe imaginea de mai sus pentru un videoclip despre variabile.
 
-### Adăugarea logicii de start
+### Adaugă logica de start
 
-Pentru a începe jocul, jucătorul va da clic pe start. Desigur, nu știm când va da clic pe start. Aici intervine un [ascultător de evenimente](https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener). Un ascultător de evenimente ne va permite să „ascultăm” ceva care se întâmplă (un eveniment) și să executăm cod ca răspuns. În cazul nostru, dorim să executăm cod atunci când utilizatorul dă clic pe start.
+Aici totul prinde sens! 🚀 Ești pe cale să scrii primul tău adevărat event listener, iar senzația de a vedea codul răspunzând la un click pe buton este destul de satisfăcătoare.
 
-Când utilizatorul dă clic pe **start**, trebuie să selectăm un citat, să configurăm interfața utilizator și să configurăm urmărirea cuvântului curent și a timpului. Mai jos este codul JavaScript pe care trebuie să-l adaugi; îl discutăm imediat după blocul de script.
+Gândește-te: undeva, un jucător va apăsa butonul "Start", iar codul tău trebuie să fie pregătit pentru asta. Nu știm când o va face - imediat, sau după ce își ia o cafea - dar atunci când se întâmplă, jocul tău prinde viață.
+
+Când utilizatorul apasă `start`, trebuie să selectăm un citat, să configurăm interfața și să pornim urmărirea cuvântului curent și a timpului. Mai jos este JavaScript-ul pe care trebuie să îl adaugi; îl discutăm imediat după blocul de script.
 
 ```javascript
-// at the end of script.js
+// la sfârșitul script.js
 document.getElementById('start').addEventListener('click', () => {
-  // get a quote
+  // obține o citare
   const quoteIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[quoteIndex];
-  // Put the quote into an array of words
+  // Pune citatul într-un tablou de cuvinte
   words = quote.split(' ');
-  // reset the word index for tracking
+  // resetează indexul cuvântului pentru urmărire
   wordIndex = 0;
 
-  // UI updates
-  // Create an array of span elements so we can set a class
+  // Actualizări UI
+  // Creează un tablou de elemente span pentru a putea seta o clasă
   const spanWords = words.map(function(word) { return `<span>${word} </span>`});
-  // Convert into string and set as innerHTML on quote display
+  // Convertește într-un șir și setează ca innerHTML pe afișajul citatului
   quoteElement.innerHTML = spanWords.join('');
-  // Highlight the first word
+  // Evidențiază primul cuvânt
   quoteElement.childNodes[0].className = 'highlight';
-  // Clear any prior messages
+  // Șterge orice mesaje anterioare
   messageElement.innerText = '';
 
-  // Setup the textbox
-  // Clear the textbox
+  // Configurează caseta de text
+  // Golește caseta de text
   typedValueElement.value = '';
-  // set focus
+  // setează focusul
   typedValueElement.focus();
-  // set the event handler
+  // setează handlerul de eveniment
 
-  // Start the timer
+  // Pornește cronometrul
   startTime = new Date().getTime();
 });
 ```
 
-Să descompunem codul!
+**Să descompunem codul în secțiuni logice:**
 
-- Configurarea urmăririi cuvintelor
-  - Utilizarea [Math.floor](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/floor) și [Math.random](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/random) ne permite să selectăm aleatoriu un citat din array-ul `quotes`
-  - Convertim `quote` într-un array de `words` pentru a putea urmări cuvântul pe care jucătorul îl tastează în prezent
-  - `wordIndex` este setat la 0, deoarece jucătorul va începe cu primul cuvânt
-- Configurarea interfeței utilizator
-  - Creăm un array de `spanWords`, care conține fiecare cuvânt într-un element `span`
-    - Acest lucru ne va permite să evidențiem cuvântul pe afișaj
-  - `join` array-ul pentru a crea un șir pe care îl putem folosi pentru a actualiza `innerHTML` pe `quoteElement`
-    - Acest lucru va afișa citatul pentru jucător
-  - Setăm `className` al primului element `span` la `highlight` pentru a-l evidenția cu galben
-  - Curățăm `messageElement` setând `innerText` la `''`
-- Configurarea casetei de text
-  - Golim `value` curent pe `typedValueElement`
-  - Setăm `focus` pe `typedValueElement`
-- Pornim cronometrul apelând `getTime`
+**📊 Configurare urmărire cuvânt:**
+- **Selectează** un citat aleator folosind `Math.floor()` și `Math.random()` pentru varietate
+- **Convertește** citatul într-un array de cuvinte individuale folosind `split(' ')`
+- **Resetează** `wordIndex` la 0 deoarece jucătorii începe cu primul cuvânt
+- **Pregătește** starea jocului pentru un nou rând
 
-### Adăugarea logicii de tastare
+**🎨 Configurare UI și afișare:**
+- **Creează** un array de elemente `<span>`, înfășurând fiecare cuvânt pentru stilizare individuală
+- **Unește** elementele span într-un singur șir pentru actualizarea eficientă a DOM-ului
+- **Evidențiază** primul cuvânt adăugând clasa CSS `highlight`
+- **Curăță** orice mesaje anterioare pentru a oferi o tablă curată
 
-Pe măsură ce jucătorul tastează, se va declanșa un eveniment `input`. Acest ascultător de evenimente va verifica dacă jucătorul tastează corect cuvântul și va gestiona starea curentă a jocului. Revenind la **script.js**, adaugă următorul cod la final. Îl vom descompune ulterior.
+**⌨️ Pregătirea câmpului de text:**
+- **Șterge** orice text existent în câmpul de input
+- **Setează focusul** pe textbox astfel încât jucătorii să poată începe să scrie imediat
+- **Pregătește** aria de input pentru noua sesiune de joc
+
+**⏱️ Inițializare cronometru:**
+- **Capturează** timestamp-ul curent folosind `new Date().getTime()`
+- **Permite** calculul exact al vitezei de tastare și timpului de finalizare
+- **Pornește** urmărirea performanței pentru sesiunea de joc
+
+### Adaugă logica de tastare
+
+Aici abordăm inima jocului nostru! Nu te îngrijora dacă pare mult la început — vom parcurge fiecare bucățică, iar la final vei vedea cât de logic este totul.
+
+Ce construim aici este destul de sofisticat: de fiecare dată când cineva tastează o literă, codul nostru va verifica ce a tastat, îi va oferi feedback și va decide ce trebuie să se întâmple în continuare. Este similar cu modul în care primele procesoare de text precum WordStar din anii 70 ofereau feedback în timp real.
 
 ```javascript
-// at the end of script.js
+// la sfârșitul script.js
 typedValueElement.addEventListener('input', () => {
-  // Get the current word
+  // Obține cuvântul curent
   const currentWord = words[wordIndex];
-  // get the current value
+  // obține valoarea curentă
   const typedValue = typedValueElement.value;
 
   if (typedValue === currentWord && wordIndex === words.length - 1) {
-    // end of sentence
-    // Display success
+    // sfârșitul propoziției
+    // Afișează succesul
     const elapsedTime = new Date().getTime() - startTime;
     const message = `CONGRATULATIONS! You finished in ${elapsedTime / 1000} seconds.`;
     messageElement.innerText = message;
   } else if (typedValue.endsWith(' ') && typedValue.trim() === currentWord) {
-    // end of word
-    // clear the typedValueElement for the new word
+    // sfârșitul cuvântului
+    // șterge typedValueElement pentru cuvântul nou
     typedValueElement.value = '';
-    // move to the next word
+    // treci la următorul cuvânt
     wordIndex++;
-    // reset the class name for all elements in quote
+    // resetează numele clasei pentru toate elementele din citat
     for (const wordElement of quoteElement.childNodes) {
       wordElement.className = '';
     }
-    // highlight the new word
+    // evidențiază cuvântul nou
     quoteElement.childNodes[wordIndex].className = 'highlight';
   } else if (currentWord.startsWith(typedValue)) {
-    // currently correct
-    // highlight the next word
+    // corect în momentul actual
+    // evidențiază următorul cuvânt
     typedValueElement.className = '';
   } else {
-    // error state
+    // stare de eroare
     typedValueElement.className = 'error';
   }
 });
 ```
 
-Să descompunem codul! Începem prin a prelua cuvântul curent și valoarea tastată de jucător până acum. Apoi avem o logică în cascadă, unde verificăm dacă citatul este complet, cuvântul este complet, cuvântul este corect sau (în cele din urmă) dacă există o eroare.
+**Înțelegerea fluxului logic de tastare:**
 
-- Citatul este complet, indicat de faptul că `typedValue` este egal cu `currentWord`, iar `wordIndex` este egal cu lungimea `words` minus unu
-  - Calculăm `elapsedTime` scăzând `startTime` din timpul curent
-  - Împărțim `elapsedTime` la 1.000 pentru a converti din milisecunde în secunde
-  - Afișăm un mesaj de succes
-- Cuvântul este complet, indicat de faptul că `typedValue` se termină cu un spațiu (sfârșitul unui cuvânt) și `typedValue` este egal cu `currentWord`
-  - Setăm `value` pe `typedElement` la `''` pentru a permite tastarea următorului cuvânt
-  - Incrementăm `wordIndex` pentru a trece la următorul cuvânt
-  - Parcurgem toți `childNodes` ai `quoteElement` pentru a seta `className` la `''` pentru a reveni la afișajul implicit
-  - Setăm `className` al cuvântului curent la `highlight` pentru a-l marca drept următorul cuvânt de tastat
-- Cuvântul este tastat corect (dar nu complet), indicat de faptul că `currentWord` începe cu `typedValue`
-  - Ne asigurăm că `typedValueElement` este afișat ca implicit prin ștergerea `className`
-- Dacă am ajuns până aici, avem o eroare
-  - Setăm `className` pe `typedValueElement` la `error`
+Această funcție folosește o abordare tip cascadă, verificând condițiile de la cele mai specifice la cele mai generale. Să descompunem fiecare scenariu:
 
-## Testează aplicația
+```mermaid
+flowchart TD
+    A[Jucătorul tastează caracter] --> B[Obține cuvântul curent și valoarea tastată]
+    B --> C{Ghilimea completă?}
+    C -->|Da| D[Arată mesaj de completare cu timpul]
+    C -->|Nu| E{Cuvântul complet cu spațiu?}
+    E -->|Da| F[Șterge inputul, trece la următorul cuvânt, actualizează evidențierea]
+    E -->|Nu| G{Tastarea corectă până acum?}
+    G -->|Da| H[Elimină stilizarea erorii]
+    G -->|Nu| I[Arată stilizarea erorii]
+```
+**🏁 Citat complet (Scenariul 1):**
+- **Verifică** dacă valoarea tastată corespunde cuvântului curent ȘI că suntem la ultimul cuvânt
+- **Calculează** timpul scurs scăzând timpul de start din timpul curent
+- **Convertește** milisecundele în secunde prin împărțire la 1.000
+- **Afișează** un mesaj de felicitare cu timpul de finalizare
 
-Ai ajuns la final! Ultimul pas este să te asiguri că aplicația funcționează. Încearcă! Nu-ți face griji dacă apar erori; **toți dezvoltatorii** au erori. Examinează mesajele și depanează după cum este necesar.
+**✅ Cuvânt complet (Scenariul 2):**
+- **Detectează** finalizarea cuvântului când inputul se termină cu spațiu
+- **Validează** că inputul tăiat se potrivește exact cu cuvântul curent
+- **Șterge** câmpul de input pentru cuvântul următor
+- **Trece** la cuvântul următor incrementând `wordIndex`
+- **Actualizează** evidențierea vizuală eliminând toate clasele și evidențiind noul cuvânt
 
-Dă clic pe **start** și începe să tastezi! Ar trebui să arate puțin ca animația pe care am văzut-o înainte.
+**📝 Tastare în curs (Scenariul 3):**
+- **Verifică** că cuvântul curent începe cu ceea ce s-a tastat până acum
+- **Elimină** orice stil de eroare pentru a arăta că inputul este corect
+- **Permite** continuarea tastării fără întrerupere
+
+**❌ Stare de eroare (Scenariul 4):**
+- **Se declanșează** când textul tastat nu coincide cu începutul cuvântului așteptat
+- **Aplică** clasa CSS de eroare pentru a oferi feedback vizual imediat
+- **Ajută** jucătorii să identifice rapid și să corecteze greșelile
+
+## Testează aplicația ta
+
+Privește ce ai realizat! 🎉 Ai construit un joc de tastare funcțional de la zero folosind programare bazată pe evenimente. Ia-ți un moment să apreciezi asta - nu e o realizare mică!
+
+Acum urmează faza de testare! Va funcționa așa cum te aștepți? Ai uitat ceva? Ei bine, dacă ceva nu merge perfect din prima, este complet normal. Chiar și dezvoltatorii cu experiență găsesc erori în codul lor frecvent. Este parte din procesul de dezvoltare!
+
+Apasă pe `start` și începe să tastezi! Ar trebui să semene puțin cu animația pe care am văzut-o anterior.
 
 ![Animație a jocului în acțiune](../../../../4-typing-game/images/demo.gif)
 
+**Ce să testezi în aplicația ta:**
+- **Verifică** dacă apăsarea pe Start afișează un citat aleator
+- **Confirmă** că tastarea evidențiază corect cuvântul curent
+- **Verifică** dacă apar stilurile de eroare la tastarea greșită
+- **Asigură** că finalizarea cuvintelor avansează evidențierea corect
+- **Testează** dacă terminarea citatului afișează mesajul de finalizare cu timpul
+
+**Sfaturi comune pentru depanare:**
+- **Verifică** consola browserului (F12) pentru erori JavaScript
+- **Confirmă** că toate numele fișierelor sunt exacte (sensitive la majuscule)
+- **Asigură-te** că Live Server rulează și se actualizează corect
+- **Testează** diferite citate pentru a verifica selecția aleatorie
+
 ---
+
+## Provocarea Agent GitHub Copilot 🎮
+
+Folosește modul Agent pentru a rezolva următoarea provocare:
+
+**Descriere:** Extinde jocul de tastare implementând un sistem de dificultate care să ajusteze jocul în funcție de performanța jucătorului. Această provocare te va ajuta să exersezi gestionarea avansată a evenimentelor, analiza datelor și actualizările dinamice UI.
+
+**Prompt:** Creează un sistem de ajustare a dificultății pentru jocul de tastare care:
+1. Monitorizează viteza de tastare a jucătorului (cuvinte pe minut) și procentajul de acuratețe
+2. Se ajustează automat pe trei niveluri de dificultate: Ușor (citate simple), Mediu (citatele curente), Greu (citate complexe cu punctuație)
+3. Afișează nivelul de dificultate curent și statisticile jucătorului în UI
+4. Implementează un contor de serii care crește dificultatea după 3 performanțe bune consecutiv
+5. Adaugă feedback vizual (culori, animații) pentru a indica schimbările de dificultate
+
+Adaugă elementele HTML necesare, stiluri CSS și funcțiile JavaScript pentru a implementa această caracteristică. Include gestionarea adecvată a erorilor și asigură-te că jocul rămâne accesibil cu etichete ARIA potrivite.
+
+Află mai multe despre [modul agent](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) aici.
 
 ## 🚀 Provocare
 
-Adaugă mai multă funcționalitate
+Ești gata să duci jocul tău de tastare la nivelul următor? Încearcă să implementezi aceste funcții avansate pentru a aprofunda înțelegerea manipulării evenimentelor și a DOM-ului:
 
-- Dezactivează ascultătorul de evenimente `input` la finalizare și reactivează-l când butonul este apăsat
-- Dezactivează caseta de text când jucătorul finalizează citatul
-- Afișează o casetă de dialog modală cu mesajul de succes
-- Stochează scorurile maxime folosind [localStorage](https://developer.mozilla.org/docs/Web/API/Window/localStorage)
-## Chestionar de după curs
+**Adaugă mai multă funcționalitate:**
 
-[Chestionar de după curs](https://ff-quizzes.netlify.app/web/quiz/22)
+| Funcționalitate | Descriere | Abilități pe care le exersezi |
+|-----------------|-----------|-------------------------------|
+| **Control Input** | Dezactivează listener-ul pentru evenimentul `input` la finalizare și îl reactivează când se apasă butonul | Gestionarea evenimentelor și controlul stării |
+| **Management UI** | Dezactivează textbox-ul când jucătorul termină citatul | Manipularea proprietăților DOM |
+| **Dialog Modal** | Afișează o fereastră modală cu mesajul de succes | Pattern-uri avansate UI și accesibilitate |
+| **Sistem de scor maxim** | Stochează scorurile în `localStorage` | API-uri de stocare browser și persistența datelor |
 
-## Recapitulare și Studiu Individual
+**Sfaturi de implementare:**
+- **Documentează-te** despre `localStorage.setItem()` și `localStorage.getItem()` pentru stocare persistentă
+- **Exersează** adăugarea și eliminarea dinamică a event listener-elor
+- **Explorează** elemente dialog HTML sau pattern-uri modale CSS
+- **Ia în considerare** accesibilitatea când dezactivezi și reactivezi controalele formularului
 
-Citește despre [toate evenimentele disponibile](https://developer.mozilla.org/docs/Web/Events) pentru dezvoltatori prin intermediul browserului web și gândește-te la scenariile în care ai folosi fiecare dintre ele.
+## Quiz post-lecture
 
-## Temă
-
-[Creează un nou joc de tastatură](assignment.md)
+[Quiz post-lecture](https://ff-quizzes.netlify.app/web/quiz/22)
 
 ---
 
+## 🚀 Cronologia ta de masterizare a jocului de tastare
+
+### ⚡ **Ce poți face în următoarele 5 minute**
+- [ ] Testează jocul de tastare cu diferite citate pentru a asigura funcționarea lină
+- [ ] Experimentează cu stilurile CSS — încearcă să schimbi culorile pentru evidențiere și eroare
+- [ ] Deschide DevTools în browser (F12) și urmărește Consola în timp ce joci
+- [ ] Provocă-te să termini un citat cât mai rapid posibil
+
+### ⏰ **Ce poți realiza în următoarea oră**
+- [ ] Adaugă mai multe citate în array (poate din cărțile sau filmele preferate)
+- [ ] Implementează sistemul de scor maxim cu localStorage din secțiunea de provocare
+- [ ] Creează un calculator de cuvinte pe minut care să afișeze după fiecare joc
+- [ ] Adaugă efecte sonore pentru tastarea corectă, erori și finalizare
+
+### 📅 **Aventura ta pe o săptămână**
+- [ ] Construiește o versiune multiplayer în care prietenii pot concura unul lângă altul
+- [ ] Creează niveluri de dificultate diferite cu complexitate variată a citatelor
+- [ ] Adaugă o bară de progres care să arate cât din citat s-a terminat
+- [ ] Implementează conturi de utilizator cu urmărire personalizată a statisticilor
+- [ ] Proiectează teme personalizate și permite utilizatorilor să aleagă stilul preferat
+
+### 🗓️ **Transformarea ta pe o lună**
+- [ ] Creează un curs de tastare cu lecții care predau progresiv plasarea corectă a degetelor
+- [ ] Construiește analize care arată ce litere sau cuvinte cauzează cele mai multe erori
+- [ ] Adaugă suport pentru diferite limbi și layout-uri de tastatură
+- [ ] Integrează API-uri educaționale pentru a prelua citate din baze de date literare
+- [ ] Publică jocul tău de tastare îmbunătățit pentru ca alții să-l folosească și să se bucure
+
+### 🎯 **Verificare finală de reflecție**
+
+**Înainte să continui, ia un moment să sărbătorești:**
+- Care a fost cel mai satisfăcător moment în timp ce construiai acest joc?
+- Cum te simți acum în legătură cu programarea bazată pe evenimente comparativ cu începutul?
+- Care este o caracteristică pe care abia aștepți să o adaugi pentru a face jocul unic?
+- Cum ai putea aplica conceptele de gestionare a evenimentelor în alte proiecte?
+
+```mermaid
+journey
+    title Călătoria ta în încrederea programării evenimentelor
+    section Astăzi
+      Înțelegerea evenimentelor: 3: You
+      Construirea UI: 4: You
+      Scrierea ascultătorilor de evenimente: 5: You
+    section Săptămâna aceasta
+      Adăugarea de funcționalități: 4: You
+      Depanarea problemelor: 5: You
+      Îmbunătățirea experienței utilizatorului: 4: You
+    section Luna viitoare
+      Construirea de aplicații complexe: 5: You
+      Predarea altora: 5: You
+      Crearea de cadre de lucru: 5: You
+```
+> 🌟 **Amintește-ți**: Tocmai ai stăpânit unul dintre conceptele de bază care animă fiecare site și aplicație interactivă. Programarea bazată pe evenimente este ceea ce face web-ul să fie viu și receptiv. De fiecare dată când vezi un meniu derulant, un formular care validează pe măsură ce tastezi sau un joc care reacționează la click-urile tale, acum înțelegi magia din spatele lor. Nu doar înveți să programezi - înveți să creezi experiențe care sunt intuitive și captivante! 🎉
+
+---
+
+## Recenzie & Studiu individual
+
+Citește despre [toate evenimentele disponibile](https://developer.mozilla.org/docs/Web/Events) către dezvoltator prin browser și gândește-te în ce situații ai folosi fiecare.
+
+## Tema
+
+[Crează un nou joc de tastatură](assignment.md)
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Declinarea responsabilității**:  
-Acest document a fost tradus utilizând serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși depunem eforturi pentru a asigura acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite rezultate din utilizarea acestei traduceri.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

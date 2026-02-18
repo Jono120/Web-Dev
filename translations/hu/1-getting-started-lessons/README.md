@@ -1,13 +1,4 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "04683f4cfa46004179b0404b89a3065c",
-  "translation_date": "2025-08-28T04:29:03+00:00",
-  "source_file": "1-getting-started-lessons/README.md",
-  "language_code": "hu"
-}
--->
-# Webfejlesztés alapjai
+# Webfejlesztés kezdőknek
 
 Ebben a tananyagban olyan, nem projektalapú fogalmakat ismerhetsz meg, amelyek elengedhetetlenek ahhoz, hogy profi fejlesztővé válj.
 
@@ -19,11 +10,11 @@ Ebben a tananyagban olyan, nem projektalapú fogalmakat ismerhetsz meg, amelyek 
 
 ### Köszönetnyilvánítás
 
-A "Bevezetés a programozási nyelvekbe és eszközökbe" fejezetet ♥️-val írta [Jasmine Greenaway](https://twitter.com/paladique)
+A "Bevezetés a programozási nyelvekbe és eszközökbe" fejezetet ♥️-vel írta [Jasmine Greenaway](https://twitter.com/paladique)
 
-A "Bevezetés a GitHub használatába" fejezetet ♥️-val írta [Floor Drees](https://twitter.com/floordrees)
+A "Bevezetés a GitHub használatába" fejezetet ♥️-vel írta [Floor Drees](https://twitter.com/floordrees)
 
-Az "Az akadálymentesség alapjai" fejezetet ♥️-val írta [Christopher Harrison](https://twitter.com/geektrainer)
+Az "Az akadálymentesség alapjai" fejezetet ♥️-vel írta [Christopher Harrison](https://twitter.com/geektrainer)
 
 ---
 

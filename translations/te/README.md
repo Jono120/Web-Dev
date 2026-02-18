@@ -1,0 +1,243 @@
+# వెబ్ అభివృద్ధి ప్రారంభమైన వారికోసం - ఒక పాఠ్యాంశం
+
+మైక్రోసాఫ్ట్ క్లౌడ్ అడ్వొకేట్స్ రూపకల్పన చేసిన మా 12 వారాల సమగ్ర కోర్సుతో వెబ్ అభివృద్ధి మూలాభాస్ నేర్చుకోండి. 24 పాఠాలన్నీ జావాస్క్రిప్ట్, CSS, మరియు HTML పై చేతితో చేయగల ప్రాజెక్ట్స్ ద్వారా, terrariums, బ్రౌజర్ ఎక్స్‌టెన్షన్స్, మరియు స్పేస్ గేమ్స్ వంటి ఒప్షన్లపై లోతుగా తెలుసుకుంటారు. క్విజ్‌లు, చర్చలు, మరియు ప్రాక్టికల్ అసైన్‌మెంట్‌లతో ఎంగేజ్ అవ్వండి. మీ నైపుణ్యాలను మెరుగు పరుచుకోండి మరియు మా సమర్థమైన ప్రాజెక్ట్ ఆధారిత ఉపాధ్యాయం ద్వారా మీ జ్ఞానాన్ని సవ్యంగా నిలుపుకోవడంలో సహాయం పొందండి. మీ కోడింగ్ ప్రయాణాన్ని ఈరోజు ప్రారంభించండి!
+
+Azure AI Foundry Discord కమ్యూనిటీతో చేరండి
+
+Follow these steps to get started using these resources:
+1. **రిపాజిటరీని Fork చేయండి**: క్లిక్ చేయండి [![GitHub forks](https://img.shields.io/github/forks/microsoft/Web-Dev-For-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/fork)
+2. **రిపాజిటరీని Clone చేయండి**:   `git clone https://github.com/microsoft/Web-Dev-For-Beginners.git`
+3. [**Azure AI Foundry Discord లో చేరండి మరియు నిపుణులు, fellow డెవలపర్లు కలవండి**](https://discord.com/invite/ByRwuEEgH4)
+
+### 🌐 బహుభాషా మద్దతు
+
+#### GitHub Action ద్వారా మద్దతు (ఆటోమేటెడ్ & ఎప్పుడూ తాజా)
+
+> **స్థానికంగా క్లోన్ చేయాలనుకుంటున్నారా?**
+
+> ఈ రిపాజిటరీలో 50+ భాషల అనువాదాలు ఉన్నందున ఫైల్ డౌన్‌లోడ్ సైజ్ పెద్దది అవుతుంది. అనువాదాలు లేకుండా క్లోన్ చేయడానికి sparse checkout ను ఉపయోగించండి:
+> ```bash
+> git clone --filter=blob:none --sparse https://github.com/microsoft/Web-Dev-For-Beginners.git
+> cd Web-Dev-For-Beginners
+> git sparse-checkout set --no-cone '/*' '!translations' '!translated_images'
+> ```
+> ఇది మీకు కోర్సును పూర్తి చేయడానికి కావలసిన అన్ని విషయాలను వేగంగా డౌన్‌లోడ్ చేసుకోవడంలో సహాయపడుతుంది.
+
+**మీకు అదనపు అనువాద భాషలు కావాలంటే అవి ఇక్కడ జాబితా చేయబడ్డాయి [ఇక్కడ](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
+
+#### 🧑‍🎓 _మీరు విద్యార్థివా?_
+
+విజిట్ చేయండి [**Student Hub పేజీ**](https://docs.microsoft.com/learn/student-hub/?WT.mc_id=academic-77807-sagibbon) అక్కడ మీరు ప్రారంభ అవసరాలు, విద్యార్థి ప్యాక్స్ మరియు ఉచిత సర్టిఫికెట్ వోచర్ పొందే మార్గాలు కనుగొంటారు. ఇది మీరు తరచూ బుక్‌మార్క్ చేసుకుని చూడవలసిన పేజీ, ఎందుకంటే మేము ప్రతి నెలకు కంటెంట్ మార్చుతాము.
+
+### 📣 ప్రకటన - కొత్త GitHub Copilot Agent మోడ్ సవాళ్లను పూర్తిచేయండి!
+
+కొత్త సవాలు జోడించబడింది, "GitHub Copilot Agent Challenge 🚀"ను ఎక్కువ అధ్యాయాలలో చూడండి. ఇది GitHub Copilot మరియు Agent మోడ్ ఉపయోగించి పూర్తి చేయాల్సిన కొత్త సవాలే. మీరు Agent మోడ్‌ని uses చేసుకోకపోయినా అది కేవలం టెక్స్ట్ ఉత్పత్తి చేయడమే కాకుండా ఫైళ్ళను సృష్టించడం, సవరించడం, కమాండ్లు నడపడం కూడా చేయగలదు.
+
+### 📣 ప్రకటన - _Generative AI ఉపయోగించి కొత్త ప్రాజెక్ట్_
+
+కొత్త AI అసిస్టెంట్ ప్రాజెక్ట్ జోడించబడింది, తనిఖీ చేయండి [ప్రాజెక్ట్](./9-chat-project/README.md)
+
+### 📣 ప్రకటన - _జావాస్క్రిప్ట్ కోసం Generative AI పై కొత్త పాఠ్యాంశం_
+
+మా కొత్త Generative AI పాఠ్యాంశాన్ని మిస్ కావద్దు!
+
+ప్రారంభించడానికి [https://aka.ms/genai-js-course](https://aka.ms/genai-js-course) సందర్శించండి!
+
+- మౌలికాలు నుండి RAG వరకు అన్ని విషయాలను కవర్ చేయడం.
+- Generative AI మరియు మా సహచర యాప్ ద్వారా చరిత్రామయ పాత్రలతో ఇంటరాక్ట్ అవ్వండి.
+- సరదా మరియు ఆకట్టుకునే కథనం, మీరు కాలం ప్రయాణం చేస్తూ ఉంటారు!
+
+ప్రతి పాఠంలో పూర్తి చేయాల్సిన అసైన్మెంట్, జ్ఞాన పరీక్ష మరియు సవాలు ఉన్నాయి, ముఖ్యంగా ఇదిగో విషయాలలో దీని ద్వారా నేర్చుకుంటారు:
+- ప్రాంప్టింగ్ మరియు ప్రాంప్ట్ ఇంజనీరింగ్
+- టెక్స్ట్ మరియు ఇమేజ్ యాప్ జెనరేషన్
+- సెర్చ్ యాప్స్
+
+ప్రారంభించడానికి [https://aka.ms/genai-js-course](https://aka.ms/genai-js-course) సందర్శించండి!
+
+
+
+## 🌱 మొదలు పెట్టడం
+
+> **ఉపాధ్యాయులు**, ఈ పాఠ్యాంశాన్ని ఎలా ఉపయోగించాలో కొన్ని సూచనలు [ఇక్కడ](for-teachers.md) వెల్లడించాము. మీరు మా అభిప్రాయం [మా చర్చా ఫోరమ్‌లో](https://github.com/microsoft/Web-Dev-For-Beginners/discussions/categories/teacher-corner) తెలియజేయండి!
+
+**[లెర్నర్లు](https://aka.ms/student-page/?WT.mc_id=academic-77807-sagibbon)**, ప్రతి పాఠం కోసం, ముందుదశా క్విజ్‌తో ప్రారంభించి లెక్చర్ మెటీరియల్ చదవండి, వివిధ కార్యకలాపాలు పూర్తిచేయండి మరియు తరువాత క్విజ్ ద్వారా మీ అర్ధం ఎంత తీవ్రంగా ఉందో నిర్ధారించుకోండి.
+
+మీ అధ్యయన అనుభవాన్ని మెరుగుపరచడానికి, ప్రాజెక్ట్‌లపై సంయుక్తంగా పని చేయడానికి తోబుట్టువులతో కనెక్ట్ అవ్వండి! చర్చలు మా [చర్చా ఫోరమ్](https://github.com/microsoft/Web-Dev-For-Beginners/discussions) లో ప్రోత్సహించబడతాయి, అక్కడ మోడరేటర్లు మీ ప్రశ్నలకు సమాధానమివ్వడానికి అందుబాటులో ఉంటారు.
+
+మీ విద్యను మరింతగా అభివృద్ధి చేసుకోవడానికి అదనపు అధ్యయన వస్తువుల కోసం మేము [Microsoft Learn](https://learn.microsoft.com/users/wirelesslife/collections/p1ddcy5jwy0jkm?WT.mc_id=academic-77807-sagibbon) ను అన్వేషించమని మేము ఉత్సాహంగా సిఫార్సు చేస్తున్నాము.
+
+### 📋 మీ వాతావరణం సెట్ చేయడం
+
+ఈ పాఠ్యాంశం ఒక అభివృద్ధి వాతావరణంతో సిద్ధంగా ఉంది! మీరు ప్రారంభించినపుడు [Codespace](https://github.com/features/codespaces/) (_బ్రౌజర్ ఆధారిత, ఇన్‌స్టాల్ అవసరం లేని వాతావరణం_) లో లేదా మీ కంప్యూటరులో [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) వంటి టెక్స్ట్ ఎడిటర్ ఉపయోగించి ఈ కోర్సును నడిపించవచ్చు.
+
+#### మీ రిపాజిటరీని సృష్టించండి
+మీ పని సులభంగా సేవ్ చేసుకునేందుకు, ఈ రిపాజిటరీ యొక్క మీ స్వంత ప్రతిని సృష్టించడం సిఫార్సు చేయబడుతుంది. దీనికి పైగా ఉన్న **Use this template** బటన్‌ను క్లిక్ చేయండి. ఇది మీ GitHub ఖాతాలో కొత్త రిపాజిటరీని సృష్టిస్తుంది, ఇంతకు ముందు ఉన్న పాఠ్యాంశంతో కూడి.
+
+ఈ దశలను పాటించండి:
+1. **రిపాజిటరీని Fork చేయండి**: ఈ పేజీ టాప్-రైట్ మూలలోని "Fork" బటన్‌పై క్లిక్ చేయండి.
+2. **రిపాజిటరీని Clone చేయండి**:   `git clone https://github.com/microsoft/Web-Dev-For-Beginners.git`
+
+#### కోడ్స్‌పేస్‌లో పాఠ్యాంశం నడపడం
+
+మీ సృష్టించిన ఈ రిపాజిటరీ కాపీ లో, **Code** బటన్ క్లిక్ చేసి **Open with Codespaces** ఎంచుకోండి. ఇది మీకు కొత్త Codespace ని సృష్టిస్తుంది. 
+
+#### మీ కంప్యూటరులో స్థానికంగా పాఠ్యాంశం నడపడం
+
+మీ కంప్యూటరులో ఈ పాఠ్యాంశం నడపడానికి, మీరు ఒక టెక్స్ట్ ఎడిటర్, బ్రౌజర్ మరియు కమాండ్ లైన్ టూల్ అవసరం. మా మొదటి పాఠం, [Introduction to Programming Languages and Tools of the Trade](../../1-getting-started-lessons/1-intro-to-programming-languages), మీరు ఎన్నుకోవడానికి వివిధ ఎంపికలను మీకు చూపిస్తుంది.
+
+మా సిఫార్సు [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) ఎడిటర్‌ని ఉపయోగించడం, ఇందులో బిల్ట్-ఇన్ [టెర్మినల్](https://code.visualstudio.com/docs/terminal/basics/?WT.mc_id=academic-77807-sagibbon) కూడా ఉంది. మీరు Visual Studio Code ని [ఇక్కడ](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) నుండి డౌన్లోడ్ చేసుకోవచ్చు.
+
+1. మీ రిపాజిటరీని మీ కంప్యూటరులో క్లోన్ చేయండి. దీనికి **Code** బటన్ క్లిక్ చేసి URLను కాపీ చేసుకోండి:
+
+    [CodeSpace](./images/createcodespace.png)
+అప్పుడు, [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) లో [Terminal](https://code.visualstudio.com/docs/terminal/basics/?WT.mc_id=academic-77807-sagibbon) ను తెరిచి, మీరు కితప్పిన URLతో `<your-repository-url>` ను మార్చి క్రింది కమాండ్‌ను నడపండి:
+
+    ```bash 
+    git clone <your-repository-url>
+    ```
+
+2. Visual Studio Code లో ఫోల్‌డర్‌ను తెరవండి. ఇది **File** > **Open Folder** ను క్లిక్ చేయడం ద్వారా మరియు మీరు ఇప్పటికే క్లోన్ చేసిన ఫోల్‌డర్‌ను ఎంచుకోవడం ద్వారా చేయవచ్చు.
+
+
+>  సిఫార్సు చేయబడిన Visual Studio Code విస్తరణలు:
+>
+> * [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon) - Visual Studio Code లో HTML పేజీలను ప్రివ్యూ చేయడానికి
+> * [Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot&WT.mc_id=academic-77807-sagibbon) - మీరు త్వరగా కోడ్ రాయడంలో సహాయపడడానికి
+
+## 📂 ప్రతి పాఠంలో ఉంది:
+
+- ఐచ్ఛిక స్కెచ్ నోట్
+- ఐచ్ఛిక సహాయక వీడియో
+- పాఠం ముందు వార్మ్-అప్ క్విజ్
+- రాసిన పాఠం
+- ప్రాజెక్ట్-ఆధారిత పాఠాల కోసం, ప్రాజెక్ట్‌ను ఎలా నిర్మించాలో దశల వారీ మార్గదర్శకాలు
+- జ్ఞాన పరీక్షలు
+- ఒక సవాలు
+- సహాయక పఠనం
+- అసైన్మెంట్
+- [పాఠం తరువాతి క్విజ్](https://ff-quizzes.netlify.app/web/)
+
+> **క్విజ్‌ల గురించి ఒక నోట్**: అన్ని క్విజ్‌లు Quiz-app ఫోల్డర్‌లో ఉన్నాయి, మొత్తం 48 క్విజ్‌లు ప్రతి ఒకటి మూడు ప్రశ్నలతో. ఇవి [ఇక్కడ](https://ff-quizzes.netlify.app/web/) అందుబాటులో ఉన్నాయి; క్విజ్ అప్లికేషన్ స్థానికంగా నడపవచ్చు లేదా Azure కు పంపించవచ్చు; `quiz-app` ఫోల్డర్‌లో సూచనలను అనుసరించండి.
+
+## 🗃️ పాఠాలు
+
+|     |                       ప్రాజెక్ట్ పేరు                       |                            నేర్పే అంశాలు                             | అధ్యయన లక్ష్యాలు                                                                                                                 |                                                         లింకు తోపాటు పాఠం                                                          |         రచయిత          |
+| :-: | :------------------------------------------------------: | :--------------------------------------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------: | :---------------------: |
+| 01  |                     Getting Started                      |           ప్రోగ్రామింగ్ పరిచయం మరియు పనికి ఉపయోగించే పరికరాలు           | ఎక్కువ ప్రోగ్రామింగ్ భాషల ప్రాథమిక సూత్రాలు మరియు ప్రొఫెషనల్ డెవలపర్లకు సహాయపడే సాఫ్ట్‌వేర్ గురించి నేర్చుకోండి | [Intro to Programming Languages and Tools of the Trade](./1-getting-started-lessons/1-intro-to-programming-languages/README.md) |         జాస్మిన్         |
+| 02  |                     Getting Started                      |             GitHub ప్రాధమికాలు, జట్టుతో కలిసి పనిచేసే విధానం             | మీ ప్రాజెక్టులో GitHub ను ఎలా ఉపయోగించాలో, కోడ్ బేస్‌పై ఇతరులతో ఎలా సహకరించాలో నేర్చుకోండి |                            [Intro to GitHub](./1-getting-started-lessons/2-github-basics/README.md)                             |          ఫ్లోర్          |
+| 03  |                     Getting Started                      |                             యాక్సెసిబిలిటీ                              | వెబ్ యాక్సెసిబిలిటీ యొక్క ప్రాథమికాలు నేర్చుకోండి                                                                                               |                       [Accessibility Fundamentals](./1-getting-started-lessons/3-accessibility/README.md)                       |       క్రిస్టోఫర్       |
+| 04  |                        JS Basics                         |                         JavaScript డేటా రకాల గురించి                          | JavaScript డేటా రకాల మూలాలు                                                                                                 |                                       [Data Types](./2-js-basics/1-data-types/README.md)                                        |         జాస్మిన్         |
+| 05  |                        JS Basics                         |                         ఫంక్షన్స్ మరియు మెథడ్స్                          | యాప్ యొక్క లాజిక్ ప్రవాహాన్ని నియంత్రించడానికి ఫంక్షన్స్ మరియు మెదడ్స్ గురించి నేర్చుకోండి                                                             |                              [Functions and Methods](./2-js-basics/2-functions-methods/README.md)                               | జాస్మిన్ మరియు క్రిస్టోఫర్ |
+| 06  |                        JS Basics                         |                        JS తో నిర్ణయాలు తీసుకోవడం                        | నిర్ణయాలు తీసుకోవడం ఎలా చేయాలో నీతించుకోండి                                                           |                                 [Making Decisions](./2-js-basics/3-making-decisions/README.md)                                  |         జాస్మిన్         |
+| 07  |                        JS Basics                         |                            అర్రేస్ మరియు లూప్స్                            | JavaScript లో అర్రేస్ మరియు లూప్స్ తో డేటాతో పనిచేయండి                                                                                 |                                   [Arrays and Loops](./2-js-basics/4-arrays-loops/README.md)                                    |         జాస్మిన్         |
+| 08  |       [Terrarium](./3-terrarium/solution/README.md)       |                            HTML ఆచరణలో                            | ఆన్‌లైన్ టెర్రేరియం తయారీలో HTML నిర్మాణం చేయండి, లేఅవుట్ రోపణపై దృష్టి పెట్టండి                                                         |                                 [Introduction to HTML](./3-terrarium/1-intro-to-html/README.md)                                 |           జెన్           |
+| 09  |       [Terrarium](./3-terrarium/solution/README.md)       |                            CSS ఆచరణలో                             | ఆన్‌లైన్ టెర్రేరియం డిజైన్ చేసేందుకు CSS సృష్టించండి, బేసిక్ CSS మరియు పేజీ రిస్పాన్సివ్ చేయడం మీద దృష్టి పెట్టండి                     |                                  [Introduction to CSS](./3-terrarium/2-intro-to-css/README.md)                                  |           జెన్           |
+| 10  |            [Terrarium](./3-terrarium/solution/README.md)            |                 JavaScript క్లొజర్స్, DOM మేనిప్యులేషన్                  | టెర్రేరియం ను డ్రాగ్/డ్రాప్ ఇంటర్‌ఫేస్‌గా రూపొందించేందుకు JavaScript ను నిర్మించండి, క్లొజర్స్ మరియు DOM మేనిప్యులేషన్ పై దృష్టి పెట్టండి             |                  [JavaScript Closures, DOM manipulation](./3-terrarium/3-intro-to-DOM-and-closures/README.md)                   |           జెన్           |
+| 11  |          [Typing Game](./4-typing-game/solution/README.md)          |                          టైపింగ్ గేమ్ నిర్మించడం                           | మీ JavaScript యాప్ లాజిక్‌ను కీబోర్డ్ ఈవెంట్‌ల ద్వారా నడిపించడం ఎలా చేయాలో నేర్చుకోండి                                                          |                                [Event-Driven Programming](./4-typing-game/typing-game/README.md)                                |       క్రిస్టోఫర్       |
+| 12  | [Green Browser Extension](./5-browser-extension/solution/README.md) |                         బ్రౌజర్లతో పని చేయడం                          | బ్రౌజర్లు ఎలా పనిచేస్తాయో, వాటి చరిత్ర, బ్రౌజర్ ఎక్స్‌టెన్షన్ యొక్క మొదటి అంశాలను ఎలా వెనక్కి సాగదీయాలో తెలుసుకోండి                               |                               [About Browsers](./5-browser-extension/1-about-browsers/README.md)                                |           జెన్           |
+| 13  | [Green Browser Extension](./5-browser-extension/solution/README.md) | ఫారం తయారుచేయడం, APIకు కాల్ చేయడం, స్థానిక నిల్వలో వేరియబుల్స్ నిల్వచేయడం | బ్రౌజర్ ఎక్స్‌టెన్షన్ యొక్క JavaScript అంశాలను నిర్మించి, స్థానిక నిల్వలో నిల్వ చేసిన వేరియబుల్స్ ఉపయోగించి APIని కాల్ చేయండి                      |                [APIs, Forms, and Local Storage](./5-browser-extension/2-forms-browsers-local-storage/README.md)                 |           జెన్           |
+| 14  | [Green Browser Extension](./5-browser-extension/solution/README.md) |          బ్రౌజర్ బ్యాక్‌గ్రౌండ్ ప్రాసెస్‌లు, వెబ్ పనితీరు          | ఎక్స్‌టెన్షన్ ఐకాన్‌ను నిర్వహించడానికి బ్రౌజర్ బ్యాక్‌గ్రౌండ్ ప్రాసెస్‌లను ఉపయోగించండి; వెబ్ పనితీరు మరియు కొంత ఆప్టిమైజేషన్ గురించి నేర్చుకోండి   |             [Background Tasks and Performance](./5-browser-extension/3-background-tasks-and-performance/README.md)              |           జెన్           |
+| 15  |           [Space Game](./6-space-game/solution/README.md)           |             JavaScript తో మరింత అభివృద్ధి గేమ్ డెవలప్‌మెంట్             | క్లాసులు మరియు కాంపోజిషన్ ఉపయోగించి వారసత్వం, Pub/Sub నమూనా గురించి నేర్చుకోండి, గేమ్ నిర్మాణానికి సిద్ధంగా ఉండండి              |                      [Introduction to Advanced Game Development](./6-space-game/1-introduction/README.md)                       |          క్రిస్          |
+| 16  |           [Space Game](./6-space-game/solution/README.md)           |                           క్యాన్వాస్ డ్రాయింగ్                            | స్క్రీన్‌పై ఎలిమెంట్లను గీయడానికి ఉపయోగించే Canvas API గురించి నేర్చుకోండి                                                                       |                                [Drawing to Canvas](./6-space-game/2-drawing-to-canvas/README.md)                                |          క్రిస్          |
+| 17  |           [Space Game](./6-space-game/solution/README.md)           |                   స్క్రీన్‌పై ఎలిమెంట్లను కదిలించడం                    | కార్టేషియన్ కోఆర్డినేట్లు మరియు Canvas API ఉపయోగించి ఎలిమెంట్లకు మోషన్ ఎలా వస్తుందో గుర్తించండి                                            |                           [Moving Elements Around](./6-space-game/3-moving-elements-around/README.md)                           |          క్రిస్          |
+| 18  |           [Space Game](./6-space-game/solution/README.md)           |                          ఢీకు గుర్తింపు                           | ఎలిమెంట్లు ఒకటితో ఒకటి ఢీకు పడి స్పందించేటట్లు చేయండి, కీలను నొక్కినప్పుడు ప్రతిస్పందన కలిగి, గేమ్ పనితీరును నిర్ధారించే కూల్‌డౌన్ ఫంక్షన్ ఇవ్వండి    |                              [Collision Detection](./6-space-game/4-collision-detection/README.md)                              |          క్రిస్          |
+| 19  |           [Space Game](./6-space-game/solution/README.md)           |                             స్కోరు ఉంచడం                              | గేమ్ స్థితిగతులు మరియు పనితీరుతో సంబంధించి గణిత లెక్కింపులు నిర్వహించండి                                                                |                                    [Keeping Score](./6-space-game/5-keeping-score/README.md)                                    |          క్రిస్          |
+| 20  |           [Space Game](./6-space-game/solution/README.md)           |                     గేమ్ ముగింపు మరియు రీస్టార్ట్                     | గేమ్ ముగింపు మరియు రీస్టార్ట్ పై నేర్చుకోండి, అసెట్స్ సరిచూసుకోవటం మరియు వేరియబుల్ విలువలను రీసెట్ చేయడం                              |                                [The Ending Condition](./6-space-game/6-end-condition/README.md)                                 |          క్రిస్          |
+| 21  |         [Banking App](./7-bank-project/solution/README.md)          |                 వెబ్ యాప్‌లో HTML టెంప్లేట్లు మరియు రూట్లు                 | రూటింగ్ మరియు HTML టెంప్లేట్లను ఉపయోగించి మల్టిపేజ్ వెబ్‌సైట్ నిర్మాణాన్ని ఎలా సృష్టించాలో నేర్చుకోండి                             |                            [HTML Templates and Routes](./7-bank-project/1-template-route/README.md)                             |          యోహాన్          |
+| 22  |         [Banking App](./7-bank-project/solution/README.md)          |                  లాగిన్ మరియు రిజిస్ట్రేషన్ ఫారం నిర్మాణం                   | ఫారమ్స్ తయారీ మరియు వాలిడేషన్ రొటీన్‌లను నిర్వహించడం గురించి నేర్చుకోండి                                                                          |                                           [Forms](./7-bank-project/2-forms/README.md)                                           |          యోహాన్          |
+| 23  |         [Banking App](./7-bank-project/solution/README.md)          |                   డేటా పొందటం మరియు ఉపయోగించే పద్ధతులు                   | మీ యాప్‌లో డేటా ప్రవాహం ఎలా జరుగుతుందో, దాన్ని ఎలా తీసుకోవాలో, నిల్వ చేసుకోవాలో మరియు తొలగించాలో                                                                 |                                            [Data](./7-bank-project/3-data/README.md)                                            |          యోహాన్          |
+| 24  |         [Banking App](./7-bank-project/solution/README.md)          |                      స్టేట్ మేనేజ్మెంట్ సూత్రాలు                      | మీ యాప్ స్టేట్ ను ఎలా నిర్వహిస్తుందో, ప్రోగ్రామాటిక్గా దాన్ని ఎలా నియంత్రించాలో నేర్చుకోండి                                                              |                                [State Management](./7-bank-project/4-state-management/README.md)                                |          యోహాన్          |
+| 25 | [Browser/VScode Code](../../8-code-editor) | VScode తో పని చేయడం | కోడ్ ఎడిటర్‌ను ఎలా ఉపయోగించాలో నేర్చుకోండి| [Use VScode Code Editor](./8-code-editor/1-using-a-code-editor/README.md) | క్రిస్ |
+| 26 | [AI Assistants](./9-chat-project/README.md) | AI తో పని చేయడం | మీ స్వంత AI అసిస్టెంట్‌ను ఎలా నిర్మించాలో నేర్చుకోండి | [AI Assistant project](./9-chat-project/README.md) | క్రిస్ |
+
+## 🏫 పాఠశాల
+
+మా పాఠ్యক্রমం రెండు ప్రధాన పాఠశాల సిద్ధాంతాలతో రూపొందించబడింది:
+* ప్రాజెక్ట్ ఆధారిత అభ్యాసం
+* తరచుగా క్విజ్‌లు
+
+ఈ ప్రోగ్రాం JavaScript, HTML, CSS ప్రాథమికాలను, అలాగే నేటి వెబ్ డెవలపర్లు ఉపయోగించే తాజా పరికరాలు మరియు సాంకేతికతలను నేర్పిస్తుంది. విద్యార్థులు టైపింగ్ గేమ్, వర్చువల్ టెర్రేరియం, పర్యావరణ అనుకూల బ్రౌజర్ ఎక్స్‌టెన్షన్, స్పేస్-ఇన్వేడర్ శైలిగేమ్, మరియు వ్యాపారాల కోసం బ్యాంకింగ్ యాప్ నిర్మించడం ద్వారా అనుభవాన్ని పొందగలరు. శ్రేణి చివరికి, విద్యార్థులు వెబ్ డెవలప్‌మెంట్ పై దృఢమైన అవగాహన పొందుతారు.
+
+> 🎓 మీరు Microsoft Learn లోని [Learn Path](https://docs.microsoft.com/learn/paths/web-development-101/?WT.mc_id=academic-77807-sagibbon) గా ఈ పాఠ్యక్రమంలోని మొదటి కొన్ని పాఠాలను తీసుకోవచ్చు!
+
+కంటెంట్ ప్రాజెక్టులకు అనుగుణంగా ఉండడం ద్వారా, విద్యార్థులకు పాఠ్యంపాటు మరింత ఆసక్తికరంగా మారుతుంది మరియు భావనల నిలుపుదల పెరుగుతుంది. మేము JavaScript ప్రాథమికాలను పరిచయపెట్టేందుకు కొన్ని ప్రారంభ పాఠాలను కూడా రాయగా, "[Beginners Series to: JavaScript](https://channel9.msdn.com/Series/Beginners-Series-to-JavaScript/?WT.mc_id=academic-77807-sagibbon)" వీడియో ట్యుటోరియల్స్ సిరీస్ నుండి కొన్ని వీడియోలతో జతచేశాము, అందులో కొంత రచయితలు ఈ పాఠశామార్గంలో సహాయం చేశారు.
+
+అలాగే, తరగతి ముందు ఒక తక్కువ ఒత్తిడి క్విజ్ విద్యార్థికి నేర్చుకోవడంలో ఉత్సాహం కలిగిస్తే, తరగతి తర్వాత మరొక క్విజ్ మరింత నిలుపుదలని నిర్ధారిస్తుంది. ఈ పాఠ్యక్రమం సులభంగా, సరదాగా ఉండటానికి రూపొంది, మొత్తం లేదా కొన్ని భాగాలుగా తీసుకోవచ్చు. ప్రాజెక్టులు చిన్నదిగా మొదలయ్యి 12-వారాల సైకిల్ చివరకు క్రమంగా కష్టమైనవి అవుతాయి.
+
+వేబ్ డెవలపర్‌గా అవసరమైన ప్రాథమిక నైపుణ్యాలపై దృష్టి పెట్టడానికి JavaScript ఫ్రేమ్‌వర్క్‌లు పరిచయం చేయడం నుంచి మేము ఇక్కడ దూరమయ్యాము. ఈ పాఠ్యక్రమాన్ని పూర్తి చేసిన తర్వాత ఎంచుకోవడానికి మంచి తదుపరి దశ Node.js గురించి "[Beginner Series to: Node.js](https://channel9.msdn.com/Series/Beginners-Series-to-Nodejs/?WT.mc_id=academic-77807-sagibbon)" వీడియో సిరీస్ ద్వారా నేర్చుకోవడం.
+
+> మా [Code of Conduct](CODE_OF_CONDUCT.md) మరియు [Contributing](CONTRIBUTING.md) మార్గదర్శకాలను సందర్శించండి. మీ రాచనాత్మక అభిప్రాయాలను స్వాగతిస్తున్నాం!
+
+
+## 🧭 ఆఫ్‌లైన్ యాక్సెస్
+
+[Docsify](https://docsify.js.org/#/) ఉపయోగించి మీరు ఈ డాక్యుమెంటేషన్‌ను ఆఫ్‌లైన్ లో నడపగలరు. ఈ రిపోను ఫోర్క్ చేసి, మీ స్థానిక యంత్రంపై [Docsify ను ఇన్‌స్టాల్](https://docsify.js.org/#/quickstart) చేసుకోండి, తర్వాత ఈ రిపో యొక్క రూట్ ఫోల్డర్‌లో `docsify serve` టైప్ చేయండి. వెబ్‌సైట్ 3000 పోర్ట్‌ ద్వారా మీరు ఉపయోగించే లోకల్‌హోస్ట్‌లో అందుబాటులో ఉంటుంది: `localhost:3000`.
+
+## 📘 PDF
+
+అన్ని పాఠాల PDF ను [ఇక్కడ](https://microsoft.github.io/Web-Dev-For-Beginners/pdf/readme.pdf) కనుగొనవచ్చు.
+
+
+## 🎒 ఇతర కోర్సులు
+మా టీమ్ ఇతర కోర్సులు కూడా తయారు చేస్తోంది! వీటిని చూడండి:
+
+<!-- CO-OP TRANSLATOR OTHER COURSES START -->
+### లాంగ్చైన్
+[![LangChain4j барои ప్రారంభోత్సవులు](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js ప్రారంభోత్సవులు కోసం](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
+
+---
+
+### ఆజ్యూర్ / ఎడ్జ్ / MCP / ఏజెంట్స్
+[![ప్రారంభోత్సవులు కోసం AZD](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![ప్రారంభోత్సవులు కోసం ఎడ్జ్ AI](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![ప్రారంభోత్సవులు కోసం MCP](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![ప్రారంభోత్సవులు కోసం AI ఏజెంట్స్](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### జనరేటివ్ AI సిరీస్
+[![ప్రారంభోత్సవులు కోసం జనరేటివ్ AI](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![జనరేటివ్ AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![జనరేటివ్ AI (జావా)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![జనరేటివ్ AI (జావాస్క్రిప్ట్)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### కోర్ లెర్నింగ్
+[![ప్రారంభోత్సవులు కోసం ML](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![ప్రారంభోత్సవులు కోసం డేటా సైన్స్](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![ప్రారంభోత్సవులు కోసం AI](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![ప్రారంభోత్సవులు కోసం సైబర్ సెక్యూరిటీ](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![ప్రారంభోత్సవులు కోసం వెబ్ డెవ్](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![ప్రారంభోత్సవులు కోసం IoT](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+[![ప్రారంభోత్సవులు కోసం XR డెవలప్‌మెంట్](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### కోపైలట్ సిరీస్
+[![AI జత కోడింగ్ కోసం కోపైలట్](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![C#/.NET కోసం కోపైలట్](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![కోపైలట్ అడ్వెంచర్](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+<!-- CO-OP TRANSLATOR OTHER COURSES END -->
+
+## సహాయం పొందుట
+
+మీరు అడ్డుకట్టబడినట్లయితే లేదా AI యాప్‌లను నిర్మించే విషయంలో ఏవైనా ప్రశ్నలు ఉంటే, MCP గురించి చర్చలలో సార్థక అభ్యసకులు మరియు అనుభవజ్ఞుల డెవలపర్లు చేరండి. ఇది ప్రశ్నలు స్వాగతించబడతాయి మరియు జ్ఞానం స్వేచ్ఛగా పంచుకుంటారు అటువంటి సపోర్టివ్ కమ్యూనిటీ.
+
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+
+మీరు నిర్మిస్తున్నప్పుడు ఉత్పత్తి గురించి అభిప్రాయాలు లేదా లోపాలుంటే సందర్శించండి:
+
+[![Microsoft Foundry Developer Forum](https://img.shields.io/badge/GitHub-Microsoft_Foundry_Developer_Forum-blue?style=for-the-badge&logo=github&color=000000&logoColor=fff)](https://aka.ms/foundry/forum)
+
+## లైసెన్స్
+
+ఈ రిపాజిటరీ MIT లైసెన్స్ కింద లైసెన్స్ చేయబడింది. మరిన్ని సమాచారం కోసం [LICENSE](../../LICENSE) ఫైల్‌ను చూడండి.
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**అస్పష్టత నోటీసు**:
+ఈ పత్రాన్ని AI అనువాద సేవ అయిన [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించారు. మేము ఖచ్చితత్వానికి శ్రమిస్తున్నప్పటికీ, యంత్ర అనువాదాల్లో పొరపాట్లు లేదా తప్పుడు అర్థాలు ఉండవచ్చు. స్థానిక భాషలో ఉన్న అసలు పత్రం అధికారిక మూలంగా తీసుకోవాలి. ముఖ్యమైన సమాచారానికి వృత్తిపరమైన మానవ అనువాదం సిఫార్సు చేయబడుతుంది. ఈ అనువాదాన్ని ఉపయోగించే కారణంగా కలిగే ఏమీ అవగాహనా లోపాలు లేదా తప్పు అర్థాలకో మేము బాధ్యత వహించము.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

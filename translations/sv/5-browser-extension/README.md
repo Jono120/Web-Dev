@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b121a279a6ab39878491f3e572673515",
-  "translation_date": "2025-08-26T22:31:04+00:00",
-  "source_file": "5-browser-extension/README.md",
-  "language_code": "sv"
-}
--->
 # Bygga en webbläsartillägg
 
 Att bygga webbläsartillägg är ett roligt och intressant sätt att tänka på prestandan för dina appar samtidigt som du skapar en annan typ av webbresurs. Den här modulen innehåller lektioner om hur webbläsare fungerar och hur man distribuerar ett webbläsartillägg, hur man bygger ett formulär, anropar en API och använder lokal lagring, samt hur man bedömer prestandan för din webbplats och förbättrar den.
@@ -23,7 +14,7 @@ Detta tillägg kan användas ad hoc av en användare när en API-nyckel och regi
 
 ### Krediter
 
-![ett grönt webbläsartillägg](../../../translated_images/extension-screenshot.0e7f5bfa110e92e3875e1bc9405edd45a3d2e02963e48900adb91926a62a5807.sv.png)
+![ett grönt webbläsartillägg](../../../translated_images/sv/extension-screenshot.0e7f5bfa110e92e3.webp)
 
 ## Krediter
 

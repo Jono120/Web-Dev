@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "3f5e6821e0febccfc5d05e7c944d9e3d",
-  "translation_date": "2025-08-27T20:54:33+00:00",
-  "source_file": "5-browser-extension/solution/translation/README.ja.md",
-  "language_code": "he"
-}
--->
 # תוסף דפדפן למעקב אחר פליטת פחמן: קוד מוכן
 
 בנו תוסף לדפדפן שמציג תזכורת על צריכת החשמל באזורכם, באמצעות ה-API של CO2 Signal מבית tmrow. התוסף מאפשר לכם לעקוב אחר צריכת החשמל באזורכם ולהשתמש במידע הזה כדי לקבל החלטות מושכלות לגבי הפעילות שלכם.
 
-![צילום מסך של התוסף](../../../../../translated_images/extension-screenshot.0e7f5bfa110e92e3875e1bc9405edd45a3d2e02963e48900adb91926a62a5807.he.png)
+![צילום מסך של התוסף](../../../../../translated_images/he/extension-screenshot.0e7f5bfa110e92e3.webp)
 
 ## הקדמה
 
@@ -31,7 +22,7 @@ npm run build
 
 כדי להתקין ב-Edge, מצאו את לוח ה"הרחבות" דרך תפריט "שלוש הנקודות" בפינה הימנית העליונה של הדפדפן. משם, בחרו "Load Unpacked" כדי לטעון את התוסף החדש. כאשר תתבקשו, פתחו את תיקיית "dist", והתוסף ייטען. לשימוש בתוסף, תצטרכו מפתח API של CO2 Signal ([קבלו אחד כאן דרך אימייל](https://www.co2signal.com/) - הזינו את האימייל שלכם בתיבה שבדף) וקוד לאזור שלכם התואם ל-[Electricity Map](https://www.electricitymap.org/map) ([ראו כאן את הקוד לאזור שלכם](http://api.electricitymap.org/v3/zones)). לדוגמה, בבוסטון משתמשים ב-'US-NEISO'.
 
-![התקנה](../../../../../translated_images/install-on-edge.78634f02842c48283726c531998679a6f03a45556b2ee99d8ff231fe41446324.he.png)
+![התקנה](../../../../../translated_images/he/install-on-edge.78634f02842c4828.webp)
 
 לאחר שתזינו את מפתח ה-API והאזור בממשק התוסף, נקודה צבעונית שתופיע בסרגל ההרחבות של הדפדפן תשתנה בהתאם לצריכת האנרגיה באזורכם. הנקודה תספק אינדיקציה אילו פעילויות שדורשות אנרגיה מתאימות לביצוע באותו זמן. הרעיון של מערכת ה"נקודה" נלקח מהתוסף [Energy Lollipop](https://energylollipop.com/) שנועד למעקב אחר פליטות בקליפורניה.
 

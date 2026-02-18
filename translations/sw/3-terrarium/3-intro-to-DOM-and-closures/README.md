@@ -1,61 +1,196 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "61c14b27044861e5e69db35dd52c4403",
-  "translation_date": "2025-08-29T10:10:53+00:00",
-  "source_file": "3-terrarium/3-intro-to-DOM-and-closures/README.md",
-  "language_code": "sw"
-}
--->
-# Mradi wa Terrarium Sehemu ya 3: Udhibiti wa DOM na Closure
+# Mradi wa Terrarium Sehemu ya 3: Udhibiti wa DOM na Mifungo ya JavaScript
 
-![DOM na closure](../../../../translated_images/webdev101-js.10280393044d7eaaec7e847574946add7ddae6be2b2194567d848b61d849334a.sw.png)
+```mermaid
+journey
+    title Safari Yako ya JavaScript DOM
+    section Msingi
+      Elewa DOM: 3: Student
+      Jifunze closures: 4: Student
+      Unganisha vipengele: 4: Student
+    section Mwingiliano
+      Sanidi matukio ya buruta: 4: Student
+      Fuatilia kuratibu: 5: Student
+      Simamia harakati: 5: Student
+    section Kuhariri
+      Ongeza usafi: 4: Student
+      Jaribu utendakazi: 5: Student
+      Kamilisha terrarium: 5: Student
+```
+![DOM na kifunga](../../../../translated_images/sw/webdev101-js.10280393044d7eaa.webp)
 > Sketchnote na [Tomomi Imura](https://twitter.com/girlie_mac)
 
-## Jaribio la Kabla ya Somo
+Karibu katika mojawapo ya sehemu zinazovutia zaidi za maendeleo ya wavuti - kufanya mambo kuwa ya kuingiliana! Mfano wa Kitu cha Nyaraka (DOM) ni kama daraja kati ya HTML yako na JavaScript, na leo tutautumia kuleta terrarium yako kuishi. Wakati Tim Berners-Lee aliuumba kivinjari cha kwanza cha wavuti, aliona wavuti ambako nyaraka zinaweza kuwa za mabadiliko na kuingiliana - DOM hufanikisha maono hayo.
 
-[Jaribio la kabla ya somo](https://ff-quizzes.netlify.app/web/quiz/19)
+Tutaangalia pia mifungo ya JavaScript, ambayo huenda ikaonekana ya kuogopesha mwanzoni. Fikiria mifungo kama kuunda "mfuko wa kumbukumbu" ambapo kazi zako zinaweza kukumbuka taarifa muhimu. Ni kama kila mmea katika terrarium yako kuwa na rekodi yake ya data kufuatilia nafasi yake. Mwishoni mwa somo hili, utaelewa jinsi gani ni za asili na za manufaa.
 
-### Utangulizi
+Hivi ndivyo tunavyojenga: terrarium ambapo watumiaji wanaweza kuvuta na kudondosha mimea popote walipotaka. Utajifunza mbinu za udhibiti wa DOM zinazochochea kila kitu kuanzia upakiaji wa faili kwa njia ya kuvuta-na-kudondosha hadi michezo ya kuingiliana. Hebu tufanye terrarium yako kuishi.
 
-Kudhibiti DOM, au "Document Object Model", ni kipengele muhimu cha maendeleo ya wavuti. Kulingana na [MDN](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction), "Document Object Model (DOM) ni uwakilishi wa data wa vitu vinavyounda muundo na maudhui ya hati kwenye wavuti." Changamoto zinazohusiana na udhibiti wa DOM kwenye wavuti mara nyingi zimekuwa sababu ya kutumia mifumo ya JavaScript badala ya JavaScript ya kawaida (vanilla JavaScript) ili kudhibiti DOM, lakini tutaweza kufanya hivyo sisi wenyewe!
+```mermaid
+mindmap
+  root((DOM & JavaScript))
+    DOM Tree
+      Uchaguzi wa Kivuli
+      Upatikanaji wa Mali
+      Usimamizi wa Matukio
+      Sasisho za Mbadala
+    Matukio
+      Matukio ya Kidole
+      Matukio ya Panya
+      Matukio ya Kugusa
+      Wasikilizaji wa Matukio
+    Funga
+      Vigezo Binafsi
+      Eneo la Kazi la Kazi
+      Hifadhi ya Kumbukumbu
+      Usimamizi wa Hali
+    Drag & Drop
+      Ufuatiliaji wa Nafasi
+      Hisabati za Msimbo
+      Mzunguko wa Matukio
+      Mwingiliano wa Mtumiaji
+    Mifumo ya Kisasa
+      Ugawaji wa Matukio
+      Utendaji
+      Vifaa Anuwai
+      Upatikanaji
+```
+## Mtihani wa Awali wa Mhaulizio
 
-Zaidi ya hayo, somo hili litatambulisha wazo la [closure ya JavaScript](https://developer.mozilla.org/docs/Web/JavaScript/Closures), ambalo unaweza kufikiria kama kazi iliyofungwa ndani ya kazi nyingine ili kazi ya ndani iweze kufikia upeo wa kazi ya nje.
+[Mtihani wa awali](https://ff-quizzes.netlify.app/web/quiz/19)
 
-> Closure za JavaScript ni mada pana na ngumu. Somo hili linagusia wazo la msingi kabisa kwamba katika msimbo wa terrarium hii, utapata closure: kazi ya ndani na kazi ya nje iliyojengwa kwa njia inayoruhusu kazi ya ndani kufikia upeo wa kazi ya nje. Kwa maelezo zaidi kuhusu jinsi hii inavyofanya kazi, tafadhali tembelea [nyaraka za kina](https://developer.mozilla.org/docs/Web/JavaScript/Closures).
+## Kuelewa DOM: Mlango wako wa Kurasa za Wavuti zinazoingiliana
 
-Tutatumia closure kudhibiti DOM.
+Mfano wa Kitu cha Nyaraka (DOM) ni jinsi JavaScript inavyowasiliana na vipengele vya HTML vyako. Wakati kivinjari chako kinapopakia ukurasa wa HTML, huunda uwakilishi uliopangwa wa ukurasa huo kwenye kumbukumbu - huo ndiyo DOM. Fikiria kama mti wa familia ambapo kila kipengele cha HTML ni mwanafamilia ambaye JavaScript anaweza kufikia, kubadilisha, au kupanga upya.
 
-Fikiria DOM kama mti, unaowakilisha njia zote ambazo hati ya ukurasa wa wavuti inaweza kudhibitiwa. API mbalimbali (Application Program Interfaces) zimeandikwa ili kuruhusu programu, kwa kutumia lugha yao ya programu wanayoipenda, kufikia DOM na kuhariri, kubadilisha, kupanga upya, na kudhibiti kwa njia nyingine.
+Udhibiti wa DOM hubadilisha kurasa tuli kuwa tovuti zinazoweza kuingiliana. Kila wakati unaona kitufe kinabadilisha rangi unapoelekeza kipanya juu, maudhui kubadilika bila kupakia upya ukurasa, au vipengele ambavyo unaweza kuvuta kuzunguka, hiyo ni udhibiti wa DOM ukiwa kazini.
 
-![Uwakilishi wa mti wa DOM](../../../../translated_images/dom-tree.7daf0e763cbbba9273f9a66fe04c98276d7d23932309b195cb273a9cf1819b42.sw.png)
+```mermaid
+flowchart TD
+    A["Hati"] --> B["HTML"]
+    B --> C["Kichwa"]
+    B --> D["Mwili"]
+    C --> E["Kichwa cha Habari"]
+    C --> F["Lebo za Meta"]
+    D --> G["H1: Kitalu Changu cha Mimea"]
+    D --> H["Div: Kontena la Ukurasa"]
+    H --> I["Div: Kontena la Kushoto"]
+    H --> J["Div: Kontena la Kulia"]
+    H --> K["Div: Kitalu"]
+    I --> L["Viwango vya Mimea 1-7"]
+    J --> M["Viwango vya Mimea 8-14"]
+    
+    L --> N["img#plant1"]
+    L --> O["img#plant2"]
+    M --> P["img#plant8"]
+    M --> Q["img#plant9"]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style D fill:#e8f5e8
+    style H fill:#fff3e0
+    style N fill:#ffebee
+    style O fill:#ffebee
+    style P fill:#ffebee
+    style Q fill:#ffebee
+```
+![Uwawakilishi wa mti wa DOM](../../../../translated_images/sw/dom-tree.7daf0e763cbbba92.webp)
 
-> Uwakilishi wa DOM na alama ya HTML inayoiashiria. Kutoka kwa [Olfa Nasraoui](https://www.researchgate.net/publication/221417012_Profile-Based_Focused_Crawler_for_Social_Media-Sharing_Websites)
+> Uwawakilishi wa DOM na alama za HTML zinazomrejelea. Kutoka kwa [Olfa Nasraoui](https://www.researchgate.net/publication/221417012_Profile-Based_Focused_Crawler_for_Social_Media-Sharing_Websites)
 
-Katika somo hili, tutakamilisha mradi wetu wa terrarium wa mwingiliano kwa kuunda JavaScript itakayomruhusu mtumiaji kudhibiti mimea kwenye ukurasa.
+**Hivi ndivyo DOM inavyofaidi:**
+- **Hutoa** njia iliyopangwa ya kufikia kipengele chochote kwenye ukurasa wako
+- **Inawezesha** masasisho ya maudhui ya mabadiliko bila kupakia upya ukurasa
+- **Inaruhusu** majibu ya papo kwa papo kwa mwingiliano wa mtumiaji kama mibofyo na kuvuta
+- **Inaweka** msingi wa programu za wavuti za kisasa zinazoweza kuingiliana
 
-### Mahitaji ya Awali
+## Mifungo ya JavaScript: Kuunda Msimbo uliopangwa, wenye Nguvu
 
-Unapaswa kuwa na HTML na CSS ya terrarium yako tayari. Kufikia mwisho wa somo hili utaweza kuhamisha mimea ndani na nje ya terrarium kwa kuiburuta.
+[Mfunga wa JavaScript](https://developer.mozilla.org/docs/Web/JavaScript/Closures) ni kama kumpa kazi eneo lake la kazi la kibinafsi lenye kumbukumbu endelevu. Fikiria jinsi ndege wa Darwin kwenye Visiwa vya Galápagos walivyojifunza kumiliki mdomo maalum kulingana na mazingira yao maalum - mifungo hufanya vivyo hivyo, kuunda kazi maalum zinazokumbuka muktadha wao hata baada ya kazi mama kumaliza.
 
-### Kazi
+Katika terrarium yetu, mifungo husaidia mmea kila mmoja kukumbuka nafasi yake binafsi kwa uhuru. Mpangilio huu unaonekana katika maendeleo ya kitaalamu ya JavaScript, na kufanya kuwa dhana muhimu kuelewa.
 
-Katika folda yako ya terrarium, tengeneza faili mpya inayoitwa `script.js`. Ingiza faili hiyo katika sehemu ya `<head>`:
+```mermaid
+flowchart LR
+    A["dragElement(plant1)"] --> B["Inaunda Closure"]
+    A2["dragElement(plant2)"] --> B2["Inaunda Closure"]
+    
+    B --> C["Vigezo Binafsi"]
+    B2 --> C2["Vigezo Binafsi"]
+    
+    C --> D["pos1, pos2, pos3, pos4"]
+    C --> E["kazi ya pointerDrag"]
+    C --> F["kazi ya elementDrag"]
+    C --> G["kazi ya stopElementDrag"]
+    
+    C2 --> D2["pos1, pos2, pos3, pos4"]
+    C2 --> E2["kazi ya pointerDrag"]
+    C2 --> F2["kazi ya elementDrag"]
+    C2 --> G2["kazi ya stopElementDrag"]
+    
+    H["Mmea 1 unakumbuka nafasi yake"] --> B
+    H2["Mmea 2 unakumbuka nafasi yake"] --> B2
+    
+    style B fill:#e8f5e8
+    style B2 fill:#e8f5e8
+    style C fill:#fff3e0
+    style C2 fill:#fff3e0
+```
+> 💡 **Kuelewa Mifungo**: Mifungo ni mada muhimu katika JavaScript, na wengi wa watengenezaji huwatumia kwa miaka kabla ya kuelewa pande zote za nadharia. Leo, tutazingatia matumizi ya vitendo - utaona mifungo ikitokea asili unapotengeneza vipengele vyetu vinavyoingiliana. Uelewa utaendelea unapoona jinsi zinavyotatua matatizo halisi.
+
+![Uwawakilishi wa mti wa DOM](../../../../translated_images/sw/dom-tree.7daf0e763cbbba92.webp)
+
+> Uwawakilishi wa DOM na alama za HTML zinazomrejelea. Kutoka kwa [Olfa Nasraoui](https://www.researchgate.net/publication/221417012_Profile-Based_Focused_Crawler_for_Social_Media-Sharing_Websites)
+
+Katika somo hili, tutamaliza mradi wetu wa terrarium unaoingiliana kwa kuunda JavaScript itakayomruhusu mtumiaji kudhibiti mimea kwenye ukurasa.
+
+## Kabla ya Kuanza: Kujiandaa kwa Mafanikio
+
+Utahitaji faili zako za HTML na CSS kutoka masomo ya terrarium yaliyopita - tunakaribia kufanya muundo huo tuli kuwa wa kuingiliana. Ukijiunga kwa mara ya kwanza, kumaliza masomo hayo kwanza kutakupa muktadha muhimu.
+
+Hapa ni kile tutakachojenga:
+- **Uvuta-na-kudondosha laini** kwa mimea yote ya terrarium
+- **Ufuatiliaji wa msimamo** ili mimea ikumbuke nafasi zao
+- **Kiolesura kamili cha kuingiliana** kwa kutumia JavaScript ya msingi
+- **Msimbo safi, uliopangwa** kwa kutumia mifumo ya mifungo
+
+## Kuanzisha Faili lako la JavaScript
+
+Hebu tuunde faili la JavaScript litakalofanya terrarium yako kuingiliana.
+
+**Hatua 1: Unda faili lako la script**
+
+Ndani ya folda ya terrarium, unda faili mpya liitwacho `script.js`.
+
+**Hatua 2: Unganisha JavaScript kwenye HTML yako**
+
+Ongeza alama hii ya script kwenye sehemu ya `<head>` ya faili yako `index.html`:
 
 ```html
-	<script src="./script.js" defer></script>
+<script src="./script.js" defer></script>
 ```
 
-> Kumbuka: tumia `defer` unapojumuisha faili ya nje ya JavaScript kwenye faili ya html ili kuruhusu JavaScript kutekelezwa tu baada ya faili ya HTML kupakiwa kikamilifu. Unaweza pia kutumia sifa ya `async`, ambayo inaruhusu script kutekelezwa wakati faili ya HTML inachakatwa, lakini katika kesi yetu, ni muhimu kuwa na vipengele vya HTML vinavyopatikana kikamilifu kwa kuburuta kabla ya kuruhusu script ya kuburuta kutekelezwa.
+**Kwa nini sifa ya `defer` ni muhimu:**
+- **Hakikisha** JavaScript yako inasubiri hadi HTML yote ipakwe
+- **Zuia** makosa ambapo JavaScript inatafuta vipengele ambavyo bado havijakuja
+- **Thibitisha** vipengele vyote vya mmea vipo kwa ajili ya mwingiliano
+- **Toa** utendaji bora kuliko kuweka script chini ya ukurasa
+
+> ⚠️ **Kumbuka Muhimu**: Sifa ya `defer` huzuia matatizo ya muda wa utekelezaji. Bila yake, JavaScript inaweza kujaribu kufikia vipengele vya HTML kabla havijapakuliwa na kusababisha makosa.
+
 ---
 
-## Vipengele vya DOM
+## Kuunganisha JavaScript na Vipengele vya HTML
 
-Jambo la kwanza unalohitaji kufanya ni kuunda marejeleo kwa vipengele unavyotaka kudhibiti katika DOM. Katika kesi yetu, ni mimea 14 ambayo kwa sasa inasubiri kwenye upau wa pembeni.
+Kabala ya kufanya vipengele viweze kuvutwa, JavaScript inahitaji kuvitambua ndani ya DOM. Fikiria kama mfumo wa maktaba wa upangaji - mara unapopewa nambari ya katalogi, unaweza kupata kitabu unachohitaji na kufikia yaliyomo ndani yake.
 
-### Kazi
+Tutatumia mbinu ya `document.getElementById()` kuunda uhusiano huu. Ni kama kuwa na mfumo wa faili sahihi - unatoa ID na inatafuta kipengele husika cha HTML.
 
-```html
+### Kuwezesha Uvuto kwa Mimea Yote
+
+Ongeza msimbo huu kwenye faili lako `script.js`:
+
+```javascript
+// Wezesha utendakazi wa kuvuta kwa mimea yote 14
 dragElement(document.getElementById('plant1'));
 dragElement(document.getElementById('plant2'));
 dragElement(document.getElementById('plant3'));
@@ -72,159 +207,556 @@ dragElement(document.getElementById('plant13'));
 dragElement(document.getElementById('plant14'));
 ```
 
-Nini kinaendelea hapa? Unarejelea hati na kutafuta kupitia DOM yake ili kupata kipengele chenye Id fulani. Kumbuka katika somo la kwanza la HTML kwamba ulitoa Id za kipekee kwa kila picha ya mmea (`id="plant1"`)? Sasa utatumia juhudi hiyo. Baada ya kutambua kila kipengele, unakipitisha kwa kazi inayoitwa `dragElement` ambayo utajenga muda mfupi ujao. Hivyo, kipengele katika HTML sasa kinaweza kuburudishwa, au kitakuwa hivi karibuni.
+**Hili ndilo msimbo unaofanikisha:**
+- **Inatambua** kila kipengele cha mmea ndani ya DOM kwa kutumia ID yake ya kipekee
+- **Inapata** rejea ya JavaScript kwa kila kipengele cha HTML
+- **Inapitisha** kila kipengele kwenye kazi ya `dragElement` (ambayo tutaunda baadaye)
+- **Inaandaa** kila mmea kuingiliana kwa kuvuta-na-kudondosha
+- **Inaunda** muunganisho kati ya muundo wako wa HTML na utendaji wa JavaScript
 
-✅ Kwa nini tunarejelea vipengele kwa Id? Kwa nini si kwa darasa la CSS? Unaweza kurejelea somo la awali la CSS kujibu swali hili.
+> 🎯 **Kwa nini kutumia IDs badala ya Madarasa?** IDs hutoa vitambulisho vya kipekee kwa vipengele maalum, wakati madarasa ya CSS yameundwa kwa ajili ya kusanifu makundi ya vipengele. Wakati JavaScript inapotaka kudhibiti vipengele binafsi, IDs hutoa usahihi na utendaji unaohitajika.
+
+> 💡 **Vidokezo vya Kitaalamu**: Angalia jinsi tunavyoitisha `dragElement()` kwa kila mmea kibinafsi. Njia hii huhakikisha mmea kila mmoja anapata tabia yake ya kuvuta inayojitegemea, jambo muhimu kwa mwingiliano laini wa mtumiaji.
+
+### 🔄 **Ukaguzi wa Kikisio**
+**Kuelewa Muunganisho wa DOM**: Kabla ya kuhamia kwenye uvuto, hakikisha unaweza:
+- ✅ Eleza jinsi `document.getElementById()` inavyotafuta vipengele vya HTML
+- ✅ Elewa kwa nini tunatumia IDs za kipekee kwa kila mmea
+- ✅ Eleza lengo la sifa ya `defer` katika alama za script
+- ✅ Tambua jinsi JavaScript na HTML vinavyounganishwa kupitia DOM
+
+**Jaribio la Kujitathmini**: Nini kingeendelea kama vipengele viwili vingekuwa na ID moja? Kwa nini `getElementById()` inarudisha kipengele kimoja tu?
+*Jibu: IDs zinapaswa kuwa za kipekee; kama zinafanana, kipengele cha kwanza tu ndicho kinachorejeshwa*
 
 ---
 
-## Closure
+## Kuunda Mfunga wa Kitu cha Kuvuta
 
-Sasa uko tayari kuunda closure ya `dragElement`, ambayo ni kazi ya nje inayofunga kazi ya ndani au kazi (katika kesi yetu, tutakuwa na tatu).
+Sasa tutaunda moyo wa utendaji wa kuvuta: mfunga ambao unasimamia tabia ya kuvuta kwa kila mmea. Mfunga huu utakuwa na kazi nyingi za ndani zinazofanya kazi pamoja kufuatilia mienendo ya kipanya na kusasisha nafasi za vipengele.
 
-Closure ni muhimu wakati kazi moja au zaidi zinahitaji kufikia upeo wa kazi ya nje. Hapa kuna mfano:
+Mifungo ni bora kwa kazi hii kwa sababu huwapa uwezo wa kuunda "vigezo binafsi" ambavyo hudumu kati ya miito ya kazi, huku kila mmea anapata mfumo wake wa kufuatilia mwelekeo wa nafasi.
+
+### Kuelewa Mifungo kwa Mfano Rahisi
+
+Nikuonyeshe mifungo kwa mfano rahisi unaoelezea dhana:
 
 ```javascript
-function displayCandy(){
-	let candy = ['jellybeans'];
-	function addCandy(candyType) {
-		candy.push(candyType)
-	}
-	addCandy('gumdrops');
+function createCounter() {
+    let count = 0; // Hii ni kama tofauti binafsi
+    
+    function increment() {
+        count++; // Kazi ya ndani inakumbuka tofauti ya nje
+        return count;
+    }
+    
+    return increment; // Tunarejesha kazi ya ndani
 }
-displayCandy();
-console.log(candy)
+
+const myCounter = createCounter();
+console.log(myCounter()); // 1
+console.log(myCounter()); // 2
 ```
 
-Katika mfano huu, kazi ya `displayCandy` inazunguka kazi inayosukuma aina mpya ya pipi kwenye safu ambayo tayari ipo kwenye kazi. Ikiwa ungeendesha msimbo huu, safu ya `candy` ingekuwa haijafafanuliwa, kwani ni kigezo cha ndani (cha ndani ya closure).
+**Hivi ndivyo muundo huu wa mfunga unavyofanya kazi:**
+- **Hutengeneza** kigezo binafsi cha `count` ambacho kiko tu ndani ya mfunga huu
+- **Kazi ya ndani** inaweza kufikia na kubadilisha kigezo hicho cha nje (mfumo wa mfunga)
+- **Tunaporudisha** kazi ya ndani, inaendelea kuungana na data hiyo binafsi
+- **Hata baada** ya `createCounter()` kumalizika, `count` hudumu na kukumbuka thamani yake
 
-✅ Unawezaje kufanya safu ya `candy` ipatikane? Jaribu kuihamisha nje ya closure. Kwa njia hii, safu inakuwa ya kimataifa, badala ya kubaki tu inapatikana kwa upeo wa ndani wa closure.
+### Kwa Nini Mifungo ni Kamili kwa Uvuto
 
-### Kazi
+Kwa terrarium yetu, kila mmea unahitaji kukumbuka msimamo wake wa sasa. Mifungo hutoa suluhisho bora:
 
-Chini ya matamko ya vipengele katika `script.js`, tengeneza kazi:
+**Manufaa muhimu kwa mradi wetu:**
+- **Inadumisha** vigezo binafsi vya msimamo kwa kila mmea kwa uhuru
+- **Inahifadhi** data ya mwelekeo kati ya matukio ya kuvuta
+- **Inazuia** migongano ya vigezo kati ya vipengele tofauti vinavyovutwa
+- **Inaunda** muundo wa msimbo safi na uliopangwa
+
+> 🎯 **Lengo la Kujifunza**: Huhitaji kuwa mtaalamu wa kila kipengele cha mifungo sasa hivi. Lenga kuona jinsi zinavyotusaidia kupanga msimbo na kudumisha hali kwa utendaji wa kuvuta.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Ready: Ukurasa unapakia
+    Ready --> DragStart: Mtumiaji bonyeza chini (pointerdown)
+    DragStart --> Dragging: Pembeja kidole/mswaki huenda (pointermove)
+    Dragging --> Dragging: Endelea kusogea
+    Dragging --> DragEnd: Mtumiaji anaachilia (pointerup)
+    DragEnd --> Ready: Weka upya kwa mnyororo ujao
+    
+    state DragStart {
+        [*] --> CapturePosition
+        CapturePosition --> SetupListeners
+        SetupListeners --> [*]
+    }
+    
+    state Dragging {
+        [*] --> CalculateMovement
+        CalculateMovement --> UpdatePosition
+        UpdatePosition --> [*]
+    }
+    
+    state DragEnd {
+        [*] --> RemoveListeners
+        RemoveListeners --> CleanupState
+        CleanupState --> [*]
+    }
+```
+### Kuunda Kazi ya dragElement
+
+Sasa tujenge kazi kuu inayoshughulikia mantiki yote ya kuvuta. Ongeza kazi hii chini ya utangulizi wa vipengele bya mimea:
 
 ```javascript
 function dragElement(terrariumElement) {
-	//set 4 positions for positioning on the screen
-	let pos1 = 0,
-		pos2 = 0,
-		pos3 = 0,
-		pos4 = 0;
-	terrariumElement.onpointerdown = pointerDrag;
+    // Anzisha vigezo vya kufuatilia nafasi
+    let pos1 = 0,  // Nafasi ya kipanya ya X ya awali
+        pos2 = 0,  // Nafasi ya kipanya ya Y ya awali
+        pos3 = 0,  // Nafasi ya kipanya ya X ya sasa
+        pos4 = 0;  // Nafasi ya kipanya ya Y ya sasa
+    
+    // Weka kisikilizaji cha tukio la kuvuta la awali
+    terrariumElement.onpointerdown = pointerDrag;
 }
 ```
 
-`dragElement` hupata kitu chake cha `terrariumElement` kutoka kwa matamko juu ya script. Kisha, unaweka nafasi za ndani kwa `0` kwa kipengele kilichopitishwa kwenye kazi. Hizi ni vigezo vya ndani ambavyo vitadhibitiwa kwa kila kipengele unapoongeza utendaji wa kuburuta na kuacha ndani ya closure kwa kila kipengele. Terrarium itajazwa na vipengele hivi vilivyoburudishwa, kwa hivyo programu inahitaji kufuatilia mahali vinapowekwa.
+**Kuelewa mfumo wa kufuatilia maeneo:**
+- **`pos1` na `pos2`**: Huhifadhi tofauti kati ya nafasi za kipanya za zamani na mpya
+- **`pos3` na `pos4`**: Hufuata kuratibu za sasa za kipanya
+- **`terrariumElement`**: Kipengele maalum cha mmea tunachotaka kuweza kuvutwa
+- **`onpointerdown`**: Tukio linalochochewa mtu anapochagua na kuanza kuvuta
 
-Zaidi ya hayo, kipengele cha terrarium kinachopitishwa kwa kazi hii kinapewa tukio la `pointerdown`, ambalo ni sehemu ya [API za wavuti](https://developer.mozilla.org/docs/Web/API) zilizoundwa kusaidia na usimamizi wa DOM. `onpointerdown` hufanyika wakati kitufe kinapobonyezwa, au katika kesi yetu, kipengele kinachoweza kuburudishwa kinapoguswa. Mdhibiti wa tukio hili hufanya kazi kwenye [vivinjari vya wavuti na simu](https://caniuse.com/?search=onpointerdown), na baadhi ya tofauti.
+**Hivi ndivyo muundo wa mfunga unavyofanya kazi:**
+- **Hutengeneza** vigezo binafsi vya nafasi kwa kila mmea
+- **Hudumisha** vigezo hivi wakati wote wa mzunguko wa uvuto
+- **Huthibitisha** kila mmea kufuatilia nafasi zake binafsi bila kuingiliana
+- **Hutoa** kiolesura safi kupitia kazi ya `dragElement`
 
-✅ Mdhibiti wa tukio [`onclick`](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onclick) una msaada mkubwa zaidi wa kuvuka vivinjari; kwa nini usingetumia hapa? Fikiria aina halisi ya mwingiliano wa skrini unayojaribu kuunda hapa.
+### Kwa Nini Tutumie Matukio ya Pointer?
+
+Huenda unajiuliza kwa nini tunatumia `onpointerdown` badala ya `onclick` inayojulikana zaidi. Hapa sababu ni:
+
+| Aina ya Tukio | Inafaa Kwa | Kificho |
+|---------------|------------|---------|
+| `onclick` | Bonyeza vitufe rahisi | Haiwezi kushughulikia uvuto (ni bonyeza na kuachia tu) |
+| `onpointerdown` | Picha ya kipanya na mguso | Mpya, lakini inaungwa mkono vizuri sasa |
+| `onmousedown` | Kipanya cha kompyuta tu | Washaifu wa simu wanachukuliwa pembeni |
+
+**Kwa nini matukio ya pointer ni kamili kwa kile tunachojenga:**
+- **Hufanya kazi vizuri** ama mtu anatumia kipanya, kidole, au kalamu ya kidijitali
+- **Huhisi sawa** katika kompyuta, kompyuta kibao, au simu
+- **Inasimamia** mwendo halisi wa uvuto (si kubofya tu)
+- **Hutoa** uzoefu laini unaotarajiwa kwenye programu za wavuti za kisasa
+
+> 💡 **Kujikinga na Mabadiliko ya Baadaye**: Matukio ya pointer ni njia ya kisasa ya kushughulikia mwingiliano wa mtumiaji. Badala ya kuandika msimbo tofauti kwa kipanya na mguso, unapata yote kwa bure. Ni njia nzuri, sivyo?
+
+### 🔄 **Ukaguzi wa Kikisio**
+**Kuelewa Udhibiti wa Tukio**: Simama kidogo kuthibitisha uelewa wako:
+- ✅ Kwa nini tunatumia matukio ya pointer badala ya matukio ya kipanya?
+- ✅ Vigezo vya mfunga hudumu vipi kati ya miito ya kazi?
+- ✅ Jukumu la `preventDefault()` katika kuvuta kwa urahisi ni gani?
+- ✅ Kwa nini tunapeleka wasikilizi kwenye hati badala ya vipengele binafsi?
+
+**Muunganisho Halisi**: Fikiria kuhusu kiolesura cha kuvuta-na-kudondosha unakitumia kila siku:
+- **Upakiaji wa faili**: Kuvuta faili ndani ya dirisha la kivinjari
+- **Bodi za Kanban**: Kuhamisha kazi kati ya nguzo
+- **Makumbusho ya picha**: Kuandaa upya mpangilio wa picha
+- **Kiolesura cha simu**: Kunusuru na kuvuta kwenye skrini za kugusa
 
 ---
 
-## Kazi ya Pointerdrag
+## Kazi ya pointerDrag: Kukamata Mwanzo wa Uvuto
 
-`terrariumElement` sasa iko tayari kuburudishwa; wakati tukio la `onpointerdown` linapofanyika, kazi ya `pointerDrag` inaitwa. Ongeza kazi hiyo chini ya mstari huu: `terrariumElement.onpointerdown = pointerDrag;`:
+Mtu anapobonyeza mmea (kwa kubofya kipanya au mguso kidole), kazi ya `pointerDrag` huanza kufanya kazi. Kazi hii hukamata kuratibu za mwanzo na kuanzisha mfumo wa uvuto.
 
-### Kazi 
+Ongeza kazi hii ndani ya mfunga wako wa `dragElement`, mara baada ya mstari `terrariumElement.onpointerdown = pointerDrag;`:
 
 ```javascript
 function pointerDrag(e) {
-	e.preventDefault();
-	console.log(e);
-	pos3 = e.clientX;
-	pos4 = e.clientY;
+    // Zuia tabia ya kuvinjari ya kawaida (kama uteuzi wa maandishi)
+    e.preventDefault();
+    
+    // Chukua eneo la mwanzo la panya/ugusa
+    pos3 = e.clientX;  // Msingi wa X ulipoanza buruta
+    pos4 = e.clientY;  // Msingi wa Y ulipoanza buruta
+    
+    // Weka wasikilizaji wa matukio kwa mchakato wa kuvuta
+    document.onpointermove = elementDrag;
+    document.onpointerup = stopElementDrag;
 }
 ```
 
-Mambo kadhaa hufanyika. Kwanza, unazuia matukio ya msingi ambayo kawaida hutokea kwenye pointerdown kwa kutumia `e.preventDefault();`. Kwa njia hii unakuwa na udhibiti zaidi juu ya tabia ya kiolesura.
+**Hatua kwa hatua, hivi ndivyo kinavyotokea:**
+- **Huzuia** mienendo ya asili ya kivinjari ambayo inaweza kuingilia uvuto
+- **Hurekodi** hasa kuratibu ambapo mtumiaji alianza ishara ya kuvuta
+- **Huweka** wasikilizi wa tukio kwa mwendo unaoendelea wa uvuto
+- **Inajenga** mfumo wa kufuatilia mwendo wa kipanya/kidole katika hati nzima
 
-> Rudi kwenye mstari huu unapomaliza kujenga faili ya script na ujaribu bila `e.preventDefault()` - nini kinatokea?
+### Kuelewa Kuzuia Tukio
 
-Pili, fungua `index.html` kwenye dirisha la kivinjari, na ukague kiolesura. Unapobofya mmea, unaweza kuona jinsi tukio la 'e' linavyonaswa. Chunguza tukio hilo ili kuona ni kiasi gani cha taarifa kinachokusanywa na tukio moja la pointerdown!  
+Mstari wa `e.preventDefault()` ni muhimu kwa uvuto laini:
 
-Kisha, angalia jinsi vigezo vya ndani `pos3` na `pos4` vinavyowekwa kwa e.clientX. Unaweza kupata maadili ya `e` kwenye paneli ya ukaguzi. Maadili haya yanakamata viwianishi vya x na y vya mmea wakati unapoibofya au kuigusa. Utahitaji udhibiti wa kina juu ya tabia ya mimea unapobofya na kuiburuta, kwa hivyo unafuatilia viwianishi vyake.
+**Bila kuzuia, vivinjari vinaweza:**
+- **Kuchagua** maandishi unavyovutwa katika ukurasa
+- **Kusababisha** menyu za muktadha wakati wa kuvuta kwa kitufe cha kulia
+- **Kuingilia** tabia yetu ya kuvuta iliyobinafsishwa
+- **Kuumba** athari za kuona wakati wa uvuto
 
-✅ Je, inazidi kuwa wazi kwa nini programu hii yote imejengwa na closure moja kubwa? Ikiwa haingekuwa hivyo, ungewezaje kudumisha upeo kwa kila moja ya mimea 14 inayoweza kuburudishwa?
+> 🔍 **Jaribu**: Baada ya kumaliza somo hili, jaribu kuondoa `e.preventDefault()` uone jinsi inavyoathiri uzoefu wa kuvuta. Utazoea haraka kwa nini mstari huu ni muhimu!
 
-Kamilisha kazi ya awali kwa kuongeza udhibiti wa matukio mawili zaidi ya pointer chini ya `pos4 = e.clientY`:
+### Mfumo wa Kufuatilia Kuratibu
 
-```html
+Mali `e.clientX` na `e.clientY` hutoa kuratibu halisi za kipanya/mguso:
+
+| Mali | Kinachopimwa | Matumizi |
+|-------|--------------|----------|
+| `clientX` | Nafasi ya usawa katika dirisha | Kufuatilia mwelekeo wa kushoto-kulia |
+| `clientY` | Nafasi ya wima katika dirisha | Kufuatilia mwelekeo wa juu-chini |
+**Kuelewa hizi kuratibu:**
+- **Inatoa** habari ya kuweka mahali kwa umbo na piksela kamili
+- **Inasasisha** kwa wakati halisi wakati mtumiaji anahamisha pointer yao
+- **Inabaki** thabiti kupitia ukubwa tofauti wa skrini na viwango vya kuzuia
+- **Inawezesha** mwingiliano laini, wa majibu ya buruta
+
+### Kuweka Wasikilizaji wa Tukio Kwenye Kiwango cha Hati
+
+Angalia jinsi tunavyounganisha matukio ya kusogeza na kusitisha kwenye `document` nzima, si tu kwenye kipengee cha mmea:
+
+```javascript
 document.onpointermove = elementDrag;
 document.onpointerup = stopElementDrag;
 ```
-Sasa unaonyesha kwamba unataka mmea uburudishwe pamoja na pointer unapouhamisha, na kwa ishara ya kuburuta kusimama unapochagua mmea. `onpointermove` na `onpointerup` zote ni sehemu ya API sawa na `onpointerdown`. Kiolesura sasa kitatoa makosa kwani bado hujafafanua kazi za `elementDrag` na `stopElementDrag`, kwa hivyo zijenge baadaye.
 
-## Kazi za elementDrag na stopElementDrag
+**Kwa nini kuambatanisha kwenye hati:**
+- **Inaendelea** kufuatilia hata mtindo wa panya utakapotoa kipengee cha mmea
+- **Inazuia** kukatizwa kwa buruta kama mtumiaji anahama haraka
+- **Inatoa** buruta laini katika skrini nzima
+- **Inashughulikia** kesi za msalaba ambapo pointer inatoka nje ya dirisha la kivinjari
 
-Utakamilisha closure yako kwa kuongeza kazi mbili za ndani ambazo zitasimamia kinachotokea unapoburuta mmea na kusimamisha kuburuta. Tabia unayotaka ni kwamba unaweza kuburuta mmea wowote wakati wowote na kuuweka mahali popote kwenye skrini. Kiolesura hiki hakina maoni mengi (hakuna eneo la kuacha kwa mfano) ili kukuruhusu kubuni terrarium yako jinsi unavyotaka kwa kuongeza, kuondoa, na kupanga upya mimea.
+> ⚡ **Kumbuka Utendaji**: Tutasafisha wasikilizaji hawa wa kiwango cha hati wakati buruta itakaposimama ili kuepuka kuvuja kumbukumbu na matatizo ya utendaji.
 
-### Kazi
+## Kukamilisha Mfumo wa Buruta: Mwigiliano na Usafishaji
 
-Ongeza kazi ya `elementDrag` mara baada ya mabano ya kufunga ya `pointerDrag`:
+Sasa tutaongeza kazi mbili zilizobaki zinazoshughulikia mwendo halisi wa buruta na usafishaji wakati buruta inaposimama. Kazi hizi hufanya kazi pamoja kuunda mwendo laini, wa majibu wa mmea ndani ya terrarium yako.
+
+### Kazi elementDrag: Kufuatilia Mwendo
+
+Ongeza kazi `elementDrag` mara baada ya mkato wa kufunga wa `pointerDrag`:
 
 ```javascript
 function elementDrag(e) {
-	pos1 = pos3 - e.clientX;
-	pos2 = pos4 - e.clientY;
-	pos3 = e.clientX;
-	pos4 = e.clientY;
-	console.log(pos1, pos2, pos3, pos4);
-	terrariumElement.style.top = terrariumElement.offsetTop - pos2 + 'px';
-	terrariumElement.style.left = terrariumElement.offsetLeft - pos1 + 'px';
+    // Hesabu umbali uliosogezwa tangu tukio la mwisho
+    pos1 = pos3 - e.clientX;  // Umbali wa usawa uliosogezwa
+    pos2 = pos4 - e.clientY;  // Umbali wa wima uliosogezwa
+    
+    // Sasisha ufuatiliaji wa nafasi ya sasa
+    pos3 = e.clientX;  // Nafasi mpya ya sasa ya X
+    pos4 = e.clientY;  // Nafasi mpya ya sasa ya Y
+    
+    // Tumia mabadiliko ya mwelekeo kwenye nafasi ya kipengee
+    terrariumElement.style.top = (terrariumElement.offsetTop - pos2) + 'px';
+    terrariumElement.style.left = (terrariumElement.offsetLeft - pos1) + 'px';
 }
 ```
-Katika kazi hii, unafanya mabadiliko mengi ya nafasi za awali 1-4 ulizoweka kama vigezo vya ndani katika kazi ya nje. Nini kinaendelea hapa?
 
-Unapoburuta, unarudisha upya `pos1` kwa kuifanya iwe sawa na `pos3` (ambayo uliweka awali kama `e.clientX`) ukiondoa thamani ya sasa ya `e.clientX`. Unafanya operesheni sawa kwa `pos2`. Kisha, unarudisha upya `pos3` na `pos4` kwa viwianishi vipya vya X na Y vya kipengele. Unaweza kutazama mabadiliko haya kwenye console unapoburuta. Kisha, unadhibiti mtindo wa css wa mmea ili kuweka nafasi yake mpya kulingana na nafasi mpya za `pos1` na `pos2`, ukihesabu viwianishi vya juu na kushoto vya mmea kulingana na kulinganisha ofseti yake na nafasi hizi mpya.
+**Kuelewa hesabu za kuratibu:**
+- **`pos1` na `pos2`**: Hisa jinsi panya imesogezwa tangu sasisho la mwisho
+- **`pos3` na `pos4`**: Hifadhi nafasi ya sasa ya panya kwa mahesabu yajayo
+- **`offsetTop` na `offsetLeft`**: Pata nafasi ya kipengee sasa kwenye ukurasa
+- **Mantiki ya kutoa**: Husogeza kipengee kwa kiasi kilema panya iliposogea
 
-> `offsetTop` na `offsetLeft` ni mali za CSS zinazoweka nafasi ya kipengele kulingana na ile ya mzazi wake; mzazi wake unaweza kuwa kipengele chochote ambacho hakijawekwa kama `static`. 
+```mermaid
+sequenceDiagram
+    participant User
+    participant Mouse
+    participant JavaScript
+    participant Plant
+    
+    User->>Mouse: Anza kuvuta kwenye (100, 50)
+    Mouse->>JavaScript: tukio la pointerdown
+    JavaScript->>JavaScript: Hifadhi nafasi ya awali (pos3=100, pos4=50)
+    JavaScript->>JavaScript: Weka wasikilizaji wa harakati/mwisho
+    
+    User->>Mouse: Hamisha kwenda (110, 60)
+    Mouse->>JavaScript: tukio la pointermove
+    JavaScript->>JavaScript: Hesabu: pos1=10, pos2=10
+    JavaScript->>Plant: Sasisha: kushoto += 10px, juu += 10px
+    Plant->>Plant: Onyesha katika nafasi mpya
+    
+    User->>Mouse: Achilia kwenye (120, 65)
+    Mouse->>JavaScript: tukio la pointerup
+    JavaScript->>JavaScript: Ondoa wasikilizaji
+    JavaScript->>JavaScript: Weka upya kwa vurugu inayofuata
+```
+**Hapa ni mgawanyo wa hesabu za mwendo:**
+1. **Kupima** tofauti kati ya nafasi ya zamani na mpya ya panya
+2. **Kuhesabu** kiasi cha kusogeza kipengee kulingana na mwendo wa panya
+3. **Kusasisha** mali za CSS za nafasi ya kipengee kwa wakati halisi
+4. **Kuhifadhi** nafasi mpya kama msingi wa hesabu inayofuata ya mwendo
 
-Mabadiliko haya yote ya nafasi huruhusu udhibiti wa kina wa tabia ya terrarium na mimea yake.
+### Mwakilishi wa Kielelezo wa Hesabu
 
-### Kazi 
+```mermaid
+sequenceDiagram
+    participant Mouse
+    participant JavaScript
+    participant Plant
+    
+    Mouse->>JavaScript: Hamia kutoka (100,50) hadi (110,60)
+    JavaScript->>JavaScript: Hesabu: ilihamia 10px kulia, 10px chini
+    JavaScript->>Plant: Sasisha nafasi kwa +10px kulia, +10px chini
+    Plant->>Plant: Onyesha kwenye nafasi mpya
+```
+### Kazi stopElementDrag: Kusafisha
 
-Kazi ya mwisho ya kukamilisha kiolesura ni kuongeza kazi ya `stopElementDrag` baada ya mabano ya kufunga ya `elementDrag`:
+Ongeza kazi ya usafishaji baada ya mkato wa kufunga wa `elementDrag`:
 
 ```javascript
 function stopElementDrag() {
-	document.onpointerup = null;
-	document.onpointermove = null;
+    // Ondoa wasikilizaji wa matukio ya ngazi ya hati
+    document.onpointerup = null;
+    document.onpointermove = null;
 }
 ```
 
-Kazi hii ndogo inarudisha upya matukio ya `onpointerup` na `onpointermove` ili uweze kuanzisha upya maendeleo ya mmea wako kwa kuanza kuiburuta tena, au kuanza kuburuta mmea mpya.
+**Kwa nini usafishaji ni muhimu:**
+- **Inazuia** uvujaji wa kumbukumbu kutokana na wasikilizaji wa tukio waliobaki
+- **Inasimamisha** tabia ya buruta wakati mtumiaji anaacha kushika mmea
+- **Inaruhusu** vipengee vingine kuburuliwa kwa uhuru
+- **Inarejesha** mfumo kwa ajili ya operesheni inayofuata ya buruta
 
-✅ Nini kinatokea ikiwa hutoi matukio haya kuwa null?
+**Nini hutokea bila usafishaji:**
+- Wasikilizaji wa tukio wanaendelea kuwa hai hata baada ya buruta kusimama
+- Utendaji hupungua wakati wasikilizaji wasiotumika wanajitokeza
+- Tabia zisizotarajiwa zinapotokea wakati wa kuingiliana na vipengee vingine
+- Rasilimali za kivinjari hutumika bure kwa utunzaji usiohitajika wa matukio
 
-Sasa umekamilisha mradi wako!
+### Kuelewa Mali za Nafasi za CSS
 
-🥇Hongera! Umefanikiwa kumaliza terrarium yako nzuri. ![terrarium iliyokamilika](../../../../translated_images/terrarium-final.0920f16e87c13a84cd2b553a5af9a3ad1cffbd41fbf8ce715d9e9c43809a5e2c.sw.png)
+Mfumo wetu wa buruta unabadili mali mbili muhimu za CSS:
+
+| Mali     | Inasimamia Nini  | Jinsi Tunavyotumia |
+|----------|------------------|--------------------|
+| `top`    | Umbali kutoka kando ya juu | Uwekaji wima wakati wa buruta |
+| `left`   | Umbali kutoka kando ya kushoto | Uwekaji mwembamba wakati wa buruta |
+
+**Maarifa muhimu kuhusu mali za offset:**
+- **`offsetTop`**: Umbali wa sasa kutoka juu ya mzazi aliyewekwa nafasi
+- **`offsetLeft`**: Umbali wa sasa kutoka kushoto wa mzazi aliyewekwa nafasi
+- **Muktadha wa kuweka nafasi**: Thamani hizi ni kulingana na babu aliyewekwa nafasi karibu zaidi
+- **Mabadiliko kwa wakati halisi**: Hubadilika mara tu tunapobadilisha mali za CSS
+
+> 🎯 **Falsafa ya Ubunifu**: Mfumo huu wa buruta umeundwa kwa ajili ya unyumbufu mkubwa – hakuna "eneo la kutupa" wala vizingiti. Watumiaji wanaweza kuweka mimea popote, wakipewa uhuru kamili wa ubunifu katika usanifu wa terrarium yao.
+
+## Kuunganisha Yote: Mfumo Wako Kamili wa Buruta
+
+Hongera! Umeunda mfumo wa kisasa wa buruta na kuachia kwa kutumia JavaScript ya kawaida. Kazi yako kamili ya `dragElement` sasa ina kufunga imara zinazoshughulikia:
+
+**Kile kufunga kwako kunakamilisha:**
+- **Inadumisha** vigezo vya mahali binafsi kwa kila mmea kwa uhuru
+- **Inashughulikia** mizunguko kamili ya buruta kuanzia mwanzo hadi mwisho
+- **Inatoa** mwendo laini, wa majibu kupitia skrini nzima
+- **Inasafisha** rasilimali vizuri ili kuzuia uvujaji wa kumbukumbu
+- **Inaunda** kiolesura cha ubunifu chenye hisia rahisi kwa kubuni terrarium
+
+### Kuangalia Terrarium Yako ya Kimataifa
+
+Sasa jaribu terrarium yako ya kijamii! Fungua faili yako ya `index.html` kwenye kivinjari na jaribu utendakazi:
+
+1. **Bonyeza na shikilia** mmea wowote kuanza kuburuta
+2. **Hamisha panya au kidole chako** na tazama mmea ukifuata kwa urahisi
+3. **Achilia** kuacha mmea kwenye nafasi mpya
+4. **Jaribu kupanga tofauti** ili kuchunguza kiolesura
+
+🥇 **Mafanikio**: Umeunda programu ya mtandao kamili ya mwingiliano kwa kutumia misingi ambayo waendelezaji wa kitaalamu hutumia kila siku. Utendakazi huu wa buruta na kuachia unatumia misingi ile ile ya kupeleka faili, bodi za kanban, na kiolesura kingine kibaguzi.
+
+### 🔄 **Chunguzi ya Kitaalamu**
+**Kuelewa Kamili kwa Mfumo**: Thibitisha umahiri wako wa mfumo wote wa buruta:
+- ✅ Je, kufunga huendeshaje hali huru kwa kila mmea?
+- ✅ Kwa nini hesabu za kuratibu ni muhimu kwa mwendo laini?
+- ✅ Nini kingetokea tuliposahau kusafisha wasikilizaji wa matukio?
+- ✅ Mfano huu unavyoonyesha ukuaji kwa mwingiliano mgumu zaidi?
+
+**Kumbukumbu ya Ubora wa Msimbo**: Kagua suluhisho lako kamili:
+- **Ubunifu wa moduli**: Kila mmea hupata toleo lake la kufunga
+- **Ufanisi wa matukio**: Usanidi na usafishaji sahihi wa wasikilizaji
+- **Msaada wa kifaa chochote**: Hufanya kazi kwenye kompyuta na simu
+- **Uelewa wa utendaji**: Hakuna uvujaji wa kumbukumbu au mahesabu ya ziada
+
+![terrarium iliyokamilika](../../../../translated_images/sw/terrarium-final.0920f16e87c13a84.webp)
 
 ---
 
-## 🚀Changamoto
+## Changamoto ya GitHub Copilot Agent 🚀
 
-Ongeza mdhibiti mpya wa tukio kwenye closure yako ili kufanya jambo zaidi kwa mimea; kwa mfano, bofya mara mbili mmea ili kuleta mbele. Kuwa mbunifu!
+Tumia hali ya Agent kukamilisha changamoto ifuatayo:
 
-## Jaribio la Baada ya Somo
+**Maelezo:** Boresha mradi wa terrarium kwa kuongeza kitufe cha kuweka upya kinachorejesha mimea yote kwenye nafasi zao za awali za pembeni kwa michoro laini.
 
-[Jaribio la baada ya somo](https://ff-quizzes.netlify.app/web/quiz/20)
+**Agizo:** Tengeneza kitufe cha kuweka upya ambacho, kinapobonyezwa, hutangaza mimea yote kurudi nafasi zao za awali za pembeni kwa kutumia mabadiliko ya CSS. Kazi hii inapaswa kuhifadhi nafasi za awali wakati ukurasa unapopakia na kuhamisha mimea hiyo kwa utulivu kwenye nafasi hizo ndani ya sekunde 1 wakati kitufe cha kuweka upya kinapobonyezwa.
 
-## Mapitio na Kujisomea
+Jifunze zaidi kuhusu [hali ya agent](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) hapa.
 
-Ingawa kuburuta vipengele kwenye skrini kunaonekana rahisi, kuna njia nyingi za kufanya hivi na mitego mingi, kulingana na athari unayotafuta. Kwa kweli, kuna [API ya kuburuta na kuacha](https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API) ambayo unaweza kujaribu. Hatukutumia API hii katika moduli hii kwa sababu athari tuliyotaka ilikuwa tofauti kidogo, lakini jaribu API hii kwenye mradi wako mwenyewe na uone unachoweza kufanikisha.
+## 🚀 Changamoto Zaidi: Panua Ujuzi Wako
 
-Pata maelezo zaidi kuhusu matukio ya pointer kwenye [nyaraka za W3C](https://www.w3.org/TR/pointerevents1/) na kwenye [nyaraka za wavuti za MDN](https://developer.mozilla.org/docs/Web/API/Pointer_events).
+Ume tayari kuinua terrarium yako kwa kiwango kingine? Jaribu kutekeleza maboresho haya:
 
-Daima angalia uwezo wa kivinjari kwa kutumia [CanIUse.com](https://caniuse.com/).
+**Miongezeko ya Ubunifu:**
+- **Bonyeza mara mbili** mmea kuifanya ionekane mbele (kusimamia z-index)
+- **Ongeza maoni ya kuona** kama mwangaza mdogo unapobeba juu ya mimea
+- **Tekeleza mipaka** kuzuia mimea kuburuliwa nje ya terrarium
+- **Unda kazi ya kuhifadhi** inayokumbuka nafasi za mimea kwa kutumia localStorage
+- **Ongeza sauti** kwa kuinua na kuweka mimea
 
-## Kazi
+> 💡 **Fursa ya Kujifunza**: Kila changamoto itakufundisha vipengele vipya vya utunzaji wa DOM, usimamizi wa matukio, na usanifu wa uzoefu wa mtumiaji.
 
-[Fanya kazi zaidi na DOM](assignment.md)
+## Mtihani wa Baada ya Kozi
+
+[Mtihani wa baada ya kozi](https://ff-quizzes.netlify.app/web/quiz/20)
+
+## Muhtasari & Kujifunza Binafsi: Kupanua Uelewa Wako
+
+Umeweza misingi ya utunzaji wa DOM na kufunga, lakini daima kuna zaidi ya kuchunguza! Hapa kuna njia za kupanua maarifa na ujuzi wako.
+
+### Mbinu Mbadala za Buruta na Kuachia
+
+Tulitumia matukio ya pointer kwa unyumbufu zaidi, lakini maendeleo ya wavuti yanatoa mbinu nyingi:
+
+| Mbinu                          | Bora Kwa                         | Thamani ya Kujifunza            |
+|--------------------------------|---------------------------------|---------------------------------|
+| [HTML Drag and Drop API](https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API) | Kupakia faili, maeneo rasmi ya buruta | Kuelewa uwezo wa kivinjari asilia |
+| [Touch Events](https://developer.mozilla.org/docs/Web/API/Touch_events) | Mwingiliano maalum wa simu    | Mitindo ya maendeleo ya kwanza simu |
+| Mali za CSS `transform`        | Michoro laini                  | Mbinu za kuboresha utendaji     |
+
+### Mada za Kina za Utunzaji wa DOM
+
+**Hatua zinazofuata katika safari yako ya kujifunza:**
+- **Ugawaji wa matukio**: Kusimamia matukio kwa ufanisi kwa vipengee vingi
+- **Intersection Observer**: Kugundua vipengee vinapoingia/kuondoka kwenye dirisha la mtazamo
+- **Mutation Observer**: Kutazama mabadiliko kwenye muundo wa DOM
+- **Vipengele vya Wavuti**: Kuunda vipengee vya UI vinavyoweza kutumika tena vilivyozikwa
+- **Dhana za Virtual DOM**: Kuelewa jinsi mifumo huboresha masasisho ya DOM
+
+### Rasilimali Muhimu kwa Kujifunza Moja kwa Moja
+
+**Nyaraka za Kiufundi:**
+- [Mwongozo wa Matukio ya Pointer MDN](https://developer.mozilla.org/docs/Web/API/Pointer_events) - Marejeleo kamili ya matukio ya pointer
+- [Mbinu Rasmi za Matukio ya Pointer wa W3C](https://www.w3.org/TR/pointerevents1/) - Nyaraka rasmi za viwango
+- [Kuzama Kina kwa JavaScript Closures](https://developer.mozilla.org/docs/Web/JavaScript/Closures) - Mifumo ya juu ya kufunga kazi
+
+**Ulinganifu wa Vivinjari:**
+- [CanIUse.com](https://caniuse.com/) - Kagua msaada wa sifa katika vivinjari mbalimbali
+- [Data ya Ulinganifu wa Vivinjari ya MDN](https://github.com/mdn/browser-compat-data) - Taarifa za kina za ulinganifu
+
+**Fursa za Mazoezi:**
+- **Jenga** mchezo wa maumbo ukitumia mbinu kama hizi za buruta
+- **Unda** bodi ya kanban yenye usimamizi wa kazi kwa buruta na kuachia
+- **Tengeneza** maktaba ya picha yenye mpangilio wa kupiga picha burutaji
+- **Jaribu** ishara za kugusa kwa interfaces za simu
+
+> 🎯 **Mkakati wa Kujifunza**: Njia bora ya kukamilisha haya ni kwa mazoezi. Jaribu kujenga mabadiliko ya interfaces za buruta – kila mradi utakufundisha kitu kipya kuhusu mwingiliano wa mtumiaji na utunzaji wa DOM.
+
+### ⚡ **Kitu Unachoweza Kufanya Katika Dakika 5 Zijazo**
+- [ ] Fungua DevTools ya kivinjari na andika `document.querySelector('body')` kwenye console
+- [ ] Jaribu kubadilisha maandishi ya ukurasa ukiwa na `innerHTML` au `textContent`
+- [ ] Ongeza wasikilizaji wa tukio la kubonyeza kwenye kitufe au kiungo chochote wa ukurasa
+- [ ] Angalia muundo wa mti wa DOM ukiwa kwenye paneli ya Vipengee
+
+### 🎯 **Kitu Unachoweza Kufanikisha Saa Hii**
+- [ ] Maliza mtihani wa baada ya kozi na rudia misingi ya utunzaji wa DOM
+- [ ] Tengeneza ukurasa wa mtandao wa mwingiliano unaojibu bonyeza za mtumiaji
+- [ ] Fanya mazoezi ya usimamizi wa matukio ya aina mbalimbali (bonyeza, panya juu, shinikizo la kitufe)
+- [ ] Jenga orodha rahisi ya kazi au kiongezaji kwa kutumia utunzaji wa DOM
+- [ ] Chunguza uhusiano kati ya vipengee vya HTML na vitu vya JavaScript
+
+### 📅 **Safari Yako ya JavaScript ya Wiki Mmoja**
+- [ ] Kukamilisha mradi wa terrarium yenye utendaji wa buruta na kuachia
+- [ ] Kuthibitisha ugawaji wa matukio kwa usimamizi mzuri wa matukio
+- [ ] Jifunze kuhusu mzunguko wa matukio na JavaScript isiyo simu
+- [ ] Fanya mazoezi ya kufunga kwa kujenga moduli zenye hali binafsi
+- [ ] Chunguza API za kisasa za DOM kama Intersection Observer
+- [ ] Jenga vipengee vya mwingiliano bila kutumia mifumo
+
+### 🌟 **Utaalamu Wako wa Mwezi mmoja wa JavaScript**
+- [ ] Tengeneza programu ngumu ya ukurasa mmoja kwa kutumia JavaScript ya kawaida
+- [ ] Jifunze mfumo wa kisasa (React, Vue, au Angular) na kulinganisha na DOM ya vanilla
+- [ ] Changia kwenye miradi ya chanzo huria ya JavaScript
+- [ ] Ithibitishe maarifa ya juu kama vipengele vya wavuti na vipengee maalum
+- [ ] Jenga programu bora za mtandao zinazofanya kazi kwa mbinu bora za DOM
+- [ ] Fundisha wengine kuhusu utunzaji wa DOM na misingi ya JavaScript
+
+## 🎯 Ratiba Yako ya Umahiri wa JavaScript DOM
+
+```mermaid
+timeline
+    title Ukuaji wa Kujifunza DOM & JavaScript
+    
+    section Msingi (dakika 15)
+        Ku kuelewa DOM: Mbinu za uchaguzi wa vipengele
+                         : Uvinjari wa muundo wa mti
+                         : Mifumo ya upatikanaji wa mali
+        
+    section Usimamizi wa Tukio (dakika 20)
+        Mwingiliano wa Mtumiaji: Misingi ya tukio la kidole
+                            : Uanzishaji wa msikiliza tukio
+                            : Ulinganifu wa vifaa mbalimbali
+                            : Mbinu za kuzuia tukio
+        
+    section Mafunga (dakika 25)
+        Usimamizi wa Wigo: Uundaji wa kivuli binafsi
+                       : Uendelevu wa kazi
+                       : Mifumo ya usimamizi wa hali
+                       : Ufanisi wa kumbukumbu
+        
+    section Mfumo wa Buruta (dakika 30)
+        Sifa Shirikishi: Ufuatiliaji wa kuratibu
+                       : Hisabati ya nafasi
+                       : Hisabati ya mwendo
+                       : Taratibu za kusafisha
+        
+    section Mifumo ya Juu (dakika 45)
+        Ujuzi wa Kitaalamu: Utekelezaji wa tukio kwa mtu mwingine
+                         : Uboreshaji wa utendaji
+                         : Usimamizi wa makosa
+                         : Mambo ya kuzingatia upatikanaji
+        
+    section Uelewa wa Fremu ya Kazi (wiki 1)
+        Maendeleo ya Kisasa: Misingi ya DOM halisi
+                          : Maktaba za usimamizi wa hali
+                          : Miundo ya vipengele
+                          : Ushirikiano wa zana za kujenga
+        
+    section Kiwango cha Mtaalamu (mwezi 1)
+        APIs za DOM za Juu: Mchakataji wa Kukutana
+                         : Mchakataji wa Mabadiliko
+                         : Vipengele Maalum
+                         : Vipengee vya Wavuti
+```
+### 🛠️ Muhtasari wa Vifaa Vyako vya JavaScript
+
+Baada ya kukamilisha somo hili, sasa una:
+- **Umahiri wa DOM**: Uchaguzi wa vipengee, utunzaji wa mali, na njia za mti
+- **Utaalamu wa Matukio**: Usimamizi wa mwingiliano kupitia matukio ya pointer
+- **Uelewa wa Kufunga Kazi**: Usimamizi wa hali binafsi na kudumu kazi
+- **Mifumo ya Mwingiliano**: Kutekeleza kwa ukamilifu buruta na kuachia kutoka mwanzoni
+- **Uhamasishaji wa Utendaji**: Usafishaji sahihi wa matukio na usimamizi wa kumbukumbu
+- **Mifumo ya Kisasa**: Mbinu za kupanga msimbo zinazotumika katika maendeleo ya kitaalamu
+- **Uzoefu wa Mtumiaji**: Kuunda kiolesura kilicho na hisia rahisi na majibu
+
+**Ujuzi Unaopatikana Kiutendaji:** Umejenga vipengee kwa kutumia mbinu ileile zilizotumiwa na:
+- **Bodi za Trello/Kanban**: Buruta kadi kati ya nguzo
+- **Mifumo ya upakiaji faili**: Utunzaji wa faili kwa buruta na kuachia
+- **Makumbusho ya picha**: Kiolesura cha kupanga picha burutaji
+- **Programu za simu**: Mitindo ya mwingiliano wa kugusa
+
+**Kiwango Kifuatacho**: Uko tayari kuchunguza mifumo ya kisasa kama React, Vue, au Angular inayojenga juu ya misingi hii ya utunzaji wa DOM! 
+
+## Kazi ya Nyumbani
+
+[Endelea kufanya kazi kidogo na DOM](assignment.md)
 
 ---
 
-**Kanusho**:  
-Hati hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya awali inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Kiasi cha Majibu**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za moja kwa moja zinaweza kuwa na makosa au ukosefu wa usahihi. Hati asili katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayotolewa na watu inashauriwa. Hatubeba dhima kwa uelewa au tafsiri za makosa zinazotokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,200 +1,264 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "687c62646ad5595f1ba733edc294cdae",
-  "translation_date": "2025-08-28T18:26:44+00:00",
-  "source_file": "README.md",
-  "language_code": "my"
-}
--->
-[![GitHub license](https://img.shields.io/github/license/microsoft/Web-Dev-For-Beginners.svg)](https://github.com/microsoft/Web-Dev-For-Beginners/blob/master/LICENSE)  
-[![GitHub contributors](https://img.shields.io/github/contributors/microsoft/Web-Dev-For-Beginners.svg)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/graphs/contributors/)  
-[![GitHub issues](https://img.shields.io/github/issues/microsoft/Web-Dev-For-Beginners.svg)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/issues/)  
-[![GitHub pull-requests](https://img.shields.io/github/issues-pr/microsoft/Web-Dev-For-Beginners.svg)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/pulls/)  
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)  
+[![GitHub license](https://img.shields.io/github/license/microsoft/Web-Dev-For-Beginners.svg)](https://github.com/microsoft/Web-Dev-For-Beginners/blob/master/LICENSE)
+[![GitHub contributors](https://img.shields.io/github/contributors/microsoft/Web-Dev-For-Beginners.svg)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/graphs/contributors/)
+[![GitHub issues](https://img.shields.io/github/issues/microsoft/Web-Dev-For-Beginners.svg)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/issues/)
+[![GitHub pull-requests](https://img.shields.io/github/issues-pr/microsoft/Web-Dev-For-Beginners.svg)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/pulls/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/Web-Dev-For-Beginners.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/watchers/)  
-[![GitHub forks](https://img.shields.io/github/forks/microsoft/Web-Dev-For-Beginners.svg?style=social&label=Fork&maxAge=2592000)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/network/)  
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/Web-Dev-For-Beginners.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/stargazers/)  
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/Web-Dev-For-Beginners.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/Web-Dev-For-Beginners.svg?style=social&label=Fork&maxAge=2592000)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/Web-Dev-For-Beginners.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/stargazers/)
 
-[![](https://dcbadge.vercel.app/api/server/ByRwuEEgH4)](https://discord.gg/zxKYvhSnVp?WT.mc_id=academic-000002-leestott)  
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
-[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/microsoft/Web-Dev-For-Beginners)  
+# Web Development for Beginners - A Curriculum
 
-[![Microsoft Azure AI Foundry Discord](https://dcbadge.limes.pink/api/server/ByRwuEEgH4)](https://discord.com/invite/ByRwuEEgH4)  
+Microsoft Cloud Advocates မှ ထုတ်ပြန်သော ၁၂ ပတ် ကြာ၍ ပြည့်စုံသော အွန်လိုင်းသင်တန်းဖြင့် ဝက်ဘ်ဒီဗလုပ်မှု အခြေခံများကို သင်ယူပါ။ စုစုပေါင်း ၂၄ ပတ်သင်ခန်းစာများတွင် JavaScript၊ CSS နှင့် HTML ကို terrariums၊ browser extensions နှင့် space games ကဲ့သို့သော လက်တွေ့ အစီအစဉ်များဖြင့် လေ့လာနိုင်သည်။ မေးခွန်းဖြေ၊ ဆွေးနွေးပွဲများနှင့် လက်တွေ့အလုပ်များဖြင့်ပါ ဝင်ရောက်ပါဝင်နိုင်ပါသည်။ သင်၏ကျွမ်းကျင်မှုကို တိုးတက်ကောင်းမွန်စေရန်နှင့် အသိပညာ သိမြင်စေမှုကို ထိရောက်စွာ မြှင့်တင်စေရန် ကျွမ်းကျင်ပြီးသော စီမံကိန်းအခြေပြု ပညာသင်ကြားမှုနည်းစနစ်ဖြင့် သင်ယူပါ။ သင်၏ကွန်ပျူတာကုဒ်ရေးရာ ခရီးစဉ်ကို ယနေ့မှ စတင်လိုက်ပါ!
 
-ဤအရင်းအမြစ်များကို အသုံးပြုရန်အဆင့်များကို လိုက်နာပါ-  
-1. **Repository ကို Fork လုပ်ပါ**: [![GitHub forks](https://img.shields.io/github/forks/microsoft/Web-Dev-For-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/fork) ကိုနှိပ်ပါ  
-2. **Repository ကို Clone လုပ်ပါ**: `git clone https://github.com/microsoft/Web-Dev-For-Beginners.git`  
-3. [**Azure AI Foundry Discord ကို Join လုပ်ပြီး ကျွမ်းကျင်သူများနှင့် Developer မိတ်ဆွေများနှင့် တွေ့ဆုံပါ**](https://discord.com/invite/ByRwuEEgH4)  
+Azure AI Foundry Discord Community နှင့် ပူးပေါင်းပါ။
 
-# Beginner များအတွက် Web Development - သင်ခန်းစာများ  
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
-Microsoft Cloud Advocates မှ 12-ပတ်ကြာ သင်ခန်းစာများဖြင့် Web Development အခြေခံများကို လေ့လာပါ။ 24 သင်ခန်းစာများတွင် JavaScript, CSS, HTML ကို terrariums, browser extensions, space games စသည်တို့ကဲ့သို့သော လက်တွေ့လုပ်ငန်းများမှတစ်ဆင့် လေ့လာနိုင်ပါသည်။ Quiz များ၊ ဆွေးနွေးမှုများနှင့် လက်တွေ့အလုပ်များကို ပါဝင်စေပြီး သင်၏ကျွမ်းကျင်မှုများကို တိုးတက်စေပါသည်။ Project-based သင်ကြားမှုနည်းလမ်းများဖြင့် သင်၏ အသိပညာကို အထူးပြုစေပါ။ Coding ခရီးစဉ်ကို ယနေ့စတင်လိုက်ပါ!  
+ဤသင်ခန်းစာများနှင့် အရင်းအမြစ်များကို အသုံးပြုရန် အောက်ပါအဆင့်များကို လိုက်နာပါ-
+1. **Repository ကို Fork ပြုလုပ်ပါ**။ ကလစ်နှိပ်ပါ [![GitHub forks](https://img.shields.io/github/forks/microsoft/Web-Dev-For-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/fork)
+2. **Repository ကို Clone ပြုလုပ်ပါ**။ `git clone https://github.com/microsoft/Web-Dev-For-Beginners.git`
+3. [**Azure AI Foundry Discord တွင် ပါ၀င်၍ နည်းပြများနှင့် Developer များနှင့် တွေ့ဆုံပါ**](https://discord.com/invite/ByRwuEEgH4)
 
-### 🌐 Multi-Language Support  
+### 🌐 ဘာသာစကား များစွာကို ထောက်ပံ့သည်
 
-#### GitHub Action မှတစ်ဆင့် အလိုအလျောက် အမြဲ Update ဖြစ်နေသော ဘာသာစကားများ  
+#### GitHub Action မှတဆင့် ထောက်ပံ့သည် (အလိုအလျောက်နှင့် အမြဲတမ်း ပြုပြင်ထားသည်)
 
-[French](../fr/README.md) | [Spanish](../es/README.md) | [German](../de/README.md) | [Russian](../ru/README.md) | [Arabic](../ar/README.md) | [Persian (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinese (Simplified)](../zh/README.md) | [Chinese (Traditional, Macau)](../mo/README.md) | [Chinese (Traditional, Hong Kong)](../hk/README.md) | [Chinese (Traditional, Taiwan)](../tw/README.md) | [Japanese](../ja/README.md) | [Korean](../ko/README.md) | [Hindi](../hi/README.md) | [Bengali](../bn/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portuguese (Portugal)](../pt/README.md) | [Portuguese (Brazil)](../br/README.md) | [Italian](../it/README.md) | [Polish](../pl/README.md) | [Turkish](../tr/README.md) | [Greek](../el/README.md) | [Thai](../th/README.md) | [Swedish](../sv/README.md) | [Danish](../da/README.md) | [Norwegian](../no/README.md) | [Finnish](../fi/README.md) | [Dutch](../nl/README.md) | [Hebrew](../he/README.md) | [Vietnamese](../vi/README.md) | [Indonesian](../id/README.md) | [Malay](../ms/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Swahili](../sw/README.md) | [Hungarian](../hu/README.md) | [Czech](../cs/README.md) | [Slovak](../sk/README.md) | [Romanian](../ro/README.md) | [Bulgarian](../bg/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Croatian](../hr/README.md) | [Slovenian](../sl/README.md) | [Ukrainian](../uk/README.md) | [Burmese (Myanmar)](./README.md)  
+<!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
+[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](./README.md) | [Chinese (Simplified)](../zh-CN/README.md) | [Chinese (Traditional, Hong Kong)](../zh-HK/README.md) | [Chinese (Traditional, Macau)](../zh-MO/README.md) | [Chinese (Traditional, Taiwan)](../zh-TW/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../pt-BR/README.md) | [Portuguese (Portugal)](../pt-PT/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
 
-**အပိုဘာသာစကားများကို ထည့်သွင်းလိုပါက [ဒီနေရာ](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md) တွင် ရှာဖွေပါ**  
+> **ဒေသတွင်း Clone လုပ်လိုပါသလား?**
 
-#### 🧑‍🎓 _ကျောင်းသားများအတွက်_  
+> ဤ repository တွင် ၅၀ ကျော်သော ဘာသာစကားများအတွက် ဘာသာပြန်ထားပြီး Download အရွယ်အစားကို မှီငြမ်းသွားသည်။ ဘာသာပြန်များမပါဘဲ Clone လုပ်ရန် sparse checkout ကို အသုံးပြုပါ-
+> ```bash
+> git clone --filter=blob:none --sparse https://github.com/microsoft/Web-Dev-For-Beginners.git
+> cd Web-Dev-For-Beginners
+> git sparse-checkout set --no-cone '/*' '!translations' '!translated_images'
+> ```
+> သင်သည် သင်ခန်းစာကို ပြီးမြောက်စွာ အလွယ်တကူ Download လုပ်ပြီး သင်ယူနိုင်ပါသည်။
+<!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
-[**Student Hub page**](https://docs.microsoft.com/learn/student-hub/?WT.mc_id=academic-77807-sagibbon) ကို သွားရောက်လေ့လာပါ။ အစပြုသူများအတွက် အရင်းအမြစ်များ၊ Student packs များနှင့် အခမဲ့လက်မှတ် voucher ရယူနိုင်သော နည်းလမ်းများကို တွေ့နိုင်ပါသည်။ ဤစာမျက်နှာကို Bookmark လုပ်ထားပြီး လစဉ်အကြောင်းအရာများ ပြောင်းလဲသည့်အခါ ပြန်လည်ကြည့်ရှုပါ။  
+**ထို့အပြင် ထောက်ပံ့လိုသော ဘာသာစကားများကို [ဤနေရာတွင်](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md) ကြည့်ရှုနိုင်ပါသည်။**
 
-### 📣 ကြေညာချက် - _Generative AI အသုံးပြု၍ Project အသစ်တည်ဆောက်ရန်_  
+[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/microsoft/Web-Dev-For-Beginners)
 
-AI Assistant Project အသစ်ကို ထည့်သွင်းထားပြီး [project](./09-chat-project/README.md) တွင် ကြည့်ရှုပါ။  
+#### 🧑‍🎓 _ကျောင်းသားတစ်ဦးလား?_
 
-### 📣 ကြေညာချက် - _Generative AI Curriculum_ အသစ်ကို JavaScript အတွက် ထုတ်ဝေထားပါသည်  
+[**Student Hub စာမျက်နှာ**](https://docs.microsoft.com/learn/student-hub/?WT.mc_id=academic-77807-sagibbon) ကို လည်ပတ်ပါ။ ဤနေရာတွင် စတင်လေ့လာသူအတွက် အရင်းအမြစ်များ၊ ကျောင်းသားအထောက်အပံ့ပက်(ပက်ကေ့ဂျ်) များနဲ့ အခမဲ့လက်မှတ်ရယူနိုင်စေရန် နည်းလမ်းများလည်း ထည့်သွင်းထားသည်။ ကျွန်ုပ်တို့အတွက် ဤစာမျက်နှာကို Bookmark များထားပြီး အချိန်နှင့်အမျှ လေ့လာဆဲရှိသော အကြောင်းအရာများကို ပြောင်းလဲနေမှုများအတွက် စောင့်ကြည့်ပါ။
 
-Generative AI Curriculum အသစ်ကို လက်မလွှတ်ပါနှင့်!  
+### 📣 ကြေငြာချက် - GitHub Copilot Agent mode အသုံးပြုပြီး အစီအစဉ် အသစ်များ ပြီးမြောက်ရန် စိန်ခေါ်မှုများ!
 
-[https://aka.ms/genai-js-course](https://aka.ms/genai-js-course) သို့ သွားရောက်ပြီး စတင်ပါ!  
+အသစ်ထည့်သွင်းထားသော စိန်ခေါ်မှုကို “GitHub Copilot Agent Challenge 🚀” ဟု တိုင်းချိန်သည့် မိသားစုများတွင် ရှာဖွေပါ။ Agent mode ကို မသုံးစေသေးလျှင်၊ ထိုအပြင် Text Generate ပြုလုပ်ခြင်းသာမက ဖိုင် ဖန်တီးပြင်ဆင်ခြင်း၊ ကွန်မန်းများ ပြေးဆွဲခြင်းစသဖြင့် အပြည့်အဝ အသုံးပြုနိုင်ပါသည်။
 
-![Background](../../translated_images/background.148a8d43afde57303419a663f50daf586681bc2fabf833f66ef6954073983c66.my.png)  
+### 📣 ကြေငြာချက် - Generative AI အသုံးပြုပြီး ဆောက်ရွက်ရန် ပြုပြင်ထားသော အသစ်သော Project 
 
-- အခြေခံမှ RAG အထိ သင်ခန်းစာများ  
-- GenAI နှင့် အကူအညီ App ကို အသုံးပြု၍ သမိုင်းဆိုင်ရာ လူပုဂ္ဂိုလ်များနှင့် အပြန်အလှန် ဆွေးနွေးပါ  
-- စိတ်ဝင်စားဖွယ် ဇာတ်လမ်းတစ်ပုဒ်ဖြင့် အချိန်ခရီးသွားပါ!  
+AI Assistant Project အသစ်တစ်ခု ထပ်မံ ထည့်သွင်းပြီးဖြစ်သည်။ လေ့လာရန် ဤနေရာတွင် ကြည့်ရှုပါ [project](./9-chat-project/README.md)
 
-![character](../../translated_images/character.5c0dd8e067ffd693c16e2c5b7412ab075a2215ce31f998305639fa3a05e14fbe.my.png)  
+### 📣 ကြေငြာချက် - JavaScript အတွက် Generative AI သင်ရိုးညွှန်းအစီအစဉ် အသစ် ထုတ်ပြန်ခြင်း
 
-သင်ခန်းစာတိုင်းတွင် လုပ်ငန်းတာဝန်များ၊ အသိပညာစစ်ဆေးမှုများနှင့် အခန်းကဏ္ဍများ ပါဝင်ပြီး အောက်ပါအကြောင်းအရာများကို လေ့လာရန် လမ်းညွှန်ပါသည်-  
-- Prompting နှင့် Prompt Engineering  
-- Text နှင့် Image App တည်ဆောက်ခြင်း  
-- Search Apps  
+ယခုနှစ်သားသားဖြစ်သော Generative AI သင်ရိုးအသစ်ကို မလွတ်မသီးဖြစ်ပါစေနဲ့!
 
-[https://aka.ms/genai-js-course](https://aka.ms/genai-js-course) သို့ သွားရောက်ပြီး စတင်ပါ!  
+စတင်ရန် [https://aka.ms/genai-js-course](https://aka.ms/genai-js-course) ကို သွားရောက်ပါ!
 
-## 🌱 စတင်အသုံးပြုခြင်း  
+![Background](../../translated_images/my/background.148a8d43afde5730.webp)
 
-> **ဆရာများ**၊ ဤသင်ခန်းစာများကို အသုံးပြုရန် အကြံပြုချက်များကို [ဒီနေရာ](for-teachers.md) တွင် ထည့်သွင်းထားပါသည်။ [ဆရာများအတွက် ဆွေးနွေးမှုဖိုရမ်](https://github.com/microsoft/Web-Dev-For-Beginners/discussions/categories/teacher-corner) တွင် သင့်အကြံပြုချက်များကို မျှဝေပါ!  
+- အခြေခံမှ RAG အထိ သင်ခန်းစာများပါဝင်သည်။
+- GenAI နှင့် ဆက်စပ်သော အသက်ရှင်သောသူများနှင့် အပြန်အလှန် ဆက်ဆံနိုင်သည်။
+- စိတ်ဝင်စားဖွယ်ရာ မက္ခရာနှင့် စိတ်ဝင်စားဖွယ် စခန်းတင် ဆက်ကပ်မှုရှိသည်။
 
-**[သင်ယူသူများ](https://aka.ms/student-page/?WT.mc_id=academic-77807-sagibbon)**၊ သင်ခန်းစာတိုင်းအတွက် Pre-lecture Quiz ဖြင့် စတင်ပြီး သင်ခန်းစာအကြောင်းအရာများကို ဖတ်ရှုပါ၊ လုပ်ငန်းများကို ပြီးမြောက်စေပြီး Post-lecture Quiz ဖြင့် သင်၏နားလည်မှုကို စစ်ဆေးပါ။  
+![character](../../translated_images/my/character.5c0dd8e067ffd693.webp)
 
-သင်ယူမှုအတွေ့အကြုံကို မြှင့်တင်ရန် မိတ်ဆွေများနှင့် ပူးပေါင်းပြီး Project များကို အတူတူလုပ်ဆောင်ပါ! [ဆွေးနွေးမှုဖိုရမ်](https://github.com/microsoft/Web-Dev-For-Beginners/discussions) တွင် ဆွေးနွေးမှုများကို လှုံ့ဆော်ပြီး ကျွန်ုပ်တို့၏ Moderator အဖွဲ့သည် သင့်မေးခွန်းများကို ဖြေကြားပေးပါမည်။  
+သင်ခန်းစာတိုင်းသည် လေ့ကျင့်ရေးအလုပ်ကိုင်ဖို့ တာဝန်အဖြစ် ပါဝင်ပြီး အတွေ့အကြုံများ ဖြေရှင်းရန် knowledge check နှင့် စိန်ခေါ်မှုတို့ပါဝင်သည်။ လေ့လာမည့် ခေါင်းစဉ်များမှာ -
+- Prompting နှင့် prompt engineering
+- စာသားနှင့် ပုံရိပ် အက်ပ်များ ဖန်တီးခြင်း
+- ရှာဖွေရေးအက်ပ်များ
 
-သင်၏ပညာရေးကို တိုးတက်စေရန် [Microsoft Learn](https://learn.microsoft.com/users/wirelesslife/collections/p1ddcy5jwy0jkm?WT.mc_id=academic-77807-sagibbon) ကို လေ့လာရန် အထူးအကြံပြုပါသည်။  
+စတင်ရန် [https://aka.ms/genai-js-course](../../[https:/aka.ms/genai-js-course) ကို ရောက်၍ ကြည့်ရှုပါ။
 
-### 📋 သင့်ပတ်ဝန်းကျင်ကို စတင်တပ်ဆင်ခြင်း  
+## 🌱 စတင်ခြင်း
 
-ဤသင်ခန်းစာများတွင် Development Environment ကို အသင့်ရှိပြီး သင်စတင်နိုင်ပါသည်! Curriculum ကို [Codespace](https://github.com/features/codespaces/) (_Browser-based, Install မလိုအပ်သော Environment_) သို့မဟုတ် သင်၏ Computer တွင် Local အနေဖြင့် Text Editor တစ်ခုဖြင့် အသုံးပြုနိုင်ပါသည်။ [Programming Languages နှင့် Tools of the Trade](../../1-getting-started-lessons/1-intro-to-programming-languages) သင်ခန်းစာတွင် သင်၏လိုအပ်ချက်များအတွက် အကောင်းဆုံး Tool များကို ရွေးချယ်ရန် လမ်းညွှန်ပါမည်။  
+> **ဆရာ/ဆရာမများ** အတွက် ဒီသင်ရိုးညွှန်းကို ဘယ်လိုအသုံးပြုမလဲဆိုတာအတွက် [အကြံပေးချက်များ](for-teachers.md) ထည့်သွင်းထားပါတယ်။ ကျွန်ုပ်တို့နှင့် [ဆွေးနွေးဖို့](https://github.com/microsoft/Web-Dev-For-Beginners/discussions/categories/teacher-corner) ကာမရှင်စခန်းထဲမှာ တုံ့ပြန်မှုလည်းလက်ခံပါတယ်!
 
-#### သင်၏ Repository ကို ဖန်တီးပါ  
-သင်၏အလုပ်များကို လွယ်ကူစွာ သိမ်းဆည်းရန် သင်၏ Repository ကို ဖန်တီးရန် အကြံပြုပါသည်။ ဤသင်ခန်းစာများကို သင်၏ GitHub Account တွင် Copy လုပ်ထားသော Repository အသစ်တစ်ခုကို ဖန်တီးရန် **Use this template** ခလုတ်ကို နှိပ်ပါ။  
+**[လေ့လာသူများ](https://aka.ms/student-page/?WT.mc_id=academic-77807-sagibbon)** - တစ်ခါသင်ခန်းစာစီလျှင် အစပိုင်း ရှုထောင့်မေးခွန်းဖြေပြီး၊ သင်ခန်းစာ စာအုပ်ကို ဖတ်ပါ၊ လုပ်ငန်းများ ဆောင်ရွက်ပါ၊ နောက်ပိုင်း မေးခွန်းဖြေလိုက်ပါ။
 
-အဆင့်များကို လိုက်နာပါ-  
-1. **Repository ကို Fork လုပ်ပါ**: ဤစာမျက်နှာ၏ အပေါ်ယံညာဘက်တွင်ရှိသော "Fork" ခလုတ်ကို နှိပ်ပါ။  
-2. **Repository ကို Clone လုပ်ပါ**: `git clone https://github.com/microsoft/Web-Dev-For-Beginners.git`  
+သင်ယူမှုကို တိုးတက်စေရန်၊ မိတ်ဆွေများနှင့် ပူးပေါင်း အစီအစဉ်များ အတူတူ အလုပ်လုပ်ပါ။ ဆွေးနွေးနိုင်သော ဒိုင်ယာလော့များကို [ဆွေးနွေးပွဲအစည်းအဝေး](https://github.com/microsoft/Web-Dev-For-Beginners/discussions) တွင် ဆက်သွယ်မှုအတွင်း တင်ပြနိုင်ပြီး မေးခွန်းများကို မော်ဒရေတာများ ကူညီဖြေရှင်းပေးပါသည်။
 
-#### Curriculum ကို Codespace တွင် Run လုပ်ခြင်း  
+သင်၏ပညာအဆင့်မြှင့်တင်ရန် Microsoft Learn ကိုလည်း အကြံပြုလိုပါသည် [Microsoft Learn](https://learn.microsoft.com/users/wirelesslife/collections/p1ddcy5jwy0jkm?WT.mc_id=academic-77807-sagibbon) ထဲတွင် ပို၍ သင်ယူနိုင်သော စာအုပ်များလည်း ရှိပါသည်။
 
-သင်ဖန်တီးထားသော Repository တွင် **Code** ခလုတ်ကို နှိပ်ပြီး **Open with Codespaces** ကို ရွေးပါ။ ဤသည် သင်အလုပ်လုပ်ရန် Codespace အသစ်တစ်ခုကို ဖန်တီးပေးပါမည်။  
+### 📋 သင့်ပတ်ဝန်းကျင်ကို စတင်တည်ဆောက်ခြင်း
 
-[!Codespace](../..)./images/createcodespace.png)  
+ဤ သင်ရိုးညွှန်းတွင် ဖန်တီးမှု ပတ်ဝန်းကျင် (development environment) ရှိပြီး အသုံးပြုနိုင်ပါသည်။ စတင်လေ့လာရာတွင် [Codespace](https://github.com/features/codespaces/) (Browser-based, install လုပ်စရာမလိုသော ပတ်ဝန်းကျင်) သို့မဟုတ် ကိုယ်ပိုင်ကွန်ပျူတာပေါ်တွင် Visual Studio Code ကဲ့သို့သောစာပုံဆွဲတည်းဖြတ်စက်ဖြင့် ဖွင့်နိုင်ပါသည်။
 
-#### Curriculum ကို သင်၏ Computer တွင် Local အနေဖြင့် Run လုပ်ခြင်း  
+#### Repository သင်၏ကိုယ်ပိုင်အကူးယူချက်ဖန်တီးခြင်း
+သင့်အလုပ်များကို အလွယ်တကူ သိမ်းဆည်းနိုင်ရန် ဒီ repository ကို ကိုယ်ပိုင် အကူးတစ်ခုဖန်တီးရန် အကြံပြုပါသည်။ ဒီအတွက် စာမျက်နှာအပေါ်တွင် **Use this template** ခလုတ်ကို နှိပ်ပါ။ သင်၏ GitHub အကောင့်အတွင်း သင်ရိုးညွှန်း၏ မိတ္တူဖြစ်သော Repository အသစ် တစ်ခုဖန်တီးမည်ဖြစ်ပါသည်။
 
-Curriculum ကို သင်၏ Computer တွင် Local အနေဖြင့် Run လုပ်ရန် Text Editor, Browser နှင့် Command Line Tool တစ်ခုလိုအပ်ပါသည်။ [Programming Languages နှင့် Tools of the Trade](../../1-getting-started-lessons/1-intro-to-programming-languages) သင်ခန်းစာတွင် Tool များကို ရွေးချယ်ရန် လမ်းညွှန်ပါမည်။  
+အဆင့်များကို လိုက်နာပါ -
+1. **Repository ကို Fork ပြုလုပ်ပါ**။ ဒီစာမျက်နှာ၏ ညာဖက်ထောင့်အပေါ်ရှိ Fork ကို နှိပ်ပါ။
+2. **Repository ကို Clone ပြုလုပ်ပါ**။ `git clone https://github.com/microsoft/Web-Dev-For-Beginners.git`
 
-ကျွန်ုပ်တို့၏ အကြံပြုချက်မှာ [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) ကို Editor အဖြစ် အသုံးပြုရန်ဖြစ်ပြီး [Terminal](https://code.visualstudio.com/docs/terminal/basics/?WT.mc_id=academic-77807-sagibbon) ကို Built-in အနေဖြင့် ပါဝင်သည်။ [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) ကို [ဒီနေရာ](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) မှ Download လုပ်ပါ။  
+#### Codespace တွင် သင်ရိုးကို ဖွင့်၍ အသုံးပြုခြင်း
 
-1. သင်၏ Repository ကို Computer သို့ Clone လုပ်ပါ။ **Code** ခလုတ်ကို နှိပ်ပြီး URL ကို Copy လုပ်ပါ-  
+သင်ဖန်တီးထားသော မိတ္တူ Repository တွင် **Code** ခလုတ်ကိုနှိပ်ပြီး **Open with Codespaces** ကို ရွေးချယ်ပါ။ အသစ်တစ်ခုသော Codespace တစ်ခု ဖန်တီးမည်ဖြစ်သည်။
 
-    [!CodeSpace](./images/createcodespace.png)  
+![Codespace](../../translated_images/my/createcodespace.0238bbf4d7a8d955.webp)
 
-    ထို့နောက် [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) တွင် [Terminal](https://code.visualstudio.com/docs/terminal/basics/?WT.mc_id=academic-77807-sagibbon) ကို ဖွင့်ပြီး သင် Copy လုပ်ထားသော URL ကို `<your-repository-url>` အစားထိုး၍ အောက်ပါ Command ကို Run လုပ်ပါ-  
+#### ကိုယ်ပိုင်ကွန်ပျူတာပေါ်တွင် သင်ရိုးကို လည်ပတ်ခြင်း
+
+ကိုယ်ပိုင်ကွန်ပျူတာပေါ်တွင် သင်ရိုးကို လည်ပတ်ရန်အတွက် စာပုံဆွဲတည်းဖြတ်စက်တစ်ခု၊ browser တစ်ခုနှင့် command line  တစ်ခု လိုအပ်ပါသည်။ ပထမ သင်ခန်းစာ [Programming Languages and Tools of the Trade ၏ အကျဉ်း](../../1-getting-started-lessons/1-intro-to-programming-languages) တွင် ကုဒ်ရေးရန် အသုံးပြုမည့် အမျိုးမျိုးသော အကောင်းဆုံး ဝါရင့်မြော် ကိရိယာများကို ထည့်သွင်း ရွေးချယ်ပေးပါသည်။
+
+ကျွန်ုပ်တို့ အကြံပြုလိုသည်မှာ အယ်ဒီတာအဖြစ် [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) ကို အသုံးပြုခြင်းဖြစ်ပြီး၊ ထို Visual Studio Code တွင် အိုင်နမ့် Terminal ပါရှိပါသည် [Terminal](https://code.visualstudio.com/docs/terminal/basics/?WT.mc_id=academic-77807-sagibbon)။ Visual Studio Code ကို [ဒီနေရာ](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) မှ ဒေါင်းလုဒ်လုပ်နိုင်သည်။
+
+1. ကိုယ်ပိုင် repository ကို ကိုယ်ပိုင်ကွန်ပျူတာတွင် Clone ကြပါ။ **Code** ခလုတ်ကို နှိပ်၍ URL ကို ကူးယူပါ-
+
+    [CodeSpace](./images/createcodespace.png)
+ပြီးနောက်၊ [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) အတွင်းရှိ [Terminal](https://code.visualstudio.com/docs/terminal/basics/?WT.mc_id=academic-77807-sagibbon) ကိုဖွင့်ပြီး၊ သင်ကူးယူထားသော URL ကို `<your-repository-url>` ဖြင့်အစားထိုး၍ အောက်ပါ command ကို chạy ပါ။
 
     ```bash 
     git clone <your-repository-url>
-    ```  
+    ```
 
-2. Visual Studio Code တွင် Folder ကို ဖွင့်ပါ။ **File** ကို နှိပ်ပြီး...  
-> **ဖိုလ်ဒါဖွင့်**ပြီးတော့ သင်မကြာသေးမီက ကလုန်းလုပ်ထားတဲ့ ဖိုလ်ဒါကို ရွေးချယ်ပါ။
->  Visual Studio Code အတွက် အကြံပြုထားသော Extension များ:
+2. Visual Studio Code တွင် ဖိုလ်ဒါအားဖွင့်ပါ။ ဒါကို **File** > **Open Folder** ကိုနှိပ်ပြီး သင်လတ်တလောကူးယူထားသော ဖိုလ်ဒါကိုရွေးချယ်ခြင်းဖြင့် ပြုလုပ်နိုင်ပါသည်။
+
+>  အကြံပြု Visual Studio Code ပြည့်စုံစက်များ:
 >
-> * [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon) - Visual Studio Code အတွင်း HTML စာမျက်နှာများကို ကြည့်ရှုရန်
-> * [Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot&WT.mc_id=academic-77807-sagibbon) - ကုဒ်ရေးသားမှုကို ပိုမိုလျင်မြန်စေရန်
+> * [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon) - Visual Studio Code ထဲတွင် HTML စာမျက်နှာများ ကြည့်ရှုရန်
+> * [Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot&WT.mc_id=academic-77807-sagibbon) - ကုဒ်ရေးသားမှုကို ပိုမိုလျင်မြန်စေရန်အတွက်အကူအညီ
 
-## 📂 သင်ခန်းစာတစ်ခုစီတွင် ပါဝင်သည်များ:
+## 📂 တစ်ခုချင်းသင်ခန်းစာများတွင် ပါဝင်သောအရာများ
 
-- စိတ်ကြိုက် sketchnote
-- စိတ်ကြိုက် ထပ်ဆောင်းဗီဒီယို
-- သင်ခန်းစာမတိုင်မီ အပူတက်မေးခွန်း
+- စိတ်ကြိုက် စကတ်ချတ်မှတ်တမ်း
+- စိတ်ကြိုက် ထပ်ဆင့်ဗီဒီယို
+- သင်ခန်းစာမတိုင်ခင် အပူချိန် စစ်တမ်း
 - ရေးသားထားသော သင်ခန်းစာ
-- ပရောဂျက်အခြေပြု သင်ခန်းစာများအတွက် ပရောဂျက်တည်ဆောက်နည်း လမ်းညွှန်ချက်များ
-- အသိပညာစစ်ဆေးမှုများ
-- စိန်ခေါ်မှု
-- ထပ်ဆောင်းဖတ်ရှုရန်
-- အိမ်စာ
-- [သင်ခန်းစာပြီးဆုံးပြီးနောက် မေးခွန်း](https://ff-quizzes.netlify.app/web/)
+- ပရောဂျက်အခြေပြု သင်ခန်းစာများအတွက် ပရောဂျက် တည်ဆောက်ရန် အဆင့်ဆင့် လမ်းညွှန်ချက်များ
+- ပညာရပ်စစ်ဆေးမှုများ
+- စိန်ခေါ်မှုတစ်ခု
+- ထပ်ဆင့်စာဖတ်ရန်ပစ္စည်း
+- တာဝန်များ
+- [သင်ခန်းစာပြီးနောက် စစ်တမ်း](https://ff-quizzes.netlify.app/web/)
 
-> **မေးခွန်းများအကြောင်း မှတ်ချက်**: မေးခွန်းအားလုံးကို Quiz-app ဖိုလ်ဒါတွင် ထည့်သွင်းထားပြီး၊ မေးခွန်း ၃ ခုပါဝင်သော စုစုပေါင်း ၄၈ ခုရှိသည်။ [ဒီမှာ](https://ff-quizzes.netlify.app/web/) ရနိုင်ပြီး၊ quiz app ကို ဒေသတွင်းတွင် အလုပ်လုပ်စေခြင်း သို့မဟုတ် Azure တွင် တင်နိုင်သည်။ `quiz-app` ဖိုလ်ဒါအတွင်းရှိ လမ်းညွှန်ချက်များကို လိုက်နာပါ။
+> **စစ်တမ်းအကြောင်း မှတ်ချက်**: စစ်တမ်းအားလုံးကို Quiz-app ဖိုလ်ဒါတွင် စုစည်းထားပြီး၊ မေးခွန်း သုံးခုပါသော စစ်တမ်း ၄၈ ခုရှိသည်။ ၎င်းတို့ကို [ဒီနေရာမှာ](https://ff-quizzes.netlify.app/web/) ရနိုင်ပြီး၊ quiz app ကို ကိုယ်ပိုင်စက်တွင် chạy လို့ရ သို့မဟုတ် Azure တွင် ထပ်တင်နိုင်ပါသည်။ `quiz-app` ဖိုလ်ဒါထဲရှိ လမ်းညွှန်ချက်များကို လိုက်နာပါ။
 
 ## 🗃️ သင်ခန်းစာများ
 
-|     |                       ပရောဂျက်အမည်                       |                            သင်ကြားမည့်အကြောင်းအရာများ                             | သင်ယူရမည့်ရည်မှန်းချက်များ                                                                                                                 |                                                         သင်ခန်းစာချိတ်ဆက်                                                          |         စာရေးသူ          |
-| :-: | :------------------------------------------------------: | :--------------------------------------------------------------------: | ----------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------: | :---------------------: |
-| 01  |                     စတင်ခြင်း                      |           Programming နှင့် Tools of the Trade အကြောင်းမိတ်ဆက်           | Programming ဘာသာစကားများ၏ အခြေခံအကြောင်းအရာများနှင့် ပရော်ဖက်ရှင်နယ် Developer များအလုပ်လုပ်ရာတွင် အသုံးပြုသော ဆော့ဖ်ဝဲများကို လေ့လာပါ | [Programming ဘာသာစကားများနှင့် Tools of the Trade အကြောင်းမိတ်ဆက်](./1-getting-started-lessons/1-intro-to-programming-languages/README.md) |         Jasmine         |
-| 02  |                     စတင်ခြင်း                      |             GitHub အခြေခံများ၊ အဖွဲ့လိုက်အလုပ်လုပ်ခြင်းအပါအဝင်             | GitHub ကို သင်၏ပရောဂျက်တွင် အသုံးပြုနည်း၊ အခြားသူများနှင့် ကုဒ်အခြေခံပေါ်တွင် ပူးပေါင်းဆောင်ရွက်နည်း                                                    |                            [GitHub အခြေခံများ](./1-getting-started-lessons/2-github-basics/README.md)                             |          Floor          |
-| 03  |                     စတင်ခြင်း                      |                             ဝက်ဘ်လက်လှမ်းမီမှု                              | ဝက်ဘ်လက်လှမ်းမီမှု၏ အခြေခံအကြောင်းအရာများကို လေ့လာပါ                                                                                               |                       [ဝက်ဘ်လက်လှမ်းမီမှုအခြေခံ](./1-getting-started-lessons/3-accessibility/README.md)                       |       Christopher       |
-| 04  |                        JS အခြေခံ                         |                         JavaScript Data Types                          | JavaScript Data Types အခြေခံအကြောင်းအရာများ                                                                                                 |                                       [Data Types](./2-js-basics/1-data-types/README.md)                                        |         Jasmine         |
-| 05  |                        JS အခြေခံ                         |                         Functions နှင့် Methods                          | Application ၏ logic flow ကို စီမံရန် Functions နှင့် Methods အကြောင်းကို လေ့လာပါ                                                             |                              [Functions နှင့် Methods](./2-js-basics/2-functions-methods/README.md)                               | Jasmine and Christopher |
-| 06  |                        JS အခြေခံ                         |                        JS ဖြင့် ဆုံးဖြတ်ချက်များချခြင်း                        | Decision-making နည်းလမ်းများကို အသုံးပြု၍ သင်၏ကုဒ်တွင် အခြေအနေများ ဖန်တီးနည်းကို လေ့လာပါ                                                           |                                 [ဆုံးဖြတ်ချက်များချခြင်း](./2-js-basics/3-making-decisions/README.md)                                  |         Jasmine         |
-| 07  |                        JS အခြေခံ                         |                            Arrays နှင့် Loops                            | JavaScript တွင် Arrays နှင့် Loops ကို အသုံးပြု၍ ဒေတာများကို စီမံပါ                                                                                 |                                   [Arrays နှင့် Loops](./2-js-basics/4-arrays-loops/README.md)                                    |         Jasmine         |
-| 08  |       [Terrarium](./3-terrarium/solution/README.md)       |                            HTML ကို လက်တွေ့အသုံးပြုခြင်း                            | Layout တစ်ခုတည်ဆောက်ရန် အွန်လိုင်း Terrarium တစ်ခုကို HTML ဖြင့် တည်ဆောက်ပါ                                                         |                                 [HTML အကြောင်းမိတ်ဆက်](./3-terrarium/1-intro-to-html/README.md)                                 |           Jen           |
-| 09  |       [Terrarium](./3-terrarium/solution/README.md)       |                            CSS ကို လက်တွေ့အသုံးပြုခြင်း                             | CSS ကို အသုံးပြု၍ အွန်လိုင်း Terrarium ကို အလှဆင်ပါ၊ CSS အခြေခံအကြောင်းအရာများနှင့် စာမျက်နှာကို responsive ဖြစ်စေရန် အခြေခံများကို အာရုံစိုက်ပါ                     |                                  [CSS အကြောင်းမိတ်ဆက်](./3-terrarium/2-intro-to-css/README.md)                                  |           Jen           |
-| 10  |            [Terrarium](./3-terrarium/solution/README.md)            |                 JavaScript Closures, DOM ကို စီမံခြင်း                  | Drag/drop interface အဖြစ် Terrarium ကို လုပ်ဆောင်စေရန် JavaScript ကို တည်ဆောက်ပါ၊ Closures နှင့် DOM ကို စီမံခြင်းအပေါ် အာရုံစိုက်ပါ             |                  [JavaScript Closures, DOM ကို စီမံခြင်း](./3-terrarium/3-intro-to-DOM-and-closures/README.md)                   |           Jen           |
-| 11  |          [Typing Game](./4-typing-game/solution/README.md)          |                          Typing Game တစ်ခု တည်ဆောက်ခြင်း                           | JavaScript app ၏ logic ကို keyboard events အသုံးပြု၍ စီမံနည်းကို လေ့လာပါ                                                          |                                [Event-Driven Programming](./4-typing-game/typing-game/README.md)                                |       Christopher       |
-| 12  | [Green Browser Extension](./5-browser-extension/solution/README.md) |                         Browser များနှင့် အလုပ်လုပ်ခြင်း                          | Browser များအလုပ်လုပ်ပုံ၊ ၎င်းတို့၏ သမိုင်းကြောင်းနှင့် Browser Extension ၏ ပထမဆုံး elements များကို scaffold တည်ဆောက်နည်းကို လေ့လာပါ                               |                               [Browser များအကြောင်း](./5-browser-extension/1-about-browsers/README.md)                                |           Jen           |
-| 13  | [Green Browser Extension](./5-browser-extension/solution/README.md) | Form တစ်ခုတည်ဆောက်ခြင်း၊ API တစ်ခုကို ခေါ်သုံးခြင်းနှင့် local storage တွင် variable များသိမ်းခြင်း | Local storage တွင် သိမ်းထားသော variable များကို အသုံးပြု၍ API တစ်ခုကို ခေါ်သုံးရန် Browser Extension ၏ JavaScript elements များကို တည်ဆောက်ပါ                      |                [APIs, Forms, နှင့် Local Storage](./5-browser-extension/2-forms-browsers-local-storage/README.md)                 |           Jen           |
-| 14  | [Green Browser Extension](./5-browser-extension/solution/README.md) |          Browser ၏ Background Processes, Web Performance          | Extension ၏ icon ကို စီမံရန် Browser ၏ Background Processes ကို အသုံးပြုပါ၊ Web Performance နှင့် အချို့သော Optimization များကို လေ့လာပါ   |             [Background Tasks နှင့် Performance](./5-browser-extension/3-background-tasks-and-performance/README.md)              |           Jen           |
-| 15  |           [Space Game](./6-space-game/solution/README.md)           |             JavaScript ဖြင့် အဆင့်မြင့် Game Development             | Game တစ်ခုတည်ဆောက်ရန် Class နှင့် Composition နှင့် Pub/Sub pattern ကို အသုံးပြု၍ Inheritance အကြောင်းကို လေ့လာပါ              |                      [အဆင့်မြင့် Game Development အကြောင်းမိတ်ဆက်](./6-space-game/1-introduction/README.md)                       |          Chris          |
-| 16  |           [Space Game](./6-space-game/solution/README.md)           |                           Canvas ပေါ်တွင် ရေးဆွဲခြင်း                            | Canvas API အကြောင်းကို လေ့လာပါ၊ ၎င်းကို အသုံးပြု၍ Screen ပေါ်တွင် Element များကို ရေးဆွဲပါ                                                                       |                                [Canvas ပေါ်တွင် ရေးဆွဲခြင်း](./6-space-game/2-drawing-to-canvas/README.md)                                |          Chris          |
-| 17  |           [Space Game](./6-space-game/solution/README.md)           |                   Screen ပေါ်တွင် Element များကို ရွှေ့ခြင်း                    | Cartesian Coordinates နှင့် Canvas API ကို အသုံးပြု၍ Element များကို ရွှေ့လျားစေခြင်းအကြောင်းကို ရှာဖွေပါ                                            |                           [Element များကို ရွှေ့ခြင်း](./6-space-game/3-moving-elements-around/README.md)                           |          Chris          |
-| 18  |           [Space Game](./6-space-game/solution/README.md)           |                          Collision Detection                           | Element များကို တိုက်ဆိုင်စေပြီး၊ keypress များကို အသုံးပြု၍ တုံ့ပြန်မှုများကို ဖန်တီးပါ၊ Game ၏ Performance ကို အာရုံစိုက်ရန် Cooldown Function တစ်ခု ထည့်သွင်းပါ    |                              [Collision Detection](./6-space-game/4-collision-detection/README.md)                              |          Chris          |
-| 19  |           [Space Game](./6-space-game/solution/README.md)           |                             အမှတ်တွက်ခြင်း                              | Game ၏ Status နှင့် Performance အပေါ်မူတည်၍ သင်္ချာတွက်ချက်မှုများကို ဆောင်ရွက်ပါ                                                                |                                    [အမှတ်တွက်ခြင်း](./6-space-game/5-keeping-score/README.md)                                    |          Chris          |
-| 20  |           [Space Game](./6-space-game/solution/README.md)           |                     Game ကို အဆုံးသတ်ခြင်းနှင့် ပြန်စခြင်း                     | Game ကို အဆုံးသတ်ခြင်းနှင့် ပြန်စခြင်းအကြောင်းကို လေ့လာပါ၊ Asset များကို ရှင်းလင်းခြင်းနှင့် Variable တန်ဖိုးများကို ပြန်လည်သတ်မှတ်ခြင်းအပါအဝင်                              |                                [အဆုံးသတ်အခြေအနေ](./6-space-game/6-end-condition/README.md)                                 |          Chris          |
-| 21  |         [Banking App](./7-bank-project/solution/README.md)          |                 Web App တစ်ခုတွင် HTML Templates နှင့် Routes                 | Multipage Website Architecture တစ်ခု၏ Scaffold ကို Routing နှင့် HTML Templates အသုံးပြု၍ တည်ဆောက်နည်းကို လေ့လာပါ                             |                            [HTML Templates နှင့် Routes](./7-bank-project/1-template-route/README.md)                             |          Yohan          |
-| 22  |         [Banking App](./7-bank-project/solution/README.md)          |                  Login နှင့် Registration Form တစ်ခု တည်ဆောက်ခြင်း                   | Form တစ်ခုတည်ဆောက်ခြင်းနှင့် Validation Routines ကို ကိုင်တွယ်နည်း                                                                          |                                           [Forms](./7-bank-project/2-forms/README.md)                                           |          Yohan          |
-| 23  |         [Banking App](./7-bank-project/solution/README.md)          |                   Data ကို ရယူခြင်းနှင့် အသုံးပြုခြင်းနည်းလမ်းများ                   | သင်၏ App အတွင်း Data များ စီးဆင်းပုံ၊ ၎င်းကို ရယူနည်း၊ သိမ်းဆည်းနည်းနှင့် ဖယ်ရှားနည်း                                                 |                                            [Data](./7-bank-project/3-data/README.md)                                            |          Yohan          |
-| 24  |         [Banking App](./7-bank-project/solution/README.md)          |                      State Management ၏ အကြောင်းအရာများ                      | သင်၏ App ၏ State ကို ဘယ်လိုထိန်းသိမ်းရမည်နှင့် Programmatically အကောင်အထည်ဖော်နည်းကို လေ့လာပါ                                                              |                                [State Management](./7-bank-project/4-state-management/README.md)                                |          Yohan          |
-| 25 | [Browser/VScode Code](../../8-code-editor) | VScode နှင့် အလုပ်လုပ်ခြင်း | Code Editor အသုံးပြုနည်းကို လေ့လာပါ | [VScode Code Editor အသုံးပြုခြင်း](./8-code-editor/1-using-a-code-editor/README.md) | Chris |
-| 26 | [AI Assistants](./9-chat-project/README.md) | AI နှင့် အလုပ်လုပ်ခြင်း | သင်၏ကိုယ်ပိုင် AI Assistant တစ်ခု တည်ဆောက်နည်းကို လေ့လာပါ | [AI Assistant Project](./9-chat-project/README.md) | Chris |
+|     |                       ပရောဂျက်အမည်                        |                            သင်ကြားသည့် အယူအဆများ                             | သင်ယူရမည့် ရည်မှန်းချက်များ                                                                                                                 |                                                         ဆက်သွယ်သင်ခန်းစာ                                                         |         အတန်းအုပ်          |
+| :-: | :----------------------------------------------------------: | :--------------------------------------------------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------: | :---------------------: |
+| 01  |                     Getting Started                      |           ပရိုဂရမ်မင်းနှင့် လုပ်ငန်းကိရိယာများသိရှိမှု မိတ်ဆက်ခြင်း           | အများဆုံး အသုံးပြုသော programming ဘာသာစကားများ၏ အခြေခံ အချက်များနှင့် ပရော်ဖက်ရှင်နယ် တီထွင်သူများအတွက် ကူညီပစ္စည်းများကို သင်ယူပါ | [Intro to Programming Languages and Tools of the Trade](./1-getting-started-lessons/1-intro-to-programming-languages/README.md) |         Jasmine         |
+| 02  |                     Getting Started                      |             GitHub အခြေခံများ၊ အဖွဲ့နှင့် သဘောတူလုပ်ငန်းများ             | သင့်ပရောဂျက်တွင် GitHub ကို ကောင်တာအသုံးပြုနည်း၊ ကုဒ်အခြေခံတွင် အခြားသူများနှင့် ပူးပေါင်းလုပ်ဆောင်နည်း                                  |                            [Intro to GitHub](./1-getting-started-lessons/2-github-basics/README.md)                             |          Floor          |
+| 03  |                     Getting Started                      |                             လက်ဝှေ့နှင့် စီမံခန့်ခွဲမှု                          | ဝက်ပ accessibility ၏ အခြေခံကို လေ့လာခြင်း                                                                                               |                       [Accessibility Fundamentals](./1-getting-started-lessons/3-accessibility/README.md)                       |       Christopher       |
+| 04  |                        JS Basics                         |                         JavaScript ဒေတာအမျိုးအစားများ                              | JavaScript ဒေတာအမျိုးအစားများ၏ အခြေခံများ                                                                                                 |                                       [Data Types](./2-js-basics/1-data-types/README.md)                                        |         Jasmine         |
+| 05  |                        JS Basics                         |                         Function များနှင့် Method များ                           | အပလီကေးရှင်း၏ လောဂစ်စနစ်ကို စီမံခန့်ခွဲရန် Function များနှင့် Method များကို သင်ယူပါ                                                             |                              [Functions and Methods](./2-js-basics/2-functions-methods/README.md)                               | Jasmine and Christopher |
+| 06  |                        JS Basics                         |                        JS ဖြင့် ဆုံးဖြတ်ချက်များ အခြေခံ                                         | သင့်ကုဒ်တွင် ဆုံးဖြတ်ချက် ရယူရေးနည်းများကို သင်ယူပါ                                                                                         |                                 [Making Decisions](./2-js-basics/3-making-decisions/README.md)                                  |         Jasmine         |
+| 07  |                        JS Basics                         |                            အရေအတွက်များနှင့် Loop များ                                 | JavaScript တွင် အရေအတွက်များနှင့် Loop များဖြင့် ဒေတာ စီမံခန့်ခွဲခြင်း                                                                         |                                   [Arrays and Loops](./2-js-basics/4-arrays-loops/README.md)                                    |         Jasmine         |
+| 08  |       [Terrarium](./3-terrarium/solution/README.md)       |                            HTML လက်တွေ့အသုံးပြုမှု                                | အွန်လိုင်း Terrarium တည်ဆောက်ရန် HTML တည်ဆောက်ခြင်း၊ ဖော်စပ်ခြင်းအပေါ် အာရုံစိုက်ခြင်း                                                         |                                 [Introduction to HTML](./3-terrarium/1-intro-to-html/README.md)                                 |           Jen           |
+| 09  |       [Terrarium](./3-terrarium/solution/README.md)       |                            CSS လက်တွေ့အသုံးပြုမှု                                 | အွန်လိုင်း Terrarium အား အလှဆင်ရန် CSS တည်ဆောက်ခြင်း၊ CSS အခြေခံများနှင့် စာမျက်နှာကို ပြန်လည်တုံ့ပြန်နိုင်စေရန် အထူး အာရုံစိုက်ခြင်း                     |                                  [Introduction to CSS](./3-terrarium/2-intro-to-css/README.md)                                  |           Jen           |
+| 10  |            [Terrarium](./3-terrarium/solution/README.md)            |                 JavaScript Closure များ၊ DOM ကိုင်တွယ်မှု                       | Terrarium ကို drag/drop အင်တာဖေ့စ် အဖြစ် ပြုလုပ်ရန် JavaScript ရေးဆွဲခြင်း၊ closure များနှင့် DOM ကိုင်တွယ်မှုအပေါ် အာရုံစိုက်ခြင်း                  |                  [JavaScript Closures, DOM manipulation](./3-terrarium/3-intro-to-DOM-and-closures/README.md)                   |           Jen           |
+| 11  |          [Typing Game](./4-typing-game/solution/README.md)          |                          ရိုက်နှိပ်မှု ကစားနည်း တည်ဆောက်ခြင်း                | JavaScript အက်ပ်၏ လောဂစ်သွားလာမှုအတွက် Keyboard event များ အသုံးပြုနည်း                                                               |                                [Event-Driven Programming](./4-typing-game/typing-game/README.md)                                |       Christopher       |
+| 12  | [Green Browser Extension](./5-browser-extension/solution/README.md) |                         Browser များနဲ့အလုပ်လုပ်ခြင်း                          | Browser မ်ား၏ လုပ်ငန်းစဉ်၊ သမိုင်းနောက်ခံ၊ browser extension ၏ ပထမဆုံးအရာများ ဖန်တီးနည်း                                   |                               [About Browsers](./5-browser-extension/1-about-browsers/README.md)                                |           Jen           |
+| 13  | [Green Browser Extension](./5-browser-extension/solution/README.md) | API ကို ခေါ်ယူခြင်း၊ form တည်ဆောက်ခြင်းနှင့် local storage တွင် သိမ်းဆည်းခြင်း | API ကိုခေါ်ရယူရန်နှင့် local storage တွင် သိမ်းဆည်းထားသော variable များကို အသုံးပြုသော browser extension ၏ JavaScript အစိတ်အပိုင်းများ တည်ဆောက်ခြင်း                      |                [APIs, Forms, and Local Storage](./5-browser-extension/2-forms-browsers-local-storage/README.md)                 |           Jen           |
+| 14  | [Green Browser Extension](./5-browser-extension/solution/README.md) |          Browser အတွင်း backround proccess များ၊ ဝက်ဘ်စွမ်းဆောင်ရည်          | Extension icon ကို စီမံရေးဆွဲရန် browser ၏ background process များကို သုံးခြင်း၊ ဝက်ဘ်စွမ်းဆောင်ရည်နှင့် တချို့သော ထိရောက်မှုများအပေါ် သိမြင်ရန်                      |             [Background Tasks and Performance](./5-browser-extension/3-background-tasks-and-performance/README.md)              |           Jen           |
+| 15  |           [Space Game](./6-space-game/solution/README.md)           |             JavaScript ဖြင့် များပြားသောဂိမ်းဖွံ့ဖြိုးမှုအဆင့်မြင့်            | Classes နှင့် Composition ကို သုံးပြီး Inheritance အကြောင်း နှင့် Pub/Sub ပုံစံကို သင်ယူပြီး ဂိမ်းတစ်ခု ဖန်တီးရန် ပြင်ဆင်ခြင်း                                          |                      [Introduction to Advanced Game Development](./6-space-game/1-introduction/README.md)                       |          Chris          |
+| 16  |           [Space Game](./6-space-game/solution/README.md)           |                           Canvas တွင် ဆွဲဆောင်ခြင်း                             | Canvas API ကို စာမျက်နှာပေါ်တွင် element များ ထည့်ရန် အသုံးပြုမှု                                                              |                                [Drawing to Canvas](./6-space-game/2-drawing-to-canvas/README.md)                                |          Chris          |
+| 17  |           [Space Game](./6-space-game/solution/README.md)           |                   စာမျက်နှာပေါ်တွင် element များကို ရွှေ့ပြောင်းခြင်း               | Cartesian coordinates နှင့် Canvas API ကို အသုံးပြုကာ element များကို ရွှေ့ပြောင်းပေးရန် သင်ယူခြင်း                                                     |                           [Moving Elements Around](./6-space-game/3-moving-elements-around/README.md)                           |          Chris          |
+| 18  |           [Space Game](./6-space-game/solution/README.md)           |                          တွယ်ထိုးမှု မှတ်ချက်များ                            | keypress များ အသုံးပြုပြီး element များကို တွယ်ထိုးခြင်းနှင့် တစ်ခုနှင့်တစ်ခု ထိတွေ့ပြီး လုပ်ဆောင်နိုင်စေရန် cooldown function တစ်ခု ဖန်တီးခြင်း                           |                              [Collision Detection](./6-space-game/4-collision-detection/README.md)                              |          Chris          |
+| 19  |           [Space Game](./6-space-game/solution/README.md)           |                             မှတ်တမ်း ထိန်းသိမ်းခြင်း                          | ဂိမ်း၏ အခြေအနေ နှင့် စွမ်းဆောင်ရည် အပေါ် ရှိ သင်္ချာတွက်ချက်ချက်များ ပြုလုပ်ခြင်း                                                          |                                    [Keeping Score](./6-space-game/5-keeping-score/README.md)                                    |          Chris          |
+| 20  |           [Space Game](./6-space-game/solution/README.md)           |                     ဂိမ်းကို နှုတ်ဆက်ပြီး ပြန်စတင်ခြင်း                          | ဂိမ်းအစစ ပြီးဆုံးခြင်းနှင့် ပြန်စတင်ခြင်းအကြောင်း၊ အရင်းအမြစ်များ သန့်ရှင်းသည်ြဖစ်စေရန် နှင့် variable တန်ဖိုးများ ပြန်လည်သတ်မှတ်ခြင်း                            |                                [The Ending Condition](./6-space-game/6-end-condition/README.md)                                 |          Chris          |
+| 21  |         [Banking App](./7-bank-project/solution/README.md)          |                 ဝက်ဘ်အက်ပ်တွင် HTML Template များနှင့် Route များ                | မျက်နှာတစ်ခုထက်ပိုသော ဝက်ဘ်ဆိုက် ဖွဲ့စည်းမှုအတွက် routing နှင့် HTML template များ ဖြင့် စနစ်တစ်ခု တည်ဆောက်နည်း                                                |                            [HTML Templates and Routes](./7-bank-project/1-template-route/README.md)                             |          Yohan          |
+| 22  |         [Banking App](./7-bank-project/solution/README.md)          |                  Login နှင့် Registration form ဖန်တီးခြင်း                       | form များတည်ဆောက်ခြင်းနှင့် အတည်ပြုလုပ်ဆောင်မှုများကို ကိုင်တွယ်ခြင်း                                                                      |                                           [Forms](./7-bank-project/2-forms/README.md)                                           |          Yohan          |
+| 23  |         [Banking App](./7-bank-project/solution/README.md)          |                   ဒေတာ ရယူခြင်းနှင့် အသုံးပြုနည်းများ                         | သင်၏အက်ပ်ဖြင့် ဒေတာ လှုပ်ရှားပုံ၊ ဒေတာ ရယူခြင်း၊ သိမ်းဆည်းခြင်းနှင့် ဖယ်ရှားခြင်း                                                             |                                            [Data](./7-bank-project/3-data/README.md)                                            |          Yohan          |
+| 24  |         [Banking App](./7-bank-project/solution/README.md)          |                      အခြေအနေ စီမံခန့်ခွဲမှု အယူအဆများ                      | သင့်အက်ပ်၏ အခြေအနေပိုင်း စီမံခန့်ခွဲပုံနှင့် ပရိုဂရမ်ဖြင့် ထိန်းချုပ်နည်း                                                                      |                                [State Management](./7-bank-project/4-state-management/README.md)                                |          Yohan          |
+| 25 | [Browser/VScode Code](../../8-code-editor) | VScode ကို အသုံးပြုခြင်း | ကုဒ် တည်းဖြတ်ကိရိယာကို အသုံးပြုနည်း သင်ယူပါ| [Use VScode Code Editor](./8-code-editor/1-using-a-code-editor/README.md) | Chris |
+| 26 | [AI Assistants](./9-chat-project/README.md) | AI ဖြင့် အလုပ်လုပ်ခြင်း | ကိုယ်ပိုင် AI အကူအညီသစ်တစ်ခု ဖန်တီးနည်း သင်ယူပါ | [AI Assistant project](./9-chat-project/README.md) | Chris |
 
-## 🏫 သင်ကြားမှုနည်းပညာ
+## 🏫 သင်ကြားမှု နည်းဗျူဟာ
 
-ကျွန်ုပ်တို့၏ သင်ရိုးညွှန်းတမ်းကို အဓိက သင်ကြားမှုနည်းပညာနှစ်ခုကို အခြေခံ၍ ဒီဇိုင်းဆွဲထားပါသည်:
+ကျွန်ုပ်တို့၏ သင်ယူရေးအစီအစဉ်သည် အဓိက သင်ကြားမှု 원칙နှစ်ခုဖြင့် တည်ဆောက်ထားပါသည်။
 * ပရောဂျက်အခြေပြု သင်ကြားမှု
-* မကြာခဏ မေးခွန်းများ
+* အကြိမ်ကြိမ် စစ်တမ်းများ
 
-ဒီအစီအစဉ်သည် JavaScript, HTML, CSS ၏ အခြေခံအကြောင်းအရာများနှင့် ယနေ့ Web Developer များအသုံးပြုနေသော နောက်ဆုံးပေါ် Tools နှင့် နည်းလမ်းများကို သင်ကြားပေးပါသည်။ ကျောင်းသားများသည် Typing Game, Virtual Terrarium, Eco-Friendly Browser Extension, Space-Invader-Style Game, နှင့် စီးပွားရေးလုပ်ငန်းများအတွက် Banking App တို့ကို တည်ဆောက်ခြင်းဖြင့် လက်တွေ့အတွေ့အကြုံရရှိမည်ဖြစ်သည်။ သင်ရိုးညွှန်းတန်း၏ အဆုံးတွင် ကျောင်းသားများသည် Web Development အကြောင်းကို ခိုင်မာစွာ နားလည်သွားမည်ဖြစ်သည်။
+ဒီအစီအစဉ်သည် JavaScript၊ HTML နှင့် CSS အခြေခံအချက်များ၊ နောက်ဆုံးပေါ် ဝက်ဘ်ဖန်တီးသူများက အသုံးပြုနေကြသော ကိရိယာနှင့် နည်းပညာများကို သင်ကြားပေးသည်။ ကျောင်းသားများသည် စတိုင်ပေါ်မှ typing game၊ virtual terrarium, eco-friendly browser extension, space-invader-style game နှင့် စီးပွားရေးလုပ်ငန်းအတွက် banking app တို့ကို တည်ဆောက်ခြင်းဖြင့် လက်တွေ့ အတွေ့အကြုံ ရရှိနိုင်မည်ဖြစ်သည်။ စီးရီးအဆုံးတွင် ကျောင်းသားများသည် ဝက်ဘ်ဖန်တီးမှုကို များစွာ နားလည်တတ်မြောက်မည်ဖြစ်သည်။
 
-> 🎓 သင်ဤသင်ရိုးညွှန်းတန်း၏ ပထမဆုံး သင်ခန်းစာအချို့ကို Microsoft Learn တွင် [Learn Path](https://docs.microsoft.com/learn/paths/web-development-101/?WT.mc_id=academic-77807-sagibbon) အဖြစ် လေ့လာနိုင်ပါသည်။
+> 🎓 သင်သည် Microsoft Learn တွင် [Learn Path](https://docs.microsoft.com/learn/paths/web-development-101/?WT.mc_id=academic-77807-sagibbon) အဖြစ် ဒီသင်ခန်းစာတစ်ချို့ကို စမ်းသပ်နိုင်ပါသည်!
 
-ပရောဂျက်များနှင့် အကြောင်းအရာများကို ကိုက်ညီစေရန် သေချာစွာ စီစဉ်ထားသောကြောင့် ကျောင်းသားများအတွက် ပိုမိုစိတ်ဝင်စားစေပြီး အကြောင်းအရာများကို ပိုမိုမှတ်မိစေပါသည်။ JavaScript အခြေခံများကို မိတ်ဆက်သည့် သင်ခန်းစာအချို့ကို "[Beginners Series to: JavaScript](https://channel9.msdn.com/Series/Beginners-Series-to-JavaScript/?WT.mc_id=academic-77807-sagibbon)" ဗီဒီယို Tutorial စုစည်းမှုမှ ဗီဒီယိုတစ်ခုနှင့် တွဲဖက်ရေးသားထားပါသည်။ ဤသင်ရိုးညွှန်းတန်းကို ရေးသားရာတွင် အချို့သောစာရေးသူများလည်း ပါဝင်ခဲ့ပါသည်။
+အကြောင်းအရာသည် ပရောဂျက်များနှင့် ကိုက်ညီအောင် ဖန်တီးထားခြင်းကြောင့် ကျောင်းသားများအတွက် ပိုမိုစိတ်ဝင်စားဖွယ်ဖြစ်ပြီး အယူအဆများကို ပိုမိုမှတ်သားနိုင်မည်ဖြစ်သည်။ ကျွန်ုပ်တို့သည် JavaScript အခြေခံ သင်ခန်းစာများ အနည်းငယ်ကို စတင်ရေးသားထားပြီး၊ "[Beginners Series to: JavaScript](https://channel9.msdn.com/Series/Beginners-Series-to-JavaScript/?WT.mc_id=academic-77807-sagibbon)" ဗီဒီယိုသင်ခန်းစာစုများထဲမှ ဗီဒီယိုတစ်ခုဖုန်းလိုက်ပြီး၊ စာရေးသူတချို့သည် ဒီအစီအစဉ်အတွက် ထောက်ပံ့ခဲ့ကြသည်။
 
-ထို့အပြင်၊ သင်ခန်းစာမတိုင်မီ မေးခွန်းတစ်ခုသည် ကျောင်းသား၏ အာရုံစိုက်မှုကို သင်ခန်းစာအကြောင်းသို့ ဦးတည်စေပြီး၊ သင်ခန်းစာပြီးနောက် မေးခွန်းတစ်ခုသည် အကြောင်းအရာများကို ပိုမိုမှတ်မိစေပါသည်။ ဤသင်ရိုးညွှန်းတန်းကို တစ်ခုလုံး သို့မဟုတ် အစိတ်အပိုင်းအချို့သာ လေ့လာနိုင်ပြီး၊ Flexible နှင့် ပျော်ရွှင်စေရန် ဒီဇိုင်းဆွဲထားပါသည်။ ပရောဂျက်များသည် သေးငယ်သောအဆင့်မှ စတင်ပြီး ၁၂ ပတ်အတွင်း အဆင့်မြင့်ဖြစ်လာမည်ဖြစ်သည်။
+ထို့အပြင် သင်ခန်းစာမတိုင်မီ အနည်းငယ်သော စစ်တမ်းတစ်ခုသည် ကျောင်းသား၏ သင်ယူမှုရည်ရွယ်ချက်အား သတ်မှတ်ပေးပြီး၊ သင်ခန်းစာပြီးနောက် ဖျော်ဖြေစစ်တမ်းတစ်ခုသည် နောက်ထပ် မှတ်သားမှုကို အတည်ပြုသည်။ ဒီအစီအစဉ်ကို လွယ်ကူပျော်ရွှင်စွာ ပြုလုပ်နိုင်ပြီး အစိတ်အပိုင်းအလိုက် သို့မဟုတ် တစ်ပြိုင်နက်လုံး သင်ယူနိုင်ပါသည်။ ပရောဂျက်များသည် သေးငယ်စွာစတင်ပြီး ၁၂ ပတ်စာ အချုပ်အခြာအတွင်း မှာသာ များပြားခက်ခဲလာသည်။
 
-JavaScript Framework များကို မိတ်ဆက်ခြင်းကို ရှောင်ကြဉ်ထားပြီး Framework တစ်ခုကို လေ့လာမီ Web Developer အဖြစ် လ
-- [Data Science for Beginners](https://aka.ms/datascience-beginners)  
-- [ML for Beginners](https://aka.ms/ml-beginners)  
-- [Cybersecurity for Beginners](https://github.com/microsoft/Security-101)  
-- [Web Dev for Beginners](https://aka.ms/webdev-beginners)  
-- [IoT for Beginners](https://aka.ms/iot-beginners)  
-- [XR Development for Beginners](https://github.com/microsoft/xr-development-for-beginners)  
-- [Mastering GitHub Copilot for Agentic use](https://github.com/microsoft/Mastering-GitHub-Copilot-for-Paired-Programming)  
-- [Mastering GitHub Copilot for C#/.NET Developers](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers)  
-- [Choose Your Own Copilot Adventure](https://github.com/microsoft/CopilotAdventures)  
+JavaScript framework များကို မိတ်ဆက်ရန် ရည်ရွယ်ချက်မရှိပေမယ့်၊ ဝက်ဘ်ဖန်တီးသူ တစ်ဦးအနေနဲ့ လိုအပ်သော အခြေခံကျသော ကျွမ်းကျင်မှုများကို ရရှိရန် အရင်ဆုံး သင်ကြားခြင်းဖြစ်ပြီး၊ ဒီအစီအစဉ် ပြီးမြောက်ရန်အတွက် နောက်တစ်ခုအဆင့် အဖြစ် Node.js ကို "[Beginner Series to: Node.js](https://channel9.msdn.com/Series/Beginners-Series-to-Nodejs/?WT.mc_id=academic-77807-sagibbon)" ဗီဒီယိုစုရုပ်မှတ်တမ်းကနေ သင်ယူနိုင်ပါသည်။
 
-## လိုင်စင်  
+> ကျွန်ုပ်တို့၏ [Code of Conduct](CODE_OF_CONDUCT.md) နှင့် [Contributing](CONTRIBUTING.md) လမ်းညွှန်များကို လေ့လာပါ။ သင့်၏ ဖွံ့ဖြိုးတိုးတက်မှုဆိုင်ရာ တုံ့ပြန်ချက်များကို ကြိုဆိုပါသည်။
 
-ဤ repository သည် MIT လိုင်စင်အောက်တွင် လိုင်စင်ရရှိထားပါသည်။ ပိုမိုသိရှိလိုပါက [LICENSE](../../LICENSE) ဖိုင်ကို ကြည့်ပါ။  
+## 🧭 အော့ဖ်လိုင်းလက်လီချိတ်ဆက်မှု
+
+[Docsify](https://docsify.js.org/#/) ကို အသုံးပြု၍ ဒီစာရွက်စာတမ်းကို အော့ဖ်လိုင်းတွင် ဖတ်ရှုနိုင်ပါသည်။ repo ကို fork ပြုလုပ်ပြီး၊ သင့်ဒက်စတော့ပေါ်သို့ [Docsify ကို 설치](https://docsify.js.org/#/quickstart) ပြုလုပ်ပါ၊ ထို့နောက် ဒီ repo ၏ ပင်မ ဖိုလ်ဒါတွင် `docsify serve` ကို ရိုက်ထည့်မည်ဖြင့် local server သို့ ဝက်ဘ်ဆိုက်အား port 3000 တွင် ေပးဆောင်ပါမည်။ ဒီတော့သင့် browser မှ `localhost:3000` တို့ တွင် ဝင်ရောက်ကြည့်ရှုနိုင်ပါသည်။
+
+## 📘 PDF
+
+သင်ခန်းစာများအားလုံး၏ PDF ကို [ဒီနေရာတွင်](https://microsoft.github.io/Web-Dev-For-Beginners/pdf/readme.pdf) ရှာတွေ့နိုင်ပါသည်။
+
+## 🎒 အခြားသင်တန်းများ
+ကျွန်ုပ်တို့၏အသင်းသည် အခြားသင်တန်းများကိုလည်း ထုတ်လုပ်ပါသည်! ကြည့်ရှုပါ:
+
+<!-- CO-OP TRANSLATOR OTHER COURSES START -->
+### LangChain
+[![LangChain4j for Beginners](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js for Beginners](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
 
 ---
 
-**အကြောင်းကြားချက်**:  
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူရင်းစာရွက်စာတမ်းကို ၎င်း၏ မူလဘာသာစကားဖြင့် အာဏာတရားရှိသော အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ဘာသာပြန်ပညာရှင်များမှ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်မှုကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်လာသော အလွဲအလွတ်များ သို့မဟုတ် အနားယူမှုမှားများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+### Azure / Edge / MCP / Agents
+[![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![MCP for Beginners](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI Agents for Beginners](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### Generative AI Series
+[![Generative AI for Beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### Core Learning
+[![ML for Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+[![XR Development for Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### Copilot Series
+[![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+<!-- CO-OP TRANSLATOR OTHER COURSES END -->
+
+## ကူညီမှုရယူရန်
+
+AI အက်ပ်များကို တည်ဆောက်ရာတွင် အခက်အခဲများရှိသည်거나 မေးခွန်းများရှိပါက MCP အကြောင်းကို အတူတကွလေ့လာသူများနှင့် အတွေ့အကြုံရှိသော ဖွံ့ဖြိုးသူများနှင့် တွေ့ဆုံဆွေးနွေးနိုင်ပါသည်။ ၎င်းသည် မေးခွန်းများကို ကြိုဆိုပြီး ဗဟုသုတကို အခမဲ့မျှဝေသော ပံ့ပိုးမှုရှိသော အသိုင်းအဝိုင်းတစ်ခုဖြစ်သည်။
+
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+
+ထုတ်ကုန်တုံ့ပြန်ချက်များ သို့မဟုတ် အမှားများဖြစ်ပေါ်ပါက ဖော်ပြထားသော နေရာသို့ သွားရောက်ကြည့်ရှုနိုင်သည်။
+
+[![Microsoft Foundry Developer Forum](https://img.shields.io/badge/GitHub-Microsoft_Foundry_Developer_Forum-blue?style=for-the-badge&logo=github&color=000000&logoColor=fff)](https://aka.ms/foundry/forum)
+
+## ခွင့်ပြုချက်
+
+ဤ စုစည်းမှုကို MIT ခွင့်ပြုချက်ဖြင့် လိုင်စင်ရှိပါသည်။ အသေးစိတ်အချက်အလက်များအတွက် [LICENSE](../../LICENSE) ဖိုင်ကို ကြည့်ရှုပါ။
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**အကြောင်းကြားချက်**  
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားတတ်သောကြောင့်၊ အလိုအလျောက် ဘာသာပြန်ခြင်းတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ဖြစ်ပေါ်နိုင်ကြောင်း သတိပြုဖို့လိုအပ်ပါသည်။ မူရင်းစာရွက်စာတမ်းကို မူလဘာသာဖြင့်သာ ခံယူသင့်သော တရားဝင်အရင်းအမြစ်အဖြစ် ထားရှိသင့်ပါသည်။ အရေးကြီးသော သတင်းအချက်အလက်များအတွက် သက်ဆိုင်ရာလူတို့၏ ပရော်ဖက်ရှင်နယ်ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ခြင်းကို အသုံးပြုရာတွင် ဖြစ်ပေါ်လာသော နားလည်မှုမှားယွင်းခြင်း သို့မဟုတ် မှားအဓိပ္ပါယ်ယူခြင်းများအတွက် ကျွန်ုပ်တို့ အပြစ်မရှိပါ။
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

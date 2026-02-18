@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-27T22:58:44+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "tl"
-}
--->
 # Ang Aking Terrarium: Isang proyekto para matutunan ang HTML, CSS, at DOM manipulation gamit ang JavaScript 🌵🌱
 
 Isang maliit na drag and drop na code-meditation. Sa kaunting HTML, JS, at CSS, maaari kang gumawa ng web interface, i-style ito, at magdagdag ng interaksyon.
 
-![ang aking terrarium](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.tl.png)
+![ang aking terrarium](../../../../translated_images/tl/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## Mga Kredito
 

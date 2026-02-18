@@ -1,31 +1,102 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a7587943d38d095de8613e1b508609f5",
-  "translation_date": "2025-08-28T17:01:03+00:00",
-  "source_file": "5-browser-extension/2-forms-browsers-local-storage/README.md",
-  "language_code": "pa"
-}
--->
-# ਬ੍ਰਾਊਜ਼ਰ ਐਕਸਟੈਂਸ਼ਨ ਪ੍ਰੋਜੈਕਟ ਭਾਗ 2: API ਨੂੰ ਕਾਲ ਕਰੋ, ਲੋਕਲ ਸਟੋਰੇਜ ਵਰਤੋ
+# ਬ੍ਰਾਊਜ਼ਰ ਐਕਸਟੈਂਸ਼ਨ ਪ੍ਰੋਜੈਕਟ ਭਾਗ 2: API ਕਾਲ ਕਰੋ, ਲੋਕਲ ਸਟੋਰੇਜ ਵਰਤੋ
 
-## ਪੂਰਵ-ਵਿਚਾਰ ਕਵਿਜ਼
+```mermaid
+journey
+    title Your API Integration & Storage Journey
+    section Foundation
+      Setup DOM references: 3: Student
+      Add event listeners: 4: Student
+      Handle form submission: 4: Student
+    section Data Management
+      Implement local storage: 4: Student
+      Build API calls: 5: Student
+      Handle async operations: 5: Student
+    section User Experience
+      Add error handling: 5: Student
+      Create loading states: 4: Student
+      Polish interactions: 5: Student
+```
 
-[ਪੂਰਵ-ਵਿਚਾਰ ਕਵਿਜ਼](https://ff-quizzes.netlify.app/web/quiz/25)
+## ਪੂਰਵ-ਵਿਦਿਆਰਥੀ ਕਵਿਜ਼
 
-### ਪਰਿਚਯ
+[ਪੂਰਵ-ਵਿਦਿਆਰਥੀ ਕਵਿਜ਼](https://ff-quizzes.netlify.app/web/quiz/25)
 
-ਇਸ ਪਾਠ ਵਿੱਚ, ਤੁਸੀਂ ਆਪਣੇ ਬ੍ਰਾਊਜ਼ਰ ਐਕਸਟੈਂਸ਼ਨ ਦੇ ਫਾਰਮ ਨੂੰ ਸਬਮਿਟ ਕਰਕੇ API ਨੂੰ ਕਾਲ ਕਰੋਗੇ ਅਤੇ ਨਤੀਜੇ ਬ੍ਰਾਊਜ਼ਰ ਐਕਸਟੈਂਸ਼ਨ ਵਿੱਚ ਦਿਖਾਵੋਗੇ। ਇਸਦੇ ਨਾਲ, ਤੁਸੀਂ ਸਿੱਖੋਗੇ ਕਿ ਕਿਵੇਂ ਆਪਣੇ ਬ੍ਰਾਊਜ਼ਰ ਦੇ ਲੋਕਲ ਸਟੋਰੇਜ ਵਿੱਚ ਡਾਟਾ ਭਵਿੱਖ ਵਿੱਚ ਹਵਾਲੇ ਅਤੇ ਵਰਤੋਂ ਲਈ ਸਟੋਰ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ।
+## ਪਰਿਚਯ
 
-✅ ਸਹੀ ਫਾਈਲਾਂ ਵਿੱਚ ਗਿਣਤੀ ਵਾਲੇ ਸੈਗਮੈਂਟਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ ਤਾਂ ਜੋ ਤੁਹਾਨੂੰ ਪਤਾ ਲੱਗੇ ਕਿ ਕੋਡ ਕਿੱਥੇ ਰੱਖਣਾ ਹੈ।
+ਤੁਹਾਨੂੰ ਯਾਦ ਹੈ ਕਿ ਤੁਸੀਂ ਬ੍ਰਾਊਜ਼ਰ ਐਕਸਟੈਂਸ਼ਨ ਬਣਾਉਣ ਦੀ ਸ਼ੁਰੂਆਤ ਕੀਤੀ ਸੀ? ਇਸ ਸਮੇਂ ਤੁਹਾਡੇ ਕੋਲ ਇੱਕ ਸੁੰਦਰ ਫਾਰਮ ਹੈ, ਪਰ ਇਹ ਮੁੱਖ ਤੌਰ 'ਤੇ ਸਥਿਰ ਹੈ। ਅੱਜ ਅਸੀਂ ਇਸਨੂੰ ਹਕੀਕਤੀ ਡਾਟਾ ਨਾਲ ਜੋੜ ਕੇ ਅਤੇ ਇਸਨੂੰ ਯਾਦਸ਼ਕਤੀ ਦੇ ਕੇ ਜ਼ਿੰਦਾ ਕਰਾਂਗੇ।
 
-### ਐਕਸਟੈਂਸ਼ਨ ਵਿੱਚ ਮੈਨਿਪੁਲੇਟ ਕਰਨ ਲਈ ਐਲਿਮੈਂਟ ਸੈਟ ਕਰੋ:
+ਅਪੋਲੋ ਮਿਸ਼ਨ ਕੰਟਰੋਲ ਕੰਪਿਊਟਰਾਂ ਬਾਰੇ ਸੋਚੋ - ਉਹ ਸਿਰਫ਼ ਸਥਿਰ ਜਾਣਕਾਰੀ ਨਹੀਂ ਦਿਖਾਉਂਦੇ ਸਨ। ਉਹ ਸਪੇਸਕ੍ਰਾਫਟ ਨਾਲ ਲਗਾਤਾਰ ਸੰਚਾਰ ਕਰਦੇ ਸਨ, ਟੈਲੀਮੇਟਰੀ ਡਾਟਾ ਨਾਲ ਅਪਡੇਟ ਹੁੰਦੇ ਸਨ, ਅਤੇ ਮਹੱਤਵਪੂਰਨ ਮਿਸ਼ਨ ਪੈਰਾਮੀਟਰਾਂ ਨੂੰ ਯਾਦ ਰੱਖਦੇ ਸਨ। ਅੱਜ ਅਸੀਂ ਇਸ ਤਰ੍ਹਾਂ ਦਾ ਗਤੀਸ਼ੀਲ ਵਿਹਾਰ ਬਣਾਉਣ ਜਾ ਰਹੇ ਹਾਂ। ਤੁਹਾਡਾ ਐਕਸਟੈਂਸ਼ਨ ਇੰਟਰਨੈਟ ਨਾਲ ਜੁੜੇਗਾ, ਹਕੀਕਤੀ ਵਾਤਾਵਰਣ ਡਾਟਾ ਲਵੇਗਾ, ਅਤੇ ਅਗਲੀ ਵਾਰ ਲਈ ਤੁਹਾਡੇ ਸੈਟਿੰਗਾਂ ਨੂੰ ਯਾਦ ਰੱਖੇਗਾ।
 
-ਇਸ ਸਮੇਂ ਤੱਕ ਤੁਸੀਂ ਆਪਣੇ ਬ੍ਰਾਊਜ਼ਰ ਐਕਸਟੈਂਸ਼ਨ ਲਈ ਫਾਰਮ ਅਤੇ ਨਤੀਜਿਆਂ `<div>` ਲਈ HTML ਬਣਾਈ ਹੈ। ਹੁਣ ਤੋਂ, ਤੁਹਾਨੂੰ `/src/index.js` ਫਾਈਲ ਵਿੱਚ ਕੰਮ ਕਰਨ ਦੀ ਜ਼ਰੂਰਤ ਹੈ ਅਤੇ ਆਪਣੀ ਐਕਸਟੈਂਸ਼ਨ ਨੂੰ ਹੌਲੀ-ਹੌਲੀ ਬਣਾਉਣਾ ਹੈ। ਪ੍ਰੋਜੈਕਟ ਸੈਟਅਪ ਅਤੇ ਬਿਲਡ ਪ੍ਰੋਸੈਸ ਬਾਰੇ ਜਾਣਨ ਲਈ [ਪਿਛਲੇ ਪਾਠ](../1-about-browsers/README.md) ਨੂੰ ਵੇਖੋ।
+API ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਮੁਸ਼ਕਲ ਲੱਗ ਸਕਦੀ ਹੈ, ਪਰ ਇਹ ਸਿਰਫ਼ ਤੁਹਾਡੇ ਕੋਡ ਨੂੰ ਹੋਰ ਸੇਵਾਵਾਂ ਨਾਲ ਸੰਚਾਰ ਕਰਨ ਦਾ ਸਿਖਾਉਣਾ ਹੈ। ਚਾਹੇ ਤੁਸੀਂ ਮੌਸਮ ਡਾਟਾ, ਸੋਸ਼ਲ ਮੀਡੀਆ ਫੀਡਸ, ਜਾਂ ਕਾਰਬਨ ਫੁੱਟਪ੍ਰਿੰਟ ਜਾਣਕਾਰੀ ਲੈ ਰਹੇ ਹੋ ਜਿਵੇਂ ਅਸੀਂ ਅੱਜ ਕਰਨ ਜਾ ਰਹੇ ਹਾਂ, ਇਹ ਸਾਰੇ ਡਿਜ਼ੀਟਲ ਕਨੈਕਸ਼ਨ ਸਥਾਪਤ ਕਰਨ ਬਾਰੇ ਹੈ। ਅਸੀਂ ਇਹ ਵੀ ਪੜ੍ਹਾਂਗੇ ਕਿ ਬ੍ਰਾਊਜ਼ਰ ਜਾਣਕਾਰੀ ਨੂੰ ਕਿਵੇਂ ਸਥਿਰ ਕਰ ਸਕਦੇ ਹਨ - ਜਿਵੇਂ ਲਾਇਬ੍ਰੇਰੀਆਂ ਨੇ ਕਿਤਾਬਾਂ ਦੇ ਸਥਾਨ ਨੂੰ ਯਾਦ ਰੱਖਣ ਲਈ ਕਾਰਡ ਕੈਟਾਲੌਗ ਵਰਤੇ ਹਨ।
 
-ਆਪਣੀ `index.js` ਫਾਈਲ ਵਿੱਚ ਕੰਮ ਕਰਦੇ ਹੋਏ, ਕੁਝ `const` ਵੈਰੀਏਬਲ ਬਣਾਉਣ ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ ਜੋ ਵੱਖ-ਵੱਖ ਫੀਲਡਾਂ ਨਾਲ ਸੰਬੰਧਿਤ ਮੁੱਲਾਂ ਨੂੰ ਰੱਖਦੇ ਹਨ:
+ਇਸ ਪਾਠ ਦੇ ਅੰਤ ਤੱਕ, ਤੁਹਾਡੇ ਕੋਲ ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਐਕਸਟੈਂਸ਼ਨ ਹੋਵੇਗਾ ਜੋ ਹਕੀਕਤੀ ਡਾਟਾ ਲੈਂਦਾ ਹੈ, ਯੂਜ਼ਰ ਪਸੰਦਾਂ ਨੂੰ ਸਟੋਰ ਕਰਦਾ ਹੈ, ਅਤੇ ਇੱਕ ਸੁਗਮ ਅਨੁਭਵ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ। ਚਲੋ ਸ਼ੁਰੂ ਕਰੀਏ!
 
-```JavaScript
+```mermaid
+mindmap
+  root((Dynamic Extensions))
+    DOM Manipulation
+      Element Selection
+      Event Handling
+      State Management
+      UI Updates
+    Local Storage
+      Data Persistence
+      Key-Value Pairs
+      Session Management
+      User Preferences
+    API Integration
+      HTTP Requests
+      Authentication
+      Data Parsing
+      Error Handling
+    Async Programming
+      Promises
+      Async/Await
+      Error Catching
+      Non-blocking Code
+    User Experience
+      Loading States
+      Error Messages
+      Smooth Transitions
+      Data Validation
+```
+
+✅ ਸਹੀ ਫਾਈਲਾਂ ਵਿੱਚ ਗਿਣਤੀ ਵਾਲੇ ਸੈਗਮੈਂਟਾਂ ਦੀ ਪਾਲਣਾ ਕਰੋ ਤਾਂ ਜੋ ਤੁਹਾਨੂੰ ਪਤਾ ਲੱਗੇ ਕਿ ਤੁਹਾਡਾ ਕੋਡ ਕਿੱਥੇ ਰੱਖਣਾ ਹੈ।
+
+## ਐਕਸਟੈਂਸ਼ਨ ਵਿੱਚ ਤਬਦੀਲੀ ਕਰਨ ਲਈ ਤੱਤ ਸੈਟ ਕਰੋ
+
+ਤੁਹਾਡਾ ਜਾਵਾਸਕ੍ਰਿਪਟ ਇੰਟਰਫੇਸ ਨੂੰ ਤਬਦੀਲ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ, ਇਸਨੂੰ ਖਾਸ HTML ਤੱਤਾਂ ਦੇ ਹਵਾਲੇ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ। ਇਸਨੂੰ ਇਸ ਤਰ੍ਹਾਂ ਸੋਚੋ ਜਿਵੇਂ ਇੱਕ ਦੂਰਬੀਨ ਨੂੰ ਖਾਸ ਤਾਰਿਆਂ ਵੱਲ ਇਸ਼ਾਰਾ ਕਰਨ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ - ਗੈਲੀਲਿਓ ਜੁਪਿਟਰ ਦੇ ਚੰਦਾਂ ਦਾ ਅਧਿਐਨ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ, ਉਸਨੂੰ ਜੁਪਿਟਰ ਨੂੰ ਲੱਭਣਾ ਅਤੇ ਇਸ 'ਤੇ ਧਿਆਨ ਕੇਂਦਰਿਤ ਕਰਨਾ ਪਿਆ।
+
+ਤੁਹਾਡੇ `index.js` ਫਾਈਲ ਵਿੱਚ, ਅਸੀਂ `const` ਵੈਰੀਏਬਲ ਬਣਾਵਾਂਗੇ ਜੋ ਹਰ ਮਹੱਤਵਪੂਰਨ ਫਾਰਮ ਤੱਤ ਦੇ ਹਵਾਲੇ ਨੂੰ ਕੈਪਚਰ ਕਰਦੇ ਹਨ। ਇਹ ਉਸ ਤਰ੍ਹਾਂ ਹੈ ਜਿਵੇਂ ਵਿਗਿਆਨੀਆਂ ਆਪਣੇ ਸਾਜ਼ੋ-ਸਾਮਾਨ ਨੂੰ ਲੇਬਲ ਕਰਦੇ ਹਨ - ਹਰ ਵਾਰ ਪੂਰੇ ਲੈਬੋਰਟਰੀ ਵਿੱਚ ਖੋਜ ਕਰਨ ਦੀ ਬਜਾਏ, ਉਹ ਸਿੱਧੇ ਤੌਰ 'ਤੇ ਉਹਨਾਂ ਨੂੰ ਪਹੁੰਚ ਸਕਦੇ ਹਨ ਜੋ ਉਹਨਾਂ ਦੀ ਲੋੜ ਹੈ।
+
+```mermaid
+flowchart LR
+    A[JavaScript Code] --> B[document.querySelector]
+    B --> C[CSS Selectors]
+    C --> D[HTML Elements]
+    
+    D --> E[".form-data"]
+    D --> F[".region-name"]
+    D --> G[".api-key"]
+    D --> H[".loading"]
+    D --> I[".errors"]
+    D --> J[".result-container"]
+    
+    E --> K[Form Element]
+    F --> L[Input Field]
+    G --> M[Input Field]
+    H --> N[UI Element]
+    I --> O[UI Element]
+    J --> P[UI Element]
+    
+    style A fill:#e1f5fe
+    style D fill:#e8f5e8
+    style K fill:#fff3e0
+    style L fill:#fff3e0
+    style M fill:#fff3e0
+```
+
+```javascript
 // form fields
 const form = document.querySelector('.form-data');
 const region = document.querySelector('.region-name');
@@ -41,194 +112,336 @@ const myregion = document.querySelector('.my-region');
 const clearBtn = document.querySelector('.clear-btn');
 ```
 
-ਇਹ ਸਾਰੇ ਫੀਲਡ CSS ਕਲਾਸ ਦੁਆਰਾ ਰਿਫਰੈਂਸ ਕੀਤੇ ਗਏ ਹਨ, ਜਿਵੇਂ ਤੁਸੀਂ ਪਿਛਲੇ ਪਾਠ ਵਿੱਚ HTML ਵਿੱਚ ਸੈਟ ਕੀਤਾ ਸੀ।
+**ਇਹ ਕੋਡ ਕੀ ਕਰਦਾ ਹੈ:**
+- **ਕੈਪਚਰ ਕਰਦਾ ਹੈ** ਫਾਰਮ ਤੱਤਾਂ ਨੂੰ `document.querySelector()` ਨਾਲ CSS ਕਲਾਸ ਸਿਲੈਕਟਰਾਂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ
+- **ਬਣਾਉਂਦਾ ਹੈ** ਇਨਪੁਟ ਫੀਲਡਸ ਲਈ ਹਵਾਲੇ ਜਿਵੇਂ ਖੇਤਰ ਦਾ ਨਾਮ ਅਤੇ API ਕੁੰਜੀ
+- **ਸਥਾਪਿਤ ਕਰਦਾ ਹੈ** ਕਾਰਬਨ ਵਰਤੋਂ ਡਾਟਾ ਲਈ ਨਤੀਜਾ ਡਿਸਪਲੇ ਤੱਤਾਂ ਨਾਲ ਕਨੈਕਸ਼ਨ
+- **ਸੈਟ ਕਰਦਾ ਹੈ** UI ਤੱਤਾਂ ਲਈ ਪਹੁੰਚ ਜਿਵੇਂ ਲੋਡਿੰਗ ਇੰਡੀਕੇਟਰ ਅਤੇ ਗਲਤੀ ਸੁਨੇਹੇ
+- **ਸਟੋਰ ਕਰਦਾ ਹੈ** ਹਰ ਤੱਤ ਹਵਾਲੇ ਨੂੰ `const` ਵੈਰੀਏਬਲ ਵਿੱਚ ਜੋ ਤੁਹਾਡੇ ਕੋਡ ਵਿੱਚ ਆਸਾਨ ਰੀਯੂਜ਼ ਲਈ ਹੈ
 
-### ਲਿਸਨਰਜ਼ ਸ਼ਾਮਲ ਕਰੋ
+## ਇਵੈਂਟ ਲਿਸਨਰਜ਼ ਸ਼ਾਮਲ ਕਰੋ
 
-ਅਗਲੇ ਕਦਮ ਵਿੱਚ, ਫਾਰਮ ਅਤੇ ਕਲੀਅਰ ਬਟਨ ਲਈ ਇਵੈਂਟ ਲਿਸਨਰਜ਼ ਸ਼ਾਮਲ ਕਰੋ ਜੋ ਫਾਰਮ ਰੀਸੈਟ ਕਰਦਾ ਹੈ, ਤਾਂ ਜੋ ਜੇਕਰ ਕੋਈ ਯੂਜ਼ਰ ਫਾਰਮ ਸਬਮਿਟ ਕਰਦਾ ਹੈ ਜਾਂ ਰੀਸੈਟ ਬਟਨ 'ਤੇ ਕਲਿਕ ਕਰਦਾ ਹੈ, ਕੁਝ ਹੋਵੇ। ਫਾਈਲ ਦੇ ਤਲ 'ਤੇ ਐਪ ਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਕਾਲ ਸ਼ਾਮਲ ਕਰੋ:
+ਹੁਣ ਅਸੀਂ ਤੁਹਾਡੇ ਐਕਸਟੈਂਸ਼ਨ ਨੂੰ ਯੂਜ਼ਰ ਦੀਆਂ ਕਾਰਵਾਈਆਂ ਦਾ ਜਵਾਬ ਦੇਣ ਲਈ ਬਣਾਵਾਂਗੇ। ਇਵੈਂਟ ਲਿਸਨਰਜ਼ ਤੁਹਾਡੇ ਕੋਡ ਦਾ ਯੂਜ਼ਰ ਇੰਟਰੈਕਸ਼ਨ ਦੀ ਨਿਗਰਾਨੀ ਕਰਨ ਦਾ ਤਰੀਕਾ ਹੈ। ਇਹਨਾਂ ਨੂੰ ਪਹਿਲੇ ਟੈਲੀਫੋਨ ਐਕਸਚੇਂਜ ਵਿੱਚ ਓਪਰੇਟਰਾਂ ਵਾਂਗ ਸੋਚੋ - ਉਹ ਆਉਣ ਵਾਲੀਆਂ ਕਾਲਾਂ ਲਈ ਸੁਣਦੇ ਸਨ ਅਤੇ ਜਦੋਂ ਕੋਈ ਕਨੈਕਸ਼ਨ ਬਣਾਉਣ ਦੀ ਇੱਛਾ ਕਰਦਾ ਸੀ ਤਾਂ ਸਹੀ ਸਰਕਟਸ ਨੂੰ ਜੋੜਦੇ ਸਨ।
 
-```JavaScript
+```mermaid
+sequenceDiagram
+    participant User
+    participant Form
+    participant JavaScript
+    participant API
+    participant Storage
+    
+    User->>Form: Fills out region/API key
+    User->>Form: Clicks submit
+    Form->>JavaScript: Triggers submit event
+    JavaScript->>JavaScript: handleSubmit(e)
+    JavaScript->>Storage: Save user preferences
+    JavaScript->>API: Fetch carbon data
+    API->>JavaScript: Returns data
+    JavaScript->>Form: Update UI with results
+    
+    User->>Form: Clicks clear button
+    Form->>JavaScript: Triggers click event
+    JavaScript->>Storage: Clear saved data
+    JavaScript->>Form: Reset to initial state
+```
+
+```javascript
 form.addEventListener('submit', (e) => handleSubmit(e));
 clearBtn.addEventListener('click', (e) => reset(e));
 init();
 ```
 
-✅ ਧਿਆਨ ਦਿਓ ਕਿ ਸਬਮਿਟ ਜਾਂ ਕਲਿਕ ਇਵੈਂਟ ਸੁਣਨ ਲਈ ਵਰਤੀ ਗਈ ਸ਼ਾਰਟਹੈਂਡ ਅਤੇ ਇਹ ਕਿ ਇਵੈਂਟ ਨੂੰ ਕਿਵੇਂ `handleSubmit` ਜਾਂ `reset` ਫੰਕਸ਼ਨ ਨੂੰ ਪਾਸ ਕੀਤਾ ਜਾਂਦਾ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ ਸ਼ਾਰਟਹੈਂਡ ਦਾ ਲੰਬੇ ਫਾਰਮੈਟ ਵਿੱਚ ਸਮਾਨ ਲਿਖ ਸਕਦੇ ਹੋ? ਤੁਹਾਨੂੰ ਕਿਹੜਾ ਪਸੰਦ ਹੈ?
+**ਇਹ ਸੰਕਲਪ ਸਮਝਣਾ:**
+- **ਜੋੜਦਾ ਹੈ** ਇੱਕ ਸਬਮਿਟ ਲਿਸਨਰ ਫਾਰਮ ਨਾਲ ਜੋ ਯੂਜ਼ਰਜ਼ ਦੇ ਐਂਟਰ ਦਬਾਉਣ ਜਾਂ ਸਬਮਿਟ ਕਲਿਕ ਕਰਨ 'ਤੇ ਟ੍ਰਿਗਰ ਹੁੰਦਾ ਹੈ
+- **ਜੋੜਦਾ ਹੈ** ਇੱਕ ਕਲਿਕ ਲਿਸਨਰ ਕਲੀਅਰ ਬਟਨ ਨਾਲ ਫਾਰਮ ਨੂੰ ਰੀਸੈਟ ਕਰਨ ਲਈ
+- **ਪਾਸ ਕਰਦਾ ਹੈ** ਇਵੈਂਟ ਆਬਜੈਕਟ `(e)` ਹੈਂਡਲਰ ਫੰਕਸ਼ਨਜ਼ ਨੂੰ ਵਧੇਰੇ ਕੰਟਰੋਲ ਲਈ
+- **ਕਾਲ ਕਰਦਾ ਹੈ** `init()` ਫੰਕਸ਼ਨ ਤੁਰੰਤ ਐਕਸਟੈਂਸ਼ਨ ਦੀ ਸ਼ੁਰੂਆਤੀ ਸਥਿਤੀ ਸੈਟ ਕਰਨ ਲਈ
 
-### `init()` ਅਤੇ `reset()` ਫੰਕਸ਼ਨ ਬਣਾਓ:
+✅ ਇੱਥੇ ਵਰਤੀ ਗਈ ਸ਼ਾਰਟਹੈਂਡ ਐਰੋ ਫੰਕਸ਼ਨ ਸਿੰਟੈਕਸ ਨੂੰ ਨੋਟ ਕਰੋ। ਇਹ ਆਧੁਨਿਕ ਜਾਵਾਸਕ੍ਰਿਪਟ ਪਹੁੰਚ ਪੁਰਾਣੇ ਫੰਕਸ਼ਨ ਐਕਸਪ੍ਰੈਸ਼ਨਜ਼ ਨਾਲੋਂ ਸਾਫ਼ ਹੈ, ਪਰ ਦੋਵੇਂ ਹੀ ਬਰਾਬਰ ਚੰਗੇ ਕੰਮ ਕਰਦੇ ਹਨ!
 
-ਹੁਣ ਤੁਸੀਂ ਐਕਸਟੈਂਸ਼ਨ ਨੂੰ ਸ਼ੁਰੂ ਕਰਨ ਵਾਲਾ ਫੰਕਸ਼ਨ ਬਣਾਉਣ ਜਾ ਰਹੇ ਹੋ, ਜਿਸਨੂੰ `init()` ਕਿਹਾ ਜਾਂਦਾ ਹੈ:
+### 🔄 **ਪੈਡਾਗੌਜੀਕਲ ਚੈੱਕ-ਇਨ**
+**ਇਵੈਂਟ ਹੈਂਡਲਿੰਗ ਸਮਝਣਾ**: ਸ਼ੁਰੂਆਤ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਤੁਸੀਂ ਸਮਝ ਸਕਦੇ ਹੋ:
+- ✅ ਕਿਵੇਂ `addEventListener` ਯੂਜ਼ਰ ਦੀਆਂ ਕਾਰਵਾਈਆਂ ਨੂੰ ਜਾਵਾਸਕ੍ਰਿਪਟ ਫੰਕਸ਼ਨਜ਼ ਨਾਲ ਜੋੜਦਾ ਹੈ
+- ✅ ਕਿਉਂ ਅਸੀਂ ਹੈਂਡਲਰ ਫੰਕਸ਼ਨਜ਼ ਨੂੰ ਇਵੈਂਟ ਆਬਜੈਕਟ `(e)` ਪਾਸ ਕਰਦੇ ਹਾਂ
+- ✅ `submit` ਅਤੇ `click` ਇਵੈਂਟਸ ਵਿੱਚ ਅੰਤਰ ਪਛਾਣੋ
+- ✅ `init()` ਫੰਕਸ਼ਨ ਕਦੋਂ ਚਲਦਾ ਹੈ ਅਤੇ ਕਿਉਂ
 
-```JavaScript
+**ਤੁਰੰਤ ਸਵਾਲ-ਜਵਾਬ**: ਜੇ ਤੁਸੀਂ ਫਾਰਮ ਸਬਮਿਸ਼ਨ ਵਿੱਚ `e.preventDefault()` ਭੁੱਲ ਜਾਓ ਤਾਂ ਕੀ ਹੋਵੇਗਾ?
+*ਜਵਾਬ: ਪੇਜ ਰੀਲੋਡ ਹੋ ਜਾਵੇਗਾ, ਸਾਰੇ ਜਾਵਾਸਕ੍ਰਿਪਟ ਸਥਿਤੀ ਖਤਮ ਹੋ ਜਾਵੇਗੀ ਅਤੇ ਯੂਜ਼ਰ ਅਨੁਭਵ ਵਿੱਚ ਰੁਕਾਵਟ ਆਵੇਗੀ*
+
+## ਸ਼ੁਰੂਆਤ ਅਤੇ ਰੀਸੈਟ ਫੰਕਸ਼ਨ ਬਣਾਓ
+
+ਆਓ ਤੁਹਾਡੇ ਐਕਸਟੈਂਸ਼ਨ ਲਈ ਸ਼ੁਰੂਆਤੀ ਤਰਕ ਬਣਾਈਏ। `init()` ਫੰਕਸ਼ਨ ਇੱਕ ਜਹਾਜ਼ ਦੇ ਨੈਵੀਗੇਸ਼ਨ ਸਿਸਟਮ ਵਾਂਗ ਹੈ ਜੋ ਆਪਣੇ ਸਾਜ਼ੋ-ਸਾਮਾਨ ਦੀ ਜਾਂਚ ਕਰਦਾ ਹੈ - ਇਹ ਮੌਜੂਦਾ ਸਥਿਤੀ ਦਾ ਨਿਰਧਾਰਨ ਕਰਦਾ ਹੈ ਅਤੇ ਇਸਦੇ ਅਨੁਸਾਰ ਇੰਟਰਫੇਸ ਨੂੰ ਸਮਰੂਪ ਕਰਦਾ ਹੈ। ਇਹ ਜਾਂਚਦਾ ਹੈ ਕਿ ਕਿਸੇ ਨੇ ਪਹਿਲਾਂ ਤੁਹਾਡੇ ਐਕਸਟੈਂਸ਼ਨ ਦੀ ਵਰਤੋਂ ਕੀਤੀ ਹੈ ਜਾਂ ਨਹੀਂ ਅਤੇ ਉਹਨਾਂ ਦੀਆਂ ਪਿਛਲੀ ਸੈਟਿੰਗਾਂ ਨੂੰ ਲੋਡ ਕਰਦਾ ਹੈ।
+
+`reset()` ਫੰਕਸ਼ਨ ਯੂਜ਼ਰਜ਼ ਨੂੰ ਇੱਕ ਨਵਾਂ ਸ਼ੁਰੂਆਤ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ - ਜਿਵੇਂ ਵਿਗਿਆਨੀ ਆਪਣੇ ਸਾਜ਼ੋ-ਸਾਮਾਨ ਨੂੰ ਪ੍ਰਯੋਗਾਂ ਦੇ ਵਿਚਕਾਰ ਰੀਸੈਟ ਕਰਦੇ ਹਨ ਤਾਂ ਜੋ ਸਾਫ਼ ਡਾਟਾ ਯਕੀਨੀ ਬਣਾਇਆ ਜਾ ਸਕੇ।
+
+```javascript
 function init() {
-	//if anything is in localStorage, pick it up
+	// Check if user has previously saved API credentials
 	const storedApiKey = localStorage.getItem('apiKey');
 	const storedRegion = localStorage.getItem('regionName');
 
-	//set icon to be generic green
-	//todo
+	// Set extension icon to generic green (placeholder for future lesson)
+	// TODO: Implement icon update in next lesson
 
 	if (storedApiKey === null || storedRegion === null) {
-		//if we don't have the keys, show the form
+		// First-time user: show the setup form
 		form.style.display = 'block';
 		results.style.display = 'none';
 		loading.style.display = 'none';
 		clearBtn.style.display = 'none';
 		errors.textContent = '';
 	} else {
-        //if we have saved keys/regions in localStorage, show results when they load
-        displayCarbonUsage(storedApiKey, storedRegion);
+		// Returning user: load their saved data automatically
+		displayCarbonUsage(storedApiKey, storedRegion);
 		results.style.display = 'none';
 		form.style.display = 'none';
 		clearBtn.style.display = 'block';
 	}
-};
+}
 
 function reset(e) {
 	e.preventDefault();
-	//clear local storage for region only
+	// Clear stored region to allow user to choose a new location
 	localStorage.removeItem('regionName');
+	// Restart the initialization process
 	init();
 }
-
 ```
 
-ਇਸ ਫੰਕਸ਼ਨ ਵਿੱਚ ਕੁਝ ਦਿਲਚਸਪ ਲਾਜਿਕ ਹੈ। ਇਸਨੂੰ ਪੜ੍ਹਦੇ ਹੋਏ, ਕੀ ਤੁਸੀਂ ਦੇਖ ਸਕਦੇ ਹੋ ਕਿ ਕੀ ਹੁੰਦਾ ਹੈ?
+**ਇੱਥੇ ਕੀ ਹੁੰਦਾ ਹੈ ਇਸਨੂੰ ਤੋੜ ਕੇ ਸਮਝਣਾ:**
+- **ਰੀਟਰੀਵ ਕਰਦਾ ਹੈ** ਸਟੋਰ ਕੀਤੀ API ਕੁੰਜੀ ਅਤੇ ਖੇਤਰ ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਦੇ ਲੋਕਲ ਸਟੋਰੇਜ ਤੋਂ
+- **ਜਾਂਚਦਾ ਹੈ** ਕਿ ਇਹ ਪਹਿਲੀ ਵਾਰ ਦਾ ਯੂਜ਼ਰ ਹੈ (ਕੋਈ ਸਟੋਰ ਕੀਤੇ ਪ੍ਰਮਾਣ ਨਹੀਂ) ਜਾਂ ਵਾਪਸੀ ਕਰਨ ਵਾਲਾ ਯੂਜ਼ਰ
+- **ਦਿਖਾਉਂਦਾ ਹੈ** ਨਵੇਂ ਯੂਜ਼ਰਜ਼ ਲਈ ਸੈਟਅੱਪ ਫਾਰਮ ਅਤੇ ਹੋਰ ਇੰਟਰਫੇਸ ਤੱਤਾਂ ਨੂੰ ਛੁਪਾਉਂਦਾ ਹੈ
+- **ਆਟੋਮੈਟਿਕ ਲੋਡ ਕਰਦਾ ਹੈ** ਸਟੋਰ ਕੀਤੇ ਡਾਟਾ ਨੂੰ ਵਾਪਸੀ ਕਰਨ ਵਾਲੇ ਯੂਜ਼ਰਜ਼ ਲਈ ਅਤੇ ਰੀਸੈਟ ਵਿਕਲਪ ਦਿਖਾਉਂਦਾ ਹੈ
+- **ਪ੍ਰਬੰਧ ਕਰਦਾ ਹੈ** ਉਪਲਬਧ ਡਾਟਾ ਦੇ ਅਧਾਰ 'ਤੇ ਯੂਜ਼ਰ ਇੰਟਰਫੇਸ ਸਥਿਤੀ
 
-- ਦੋ `const` ਸੈਟ ਕੀਤੇ ਜਾਂਦੇ ਹਨ ਤਾਂ ਜੋ ਜਾਂਚਿਆ ਜਾ ਸਕੇ ਕਿ ਯੂਜ਼ਰ ਨੇ APIKey ਅਤੇ ਰੀਜਨ ਕੋਡ ਨੂੰ ਲੋਕਲ ਸਟੋਰੇਜ ਵਿੱਚ ਸਟੋਰ ਕੀਤਾ ਹੈ ਜਾਂ ਨਹੀਂ।
-- ਜੇਕਰ ਇਹਨਾਂ ਵਿੱਚੋਂ ਕੋਈ ਵੀ `null` ਹੈ, ਫਾਰਮ ਨੂੰ 'block' ਵਜੋਂ ਡਿਸਪਲੇਅ ਕਰਨ ਲਈ ਇਸਦੀ ਸਟਾਈਲ ਨੂੰ ਬਦਲ ਕੇ ਦਿਖਾਓ।
-- ਨਤੀਜੇ, ਲੋਡਿੰਗ, ਅਤੇ `clearBtn` ਨੂੰ ਛੁਪਾਓ ਅਤੇ ਕਿਸੇ ਵੀ ਐਰਰ ਟੈਕਸਟ ਨੂੰ ਖਾਲੀ ਸਟ੍ਰਿੰਗ ਵਿੱਚ ਸੈਟ ਕਰੋ।
-- ਜੇਕਰ ਕੁੰਜੀ ਅਤੇ ਰੀਜਨ ਮੌਜੂਦ ਹਨ, ਇੱਕ ਰੂਟੀਨ ਸ਼ੁਰੂ ਕਰੋ:
-  - API ਨੂੰ ਕਾਲ ਕਰੋ ਤਾਂ ਜੋ ਕਾਰਬਨ ਵਰਤੋਂ ਡਾਟਾ ਪ੍ਰਾਪਤ ਕੀਤਾ ਜਾ ਸਕੇ।
-  - ਨਤੀਜਿਆਂ ਵਾਲੇ ਖੇਤਰ ਨੂੰ ਛੁਪਾਓ।
-  - ਫਾਰਮ ਨੂੰ ਛੁਪਾਓ।
-  - ਰੀਸੈਟ ਬਟਨ ਦਿਖਾਓ।
+**ਲੋਕਲ ਸਟੋਰੇਜ ਬਾਰੇ ਮੁੱਖ ਸੰਕਲਪ:**
+- **ਡਾਟਾ ਨੂੰ ਸਥਿਰ ਕਰਦਾ ਹੈ** ਬ੍ਰਾਊਜ਼ਰ ਸੈਸ਼ਨਜ਼ ਦੇ ਵਿਚਕਾਰ (ਸੈਸ਼ਨ ਸਟੋਰੇਜ ਦੇ ਵਿਰੁੱਧ)
+- **ਡਾਟਾ ਨੂੰ ਸਟੋਰ ਕਰਦਾ ਹੈ** ਕੁੰਜੀ-ਮੁੱਲ ਜੋੜਿਆਂ ਦੇ ਰੂਪ ਵਿੱਚ `getItem()` ਅਤੇ `setItem()` ਦੀ ਵਰਤੋਂ ਕਰਕੇ
+- **ਨਾਲ ਵਾਪਸ ਕਰਦਾ ਹੈ** `null` ਜਦੋਂ ਕਿਸੇ ਦਿੱਤੀ ਕੁੰਜੀ ਲਈ ਕੋਈ ਡਾਟਾ ਮੌਜੂਦ ਨਹੀਂ ਹੁੰਦਾ
+- **ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ** ਯੂਜ਼ਰ ਪਸੰਦਾਂ ਅਤੇ ਸੈਟਿੰਗਾਂ ਨੂੰ ਯਾਦ ਰੱਖਣ ਦਾ ਸਧਾਰਨ ਤਰੀਕਾ
 
-ਅੱਗੇ ਵਧਣ ਤੋਂ ਪਹਿਲਾਂ, ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਉਪਲਬਧ ਇੱਕ ਬਹੁਤ ਮਹੱਤਵਪੂਰਨ ਧਾਰਨਾ ਬਾਰੇ ਸਿੱਖਣਾ ਲਾਭਦਾਇਕ ਹੈ: [LocalStorage](https://developer.mozilla.org/docs/Web/API/Window/localStorage)। LocalStorage ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਸਟ੍ਰਿੰਗਾਂ ਨੂੰ `key-value` ਜੋੜੇ ਵਜੋਂ ਸਟੋਰ ਕਰਨ ਦਾ ਇੱਕ ਲਾਭਦਾਇਕ ਤਰੀਕਾ ਹੈ। ਇਸ ਤਰ੍ਹਾਂ ਦੀ ਵੈੱਬ ਸਟੋਰੇਜ ਨੂੰ ਜਾਵਾਸਕ੍ਰਿਪਟ ਦੁਆਰਾ ਮੈਨੇਜ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ। LocalStorage ਦੀ ਮਿਆਦ ਨਹੀਂ ਖਤਮ ਹੁੰਦੀ, ਜਦਕਿ SessionStorage, ਵੈੱਬ ਸਟੋਰੇਜ ਦੀ ਇੱਕ ਹੋਰ ਕਿਸਮ, ਬ੍ਰਾਊਜ਼ਰ ਬੰਦ ਹੋਣ 'ਤੇ ਸਾਫ਼ ਹੋ ਜਾਂਦੀ ਹੈ। ਸਟੋਰੇਜ ਦੇ ਵੱਖ-ਵੱਖ ਕਿਸਮਾਂ ਦੇ ਉਪਯੋਗ ਦੇ ਫਾਇਦੇ ਅਤੇ ਨੁਕਸਾਨ ਹਨ।
+> 💡 **ਬ੍ਰਾਊਜ਼ਰ ਸਟੋਰੇਜ ਨੂੰ ਸਮਝਣਾ**: [LocalStorage](https://developer.mozilla.org/docs/Web/API/Window/localStorage) ਤੁਹਾਡੇ ਐਕਸਟੈਂਸ਼ਨ ਨੂੰ ਸਥਿਰ ਯਾਦਸ਼ਕਤੀ ਦੇਣ ਵਾਂਗ ਹੈ। ਸੋਚੋ ਕਿ ਕਿਵੇਂ ਪ੍ਰਾਚੀਨ ਅਲੈਕਜ਼ੈਂਡਰੀਆ ਦੀ ਲਾਇਬ੍ਰੇਰੀ ਨੇ ਸਕਰੋਲਜ਼ ਨੂੰ ਸਟੋਰ ਕੀਤਾ - ਜਾਣਕਾਰੀ ਉਪਲਬਧ ਰਹੀ ਜਦੋਂ ਵਿਦਵਾਨ ਛੱਡ ਕੇ ਵਾਪਸ ਆਏ।
+>
+> **ਮੁੱਖ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ:**
+> - **ਡਾਟਾ ਨੂੰ ਸਥਿਰ ਕਰਦਾ ਹੈ** ਭਾਵੇਂ ਤੁਸੀਂ ਆਪਣਾ ਬ੍ਰਾਊਜ਼ਰ ਬੰਦ ਕਰ ਦਿਓ
+> - **ਕੰਪਿਊਟਰ ਰੀਸਟਾਰਟ ਅਤੇ ਬ੍ਰਾਊਜ਼ਰ ਕਰੈਸ਼ ਤੋਂ ਬਚਦਾ ਹੈ**
+> - **ਯੂਜ਼ਰ ਪਸੰਦਾਂ ਲਈ ਵੱਡੀ ਸਟੋਰੇਜ ਸਪੇਸ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ**
+> - **ਨੈਟਵਰਕ ਦੇਰੀ ਤੋਂ ਬਿਨਾਂ ਤੁਰੰਤ ਪਹੁੰਚ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ**
 
-> ਨੋਟ - ਤੁਹਾਡੇ ਬ੍ਰਾਊਜ਼ਰ ਐਕਸਟੈਂਸ਼ਨ ਦਾ ਆਪਣਾ ਲੋਕਲ ਸਟੋਰੇਜ ਹੈ; ਮੁੱਖ ਬ੍ਰਾਊਜ਼ਰ ਵਿੰਡੋ ਇੱਕ ਵੱਖਰਾ ਇੰਸਟੈਂਸ ਹੈ ਅਤੇ ਵੱਖਰੇ ਤਰੀਕੇ ਨਾਲ ਕੰਮ ਕਰਦਾ ਹੈ।
+> **ਮਹੱਤਵਪੂਰਨ ਨੋਟ**: ਤੁਹਾਡੇ ਬ੍ਰਾਊਜ਼ਰ ਐਕਸਟੈਂਸ਼ਨ ਦਾ ਆਪਣਾ ਅਲੱਗ ਲੋਕਲ ਸਟੋਰੇਜ ਹੁੰਦਾ ਹੈ ਜੋ ਆਮ ਵੈਬ ਪੇਜਾਂ ਤੋਂ ਵੱਖਰਾ ਹੁੰਦਾ ਹੈ। ਇਹ ਸੁਰੱਖਿਆ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ ਅਤੇ ਹੋਰ ਵੈਬਸਾਈਟਾਂ ਨਾਲ ਟਕਰਾਅ ਨੂੰ ਰੋਕਦਾ ਹੈ।
 
-ਤੁਸੀਂ ਆਪਣੀ APIKey ਨੂੰ ਇੱਕ ਸਟ੍ਰਿੰਗ ਮੁੱਲ ਦੇਣ ਲਈ ਸੈਟ ਕਰਦੇ ਹੋ, ਉਦਾਹਰਨ ਵਜੋਂ, ਅਤੇ ਤੁਸੀਂ ਦੇਖ ਸਕਦੇ ਹੋ ਕਿ ਇਹ Edge 'ਤੇ "ਇੰਸਪੈਕਟ" ਕਰਕੇ ਸੈਟ ਕੀਤੀ ਗਈ ਹੈ (ਤੁਸੀਂ ਬ੍ਰਾਊਜ਼ਰ 'ਤੇ ਰਾਈਟ-ਕਲਿਕ ਕਰਕੇ ਇੰਸਪੈਕਟ ਕਰ ਸਕਦੇ ਹੋ) ਅਤੇ ਸਟੋਰੇਜ ਦੇਖਣ ਲਈ ਐਪਲੀਕੇਸ਼ਨ ਟੈਬ 'ਤੇ ਜਾ ਸਕਦੇ ਹੋ।
+ਤੁਹਾਡੇ ਸਟੋਰ ਕੀਤੇ ਡਾਟਾ ਨੂੰ ਦੇਖਣ ਲਈ ਬ੍ਰਾਊਜ਼ਰ ਡਿਵੈਲਪਰ ਟੂਲਜ਼ (F12) ਖੋਲ੍ਹੋ, **ਐਪਲੀਕੇਸ਼ਨ** ਟੈਬ 'ਤੇ ਜਾਓ, ਅਤੇ **ਲੋਕਲ ਸਟੋਰੇਜ** ਸੈਕਸ਼ਨ ਨੂੰ ਵਧਾਓ।
 
-![Local storage pane](../../../../translated_images/localstorage.472f8147b6a3f8d141d9551c95a2da610ac9a3c6a73d4a1c224081c98bae09d9.pa.png)
+```mermaid
+stateDiagram-v2
+    [*] --> CheckStorage: Extension starts
+    CheckStorage --> FirstTime: No stored data
+    CheckStorage --> Returning: Data found
+    
+    FirstTime --> ShowForm: Display setup form
+    ShowForm --> UserInput: User enters data
+    UserInput --> SaveData: Store in localStorage
+    SaveData --> FetchAPI: Get carbon data
+    
+    Returning --> LoadData: Read from localStorage
+    LoadData --> FetchAPI: Get carbon data
+    
+    FetchAPI --> ShowResults: Display data
+    ShowResults --> UserAction: User interacts
+    
+    UserAction --> Reset: Clear button clicked
+    UserAction --> ShowResults: View data
+    
+    Reset --> ClearStorage: Remove saved data
+    ClearStorage --> FirstTime: Back to setup
+```
 
-✅ ਉਹ ਸਥਿਤੀਆਂ ਬਾਰੇ ਸੋਚੋ ਜਿੱਥੇ ਤੁਸੀਂ ਕੁਝ ਡਾਟਾ LocalStorage ਵਿੱਚ ਸਟੋਰ ਨਹੀਂ ਕਰਨਾ ਚਾਹੁੰਦੇ। ਆਮ ਤੌਰ 'ਤੇ, API Keys ਨੂੰ LocalStorage ਵਿੱਚ ਰੱਖਣਾ ਇੱਕ ਖਰਾਬ ਵਿਚਾਰ ਹੈ! ਕੀ ਤੁਸੀਂ ਦੇਖ ਸਕਦੇ ਹੋ ਕਿ ਕਿਉਂ? ਸਾਡੇ ਕੇਸ ਵਿੱਚ, ਕਿਉਂਕਿ ਸਾਡਾ ਐਪ ਸਿਰਫ ਸਿੱਖਣ ਲਈ ਹੈ ਅਤੇ ਐਪ ਸਟੋਰ ਵਿੱਚ ਤੈਨਾਤ ਨਹੀਂ ਕੀਤਾ ਜਾਵੇਗਾ, ਅਸੀਂ ਇਸ ਤਰੀਕੇ ਨੂੰ ਵਰਤਾਂਗੇ।
+![ਲੋਕਲ ਸਟੋਰੇਜ ਪੈਨ](../../../../translated_images/pa/localstorage.472f8147b6a3f8d1.webp)
 
-ਧਿਆਨ ਦਿਓ ਕਿ ਤੁਸੀਂ LocalStorage ਨੂੰ ਮੈਨਿਪੁਲੇਟ ਕਰਨ ਲਈ Web API ਵਰਤਦੇ ਹੋ, ਜਾਂ `getItem()`, `setItem()`, ਜਾਂ `removeItem()` ਵਰਤ ਕੇ। ਇਹ ਬ੍ਰਾਊਜ਼ਰਾਂ ਵਿੱਚ ਵਿਆਪਕ ਤੌਰ 'ਤੇ ਸਹਾਇਕ ਹੈ।
+> ⚠️ **ਸੁਰੱਖਿਆ ਵਿਚਾਰ**: ਉਤਪਾਦਨ ਐਪਲੀਕੇਸ਼ਨਜ਼ ਵਿੱਚ, LocalStorage ਵਿੱਚ API ਕੁੰਜੀਆਂ ਨੂੰ ਸਟੋਰ ਕਰਨਾ ਸੁਰੱਖਿਆ ਖਤਰੇ ਪੈਦਾ ਕਰਦਾ ਹੈ ਕਿਉਂਕਿ ਜਾਵਾਸਕ੍ਰਿਪਟ ਇਸ ਡਾਟਾ ਤੱਕ ਪਹੁੰਚ ਕਰ ਸਕਦਾ ਹੈ। ਸਿੱਖਣ ਦੇ ਉਦੇਸ਼ਾਂ ਲਈ, ਇਹ ਪਹੁੰਚ ਠੀਕ ਹੈ, ਪਰ ਅਸਲ ਐਪਲੀਕੇਸ਼ਨਜ਼ ਨੂੰ ਸੰਵੇਦਨਸ਼ੀਲ ਪ੍ਰਮਾਣਾਂ ਲਈ ਸੁਰੱਖਿਅਤ ਸਰਵਰ-ਸਾਈਡ ਸਟੋਰੇਜ ਦੀ ਵਰਤੋਂ ਕਰਨੀ ਚਾਹੀਦੀ ਹੈ।
 
-`displayCarbonUsage()` ਫੰਕਸ਼ਨ ਬਣਾਉਣ ਤੋਂ ਪਹਿਲਾਂ ਜੋ `init()` ਵਿੱਚ ਕਾਲ ਕੀਤਾ ਜਾਂਦਾ ਹੈ, ਆਓ ਸ਼ੁਰੂਆਤੀ ਫਾਰਮ ਸਬਮਿਟ ਕਰਨ ਦੀ ਕਾਰਗੁਜ਼ਾਰੀ ਬਣਾਈਏ।
+## ਫਾਰਮ ਸਬਮਿਸ਼ਨ ਨੂੰ ਹੈਂਡਲ ਕਰੋ
 
-### ਫਾਰਮ ਸਬਮਿਟ ਕਰਨ ਨੂੰ ਸੰਭਾਲੋ
+ਹੁਣ ਅਸੀਂ ਹੈਂਡਲ ਕਰਾਂਗੇ ਕਿ ਜਦੋਂ ਕੋਈ ਤੁਹਾਡਾ ਫਾਰਮ ਸਬਮਿਟ ਕਰਦਾ ਹੈ ਤਾਂ ਕੀ ਹੁੰਦਾ ਹੈ। ਡਿਫਾਲਟ ਤੌਰ 'ਤੇ, ਬ੍ਰਾਊਜ਼ਰ ਫਾਰਮ ਸਬਮਿਟ ਕੀਤੇ ਜਾਣ 'ਤੇ ਪੇਜ ਨੂੰ ਰੀਲੋਡ ਕਰਦੇ ਹਨ, ਪਰ ਅਸੀਂ ਇਸ ਵਿਹਾਰ ਨੂੰ ਰੋਕਾਂਗੇ ਤਾਂ ਜੋ ਇੱਕ ਸੁਗਮ ਅਨੁਭਵ ਬਣਾਇਆ ਜਾ ਸਕੇ।
 
-ਇੱਕ ਫੰਕਸ਼ਨ ਬਣਾਓ ਜਿਸਨੂੰ `handleSubmit` ਕਿਹਾ ਜਾਂਦਾ ਹੈ ਜੋ ਇੱਕ ਇਵੈਂਟ ਆਰਗੂਮੈਂਟ `(e)` ਨੂੰ ਸਵੀਕਾਰ ਕਰਦਾ ਹੈ। ਇਵੈਂਟ ਨੂੰ ਪ੍ਰਸਾਰਿਤ ਕਰਨ ਤੋਂ ਰੋਕੋ (ਇਸ ਕੇਸ ਵਿੱਚ, ਅਸੀਂ ਬ੍ਰਾਊਜ਼ਰ ਨੂੰ ਰੀਫ੍ਰੈਸ਼ ਕਰਨ ਤੋਂ ਰੋਕਣਾ ਚਾਹੁੰਦੇ ਹਾਂ) ਅਤੇ ਇੱਕ ਨਵੇਂ ਫੰਕਸ਼ਨ `setUpUser` ਨੂੰ ਕਾਲ ਕਰੋ, `apiKey.value` ਅਤੇ `region.value` ਆਰਗੂਮੈਂਟ ਪਾਸ ਕਰਦੇ ਹੋਏ। ਇਸ ਤਰੀਕੇ ਨਾਲ, ਤੁਸੀਂ ਦੋ ਮੁੱਲਾਂ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋ ਜੋ ਸ਼ੁਰੂਆਤੀ ਫਾਰਮ ਦੁਆਰਾ ਲਿਆਂਦੇ ਜਾਂਦੇ ਹਨ ਜਦੋਂ ਸਬੰਧਿਤ ਫੀਲਡਾਂ ਨੂੰ ਪੂਰਾ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।
+ਇਹ ਪਹੁੰਚ ਉਸ ਤਰ੍ਹਾਂ ਹੈ ਜਿਵੇਂ ਮਿਸ਼ਨ ਕੰਟਰੋਲ ਸਪੇਸਕ੍ਰਾਫਟ ਸੰਚਾਰ ਨੂੰ ਹੈਂਡਲ ਕਰਦਾ ਹੈ - ਹਰ ਟ੍ਰਾਂਸਮਿਸ਼ਨ ਲਈ ਪੂਰੇ ਸਿਸਟਮ ਨੂੰ ਰੀਸੈਟ ਕਰਨ ਦੀ ਬਜਾਏ, ਉਹ ਨਵੀਂ ਜਾਣਕਾਰੀ ਨੂੰ ਪ੍ਰੋਸੈਸ ਕਰਦੇ ਹੋਏ ਲਗਾਤਾਰ ਕਾਰਵਾਈ ਜਾਰੀ ਰੱਖਦੇ ਹਨ।
 
-```JavaScript
+ਇੱਕ ਫੰਕਸ਼ਨ ਬਣਾਓ ਜੋ ਫਾਰਮ ਸਬਮਿਸ਼ਨ ਇਵੈਂਟ ਨੂੰ ਕੈਪਚਰ ਕਰਦਾ ਹੈ ਅਤੇ ਯੂਜ਼ਰ ਦਾ ਇਨਪੁਟ ਕੱਢਦਾ ਹੈ:
+
+```javascript
 function handleSubmit(e) {
 	e.preventDefault();
 	setUpUser(apiKey.value, region.value);
 }
 ```
 
-✅ ਆਪਣੀ ਯਾਦ ਤਾਜ਼ਾ ਕਰੋ - ਪਿਛਲੇ ਪਾਠ ਵਿੱਚ ਤੁਸੀਂ ਸੈਟ ਕੀਤਾ HTML ਵਿੱਚ ਦੋ ਇਨਪੁਟ ਫੀਲਡ ਹਨ ਜਿਨ੍ਹਾਂ ਦੇ `values` ਨੂੰ ਤੁਸੀਂ ਫਾਈਲ ਦੇ ਸਿਖਰ 'ਤੇ ਸੈਟ ਕੀਤੇ `const` ਦੁਆਰਾ ਕੈਪਚਰ ਕਰਦੇ ਹੋ, ਅਤੇ ਇਹ ਦੋਵੇਂ `required` ਹਨ ਤਾਂ ਜੋ ਬ੍ਰਾਊਜ਼ਰ ਯੂਜ਼ਰ ਨੂੰ null ਮੁੱਲਾਂ ਦਾਖਲ ਕਰਨ ਤੋਂ ਰੋਕੇ।
+**ਉਪਰੋਕਤ ਵਿੱਚ, ਅਸੀਂ:**
+- **ਡਿਫਾਲਟ ਫਾਰਮ ਸਬਮਿਸ਼ਨ ਵਿਹਾਰ ਨੂੰ ਰੋਕਦਾ ਹੈ** ਜੋ ਪੇਜ ਨੂੰ ਰੀਫ੍ਰੈਸ਼ ਕਰਦਾ
+- **ਯੂਜ਼ਰ ਇਨਪੁਟ ਮੁੱਲਾਂ ਨੂੰ ਕੈਪਚਰ ਕਰਦਾ ਹੈ** API ਕੁੰਜੀ ਅਤੇ ਖੇਤਰ ਫੀਲਡਸ ਤੋਂ
+- **ਫਾਰਮ ਡਾਟਾ ਨੂੰ `setUpUser()` ਫੰਕਸ਼ਨ ਨੂੰ ਪਾਸ ਕਰਦਾ ਹੈ** ਪ੍ਰੋਸੈਸਿੰਗ ਲਈ
+- **ਸਿੰਗਲ-ਪੇਜ ਐਪਲੀਕੇਸ਼ਨ ਵਿਹਾਰ ਨੂੰ ਸਥਿਰ ਰੱਖਦਾ ਹੈ** ਪੇਜ ਰੀਲੋਡ ਤੋਂ ਬਚ ਕੇ
 
-### ਯੂਜ਼ਰ ਸੈਟ ਕਰੋ
+✅ ਯਾਦ ਰੱਖੋ ਕਿ ਤੁਹਾਡੇ HTML ਫਾਰਮ ਫੀਲਡਸ ਵਿੱਚ `required` ਐਟ੍ਰਿਬਿਊਟ ਸ਼ਾਮਲ ਹੈ, ਇਸ ਲਈ ਬ੍ਰਾਊਜ਼ਰ ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ ਯਕੀਨੀ ਬਣਾਉਂਦਾ ਹੈ ਕਿ ਯੂਜ਼ਰਜ਼ ਇਸ ਫੰਕਸ਼ਨ ਦੇ ਚਲਣ ਤੋਂ ਪਹਿਲਾਂ API ਕੁੰਜੀ ਅਤੇ ਖੇਤਰ ਦੋਵੇਂ ਪ੍ਰਦਾਨ ਕਰਦੇ ਹਨ।
 
-`setUpUser` ਫੰਕਸ਼ਨ ਵੱਲ ਵਧਦੇ ਹੋਏ, ਇੱਥੇ ਤੁਸੀਂ apiKey ਅਤੇ regionName ਲਈ ਲੋਕਲ ਸਟੋਰੇਜ ਮੁੱਲਾਂ ਸੈਟ ਕਰਦੇ ਹੋ। ਇੱਕ ਨਵਾਂ ਫੰਕਸ਼ਨ ਸ਼ਾਮਲ ਕਰੋ:
+## ਯੂਜ਼ਰ ਪਸੰਦਾਂ ਸੈਟ ਕਰੋ
 
-```JavaScript
+`setUpUser` ਫੰਕਸ਼ਨ ਯੂਜ਼ਰ ਦੇ ਪ੍ਰਮਾਣਾਂ ਨੂੰ ਸਟੋਰ ਕਰਨ ਅਤੇ ਪਹਿਲੀ API ਕਾਲ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਹੈ। ਇਹ ਸੈਟਅੱਪ ਤੋਂ ਨਤੀਜੇ ਦਿਖਾਉਣ ਲਈ ਇੱਕ ਸੁਗਮ ਤਬਦੀਲੀ ਬਣਾਉਂਦਾ ਹੈ।
+
+```javascript
 function setUpUser(apiKey, regionName) {
+	// Save user credentials for future sessions
 	localStorage.setItem('apiKey', apiKey);
 	localStorage.setItem('regionName', regionName);
+	
+	// Update UI to show loading state
 	loading.style.display = 'block';
 	errors.textContent = '';
 	clearBtn.style.display = 'block';
-	//make initial call
+	
+	// Fetch carbon usage data with user's credentials
 	displayCarbonUsage(apiKey, regionName);
 }
 ```
 
-ਇਹ ਫੰਕਸ਼ਨ API ਨੂੰ ਕਾਲ ਕਰਨ ਦੌਰਾਨ ਦਿਖਾਉਣ ਲਈ ਇੱਕ ਲੋਡਿੰਗ ਸੁਨੇਹਾ ਸੈਟ ਕਰਦਾ ਹੈ। ਇਸ ਪੜਾਅ 'ਤੇ, ਤੁਸੀਂ ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਐਕਸਟੈਂਸ਼ਨ ਦੇ ਸਭ ਤੋਂ ਮਹੱਤਵਪੂਰਨ ਫੰਕਸ਼ਨ ਨੂੰ ਬਣਾਉਣ 'ਤੇ ਪਹੁੰਚ ਗਏ ਹੋ!
+**ਕਦਮ-ਦਰ-ਕਦਮ, ਇੱਥੇ ਕੀ ਹੋ ਰਿਹਾ ਹੈ:**
+- **API ਕੁੰਜੀ ਅਤੇ ਖੇਤਰ ਦਾ ਨਾਮ ਸਟੋਰ ਕਰਦਾ ਹੈ** ਲੋਕਲ ਸਟੋਰੇਜ ਵਿੱਚ
+**ਵੇਰਵਾ:** ਬ੍ਰਾਊਜ਼ਰ ਐਕਸਟੈਂਸ਼ਨ ਵਿੱਚ ਗਲਤੀ ਸੰਭਾਲਨ ਵਿੱਚ ਸੁਧਾਰ ਅਤੇ ਯੂਜ਼ਰ ਅਨੁਭਵ ਫੀਚਰ ਸ਼ਾਮਲ ਕਰਕੇ ਇਸਨੂੰ ਬਿਹਤਰ ਬਣਾਓ। ਇਹ ਚੁਣੌਤੀ ਤੁਹਾਨੂੰ APIs, ਸਥਾਨਕ ਸਟੋਰੇਜ, ਅਤੇ DOM ਮੈਨਿਪੂਲੇਸ਼ਨ 'ਤੇ ਆਧੁਨਿਕ ਜਾਵਾਸਕ੍ਰਿਪਟ ਪੈਟਰਨਾਂ ਦੀ ਵਰਤੋਂ ਕਰਨ ਦਾ ਅਭਿਆਸ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰੇਗੀ।
 
-### ਕਾਰਬਨ ਵਰਤੋਂ ਦਿਖਾਓ
+**ਪ੍ਰੋੰਪਟ:** displayCarbonUsage ਫੰਕਸ਼ਨ ਦਾ ਇੱਕ ਬਿਹਤਰ ਸੰਸਕਰਣ ਬਣਾਓ ਜਿਸ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਵੇ: 1) API ਕਾਲਾਂ ਦੇ ਫੇਲ੍ਹ ਹੋਣ 'ਤੇ exponential backoff ਨਾਲ ਰੀਟ੍ਰਾਈ ਮਕੈਨਿਜ਼ਮ, 2) API ਕਾਲ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਰੀਜਨ ਕੋਡ ਲਈ ਇਨਪੁਟ ਵੈਲੀਡੇਸ਼ਨ, 3) ਲੋਡਿੰਗ ਐਨੀਮੇਸ਼ਨ ਨਾਲ ਪ੍ਰੋਗਰੈਸ ਇੰਡਿਕੇਟਰ, 4) localStorage ਵਿੱਚ API ਜਵਾਬਾਂ ਨੂੰ 30 ਮਿੰਟਾਂ ਲਈ ਮਿਆਦ ਸਮੇਤ ਕੈਸ਼ ਕਰਨਾ, ਅਤੇ 5) ਪਿਛਲੇ API ਕਾਲਾਂ ਤੋਂ ਇਤਿਹਾਸਕ ਡਾਟਾ ਦਿਖਾਉਣ ਦੀ ਵਿਸ਼ੇਸ਼ਤਾ। ਸਾਰੇ ਫੰਕਸ਼ਨ ਪੈਰਾਮੀਟਰ ਅਤੇ ਰਿਟਰਨ ਟਾਈਪਸ ਨੂੰ ਦਸਤਾਵੇਜ਼ ਕਰਨ ਲਈ TypeScript-ਸ਼ੈਲੀ JSDoc ਟਿੱਪਣੀਆਂ ਸ਼ਾਮਲ ਕਰੋ।
 
-ਅੰਤ ਵਿੱਚ, API ਨੂੰ ਕਵੈਰੀ ਕਰਨ ਦਾ ਸਮਾਂ ਹੈ!
-
-ਅੱਗੇ ਵਧਣ ਤੋਂ ਪਹਿਲਾਂ, ਅਸੀਂ API ਬਾਰੇ ਚਰਚਾ ਕਰਨੀ ਚਾਹੀਦੀ ਹੈ। API, ਜਾਂ [Application Programming Interfaces](https://www.webopedia.com/TERM/A/API.html), ਵੈੱਬ ਡਿਵੈਲਪਰ ਦੇ ਟੂਲਬਾਕਸ ਦਾ ਇੱਕ ਮਹੱਤਵਪੂਰਨ ਤੱਤ ਹੈ। ਇਹ ਪ੍ਰੋਗਰਾਮਾਂ ਨੂੰ ਇੱਕ-ਦੂਜੇ ਨਾਲ ਇੰਟਰਫੇਸ ਕਰਨ ਲਈ ਮਿਆਰੀ ਤਰੀਕੇ ਪ੍ਰਦਾਨ ਕਰਦੇ ਹਨ। ਉਦਾਹਰਨ ਵਜੋਂ, ਜੇਕਰ ਤੁਸੀਂ ਇੱਕ ਵੈੱਬਸਾਈਟ ਬਣਾਉਣ ਜਾ ਰਹੇ ਹੋ ਜਿਸਨੂੰ ਡਾਟਾਬੇਸ ਨੂੰ ਕਵੈਰੀ ਕਰਨ ਦੀ ਜ਼ਰੂਰਤ ਹੈ, ਤਾਂ ਕੋਈ ਤੁਹਾਡੇ ਲਈ ਵਰਤਣ ਲਈ API ਬਣਾਇਆ ਹੋ ਸਕਦਾ ਹੈ। ਜਦਕਿ API ਦੀਆਂ ਕਈ ਕਿਸਮਾਂ ਹਨ, ਸਭ ਤੋਂ ਪ੍ਰਸਿੱਧ ਵਿੱਚੋਂ ਇੱਕ ਹੈ [REST API](https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/)।
-
-✅ 'REST' ਦਾ ਅਰਥ 'Representational State Transfer' ਹੈ ਅਤੇ ਇਹ ਵੱਖ-ਵੱਖ ਤਰੀਕੇ ਨਾਲ ਕਨਫਿਗਰ ਕੀਤੇ URLs ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਡਾਟਾ ਪ੍ਰਾਪਤ ਕਰਨ ਦੀ ਵਿਸ਼ੇਸ਼ਤਾ ਹੈ। ਡਿਵੈਲਪਰਾਂ ਲਈ ਉਪਲਬਧ ਵੱਖ-ਵੱਖ ਕਿਸਮਾਂ ਦੇ API ਬਾਰੇ ਕੁਝ ਖੋਜ ਕਰੋ। ਤੁਹਾਨੂੰ ਕਿਹੜਾ ਫਾਰਮੈਟ ਪਸੰਦ ਹੈ?
-
-ਇਸ ਫੰਕਸ਼ਨ ਬਾਰੇ ਕੁਝ ਮਹੱਤਵਪੂਰਨ ਗੱਲਾਂ ਹਨ। ਪਹਿਲਾਂ, [`async` ਕੀਵਰਡ](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function) 'ਤੇ ਧਿਆਨ ਦਿਓ। ਆਪਣੇ ਫੰਕਸ਼ਨ ਨੂੰ ਇਸ ਤਰੀਕੇ ਨਾਲ ਲਿਖਣਾ ਕਿ ਇਹ ਅਸਿੰਕ੍ਰੋਨਸ ਤਰੀਕੇ ਨਾਲ ਚਲਦੇ ਹਨ, ਇਸਦਾ ਮਤਲਬ ਹੈ ਕਿ ਇਹ ਕਿਸੇ ਕਾਰਵਾਈ, ਜਿਵੇਂ ਕਿ ਡਾਟਾ ਵਾਪਸ ਆਉਣਾ, ਪੂਰਾ ਹੋਣ ਦੀ ਉਡੀਕ ਕਰਦੇ ਹਨ।
-
-ਇੱਥੇ `async` ਬਾਰੇ ਇੱਕ ਛੋਟੀ ਵੀਡੀਓ ਹੈ:
-
-[![Async and Await for managing promises](https://img.youtube.com/vi/YwmlRkrxvkk/0.jpg)](https://youtube.com/watch?v=YwmlRkrxvkk "Async and Await for managing promises")
-
-> 🎥 ਉੱਪਰ ਦਿੱਤੀ ਤਸਵੀਰ 'ਤੇ ਕਲਿਕ ਕਰੋ `async/await` ਬਾਰੇ ਵੀਡੀਓ ਦੇਖਣ ਲਈ।
-
-C02Signal API ਨੂੰ ਕਵੈਰੀ ਕਰਨ ਲਈ ਇੱਕ ਨਵਾਂ ਫੰਕਸ਼ਨ ਬਣਾਓ:
-
-```JavaScript
-import axios from '../node_modules/axios';
-
-async function displayCarbonUsage(apiKey, region) {
-	try {
-		await axios
-			.get('https://api.co2signal.com/v1/latest', {
-				params: {
-					countryCode: region,
-				},
-				headers: {
-					'auth-token': apiKey,
-				},
-			})
-			.then((response) => {
-				let CO2 = Math.floor(response.data.data.carbonIntensity);
-
-				//calculateColor(CO2);
-
-				loading.style.display = 'none';
-				form.style.display = 'none';
-				myregion.textContent = region;
-				usage.textContent =
-					Math.round(response.data.data.carbonIntensity) + ' grams (grams C02 emitted per kilowatt hour)';
-				fossilfuel.textContent =
-					response.data.data.fossilFuelPercentage.toFixed(2) +
-					'% (percentage of fossil fuels used to generate electricity)';
-				results.style.display = 'block';
-			});
-	} catch (error) {
-		console.log(error);
-		loading.style.display = 'none';
-		results.style.display = 'none';
-		errors.textContent = 'Sorry, we have no data for the region you have requested.';
-	}
-}
-```
-
-ਇਹ ਇੱਕ ਵੱਡਾ ਫੰਕਸ਼ਨ ਹੈ। ਇੱਥੇ ਕੀ ਹੋ ਰਿਹਾ ਹੈ?
-
-- ਸ੍ਰੇਸ਼ਠ ਤਰੀਕਿਆਂ ਦੀ ਪਾਲਣਾ ਕਰਦੇ ਹੋਏ, ਤੁਸੀਂ ਇਸ ਫੰਕਸ਼ਨ ਨੂੰ ਅਸਿੰਕ੍ਰੋਨਸ ਬਣਾਉਣ ਲਈ `async` ਕੀਵਰਡ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋ। ਫੰਕਸ਼ਨ ਵਿੱਚ ਇੱਕ `try/catch` ਬਲਾਕ ਹੈ ਕਿਉਂਕਿ ਇਹ API ਤੋਂ ਡਾਟਾ ਵਾਪਸ ਆਉਣ 'ਤੇ ਇੱਕ ਪ੍ਰੋਮਿਸ ਵਾਪਸ ਕਰੇਗਾ। ਕਿਉਂਕਿ ਤੁਹਾਡੇ ਕੋਲ API ਦੇ ਜਵਾਬ ਦੇਣ ਦੀ ਗਤੀ 'ਤੇ ਕੰਟਰੋਲ ਨਹੀਂ ਹੈ (ਇਹ ਜਵਾਬ ਨਹੀਂ ਦੇ ਸਕਦਾ!), ਤੁਸੀਂ ਇਸ ਅਨਿਸ਼ਚਿਤਤਾ ਨੂੰ ਅਸਿੰਕ੍ਰੋਨਸ ਤਰੀਕੇ ਨਾਲ ਕਾਲ ਕਰਕੇ ਸੰਭਾਲਣ ਦੀ ਜ਼ਰੂਰਤ ਹੈ।
-- ਤੁਸੀਂ co2signal API ਨੂੰ ਆਪਣੇ ਰੀਜਨ ਦਾ ਡਾਟਾ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਕਵੈਰੀ ਕਰ ਰਹੇ ਹੋ, ਆਪਣੀ API Key ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹੋ। ਉਸ ਕੁੰਜੀ ਨੂੰ ਵਰਤਣ ਲਈ, ਤੁਹਾਨੂੰ ਆਪਣੇ ਹੈਡਰ ਪੈਰਾਮੀਟਰਾਂ ਵਿੱਚ ਇੱਕ ਕਿਸਮ ਦੀ ਪ੍ਰਮਾਣਿਕਤਾ ਦੀ ਲੋੜ ਹੈ।
-- ਜਦੋਂ API ਜਵਾਬ ਦਿੰਦਾ ਹੈ, ਤੁਸੀਂ ਇਸਦੇ ਜਵਾਬ ਡਾਟਾ ਦੇ ਵੱਖ-ਵੱਖ ਤੱਤਾਂ ਨੂੰ ਆਪਣੇ ਸਕ੍ਰੀਨ ਦੇ ਹਿੱਸਿਆਂ ਵਿੱਚ ਅਸਾਈਨ ਕਰਦੇ ਹੋ ਜੋ ਤੁਸੀਂ ਇਹ ਡਾਟਾ ਦਿਖਾਉਣ ਲਈ ਸੈਟ ਕੀਤਾ ਹੈ।
-- ਜੇਕਰ ਕੋਈ ਗਲਤੀ ਹੈ, ਜਾਂ ਕੋਈ ਨਤੀਜਾ ਨਹੀਂ ਹੈ, ਤਾਂ ਤੁਸੀਂ ਇੱਕ ਗਲਤੀ ਸੁਨੇਹਾ ਦਿਖਾਉਂਦੇ ਹੋ।
-
-✅ ਅਸਿੰਕ੍ਰੋਨਸ ਪ੍ਰੋਗਰਾਮਿੰਗ ਪੈਟਰਨ ਦੀ ਵਰਤੋਂ ਕਰਨਾ ਤੁਹਾਡੇ ਟੂਲਬਾਕਸ ਵਿੱਚ ਇੱਕ ਹੋਰ ਬਹੁਤ ਹੀ ਲਾਭਦਾਇਕ ਟੂਲ ਹੈ। [ਵੱਖ-ਵੱਖ ਤਰੀਕਿਆਂ](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function) ਬਾਰੇ ਪੜ੍ਹੋ ਜਿਨ੍ਹਾਂ ਨਾਲ ਤੁਸੀਂ ਇਸ ਕਿਸਮ ਦੇ ਕੋਡ ਨੂੰ ਕਨਫਿਗਰ ਕਰ ਸਕਦੇ ਹੋ।
-
-ਮੁਬਾਰਕਾਂ! ਜੇਕਰ ਤੁਸੀਂ ਆਪਣੀ ਐਕਸਟੈਂਸ਼ਨ ਨੂੰ ਬਣਾਉਂਦੇ ਹੋ (`npm run build`) ਅਤੇ ਇਸਨੂੰ ਆਪਣੇ ਐਕਸਟੈਂਸ਼ਨ ਪੈਨ ਵਿੱਚ ਰੀਫ੍ਰੈਸ਼ ਕਰਦੇ ਹੋ, ਤਾਂ ਤੁਹਾਡੇ ਕੋਲ ਇੱਕ ਕੰਮ ਕਰਨ ਵਾਲੀ ਐਕਸਟੈਂਸ਼ਨ ਹੈ! ਸਿਰਫ ਇੱਕ ਚੀਜ਼ ਜੋ ਕੰਮ ਨਹੀਂ ਕਰ ਰਹੀ ਹੈ ਉਹ ਹੈ ਆਈਕਨ, ਅਤੇ ਤੁਸੀਂ ਇਸਨੂੰ ਅਗਲੇ ਪਾਠ ਵਿੱਚ ਠੀਕ ਕਰੋਗੇ।
-
----
+[agent mode](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) ਬਾਰੇ ਹੋਰ ਜਾਣੋ।
 
 ## 🚀 ਚੁਣੌਤੀ
 
-ਅਸੀਂ ਹੁਣ ਤੱਕ ਪਾਠਾਂ ਵਿੱਚ ਕਈ ਕਿਸਮਾਂ ਦੇ API ਬਾਰੇ ਚਰਚਾ ਕੀਤੀ ਹੈ। ਇੱਕ ਵੈੱਬ API ਚੁਣੋ ਅਤੇ ਇਸਦੇ ਦੌਰਾਨ ਕੀ ਪੇਸ਼ਕਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ ਇਸ ਬਾਰੇ ਗਹਿਰਾਈ ਵਿੱਚ ਖੋਜ ਕਰੋ। ਉਦਾਹਰਨ ਵਜੋਂ, ਬ੍ਰਾਊਜ਼ਰਾਂ ਵਿੱਚ ਉਪਲਬਧ API ਨੂੰ ਵੇਖੋ ਜਿਵੇਂ ਕਿ [HTML Drag and Drop API](https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API)। ਤੁਹਾਡੇ ਵਿਚਾਰ ਵਿੱਚ ਇੱਕ ਵਧੀਆ API ਕਿਹੜਾ ਬਣਾਉਂਦਾ ਹੈ?
+APIs ਦੀ ਸਮਝ ਨੂੰ ਵਧਾਉਣ ਲਈ ਵੈੱਬ ਵਿਕਾਸ ਲਈ ਉਪਲਬਧ ਬ੍ਰਾਊਜ਼ਰ-ਅਧਾਰਤ APIs ਦੀ ਖੋਜ ਕਰੋ। ਇਨ੍ਹਾਂ APIs ਵਿੱਚੋਂ ਇੱਕ ਚੁਣੋ ਅਤੇ ਇੱਕ ਛੋਟਾ ਡੈਮੋ ਬਣਾਓ:
 
-## ਪਾਠ-ਪ੍ਰਸਚਾਤ ਕਵਿਜ਼
+- [Geolocation API](https://developer.mozilla.org/docs/Web/API/Geolocation_API) - ਯੂਜ਼ਰ ਦਾ ਮੌਜੂਦਾ ਸਥਾਨ ਪ੍ਰਾਪਤ ਕਰੋ
+- [Notification API](https://developer.mozilla.org/docs/Web/API/Notifications_API) - ਡੈਸਕਟਾਪ ਨੋਟੀਫਿਕੇਸ਼ਨ ਭੇਜੋ
+- [HTML Drag and Drop API](https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API) - ਇੰਟਰਐਕਟਿਵ ਡ੍ਰੈਗ ਇੰਟਰਫੇਸ ਬਣਾਓ
+- [Web Storage API](https://developer.mozilla.org/docs/Web/API/Web_Storage_API) - ਸਥਾਨਕ ਸਟੋਰੇਜ ਤਕਨੀਕਾਂ
+- [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) - XMLHttpRequest ਦਾ ਆਧੁਨਿਕ ਵਿਕਲਪ
 
-[ਪਾਠ-ਪ੍ਰਸਚਾਤ ਕਵਿਜ਼](https://ff-quizzes.netlify.app/web/quiz/26)
+**ਖੋਜ ਦੇ ਸਵਾਲ:**  
+- ਇਹ API ਕਿਹੜੀਆਂ ਅਸਲ ਦੁਨੀਆ ਦੀਆਂ ਸਮੱਸਿਆਵਾਂ ਦਾ ਹੱਲ ਦਿੰਦੀ ਹੈ?  
+- API ਗਲਤੀਆਂ ਅਤੇ ਐਜ ਕੇਸਾਂ ਨੂੰ ਕਿਵੇਂ ਸੰਭਾਲਦੀ ਹੈ?  
+- ਇਸ API ਨੂੰ ਵਰਤਣ ਸਮੇਂ ਕਿਹੜੀਆਂ ਸੁਰੱਖਿਆ ਸੰਬੰਧੀ ਚਿੰਤਾਵਾਂ ਹਨ?  
+- ਇਹ API ਵੱਖ-ਵੱਖ ਬ੍ਰਾਊਜ਼ਰਾਂ ਵਿੱਚ ਕਿੰਨੀ ਵਿਆਪਕ ਹੈ?
+
+ਖੋਜ ਦੇ ਬਾਅਦ, ਇਹ ਪਛਾਣੋ ਕਿ ਇੱਕ API ਨੂੰ ਡਿਵੈਲਪਰ-ਫ੍ਰੈਂਡਲੀ ਅਤੇ ਭਰੋਸੇਮੰਦ ਬਣਾਉਣ ਵਾਲੇ ਗੁਣ ਕੀ ਹਨ।
+
+## ਪੋਸਟ-ਲੈਕਚਰ ਕਵਿਜ਼
+
+[ਪੋਸਟ-ਲੈਕਚਰ ਕਵਿਜ਼](https://ff-quizzes.netlify.app/web/quiz/26)
 
 ## ਸਮੀਖਿਆ ਅਤੇ ਸਵੈ-ਅਧਿਐਨ
 
-ਤੁਸੀਂ ਇਸ ਪਾਠ ਵਿੱਚ LocalStorage ਅਤੇ API ਬਾਰੇ ਸਿੱਖਿਆ, ਜੋ ਕਿ ਪੇਸ਼ੇਵਰ ਵੈੱਬ ਡਿਵੈਲਪਰ ਲਈ ਬਹੁਤ ਹੀ ਲਾਭਦਾਇਕ ਹਨ। ਕੀ ਤੁਸੀਂ ਸੋਚ ਸਕਦੇ ਹੋ ਕਿ ਇਹ ਦੋ ਚੀਜ਼ਾਂ ਇਕੱਠੇ ਕਿਵੇਂ ਕੰਮ ਕਰਦੀਆਂ ਹਨ? ਸੋਚੋ ਕਿ ਤੁਸੀਂ ਇੱਕ ਵੈੱਬਸਾਈਟ ਨੂੰ ਕਿਵੇਂ ਆਰਕੀਟੈਕਟ ਕਰਦੇ ਹੋ ਜੋ API ਦੁਆਰਾ ਵਰਤਣ ਲਈ ਆਈਟਮ ਸਟੋਰ ਕਰੇਗੀ।
+ਤੁਹਾਨੂੰ ਇਸ ਪਾਠ ਵਿੱਚ LocalStorage ਅਤੇ APIs ਬਾਰੇ ਸਿੱਖਣ ਨੂੰ ਮਿਲਿਆ, ਜੋ ਕਿ ਪੇਸ਼ੇਵਰ ਵੈੱਬ ਡਿਵੈਲਪਰ ਲਈ ਬਹੁਤ ਹੀ ਲਾਭਦਾਇਕ ਹਨ। ਕੀ ਤੁਸੀਂ ਸੋਚ ਸਕਦੇ ਹੋ ਕਿ ਇਹ ਦੋ ਚੀਜ਼ਾਂ ਇਕੱਠੇ ਕਿਵੇਂ ਕੰਮ ਕਰਦੀਆਂ ਹਨ? ਸੋਚੋ ਕਿ ਤੁਸੀਂ ਇੱਕ ਵੈੱਬਸਾਈਟ ਨੂੰ ਕਿਵੇਂ ਡਿਜ਼ਾਈਨ ਕਰੋਗੇ ਜੋ API ਦੁਆਰਾ ਵਰਤਣ ਲਈ ਆਈਟਮ ਸਟੋਰ ਕਰੇ।
+
+### ⚡ **ਅਗਲੇ 5 ਮਿੰਟਾਂ ਵਿੱਚ ਤੁਸੀਂ ਕੀ ਕਰ ਸਕਦੇ ਹੋ**  
+- [ ] DevTools ਦੇ Application ਟੈਬ ਨੂੰ ਖੋਲ੍ਹੋ ਅਤੇ ਕਿਸੇ ਵੀ ਵੈੱਬਸਾਈਟ 'ਤੇ localStorage ਦੀ ਜਾਂਚ ਕਰੋ  
+- [ ] ਇੱਕ ਸਧਾਰਨ HTML ਫਾਰਮ ਬਣਾਓ ਅਤੇ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਫਾਰਮ ਵੈਲੀਡੇਸ਼ਨ ਦੀ ਜਾਂਚ ਕਰੋ  
+- [ ] localStorage ਵਿੱਚ ਡਾਟਾ ਸਟੋਰ ਅਤੇ ਰੀਟ੍ਰੀਵ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ  
+- [ ] Network ਟੈਬ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਫਾਰਮ ਡਾਟਾ ਦੀ ਜਾਂਚ ਕਰੋ  
+
+### 🎯 **ਇਸ ਘੰਟੇ ਵਿੱਚ ਤੁਸੀਂ ਕੀ ਹਾਸਲ ਕਰ ਸਕਦੇ ਹੋ**  
+- [ ] ਪੋਸਟ-ਲੈਸਨ ਕਵਿਜ਼ ਪੂਰਾ ਕਰੋ ਅਤੇ ਫਾਰਮ ਹੈਂਡਲਿੰਗ ਸੰਕਲਪਾਂ ਨੂੰ ਸਮਝੋ  
+- [ ] ਇੱਕ ਬ੍ਰਾਊਜ਼ਰ ਐਕਸਟੈਂਸ਼ਨ ਫਾਰਮ ਬਣਾਓ ਜੋ ਯੂਜ਼ਰ ਪਸੰਦਾਂ ਨੂੰ ਸੇਵ ਕਰਦਾ ਹੈ  
+- [ ] ਕਲਾਇੰਟ-ਸਾਈਡ ਫਾਰਮ ਵੈਲੀਡੇਸ਼ਨ ਨੂੰ ਮਦਦਗਾਰ ਗਲਤੀ ਸੁਨੇਹਿਆਂ ਨਾਲ ਲਾਗੂ ਕਰੋ  
+- [ ] ਐਕਸਟੈਂਸ਼ਨ ਡਾਟਾ ਸਟੋਰੇਜ ਲਈ chrome.storage API ਦੀ ਵਰਤੋਂ ਦਾ ਅਭਿਆਸ ਕਰੋ  
+- [ ] ਇੱਕ ਯੂਜ਼ਰ ਇੰਟਰਫੇਸ ਬਣਾਓ ਜੋ ਸੇਵ ਕੀਤੇ ਯੂਜ਼ਰ ਸੈਟਿੰਗਾਂ ਨੂੰ ਪ੍ਰਤੀਕ੍ਰਿਆ ਦਿੰਦਾ ਹੈ  
+
+### 📅 **ਤੁਹਾਡਾ ਹਫ਼ਤੇ-ਲੰਬਾ ਐਕਸਟੈਂਸ਼ਨ ਬਣਾਉਣ ਦਾ ਯੋਜਨਾ**  
+- [ ] ਫਾਰਮ ਫੰਕਸ਼ਨਲਿਟੀ ਨਾਲ ਇੱਕ ਪੂਰੀ-ਫੀਚਰਡ ਬ੍ਰਾਊਜ਼ਰ ਐਕਸਟੈਂਸ਼ਨ ਪੂਰਾ ਕਰੋ  
+- [ ] ਵੱਖ-ਵੱਖ ਸਟੋਰੇਜ ਵਿਕਲਪਾਂ: local, sync, ਅਤੇ session storage ਵਿੱਚ ਮਾਹਰ ਬਣੋ  
+- [ ] autocomplete ਅਤੇ validation ਵਰਗੇ ਉੱਨਤ ਫਾਰਮ ਫੀਚਰ ਲਾਗੂ ਕਰੋ  
+- [ ] ਯੂਜ਼ਰ ਡਾਟਾ ਲਈ import/export ਫੰਕਸ਼ਨਲਿਟੀ ਸ਼ਾਮਲ ਕਰੋ  
+- [ ] ਵੱਖ-ਵੱਖ ਬ੍ਰਾਊਜ਼ਰਾਂ ਵਿੱਚ ਆਪਣੇ ਐਕਸਟੈਂਸ਼ਨ ਦੀ ਪੂਰੀ ਜਾਂਚ ਕਰੋ  
+- [ ] ਆਪਣੇ ਐਕਸਟੈਂਸ਼ਨ ਦੇ ਯੂਜ਼ਰ ਅਨੁਭਵ ਅਤੇ ਗਲਤੀ ਸੰਭਾਲਨ ਨੂੰ ਪਾਲਿਸ਼ ਕਰੋ  
+
+### 🌟 **ਤੁਹਾਡਾ ਮਹੀਨੇ-ਲੰਬਾ ਵੈੱਬ API ਮਾਹਰ ਬਣਾਉਣ ਦਾ ਯੋਜਨਾ**  
+- [ ] ਵੱਖ-ਵੱਖ ਬ੍ਰਾਊਜ਼ਰ ਸਟੋਰੇਜ APIs ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਜਟਿਲ ਐਪਲੀਕੇਸ਼ਨ ਬਣਾਓ  
+- [ ] offline-first ਵਿਕਾਸ ਪੈਟਰਨਾਂ ਬਾਰੇ ਸਿੱਖੋ  
+- [ ] ਡਾਟਾ ਸਟੋਰੇਜ ਵਿੱਚ ਸ਼ਾਮਲ ਖੁੱਲੇ ਸਰੋਤ ਪ੍ਰੋਜੈਕਟਾਂ ਵਿੱਚ ਯੋਗਦਾਨ ਪਾਓ  
+- [ ] ਗੋਪਨੀਯਤਾ-ਕੇਂਦਰਿਤ ਵਿਕਾਸ ਅਤੇ GDPR ਅਨੁਕੂਲਤਾ ਵਿੱਚ ਮਾਹਰ ਬਣੋ  
+- [ ] ਫਾਰਮ ਹੈਂਡਲਿੰਗ ਅਤੇ ਡਾਟਾ ਮੈਨੇਜਮੈਂਟ ਲਈ ਦੁਬਾਰਾ ਵਰਤਣਯੋਗ ਲਾਇਬ੍ਰੇਰੀਆਂ ਬਣਾਓ  
+- [ ] ਵੈੱਬ APIs ਅਤੇ ਐਕਸਟੈਂਸ਼ਨ ਵਿਕਾਸ ਬਾਰੇ ਗਿਆਨ ਸਾਂਝਾ ਕਰੋ  
+
+## 🎯 ਤੁਹਾਡਾ ਐਕਸਟੈਂਸ਼ਨ ਵਿਕਾਸ ਮਾਹਰ ਬਣਾਉਣ ਦਾ ਸਮਾਂ-ਰੇਖਾ  
+
+```mermaid
+timeline
+    title API Integration & Storage Learning Progression
+    
+    section DOM Fundamentals (15 minutes)
+        Element References: querySelector mastery
+                          : Event listener setup
+                          : State management basics
+        
+    section Local Storage (20 minutes)
+        Data Persistence: Key-value storage
+                        : Session management
+                        : User preference handling
+                        : Storage inspection tools
+        
+    section Form Handling (25 minutes)
+        User Input: Form validation
+                  : Event prevention
+                  : Data extraction
+                  : UI state transitions
+        
+    section API Integration (35 minutes)
+        External Communication: HTTP requests
+                              : Authentication patterns
+                              : JSON data parsing
+                              : Response handling
+        
+    section Async Programming (40 minutes)
+        Modern JavaScript: Promise handling
+                         : Async/await patterns
+                         : Error management
+                         : Non-blocking operations
+        
+    section Error Handling (30 minutes)
+        Robust Applications: Try/catch blocks
+                           : User-friendly messages
+                           : Graceful degradation
+                           : Debugging techniques
+        
+    section Advanced Patterns (1 week)
+        Professional Development: Caching strategies
+                                : Rate limiting
+                                : Retry mechanisms
+                                : Performance optimization
+        
+    section Production Skills (1 month)
+        Enterprise Features: Security best practices
+                           : API versioning
+                           : Monitoring & logging
+                           : Scalable architecture
+```
+  
+### 🛠️ ਤੁਹਾਡਾ ਫੁੱਲ-ਸਟੈਕ ਵਿਕਾਸ ਟੂਲਕਿਟ ਸਾਰ
+
+ਇਸ ਪਾਠ ਨੂੰ ਪੂਰਾ ਕਰਨ ਤੋਂ ਬਾਅਦ, ਤੁਹਾਡੇ ਕੋਲ ਹੁਣ ਹੈ:  
+- **DOM ਮਾਹਰਤਾ**: ਸਹੀ ਤਰੀਕੇ ਨਾਲ ਐਲੀਮੈਂਟ ਟਾਰਗੇਟਿੰਗ ਅਤੇ ਮੈਨਿਪੂਲੇਸ਼ਨ  
+- **ਸਟੋਰੇਜ ਮਾਹਰਤਾ**: localStorage ਨਾਲ ਸਥਾਈ ਡਾਟਾ ਮੈਨੇਜਮੈਂਟ  
+- **API ਇੰਟੀਗ੍ਰੇਸ਼ਨ**: ਰੀਅਲ-ਟਾਈਮ ਡਾਟਾ ਫੈਚਿੰਗ ਅਤੇ ਪ੍ਰਮਾਣਿਕਤਾ  
+- **Async ਪ੍ਰੋਗਰਾਮਿੰਗ**: ਆਧੁਨਿਕ ਜਾਵਾਸਕ੍ਰਿਪਟ ਨਾਲ non-blocking ਓਪਰੇਸ਼ਨ  
+- **ਗਲਤੀ ਸੰਭਾਲਨ**: ਗਲਤੀਆਂ ਨੂੰ ਸੁਚਾਰੂ ਤਰੀਕੇ ਨਾਲ ਸੰਭਾਲਣ ਵਾਲੇ ਮਜ਼ਬੂਤ ਐਪਲੀਕੇਸ਼ਨ  
+- **ਯੂਜ਼ਰ ਅਨੁਭਵ**: ਲੋਡਿੰਗ ਸਟੇਟਸ, ਵੈਲੀਡੇਸ਼ਨ, ਅਤੇ ਸੁਚਾਰੂ ਇੰਟਰੈਕਸ਼ਨ  
+- **ਆਧੁਨਿਕ ਪੈਟਰਨ**: fetch API, async/await, ਅਤੇ ES6+ ਫੀਚਰ  
+
+**ਪੇਸ਼ੇਵਰ ਹੁਨਰ ਪ੍ਰਾਪਤ ਕੀਤੇ:** ਤੁਸੀਂ ਇਨ੍ਹਾਂ ਪੈਟਰਨਾਂ ਨੂੰ ਲਾਗੂ ਕੀਤਾ ਹੈ:  
+- **ਵੈੱਬ ਐਪਲੀਕੇਸ਼ਨ**: ਬਾਹਰੀ ਡਾਟਾ ਸਰੋਤਾਂ ਨਾਲ ਸਿੰਗਲ-ਪੇਜ ਐਪਸ  
+- **ਮੋਬਾਈਲ ਵਿਕਾਸ**: API-ਚਲਿਤ ਐਪਸ ਜਿਨ੍ਹਾਂ ਵਿੱਚ offline ਸਮਰਥਨ ਹੈ  
+- **ਡੈਸਕਟਾਪ ਸੌਫਟਵੇਅਰ**: Electron ਐਪਸ ਜਿਨ੍ਹਾਂ ਵਿੱਚ ਸਥਾਈ ਸਟੋਰੇਜ ਹੈ  
+- **ਇੰਟਰਪ੍ਰਾਈਜ਼ ਸਿਸਟਮ**: ਪ੍ਰਮਾਣਿਕਤਾ, ਕੈਸ਼ਿੰਗ, ਅਤੇ ਗਲਤੀ ਸੰਭਾਲਨ  
+- **ਆਧੁਨਿਕ ਫਰੇਮਵਰਕ**: React/Vue/Angular ਡਾਟਾ ਮੈਨੇਜਮੈਂਟ ਪੈਟਰਨ  
+
+**ਅਗਲਾ ਪੱਧਰ:** ਤੁਸੀਂ ਉੱਨਤ ਵਿਸ਼ਿਆਂ ਦੀ ਖੋਜ ਕਰਨ ਲਈ ਤਿਆਰ ਹੋ, ਜਿਵੇਂ ਕਿ ਕੈਸ਼ਿੰਗ ਰਣਨੀਤੀਆਂ, ਰੀਅਲ-ਟਾਈਮ WebSocket ਕਨੈਕਸ਼ਨ, ਜਾਂ ਜਟਿਲ ਸਟੇਟ ਮੈਨੇਜਮੈਂਟ!
 
 ## ਅਸਾਈਨਮੈਂਟ
 
@@ -236,5 +449,5 @@ async function displayCarbonUsage(apiKey, region) {
 
 ---
 
-**ਅਸਵੀਕਰਤੀ**:  
-ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀ ਹੋਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸੁਚਤਤਾਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਇਸਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਤ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਅਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+**ਅਸਵੀਕਰਤਾ**:  
+ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸਹੀ ਹੋਣ ਦਾ ਯਤਨ ਕਰਦੇ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸੁੱਤੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਇਸਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਤ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੇ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਅਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।

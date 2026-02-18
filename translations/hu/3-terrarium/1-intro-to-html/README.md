@@ -1,85 +1,159 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "89f7f9f800ce7c9f149e98baaae8491a",
-  "translation_date": "2025-08-29T10:32:47+00:00",
-  "source_file": "3-terrarium/1-intro-to-html/README.md",
-  "language_code": "hu"
-}
--->
-# Terrárium Projekt 1. rész: Bevezetés a HTML-be
+# Terrárium Projekt 1. rész: Bevezetés az HTML-be
 
-![Bevezetés a HTML-be](../../../../translated_images/webdev101-html.4389c2067af68e98280c1bde52b6c6269f399eaae3659b7c846018d8a7b0bbd9.hu.png)
-> Sketchnote készítette: [Tomomi Imura](https://twitter.com/girlie_mac)
+```mermaid
+journey
+    title Az Ön HTML tanulási útja
+    section Alapok
+      Create HTML file: 3: Student
+      Add DOCTYPE: 4: Student
+      Structure document: 5: Student
+    section Tartalom
+      Add metadata: 4: Student
+      Include images: 5: Student
+      Organize layout: 5: Student
+    section Szemantika
+      Use proper tags: 4: Student
+      Enhance accessibility: 5: Student
+      Build terrarium: 5: Student
+```
+![Bevezetés az HTML-be](../../../../translated_images/hu/webdev101-html.4389c2067af68e98.webp)
+> Sketchnote készítette [Tomomi Imura](https://twitter.com/girlie_mac)
 
+Az HTML, vagyis a HyperText Markup Language, minden általad valaha látogatott weboldal alapja. Gondolj az HTML-re úgy, mint a weboldalak vázára – ez határozza meg, hogy hová kerül a tartalom, hogyan van szervezve, és mit jelképez minden egyes elem. Míg a CSS később „felöltözteti” az HTML-t színekkel és elrendezéssel, és a JavaScript életre kelti interaktivitással, az HTML biztosítja azt az alapvető szerkezetet, amely minden mást lehetővé tesz.
+
+Ebben a leckében elkészíted egy virtuális terrárium felületének HTML szerkezetét. Ez a gyakorlati projekt megtanítja az alapvető HTML fogalmakat, miközben valami vizuálisan vonzó dolgot építesz. Megtanulod, hogyan szervezz tartalmat szemantikus elemek segítségével, hogyan dolgozz képekkel, és hogyan hozd létre az interaktív webalkalmazás alapját.
+
+A lecke végére rendelkezel majd egy működő HTML oldallal, amely növényképeket jelenít meg rendezett oszlopokban, készen a következő leckében történő stílusozásra. Ne aggódj, ha elsőre egyszerűnek tűnik – pontosan ilyennek kell lennie az HTML-nek, mielőtt a CSS ráteszi a vizuális fényét.
+
+```mermaid
+mindmap
+  root((HTML Alapok))
+    Structure
+      DOCTYPE Deklaráció
+      HTML Elem
+      Fejléc Szakasz
+      Törzs Tartalom
+    Elements
+      Címkék & Attribútumok
+      Önállóan lezáró címkék
+      Beágyazott elemek
+      Blokk vs Inline
+    Content
+      Szöveges elemek
+      Képek
+      Konténerek (div)
+      Listák
+    Semantics
+      Jelentőségteljes címkék
+      Akadálymentesség
+      Képernyőolvasók
+      SEO Előnyök
+    Best Practices
+      Helyes beágyazás
+      Érvényes jelölés
+      Leíró Alt szöveg
+      Rendezett struktúra
+```
 ## Előadás előtti kvíz
 
 [Előadás előtti kvíz](https://ff-quizzes.netlify.app/web/quiz/15)
 
-
-> Nézd meg a videót
-
+> 📺 **Nézd meg és tanulj**: Nézd meg ezt a hasznos videós összefoglalót
 > 
-> [![Git és GitHub alapok videó](https://img.youtube.com/vi/1TvxJKBzhyQ/0.jpg)](https://www.youtube.com/watch?v=1TvxJKBzhyQ)
+> [![HTML alapok videó](https://img.youtube.com/vi/1TvxJKBzhyQ/0.jpg)](https://www.youtube.com/watch?v=1TvxJKBzhyQ)
 
-### Bevezetés
+## A projekt beállítása
 
-A HTML, vagyis a HyperText Markup Language, a web 'csontváza'. Ha a CSS 'felöltözteti' a HTML-t, és a JavaScript életre kelti, akkor a HTML a webalkalmazás teste. A HTML szintaxisa is tükrözi ezt az elképzelést, mivel tartalmaz "head", "body" és "footer" tageket.
+Mielőtt belevágnánk az HTML kódba, állítsuk be a megfelelő munkakörnyezetet a terrárium projektedhez. Egy rendezett fájlszerkezet létrehozása már az elejétől fogva egy fontos szokás, amely jól fog szolgálni a webfejlesztési utadon.
 
-Ebben a leckében a HTML-t fogjuk használni, hogy megalkossuk virtuális terráriumunk felületének 'csontvázát'. Lesz egy címe és három oszlopa: egy jobb és egy bal oszlop, ahol a húzható növények találhatók, valamint egy középső terület, amely maga az üvegszerű terrárium lesz. A lecke végére látni fogod a növényeket az oszlopokban, de a felület kissé furcsán fog kinézni; ne aggódj, a következő részben CSS stílusokat adsz hozzá, hogy jobban nézzen ki.
+### Feladat: Készítsd el a projekt szerkezetét
 
-### Feladat
+Létrehozol egy külön mappát a terrárium projekthez, és hozzáadod az első HTML fájlodat. Két megközelítést használhatsz:
 
-A számítógépeden hozz létre egy 'terrarium' nevű mappát, és azon belül egy 'index.html' nevű fájlt. Ezt megteheted a Visual Studio Code-ban, miután létrehoztad a terrarium mappát, egy új VS Code ablak megnyitásával, a 'mappa megnyitása' opcióra kattintva, és az új mappádhoz navigálva. Az Explorer panelen kattints a kis 'fájl' gombra, és hozd létre az új fájlt:
+**1. lehetőség: Visual Studio Code használata**
+1. Nyisd meg a Visual Studio Code-ot
+2. Kattints a „Fájl” → „Mappa megnyitása” vagy használd a `Ctrl+K, Ctrl+O` (Windows/Linux) vagy `Cmd+K, Cmd+O` (Mac) billentyűkombinációt
+3. Hozz létre egy új mappát `terrarium` néven, és válaszd ki
+4. Az Explorer panelen kattints az „Új fájl” ikonra
+5. Nevezd el a fájlt `index.html`-nek
 
-![explorer a VS Code-ban](../../../../translated_images/vs-code-index.e2986cf919471eb984a0afef231380c8b132b000635105f2397bd2754d1b689c.hu.png)
+![VS Code Explorer új fájl létrehozása](../../../../translated_images/hu/vs-code-index.e2986cf919471eb9.webp)
 
-Vagy
+**2. lehetőség: Parancssoros parancsok használata**
+```bash
+mkdir terrarium
+cd terrarium
+touch index.html
+code index.html
+```
 
-Használd ezeket a parancsokat a git bash-ben:
-* `mkdir terrarium`
-* `cd terrarium`
-* `touch index.html`
-* `code index.html` vagy `nano index.html`
+**Ezek a parancsok a következőket végzik el:**
+- **Létrehoz** egy új könyvtárat `terrarium` néven a projekthez
+- **Belép** a terrarium könyvtárba
+- **Létrehoz** egy üres `index.html` fájlt
+- **Megnyitja** a fájlt szerkesztésre a Visual Studio Code-ban
 
-> Az index.html fájlok jelzik a böngészőnek, hogy ez az alapértelmezett fájl egy mappában; az olyan URL-ek, mint például `https://anysite.com/test`, egy olyan mappastruktúrából épülhetnek fel, amely tartalmaz egy `test` nevű mappát, benne egy `index.html` fájllal; az `index.html` nem feltétlenül jelenik meg az URL-ben.
+> 💡 **Pro tipp**: Az `index.html` fájlnév különleges a webfejlesztésben. Amikor valaki meglátogat egy weboldalt, a böngészők automatikusan keresik az `index.html` fájlt, mint az alapértelmezett megjelenítendő oldalt. Ez azt jelenti, hogy egy olyan URL, mint `https://mysite.com/projects/`, automatikusan az `index.html` fájlt szolgálja ki a `projects` mappából anélkül, hogy a fájlnevet meg kellene adni az URL-ben.
 
----
+## Az HTML dokumentum szerkezetének megértése
 
-## A DocType és a html tagek
+Minden HTML dokumentum egy meghatározott szerkezetet követ, amelyet a böngészőknek érteniük kell a helyes megjelenítés érdekében. Gondolj erre a szerkezetre úgy, mint egy hivatalos levélre – vannak előírt elemek meghatározott sorrendben, amelyek segítik a címzettet (jelen esetben a böngészőt) a tartalom helyes feldolgozásában.
 
-A HTML fájl első sora a doctype. Kicsit meglepő, hogy ennek a sornak a fájl legfelső részén kell lennie, de ez azt mondja a régebbi böngészőknek, hogy az oldal megjelenítését szabványos módban kell végezni, a jelenlegi HTML specifikációt követve.
+```mermaid
+flowchart TD
+    A["<!DOCTYPE html>"] --> B["<html>"]
+    B --> C["<head>"]
+    C --> D["<title>"]
+    C --> E["<meta karakterkészlet>"]
+    C --> F["<meta nézetablak>"]
+    B --> G["<body>"]
+    G --> H["<h1> Főcím"]
+    G --> I["<div> Konténerek"]
+    G --> J["<img> Képek"]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#fff3e0
+    style G fill:#e8f5e8
+```
+Kezdjük az alapvető alapokkal, amelyek minden HTML dokumentumnak szükségesek.
 
-> Tipp: a VS Code-ban egy tag fölé húzva az egeret információkat kaphatsz annak használatáról az MDN Reference útmutatók alapján.
+### A DOCTYPE deklaráció és a gyökérelem
 
-A második sornak a `<html>` tag nyitó tagjának kell lennie, amelyet most azonnal követ a záró tag `</html>`. Ezek a tagek az interfész gyökérelemei.
+Egy HTML fájl első két sora a dokumentum „bevezetője” a böngésző számára:
 
-### Feladat
-
-Add hozzá ezeket a sorokat az `index.html` fájlod tetejére:
-
-```HTML
+```html
 <!DOCTYPE html>
 <html></html>
 ```
 
-✅ A DocType beállításával néhány különböző módot lehet meghatározni egy lekérdezési karakterlánc segítségével: [Quirks Mode és Standards Mode](https://developer.mozilla.org/docs/Web/HTML/Quirks_Mode_and_Standards_Mode). Ezek a módok nagyon régi böngészők támogatására szolgáltak, amelyeket manapság már nem igazán használnak (például Netscape Navigator 4 és Internet Explorer 5). Maradj a szabványos doctype deklarációnál.
+**Mit is csinál ez a kód?**
+- **Deklarálja** a dokumentum típusát HTML5-ként a `<!DOCTYPE html>` használatával
+- **Létrehozza** a gyökér `<html>` elemet, amely tartalmazza az összes oldaltartalmat
+- **Megteremti** a modern webes sztenderdeket a helyes böngészői megjelenítéshez
+- **Biztosítja** a konzisztens megjelenést különböző böngészőkben és eszközökön
 
----
+> 💡 **VS Code tipp**: Ha az egérrel fölé viszed az egymelyik HTML címkének a VS Code-ban, akkor hasznos információkat láthatsz az MDN Web Docs-ból, köztük használati példákat és böngésző kompatibilitási adatokat.
 
-## A dokumentum 'head' része
+> 📚 **Tudj meg többet**: A DOCTYPE deklaráció megakadályozza, hogy a böngészők „quirks mode”-ba lépjenek, amelyet nagyon régi weboldalak támogatására használtak. A modern webfejlesztés az egyszerű `<!DOCTYPE html>` deklarációt használja az [szabványkövető megjelenítés](https://developer.mozilla.org/docs/Web/HTML/Quirks_Mode_and_Standards_Mode) biztosítására.
 
-A HTML dokumentum 'head' része tartalmazza a weboldalról szóló alapvető információkat, más néven [metaadatokat](https://developer.mozilla.org/docs/Web/HTML/Element/meta). Esetünkben a következő négy dolgot adjuk meg a webkiszolgálónak, amelyhez ezt az oldalt küldjük megjelenítésre:
+### 🔄 **Pedagógiai ellenőrzőpont**
+**Állj meg és gondold át**: Mielőtt folytatnád, győződj meg róla, hogy érted:
+- ✅ Miért van szükség minden HTML dokumentumban a DOCTYPE deklarációra
+- ✅ Mit tartalmaz a `<html>` gyökérelem
+- ✅ Hogyan segíti ez a szerkezet a böngészők helyes oldaltervezését
 
--   az oldal címe
--   metaadatok, beleértve:
-    -   a 'karakterkészletet', amely megadja, hogy milyen karakterkódolást használ az oldal
-    -   böngészőinformációk, beleértve az `x-ua-compatible`-t, amely jelzi, hogy az IE=edge böngésző támogatott
-    -   információk arról, hogyan viselkedjen a viewport az oldal betöltésekor. A viewport kezdeti méretezésének 1-re állítása szabályozza a nagyítási szintet az oldal első betöltésekor.
+**Gyors önellenőrzés**: Tudnád saját szavaiddal elmagyarázni, mit jelent a „szabványkövető megjelenítés”?
 
-### Feladat
+## Alapvető dokumentum metaadatok hozzáadása
 
-Adj hozzá egy 'head' blokkot a dokumentumodhoz a `<html>` nyitó és záró tagek közé.
+Egy HTML dokumentum `<head>` része tartalmazza azokat a fontos információkat, amelyekre a böngészőknek és keresőmotoroknak szükségük van, de amelyeket a látogatók nem látnak közvetlenül az oldalon. Gondolj rá úgy, mint a „kulisszák mögötti” információra, amely segíti az oldalad helyes működését és megjelenését különféle eszközökön és platformokon.
+
+Ez a metaadat megmondja a böngészőknek, hogyan jelenítsék meg az oldalt, milyen karakterkódolást használjanak, és hogyan kezeljék a különböző képernyőméreteket – ezek mind elengedhetetlenek a professzionális, elérhető weboldalak létrehozásához.
+
+### Feladat: Add hozzá a dokumentum fejlécét
+
+Helyezd be ezt a `<head>` részt az `<html>` nyitó és záró címkék közé:
 
 ```html
 <head>
@@ -90,17 +164,28 @@ Adj hozzá egy 'head' blokkot a dokumentumodhoz a `<html>` nyitó és záró tag
 </head>
 ```
 
-✅ Mi történne, ha egy ilyen viewport meta tag-et állítanál be: `<meta name="viewport" content="width=600">`? Olvass többet a [viewport](https://developer.mozilla.org/docs/Web/HTML/Viewport_meta_tag) témájáról.
+**Mit csinálnak ezek az elemek?**
+- **Beállítja** az oldal címét, amely a böngészőfülekben és keresési találatokban megjelenik
+- **Megadja** az UTF-8 karakterkódolást a szövegek helyes megjelenítéséhez világszerte
+- **Biztosítja** a kompatibilitást a modern Internet Explorer verziókkal
+- **Konfigurálja** a reszponzív dizájnt úgy, hogy a nézetablak illeszkedjen az eszköz szélességéhez
+- **Szabályozza** a kezdeti nagyítási szintet, hogy a tartalom természetes méretben jelenjen meg
 
----
+> 🤔 **Gondolkodj el rajta**: Mi történne, ha ezt a viewport meta taget állítanád be: `<meta name="viewport" content="width=600">`? Ez arra kényszerítené az oldalt, hogy mindig 600 pixeles szélességű legyen, ami megtöri a reszponzív tervezést! Tudj meg többet a [helyes viewport beállításról](https://developer.mozilla.org/docs/Web/HTML/Viewport_meta_tag).
 
-## A dokumentum `body` része
+## A dokumentum törzsének felépítése
 
-### HTML tagek
+A `<body>` elem tartalmaz minden látható tartalmat az oldalon – mindent, amit a felhasználók meglátnak és amellyel interakcióba lépnek. Míg a `<head>` rész utasításokat adott a böngészőnek, a `<body>` rész tartalmazza a tényleges tartalmat: szövegeket, képeket, gombokat és egyéb elemeket, amelyek létrehozzák a felhasználói felületet.
 
-A HTML-ben tageket adsz hozzá a .html fájlodhoz, hogy létrehozd a weboldal elemeit. Minden tag általában egy nyitó és egy záró tagból áll, például: `<p>hello</p>` egy bekezdés jelölésére. Hozd létre az interfész 'body' részét úgy, hogy egy `<body>` tagpárt adsz hozzá a `<html>` tagpár belsejébe; a jelölésed most így néz ki:
+Adjunk hozzá a törzs szerkezetét, és értsük meg, hogyan működnek az HTML címkék együtt a jelentésteli tartalmak létrehozásához.
 
-### Feladat
+### Az HTML címke szerkezet megértése
+
+Az HTML párosított címkéket használ az elemek meghatározásához. A legtöbb címke egy nyitó címkéből áll, pl. `<p>`, és egy záró címkéből, pl. `</p>`, közrefogva a tartalmat: `<p>Hello, világ!</p>`. Ez egy bekezdés elemet hoz létre a "Hello, világ!" szöveggel.
+
+### Feladat: Add hozzá a törzs elemet
+
+Frissítsd az HTML fájlodat úgy, hogy tartalmazza a `<body>` elemet:
 
 ```html
 <!DOCTYPE html>
@@ -115,100 +200,179 @@ A HTML-ben tageket adsz hozzá a .html fájlodhoz, hogy létrehozd a weboldal el
 </html>
 ```
 
-Most elkezdheted az oldal felépítését. Általában `<div>` tageket használsz az oldal különálló elemeinek létrehozásához. Hozz létre egy sor `<div>` elemet, amelyek képeket fognak tartalmazni.
+**Ez a teljes szerkezet a következőt biztosítja:**
+- **Létrehozza** az alapvető HTML5 dokumentum keretet
+- **Tartalmazza** a szükséges metaadatokat a helyes böngészői megjelenítéshez
+- **Létrehoz** egy üres törzset, készen a látható tartalomhoz
+- **Követi** a modern webfejlesztési jó gyakorlatokat
 
-### Képek
+Most készen állsz hozzáadni a terrárium látható elemeit. `<div>` elemeket fogunk konténerekként használni a tartalom különböző részeinek szervezéséhez, és `<img>` elemeket a növényképek megjelenítéséhez.
 
-Egy HTML tag, amelynek nincs szüksége záró tagra, az `<img>` tag, mert van egy `src` eleme, amely tartalmazza az összes információt, amely az elem megjelenítéséhez szükséges.
+### Képek és elrendezési konténerek használata
 
-Hozz létre egy `images` nevű mappát az alkalmazásodban, és abba helyezd el az összes képet a [forráskód mappából](../../../../3-terrarium/solution/images); (14 növény képe van).
+A képek speciálisak az HTML-ben, mert „önzáró” címkéket használnak. Ellentétben például a `<p></p>`, amelyek körülveszik a tartalmat, az `<img>` címke az összes szükséges információt magában hordozza a címkében attribútumok segítségével, mint például a `src` a kép fájlútvonalához és az `alt` az akadálymentesség miatt.
 
-### Feladat
+Mielőtt képeket adnál a HTML-hez, megfelelően kell szervezned a projekt fájlokat azáltal, hogy létrehozol egy képek mappát és belehelyezed a növény grafikai fájlokat.
 
-Add hozzá ezeket a növényképeket két oszlopba a `<body></body>` tagek közé:
+**Elsőként állítsd be a képeket:**
+1. Hozz létre egy `images` nevű mappát a terrárium projekt mappájában
+2. Töltsd le a növény képeket a [megoldás mappából](../../../../3-terrarium/solution/images) (összesen 14 növénykép)
+3. Másolj át minden növényképet az új `images` mappádba
+
+### Feladat: Hozd létre a növény megjelenítő elrendezést
+
+Most add hozzá a növény képeket, rendszerezve két oszlopba a `<body></body>` címkék között:
 
 ```html
 <div id="page">
 	<div id="left-container" class="container">
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
+			<img class="plant" alt="plant" id="plant1" src="../../../../translated_images/hu/plant1.d87946a2ca70cc43.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant2" src="./images/plant2.png" />
+			<img class="plant" alt="plant" id="plant2" src="../../../../translated_images/hu/plant2.8daa1606c9c1ad89.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant3" src="./images/plant3.png" />
+			<img class="plant" alt="plant" id="plant3" src="../../../../translated_images/hu/plant3.8b0d484381a2a2a7.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant4" src="./images/plant4.png" />
+			<img class="plant" alt="plant" id="plant4" src="../../../../translated_images/hu/plant4.656e16ae1df37be2.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant5" src="./images/plant5.png" />
+			<img class="plant" alt="plant" id="plant5" src="../../../../translated_images/hu/plant5.2b41b9355f11ebcc.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant6" src="./images/plant6.png" />
+			<img class="plant" alt="plant" id="plant6" src="../../../../translated_images/hu/plant6.3d1827d03b656994.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant7" src="./images/plant7.png" />
+			<img class="plant" alt="plant" id="plant7" src="../../../../translated_images/hu/plant7.8152c302ac97f621.png" />
 		</div>
 	</div>
 	<div id="right-container" class="container">
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant8" src="./images/plant8.png" />
+			<img class="plant" alt="plant" id="plant8" src="../../../../translated_images/hu/plant8.38d6428174ffa850.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant9" src="./images/plant9.png" />
+			<img class="plant" alt="plant" id="plant9" src="../../../../translated_images/hu/plant9.f0e38d3327c37fc2.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant10" src="./images/plant10.png" />
+			<img class="plant" alt="plant" id="plant10" src="../../../../translated_images/hu/plant10.b159d6d6e985595f.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant11" src="./images/plant11.png" />
+			<img class="plant" alt="plant" id="plant11" src="../../../../translated_images/hu/plant11.2a03a1c2ec8ea84e.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant12" src="./images/plant12.png" />
+			<img class="plant" alt="plant" id="plant12" src="../../../../translated_images/hu/plant12.60e9b53e538fbaf3.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant13" src="./images/plant13.png" />
+			<img class="plant" alt="plant" id="plant13" src="../../../../translated_images/hu/plant13.07a51543c820bcf5.png" />
 		</div>
 		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant14" src="./images/plant14.png" />
+			<img class="plant" alt="plant" id="plant14" src="../../../../translated_images/hu/plant14.6e486371ba7d36ba.png" />
 		</div>
 	</div>
 </div>
 ```
 
-> Megjegyzés: Spans vs. Divs. A Div-ek 'blokk' elemeknek számítanak, míg a Spans 'soros' elemek. Mi történne, ha ezeket a div-eket span-ekké alakítanád?
+**Lépésenként ez történik a kódban:**
+- **Létrehoz** egy fő oldal konténert `id="page"` az összes tartalom tárolására
+- **Létrehoz** két oszlop konténert: `left-container` és `right-container`
+- **Szervez** 7 növényt a bal oldali oszlopba és 7 növényt a jobb oldali oszlopba
+- **Befoglal** minden egyes növény képet egy `plant-holder` divbe az egyedi pozícionáláshoz
+- **Alkalmaz** egységes osztályneveket a CSS stilizáláshoz a következő leckében
+- **Hozzárendel** egyedi azonosítókat minden növény képhez a JavaScript interakciókhoz később
+- **Tartalmaz** helyes fájlútvonalakat, amelyek a képek mappára mutatnak
 
-Ezzel a jelöléssel a növények most megjelennek a képernyőn. Elég rosszul néz ki, mert még nincsenek CSS-sel formázva, de ezt a következő leckében fogjuk megtenni.
+> 🤔 **Gondold át**: Észrevetted, hogy minden képnek jelenleg ugyanaz az alt szövege: „plant”? Ez nem ideális az akadálymentesség szempontjából. A képernyőolvasó használók négyszer hallanák a „plant” szót anélkül, hogy tudnák, melyik konkrét növényt mutatja az adott kép. Tudsz jobb, leíróbb alt szöveget kitalálni minden képhez?
 
-Minden képnek van alternatív szövege, amely akkor is megjelenik, ha nem tudod látni vagy megjeleníteni a képet. Ez egy fontos attribútum a hozzáférhetőség érdekében. A hozzáférhetőségről a későbbi leckékben tanulhatsz többet; egyelőre jegyezd meg, hogy az alt attribútum alternatív információt nyújt egy képről, ha a felhasználó valamilyen okból nem tudja megtekinteni azt (például lassú kapcsolat, hiba a src attribútumban, vagy ha a felhasználó képernyőolvasót használ).
+> 📝 **HTML elem típusok**: A `<div>` elemek „blokkszintűek” és teljes szélességet foglalnak el, míg a `<span>` elemek „inline” jellegűek és csak a szükséges szélességet foglalják el. Mit gondolsz, mi történne, ha az összes `<div>` címkét `<span>`-re változtatnád?
 
-✅ Észrevetted, hogy minden képnek ugyanaz az alt tag-je? Ez jó gyakorlat? Miért igen vagy miért nem? Tudod javítani ezt a kódot?
+### 🔄 **Pedagógiai ellenőrzőpont**
+**Szerkezet megértése**: Szánj egy pillanatot az HTML szerkezet átnézésére:
+- ✅ Fel tudod ismerni a fő konténereket az elrendezésedben?
+- ✅ Megérted, miért kap minden kép egyedi azonosítót?
+- ✅ Hogyan írnád le a `plant-holder` div-ek szerepét?
 
----
+**Vizuális ellenőrzés**: Nyisd meg az HTML fájlt egy böngészőben. Látnod kell:
+- Egy egyszerű listát a növényképekből
+- A képeket két oszlopba rendezve
+- Egyszerű, stílus nélküli elrendezést
 
-## Szemantikus jelölés
+**Ne feledd**: Ez a letisztult megjelenés pontosan olyan, amilyennek az HTML-nek lennie kell, mielőtt a CSS hozzáteszi a stílust!
 
-Általánosságban előnyösebb, ha jelentést hordozó 'szemantikát' használsz a HTML írásakor. Mit jelent ez? Azt, hogy a HTML tageket arra a típusú adatra vagy interakcióra használod, amelyre tervezték őket. Például az oldal főcímének `<h1>` tag-et kell használnia.
+Ezzel a jelöléssel megjelennek majd a növények, bár még nem lesznek csinosak – erre való a következő leckében a CSS! Egyelőre egy stabil HTML alapot kaptál, amely megfelelően szervezi a tartalmaidat és követi az akadálymentességi jó gyakorlatokat.
 
-Add hozzá a következő sort közvetlenül a nyitó `<body>` tag alá:
+## Szemantikus HTML használata az akadálymentességért
+
+A szemantikus HTML azt jelenti, hogy az elemeket jelentésük és céljuk szerint választjuk, nem pusztán a megjelenésük alapján. Ha szemantikus jelölést használsz, akkor a weboldalad szerkezetét és jelentését kommunikálod a böngészők, keresőmotorok és segítő technológiák, például képernyőolvasók felé.
+
+```mermaid
+flowchart TD
+    A[Tartalomhoz hozzá kell adni valamit?] --> B{Milyen típusút?}
+    B -->|Főcím| C["<h1>"]
+    B -->|Alcím| D["<h2>, <h3>, stb."]
+    B -->|Bekezdés| E["<p>"]
+    B -->|Lista| F["<ul>, <ol>"]
+    B -->|Navigáció| G["<nav>"]
+    B -->|Cikk| H["<article>"]
+    B -->|Szakasz| I["<section>"]
+    B -->|Általános tároló| J["<div>"]
+    
+    C --> K[Képernyőolvasók főcímként jelölik]
+    D --> L[Helyes címsor-hierarchiát hoz létre]
+    E --> M[Megfelelő szövegközöket biztosít]
+    F --> N[Listanavigációs gyorsbillentyűket engedélyez]
+    G --> O[Navigációs tájékozódási pontokat azonosít]
+    H --> P[Önálló tartalmat jelöl]
+    I --> Q[Kapcsolódó tartalmak csoportosítása]
+    J --> R[Csak akkor használja, ha nincs megfelelősémantikai címke]
+    
+    style C fill:#4caf50
+    style D fill:#4caf50
+    style E fill:#4caf50
+    style F fill:#4caf50
+    style G fill:#2196f3
+    style H fill:#2196f3
+    style I fill:#2196f3
+    style J fill:#ff9800
+```
+Ez a megközelítés webhelyeidet hozzáférhetőbbé teszi mozgáskorlátozott felhasználók számára, és segíti a keresőmotorokat a tartalom jobb megértésében. Ez a modern webfejlesztés alapelve, amely jobb élményeket teremt mindenkinek.
+
+### Semantikus oldal cím hozzáadása
+
+Adjunk hozzá egy megfelelő címet a terrárium oldaladhoz. Illeszd be ezt a sort közvetlenül a `<body>` nyitó címke után:
 
 ```html
 <h1>My Terrarium</h1>
 ```
 
-A szemantikus jelölés, például a címek `<h1>`-ként való megadása és a rendezetlen listák `<ul>`-ként való megjelenítése segíti a képernyőolvasókat az oldal navigálásában. Általánosságban a gombokat `<button>`-ként kell írni, a listákat pedig `<li>`-ként. Bár _lehetséges_ speciálisan formázott `<span>` elemeket használni kattintáskezelőkkel, hogy gombokat utánozzanak, jobb a fogyatékkal élő felhasználók számára, ha a technológiák meghatározhatják, hogy az oldalon hol található egy gomb, és interakcióba léphetnek vele, ha az elem gombként jelenik meg. Emiatt próbálj meg minél több szemantikus jelölést használni.
+**Miért fontos a szemantikus jelölés:**
+- **Segíti** a képernyőolvasókat az oldal szerkezetének navigálásában és megértésében
+- **Javítja** a keresőoptimalizálást (SEO) a tartalmi hierarchia tisztázásával
+- **Fokozza** az akadálymentességet látássérült vagy kognitív különbségekkel élő felhasználók számára
+- **Jobb felhasználói élményt teremt** minden eszközön és platformon
+- **Követi** a webes szabványokat és a szakmai fejlesztési legjobb gyakorlatokat
 
-✅ Nézd meg, hogyan működik egy képernyőolvasó, és [hogyan lép kapcsolatba egy weboldallal](https://www.youtube.com/watch?v=OUDV1gqs9GA). Látod, miért lehet frusztráló a nem szemantikus jelölés a felhasználó számára?
+**Példák szemantikus és nem szemantikus választásokra:**
 
-## A terrárium
+| Cél | ✅ Szemantikus választás | ❌ Nem szemantikus választás |
+|---------|-------------------|------------------------|
+| Főcím | `<h1>Title</h1>` | `<div class="big-text">Title</div>` |
+| Navigáció | `<nav><ul><li></li></ul></nav>` | `<div class="menu"><div></div></div>` |
+| Gomb | `<button>Click me</button>` | `<span onclick="...">Click me</span>` |
+| Cikk tartalma | `<article><p></p></article>` | `<div class="content"><div></div></div>` |
 
-Az interfész utolsó része olyan jelölés létrehozását foglalja magában, amelyet úgy fogunk formázni, hogy terráriumot hozzon létre.
+> 🎥 **Lásd működés közben**: Nézd meg, hogyan navigálnak a képernyőolvasók a weboldalakon [itt](https://www.youtube.com/watch?v=OUDV1gqs9GA), hogy megértsd, miért kulcsfontosságú a szemantikus jelölés az akadálymentességhez. Figyeld meg, hogyan segít a megfelelő HTML szerkezet a felhasználóknak a hatékony navigációban.
 
-### Feladat:
+## A terrárium konténer létrehozása
 
-Add hozzá ezt a jelölést az utolsó `</div>` tag fölé:
+Most adjuk hozzá a terrárium HTML szerkezetét – az üvegburát, ahová a növények majd elhelyezésre kerülnek. Ez a szakasz egy fontos fogalmat mutat be: az HTML biztosítja a szerkezetet, de CSS stílus nélkül ezek az elemek még nem lesznek láthatóak.
+
+A terrárium jelölés leíró osztályneveket használ, amelyek a következő leckében intuitív és könnyen karbantartható CSS stílusokat tesznek lehetővé.
+
+### Feladat: Add hozzá a terrárium szerkezetét
+
+Illeszd be ezt a jelölést az utolsó `</div>` címke elé (az oldal konténer záró címkéje előtt):
 
 ```html
 <div id="terrarium">
@@ -222,13 +386,72 @@ Add hozzá ezt a jelölést az utolsó `</div>` tag fölé:
 </div>
 ```
 
-✅ Bár hozzáadtad ezt a jelölést a képernyőhöz, semmi sem jelenik meg. Miért?
+**A terrárium szerkezetét érthetően:**
+- **Létrehoz** egy fő terrárium konténert egyedi azonosítóval a stílusozáshoz
+- **Meghatározza** a különálló elemeket minden vizuális komponenshez (felső rész, falak, föld, alsó rész)
+- **Tartalmaz** beágyazott elemeket az üveg tükröződési hatásaihoz (fényes elemek)
+- **Használ** leíró osztályneveket, amelyek egyértelműen jelzik az egyes elemek célját
+- **Előkészíti** a szerkezetet a CSS stílushoz, ami megteremti az üveg terrárium megjelenését
+
+> 🤔 **Észrevettél valamit?**: Bár hozzáadtad ezt a jelölést, mégsem látsz semmi újat az oldalon! Ez tökéletesen szemlélteti, hogy a HTML a szerkezetet adja, míg a CSS a megjelenést biztosítja. Ezek az `<div>` elemek léteznek, de még nincs hozzájuk vizuális stílus – az a következő leckében érkezik!
+
+```mermaid
+flowchart TD
+    A[HTML Dokumentum] --> B[Dokumentum Fejléc]
+    A --> C[Dokumentum Törzs]
+    B --> D[Cím Element]
+    B --> E[Meta Charset]
+    B --> F[Meta Viewport]
+    C --> G[Fő Címsor]
+    C --> H[Oldal Konténer]
+    H --> I[Balin Konténer 7 növénnyel]
+    H --> J[Jobb Konténer 7 növénnyel]
+    H --> K[Terrárium Szerkezet]
+    
+    style A fill:#e1f5fe
+    style B fill:#fff3e0
+    style C fill:#e8f5e8
+    style H fill:#f3e5f5
+```
+### 🔄 **Pedagógiai ellenőrzés**
+**HTML szerkezet elsajátítása**: Mielőtt továbblépnél, bizonyosodj meg, hogy tudod:
+- ✅ Elmagyarázni a különbséget a HTML szerkezete és a vizuális megjelenés között
+- ✅ Meghatározni a szemantikus és nem szemantikus HTML elemeket
+- ✅ Leírni, hogyan segíti a megfelelő jelölés a hozzáférhetőséget
+- ✅ Felismerni a teljes dokumentumfán alapuló szerkezetet
+
+**Tudásod tesztelése**: Próbáld meg megnyitni az HTML fájlodat egy JavaScript nélküli, CSS nélküli böngészőben. Ez megmutatja a létrehozott tiszta szemantikus szerkezetet!
 
 ---
 
-## 🚀Kihívás
+## GitHub Copilot ügynök kihívás
 
-Vannak néhány 'régi' HTML tag, amelyekkel még mindig szórakoztató játszani, bár nem szabad elavult tageket, például [ezeket a tageket](https://developer.mozilla.org/docs/Web/HTML/Element#Obsolete_and_deprecated_elements) használni a jelölésedben. Mégis, tudod használni a régi `<marquee>` tag-et, hogy az h1 cím vízszintesen görögjön? (ha megteszed, ne felejtsd el utána eltávolítani)
+Használd az Agent módot a következő kihívás megoldásához:
+
+**Leírás:** Hozz létre egy szemantikus HTML szerkezetet egy növénygondozási útmutató szakaszhoz, amit hozzá lehet adni a terrárium projekthez.
+
+**Utasítás:** Készíts egy szemantikus HTML szakaszt, amely tartalmaz egy főcímet "Növénygondozási útmutató", három alrészt a "Öntözés", "Fényigény" és "Talajápolás" címmel, mindegyikben egy-egy bekezdéssel növénygondozási információkkal. Használj megfelelő szemantikus HTML címkéket, mint a `<section>`, `<h2>`, `<h3>`, és `<p>`, hogy helyesen strukturáld a tartalmat.
+
+További információ az [agent mód használatáról](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode).
+
+## HTML történet kihívás
+
+**Tanulás a web fejlődéséről**
+
+A HTML jelentősen fejlődött, mióta Tim Berners-Lee 1990-ben elkészítette az első böngészőt a CERN-ben. Néhány régebbi címke, mint a `<marquee>`, már elavult, mert nem illeszkedik jól a modern hozzáférhetőségi szabványokhoz és reszponzív tervezési elvekhez.
+
+**Próbáld ki ezt a kísérletet:**
+1. Ideiglenesen csomagold be a `<h1>` címed egy `<marquee>` címkébe: `<marquee><h1>My Terrarium</h1></marquee>`
+2. Nyisd meg az oldaladat egy böngészőben, és figyeld meg a gördülő hatást
+3. Gondolkodj el azon, miért vált elavulttá ez a címke (tipp: gondolj a felhasználói élményre és a hozzáférhetőségre)
+4. Távolítsd el a `<marquee>` címkét, és térj vissza a szemantikus jelöléshez
+
+**Elmélkedő kérdések:**
+- Hogyan befolyásolhat egy gördülő címke látássérült vagy mozgásérzékeny felhasználókat?
+- Milyen modern CSS technikákkal érhető el hasonló vizuális hatás hozzáférhetőbb módon?
+- Miért fontos a jelenlegi webes szabványok használata az elavult elemek helyett?
+
+Ismerd meg jobban az [elavult és elvetett HTML elemeket](https://developer.mozilla.org/docs/Web/HTML/Element#Obsolete_and_deprecated_elements), hogy megértsd, hogyan fejlődnek a webes szabványok a jobb felhasználói élményért.
 
 ## Előadás utáni kvíz
 
@@ -236,15 +459,127 @@ Vannak néhány 'régi' HTML tag, amelyekkel még mindig szórakoztató játszan
 
 ## Áttekintés és önálló tanulás
 
-A HTML az a 'kipróbált és bevált' építőkocka-rendszer, amely segített a webet azzá alakítani, ami ma. Tanulj egy kicsit a történelméről, tanulmányozva néhány régi és új tag-et. Ki tudod találni, miért vontak vissza néhány tag-et, és miért adtak hozzá újakat? Milyen tagek jelenhetnek meg a jövőben?
+**Mélységes HTML-ismeretek**
 
-Tudj meg többet a web- és mobiloldalak készítéséről a [Microsoft Learn](https://docs.microsoft.com/learn/modules/build-simple-website/?WT.mc_id=academic-77807-sagibbon) oldalon.
+A HTML több mint 30 éve a web alapja, fejlődve az egyszerű dokumentumjelölő nyelvtől egy fejlett, interaktív alkalmazások építését támogató platformig. Ennek az evolúciónak az ismerete segít megérteni a modern webes szabványokat, és jobb fejlesztési döntéseket hozni.
+
+**Ajánlott tanulási útvonalak:**
+
+1. **HTML története és fejlődése**
+   - Tanulmányozd az HTML 1.0-tól az HTML5-ig terjedő idővonalat
+   - Fedezd fel, miért váltak elavulttá bizonyos címkék (hozzáférhetőség, mobilbarát tervezés, karbantarthatóság)
+   - Vizsgáld meg a felmerülő HTML funkciókat és javaslatokat
+
+2. **Szemantikus HTML mélyebben**
+   - Tanulmányozd a [HTML5 szemantikus elemek teljes listáját](https://developer.mozilla.org/docs/Web/HTML/Element)
+   - Gyakorold, mikor használj `<article>`, `<section>`, `<aside>`, és `<main>` elemeket
+   - Ismerd meg az ARIA attribútumokat a jobb hozzáférhetőségért
+
+3. **Modern webfejlesztés**
+   - Fedezd fel a [reszponzív weboldalak készítését](https://docs.microsoft.com/learn/modules/build-simple-website/?WT.mc_id=academic-77807-sagibbon) a Microsoft Learn oldalán
+   - Értsd meg a HTML, CSS és JavaScript együttműködését
+   - Tanulj webes teljesítményoptimalizálást és SEO legjobb gyakorlatokat
+
+**Elmélkedő kérdések:**
+- Mely elavult HTML címkéket fedezted fel, és miért távolították el őket?
+- Milyen új HTML funkciók vannak javaslat alatt a jövőbeni verziókhoz?
+- Hogyan segít a szemantikus HTML a web hozzáférhetőségében és SEO-jában?
+
+### ⚡ **Mit tehetsz a következő 5 percben**
+- [ ] Nyisd meg a DevTools-t (F12), és vizsgáld meg kedvenc weboldalad HTML szerkezetét
+- [ ] Hozz létre egy egyszerű HTML fájlt alapvető címkékkel: `<h1>`, `<p>`, és `<img>`
+- [ ] Ellenőrizd HTML-edet a W3C HTML Validator online eszközével
+- [ ] Próbálj kommentárt hozzáadni HTML-hez `<!-- comment -->` szintaxissal
+
+### 🎯 **Mit érhetsz el ezalatt az órában**
+- [ ] Teljesítsd az előadás utáni kvízt és ismételd át a szemantikus HTML fogalmakat
+- [ ] Készíts egy egyszerű személyes weboldalt megfelelő HTML szerkezettel
+- [ ] Kísérletezz különböző címszintekkel és szövegformázó címkékkel
+- [ ] Adj hozzá képeket és linkeket a multimédia integráció gyakorlásához
+- [ ] Kutass HTML5 funkciókat, amelyeket még nem próbáltál
+
+### 📅 **HTML heted: egyhetes tanulmányi terv**
+- [ ] Fejezd be a terrárium projektet szemantikus jelöléssel
+- [ ] Készíts elérhető weboldalt ARIA címkékkel és szerepekkel
+- [ ] Gyakorold az űrlapok készítését különféle beviteli típusokkal
+- [ ] Fedezd fel a HTML5 API-kat, például a localStorage-t vagy a geolokációt
+- [ ] Tanulmányozd a reszponzív HTML mintákat és a mobile-first tervezést
+- [ ] Tekintsd át más fejlesztők HTML kódját a legjobb gyakorlatokért
+
+### 🌟 **HTML hónapod: egyhónapos alapok**
+- [ ] Építs portfólió weboldalt, amely bemutatja HTML tudásodat
+- [ ] Tanulj meg HTML sablonozást egy keretrendszerrel, mint a Handlebars
+- [ ] Vegyél részt nyílt forráskódú projektekben HTML dokumentáció fejlesztésével
+- [ ] Sajátítsd el a haladó HTML fogalmakat, például az egyedi elemeket
+- [ ] Integráld a HTML-t CSS keretrendszerekkel és JavaScript könyvtárakkal
+- [ ] Légy mentor mások számára, akik a HTML alapjait tanulják
+
+## 🎯 A HTML-mesteri idővonalad
+
+```mermaid
+timeline
+    title HTML Tanulási Előrehaladás
+    
+    section Alapok (5 perc)
+        Dokumentum Szerkezet: DOCTYPE deklaráció
+                         : HTML gyökérelem
+                         : Fej és Test megértése
+        
+    section Metaadatok (10 perc)
+        Alapvető Meta Címkék: Karakterkódolás
+                           : Nézetablak beállítás
+                           : Böngésző kompatibilitás
+        
+    section Tartalom Készítés (15 perc)
+        Kép Beillesztése: Helyes fájl elérési utak
+                         : Alternatív szöveg fontossága
+                         : Önzáró címkék
+        
+    section Elrendezés Szervezés (20 perc)
+        Konténer Stratégiája: Div elemek a szerkezethez
+                          : Osztály és ID elnevezés
+                          : Beágyazott elem hierarchia
+        
+    section Szemantikai Jártasság (30 perc)
+        Jelentőségteljes Jelölés: Címsor hierarchia
+                         : Képernyőolvasó navigáció
+                         : Akadálymentesítési legjobb gyakorlatok
+        
+    section Haladó Fogalmak (1 óra)
+        HTML5 Jellemzők: Modern szemantikai elemek
+                      : ARIA attribútumok
+                      : Teljesítmény szempontok
+        
+    section Szakmai Készségek (1 hét)
+        Kód Szervezés: Fájlszerkezet minták
+                         : Karbantartható jelölés
+                         : Csapatmunka
+        
+    section Szakértői Szint (1 hónap)
+        Modern Web Szabványok: Progresszív fejlesztés
+                            : Böngészők közötti kompatibilitás
+                            : HTML szabványfrissítések
+```
+### 🛠️ HTML eszköztárad összefoglalója
+
+A lecke elvégzése után most a kezedben van:
+- **Dokumentum szerkezet**: Teljes HTML5 alap megfelelő DOCTYPE használattal
+- **Szemantikus jelölés**: Értelmes címkék, amik javítják a hozzáférhetőséget és SEO-t
+- **Képintegráció**: Megfelelő fájlszervezés és alt szöveg használat
+- **Elrendezési konténerek**: Stratégiai div használat leíró osztálynevekkel
+- **Hozzáférhetőségi tudatosság**: Képernyőolvasó navigációjának megértése
+- **Modern szabványok**: Jelenlegi HTML5 gyakorlatok és elavult címkék ismerete
+- **Projekt alapja**: Szilárd alap a CSS stílushoz és JavaScript interaktivitáshoz
+
+**Következő lépések**: HTML szerkezeted készen áll a CSS stílusozásra! Az általad felépített szemantikus alap megkönnyíti a következő lecke megértését.
 
 ## Feladat
 
-[Gyakorold a HTML-t: Készíts egy blog makettet](assignment.md)
+[Gyakorold a HTML-ed: készíts blog-makettet](assignment.md)
 
 ---
 
-**Felelősségkizárás**:  
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt a professzionális, emberi fordítás igénybevétele. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Jogi Nyilatkozat**:
+Ezt a dokumentumot az AI alapú fordító szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével fordítottuk. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum anyanyelvén tekintendő hiteles forrásnak. Fontos információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

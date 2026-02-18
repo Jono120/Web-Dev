@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-27T22:58:29+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "id"
-}
--->
 # Terrarium Saya: Proyek untuk belajar tentang HTML, CSS, dan manipulasi DOM menggunakan JavaScript 🌵🌱
 
 Sebuah meditasi kode kecil dengan fitur seret dan lepas. Dengan sedikit HTML, JS, dan CSS, Anda dapat membangun antarmuka web, menatanya, dan menambahkan interaksi.
 
-![terrarium saya](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.id.png)
+![terrarium saya](../../../../translated_images/id/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## Kredit
 

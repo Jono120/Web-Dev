@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "830359535306594b448db6575ce5cdee",
-  "translation_date": "2025-08-26T00:03:38+00:00",
-  "source_file": "7-bank-project/README.md",
-  "language_code": "it"
-}
--->
 # :dollar: Costruisci una Banca
 
 In questo progetto, imparerai come costruire una banca fittizia. Queste lezioni includono istruzioni su come strutturare un'app web e fornire percorsi, creare moduli, gestire lo stato e recuperare dati da un'API da cui puoi ottenere i dati della banca.
 
-| ![Screen1](../../../translated_images/screen1.baccbba0f1f93364672eb250d2fbd21574bb1caf79a2155022dc098a741cbdfe.it.png) | ![Screen2](../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.it.png) |
+| ![Screen1](../../../translated_images/it/screen1.baccbba0f1f93364.webp) | ![Screen2](../../../translated_images/it/screen2.123c82a831a1d14a.webp) |
 |--------------------------------|--------------------------------|
 
 ## Lezioni

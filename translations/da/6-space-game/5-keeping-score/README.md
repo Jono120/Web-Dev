@@ -1,23 +1,80 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "adda95e02afa3fbee67b6e385b1109e1",
-  "translation_date": "2025-08-29T08:13:14+00:00",
-  "source_file": "6-space-game/5-keeping-score/README.md",
-  "language_code": "da"
-}
--->
-# Byg et Rumspil Del 5: Point og Liv
+# Byg et rumspil Del 5: Point og liv
 
-## Quiz før lektionen
+```mermaid
+journey
+    title Din Spildesign Rejse
+    section Spiller Feedback
+      Forstå scoringspsykologi: 3: Student
+      Lær visuel kommunikation: 4: Student
+      Design belønningssystemer: 4: Student
+    section Teknisk Implementering
+      Canvas tekstgengivelse: 4: Student
+      Tilstandsadministration: 5: Student
+      Begivenhedsdrevne opdateringer: 5: Student
+    section Polering af Spil
+      Brugeroplevelsesdesign: 5: Student
+      Balancer udfordring og belønning: 5: Student
+      Skab engagerende gameplay: 5: Student
+```
+## Før-forelæsning quiz
 
-[Quiz før lektionen](https://ff-quizzes.netlify.app/web/quiz/37)
+[Før-forelæsning quiz](https://ff-quizzes.netlify.app/web/quiz/37)
 
-I denne lektion lærer du, hvordan du tilføjer point til et spil og beregner liv.
+Klar til at få dit rumspil til at føles som et rigtigt spil? Lad os tilføje pointsystem og livsstyring - de kerne-mekanikker, der forvandlede tidlige arkadespil som Space Invaders fra simple demonstrationer til vanedannende underholdning. Her bliver dit spil virkelig spilbart.
 
-## Tegn tekst på skærmen
+```mermaid
+mindmap
+  root((Spil Feedback Systemer))
+    Visual Communication
+      Text Rendering
+      Icon Display
+      Color Psychology
+      Layout Design
+    Scoring Mechanics
+      Point Values
+      Reward Timing
+      Progress Tracking
+      Achievement Systems
+    Life Management
+      Risk vs Reward
+      Player Agency
+      Difficulty Balance
+      Recovery Mechanics
+    User Experience
+      Immediate Feedback
+      Clear Information
+      Emotional Response
+      Engagement Loops
+    Implementation
+      Canvas API
+      State Management
+      Event Systems
+      Performance
+```
+## Tegn tekst på skærmen - dit spils stemme
 
-For at kunne vise en spilscore på skærmen skal du vide, hvordan man placerer tekst på skærmen. Svaret er at bruge `fillText()`-metoden på canvas-objektet. Du kan også styre andre aspekter som hvilken skrifttype, der skal bruges, tekstens farve og endda dens justering (venstre, højre, center). Nedenfor er noget kode, der tegner tekst på skærmen.
+For at vise din score skal vi lære at tegne tekst på canvas. Metoden `fillText()` er dit primære værktøj til dette - det samme teknik som blev brugt i klassiske arkadespil til at vise scores og statusinformation.
+
+```mermaid
+flowchart LR
+    A["📝 Tekstindhold"] --> B["🎨 Styling"]
+    B --> C["📍 Placering"]
+    C --> D["🖼️ Canvas Rendering"]
+    
+    E["Skrifttype"] --> B
+    F["Skriftstørrelse"] --> B
+    G["Farve"] --> B
+    H["Justering"] --> B
+    
+    I["X Koordinat"] --> C
+    J["Y Koordinat"] --> C
+    
+    style A fill:#e3f2fd
+    style B fill:#e8f5e8
+    style C fill:#fff3e0
+    style D fill:#f3e5f5
+```
+Du har fuld kontrol over tekstens udseende:
 
 ```javascript
 ctx.font = "30px Arial";
@@ -26,22 +83,74 @@ ctx.textAlign = "right";
 ctx.fillText("show this on the screen", 0, 0);
 ```
 
-✅ Læs mere om [hvordan man tilføjer tekst til et canvas](https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial/Drawing_text), og føl dig fri til at gøre din version mere fancy!
+✅ Dyk dybere ned i [at tilføje tekst til et canvas](https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial/Drawing_text) - du vil måske blive overrasket over, hvor kreativ du kan være med fonte og styling!
 
-## Liv som et spilkoncept
+## Liv - Mere end bare et tal
 
-Konceptet med at have liv i et spil er blot et tal. I konteksten af et rumspil er det almindeligt at tildele et sæt liv, som trækkes fra ét ad gangen, når dit skib tager skade. Det er en god idé at vise en grafisk repræsentation af dette, som for eksempel små skibe eller hjerter i stedet for et tal.
+I spildesign repræsenterer et "liv" spillerens margin for fejl. Dette koncept går tilbage til flippermaskiner, hvor du fik flere bolde at spille med. I tidlige videospil som Asteroids gav liv spillerne tilladelse til at tage risici og lære af fejl.
 
-## Hvad skal bygges
+```mermaid
+flowchart TD
+    A["🎮 Spillers Handling"] --> B{"Risikobedømmelse"}
+    
+    B --> C["Høj Risiko, Høj Belønning"]
+    B --> D["Sikker Strategi"]
+    
+    C --> E{"Resultat"}
+    D --> F["Stadig Fremskridt"]
+    
+    E -->|Succes| G["🏆 Store Point"]
+    E -->|Fiasko| H["💔 Mist Liv"]
+    
+    H --> I{"Liv Tilbage?"}
+    I -->|Ja| J["🔄 Prøv Igen"]
+    I -->|Nej| K["💀 Spil Slut"]
+    
+    J --> B
+    G --> B
+    F --> B
+    
+    style C fill:#ffebee
+    style D fill:#e8f5e8
+    style G fill:#e3f2fd
+    style H fill:#fff3e0
+```
+Visuel repræsentation betyder meget - at vise skibsikoner i stedet for bare "Liv: 3" skaber øjeblikkelig visuel genkendelse, ligesom tidlige arkadeskabe brugte ikonografi for at kommunikere på tværs af sprogbarrierer.
 
-Lad os tilføje følgende til dit spil:
+## Byg dit spils belønningssystem
 
-- **Spilscore**: For hver fjendeskib, der bliver ødelagt, skal helten tildeles nogle point. Vi foreslår 100 point pr. skib. Spilscoren skal vises nederst til venstre.
-- **Liv**: Dit skib har tre liv. Du mister et liv, hver gang et fjendeskib kolliderer med dig. En livscore skal vises nederst til højre og bestå af følgende grafik ![livsbillede](../../../../translated_images/life.6fb9f50d53ee0413cd91aa411f7c296e10a1a6de5c4a4197c718b49bf7d63ebf.da.png).
+Nu implementerer vi de kerne feedbacksystemer, som holder spillere engagerede:
 
-## Anbefalede trin
+```mermaid
+sequenceDiagram
+    participant Player
+    participant GameEngine
+    participant ScoreSystem
+    participant LifeSystem
+    participant Display
+    
+    Player->>GameEngine: Skyder Fjende
+    GameEngine->>ScoreSystem: Tildel Point
+    ScoreSystem->>ScoreSystem: +100 point
+    ScoreSystem->>Display: Opdater Score
+    
+    Player->>GameEngine: Kolliderer med Fjende
+    GameEngine->>LifeSystem: Mist Liv
+    LifeSystem->>LifeSystem: -1 liv
+    LifeSystem->>Display: Opdater Liv
+    
+    alt Liv > 0
+        LifeSystem->>Player: Fortsæt Med at Spille
+    else Liv = 0
+        LifeSystem->>GameEngine: Spillet Slut
+    end
+```
+- **Pointsystem**: Hver ødelagt fjendtlige skib giver 100 point (runde tal er lettere for spillere at regne mentalt). Scoren vises i nederste venstre hjørne.
+- **Livstæller**: Din helt starter med tre liv - en standard etableret af tidlige arkadespil for at balancere udfordring med spilbarhed. Hver kollision med en fjende koster et liv. Vi viser resterende liv nederst til højre med skibsikoner ![liv billede](../../../../translated_images/da/life.6fb9f50d53ee0413.webp).
 
-Find de filer, der er blevet oprettet til dig i undermappen `your-work`. Den bør indeholde følgende:
+## Lad os komme i gang!
+
+Først skal du sætte dit arbejdsområde op. Naviger til filerne i din `your-work` undermappe. Du skulle gerne se disse filer:
 
 ```bash
 -| assets
@@ -53,24 +162,49 @@ Find de filer, der er blevet oprettet til dig i undermappen `your-work`. Den bø
 -| package.json
 ```
 
-Du starter dit projekt i mappen `your_work` ved at skrive:
+For at teste dit spil skal du starte udviklingsserveren fra `your_work` mappen:
 
 ```bash
 cd your-work
 npm start
 ```
 
-Ovenstående vil starte en HTTP-server på adressen `http://localhost:5000`. Åbn en browser og indtast den adresse. Lige nu bør den vise helten og alle fjenderne, og når du trykker på dine venstre og højre piletaster, bevæger helten sig og kan skyde fjender ned.
+Dette kører en lokal server på `http://localhost:5000`. Åbn denne adresse i din browser for at se dit spil. Test kontrollerne med piletasterne og prøv at skyde fjender for at sikre, at alt virker.
 
-### Tilføj kode
+```mermaid
+flowchart TD
+    A["1. Asset indlæsning"] --> B["2. Spilvariabler"]
+    B --> C["3. Kollisionsregistrering"]
+    C --> D["4. Helteforbedring"]
+    D --> E["5. Vise funktioner"]
+    E --> F["6. Begivenhedshåndterere"]
+    
+    G["Livsikonbillede"] --> A
+    H["Score & Livsopfølgning"] --> B
+    I["Helte-fjende krydsninger"] --> C
+    J["Point- & livmetoder"] --> D
+    K["Tekst- & ikonrendering"] --> E
+    L["Belønning- & straflogik"] --> F
+    
+    F --> M["🎮 Færdigt spil"]
+    
+    style A fill:#e3f2fd
+    style B fill:#e8f5e8
+    style C fill:#fff3e0
+    style D fill:#f3e5f5
+    style E fill:#e0f2f1
+    style F fill:#fce4ec
+    style M fill:#e1f5fe
+```
+### Tid til at kode!
 
-1. **Kopier de nødvendige ressourcer** fra mappen `solution/assets/` til mappen `your-work`; du skal tilføje en `life.png`-ressource. Tilføj `lifeImg` til `window.onload`-funktionen:
+1. **Hent de visuelle ressourcer du skal bruge**. Kopiér `life.png` ressourcen fra `solution/assets/` mappen ind i din `your-work` mappe. Tilføj derefter lifeImg til din window.onload funktion:
 
     ```javascript
     lifeImg = await loadTexture("assets/life.png");
     ```
 
-1. Tilføj `lifeImg` til listen over ressourcer:
+1. Glem ikke at tilføje `lifeImg` til din ressourceliste:
 
     ```javascript
     let heroImg,
@@ -80,9 +214,9 @@ Ovenstående vil starte en HTTP-server på adressen `http://localhost:5000`. Åb
     eventEmitter = new EventEmitter();
     ```
   
-2. **Tilføj variabler**. Tilføj kode, der repræsenterer din samlede score (0) og resterende liv (3), og vis disse scores på skærmen.
+2. **Opsæt dine spilvariabler**. Tilføj noget kode for at holde styr på din samlede score (starter på 0) og resterende liv (starter på 3). Vi viser disse på skærmen, så spillere altid ved, hvor de står.
 
-3. **Udvid `updateGameObjects()`-funktionen**. Udvid `updateGameObjects()`-funktionen til at håndtere fjendekollisioner:
+3. **Implementer kollisionsdetektion**. Udvid din `updateGameObjects()` funktion til at registrere, når fjender kolliderer med din helt:
 
     ```javascript
     enemies.forEach(enemy => {
@@ -93,15 +227,15 @@ Ovenstående vil starte en HTTP-server på adressen `http://localhost:5000`. Åb
       })
     ```
 
-4. **Tilføj `liv` og `point`**. 
-   1. **Initialiser variabler**. Under `this.cooldown = 0` i `Hero`-klassen, sæt liv og point:
+4. **Tilføj livs- og pointregistrering til din helt**. 
+   1. **Initialiser tællerne**. Under `this.cooldown = 0` i din `Hero` klasse, sæt liv og point op:
 
         ```javascript
         this.life = 3;
         this.points = 0;
         ```
 
-   1. **Tegn variabler på skærmen**. Tegn disse værdier på skærmen:
+   1. **Vis disse værdier til spilleren**. Opret funktioner til at tegne disse værdier på skærmen:
 
         ```javascript
         function drawLife() {
@@ -128,18 +262,34 @@ Ovenstående vil starte en HTTP-server på adressen `http://localhost:5000`. Åb
 
         ```
 
-   1. **Tilføj metoder til spilloopet**. Sørg for at tilføje disse funktioner til din `window.onload`-funktion under `updateGameObjects()`:
+   1. **Kobl det hele sammen i din spilloop**. Tilføj disse funktioner til din window.onload funktion lige efter `updateGameObjects()`:
 
         ```javascript
         drawPoints();
         drawLife();
         ```
 
-1. **Implementer spilleregler**. Implementer følgende spilleregler:
+### 🔄 **Pædagogisk check-in**
+**Forståelse af spildesign**: Før du implementerer konsekvenser, skal du sikre dig, at du forstår:
+- ✅ Hvordan visuel feedback kommunikerer spillets tilstand til spillere
+- ✅ Hvorfor konsekvent placering af UI-elementer forbedrer brugervenligheden
+- ✅ Psykologien bag pointværdier og livsstyring
+- ✅ Hvordan text rendering på canvas adskiller sig fra HTML tekst
 
-   1. **For hver helt og fjendekollision**, træk et liv fra.
+**Hurtig selvtest**: Hvorfor bruger arkadespil typisk runde tal til pointværdier?
+*Svar: Runde tal er lettere for spillere at regne mentalt og skaber tilfredsstillende psykologiske belønninger*
+
+**Principper for brugeroplevelse**: Du anvender nu:
+- **Visuel hierarki**: Vigtig information placeret fremtrædende
+- **Umiddelbar feedback**: Opdatering i realtid på spillerhandlinger
+- **Kognitiv belastning**: Enkel og klar informationspræsentation
+- **Emotionelt design**: Ikoner og farver, der skaber spillerforbindelse
+
+1. **Implementer spilkonsekvenser og belønninger**. Nu tilføjer vi feedbacksystemerne, der gør spillerhandlinger meningsfulde:
+
+   1. **Kollisioner koster liv**. Hver gang din helt kolliderer med en fjende, mister du et liv.
    
-      Udvid `Hero`-klassen til at gøre dette fradrag:
+      Tilføj denne metode til din `Hero` klasse:
 
         ```javascript
         decrementLife() {
@@ -150,9 +300,9 @@ Ovenstående vil starte en HTTP-server på adressen `http://localhost:5000`. Åb
         }
         ```
 
-   2. **For hver laser, der rammer en fjende**, øg spilscoren med 100 point.
+   2. **At skyde fjender giver point**. Hvert vellykket skud giver 100 point og giver øjeblikkelig positiv feedback for præcis skydning.
 
-      Udvid `Hero`-klassen til at gøre denne forøgelse:
+      Udvid din Hero-klasse med denne increment metode:
     
         ```javascript
           incrementPoints() {
@@ -160,7 +310,7 @@ Ovenstående vil starte en HTTP-server på adressen `http://localhost:5000`. Åb
           }
         ```
 
-        Tilføj disse funktioner til dine Collision Event Emitters:
+        Kobl nu disse funktioner til dine kollisionshændelser:
 
         ```javascript
         eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
@@ -175,29 +325,177 @@ Ovenstående vil starte en HTTP-server på adressen `http://localhost:5000`. Åb
         });
         ```
 
-✅ Lav lidt research for at opdage andre spil, der er lavet med JavaScript/Canvas. Hvad er deres fællestræk?
+✅ Nysgerrig efter andre spil bygget med JavaScript og Canvas? Gå på opdagelse - du vil måske blive overrasket over, hvad der er muligt!
 
-Når du er færdig med dette arbejde, bør du kunne se de små 'livsskibe' nederst til højre, point nederst til venstre, og du bør se din livstæller falde, når du kolliderer med fjender, og dine point stige, når du skyder fjender. Godt gået! Dit spil er næsten færdigt.
+Efter at have implementeret disse funktioner, test dit spil for at se det komplette feedbacksystem i aktion. Du bør se livsikoner nederst til højre, din score nederst til venstre, og se hvordan kollisioner reducerer liv, mens vellykkede skud øger din score.
+
+Dit spil har nu de essentielle mekanikker, der gjorde tidlige arkadespil så fængslende - klare mål, øjeblikkelig feedback og meningsfulde konsekvenser for spillerhandlinger.
+
+### 🔄 **Pædagogisk check-in**
+**Komplet spildesign system**: Bekræft din mestring af spiller-feedbacksystemer:
+- ✅ Hvordan skaber pointsystemer motivation og engagement hos spillere?
+- ✅ Hvorfor er visuel konsistens vigtig for brugergrænsefladedesign?
+- ✅ Hvordan balancerer livssystemet udfordring med fastholdelse af spillere?
+- ✅ Hvilken rolle spiller øjeblikkelig feedback i at skabe tilfredsstillende gameplay?
+
+**Systemintegration**: Dit feedbacksystem demonstrerer:
+- **Brugeroplevelsesdesign**: Klar visuel kommunikation og informationshierarki
+- **Event-driven arkitektur**: Responsiv opdatering på spillerhandlinger
+- **State management**: Sporing og visning af dynamiske spildata
+- **Canvas mestring**: Tekstrendering og spriteplacering
+- **Spilpsykologi**: Forståelse af spiller-motivation og engagement
+
+**Professionelle mønstre**: Du har implementeret:
+- **MVC arkitektur**: Adskillelse af spil-logik, data og præsentation
+- **Observer-pattern**: Event-drevne opdateringer af spiltilstande
+- **Komponentdesign**: Genanvendelige funktioner til rendering og logik
+- **Performanceoptimering**: Effektiv rendering i spilloops
+
+### ⚡ **Hvad du kan nå på 5 minutter**
+- [ ] Eksperimenter med forskellige fontstørrelser og farver til scorevisning
+- [ ] Prøv at ændre pointværdier og se hvordan det påvirker spiloplevelsen
+- [ ] Tilføj console.log udsagn for at spore, hvornår point og liv ændres
+- [ ] Test kanttilfælde som at løbe tør for liv eller opnå høje scores
+
+### 🎯 **Hvad du kan nå i denne time**
+- [ ] Færdiggør quizzen efter lektionen og forstå spilpsykologi
+- [ ] Tilføj lydeffekter for point og tab af liv
+- [ ] Implementer et highscore system med localStorage
+- [ ] Opret forskellige pointværdier for forskellige fjendetyper
+- [ ] Tilføj visuelle effekter som f.eks. skærmrystelse ved tab af liv
+
+### 📅 **Din uge-lange spildesign rejse**
+- [ ] Fuldfør det komplette rumspil med polerede feedbacksystemer
+- [ ] Implementer avancerede pointsystemer som combo-multiplikatorer
+- [ ] Tilføj achievements og låsbart indhold
+- [ ] Skab sværhedsprogression og balanceringssystemer
+- [ ] Design brugergrænseflader til menuer og game over-skærme
+- [ ] Studer andre spil for at forstå engagementsmekanismer
+
+### 🌟 **Din måneds-lange spiludviklingsmestring**
+- [ ] Byg komplette spil med sofistikerede progression systemer
+- [ ] Lær spil-analyse og måling af spilleradfærd
+- [ ] Bidrag til open source spiludviklingsprojekter
+- [ ] Mestring af avancerede spildesignmønstre og monetisering
+- [ ] Skab undervisningsindhold om spildesign og brugeroplevelse
+- [ ] Byg en portfolio, der viser spildesign og udviklingsevner
+
+## 🎯 Din spildesign mestringstidslinje
+
+```mermaid
+timeline
+    title Game Design & Spillerfeedback Læringsforløb
+    
+    section Grundlag (10 minutter)
+        Visuel Kommunikation: Tekstgengivelse
+                           : Ikondesign
+                           : Layoutprincipper
+                           : Farvepsykologi
+        
+    section Spillerpsykologi (20 minutter)
+        Motivationssystemer: Pointværdier
+                           : Risiko vs belønning
+                           : Fremdriftsfeedback
+                           : Præstationsdesign
+        
+    section Teknisk Implementering (30 minutter)
+        Canvas Mestring: Tekstpositionering
+                       : Spritegengivelse
+                       : Tilstandsadministration
+                       : Ydelsesoptimering
+        
+    section Spilbalance (40 minutter)
+        Sværhedsdesign: Livsadministration
+                      : Scoringskurver
+                      : Spillerfastholdelse
+                      : Tilgængelighed
+        
+    section Brugeroplevelse (50 minutter)
+        Interface Design: Informationshierarki
+                        : Responsiv feedback
+                        : Emotionelt design
+                        : Brugervenlighedstest
+        
+    section Avancerede Systemer (1 uge)
+        Spilmekanikker: Fremgangssystemer
+                      : Analyseintegration
+                      : Monetiseringsdesign
+                      : Community-funktioner
+        
+    section Branchefærdigheder (1 måned)
+        Professionel Udvikling: Team samarbejde
+                             : Designdokumentation
+                             : Spillerforskning
+                             : Platformoptimering
+```
+### 🛠️ Dine spildesign værktøjer - resumé
+
+Efter at have gennemført denne lektion mestrer du nu:
+- **Spillerpsykologi**: Forståelse af motivation, risiko/belønning og engagementsløjfer
+- **Visuel kommunikation**: Effektivt UI-design med tekst, ikoner og layout
+- **Feedbacksystemer**: Respons i realtid på spillerhandlinger og spilevents
+- **State management**: Effektiv sporing og visning af dynamiske spildata
+- **Canvas tekstrendering**: Professionel tekstvisning med styling og placering
+- **Eventsintegration**: Kobling af brugerhandlinger med meningsfulde spilkonsekvenser
+- **Spilbalance**: Design af sværhedskurver og spillerprogression
+
+**Anvendelser i praksis**: Dine spildesignfærdigheder gælder direkte til:
+- **Brugergrænsefladedesign**: Skabelse af engagerende og intuitive interfaces
+- **Produktudvikling**: Forståelse af brugermotivation og feedbacksløjfer
+- **Undervisningsteknologi**: Gamification og læringsengagementssystemer
+- **Datavisualisering**: Gøre kompleks information tilgængelig og engagerende
+- **Mobil app-udvikling**: Fastholdelsesmekanik og brugeroplevelsesdesign
+- **Marketingteknologi**: Forståelse af brugeradfærd og konverteringsoptimering
+
+**Professionelle færdigheder erhvervet**: Du kan nu:
+- **Designe** brugeroplevelser, der motiverer og engagerer brugere
+- **Implementere** feedbacksystemer, der effektivt styrer brugeradfærd
+- **Balancere** udfordring og tilgængelighed i interaktive systemer
+- **Skabe** visuel kommunikation, der virker på tværs af brugergrupper
+- **Analysere** brugeradfærd og iterere på designforbedringer
+
+**Spiludviklingsbegreber mestre**:
+- **Spillermotivation**: Forstå, hvad der driver engagement og fastholdelse
+- **Visuelt design**: Skabe klare, attraktive og funktionelle interfaces
+- **Systemintegration**: Forbinde flere spilsystemer til en sammenhængende oplevelse
+- **Performanceoptimering**: Effektiv rendering og state management
+- **Tilgængelighed**: Design til forskellige færdighedsniveauer og spillerbehov
+
+**Næste niveau**: Du er klar til at udforske avancerede spildesignmønstre, implementere analyssystemer eller studere spilmonetisering og spillerfastholdelsesstrategier!
+
+🌟 **Præstation Opnået**: Du har bygget et komplet spiller-feedbacksystem med professionelle spildesignprincipper!
 
 ---
+
+## GitHub Copilot Agent-udfordring 🚀
+
+Brug Agent-tilstand til at løse følgende udfordring:
+
+**Beskrivelse:** Forbedr rumspillets pointsystem ved at implementere et highscore-system med persistent lagring og bonuspointmekanikker.
+
+**Prompt:** Opret et highscore-system, der gemmer spillerens bedste score i localStorage. Tilføj bonuspoint for på hinanden følgende fjendtdrab (combo-system) og implementer forskellige pointværdier for forskellige fjendetyper. Inkluder en visuel indikator, når spilleren opnår en ny highscore, og vis den aktuelle highscore på spilkærmen.
+
+
 
 ## 🚀 Udfordring
 
-Din kode er næsten færdig. Kan du forestille dig dine næste skridt?
+Du har nu et funktionelt spil med point og liv. Overvej hvilke ekstra funktioner der kunne forbedre spilleroplevelsen.
 
-## Quiz efter lektionen
+## Efter-forelæsning quiz
 
-[Quiz efter lektionen](https://ff-quizzes.netlify.app/web/quiz/38)
+[Efter-forelæsning quiz](https://ff-quizzes.netlify.app/web/quiz/38)
 
 ## Gennemgang & Selvstudie
 
-Undersøg nogle måder, hvorpå du kan øge og mindske spilscore og liv. Der findes nogle interessante spilmotorer som [PlayFab](https://playfab.com). Hvordan kunne brugen af en af disse forbedre dit spil?
+Vil du udforske mere? Undersøg forskellige tilgange til pointsystemer og livssystemer i spil. Der findes fascinerende spilengines som [PlayFab](https://playfab.com), der håndterer scoring, leaderboards og spillerprogression. Hvordan kunne integration af noget sådan løfte dit spil til næste niveau?
 
 ## Opgave
 
-[Byg et Pointspil](assignment.md)
+[Byg et pointsystem spil](assignment.md)
 
 ---
 
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:  
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

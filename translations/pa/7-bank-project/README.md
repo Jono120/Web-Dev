@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "830359535306594b448db6575ce5cdee",
-  "translation_date": "2025-08-26T00:03:22+00:00",
-  "source_file": "7-bank-project/README.md",
-  "language_code": "pa"
-}
--->
 # :dollar: ਬੈਂਕ ਬਣਾਓ
 
 ਇਸ ਪ੍ਰੋਜੈਕਟ ਵਿੱਚ, ਤੁਸੀਂ ਇੱਕ ਕਲਪਨਾਤਮਕ ਬੈਂਕ ਬਣਾਉਣਾ ਸਿੱਖੋਗੇ। ਇਹ ਪਾਠ ਤੁਹਾਨੂੰ ਸਿਖਾਉਣਗੇ ਕਿ ਵੈੱਬ ਐਪ ਦਾ ਲੇਆਉਟ ਕਿਵੇਂ ਬਣਾਉਣਾ ਹੈ ਅਤੇ ਰੂਟਸ ਪ੍ਰਦਾਨ ਕਰਨੇ ਹਨ, ਫਾਰਮ ਬਣਾਉਣੇ ਹਨ, ਸਟੇਟ ਨੂੰ ਮੈਨੇਜ ਕਰਨਾ ਹੈ, ਅਤੇ API ਤੋਂ ਡਾਟਾ ਫੈਚ ਕਰਨਾ ਹੈ ਜਿਸ ਤੋਂ ਤੁਸੀਂ ਬੈਂਕ ਦਾ ਡਾਟਾ ਪ੍ਰਾਪਤ ਕਰ ਸਕਦੇ ਹੋ।
 
-| ![Screen1](../../../translated_images/screen1.baccbba0f1f93364672eb250d2fbd21574bb1caf79a2155022dc098a741cbdfe.pa.png) | ![Screen2](../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.pa.png) |
+| ![Screen1](../../../translated_images/pa/screen1.baccbba0f1f93364.webp) | ![Screen2](../../../translated_images/pa/screen2.123c82a831a1d14a.webp) |
 |--------------------------------|--------------------------------|
 
 ## ਪਾਠ

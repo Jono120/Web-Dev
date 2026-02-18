@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-26T21:39:00+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "sv"
-}
--->
 # Mitt Terrarium: Ett projekt för att lära sig om HTML, CSS och DOM-manipulation med JavaScript 🌵🌱
 
 En liten drag-och-släpp-kodmeditation. Med lite HTML, JS och CSS kan du bygga ett webbgränssnitt, styla det och lägga till interaktion.
 
-![mitt terrarium](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.sv.png)
+![mitt terrarium](../../../../translated_images/sv/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## Krediter
 

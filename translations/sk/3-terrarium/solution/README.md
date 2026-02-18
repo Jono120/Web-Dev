@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-27T22:47:01+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "sk"
-}
--->
 # Moje terárium: Projekt na učenie sa o HTML, CSS a manipulácii s DOM pomocou JavaScriptu 🌵🌱
 
 Malá meditácia s kódom na princípe drag and drop. S trochou HTML, JS a CSS môžete vytvoriť webové rozhranie, upraviť jeho štýl a pridať interakciu.
 
-![moje terárium](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.sk.png)
+![moje terárium](../../../../translated_images/sk/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## Poďakovania
 

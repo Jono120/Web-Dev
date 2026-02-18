@@ -1,307 +1,948 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "8baca047d77a5f43fa4099c0578afa42",
-  "translation_date": "2025-08-29T11:05:20+00:00",
-  "source_file": "7-bank-project/2-forms/README.md",
-  "language_code": "sk"
-}
--->
-# Vytvorenie bankovej aplikácie, časť 2: Vytvorenie prihlasovacieho a registračného formulára
+# Vytvorte bankovú aplikáciu časť 2: Vytvorte prihlasovací a registračný formulár
 
-## Kvíz pred prednáškou
-
-[Kvíz pred prednáškou](https://ff-quizzes.netlify.app/web/quiz/43)
-
-### Úvod
-
-Takmer vo všetkých moderných webových aplikáciách si môžete vytvoriť účet, aby ste mali vlastný súkromný priestor. Keďže webovú aplikáciu môže naraz používať viacero používateľov, potrebujete mechanizmus na oddelené ukladanie osobných údajov každého používateľa a výber informácií, ktoré sa majú zobraziť. Nebudeme sa zaoberať tým, ako [bezpečne spravovať identitu používateľa](https://en.wikipedia.org/wiki/Authentication), pretože je to rozsiahla téma sama o sebe, ale zabezpečíme, aby si každý používateľ mohol vytvoriť jeden (alebo viac) bankových účtov v našej aplikácii.
-
-V tejto časti použijeme HTML formuláre na pridanie prihlasovania a registrácie do našej webovej aplikácie. Ukážeme si, ako programovo odosielať údaje na serverovú API, a nakoniec, ako definovať základné pravidlá validácie pre vstupy používateľa.
-
-### Predpoklady
-
-Musíte mať dokončenú časť [HTML šablóny a smerovanie](../1-template-route/README.md) webovej aplikácie pre túto lekciu. Tiež musíte nainštalovať [Node.js](https://nodejs.org) a [spustiť serverovú API](../api/README.md) lokálne, aby ste mohli odosielať údaje na vytvorenie účtov.
-
-**Poznámka**
-Budete mať spustené dva terminály naraz, ako je uvedené nižšie:
-1. Pre hlavnú bankovú aplikáciu, ktorú sme vytvorili v lekcii [HTML šablóny a smerovanie](../1-template-route/README.md)
-2. Pre [serverovú API bankovej aplikácie](../api/README.md), ktorú sme práve nastavili vyššie.
-
-Na pokračovanie v lekcii musíte mať oba servery spustené. Počúvajú na rôznych portoch (port `3000` a port `5000`), takže všetko by malo fungovať bez problémov.
-
-Môžete otestovať, či server beží správne, vykonaním tohto príkazu v termináli:
-
-```sh
-curl http://localhost:5000/api
-# -> should return "Bank API v1.0.0" as a result
+```mermaid
+journey
+    title Vaša cesta vývoja formulárov
+    section Základy HTML
+      Pochopiť prvky formulára: 3: Student
+      Naučiť sa typy vstupov: 4: Student
+      Ovládnuť prístupnosť: 4: Student
+    section Integrácia JavaScriptu
+      Spracovať odoslanie formulára: 4: Student
+      Implementovať AJAX komunikáciu: 5: Student
+      Spracovať odpovede servera: 5: Student
+    section Systémy validácie
+      Vytvoriť viacvrstvovú validáciu: 5: Student
+      Zlepšiť používateľský zážitok: 5: Student
+      Zabezpečiť integritu údajov: 5: Student
 ```
+## Prednáškový kvíz
+
+[Prednáškový kvíz](https://ff-quizzes.netlify.app/web/quiz/43)
+
+Už ste niekedy vyplňovali formulár online a formulár vám odmietol formát e-mailu? Alebo ste stratili všetky svoje údaje po kliknutí na odoslať? Všetci sme zažili tieto frustrujúce situácie.
+
+Formuláre sú mostom medzi vašimi používateľmi a funkcionalitou vašej aplikácie. Podobne ako starostlivé protokoly, ktoré používajú letoví dispečeri na bezpečné nasmerovanie lietadiel do cieľa, dobre navrhnuté formuláre poskytujú jasnú spätnú väzbu a zabraňujú nákladným chybám. Zlé formuláre naopak môžu používateľov odradiť rýchlejšie než nepochopenie v rušnom letisku.
+
+V tejto lekcii premeníme vašu statickú bankovú aplikáciu na interaktívnu aplikáciu. Naučíte sa vytvárať formuláre, ktoré overujú vstupy používateľov, komunikujú so servermi a poskytujú užitočnú spätnú väzbu. Predstavte si to ako vytvorenie riadiaceho rozhrania, ktoré umožňuje používateľom navigovať funkcie vašej aplikácie.
+
+Na konci budete mať kompletný prihlasovací a registračný systém s validáciou, ktorý vedie používateľov k úspechu, nie k frustrácii.
+
+```mermaid
+mindmap
+  root((Vývoj formulára))
+    HTML Základy
+      Sémantické prvky
+      Typy vstupov
+      Prístupnosť
+      Asociácia popiskov
+    Používateľský zážitok
+      Validácia a spätná väzba
+      Prevencia chýb
+      Stav načítavania
+      Správy o úspechu
+    Integrácia JavaScriptu
+      Spracovanie udalostí
+      AJAX komunikácia
+      Spracovanie dát
+      Manažment chýb
+    Validančné vrstvy
+      HTML5 validácia
+      Logika na strane klienta
+      Bezpečnosť na strane servera
+      Progresívne vylepšenia
+    Moderné vzory
+      Fetch API
+      Async/Await
+      Form Data API
+      Spracovanie Promise
+```
+## Predpoklady
+
+Predtým, než začneme s tvorbou formulárov, uistime sa, že máte všetko správne nastavené. Táto lekcia nadväzuje tam, kde sme skončili v predchádzajúcej, takže ak ste ju preskočili, možno sa oplatí vrátiť a najprv si osvojiť základy.
+
+### Požadované nastavenie
+
+| Komponent | Stav | Popis |
+|-----------|--------|-------------|
+| [HTML šablóny](../1-template-route/README.md) | ✅ Povinné | Základná štruktúra vašej bankovej aplikácie |
+| [Node.js](https://nodejs.org) | ✅ Povinné | JavaScript runtime pre server |
+| [Bankový API server](../api/README.md) | ✅ Povinné | Backend služba pre ukladanie dát |
+
+> 💡 **Tip na vývoj**: Budete súčasne spúšťať dva samostatné servery – jeden pre frontend vašej bankovej aplikácie a druhý pre backendové API. Tento setup odráža reálny vývoj, kde front-end a back-end služby fungujú nezávisle.
+
+### Konfigurácia servera
+
+**Vaše vývojové prostredie bude obsahovať:**
+- **Frontend server**: poskytuje vašu bankovú aplikáciu (typicky port `3000`)
+- **Backend API server**: spracováva ukladanie a načítanie dát (port `5000`)
+- **Oba servery** môžu bežať súčasne bez konfliktov
+
+**Testovanie pripojenia k API:**
+```bash
+curl http://localhost:5000/api
+# Očakávaná odpoveď: "Bank API v1.0.0"
+```
+
+**Ak vidíte odpoveď s verziou API, ste pripravení pokračovať!**
 
 ---
 
-## Formulár a ovládacie prvky
+## Pochopenie HTML formulárov a ovládacích prvkov
 
-Element `<form>` obklopuje sekciu HTML dokumentu, kde používateľ môže zadávať a odosielať údaje pomocou interaktívnych ovládacích prvkov. Existuje množstvo rôznych ovládacích prvkov používateľského rozhrania (UI), ktoré je možné použiť vo formulári, najbežnejšie sú elementy `<input>` a `<button>`.
+HTML formuláre sú spôsobom, ako používatelia komunikujú s vašou webovou aplikáciou. Predstavte si ich ako telegrafný systém, ktorý spájal vzdialené miesta v 19. storočí – sú komunikačným protokolom medzi úmyslom používateľa a odpoveďou aplikácie. Keď sú navrhnuté premyslene, zachytávajú chyby, navigujú formátovanie vstupu a poskytujú užitočné návrhy.
 
-Existuje veľa rôznych [typov](https://developer.mozilla.org/docs/Web/HTML/Element/input) `<input>`, napríklad na vytvorenie poľa, kde používateľ môže zadať svoje používateľské meno, môžete použiť:
+Moderné formuláre sú výrazne sofistikovanejšie než základné textové vstupy. HTML5 prinieslo špecializované typy vstupov, ktoré automaticky zvládajú overenie e-mailu, formátovanie čísiel a výber dátumu. Tieto vylepšenia prospievajú prístupnosti aj používateľskému zážitku na mobilných zariadeniach.
+
+### Základné prvky formulára
+
+**Stavebné bloky, ktoré každý formulár potrebuje:**
 
 ```html
-<input id="username" name="username" type="text">
+<!-- Basic form structure -->
+<form id="userForm" method="POST">
+  <label for="username">Username</label>
+  <input id="username" name="username" type="text" required>
+  
+  <button type="submit">Submit</button>
+</form>
 ```
 
-Atribút `name` bude použitý ako názov vlastnosti, keď budú údaje formulára odoslané. Atribút `id` sa používa na priradenie `<label>` k ovládaciemu prvku formulára.
+**Tento kód robí nasledovné:**
+- **Vytvára** kontajner formulára s jedinečným identifikátorom
+- **Špecifikuje** HTTP metódu pre odoslanie dát
+- **Spojuje** popisky s vstupmi pre prístupnosť
+- **Definuje** tlačidlo na odoslanie formulára
 
-> Pozrite si celý zoznam [`<input>` typov](https://developer.mozilla.org/docs/Web/HTML/Element/input) a [iných ovládacích prvkov formulára](https://developer.mozilla.org/docs/Learn/Forms/Other_form_controls), aby ste získali predstavu o všetkých natívnych UI elementoch, ktoré môžete použiť pri tvorbe svojho rozhrania.
+### Moderné typy vstupov a atribúty
 
-✅ Všimnite si, že `<input>` je [prázdny element](https://developer.mozilla.org/docs/Glossary/Empty_element), ku ktorému by ste *nemali* pridávať zodpovedajúci zatvárací tag. Môžete však použiť samo-uzatvárací zápis `<input/>`, ale nie je to povinné.
+| Typ vstupu | Účel | Príklad použitia |
+|------------|---------|---------------|
+| `text` | Všeobecný textový vstup | `<input type="text" name="username">` |
+| `email` | Overenie e-mailu | `<input type="email" name="email">` |
+| `password` | Skrytý textový vstup | `<input type="password" name="password">` |
+| `number` | Číselný vstup | `<input type="number" name="balance" min="0">` |
+| `tel` | Telefónne čísla | `<input type="tel" name="phone">` |
 
-Element `<button>` vo formulári je trochu špeciálny. Ak nešpecifikujete jeho atribút `type`, automaticky odošle údaje formulára na server, keď naň kliknete. Tu sú možné hodnoty atribútu `type`:
+> 💡 **Výhoda moderného HTML5**: Používanie špecifických typov vstupov zaisťuje automatickú validáciu, vhodné klávesnice pre mobil a lepšiu podporu prístupnosti bez potreby ďalšieho JavaScriptu!
 
-- `submit`: Predvolená hodnota vo formulári `<form>`, tlačidlo spustí akciu odoslania formulára.
-- `reset`: Tlačidlo obnoví všetky ovládacie prvky formulára na ich počiatočné hodnoty.
-- `button`: Nepriraďuje predvolené správanie pri stlačení tlačidla. Môžete mu potom priradiť vlastné akcie pomocou JavaScriptu.
+### Typy tlačidiel a ich správanie
 
-### Úloha
+```html
+<!-- Different button behaviors -->
+<button type="submit">Save Data</button>     <!-- Submits the form -->
+<button type="reset">Clear Form</button>    <!-- Resets all fields -->
+<button type="button">Custom Action</button> <!-- No default behavior -->
+```
 
-Začnime pridaním formulára do šablóny `login`. Budeme potrebovať pole *používateľské meno* a tlačidlo *Prihlásiť sa*.
+**Čo robí každý typ tlačidla:**
+- **Tlačidlá submit**: Spustia odoslanie formulára a pošlú dáta na zadaný endpoint
+- **Tlačidlá reset**: Obnovia všetky polia formulára do pôvodného stavu
+- **Bežné tlačidlá**: Nemajú žiadne štandardné správanie, vyžadujú vlastný JavaScript pre funkčnosť
+
+> ⚠️ **Dôležitá poznámka**: `<input>` element je samo-uzatvárací a nepotrebuje ukončujúci tag. Moderný odporúčaný zápis je `<input>` bez lomky.
+
+### Vytváranie prihlasovacieho formulára
+
+Teraz vytvoríme praktický prihlasovací formulár, ktorý demonštruje moderné HTML postupy. Začneme so základnou štruktúrou a postupne ho vylepšíme o prístupnostné prvky a validáciu.
 
 ```html
 <template id="login">
   <h1>Bank App</h1>
   <section>
     <h2>Login</h2>
-    <form id="loginForm">
-      <label for="username">Username</label>
-      <input id="username" name="user" type="text">
-      <button>Login</button>
+    <form id="loginForm" novalidate>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" name="user" type="text" required 
+               autocomplete="username" placeholder="Enter your username">
+      </div>
+      <button type="submit">Login</button>
     </form>
   </section>
 </template>
 ```
 
-Ak sa pozriete bližšie, môžete si všimnúť, že sme tu pridali aj element `<label>`. Elementy `<label>` sa používajú na pridanie názvu k ovládacím prvkom UI, ako je naše pole používateľského mena. Štítky sú dôležité pre čitateľnosť vašich formulárov, ale majú aj ďalšie výhody:
+**Čo sa tu deje:**
+- **Štruktúruje** formulár pomocou semantických HTML5 elementov
+- **Zoskupuje** súvisiace prvky pomocou `div` kontajnerov s výstižnými triedami
+- **Spojuje** popisky s inputmi cez `for` a `id` atribúty
+- **Pridáva** moderné atribúty ako `autocomplete` a `placeholder` pre lepší UX
+- **Používa** `novalidate` pre spracovanie validácie cez JavaScript namiesto štandardnej prehliadačovej
 
-- Priradením štítku k ovládaciemu prvku formulára pomáha používateľom, ktorí používajú asistívne technológie (napríklad čítačku obrazovky), pochopiť, aké údaje sa od nich očakávajú.
-- Kliknutím na štítok môžete priamo zamerať priradený vstup, čo uľahčuje jeho dosiahnutie na zariadeniach s dotykovou obrazovkou.
+### Sila správnych popiskov
 
-> [Prístupnosť](https://developer.mozilla.org/docs/Learn/Accessibility/What_is_accessibility) na webe je veľmi dôležitá téma, ktorá sa často prehliada. Vďaka [semantickým HTML elementom](https://developer.mozilla.org/docs/Learn/Accessibility/HTML) nie je ťažké vytvárať prístupný obsah, ak ich používate správne. Môžete si [prečítať viac o prístupnosti](https://developer.mozilla.org/docs/Web/Accessibility), aby ste sa vyhli bežným chybám a stali sa zodpovedným vývojárom.
+**Prečo sú popisky dôležité pre moderný webový vývoj:**
 
-Teraz pridáme druhý formulár pre registráciu, hneď pod ten predchádzajúci:
+```mermaid
+graph TD
+    A[Označenie prvku] --> B[Podpora čítačiek obrazovky]
+    A --> C[Rozšírenie cieľa kliknutia]
+    A --> D[Validácia formulára]
+    A --> E[Výhody SEO]
+    
+    B --> F[Prístupné pre všetkých používateľov]
+    C --> G[Lepší mobilný zážitok]
+    D --> H[Jasné chybové hlásenia]
+    E --> I[Lepšie hodnotenie vo vyhľadávaní]
+```
+**Čo správne popisky zabezpečujú:**
+- **Umožňujú** čítačkám obrazovky jasne oznamovať polia formulára
+- **Rozširujú** klikaciu plochu (kliknutie na popis aktivuje vstup)
+- **Zlepšujú** použiteľnosť na mobiloch väčšími dotykovými cieľmi
+- **Podporujú** validáciu formulára s výstižnými chybovými správami
+- **Zvyšujú** SEO tým, že formulárovým prvkom dávajú sémantický význam
+
+> 🎯 **Cieľ prístupnosti**: Každý vstup v formulári by mal mať priradený popisok. Tento jednoduchý zvyk robí vaše formuláre použiteľnými pre všetkých, vrátane používateľov so zdravotným postihnutím, a zlepšuje zážitok pre všetkých.
+
+### Vytváranie registračného formulára
+
+Registračný formulár vyžaduje podrobnejšie údaje na vytvorenie kompletného používateľského účtu. Postavme ho pomocou moderných HTML5 funkcií a vylepšenej prístupnosti.
 
 ```html
 <hr/>
 <h2>Register</h2>
-<form id="registerForm">
-  <label for="user">Username</label>
-  <input id="user" name="user" type="text">
-  <label for="currency">Currency</label>
-  <input id="currency" name="currency" type="text" value="$">
-  <label for="description">Description</label>
-  <input id="description" name="description" type="text">
-  <label for="balance">Current balance</label>
-  <input id="balance" name="balance" type="number" value="0">
-  <button>Register</button>
+<form id="registerForm" novalidate>
+  <div class="form-group">
+    <label for="user">Username</label>
+    <input id="user" name="user" type="text" required 
+           autocomplete="username" placeholder="Choose a username">
+  </div>
+  
+  <div class="form-group">
+    <label for="currency">Currency</label>
+    <input id="currency" name="currency" type="text" value="$" 
+           required maxlength="3" placeholder="USD, EUR, etc.">
+  </div>
+  
+  <div class="form-group">
+    <label for="description">Account Description</label>
+    <input id="description" name="description" type="text" 
+           maxlength="100" placeholder="Personal savings, checking, etc.">
+  </div>
+  
+  <div class="form-group">
+    <label for="balance">Starting Balance</label>
+    <input id="balance" name="balance" type="number" value="0" 
+           min="0" step="0.01" placeholder="0.00">
+  </div>
+  
+  <button type="submit">Create Account</button>
 </form>
 ```
 
-Pomocou atribútu `value` môžeme definovať predvolenú hodnotu pre daný vstup.
-Všimnite si tiež, že vstup pre `balance` má typ `number`. Vyzerá inak ako ostatné vstupy? Skúste s ním interagovať.
+**V tomto sme:**
+- **Usadili** každé pole do kontajnerov `div` pre lepšie štýlovanie a rozloženie
+- **Pridali** vhodné atribúty `autocomplete` pre podporu automatického vyplňovania prehliadačom
+- **Zapracovali** užitočný placeholder text na usmernenie používateľa
+- **Nastavili** rozumné predvolené hodnoty cez atribút `value`
+- **Použili** validácie ako `required`, `maxlength` a `min`
+- **Zvolili** `type="number"` pre pole zostatku s podporou desatinných čísiel
 
-✅ Dokážete navigovať a interagovať s formulármi iba pomocou klávesnice? Ako by ste to urobili?
+### Preskúmanie typov vstupov a správania
 
-## Odosielanie údajov na server
+**Moderné typy vstupov prinášajú vylepšenia:**
 
-Teraz, keď máme funkčné UI, ďalším krokom je odoslanie údajov na server. Urobme rýchly test pomocou nášho aktuálneho kódu: čo sa stane, keď kliknete na tlačidlo *Prihlásiť sa* alebo *Registrovať*?
+| Funkcia | Výhoda | Príklad |
+|---------|---------|----------|
+| `type="number"` | Číselná klávesnica na mobile | Jednoduchšie zadávanie zostatku |
+| `step="0.01"` | Kontrola desatinnej presnosti | Umožňuje centy v mene |
+| `autocomplete` | Automatické vyplňovanie prehliadačom | Rýchlejšie vypĺňanie formulára |
+| `placeholder` | Kontextové nápovedy | Viesť očakávania používateľa |
 
-Všimli ste si zmenu v sekcii URL vášho prehliadača?
+> 🎯 **Výzva na prístupnosť**: Skúste formuláre prechádzať iba pomocou klávesnice! Použite `Tab` na presun medzi poliami, `Space` na zaškrtnutie políčok a `Enter` na odoslanie. Tento zážitok vám pomôže pochopiť, ako používatelia čítačiek obrazovky interagujú s vašimi formulármi.
 
-![Screenshot zmeny URL prehliadača po kliknutí na tlačidlo Registrovať](../../../../translated_images/click-register.e89a30bf0d4bc9ca867dc537c4cea679a7c26368bd790969082f524fed2355bc.sk.png)
+### 🔄 **Pedagogická kontrola**
+**Porozumenie základom formulárov**: Pred implementáciou JavaScriptu si overte, že rozumiete:
+- ✅ Ako semantický HTML vytvára prístupné formulárové štruktúry
+- ✅ Prečo typy vstupov ovplyvňujú klávesnice na mobile a validáciu
+- ✅ Vzťah medzi popiskami a ovládacími prvkami formulára
+- ✅ Ako atribúty formulára ovplyvňujú základné správanie prehliadača
 
-Predvolená akcia pre `<form>` je odoslať formulár na aktuálnu URL servera pomocou [metódy GET](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.3), pričom údaje formulára sa pripoja priamo k URL. Táto metóda má však určité nevýhody:
+**Rýchly samotest**: Čo sa stane, ak odošlete formulár bez JavaScriptovej obsluhy?
+*Odpoveď: Prehliadač vykoná štandardné odoslanie, obvykle presmeruje na URL z atributu action*
 
-- Odoslané údaje sú veľmi obmedzené veľkosťou (asi 2000 znakov)
-- Údaje sú priamo viditeľné v URL (nie je ideálne pre heslá)
-- Nepracuje s nahrávaním súborov
+**Výhody formulárov HTML5**: Moderné formuláre prinášajú:
+- **Vstavanú validáciu**: automatickú kontrolu e-mailu a formátu čísiel
+- **Optimalizáciu pre mobily**: vhodné klávesnice pre rôzne typy vstupov
+- **Prístupnosť**: podpora čítačiek obrazovky a navigácie klávesnicou
+- **Progresívne vylepšenie**: fungujú aj keď je JavaScript vypnutý
 
-Preto ju môžete zmeniť na použitie [metódy POST](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.5), ktorá odosiela údaje formulára na server v tele HTTP požiadavky, bez predchádzajúcich obmedzení.
+## Pochopenie metód odosielania formulárov
 
-> Hoci POST je najčastejšie používaná metóda na odosielanie údajov, [v niektorých špecifických scenároch](https://www.w3.org/2001/tag/doc/whenToUseGet.html) je vhodnejšie použiť metódu GET, napríklad pri implementácii vyhľadávacieho poľa.
+Keď niekto vyplní váš formulár a stlačí odoslať, tieto dáta musia niekam ísť – zvyčajne na server, ktorý ich môže uložiť. Existuje niekoľko spôsobov, ako sa to deje, a poznať, ktorý použiť, vám ušetrí budúce komplikácie.
 
-### Úloha
+Pozrime sa, čo sa vlastne deje, keď používateľ klikne na tlačidlo odoslania.
 
-Pridajte vlastnosti `action` a `method` do registračného formulára:
+### Štandardné správanie formulára
+
+Najprv si všimnime, čo sa deje pri základnom odoslaní formulára:
+
+**Otestujte svoje aktuálne formuláre:**
+1. Kliknite na tlačidlo *Register* vo vašom formulári
+2. Sledujte zmenu URL v adresnom riadku prehliadača
+3. Všimnite si, ako stránka obnoví a údaje sa zobrazia v URL
+
+![Screenshot zmeny URL v prehliadači po kliknutí na tlačidlo Register](../../../../translated_images/sk/click-register.e89a30bf0d4bc9ca.webp)
+
+### Porovnanie HTTP metód
+
+```mermaid
+graph TD
+    A[Odoslanie formulára] --> B{HTTP metóda}
+    B -->|GET| C[Dáta v URL]
+    B -->|POST| D[Dáta v tele požiadavky]
+    
+    C --> E[Viditeľné v adresnom riadku]
+    C --> F[Obmedzená veľkosť dát]
+    C --> G[Možné pridať medzi záložky]
+    
+    D --> H[Skryté z URL]
+    D --> I[Veľká kapacita dát]
+    D --> J[Bezpečnejšie]
+```
+**Pochopenie rozdielov:**
+
+| Metóda | Použitie | Umiestnenie dát | Úroveň zabezpečenia | Limit veľkosti |
+|--------|----------|-----------------|---------------------|----------------|
+| `GET` | Vyhľadávacie dotazy, filtre | Parametre URL | Nízka (viditeľné) | ~2000 znakov |
+| `POST` | Používateľské účty, citlivé údaje | Telo požiadavky | Vyššia (skryté) | Prakticky bez limitu |
+
+**Základné rozdiely:**
+- **GET**: Pridáva dáta formulára do URL ako parametre (vhodné na vyhľadávanie)
+- **POST**: Posiela dáta v tele požiadavky (nevyhnutné pre citlivé informácie)
+- **Ograničenia GET**: Obmedzená veľkosť, viditeľné dáta, pretrvávajúca história prehliadača
+- **Výhody POST**: Veľká kapacita dát, ochrana súkromia, podpora nahrávania súborov
+
+> 💡 **Dobrá prax**: Používajte `GET` pre vyhľadávacie formuláre a filtre (na vyhľadávanie dát), `POST` pre registráciu používateľov, prihlásenie a vytváranie dát.
+
+### Konfigurácia odoslania formulára
+
+Nakonfigurujme váš registračný formulár tak, aby správne komunikoval so backendovým API pomocou metódy POST:
 
 ```html
-<form id="registerForm" action="//localhost:5000/api/accounts" method="POST">
+<form id="registerForm" action="//localhost:5000/api/accounts" 
+      method="POST" novalidate>
 ```
 
-Teraz sa pokúste zaregistrovať nový účet so svojím menom. Po kliknutí na tlačidlo *Registrovať* by ste mali vidieť niečo takéto:
+**Táto konfigurácia zabezpečuje:**
+- **Smeruje** odoslanie formulára na váš API endpoint
+- **Používa** metódu POST pre bezpečné prenesenie dát
+- **Zahrňuje** `novalidate` na spracovanie validácie cez JavaScript
 
-![Okno prehliadača na adrese localhost:5000/api/accounts, zobrazujúce JSON reťazec s údajmi používateľa](../../../../translated_images/form-post.61de4ca1b964d91a9e338416e19f218504dd0af5f762fbebabfe7ae80edf885f.sk.png)
+### Testovanie odosielania formulára
 
-Ak všetko prebehne správne, server by mal odpovedať na vašu požiadavku s [JSON](https://www.json.org/json-en.html) odpoveďou obsahujúcou údaje o vytvorenom účte.
+**Postup pre otestovanie formulára:**
+1. **Vyplňte** registračný formulár svojimi údajmi
+2. **Kliknite** na tlačidlo "Create Account"
+3. **Sledujte** odpoveď servera v prehliadači
 
-✅ Skúste sa zaregistrovať znova s rovnakým menom. Čo sa stane?
+![Okno prehliadača na adrese localhost:5000/api/accounts s JSON reťazcom obsahujúcim údaje o používateľovi](../../../../translated_images/sk/form-post.61de4ca1b964d91a.webp)
 
-## Odosielanie údajov bez načítania stránky
+**Čo by ste mali vidieť:**
+- **Prehliadač sa presmeruje** na URL API endpointu
+- **JSON odpoveď** obsahujúcu vaše novo vytvorené údaje o účte
+- **Potvrdenie zo servera**, že účet bol úspešne vytvorený
 
-Ako ste si pravdepodobne všimli, existuje malý problém s prístupom, ktorý sme práve použili: pri odoslaní formulára sa dostaneme mimo našej aplikácie a prehliadač presmeruje na URL servera. Snažíme sa vyhnúť všetkým načítaniam stránok v našej webovej aplikácii, pretože vytvárame [jednostránkovú aplikáciu (SPA)](https://en.wikipedia.org/wiki/Single-page_application).
+> 🧪 **Čas na experiment**: Skúste sa zaregistrovať znovu s rovnakým používateľským menom. Akú odpoveď dostanete? Pomáha vám to pochopiť, ako server spracováva duplicitné dáta a chybové stavy.
 
-Aby sme mohli odoslať údaje formulára na server bez núteného načítania stránky, musíme použiť JavaScriptový kód. Namiesto zadania URL do vlastnosti `action` elementu `<form>` môžete použiť akýkoľvek JavaScriptový kód predchádzajúci reťazcom `javascript:`, aby ste vykonali vlastnú akciu. Použitie tohto prístupu tiež znamená, že budete musieť implementovať niektoré úlohy, ktoré predtým automaticky vykonával prehliadač:
+### Pochopenie JSON odpovedí
 
-- Získať údaje formulára
-- Konvertovať a zakódovať údaje formulára do vhodného formátu
-- Vytvoriť HTTP požiadavku a odoslať ju na server
+**Keď server úspešne spracuje váš formulár:**
+```json
+{
+  "user": "john_doe",
+  "currency": "$",
+  "description": "Personal savings",
+  "balance": 100,
+  "id": "unique_account_id"
+}
+```
 
-### Úloha
+**Táto odpoveď potvrdzuje:**
+- **Vytvorenie** nového účtu s vašimi zadanými dátami
+- **Priradenie** jedinečného identifikátora pre budúce použitie
+- **Vrátenie** všetkých informácií o účte na overenie
+- **Signalizuje** úspešné uloženie do databázy
 
-Nahraďte vlastnosť `action` registračného formulára:
+## Moderné spracovanie formulárov pomocou JavaScriptu
+
+Tradičné odosielanie formulárov vyvoláva úplné obnovenie stránky, podobne ako rané vesmírne misie vyžadovali kompletný reset systémov pre korekcie kurzu. Tento prístup narušuje používateľský zážitok a stráca stav aplikácie.
+
+JavaScriptové spracovanie formulárov funguje ako nepretržité navigačné systémy moderných kozmických lodí – robí úpravy v reálnom čase bez straty navigačného kontextu. Môžeme zachytávať odoslania formulárov, poskytovať okamžitú spätnú väzbu, elegantne spracovávať chyby a aktualizovať rozhranie na základe odpovedí servera, pričom používateľ zostáva v aplikácii.
+
+### Prečo sa vyhýbať obnovovaniu stránok?
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant SPA
+    participant Server
+    
+    User->>SPA: Odosiela formulár
+    SPA->>Server: AJAX požiadavka
+    Server-->>SPA: JSON odpoveď
+    SPA->>User: Aktualizuje rozhranie
+    
+    Note over User,SPA: Žiadne obnovenie stránky!
+```
+**Výhody JavaScriptového spracovania formulárov:**
+- **Udržiava** stav aplikácie a kontext používateľa
+- **Poskytuje** okamžitú spätnú väzbu a indikátory načítania
+- **Umožňuje** dynamické spracovanie chýb a validáciu
+- **Vytvára** plynulé zážitky pripomínajúce aplikácie
+- **Podporuje** podmienenú logiku na základe odpovedí servera
+
+### Prechod od tradičných k moderným formulárom
+
+**Výzvy tradičného prístupu:**
+- **Presmerováva** používateľov mimo aplikácie
+- **Stráca** aktuálny stav a kontext aplikácie
+- **Vyžaduje** úplné obnovenie stránky pre jednoduché operácie
+- **Obmedzuje** kontrolu nad spätou väzbou používateľa
+
+**Výhody moderného JavaScriptového prístupu:**
+- **Udržiava** používateľov v rámci aplikácie
+- **Zachováva** všetok stav a dáta aplikácie
+- **Povoľuje** validáciu a spätnú väzbu v reálnom čase
+- **Podporuje** progresívne vylepšenie a prístupnosť
+
+### Implementácia JavaScriptového spracovania formulárov
+
+Nahradíme tradičné odoslanie formulára modernou JavaScriptovou obsluhou udalosti:
 
 ```html
-<form id="registerForm" action="javascript:register()">
+<!-- Remove the action attribute and add event handling -->
+<form id="registerForm" method="POST" novalidate>
 ```
 
-Otvorte `app.js` a pridajte novú funkciu s názvom `register`:
+**Pridajte registračnú logiku do vášho súboru `app.js`:**
 
-```js
+```javascript
+// Moderné spracovanie formulárov riadené udalosťami
 function register() {
   const registerForm = document.getElementById('registerForm');
   const formData = new FormData(registerForm);
   const data = Object.fromEntries(formData);
   const jsonData = JSON.stringify(data);
+  
+  console.log('Form data prepared:', data);
 }
+
+// Pripojiť poslucháča udalostí pri načítaní stránky
+document.addEventListener('DOMContentLoaded', () => {
+  const registerForm = document.getElementById('registerForm');
+  registerForm.addEventListener('submit', (event) => {
+    event.preventDefault(); // Zabraňte predvolenému odoslaniu formulára
+    register();
+  });
+});
 ```
 
-Tu získavame element formulára pomocou `getElementById()` a používame pomocníka [`FormData`](https://developer.mozilla.org/docs/Web/API/FormData) na extrahovanie hodnôt z ovládacích prvkov formulára ako sadu dvojíc kľúč/hodnota. Potom konvertujeme údaje na bežný objekt pomocou [`Object.fromEntries()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries) a nakoniec serializujeme údaje do [JSON](https://www.json.org/json-en.html), formátu bežne používaného na výmenu údajov na webe.
+**Čo sa tu deje:**
+- **Zabráni** predvolenému odoslaniu formulára pomocou `event.preventDefault()`
+- **Získa** element formulára použitím moderného výberu DOM
+- **Extrahuje** dáta z formulára cez silné API `FormData`
+- **Konvertuje** FormData na obyčajný objekt cez `Object.fromEntries()`
+- **Serializuje** dáta do JSON formátu pre komunikáciu so serverom
+- **Zaznamenáva** spracované dáta pre ladenie a overenie
 
-Údaje sú teraz pripravené na odoslanie na server. Vytvorte novú funkciu s názvom `createAccount`:
+### Pochopenie API FormData
 
-```js
+**API FormData poskytuje silné nástroje na spracovanie formulárov:**
+```javascript
+// Príklad toho, čo FormData zachytáva
+const formData = new FormData(registerForm);
+
+// FormData automaticky zachytáva:
+// {
+//   "user": "john_doe",
+//   "currency": "$",
+//   "description": "Osobný účet",
+//   "balance": "100"
+// }
+```
+
+**Výhody API FormData:**
+- **Komplexný zber**: Zachytáva všetky prvky formulára vrátane textu, súborov a komplexných vstupov
+- **Pochopenie typov**: Automaticky spracováva rôzne typy vstupov bez potreby vlastného kódovania
+- **Efektivita**: Odstraňuje manuálny zber polí pomocou jediného volania API
+- **Prispôsobivosť**: Zachováva funkčnosť pri zmene štruktúry formulára
+
+### Vytvorenie funkcie pre komunikáciu so serverom
+
+Teraz si vytvoríme robustnú funkciu na komunikáciu s vaším API serverom pomocou moderných vzorov JavaScriptu:
+
+```javascript
 async function createAccount(account) {
   try {
     const response = await fetch('//localhost:5000/api/accounts', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
       body: account
     });
+    
+    // Skontrolujte, či bola odpoveď úspešná
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
     return await response.json();
   } catch (error) {
-    return { error: error.message || 'Unknown error' };
+    console.error('Account creation failed:', error);
+    return { error: error.message || 'Network error occurred' };
   }
 }
 ```
 
-Čo táto funkcia robí? Najprv si všimnite kľúčové slovo `async`. To znamená, že funkcia obsahuje kód, ktorý sa bude vykonávať [**asynchrónne**](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function). Keď sa použije spolu s kľúčovým slovom `await`, umožňuje čakať na vykonanie asynchrónneho kódu - napríklad čakanie na odpoveď servera - pred pokračovaním.
+**Pochopenie asynchrónneho JavaScriptu:**
 
-Tu je krátke video o používaní `async/await`:
-
-[![Async a Await na správu sľubov](https://img.youtube.com/vi/YwmlRkrxvkk/0.jpg)](https://youtube.com/watch?v=YwmlRkrxvkk "Async a Await na správu sľubov")
-
-> 🎥 Kliknite na obrázok vyššie pre video o async/await.
-
-Používame API `fetch()` na odoslanie JSON údajov na server. Táto metóda má 2 parametre:
-
-- URL servera, takže tu opäť zadáme `//localhost:5000/api/accounts`.
-- Nastavenia požiadavky. Tu nastavíme metódu na `POST` a poskytneme `body` požiadavky. Keďže na server odosielame JSON údaje, musíme tiež nastaviť hlavičku `Content-Type` na `application/json`, aby server vedel, ako interpretovať obsah.
-
-Keďže server odpovie na požiadavku s JSON, môžeme použiť `await response.json()` na analýzu JSON obsahu a vrátenie výsledného objektu. Všimnite si, že táto metóda je asynchrónna, takže tu používame kľúčové slovo `await`, aby sme sa uistili, že akékoľvek chyby počas analýzy sú tiež zachytené.
-
-Teraz pridajte nejaký kód do funkcie `register`, aby zavolala `createAccount()`:
-
-```js
-const result = await createAccount(jsonData);
+```mermaid
+sequenceDiagram
+    participant JS as JavaScript
+    participant Fetch as Fetch API
+    participant Server as Backend Server
+    
+    JS->>Fetch: fetch() požiadavka
+    Fetch->>Server: HTTP POST
+    Server-->>Fetch: JSON odpoveď
+    Fetch-->>JS: čakaj na odpoveď
+    JS->>JS: Spracuj dáta
 ```
+**Čo táto moderná implementácia dosahuje:**
+- **Používa** `async/await` pre čitateľný asynchrónny kód
+- **Obsahuje** správne spracovanie chýb pomocou blokov try/catch
+- **Kontroluje** stav odpovede pred spracovaním dát
+- **Nastavuje** vhodné hlavičky pre komunikáciu v JSON
+- **Poskytuje** podrobné chybové hlásenia pre ladenie
+- **Vracia** konzistentnú dátovú štruktúru pre úspechy aj chyby
 
-Keďže tu používame kľúčové slovo `await`, musíme pridať kľúčové slovo `async` pred funkciu register:
+### Sila moderného Fetch API
 
-```js
-async function register() {
-```
+**Výhody Fetch API oproti starším metódam:**
 
-Nakoniec pridajme nejaké logy na kontrolu výsledku. Finálna funkcia by mala vyzerať takto:
+| Funkcia | Výhoda | Implementácia |
+|---------|--------|---------------|
+| Promise-based | Čistý asynchrónny kód | `await fetch()` |
+| Prispôsobenie požiadaviek | Plná kontrola HTTP | Hlavičky, metódy, telo |
+| Spracovanie odpovede | Flexibilné parsovanie dát | `.json()`, `.text()`, `.blob()` |
+| Spracovanie chýb | Komplexné zachytenie chýb | Bloky try/catch |
 
-```js
+> 🎥 **Naučte sa viac**: [Async/Await Tutorial](https://youtube.com/watch?v=YwmlRkrxvkk) – Pochopenie asynchrónnych vzorov JavaScriptu pre moderný webový vývoj.
+
+**Kľúčové koncepty pre komunikáciu so serverom:**
+- **Async funkcie** umožňujú pozastaviť vykonávanie a čakať na odpovede servera
+- **Kľúčové slovo await** robí asynchrónny kód čitateľným ako synchronný
+- **Fetch API** poskytuje moderné HTTP požiadavky založené na promise
+- **Spracovanie chýb** zabezpečuje, že vaša aplikácia reaguje elegantne na sieťové problémy
+
+### Dokončenie registračnej funkcie
+
+Spojme všetko dohromady s kompletnou produkčne pripravenou registračnou funkciou:
+
+```javascript
 async function register() {
   const registerForm = document.getElementById('registerForm');
-  const formData = new FormData(registerForm);
-  const jsonData = JSON.stringify(Object.fromEntries(formData));
-  const result = await createAccount(jsonData);
-
-  if (result.error) {
-    return console.log('An error occurred:', result.error);
+  const submitButton = registerForm.querySelector('button[type="submit"]');
+  
+  try {
+    // Zobraziť stav načítania
+    submitButton.disabled = true;
+    submitButton.textContent = 'Creating Account...';
+    
+    // Spracovať údaje z formulára
+    const formData = new FormData(registerForm);
+    const jsonData = JSON.stringify(Object.fromEntries(formData));
+    
+    // Odoslať na server
+    const result = await createAccount(jsonData);
+    
+    if (result.error) {
+      console.error('Registration failed:', result.error);
+      alert(`Registration failed: ${result.error}`);
+      return;
+    }
+    
+    console.log('Account created successfully!', result);
+    alert(`Welcome, ${result.user}! Your account has been created.`);
+    
+    // Resetovať formulár po úspešnej registrácii
+    registerForm.reset();
+    
+  } catch (error) {
+    console.error('Unexpected error:', error);
+    alert('An unexpected error occurred. Please try again.');
+  } finally {
+    // Obnoviť stav tlačidla
+    submitButton.disabled = false;
+    submitButton.textContent = 'Create Account';
   }
-
-  console.log('Account created!', result);
 }
 ```
 
-To bolo trochu dlhé, ale dostali sme sa tam! Ak otvoríte [nástroje pre vývojárov prehliadača](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools) a pokúsite sa zaregistrovať nový účet, nemali by ste vidieť žiadnu zmenu na webovej stránke, ale v konzole sa objaví správa potvrdzujúca, že všetko funguje.
+**Táto rozšírená implementácia obsahuje:**
+- **Poskytuje** vizuálnu spätnú väzbu počas odosielania formulára
+- **Deaktivuje** tlačidlo odoslania, aby zabránila opakovaným odoslaním
+- **Rieši** očakávané aj neočakávané chyby s gráciou
+- **Zobrazuje** používateľsky prívetivé správy o úspechu a chybách
+- **Resetuje** formulár po úspešnej registrácii
+- **Obnovuje** stav UI bez ohľadu na výsledok
 
-![Screenshot zobrazujúci logovú správu v konzole prehliadača](../../../../translated_images/browser-console.efaf0b51aaaf67782a29e1a0bb32cc063f189b18e894eb5926e02f1abe864ec2.sk.png)
+### Testovanie vašej implementácie
 
-✅ Myslíte si, že údaje sú odosielané na server bezpečne? Čo ak by niekto dokázal zachytiť požiadavku? Môžete si prečítať o [HTTPS](https://en.wikipedia.org/wiki/HTTPS), aby ste sa dozvedeli viac o bezpečnej komunikácii údajov.
+**Otvorte nástroje vývojára prehliadača a otestujte registráciu:**
 
-## Validácia údajov
+1. **Otvorte** konzolu prehliadača (F12 → karta Konzola)
+2. **Vyplňte** registračný formulár
+3. **Kliknite** na "Vytvoriť účet"
+4. **Sledujte** správy v konzole a spätnú väzbu používateľa
 
-Ak sa pokúsite zaregistrovať nový účet bez nastavenia používateľského mena, môžete vidieť, že server vráti chybu so status kódom [400 (Zlá požiadavka)](https://developer.mozilla.org/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).).
+![Screenshot showing log message in the browser console](../../../../translated_images/sk/browser-console.efaf0b51aaaf6778.webp)
 
-Pred odoslaním údajov na server je dobrým zvykom [validovať údaje formulára](https://developer.mozilla.org/docs/Learn/Forms/Form_validation) vopred, keď je to možné, aby ste sa uistili, že odosielate platnú požiadavku. HTML5 ovládacie prvky formulára poskytujú zabudovanú validáciu pomocou rôznych atribútov:
+**Čo by ste mali vidieť:**
+- **Stav načítavania** sa zobrazí na tlačidle odoslania
+- **Záznamy v konzole** zobrazujú podrobné informácie o procese
+- **Správa o úspechu** sa zobrazí po úspešnom vytvorení účtu
+- **Formulár sa automaticky resetuje** po úspešnom odoslaní
 
-- `required`: pole musí byť vyplnené, inak formulár nemôže byť odoslaný.
-- `minlength` a `maxlength`: definuje minimálny a maximálny počet znakov v textových poliach.
-- `min` a `max`: definuje minimálnu a maximálnu hodnotu číselného poľa.
-- `type`: definuje druh očakávaných údajov, ako napríklad `number`, `email`, `file` alebo [iné zabudované typy](https://developer.mozilla.org/docs/Web/HTML/Element/input). Tento atribút môže tiež zmeniť vizuálne zobrazenie ovládacieho prvku formulára.
-- `pattern`: umožňuje definovať [regulárny výraz](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions) na testovanie, či zadané údaje sú platné alebo nie.
-> Tip: vzhľad ovládacích prvkov formulára môžete prispôsobiť podľa toho, či sú platné alebo neplatné, pomocou pseudo-tried CSS `:valid` a `:invalid`.
-### Úloha
+> 🔒 **Bezpečnostné upozornenie**: Dáta momentálne cestujú cez HTTP, čo nie je bezpečné pre produkciu. V reálnych aplikáciách vždy používajte HTTPS na zašifrovanie prenosu dát. Viac sa dozviete o [bezpečnosti HTTPS](https://en.wikipedia.org/wiki/HTTPS) a prečo je dôležitá na ochranu údajov používateľov.
 
-Na vytvorenie platného nového účtu sú potrebné dve povinné polia: používateľské meno a mena. Ostatné polia sú voliteľné. Aktualizujte HTML formulára tak, aby ste použili atribút `required` a text v označení poľa:
+### 🔄 **Pedagogická kontrola**
+**Integrácia moderného JavaScriptu**: Overte si svoj prehľad o asynchrónnom spracovaní formulárov:
+- ✅ Ako mení `event.preventDefault()` predvolené správanie formulára?
+- ✅ Prečo je API FormData efektívnejšie ako manuálny zber polí?
+- ✅ Ako zlepšujú async/await vzory čitateľnosť kódu?
+- ✅ Akú úlohu zohráva spracovanie chýb pri používateľskej skúsenosti?
 
-```html
-<label for="user">Username (required)</label>
-<input id="user" name="user" type="text" required>
-...
-<label for="currency">Currency (required)</label>
-<input id="currency" name="currency" type="text" value="$" required>
+**Architektúra systému**: Vaše spracovanie formulára demonštruje:
+- **Programovanie riadené udalosťami**: Formuláre reagujú na používateľské akcie bez obnovovania stránky
+- **Asynchrónnu komunikáciu**: Požiadavky na server neblokujú používateľské rozhranie
+- **Spracovanie chýb**: Elegantné zlyhanie pri chybách siete
+- **Správu stavu**: Aktualizácie UI zodpovedajú odpovediam servera
+- **Progresívne vylepšenie**: Základná funkčnosť funguje, JavaScript ju vylepšuje
+
+**Profesionálne vzory**: Implementovali ste:
+- **Jednotnú zodpovednosť**: Funkcie majú jasné a zamerané účely
+- **Hranice chýb**: Bloky try/catch zabraňujú pádom aplikácie
+- **Spätnú väzbu používateľovi**: Stavy načítania a správy o úspechu/chybách
+- **Transformáciu dát**: Prevod FormData na JSON pre serverovú komunikáciu
+
+## Komplexná validácia formulára
+
+Validácia formulára zabraňuje frustrujúcemu zisteniu chýb až po odoslaní. Rovnako ako viaceré redundantné systémy na Medzinárodnej vesmírnej stanici, účinná validácia používa viac vrstiev kontrolných mechanizmov.
+
+Optimálny prístup kombinuje validáciu na úrovni prehliadača pre okamžitú spätnú väzbu, JavaScript validáciu pre lepší používateľský zážitok a validáciu na strane servera pre bezpečnosť a integritu dát. Táto redundancia zabezpečuje spokojnosť používateľa aj ochranu systému.
+
+### Pochopenie vrstiev validácie
+
+```mermaid
+graph TD
+    A[Používateľský vstup] --> B[Overenie HTML5]
+    B --> C[Vlastné overenie JavaScriptom]
+    C --> D[Úplné overenie na strane klienta]
+    D --> E[Overenie na strane servera]
+    E --> F[Ukladanie dát]
+    
+    B -->|Neplatné| G[Chybové hlásenie prehliadača]
+    C -->|Neplatné| H[Vlastné zobrazenie chyby]
+    E -->|Neplatné| I[Odpoveď servera s chybou]
+```
+**Stratégia viacvrstvovej validácie:**
+- **HTML5 validácia**: Okamžité kontroly priamo v prehliadači
+- **JavaScript validácia**: Vlastná logika a používateľský zážitok
+- **Serverová validácia**: Konečné bezpečnostné a integritné kontroly
+- **Progresívne vylepšenie**: Funguje aj keď je JavaScript vypnutý
+
+### HTML5 atribúty validácie
+
+**Moderné nástroje validácie dostupné pre vás:**
+
+| Atribút | Účel | Príklad použitia | Správanie prehliadača |
+|---------|-------|------------------|-----------------------|
+| `required` | Povinné polia | `<input required>` | Zabráni prázdnemu odoslaniu |
+| `minlength`/`maxlength` | Obmedzenia dĺžky textu | `<input maxlength="20">` | Vynucuje maximálny počet znakov |
+| `min`/`max` | Číselné rozsahy | `<input min="0" max="1000">` | Validuje hranice čísel |
+| `pattern` | Vlastné regex pravidlá | `<input pattern="[A-Za-z]+">` | Zodpovedá špecifickým formátom |
+| `type` | Validácia dátového typu | `<input type="email">` | Validácia podľa formátu |
+
+### CSS štýly pre validáciu
+
+**Vytvorte vizuálnu spätnú väzbu pre stavy validácie:**
+
+```css
+/* Valid input styling */
+input:valid {
+  border-color: #28a745;
+  background-color: #f8fff9;
+}
+
+/* Invalid input styling */
+input:invalid {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+}
+
+/* Focus states for better accessibility */
+input:focus:valid {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+input:focus:invalid {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
 ```
 
-Aj keď táto konkrétna implementácia servera nevyžaduje špecifické obmedzenia na maximálnu dĺžku polí, je vždy dobrým zvykom definovať rozumné limity pre akýkoľvek text zadávaný používateľom.
+**Čo tieto vizuálne prvky dosahujú:**
+- **Zelené okraje**: Indikujú úspešnú validáciu, ako zelené svetlá v riadiacom centre misie
+- **Červené okraje**: Signalizujú chyby validácie vyžadujúce opravu
+- **Zvýraznenie focusu**: Poskytuje jasný vizuálny kontext aktuálneho vstupu
+- **Konzistentné štýly**: Vytvárajú predvídateľné vzory rozhrania pre používateľov
 
-Pridajte atribút `maxlength` do textových polí:
+> 💡 **Tip na prax**: Používajte CSS pseudotriedy `:valid` a `:invalid` na okamžitú vizuálnu spätnú väzbu pri písaní používateľa, čím vytvoríte responzívne a nápomocné rozhranie.
+
+### Implementácia komplexnej validácie
+
+Vylepšime váš registračný formulár robustnou validáciou, ktorá zabezpečí výborný používateľský zážitok a kvalitu dát:
 
 ```html
-<input id="user" name="user" type="text" maxlength="20" required>
-...
-<input id="currency" name="currency" type="text" value="$" maxlength="5" required>
-...
-<input id="description" name="description" type="text" maxlength="100">
+<form id="registerForm" method="POST" novalidate>
+  <div class="form-group">
+    <label for="user">Username <span class="required">*</span></label>
+    <input id="user" name="user" type="text" required 
+           minlength="3" maxlength="20" 
+           pattern="[a-zA-Z0-9_]+" 
+           autocomplete="username"
+           title="Username must be 3-20 characters, letters, numbers, and underscores only">
+    <small class="form-text">Choose a unique username (3-20 characters)</small>
+  </div>
+  
+  <div class="form-group">
+    <label for="currency">Currency <span class="required">*</span></label>
+    <input id="currency" name="currency" type="text" required 
+           value="$" maxlength="3" 
+           pattern="[A-Z$€£¥₹]+" 
+           title="Enter a valid currency symbol or code">
+    <small class="form-text">Currency symbol (e.g., $, €, £)</small>
+  </div>
+  
+  <div class="form-group">
+    <label for="description">Account Description</label>
+    <input id="description" name="description" type="text" 
+           maxlength="100" 
+           placeholder="Personal savings, checking, etc.">
+    <small class="form-text">Optional description (up to 100 characters)</small>
+  </div>
+  
+  <div class="form-group">
+    <label for="balance">Starting Balance</label>
+    <input id="balance" name="balance" type="number" 
+           value="0" min="0" step="0.01" 
+           title="Enter a positive number for your starting balance">
+    <small class="form-text">Initial account balance (minimum $0.00)</small>
+  </div>
+  
+  <button type="submit">Create Account</button>
+</form>
 ```
 
-Ak teraz stlačíte tlačidlo *Registrovať* a niektoré pole nespĺňa pravidlo validácie, ktoré sme definovali, mali by ste vidieť niečo takéto:
+**Pochopenie rozšírenej validácie:**
+- **Kombinuje** indikátory povinných polí s užitočnými opisami
+- **Obsahuje** atribúty `pattern` pre formátovú validáciu
+- **Poskytuje** atribúty `title` pre prístupnosť a tooltipy
+- **Pridáva** pomocný text na usmernenie vstupu používateľa
+- **Používa** sémantickú štruktúru HTML pre lepšiu prístupnosť
 
-![Snímka obrazovky zobrazujúca chybu validácie pri pokuse o odoslanie formulára](../../../../translated_images/validation-error.8bd23e98d416c22f80076d04829a4bb718e0e550fd622862ef59008ccf0d5dce.sk.png)
+### Pokročilé validačné pravidlá
 
-Validácia, ktorá sa vykonáva *pred* odoslaním akýchkoľvek údajov na server, sa nazýva **validácia na strane klienta**. Je však dôležité si uvedomiť, že nie je vždy možné vykonať všetky kontroly bez odoslania údajov. Napríklad tu nemôžeme overiť, či už existuje účet s rovnakým používateľským menom, bez odoslania požiadavky na server. Ďalšia validácia vykonaná na serveri sa nazýva **validácia na strane servera**.
+**Čo každé validačné pravidlo zabezpečuje:**
 
-Zvyčajne je potrebné implementovať obe. Používanie validácie na strane klienta zlepšuje používateľskú skúsenosť tým, že poskytuje okamžitú spätnú väzbu používateľovi, zatiaľ čo validácia na strane servera je nevyhnutná na zabezpečenie toho, aby údaje, ktoré spracovávate, boli správne a bezpečné.
+| Pole | Validačné pravidlá | Výhoda pre používateľa |
+|-------|--------------------|-----------------------|
+| Užívateľské meno | `required`, `minlength="3"`, `maxlength="20"`, `pattern="[a-zA-Z0-9_]+"` | Zabezpečuje platné, jedinečné identifikátory |
+| Mena | `required`, `maxlength="3"`, `pattern="[A-Z$€£¥₹]+"` | Prijíma bežné symboly mien |
+| Zostatok | `min="0"`, `step="0.01"`, `type="number"` | Zabráni záporným zostatkom |
+| Popis | `maxlength="100"` | Rozumné obmedzenia dĺžky |
+
+### Testovanie správania validácie
+
+**Vyskúšajte tieto validačné situácie:**
+1. **Odošlite** formulár s prázdnymi povinnými poliami
+2. **Vložte** užívateľské meno kratšie ako 3 znaky
+3. **Vyskúšajte** špeciálne znaky v poli užívateľského mena
+4. **Zadajte** zápornú hodnotu zostatku
+
+![Screenshot showing the validation error when trying to submit the form](../../../../translated_images/sk/validation-error.8bd23e98d416c22f.webp)
+
+**Čo uvidíte:**
+- **Prehliadač zobrazí** natívne validačné správy
+- **Štýly sa menia** na základe stavov `:valid` a `:invalid`
+- **Odoslanie formulára** je blokované, kým všetky validácie neprejdú
+- **Automatické presunutie focusu** na prvé neplatné pole
+
+### Validácia na klientovi vs na serveri
+
+```mermaid
+graph LR
+    A[Validácia na strane klienta] --> B[Okamžitá spätná väzba]
+    A --> C[Lepší UX]
+    A --> D[Znížené zaťaženie servera]
+    
+    E[Validácia na strane servera] --> F[Bezpečnosť]
+    E --> G[Integrita dát]
+    E --> H[Obchodné pravidlá]
+    
+    A -.-> I[Obe sú potrebné]
+    E -.-> I
+```
+**Prečo potrebujete obe vrstvy:**
+- **Klientská validácia**: Poskytuje okamžitú spätnú väzbu a zlepšuje používateľský zážitok
+- **Serverová validácia**: Zabezpečuje bezpečnosť a rieši zložité obchodné pravidlá
+- **Kombinovaný prístup**: Vytvára robustné, používateľsky prívetivé a bezpečné aplikácie
+- **Progresívne vylepšenie**: Funguje aj bez JavaScriptu
+
+> 🛡️ **Bezpečnostné pripomenutie**: Nikdy nespoliehajte len na klientskú validáciu! Škodliví používatelia môžu obísť kontroly na klientovi, preto je serverová validácia nevyhnutná pre bezpečnosť a integritu dát.
+
+### ⚡ **Čo môžete spraviť v nasledujúcich 5 minútach**
+- [ ] Otestujte svoj formulár s neplatnými dátami a skontrolujte validačné správy
+- [ ] Skúste odoslať formulár s vypnutým JavaScriptom a pozrite si HTML5 validáciu
+- [ ] Otvorte DevTools prehliadača a skontrolujte odosielané dáta formulára
+- [ ] Vyskúšajte rôzne typy vstupov a sledujte zmeny klávesnice na mobilných zariadeniach
+
+### 🎯 **Čo môžete dosiahnuť počas tejto hodiny**
+- [ ] Dokončite kvíz po lekcii a pochopte koncepty spracovania formulárov
+- [ ] Implementujte komplexnú validáciu s okamžitou spätnou väzbou
+- [ ] Pridajte CSS štýly pre profesionálny vzhľad formulárov
+- [ ] Vytvorte spracovanie chýb pre duplicitné užívateľské mená a chyby servera
+- [ ] Pridajte pole na potvrdenie hesla s validáciou súladu
+
+### 📅 **Váš týždenný plán ovládania formulárov**
+- [ ] Dokončite komplexnú bankovú aplikáciu s pokročilými funkciami formulárov
+- [ ] Implementujte nahrávanie súborov pre profilové obrázky alebo dokumenty
+- [ ] Pridajte viacstupňové formuláre s indikátormi progresu a správou stavu
+- [ ] Vytvorte dynamické formuláre, ktoré sa prispôsobujú na základe výberov používateľa
+- [ ] Implementujte automatické ukladanie a obnovu formulárov pre lepší používateľský zážitok
+- [ ] Pridajte pokročilú validáciu, ako overenie emailu a formátovanie telefónnych čísel
+
+### 🌟 **Váš mesačný plán ovládania frontendového vývoja**
+- [ ] Vytvorte komplexné aplikácie s formulármi vrátane podmienených logík a workflowov
+- [ ] Naučte sa knižnice a frameworky pre rýchly vývoj formulárov
+- [ ] Ovládnite zásady prístupnosti a inkluzívne dizajnové princípy
+- [ ] Implementujte internacionalizáciu a lokalizáciu pre globálne formuláre
+- [ ] Vytvorte knižnice opakovane použiteľných komponentov formulárov a dizajnové systémy
+- [ ] Prispievajte do open source projektov zameraných na formuláre a zdieľajte najlepšie postupy
+
+## 🎯 Váš časový plán ovládania vývoja formulárov
+
+```mermaid
+timeline
+    title Vývoj formulárov & postup učenia používateľskej skúsenosti
+    
+    section Základy HTML (15 minút)
+        Semantické formuláre: Formulárové prvky
+                           : Typy vstupov
+                           : Popisky a prístupnosť
+                           : Postupné vylepšovanie
+        
+    section Integrácia JavaScriptu (25 minút)
+        Spracovanie udalostí: Odoslanie formulára
+                           : Zber dát
+                           : AJAX komunikácia
+                           : Async/await vzory
+        
+    section Systémy overovania (35 minút)
+        Viacvrstvová bezpečnosť: Validácia HTML5
+                              : Klientská logika
+                              : Serverová verifikácia
+                              : Spracovanie chýb
+        
+    section Používateľská skúsenosť (45 minút)
+        Vylepšenie rozhrania: Stav načítania
+                           : Správy o úspechu
+                           : Obnova po chybe
+                           : Prístupnostné funkcie
+        
+    section Pokročilé vzory (1 týždeň)
+        Profesionálne formuláre: Dynamická validácia
+                             : Viacstupňové postupy
+                             : Nahrávanie súborov
+                             : Spätná väzba v reálnom čase
+        
+    section Firemné zručnosti (1 mesiac)
+        Produkčné aplikácie: Knižnice formulárov
+                            : Testovacie stratégie
+                            : Optimalizácia výkonu
+                            : Najlepšie bezpečnostné praktiky
+```
+### 🛠️ Zhrnutie vášho nástroja pre vývoj formulárov
+
+Po dokončení tejto lekcie ste ovládli:
+- **HTML5 formuláre**: Sémantickú štruktúru, typy vstupov a prístupnostné funkcie
+- **JavaScript spracovanie formulárov**: Spracovanie udalostí, zber dát a AJAX komunikáciu
+- **Architektúru validácie**: Viacvrstvovú validáciu pre bezpečnosť a používateľský zážitok
+- **Asynchrónne programovanie**: Moderné Fetch API a vzory async/await
+- **Správu chýb**: Komplexné spracovanie chýb a systémy spätnej väzby používateľovi
+- **Dizajn používateľského zážitku**: Stavy načítania, správy o úspechu a zotavenie z chýb
+- **Progresívne vylepšenie**: Formuláre fungujúce vo všetkých prehliadačoch a podmienkach
+
+**Skutočné aplikácie**: Vaše zručnosti vo vývoji formulárov nájdu uplatnenie v:
+- **E-commerce aplikáciách**: Procesy platby, registrácia účtu a platobné formuláre
+- **Podnikových softvéroch**: Systémy zadávania dát, reportovacie rozhrania a workflow aplikácie
+- **Systémoch správy obsahu**: Publikačné platformy, obsah generovaný používateľmi a administrátorské rozhrania
+- **Finančných aplikáciách**: Bankové rozhrania, investičné platformy a transakčné systémy
+- **Zdravotníckych systémoch**: Portály pre pacientov, plánovanie termínov a formuláre lekárskych záznamov
+- **Vzdelávacích platformách**: Registrácia kurzov, hodnotiace nástroje a manažment vzdelávania
+
+**Profesijné zručnosti získané**: Teraz viete:
+- **Navrhovať** prístupné formuláre fungujúce pre všetkých používateľov vrátane osôb so zdravotným postihnutím
+- **Implementovať** bezpečnú validáciu formulárov, ktorá zabraňuje poškodeniu dát a bezpečnostným dieram
+- **Vytvárať** responzívne používateľské rozhrania poskytujúce jasnú spätnú väzbu a usmernenia
+- **Ladiť** zložité interakcie formulárov pomocou nástrojov vývojára prehliadača a analýzy siete
+- **Optimalizovať** výkon formulárov efektívnym spracovaním dát a stratégiami validácie
+
+**Ovládnuté koncepty frontendového vývoja**:
+- **Architektúra riadená udalosťami**: Spracovanie interakcie používateľa a odpoveďových systémov
+- **Asynchrónne programovanie**: Nezablokujúca komunikácia so serverom a spracovanie chýb
+- **Validácia dát**: Klientská aj serverová bezpečnosť a kontrola integrity
+- **Dizajn používateľského zážitku**: Intuitívne rozhrania vedúce používateľov k úspechu
+- **Inžinierstvo prístupnosti**: Inkluzívny dizajn fungujúci pre rôzne potreby používateľov
+
+**Ďalšia úroveň**: Ste pripravení objaviť pokročilé knižnice formulárov, implementovať komplexné validačné pravidlá alebo vybudovať podnikové systémy zberu dát!
+
+🌟 **Dosiahnutý úspech**: Vybudovali ste kompletný systém spracovania formulárov s profesionálnou validáciou, spracovaním chýb a používateľskými vzormi!
 
 ---
 
+
+
+---
+
+## GitHub Copilot Agent Challenge 🚀
+
+Použite režim Agenta na dokončenie nasledujúcej výzvy:
+
+**Popis:** Vylepšite registračný formulár komplexnou validáciou na strane klienta a spätnou väzbou používateľovi. Táto výzva vám pomôže precvičiť validáciu formulárov, spracovanie chýb a zlepšovanie používateľského zážitku interaktívnou spätnou väzbou.
+**Výzva:** Vytvorte kompletný systém validácie formulára pre registračný formulár, ktorý zahŕňa: 1) spätnej väzby validácie v reálnom čase pre každé pole počas písania používateľa, 2) vlastné chybové hlásenia zobrazené pod každým vstupným poľom, 3) pole na potvrdenie hesla s validáciou zhody, 4) vizuálne indikátory (ako zelené fajky pre platné polia a červené varovania pre neplatné), 5) tlačidlo odoslania, ktoré je povolené len vtedy, keď prejdú všetky validácie. Použite atribúty HTML5 na validáciu, CSS pre štýlovanie stavov validácie a JavaScript pre interaktívne správanie.
+
+Viac informácií o [agent mode](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) nájdete tu.
+
 ## 🚀 Výzva
 
-Zobrazte chybovú správu v HTML, ak používateľ už existuje.
+Zobrazte chybové hlásenie v HTML, ak užívateľ už existuje.
 
-Tu je príklad, ako môže vyzerať finálna prihlasovacia stránka po troche štýlovania:
+Tu je príklad, ako môže konečná prihlasovacia stránka vyzerať po miernom úprave štýlov:
 
-![Snímka obrazovky prihlasovacej stránky po pridaní štýlov CSS](../../../../translated_images/result.96ef01f607bf856aa9789078633e94a4f7664d912f235efce2657299becca483.sk.png)
+![Snímka obrazovky prihlasovacej stránky po pridaní CSS štýlov](../../../../translated_images/sk/result.96ef01f607bf856a.webp)
 
 ## Kvíz po prednáške
 
 [Kvíz po prednáške](https://ff-quizzes.netlify.app/web/quiz/44)
 
-## Prehľad a samostatné štúdium
+## Prehľad & Samostatné štúdium
 
-Vývojári sa stali veľmi kreatívnymi pri vytváraní formulárov, najmä pokiaľ ide o stratégie validácie. Zistite viac o rôznych postupoch pri tvorbe formulárov prehliadaním [CodePen](https://codepen.com); nájdete niektoré zaujímavé a inšpiratívne formuláre?
+Vývojári sa stali veľmi kreatívnymi v tvorbe svojich formulárov, najmä čo sa týka stratégií validácie. Prezrite si rôzne postupy pri tvorbe formulárov na [CodePen](https://codepen.com); dokážete nájsť nejaké zaujímavé a inšpiratívne formuláre?
 
 ## Zadanie
 
@@ -309,5 +950,7 @@ Vývojári sa stali veľmi kreatívnymi pri vytváraní formulárov, najmä poki
 
 ---
 
-**Upozornenie**:  
-Tento dokument bol preložený pomocou služby na automatický preklad [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, upozorňujeme, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre dôležité informácie odporúčame profesionálny ľudský preklad. Nezodpovedáme za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Zrieknutie sa zodpovednosti**:  
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, majte prosím na pamäti, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

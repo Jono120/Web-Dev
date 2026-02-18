@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "830359535306594b448db6575ce5cdee",
-  "translation_date": "2025-08-26T22:51:43+00:00",
-  "source_file": "7-bank-project/README.md",
-  "language_code": "th"
-}
--->
 # :dollar: สร้างธนาคาร
 
 ในโปรเจกต์นี้ คุณจะได้เรียนรู้วิธีสร้างธนาคารสมมติ บทเรียนเหล่านี้จะรวมถึงคำแนะนำเกี่ยวกับการออกแบบเว็บแอปและการกำหนดเส้นทาง การสร้างฟอร์ม การจัดการสถานะ และการดึงข้อมูลจาก API ที่คุณสามารถใช้เพื่อดึงข้อมูลของธนาคารได้
 
-| ![Screen1](../../../translated_images/screen1.baccbba0f1f93364672eb250d2fbd21574bb1caf79a2155022dc098a741cbdfe.th.png) | ![Screen2](../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.th.png) |
+| ![Screen1](../../../translated_images/th/screen1.baccbba0f1f93364.webp) | ![Screen2](../../../translated_images/th/screen2.123c82a831a1d14a.webp) |
 |--------------------------------|--------------------------------|
 
 ## บทเรียน

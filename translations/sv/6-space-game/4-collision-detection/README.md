@@ -1,131 +1,316 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a6ce295ff03bb49df7a3e17e6e7100a0",
-  "translation_date": "2025-08-29T07:54:42+00:00",
-  "source_file": "6-space-game/4-collision-detection/README.md",
-  "language_code": "sv"
+# Skapa ett rymdspel Del 4: Lägga till en laser och upptäcka kollisioner
+
+```mermaid
+journey
+    title Din krockdetekteringsresa
+    section Fysikgrund
+      Förstå rektanglar: 3: Student
+      Lära sig skärningsmatematik: 4: Student
+      Begripa koordinatsystem: 4: Student
+    section Spelmekanik
+      Implementera laseravfyrning: 4: Student
+      Lägg till objekts livscykel: 5: Student
+      Skapa krockregler: 5: Student
+    section Systemintegration
+      Bygg krockdetektering: 5: Student
+      Optimera prestanda: 5: Student
+      Testa interaktionssystem: 5: Student
+```
+## Förhandsquiz
+
+[Förhandsquiz](https://ff-quizzes.netlify.app/web/quiz/35)
+
+Tänk på ögonblicket i Star Wars när Lukes protontorpeder träffar Dödsstjärnans utsläppsport. Den exakta kollisionen förändrade galaxens öde! I spel fungerar kollisiondetektering på samma sätt – den avgör när objekt interagerar och vad som händer härnäst.
+
+I den här lektionen kommer du att lägga till laser vapen till ditt rymdspel och implementera kollisiondetektering. Precis som NASAs uppdragsplanerare beräknar rymdfarkosters banor för att undvika rymdskräp, kommer du att lära dig att upptäcka när spelo objekt korsar varandra. Vi delar upp detta i hanterbara steg som bygger på varandra.
+
+I slutet kommer du att ha ett fungerande stridssystem där lasrar förstör fiender och kollisioner triggar spelhändelser. Samma kollisionprinciper används i allt från fysiksimuleringar till interaktiva webgränssnitt.
+
+```mermaid
+mindmap
+  root((Kollisiondetektering))
+    Physics Concepts
+      Rektangelgränser
+      Intersektionstestning
+      Koordinatsystem
+      Separationslogik
+    Game Objects
+      Laserprojektiler
+      Fiendeskepp
+      Hjältekaraktär
+      Kollideringszoner
+    Lifecycle Management
+      Objektcreation
+      Rörelseuppdateringar
+      Förstörelsemärkning
+      Minnesrensning
+    Event Systems
+      Tangentbordsinmatning
+      Kollisionhändelser
+      Spelstatuständringar
+      Ljud/Visuella Effekter
+    Performance
+      Effektiva Algoritmer
+      Bildhastighetsoptimering
+      Minneshantering
+      Rumslig Partitionering
+```
+✅ Gör lite research om det allra första datorspelet som någonsin skrevs. Vad hade det för funktionalitet?
+
+## Kollisiondetektering
+
+Kollisiondetektering fungerar som närhetssensorerna på Apollo månlandaren – den kontrollerar konstant avstånd och utlöser varningar när objekt kommer för nära varandra. I spel bestämmer detta system när objekt interagerar och vad som ska hända därefter.
+
+Den metod vi använder behandlar varje spelo objekt som en rektangel, liknande hur flygtrafikstyrningar använder förenklade geometriska former för att följa flygplan. Denna rektangelmetod kan verka enkel, men den är beräkningsmässigt effektiv och fungerar bra för de flesta spelscenarier.
+
+### Rektangelrepresentation
+
+Varje spelo objekt behöver koordinerade gränser, likt hur Mars Pathfinder-rovern kartlade sin position på Mars yta. Så här definierar vi dessa gränskoordinater:
+
+```mermaid
+flowchart TD
+    A["🎯 Spelobjekt"] --> B["📍 Position (x, y)"]
+    A --> C["📏 Dimensioner (bredd, höjd)"]
+    
+    B --> D["Topp: y"]
+    B --> E["Vänster: x"]
+    
+    C --> F["Botten: y + höjd"]
+    C --> G["Höger: x + bredd"]
+    
+    D --> H["🔲 Rektangelgränser"]
+    E --> H
+    F --> H
+    G --> H
+    
+    H --> I["Kollisionsdetektering klar"]
+    
+    style A fill:#e3f2fd
+    style H fill:#e8f5e8
+    style I fill:#fff3e0
+```
+```javascript
+rectFromGameObject() {
+  return {
+    top: this.y,
+    left: this.x,
+    bottom: this.y + this.height,
+    right: this.x + this.width
+  }
 }
--->
-# Bygg ett Rymdspel Del 4: Lägga till en Laser och Upptäcka Kollisioner
-
-## Quiz före föreläsningen
-
-[Quiz före föreläsningen](https://ff-quizzes.netlify.app/web/quiz/35)
-
-I den här lektionen kommer du att lära dig hur man skjuter laser med JavaScript! Vi kommer att lägga till två saker i vårt spel:
-
-- **En laser**: denna laser skjuts från din hjältes skepp och rör sig vertikalt uppåt
-- **Kollisionsdetektion**, som en del av att implementera möjligheten att *skjuta* kommer vi också att lägga till några trevliga spelregler:
-   - **Laser träffar fiende**: Fienden dör om den träffas av en laser
-   - **Laser träffar skärmens topp**: En laser förstörs om den träffar den övre delen av skärmen
-   - **Fiende och hjälte krockar**: En fiende och hjälten förstörs om de krockar med varandra
-   - **Fiende träffar skärmens botten**: En fiende och hjälten förstörs om fienden når skärmens botten
-
-Kort sagt, du -- *hjälten* -- måste träffa alla fiender med en laser innan de lyckas nå skärmens botten.
-
-✅ Gör lite efterforskning om det allra första datorspelet som någonsin skapades. Vad hade det för funktionalitet?
-
-Låt oss vara heroiska tillsammans!
-
-## Kollisionsdetektion
-
-Hur gör vi kollisionsdetektion? Vi behöver tänka på våra spelobjekt som rektanglar som rör sig runt. Varför det, kanske du undrar? Jo, bilden som används för att rita ett spelobjekt är en rektangel: den har ett `x`, `y`, `bredd` och `höjd`.
-
-Om två rektanglar, dvs en hjälte och en fiende, *korsar varandra*, har du en kollision. Vad som ska hända då beror på spelets regler. För att implementera kollisionsdetektion behöver du därför följande:
-
-1. Ett sätt att få en rektangulär representation av ett spelobjekt, något i stil med detta:
-
-   ```javascript
-   rectFromGameObject() {
-     return {
-       top: this.y,
-       left: this.x,
-       bottom: this.y + this.height,
-       right: this.x + this.width
-     }
-   }
-   ```
-
-2. En jämförelsefunktion, denna funktion kan se ut så här:
-
-   ```javascript
-   function intersectRect(r1, r2) {
-     return !(r2.left > r1.right ||
-       r2.right < r1.left ||
-       r2.top > r1.bottom ||
-       r2.bottom < r1.top);
-   }
-   ```
-
-## Hur förstör vi saker
-
-För att förstöra saker i ett spel måste du låta spelet veta att det inte längre ska rita detta objekt i spel-loopen som triggas med ett visst intervall. Ett sätt att göra detta är att markera ett spelobjekt som *dött* när något händer, så här:
-
-```javascript
-// collision happened
-enemy.dead = true
 ```
 
-Därefter kan du sortera bort *döda* objekt innan skärmen ritas om, så här:
+**Låt oss bryta ner detta:**
+- **Övre kant**: Det är bara var objektet startar vertikalt (dess y-position)
+- **Vänstra kant**: Var det startar horisontellt (dess x-position)
+- **Nedre kant**: Lägg till höjden till y-positionen – nu vet du var det slutar!
+- **Högra kant**: Lägg till bredden till x-positionen – och du har hela gränsen
 
+### Intersektionsalgoritm
+
+Att upptäcka rektangelintersektioner använder logik liknande hur Hubble-rumteleskopet avgör om himlakroppar överlappar i sitt synfält. Algoritmen kontrollerar separation:
+
+```mermaid
+flowchart LR
+    A["Rektangel 1"] --> B{"Separationstester"}
+    C["Rektangel 2"] --> B
+    
+    B --> D["R2 vänster > R1 höger?"]
+    B --> E["R2 höger < R1 vänster?"]
+    B --> F["R2 topp > R1 botten?"]
+    B --> G["R2 botten < R1 topp?"]
+    
+    D --> H{"Något Sant?"}
+    E --> H
+    F --> H
+    G --> H
+    
+    H -->|Ja| I["❌ Ingen Kollision"]
+    H -->|Nej| J["✅ Kollision Upptäckt"]
+    
+    style B fill:#e3f2fd
+    style I fill:#ffebee
+    style J fill:#e8f5e8
+```
 ```javascript
-gameObjects = gameObject.filter(go => !go.dead);
+function intersectRect(r1, r2) {
+  return !(r2.left > r1.right ||
+    r2.right < r1.left ||
+    r2.top > r1.bottom ||
+    r2.bottom < r1.top);
+}
 ```
 
-## Hur skjuter vi en laser
+**Separations-testet fungerar som radarsystem:**
+- Är rektangel 2 helt till höger om rektangel 1?
+- Är rektangel 2 helt till vänster om rektangel 1?
+- Är rektangel 2 helt under rektangel 1?
+- Är rektangel 2 helt ovanför rektangel 1?
 
-Att skjuta en laser innebär att svara på ett tangenttryck och skapa ett objekt som rör sig i en viss riktning. Vi behöver därför utföra följande steg:
+Om inget av dessa villkor är sant måste rektanglarna överlappa. Denna metod speglar hur radaroperatörer avgör om två flygplan är på säkra avstånd.
 
-1. **Skapa ett laserobjekt**: från toppen av hjälteskeppet, som vid skapandet börjar röra sig uppåt mot skärmens topp.
-2. **Koppla kod till ett tangenttryck**: vi behöver välja en tangent på tangentbordet som representerar att spelaren skjuter lasern.
-3. **Skapa ett spelobjekt som ser ut som en laser** när tangenten trycks ned.
+## Hantering av objektlivscykler
 
-## Cooldown för vår laser
+När en laser träffar en fiende måste båda objekten tas bort från spelet. Att ta bort objekt mitt i en loop kan dock orsaka krascher – en lärdom som tidiga datorsystem som Apollo Guidance Computer fick lära sig på det hårda sättet. Istället använder vi en "markera för borttagning"-metod som säkert tar bort objekt mellan bildrutor.
 
-Lasern behöver skjutas varje gång du trycker på en tangent, till exempel *mellanslag*. För att förhindra att spelet skapar alldeles för många lasrar på kort tid måste vi fixa detta. Lösningen är att implementera en så kallad *cooldown*, en timer, som säkerställer att en laser bara kan skjutas med vissa intervall. Du kan implementera det på följande sätt:
+```mermaid
+stateDiagram-v2
+    [*] --> Active: Objekt Skapat
+    Active --> Collided: Kollision Upptäckt
+    Collided --> MarkedDead: Sätt död = sant
+    MarkedDead --> Filtered: Nästa Bildruta
+    Filtered --> [*]: Objekt Borttaget
+    
+    Active --> OutOfBounds: Lämnar Skärm
+    OutOfBounds --> MarkedDead
+    
+    note right of MarkedDead
+        Säker att fortsätta
+        nuvarande bildruta
+    end note
+    
+    note right of Filtered
+        Objekt borttagna
+        mellan bildrutor
+    end note
+```
+Så här markerar vi något för borttagning:
 
+```javascript
+// Markera objekt för borttagning
+enemy.dead = true;
+```
+
+**Varför denna metod fungerar:**
+- Vi markerar objektet som "dött" men tar inte bort det direkt
+- Detta låter den nuvarande bildrutan avslutas säkert
+- Inga krascher från att försöka använda något som redan är borta!
+
+Sedan filtrerar vi ut markerade objekt före nästa renderingscykel:
+
+```javascript
+gameObjects = gameObjects.filter(go => !go.dead);
+```
+
+**Vad denna filtrering gör:**
+- Skapar en ny lista med bara "levande" objekt
+- Slänger ut allt markerat som dött
+- Håller spelet flytande smidigt
+- Förhindrar minnesuppblåsning från ackumulerade förstörda objekt
+
+## Implementera lasermekanik
+
+Laserprojektiler i spel fungerar på samma princip som fotontorpeder i Star Trek – de är diskreta objekt som färdas i raka linjer tills de träffar något. Varje tryck på mellanslag skapar ett nytt laserobjekt som rör sig över skärmen.
+
+För att detta ska fungera måste vi koordinera några olika delar:
+
+**Viktiga komponenter att implementera:**
+- **Skapa** laserobjekt som spawns från hjältens position
+- **Hantera** tangentbordsinmatning för att utlösa laserskapande
+- **Hantera** laserens rörelse och livscykel
+- **Implementera** visuell representation för laserprojektilerna
+
+## Implementera eldhastighetskontroll
+
+Obegränsad eldhastighet skulle överbelasta spelmotorn och göra spelupplevelsen för enkel. Verkliga vapensystem möter liknande begränsningar – även USS Enterprises phasers behövde tid för att ladda om mellan skotten.
+
+Vi implementerar ett återkopplingssystem som förhindrar snabbspamming samtidigt som kontrollerna förblir responsiva:
+
+```mermaid
+sequenceDiagram
+    participant Player
+    participant Weapon
+    participant Cooldown
+    participant Game
+    
+    Player->>Weapon: Tryck på mellanslag
+    Weapon->>Cooldown: Kontrollera om sval
+    
+    alt Vapen är redo
+        Cooldown->>Weapon: sval = sant
+        Weapon->>Game: Skapa laser
+        Weapon->>Cooldown: Starta ny nedkylning
+        Cooldown->>Cooldown: sval = falsk
+        
+        Note over Cooldown: Vänta 500ms
+        
+        Cooldown->>Cooldown: sval = sant
+    else Vapen kyler ner
+        Cooldown->>Weapon: sval = falsk
+        Weapon->>Player: Ingen åtgärd
+    end
+```
 ```javascript
 class Cooldown {
   constructor(time) {
     this.cool = false;
     setTimeout(() => {
       this.cool = true;
-    }, time)
+    }, time);
   }
 }
 
 class Weapon {
-  constructor {
+  constructor() {
+    this.cooldown = null;
   }
+  
   fire() {
     if (!this.cooldown || this.cooldown.cool) {
-      // produce a laser
+      // Skapa laserprojektil
       this.cooldown = new Cooldown(500);
     } else {
-      // do nothing - it hasn't cooled down yet.
+      // Vapnet håller fortfarande på att svalna
     }
   }
 }
 ```
 
-✅ Gå tillbaka till lektion 1 i rymdspelsserien för att påminna dig om *cooldowns*.
+**Hur återkopplingen fungerar:**
+- När vapnet skapas börjar det "hett" (kan inte skjuta än)
+- Efter tidsfördröjningen blir det "kallt" (redo att avfyra)
+- Innan avfyrning kontrollerar vi: "Är vapnet kallt?"
+- Detta förhindrar spamming men håller kontrollerna responsiva
 
-## Vad ska byggas
+✅ Se lektion 1 i rymdspelserien för att påminna dig om cooldowns.
 
-Du kommer att ta den befintliga koden (som du borde ha städat upp och refaktorerat) från föregående lektion och utöka den. Antingen börjar du med koden från del II eller använder koden från [Del III - startkod](../../../../../../../../../your-work).
+## Bygga kollisionssystemet
 
-> tips: lasern som du ska arbeta med finns redan i din assets-mapp och refereras i din kod
+Du kommer att bygga vidare på din existerande kod för rymdspelet för att skapa ett system för kollisiondetektering. Som Internationella rymdstationens automatiska kollisionsundvikningssystem, kommer ditt spel kontinuerligt övervaka objektpositioner och reagera på skärningspunkter.
 
-- **Lägg till kollisionsdetektion**, när en laser kolliderar med något ska följande regler gälla:
-   1. **Laser träffar fiende**: fienden dör om den träffas av en laser
-   2. **Laser träffar skärmens topp**: En laser förstörs om den träffar den övre delen av skärmen
-   3. **Fiende och hjälte krockar**: en fiende och hjälten förstörs om de krockar med varandra
-   4. **Fiende träffar skärmens botten**: En fiende och hjälten förstörs om fienden når skärmens botten
+Utifrån förra lektionens kod kommer du att lägga till kollisiondetektering med specifika regler som styr objektinteraktioner.
 
-## Rekommenderade steg
+> 💡 **Proffstips**: Laserspriten finns redan i din mapp för tillgångar och refereras i din kod, redo att användas.
 
-Leta upp filerna som har skapats åt dig i undermappen `your-work`. Den bör innehålla följande:
+### Kollisionregler att implementera
+
+**Spelmekaniker att lägga till:**
+1. **Laser träffar fiende**: Fiende förstörs när den träffas av en laserprojektil
+2. **Laser träffar skärmkant**: Laser tas bort när den når skärmens övre kant
+3. **Fiende och hjälte kolliderar**: Båda objekten förstörs när de korsar varandra
+4. **Fiende når botten**: Game over när fiender når skärmens botten
+
+### 🔄 **Pedagogisk check-in**
+**Grundläggande kollisiondetektering**: Innan du implementerar, säkerställ att du förstår:
+- ✅ Hur rektangelgränser definierar kollisionszoner
+- ✅ Varför separationstest är mer effektivt än beräkning av intersektion
+- ✅ Vikten av objektlivscykelhantering i spel-loopar
+- ✅ Hur händelsedrivna system koordinerar kollisionrespons
+
+**Snabb självtest**: Vad skulle hända om du tog bort objekt omedelbart istället för att markera dem?
+*Svar: Borttagning mitt i loopen kan orsaka krascher eller hoppa över objekt i iterationen*
+
+**Fysikförståelse**: Du förstår nu:
+- **Koordinatsystem**: Hur position och dimensioner skapar gränser
+- **Intersektionslogik**: Matematiska principer bakom kollisiondetektering
+- **Prestandaoptimering**: Varför effektiva algoritmer är viktiga i realtidssystem
+- **Minneshantering**: Säkra objektlivscykel-mönster för stabilitet
+
+## Ställa in din utvecklingsmiljö
+
+God nyhet – vi har redan lagt grunden för dig! Alla dina speltillgångar och grundläggande struktur väntar i undermappen `your-work`, redo för dig att lägga till coola kollisionsfunktioner.
+
+### Projektstruktur
 
 ```bash
 -| assets
@@ -137,169 +322,438 @@ Leta upp filerna som har skapats åt dig i undermappen `your-work`. Den bör inn
 -| package.json
 ```
 
-Du startar ditt projekt i mappen `your_work` genom att skriva:
+**Förstå filstrukturen:**
+- **Innehåller** alla spritebilder som behövs för spelo objekten
+- **Inkluderar** huvud-HTML-dokumentet och JavaScript-applikationsfilen
+- **Tillhandahåller** paketkonfiguration för lokal utvecklingsserver
+
+### Starta utvecklingsservern
+
+Navigera till din projektmapp och starta den lokala servern:
 
 ```bash
 cd your-work
 npm start
 ```
 
-Ovanstående kommer att starta en HTTP-server på adressen `http://localhost:5000`. Öppna en webbläsare och skriv in den adressen, just nu bör den visa hjälten och alla fiender, men inget rör sig - ännu :).
+**Denna kommandokedja:**
+- **Byter** katalog till din arbetsmapp för projektet
+- **Startar** en lokal HTTP-server på `http://localhost:5000`
+- **Serverar** dina spelfiler för test och utveckling
+- **Aktiverar** liveutveckling med automatisk omladdning
 
-### Lägg till kod
+Öppna din webbläsare och navigera till `http://localhost:5000` för att se aktuellt speltillstånd med hjälten och fienderna renderade på skärmen.
 
-1. **Ställ in en rektangulär representation av ditt spelobjekt för att hantera kollisioner** Koden nedan låter dig få en rektangulär representation av ett `GameObject`. Redigera din GameObject-klass för att utöka den:
+### Steg-för-steg-implementering
 
-    ```javascript
-    rectFromGameObject() {
-        return {
-          top: this.y,
-          left: this.x,
-          bottom: this.y + this.height,
-          right: this.x + this.width,
-        };
-      }
-    ```
+Som den systematiska metoden NASA använde för att programmera Voyager-rymdfarkosten, kommer vi att implementera kollisiondetektering metodiskt, steg för steg, komponent för komponent.
 
-2. **Lägg till kod som kontrollerar kollisioner** Detta blir en ny funktion som testar om två rektanglar korsar varandra:
-
-    ```javascript
-    function intersectRect(r1, r2) {
-      return !(
-        r2.left > r1.right ||
-        r2.right < r1.left ||
-        r2.top > r1.bottom ||
-        r2.bottom < r1.top
-      );
-    }
-    ```
-
-3. **Lägg till laseravfyrningsfunktionalitet**
-   1. **Lägg till tangenttrycksmeddelande**. Tangenten *mellanslag* ska skapa en laser precis ovanför hjälteskeppet. Lägg till tre konstanter i Messages-objektet:
-
-       ```javascript
-        KEY_EVENT_SPACE: "KEY_EVENT_SPACE",
-        COLLISION_ENEMY_LASER: "COLLISION_ENEMY_LASER",
-        COLLISION_ENEMY_HERO: "COLLISION_ENEMY_HERO",
-       ```
-
-   1. **Hantera mellanslagstangenten**. Redigera funktionen `window.addEventListener` för keyup för att hantera mellanslag:
-
-      ```javascript
-        } else if(evt.keyCode === 32) {
-          eventEmitter.emit(Messages.KEY_EVENT_SPACE);
-        }
-      ```
-
-    1. **Lägg till lyssnare**. Redigera funktionen `initGame()` för att säkerställa att hjälten kan skjuta när mellanslagstangenten trycks ned:
-
-       ```javascript
-       eventEmitter.on(Messages.KEY_EVENT_SPACE, () => {
-        if (hero.canFire()) {
-          hero.fire();
-        }
-       ```
-
-       och lägg till en ny `eventEmitter.on()`-funktion för att säkerställa beteendet när en fiende kolliderar med en laser:
-
-          ```javascript
-          eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
-            first.dead = true;
-            second.dead = true;
-          })
-          ```
-
-   1. **Flytta objekt**, Se till att lasern gradvis rör sig mot skärmens topp. Du skapar en ny Laser-klass som utökar `GameObject`, som du gjort tidigare: 
-   
-      ```javascript
-        class Laser extends GameObject {
-        constructor(x, y) {
-          super(x,y);
-          (this.width = 9), (this.height = 33);
-          this.type = 'Laser';
-          this.img = laserImg;
-          let id = setInterval(() => {
-            if (this.y > 0) {
-              this.y -= 15;
-            } else {
-              this.dead = true;
-              clearInterval(id);
-            }
-          }, 100)
-        }
-      }
-      ```
-
-   1. **Hantera kollisioner**, Implementera kollisionsregler för lasern. Lägg till en funktion `updateGameObjects()` som testar kolliderande objekt för träffar:
-
-      ```javascript
-      function updateGameObjects() {
-        const enemies = gameObjects.filter(go => go.type === 'Enemy');
-        const lasers = gameObjects.filter((go) => go.type === "Laser");
-      // laser hit something
-        lasers.forEach((l) => {
-          enemies.forEach((m) => {
-            if (intersectRect(l.rectFromGameObject(), m.rectFromGameObject())) {
-            eventEmitter.emit(Messages.COLLISION_ENEMY_LASER, {
-              first: l,
-              second: m,
-            });
-          }
-         });
-      });
-
-        gameObjects = gameObjects.filter(go => !go.dead);
-      }  
-      ```
-
-      Se till att lägga till `updateGameObjects()` i din spel-loop i `window.onload`.
-
-   4. **Implementera cooldown** för lasern, så att den bara kan skjutas med vissa intervall.
-
-      Slutligen, redigera Hero-klassen så att den kan hantera cooldown:
-
-       ```javascript
-      class Hero extends GameObject {
-        constructor(x, y) {
-          super(x, y);
-          (this.width = 99), (this.height = 75);
-          this.type = "Hero";
-          this.speed = { x: 0, y: 0 };
-          this.cooldown = 0;
-        }
-        fire() {
-          gameObjects.push(new Laser(this.x + 45, this.y - 10));
-          this.cooldown = 500;
+```mermaid
+flowchart TD
+    A["1. Rektangelgränser"] --> B["2. Avkänning av korsning"]
+    B --> C["3. Lasersystem"]
+    C --> D["4. Händelsehantering"]
+    D --> E["5. Kollisionsregler"]
+    E --> F["6. Nedkylningssystem"]
     
-          let id = setInterval(() => {
-            if (this.cooldown > 0) {
-              this.cooldown -= 100;
-            } else {
-              clearInterval(id);
-            }
-          }, 200);
-        }
-        canFire() {
-          return this.cooldown === 0;
-        }
-      }
-      ```
+    G["Objektgränser"] --> A
+    H["Fysikalgoitm"] --> B
+    I["Projektilskapande"] --> C
+    J["Tangentbordsinmatning"] --> D
+    K["Spellogik"] --> E
+    L["Hastighetsbegränsning"] --> F
+    
+    F --> M["🎮 Komplett spel"]
+    
+    style A fill:#e3f2fd
+    style B fill:#e8f5e8
+    style C fill:#fff3e0
+    style D fill:#f3e5f5
+    style E fill:#e0f2f1
+    style F fill:#fce4ec
+    style M fill:#e1f5fe
+```
+#### 1. Lägg till rektangelkollisionsgränser
 
-Vid det här laget har ditt spel fått viss funktionalitet! Du kan navigera med piltangenterna, skjuta en laser med mellanslagstangenten, och fiender försvinner när du träffar dem. Bra jobbat!
+Först, låt oss lära våra spelo objekt att beskriva sina gränser. Lägg till denna metod i din `GameObject`-klass:
+
+```javascript
+rectFromGameObject() {
+    return {
+      top: this.y,
+      left: this.x,
+      bottom: this.y + this.height,
+      right: this.x + this.width,
+    };
+  }
+```
+
+**Denna metod åstadkommer:**
+- **Skapar** ett rektangelobjekt med exakta gränskoordinater
+- **Beräknar** nederkant och högra kant med hjälp av position plus dimensioner
+- **Returnerar** ett objekt redo för kollisiondetekteringsalgoritmer
+- **Ger** ett standardiserat gränssnitt för alla spelo objekt
+
+#### 2. Implementera intersektionsdetektering
+
+Nu skapar vi vår kollisiondetektiv – en funktion som kan avgöra när två rektanglar överlappar:
+
+```javascript
+function intersectRect(r1, r2) {
+  return !(
+    r2.left > r1.right ||
+    r2.right < r1.left ||
+    r2.top > r1.bottom ||
+    r2.bottom < r1.top
+  );
+}
+```
+
+**Denna algoritm fungerar genom att:**
+- **Testar** fyra separationsvillkor mellan rektanglar
+- **Returnerar** `false` om något separationsvillkor är sant
+- **Indikerar** kollision när ingen separation finns
+- **Använder** negationslogik för effektiv intersektionstestning
+
+#### 3. Implementera laserskjutningssystem
+
+Här blir det spännande! Låt oss sätta upp laserskjutningssystemet.
+
+##### Meddelandekonstanter
+
+Först definierar vi några meddelandetyper så att olika delar av spelet kan kommunicera med varandra:
+
+```javascript
+KEY_EVENT_SPACE: "KEY_EVENT_SPACE",
+COLLISION_ENEMY_LASER: "COLLISION_ENEMY_LASER",
+COLLISION_ENEMY_HERO: "COLLISION_ENEMY_HERO",
+```
+
+**Dessa konstanter ger:**
+- **Standardiserar** händelsenamn i hela applikationen
+- **Möjliggör** konsekvent kommunikation mellan spelsystem
+- **Förhindrar** stavfel i registrering av event handlers
+
+##### Tangentbordsinmatningshantering
+
+Lägg till mellanslagstangentsdetektion i din key event listener:
+
+```javascript
+} else if(evt.keyCode === 32) {
+  eventEmitter.emit(Messages.KEY_EVENT_SPACE);
+}
+```
+
+**Denna input-hanterare:**
+- **Upptäcker** tryck på mellanslag med keyCode 32
+- **Sänder ut** ett standardiserat händelsemeddelande
+- **Möjliggör** lösgjord skjutningslogik
+
+##### Eventlyssnare setup
+
+Registrera skjutbeteende i din `initGame()`-funktion:
+
+```javascript
+eventEmitter.on(Messages.KEY_EVENT_SPACE, () => {
+ if (hero.canFire()) {
+   hero.fire();
+ }
+});
+```
+
+**Denna eventlyssnare:**
+- **Svarar** på mellanslagshändelser
+- **Kontrollerar** skjutningens cooldown-status
+- **Utlöser** laserskapande när tillåtet
+
+Lägg till kollisionhantering för laser-fiende-interaktioner:
+
+```javascript
+eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
+  first.dead = true;
+  second.dead = true;
+});
+```
+
+**Denna kollisionhanterare:**
+- **Tar emot** kollisionhändelsedata med båda objekten
+- **Markerar** båda objekten för borttagning
+- **Säkerställer** korrekt städning efter kollision
+
+#### 4. Skapa Laser-klassen
+
+Implementera en laserprojektil som rör sig uppåt och hanterar sin egen livscykel:
+
+```javascript
+class Laser extends GameObject {
+  constructor(x, y) {
+    super(x, y);
+    this.width = 9;
+    this.height = 33;
+    this.type = 'Laser';
+    this.img = laserImg;
+    
+    let id = setInterval(() => {
+      if (this.y > 0) {
+        this.y -= 15;
+      } else {
+        this.dead = true;
+        clearInterval(id);
+      }
+    }, 100);
+  }
+}
+```
+
+**Denna klassimplementering:**
+- **Extenderar** GameObject för att ärva grundfunktionalitet
+- **Sätter** lämpliga dimensioner för laserspriten
+- **Skapar** automatisk uppåtrörelse med `setInterval()`
+- **Hantera** självförstörelse när den når skärmens övre kant
+- **Sköter** egen animationstid och städning
+
+#### 5. Implementera kollisiondetekteringssystem
+
+Skapa en omfattande kollisiondetekteringsfunktion:
+
+```javascript
+function updateGameObjects() {
+  const enemies = gameObjects.filter(go => go.type === 'Enemy');
+  const lasers = gameObjects.filter(go => go.type === "Laser");
+  
+  // Testa kollisioner mellan laser och fiender
+  lasers.forEach((laser) => {
+    enemies.forEach((enemy) => {
+      if (intersectRect(laser.rectFromGameObject(), enemy.rectFromGameObject())) {
+        eventEmitter.emit(Messages.COLLISION_ENEMY_LASER, {
+          first: laser,
+          second: enemy,
+        });
+      }
+    });
+  });
+
+  // Ta bort förstörda objekt
+  gameObjects = gameObjects.filter(go => !go.dead);
+}
+```
+
+**Detta kollisionssystem:**
+- **Filtrerar** spelo objekt efter typ för effektiv testning
+- **Testar** varje laser mot varje fiende för överlappningar
+- **Sänder** ut kollisionhändelser när överlapp upptäcks
+- **Rensar** bort förstörda objekt efter kollisionshantering
+
+> ⚠️ **Viktigt**: Lägg till `updateGameObjects()` i din huvudsakliga spel-loop i `window.onload` för att aktivera kollisiondetektering.
+
+#### 6. Lägg till cooldown-system i Hero-klassen
+
+Förbättra Hero-klassen med skjutmekaniker och taktsbegränsning:
+
+```javascript
+class Hero extends GameObject {
+  constructor(x, y) {
+    super(x, y);
+    this.width = 99;
+    this.height = 75;
+    this.type = "Hero";
+    this.speed = { x: 0, y: 0 };
+    this.cooldown = 0;
+  }
+  
+  fire() {
+    gameObjects.push(new Laser(this.x + 45, this.y - 10));
+    this.cooldown = 500;
+
+    let id = setInterval(() => {
+      if (this.cooldown > 0) {
+        this.cooldown -= 100;
+      } else {
+        clearInterval(id);
+      }
+    }, 200);
+  }
+  
+  canFire() {
+    return this.cooldown === 0;
+  }
+}
+```
+
+**Förståelse för den förbättrade Hero-klassen:**
+- **Initierar** cooldown-timer till noll (redo att skjuta)
+- **Skapar** laserobjekt positionerade ovanför hjälteskeppet
+- **Sätter** cooldown-period för att förhindra snabb eldning
+- **Minskar** cooldown-timer med intervallbaserade uppdateringar
+- **Ger** skjutningsstatuskontroll via `canFire()`-metoden
+
+### 🔄 **Pedagogisk check-in**
+**Fullständig systemförståelse**: Kontrollera din behärskning av kollisionssystemet:
+- ✅ Hur gör rektangelgränser effektiv kollisiondetektering möjlig?
+- ✅ Varför är objektlivscykelhantering kritisk för spelstabilitet?
+- ✅ Hur förhindrar cooldown-systemet prestandaproblem?
+- ✅ Vilken roll spelar händelsedriven arkitektur för kollisionshantering?
+
+**Systemintegration**: Din kollisiondetektering visar:
+- **Matematisk noggrannhet**: Algoritmer för rektangelintersektion
+- **Prestandaoptimering**: Effektiva mönster för kollisionstestning
+- **Minneshantering**: Säker objektkonstruktion och destruktion
+- **Händelsekoordinering**: Lösgjort system för kommunikation
+- **Realtidsbehandling**: Uppdateringscykler per bildruta
+
+**Professionella mönster**: Du har implementerat:
+- **Separation av ansvar**: Fysik, rendering och input åtskilda
+- **Objektorienterad design**: Arv och polymorfism
+- **Tillståndshantering**: Objektlivscykel och speltillståndsspårning
+- **Prestandaoptimering**: Effektiva algoritmer för realtid
+
+### Testa din implementation
+
+Ditt rymdspel har nu komplett kollisiondetektering och stridsmekanik. 🚀 Testa dessa nya funktioner:
+- **Navigera** med piltangenter för att verifiera rörelsekontroller
+- **Skjut lasrar** med mellanslag – märk hur cooldown förhindrar spamming
+- **Observera kollisioner** när lasrar träffar fiender, vilket triggar borttagning
+- **Verifiera städning** när förstörda objekt försvinner från spelet
+
+Du har framgångsrikt implementerat ett kollisiondetekteringssystem med samma matematiska principer som styr rymdfarkosters navigation och robotik.
+
+### ⚡ **Vad du kan göra på de närmaste 5 minuterna**
+- [ ] Öppna webbläsarens DevTools och sätt brytpunkter i din kollisionsdetekteringsfunktion
+- [ ] Testa att ändra lasers hastighet eller fiendens rörelse för att se kollisions-effekter
+- [ ] Experimentera med olika cooldown-värden för att testa skjuthastigheter
+- [ ] Lägg till `console.log`-satser för att spåra kollisioner i realtid
+
+### 🎯 **Vad du kan uppnå denna timme**
+- [ ] Klara efter-lektionens quiz och förstå algoritmer för kollisiondetektion
+- [ ] Lägg till visuella effekter som explosioner när kollisioner inträffar
+- [ ] Implementera olika typer av projektiler med varierande egenskaper
+- [ ] Skapa power-ups som tillfälligt förbättrar spelarens förmågor
+- [ ] Lägg till ljudeffekter för att göra kollisioner mer tillfredsställande
+
+### 📅 **Din vecko-långa fysikprogrammering**
+- [ ] Klara hela rymdspelet med polerade kollisionssystem
+- [ ] Implementera avancerade kollisionsformer utöver rektanglar (cirklar, polygoner)
+- [ ] Lägg till partikelssystem för realistiska explosionseffekter
+- [ ] Skapa komplex fiende-beteende med kollisionsundvikande
+- [ ] Optimera kollisiondetektering för bättre prestanda vid många objekt
+- [ ] Lägg till fysiksimulering som rörelsemängd och realistisk rörelse
+
+### 🌟 **Din månads-långa mästerskap i spel-fysik**
+- [ ] Bygg spel med avancerade fysikmotorer och realistiska simuleringar
+- [ ] Lär dig 3D kollisiondetektion och rumslig partitionering algoritmer
+- [ ] Bidra till open source fysikbibliotek och spelmotorer
+- [ ] Bemästra prestandaoptimering för grafikintensiva applikationer
+- [ ] Skapa utbildningsinnehåll om spel-fysik och kollisiondetektion
+- [ ] Bygg en portfolio som visar avancerade fysikprogrammeringskunskaper
+
+## 🎯 Din tidslinje för mästerskap i kollisiondetektion
+
+```mermaid
+timeline
+    title Kollisionsdetektion & Spelfysik Lärandeutveckling
+    
+    section Grundläggande (10 minuter)
+        Rektangel Matematik: Koordinatsystem
+                      : Gränsberäkningar
+                      : Positionsspårning
+                      : Dimensionhantering
+        
+    section Algoritmdesign (20 minuter)
+        Skärningslogik: Separationsprovning
+                          : Överlappar upptäckt
+                          : Prestandaoptimering
+                          : Kantfallshantering
+        
+    section Spelimplementering (30 minuter)
+        Objektsystem: Livscykelhantering
+                      : Händelsesamordning
+                      : Tillståndsspårning
+                      : Minnesrensning
+        
+    section Interaktiva Funktioner (40 minuter)
+        Stridsmekanik: Projektilsystem
+                        : Vapenkylning
+                        : Skadeberäkning
+                        : Visuell återkoppling
+        
+    section Avancerad Fysik (50 minuter)
+        Realtidssystem: Bildfrekvensoptimering
+                         : Rumslig uppdelning
+                         : Kollisionsrespons
+                         : Fysiksimulering
+        
+    section Professionella Tekniker (1 vecka)
+        Spelmotor Koncept: Komponentsystem
+                             : Fysikpipeline
+                             : Prestandaprofiler
+                             : Plattformoptimering
+        
+    section Branschapplikationer (1 månad)
+        Produktionsfärdigheter: Storskalig optimering
+                         : Teamarbete
+                         : Motortutveckling
+                         : Plattformimplementering
+```
+### 🛠️ Din sammanfattning av verktygslådan för spel-fysik
+
+Efter att ha fullföljt denna lektion har du nu behärskat:
+- **Kollisionsmatematik**: Algoritmer för rektangelintersektion och koordinatsystem
+- **Prestandaoptimering**: Effektiv kollisiondetektion för realtidsapplikationer
+- **Objektlivscykelhantering**: Säkra mönster för skapande, uppdatering och förstöring
+- **Händelsestyrd arkitektur**: Lös kopplade system för kollisionreaktion
+- **Spelloop-integration**: Ram-baserade fysikuppdateringar och renderingskoordinering
+- **Inmatningssystem**: Responsiva kontroller med taktbegränsning och feedback
+- **Minneshantering**: Effektiva strategier för objektpoolning och städning
+
+**Tillämpningar i verkliga världen**: Dina kollisiondetektionsfärdigheter tillämpas direkt på:
+- **Interaktiva simuleringar**: Vetenskaplig modellering och utbildningsverktyg
+- **Användargränssnittsdesign**: Dra-och-släpp-interaktioner och pekdetektion
+- **Datavisualisering**: Interaktiva diagram och klickbara element
+- **Mobilutveckling**: Rörelsedetektering och hantering av kollisioner på pekskärm
+- **Robotprogrammering**: Ruttplanering och hinderundvikande
+- **Datorgrafik**: Raytracing och rumsliga algoritmer
+
+**Professionella färdigheter du fått**: Du kan nu:
+- **Designa** effektiva algoritmer för realtids kollisiondetektion
+- **Implementera** fysiksystem som skalar med objektkomplexitet
+- **Avlusning** av komplexa interaktionssystem med hjälp av matematisk principer
+- **Optimera** prestanda för olika hårdvaru- och webbläsarförmågor
+- **Arkitektera** underhållbara spelsystem med beprövade designmönster
+
+**Begrepp inom spelutveckling du behärskar**:
+- **Fysiksimulering**: Realtids kollisiondetektion och respons
+- **Prestandaingenjörskap**: Optimerade algoritmer för interaktiva applikationer
+- **Händelsesystem**: Lös kopplad kommunikation mellan speldelar
+- **Objekthantering**: Effektiva livscykelmönster för dynamiskt innehåll
+- **Inmatningshantering**: Responsiva kontroller med lämplig återkoppling
+
+**Nästa nivå**: Du är redo att utforska avancerade fysikmotorer som Matter.js, implementera 3D kollisiondetektion, eller bygga komplexa partikelsystem!
+
+🌟 **Uppnått prestation**: Du har byggt ett komplett fysikbaserat interaktionssystem med professionell kollisiondetektion!
+
+## GitHub Copilot Agent-utmaning 🚀
+
+Använd agent-läget för att klara följande utmaning:
+
+**Beskrivning:** Förbättra kollisiondetektionssystemet genom att implementera power-ups som spawnas slumpmässigt och ger tillfälliga förmågor när de samlas upp av hjälteskeppet.
+
+**Prompt:** Skapa en PowerUp-klass som ärver från GameObject och implementera kollisiondetektion mellan hjälten och power-ups. Lägg till minst två typer av power-ups: en som ökar eldhastigheten (minskar cooldown) och en annan som skapar en tillfällig sköld. Inkludera spawn-logik som skapar power-ups vid slumpmässiga intervaller och positioner.
 
 ---
 
+
+
 ## 🚀 Utmaning
 
-Lägg till en explosion! Ta en titt på spelresurserna i [Space Art-repot](../../../../6-space-game/solution/spaceArt/readme.txt) och försök lägga till en explosion när lasern träffar en alien.
+Lägg till en explosion! Ta en titt på spelresurserna i [the Space Art repo](../../../../6-space-game/solution/spaceArt/readme.txt) och försök lägga till en explosion när lasern träffar en alien
 
 ## Quiz efter föreläsningen
 
-[Quiz efter föreläsningen](https://ff-quizzes.netlify.app/web/quiz/36)
+[Post-lecture quiz](https://ff-quizzes.netlify.app/web/quiz/36)
 
 ## Granskning & Självstudier
 
-Experimentera med intervallen i ditt spel hittills. Vad händer när du ändrar dem? Läs mer om [JavaScript timing events](https://www.freecodecamp.org/news/javascript-timing-events-settimeout-and-setinterval/).
+Experimentera med intervallerna i ditt spel hittills. Vad händer när du ändrar på dem? Läs mer om [JavaScript timing events](https://www.freecodecamp.org/news/javascript-timing-events-settimeout-and-setinterval/).
 
 ## Uppgift
 
@@ -307,5 +761,7 @@ Experimentera med intervallen i ditt spel hittills. Vad händer när du ändrar 
 
 ---
 
-**Ansvarsfriskrivning**:  
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, vänligen notera att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Ansvarsfriskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig notera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

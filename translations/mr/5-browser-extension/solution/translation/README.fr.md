@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "9361268ca430b2579375009e1eceb5e5",
-  "translation_date": "2025-08-25T23:57:49+00:00",
-  "source_file": "5-browser-extension/solution/translation/README.fr.md",
-  "language_code": "mr"
-}
--->
 # Carbon Trigger ब्राउझर विस्तार: पूर्ण कोड
 
 tmrow च्या C02 Signal API चा वापर करून वीज वापराचे निरीक्षण करा आणि तुमच्या ब्राउझरमध्ये थेट तुमच्या प्रदेशातील वीज वापराची आठवण देणारी एक ब्राउझर विस्तार तयार करा. या विस्ताराचा वापर तुम्हाला या माहितीच्या आधारे तुमच्या क्रियाकलापांवर निर्णय घेण्यास मदत करेल.
 
-![विस्ताराचा स्क्रीनशॉट](../../../../../translated_images/extension-screenshot.0e7f5bfa110e92e3875e1bc9405edd45a3d2e02963e48900adb91926a62a5807.mr.png)
+![विस्ताराचा स्क्रीनशॉट](../../../../../translated_images/mr/extension-screenshot.0e7f5bfa110e92e3.webp)
 
 ## सुरुवात करा
 
@@ -31,7 +22,7 @@ npm run build
 
 Edge वर स्थापित करण्यासाठी, ब्राउझरच्या वरच्या उजव्या कोपऱ्यातील 'तीन बिंदू' मेनू वापरून Extensions पॅनेल शोधा. तिथून, 'Unpacked Extension लोड करा' निवडा आणि नवीन विस्तार लोड करा. 'dist' फोल्डर उघडा आणि विस्तार लोड होईल. वापरण्यासाठी, तुम्हाला CO2 Signal API साठी API की ([इथे ईमेलद्वारे मिळवा](https://www.co2signal.com/) - या पृष्ठावरील बॉक्समध्ये तुमचा ईमेल टाका) आणि [तुमच्या प्रदेशाचा कोड](http://api.electricitymap.org/v3/zones) जो [Electricity Map](https://www.electricitymap.org/map) शी संबंधित आहे (उदाहरणार्थ, Boston मध्ये, मी 'US-NEISO' वापरतो).
 
-![स्थापना](../../../../../translated_images/install-on-edge.78634f02842c48283726c531998679a6f03a45556b2ee99d8ff231fe41446324.mr.png)
+![स्थापना](../../../../../translated_images/mr/install-on-edge.78634f02842c4828.webp)
 
 API की आणि प्रदेश विस्ताराच्या इंटरफेसमध्ये टाकल्यानंतर, ब्राउझरच्या विस्तार बारमधील रंगीत बिंदू तुमच्या प्रदेशातील वीज वापर प्रतिबिंबित करण्यासाठी बदलला पाहिजे आणि तुम्हाला ऊर्जा-खर्चिक क्रियाकलापांबद्दल योग्य सल्ला देईल. या 'बिंदू' प्रणालीमागील संकल्पना मला [Energy Lollipop विस्तार](https://energylollipop.com/) कडून मिळाली, जी कॅलिफोर्नियाच्या उत्सर्जनासाठी आहे.
 

@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b121a279a6ab39878491f3e572673515",
-  "translation_date": "2025-08-28T11:23:06+00:00",
-  "source_file": "5-browser-extension/README.md",
-  "language_code": "lt"
-}
--->
 # Naršyklės plėtinio kūrimas
 
 Naršyklės plėtinių kūrimas yra smagus ir įdomus būdas galvoti apie savo programų našumą, kuriant kitokio tipo interneto išteklius. Šiame modulyje pateikiamos pamokos apie tai, kaip veikia naršyklės, kaip įdiegti naršyklės plėtinį, kaip sukurti formą, iškviesti API, naudoti vietinę saugyklą, taip pat kaip įvertinti savo svetainės našumą ir jį pagerinti.
@@ -23,7 +14,7 @@ Jūs sukursite naršyklės plėtinį, kuris veikia Edge, Chrome ir Firefox narš
 
 ### Kreditas
 
-![žalias naršyklės plėtinys](../../../translated_images/extension-screenshot.0e7f5bfa110e92e3875e1bc9405edd45a3d2e02963e48900adb91926a62a5807.lt.png)
+![žalias naršyklės plėtinys](../../../translated_images/lt/extension-screenshot.0e7f5bfa110e92e3.webp)
 
 ## Kreditas
 

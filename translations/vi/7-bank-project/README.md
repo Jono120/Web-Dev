@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "830359535306594b448db6575ce5cdee",
-  "translation_date": "2025-08-27T22:00:31+00:00",
-  "source_file": "7-bank-project/README.md",
-  "language_code": "vi"
-}
--->
 # :dollar: Xây dựng một ngân hàng
 
 Trong dự án này, bạn sẽ học cách xây dựng một ngân hàng giả tưởng. Những bài học này bao gồm hướng dẫn về cách thiết kế ứng dụng web và cung cấp các tuyến đường, xây dựng biểu mẫu, quản lý trạng thái, và lấy dữ liệu từ API để truy xuất thông tin của ngân hàng.
 
-| ![Screen1](../../../translated_images/screen1.baccbba0f1f93364672eb250d2fbd21574bb1caf79a2155022dc098a741cbdfe.vi.png) | ![Screen2](../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.vi.png) |
+| ![Screen1](../../../translated_images/vi/screen1.baccbba0f1f93364.webp) | ![Screen2](../../../translated_images/vi/screen2.123c82a831a1d14a.webp) |
 |--------------------------------|--------------------------------|
 
 ## Các bài học

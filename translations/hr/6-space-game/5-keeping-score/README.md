@@ -1,23 +1,80 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "adda95e02afa3fbee67b6e385b1109e1",
-  "translation_date": "2025-08-29T12:32:59+00:00",
-  "source_file": "6-space-game/5-keeping-score/README.md",
-  "language_code": "hr"
-}
--->
-# Izgradnja svemirske igre, dio 5: Bodovi i životi
+# Izrada igre u svemiru, dio 5: Bodovanje i životi
 
-## Kviz prije predavanja
+```mermaid
+journey
+    title Tvoj put dizajna igara
+    section Povratne informacije igrača
+      Razumjeti psihologiju bodovanja: 3: Student
+      Naučiti vizualnu komunikaciju: 4: Student
+      Dizajnirati sustave nagrađivanja: 4: Student
+    section Tehnička implementacija
+      Iscrtavanje teksta na platnu: 4: Student
+      Upravljanje stanjem: 5: Student
+      Ažuriranja vođena događajima: 5: Student
+    section Dorada igre
+      Dizajn korisničkog iskustva: 5: Student
+      Uravnotežiti izazov i nagradu: 5: Student
+      Stvoriti angažirajuću igru: 5: Student
+```
+## Pred-predavanja kviz
 
-[Kviz prije predavanja](https://ff-quizzes.netlify.app/web/quiz/37)
+[Pred-predavanja kviz](https://ff-quizzes.netlify.app/web/quiz/37)
 
-U ovoj lekciji naučit ćete kako dodati bodove u igru i izračunavati živote.
+Spremni da vašoj igri u svemiru date stvarni osjećaj igre? Dodajmo bodovanje i upravljanje životima - osnovne mehanike koje su prve arkadne igre poput Space Invaders pretvorile iz jednostavnih demonstracija u zaraznu zabavu. Ovo je trenutak kada vaša igra postaje zaista igriva.
 
-## Iscrtavanje teksta na ekranu
+```mermaid
+mindmap
+  root((Sustavi povratnih informacija u igrama))
+    Visual Communication
+      Prikaz teksta
+      Prikaz ikona
+      Psihologija boja
+      Dizajn izgleda
+    Scoring Mechanics
+      Vrijednosti bodova
+      Vremenski raspored nagrada
+      Praćenje napretka
+      Sustavi postignuća
+    Life Management
+      Rizik naspram nagrade
+      Agencija igrača
+      Uravnoteženost težine
+      Mehanike oporavka
+    User Experience
+      Trenutni povratni signal
+      Jasne informacije
+      Emocionalni odgovor
+      Petlje angažmana
+    Implementation
+      Canvas API
+      Upravljanje stanjima
+      Sustavi događaja
+      Učinkovitost
+```
+## Iscrtavanje teksta na zaslon - glas vaše igre
 
-Kako biste mogli prikazati rezultat igre na ekranu, trebate znati kako postaviti tekst na ekran. Odgovor je korištenje metode `fillText()` na objektu canvas. Također možete kontrolirati i druge aspekte poput fonta, boje teksta pa čak i poravnanja (lijevo, desno, centrirano). Ispod je primjer koda koji iscrtava tekst na ekranu.
+Za prikaz rezultata, trebamo naučiti kako prikazati tekst na platnu (canvas). Metoda `fillText()` je vaš glavni alat za to - ista tehnika koja se koristila u klasičnim arkadnim igrama za prikaz bodova i statusnih informacija.
+
+```mermaid
+flowchart LR
+    A["📝 Tekstualni sadržaj"] --> B["🎨 Stiliziranje"]
+    B --> C["📍 Pozicioniranje"]
+    C --> D["🖼️ Renderiranje platna"]
+    
+    E["Obitelj fonta"] --> B
+    F["Veličina fonta"] --> B
+    G["Boja"] --> B
+    H["Poravnanje"] --> B
+    
+    I["X Koordinata"] --> C
+    J["Y Koordinata"] --> C
+    
+    style A fill:#e3f2fd
+    style B fill:#e8f5e8
+    style C fill:#fff3e0
+    style D fill:#f3e5f5
+```
+Imate potpunu kontrolu nad izgledom teksta:
 
 ```javascript
 ctx.font = "30px Arial";
@@ -26,22 +83,74 @@ ctx.textAlign = "right";
 ctx.fillText("show this on the screen", 0, 0);
 ```
 
-✅ Pročitajte više o [dodavanju teksta na canvas](https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial/Drawing_text) i slobodno učinite svoj tekst vizualno privlačnijim!
+✅ Zaronite dublje u [dodavanje teksta na platno](https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial/Drawing_text) - možda ćete biti iznenađeni koliko kreativni možete biti s fontovima i stiliziranjem!
 
-## Život kao koncept u igri
+## Životi - Više od broja
 
-Koncept života u igri je samo broj. U kontekstu svemirske igre, uobičajeno je dodijeliti određeni broj života koji se smanjuju jedan po jedan kada vaš brod pretrpi štetu. Lijepo je ako možete prikazati grafičku reprezentaciju toga, poput malih brodova ili srca, umjesto samog broja.
+U dizajnu igara, "život" predstavlja granicu pogreške igrača. Ovaj koncept potječe od pinball automata, gdje ste dobivali više kuglica za igru. U ranijim videoigrama poput Asteroids, životi su igračima davali dozvolu za rizik i učenje iz pogrešaka.
 
-## Što ćemo izgraditi
+```mermaid
+flowchart TD
+    A["🎮 Akcija Igrača"] --> B{"Procjena Rizika"}
+    
+    B --> C["Visok Rizik, Visoka Nagrada"]
+    B --> D["Sigurna Strategija"]
+    
+    C --> E{"Ishod"}
+    D --> F["Stalan Napredak"]
+    
+    E -->|Uspjeh| G["🏆 Veliki Bodovi"]
+    E -->|Neuspjeh| H["💔 Izgubi Život"]
+    
+    H --> I{"Preostali Životi?"}
+    I -->|Da| J["🔄 Pokušaj Ponovno"]
+    I -->|Ne| K["💀 Kraj Igre"]
+    
+    J --> B
+    G --> B
+    F --> B
+    
+    style C fill:#ffebee
+    style D fill:#e8f5e8
+    style G fill:#e3f2fd
+    style H fill:#fff3e0
+```
+Vizualni prikaz ima veliki značaj - prikazivanje ikona brodova umjesto samo "Životi: 3" stvara trenutnu vizualnu prepoznatljivost, slično kao što su rani arkadni automati koristili ikonografiju za komunikaciju preko jezičnih barijera.
 
-Dodajmo sljedeće u vašu igru:
+## Izgradnja sustava nagrađivanja vaše igre
 
-- **Rezultat igre**: Za svaki neprijateljski brod koji uništite, heroj bi trebao dobiti određeni broj bodova, predlažemo 100 bodova po brodu. Rezultat igre trebao bi biti prikazan u donjem lijevom kutu.
-- **Životi**: Vaš brod ima tri života. Gubite jedan život svaki put kada se neprijateljski brod sudari s vama. Broj života trebao bi biti prikazan u donjem desnom kutu i sastojati se od sljedeće grafike ![slika života](../../../../translated_images/life.6fb9f50d53ee0413cd91aa411f7c296e10a1a6de5c4a4197c718b49bf7d63ebf.hr.png).
+Sada ćemo implementirati osnovne sustave povratne informacije koji igrače drže angažiranima:
 
-## Preporučeni koraci
+```mermaid
+sequenceDiagram
+    participant Player
+    participant GameEngine
+    participant ScoreSystem
+    participant LifeSystem
+    participant Display
+    
+    Player->>GameEngine: Puca na neprijatelja
+    GameEngine->>ScoreSystem: Dodjeli bodove
+    ScoreSystem->>ScoreSystem: +100 bodova
+    ScoreSystem->>Display: Ažuriraj rezultat
+    
+    Player->>GameEngine: Sudar s neprijateljem
+    GameEngine->>LifeSystem: Izgubi život
+    LifeSystem->>LifeSystem: -1 život
+    LifeSystem->>Display: Ažuriraj živote
+    
+    alt Životi > 0
+        LifeSystem->>Player: Nastavi igru
+    else Životi = 0
+        LifeSystem->>GameEngine: Kraj igre
+    end
+```
+- **Sustav bodovanja**: Svaki uništeni neprijateljski brod donosi 100 bodova (zaokruženi brojevi lakši su igračima za mentalno računanje). Rezultat se prikazuje u donjem lijevom kutu.
+- **Brojač života**: Vaš junak počinje s tri života - standard uspostavljen od ranih arkadnih igara za balansiranje izazova i igrivosti. Svaka kolizija s neprijateljem oduzima jedan život. Preostale živote prikazat ćemo u donjem desnom kutu koristeći ikone brodova ![life image](../../../../translated_images/hr/life.6fb9f50d53ee0413.webp).
 
-Pronađite datoteke koje su već kreirane za vas u podmapi `your-work`. Trebale bi sadržavati sljedeće:
+## Krenimo s izradom!
+
+Prvo postavite svoj radni prostor. Navigirajte do datoteka unutar podmape `your-work`. Trebali biste vidjeti ove datoteke:
 
 ```bash
 -| assets
@@ -53,24 +162,49 @@ Pronađite datoteke koje su već kreirane za vas u podmapi `your-work`. Trebale 
 -| package.json
 ```
 
-Pokrenite svoj projekt u mapi `your_work` upisivanjem:
+Za testiranje vaše igre, pokrenite razvojni server iz mape `your_work`:
 
 ```bash
 cd your-work
 npm start
 ```
 
-Gornja naredba pokrenut će HTTP poslužitelj na adresi `http://localhost:5000`. Otvorite preglednik i unesite tu adresu. Trenutno bi trebala prikazivati heroja i sve neprijatelje, a pritiskom na lijevu i desnu strelicu heroj se pomiče i može pucati na neprijatelje.
+Ovo pokreće lokalni server na `http://localhost:5000`. Otvorite ovu adresu u svojem pregledniku kako biste vidjeli svoju igru. Testirajte kontrole sa strelicama i pokušajte pucati na neprijatelje da provjerite radi li sve.
 
-### Dodavanje koda
+```mermaid
+flowchart TD
+    A["1. Učitavanje Sredstava"] --> B["2. Varijable Igre"]
+    B --> C["3. Detekcija Sudara"]
+    C --> D["4. Poboljšanje Hercega"]
+    D --> E["5. Funkcije Prikaza"]
+    E --> F["6. Obraditelji Događaja"]
+    
+    G["Slika Ikone Života"] --> A
+    H["Praćenje Rezultata i Života"] --> B
+    I["Presjeci Herceg-Neprijatelj"] --> C
+    J["Metode Bodova i Života"] --> D
+    K["Prikaz Teksta i Ikona"] --> E
+    L["Logika Nagrade i Kazne"] --> F
+    
+    F --> M["🎮 Kompletna Igra"]
+    
+    style A fill:#e3f2fd
+    style B fill:#e8f5e8
+    style C fill:#fff3e0
+    style D fill:#f3e5f5
+    style E fill:#e0f2f1
+    style F fill:#fce4ec
+    style M fill:#e1f5fe
+```
+### Vrijeme za kodiranje!
 
-1. **Kopirajte potrebne resurse** iz mape `solution/assets/` u mapu `your-work`; dodajte resurs `life.png`. Dodajte `lifeImg` u funkciju `window.onload`:
+1. **Preuzmite vizualne resurse koji su vam potrebni**. Kopirajte datoteku `life.png` iz mape `solution/assets/` u svoju mapu `your-work`. Zatim dodajte lifeImg u svoju funkciju window.onload:
 
     ```javascript
     lifeImg = await loadTexture("assets/life.png");
     ```
 
-1. Dodajte `lifeImg` na popis resursa:
+1. Ne zaboravite dodati `lifeImg` na svoj popis resursa:
 
     ```javascript
     let heroImg,
@@ -80,9 +214,9 @@ Gornja naredba pokrenut će HTTP poslužitelj na adresi `http://localhost:5000`.
     eventEmitter = new EventEmitter();
     ```
   
-2. **Dodajte varijable**. Dodajte kod koji predstavlja vaš ukupni rezultat (0) i preostale živote (3), te prikažite te vrijednosti na ekranu.
+2. **Postavite varijable igre**. Dodajte kod za praćenje ukupnog rezultata (koji počinje od 0) i preostalih života (koji počinju od 3). Prikazat ćemo ih na ekranu kako bi igrači uvijek znali kada su.
 
-3. **Proširite funkciju `updateGameObjects()`**. Proširite funkciju `updateGameObjects()` kako bi obrađivala sudare s neprijateljima:
+3. **Implementirajte detekciju sudara**. Proširite funkciju `updateGameObjects()` da detektira kada neprijatelji udare vašeg junaka:
 
     ```javascript
     enemies.forEach(enemy => {
@@ -93,15 +227,15 @@ Gornja naredba pokrenut će HTTP poslužitelj na adresi `http://localhost:5000`.
       })
     ```
 
-4. **Dodajte `life` i `points`**. 
-   1. **Inicijalizirajte varijable**. Ispod `this.cooldown = 0` u klasi `Hero`, postavite život i bodove:
+4. **Dodajte praćenje života i bodova vašem junaku**. 
+   1. **Inicijalizirajte brojače**. Ispod `this.cooldown = 0` unutar klase `Hero` postavite život i bodove:
 
         ```javascript
         this.life = 3;
         this.points = 0;
         ```
 
-   1. **Iscrtajte varijable na ekranu**. Prikažite te vrijednosti na ekranu:
+   1. **Prikažite ove vrijednosti igraču**. Napravite funkcije za iscrtavanje tih vrijednosti na ekranu:
 
         ```javascript
         function drawLife() {
@@ -128,18 +262,34 @@ Gornja naredba pokrenut će HTTP poslužitelj na adresi `http://localhost:5000`.
 
         ```
 
-   1. **Dodajte metode u petlju igre**. Pobrinite se da dodate ove funkcije u svoju funkciju `window.onload` ispod `updateGameObjects()`:
+   1. **Povežite sve u vašu glavnu petlju igre**. Dodajte ove funkcije u vašu funkciju window.onload odmah nakon `updateGameObjects()`:
 
         ```javascript
         drawPoints();
         drawLife();
         ```
 
-1. **Implementirajte pravila igre**. Implementirajte sljedeća pravila igre:
+### 🔄 **Pedagoška provjera**
+**Razumijevanje dizajna igre**: Prije implementacije posljedica, pobrinite se da razumijete:
+- ✅ Kako vizualna povratna informacija komunicira stanje igre igračima
+- ✅ Zašto dosljedni raspored elemenata korisničkog sučelja poboljšava upotrebljivost
+- ✅ Psihologiju bodova i upravljanja životima
+- ✅ Kako se iscrtavanje teksta na platnu razlikuje od HTML teksta
 
-   1. **Za svaku koliziju heroja i neprijatelja**, oduzmite jedan život.
+**Brzi samoprovjera**: Zašto arkadne igre uglavnom koriste zaokružene brojeve za bodovanje?
+*Odgovor: Zaokruženi brojevi su lakši igračima za mentalno računanje i stvaraju zadovoljavajuće psihološke nagrade*
+
+**Principi korisničkog iskustva**: Sada primjenjujete:
+- **Vizualna hijerarhija**: Važne informacije smještene su istaknuto
+- **Trenutna povratna informacija**: Ažuriranja u stvarnom vremenu na akcije igrača
+- **Kognitivno opterećenje**: Jednostavna i jasna prezentacija informacija
+- **Emocionalni dizajn**: Ikone i boje koje stvaraju vezu s igračem
+
+1. **Implementirajte posljedice i nagrade igre**. Sada ćemo dodati sustave povratne informacije koji čine akcije igrača smislenima:
+
+   1. **Sudari oduzimaju živote**. Svaki put kada vaš junak udari neprijatelja, trebate izgubiti jedan život.
    
-      Proširite klasu `Hero` kako biste to omogućili:
+      Dodajte ovu metodu u klasu `Hero`:
 
         ```javascript
         decrementLife() {
@@ -150,9 +300,9 @@ Gornja naredba pokrenut će HTTP poslužitelj na adresi `http://localhost:5000`.
         }
         ```
 
-   2. **Za svaki laser koji pogodi neprijatelja**, povećajte rezultat igre za 100 bodova.
+   2. **Pucanje po neprijateljima donosi bodove**. Svaki uspješan pogodak donosi 100 bodova, što pruža trenutnu pozitivnu povratnu informaciju za precizno gađanje.
 
-      Proširite klasu `Hero` kako biste to omogućili:
+      Proširite klasu Hero ovom metodom za povećanje bodova:
     
         ```javascript
           incrementPoints() {
@@ -160,7 +310,7 @@ Gornja naredba pokrenut će HTTP poslužitelj na adresi `http://localhost:5000`.
           }
         ```
 
-        Dodajte ove funkcije u svoje emitere događaja sudara:
+        Sada povežite ove funkcije s vašim događajima sudara:
 
         ```javascript
         eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
@@ -175,15 +325,159 @@ Gornja naredba pokrenut će HTTP poslužitelj na adresi `http://localhost:5000`.
         });
         ```
 
-✅ Istražite druge igre koje su izrađene pomoću JavaScript/Canvas. Koje su njihove zajedničke karakteristike?
+✅ Zanima vas koje su druge igre napravljene u JavaScriptu i Canvasu? Istražite malo - mogli biste se iznenaditi što je sve moguće!
 
-Na kraju ovog zadatka trebali biste vidjeti male brodove za živote u donjem desnom kutu, bodove u donjem lijevom kutu, te biste trebali vidjeti kako se broj života smanjuje kada se sudarite s neprijateljima, a bodovi povećavaju kada pucate na neprijatelje. Bravo! Vaša igra je gotovo gotova.
+Nakon što implementirate ove funkcionalnosti, testirajte svoju igru da vidite kompletan sustav povratne informacije u akciji. Trebali biste vidjeti ikone života u donjem desnom kutu, rezultat u donjem lijevom, i primijetiti kako sudari smanjuju živote, a uspješni hitci povećavaju rezultat.
+
+Vaša igra sada sadrži ključne mehanike koje su ranim arkadnim igrama dale privlačnost - jasne ciljeve, trenutnu povratnu informaciju i značajne posljedice za akcije igrača.
+
+### 🔄 **Pedagoška provjera**
+**Kompletan sustav dizajna igara**: Provjerite svoje razumijevanje sustava povratne informacije igrača:
+- ✅ Kako mehanike bodovanja stvaraju motivaciju i angažman igrača?
+- ✅ Zašto je vizualna dosljednost važna za dizajn korisničkog sučelja?
+- ✅ Kako sustav života balansira izazov i zadržavanje igrača?
+- ✅ Koju ulogu igra trenutna povratna informacija u stvaranju zadovoljavajuće igrivosti?
+
+**Integracija sustava**: Vaš sustav povratne informacije demonstrira:
+- **Dizajn korisničkog iskustva**: Jasnu vizualnu komunikaciju i hijerarhiju informacija
+- **Arhitekturu vođenu događajima**: Odgovorne nadogradnje na akcije igrača
+- **Upravljanje stanjem**: Praćenje i prikaz dinamičkih podataka igre
+- **Majstorstvo platna (Canvas)**: Iscrtavanje teksta i pozicioniranje spriteova
+- **Psihologiju igara**: Razumijevanje motivacije i angažmana igrača
+
+**Profesionalni obrasci**: Implementirali ste:
+- **MVC arhitekturu**: Odvajanje logike igre, podataka i prikaza
+- **Observer šablon**: Ažuriranja vođena događajima za promjene stanja igre
+- **Dizajn komponenti**: Ponovno upotrebljive funkcije za prikaz i logiku
+- **Optimizaciju performansi**: Efikasno iscrtavanje u petljama igre
+
+### ⚡ **Što možete napraviti u narednih 5 minuta**
+- [ ] Eksperimentirajte s različitim veličinama fonta i bojama za prikaz rezultata
+- [ ] Pokušajte mijenjati vrijednosti bodova i vidite kako to utječe na osjećaj igre
+- [ ] Dodajte console.log izjave za praćenje promjena bodova i života
+- [ ] Testirajte granične slučajeve poput potrošnih života ili postizanja visokih rezultata
+
+### 🎯 **Što možete postići ovaj sat**
+- [ ] Završiti kviz nakon lekcije i razumjeti psihologiju dizajna igara
+- [ ] Dodati zvučne efekte za bodovanje i gubitak života
+- [ ] Implementirati sustav visokih rezultata koristeći localStorage
+- [ ] Kreirati različite vrijednosti bodova za različite vrste neprijatelja
+- [ ] Dodati vizualne efekte poput podrhtavanja ekrana pri gubitku života
+
+### 📅 **Vaše tjedno putovanje kroz dizajn igara**
+- [ ] Završiti potpunu svemirsku igru s izbrušenim sustavima povratne informacije
+- [ ] Implementirati napredne mehanike bodovanja poput množitelja kombo bodova
+- [ ] Dodati postignuća i sadržaj za otključavanje
+- [ ] Kreirati sustave za progresiju i balansiranje težine
+- [ ] Dizajnirati korisnička sučelja za izbornike i ekrane igre završene
+- [ ] Proučiti druge igre da biste razumjeli mehanizme angažmana
+
+### 🌟 **Vaša mjesečna majstorija razvoja igara**
+- [ ] Izraditi potpune igre s sofisticiranim sustavima napredovanja
+- [ ] Naučiti analitiku igara i mjerenje ponašanja igrača
+- [ ] Doprinijeti projektima otvorenog koda za razvoj igara
+- [ ] Ovladati naprednim obrascima dizajna igara i monetizacije
+- [ ] Kreirati edukativne sadržaje o dizajnu igara i korisničkom iskustvu
+- [ ] Izraditi portfelj koji prikazuje vještine dizajna i razvoja igara
+
+## 🎯 Vaš vremenski plan za majstoriju dizajna igara
+
+```mermaid
+timeline
+    title Napredak učenja dizajna igara i povratnih informacija igrača
+    
+    section Temelj (10 minuta)
+        Vizualna komunikacija: Prikaz teksta
+                             : Dizajn ikona
+                             : Principi izgleda
+                             : Psihologija boja
+        
+    section Psihologija igrača (20 minuta)
+        Sustavi motivacije: Vrijednosti bodova
+                          : Rizik nasuprot nagradi
+                          : Povratne informacije o napretku
+                          : Dizajn postignuća
+        
+    section Tehnička implementacija (30 minuta)
+        Ovladavanje Canvasom: Pozicioniranje teksta
+                             : Prikaz spriteova
+                             : Upravljanje stanjima
+                             : Optimizacija performansi
+        
+    section Ravnoteža igre (40 minuta)
+        Dizajn težine: Upravljanje životima
+                      : Krivulje bodovanja
+                      : Zadržavanje igrača
+                      : Pristupačnost
+        
+    section Korisničko iskustvo (50 minuta)
+        Dizajn sučelja: Hijerarhija informacija
+                       : Odzivne povratne informacije
+                       : Emocionalni dizajn
+                       : Testiranje upotrebljivosti
+        
+    section Napredni sustavi (1 tjedan)
+        Mehanike igre: Sustavi napretka
+                      : Integracija analitike
+                      : Dizajn monetizacije
+                      : Značajke zajednice
+        
+    section Vještine u industriji (1 mjesec)
+        Profesionalni razvoj: Timsku suradnju
+                            : Dokumentaciju dizajna
+                            : Istraživanje igrača
+                            : Optimizaciju platforme
+```
+### 🛠️ Sažetak vašeg alata za dizajn igara
+
+Nakon završetka ove lekcije, sada ste savladali:
+- **Psihologiju igrača**: Razumijevanje motivacije, rizika/nagrade i petlji angažmana
+- **Vizualnu komunikaciju**: Efektivan dizajn korisničkog sučelja koristeći tekst, ikone i raspored
+- **Sustave povratne informacije**: Odgovore u stvarnom vremenu na akcije i događaje igre
+- **Upravljanje stanjem**: Praćenje i efikasno prikazivanje dinamičkih podataka igre
+- **Iscrtavanje teksta na platnu (Canvas)**: Profesionalni prikaz teksta sa stiliziranjem i pozicioniranjem
+- **Integraciju događaja**: Povezivanje korisničkih akcija s značajnim posljedicama u igri
+- **Balansiranje igre**: Dizajn težine i sustava napredovanja igrača
+
+**Primjene u stvarnom svijetu**: Vaše vještine dizajna igara primjenjuju se izravno na:
+- **Dizajn korisničkog sučelja**: Kreiranje privlačnih i intuitivnih sučelja
+- **Razvoj proizvoda**: Razumijevanje motivacije korisnika i povratnih petlji
+- **Edukacijsku tehnologiju**: Gamifikaciju i sustave angažmana u učenju
+- **Vizualizaciju podataka**: Provođenje složenih informacija na pristupačan i angažirajući način
+- **Razvoj mobilnih aplikacija**: Mehanike zadržavanja i dizajn korisničkog iskustva
+- **Marketinšku tehnologiju**: Razumijevanje ponašanja korisnika i optimizaciju konverzija
+
+**Profesionalne vještine koje ste stekli**: Sada možete:
+- **Dizajnirati** korisnička iskustva koja motiviraju i angažiraju korisnike
+- **Implementirati** sustave povratne informacije koji efikasno usmjeravaju ponašanje korisnika
+- **Balansirati** izazov i pristupačnost u interaktivnim sustavima
+- **Kreirati** vizualnu komunikaciju koja funkcionira za različite skupine korisnika
+- **Analizirati** ponašanje korisnika i iterirati na poboljšanjima dizajna
+
+**Koncepti razvoja igara koje ste savladali**:
+- **Motivacija igrača**: Razumijevanje što pokreće angažman i zadržavanje
+- **Vizualni dizajn**: Kreiranje jasnih, atraktivnih i funkcionalnih sučelja
+- **Integracija sustava**: Povezivanje više sustava igre u skladno iskustvo
+- **Optimizacija performansi**: Efikasno iscrtavanje i upravljanje stanjem
+- **Pristupačnost**: Dizajn za različite razine vještina i potrebe igrača
+
+**Sljedeći korak**: Spremni ste istražiti napredne obrasce dizajna igara, implementirati analitičke sustave ili proučiti monetizaciju i strategije zadržavanja igrača!
+
+🌟 **Postignuće otključano**: Izgradili ste kompletan sustav povratne informacije igrača s profesionalnim principima dizajna igara!
 
 ---
 
+## GitHub Copilot Agent Challenge 🚀
+
+Upotrijebite Agent način rada da dovršite sljedeći izazov:
+
+**Opis:** Unaprijedite sustav bodovanja svemirske igre implementacijom sustava najboljeg rezultata s trajnim spremanjem i bonusnim bodovima.
+
+**Zadatak:** Kreirajte sustav visokih rezultata koji sprema najbolji rezultat igrača u localStorage. Dodajte bonus bodove za više uzastopnih ubijenih neprijatelja (kombo sustav) i implementirajte različite vrijednosti bodova za različite vrste neprijatelja. Uključite vizualni indikator kada igrač postigne novi najbolji rezultat i prikažite trenutni najbolji rezultat na zaslonu igre.
+
 ## 🚀 Izazov
 
-Vaš kod je gotovo dovršen. Možete li zamisliti svoje sljedeće korake?
+Sada imate funkcionalnu igru s bodovanjem i životima. Razmislite koje dodatne značajke bi mogle poboljšati iskustvo igrača.
 
 ## Kviz nakon predavanja
 
@@ -191,13 +485,15 @@ Vaš kod je gotovo dovršen. Možete li zamisliti svoje sljedeće korake?
 
 ## Pregled i samostalno učenje
 
-Istražite načine na koje možete povećavati i smanjivati bodove i živote u igri. Postoje zanimljivi alati za razvoj igara poput [PlayFab](https://playfab.com). Kako bi korištenje jednog od njih moglo unaprijediti vašu igru?
+Želite li istražiti više? Istražite različite pristupe bodovanju i sustavima života u igrama. Postoje fascinantni igraći engine-i poput [PlayFab](https://playfab.com) koji upravljaju bodovanjem, ljestvicama i napredovanjem igrača. Kako bi integracija takvog sustava mogla podići vašu igru na višu razinu?
 
 ## Zadatak
 
-[Izgradite igru s bodovanjem](assignment.md)
+[Izradite igru s bodovanjem](assignment.md)
 
 ---
 
-**Odricanje od odgovornosti**:  
-Ovaj dokument je preveden pomoću AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni prijevod od strane ljudskog prevoditelja. Ne preuzimamo odgovornost za bilo kakve nesporazume ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Odricanje od odgovornosti**:
+Ovaj dokument je preveden pomoću AI prijevodnog servisa [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati službenim i autoritativnim izvorom. Za kritične informacije preporučujemo profesionalni ljudski prijevod. Nismo odgovorni za bilo kakve nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

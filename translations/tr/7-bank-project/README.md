@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "830359535306594b448db6575ce5cdee",
-  "translation_date": "2025-08-26T00:03:46+00:00",
-  "source_file": "7-bank-project/README.md",
-  "language_code": "tr"
-}
--->
 # :dollar: Bir Banka Kur
 
 Bu projede, hayali bir banka nasıl kurulur öğreneceksiniz. Bu dersler, bir web uygulamasının nasıl tasarlanacağı ve yönlendirmelerin nasıl sağlanacağı, formların nasıl oluşturulacağı, durumun nasıl yönetileceği ve bir API'den banka verilerini nasıl çekeceğiniz gibi konularda talimatlar içerir.
 
-| ![Ekran1](../../../translated_images/screen1.baccbba0f1f93364672eb250d2fbd21574bb1caf79a2155022dc098a741cbdfe.tr.png) | ![Ekran2](../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.tr.png) |
+| ![Ekran1](../../../translated_images/tr/screen1.baccbba0f1f93364.webp) | ![Ekran2](../../../translated_images/tr/screen2.123c82a831a1d14a.webp) |
 |--------------------------------|--------------------------------|
 
 ## Dersler

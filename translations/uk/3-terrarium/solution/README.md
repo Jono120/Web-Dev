@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-27T22:36:22+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "uk"
-}
--->
 # Мій тераріум: проект для вивчення HTML, CSS та маніпуляцій з DOM за допомогою JavaScript 🌵🌱
 
 Невелика вправа з перетягування елементів. За допомогою трохи HTML, JS і CSS ви можете створити веб-інтерфейс, стилізувати його та додати взаємодію.
 
-![мій тераріум](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.uk.png)
+![мій тераріум](../../../../translated_images/uk/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## Авторство
 

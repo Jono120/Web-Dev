@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b121a279a6ab39878491f3e572673515",
-  "translation_date": "2025-08-27T22:15:53+00:00",
-  "source_file": "5-browser-extension/README.md",
-  "language_code": "vi"
-}
--->
 # Xây dựng tiện ích mở rộng trình duyệt
 
 Xây dựng tiện ích mở rộng trình duyệt là một cách thú vị và hấp dẫn để suy nghĩ về hiệu suất của ứng dụng của bạn trong khi tạo một loại tài sản web khác biệt. Module này bao gồm các bài học về cách trình duyệt hoạt động, cách triển khai tiện ích mở rộng trình duyệt, cách xây dựng một biểu mẫu, gọi API, sử dụng bộ nhớ cục bộ, cũng như cách đánh giá hiệu suất của trang web và cải thiện nó.
@@ -23,7 +14,7 @@ Tiện ích này có thể được người dùng gọi bất kỳ lúc nào sa
 
 ### Ghi nhận
 
-![một tiện ích mở rộng trình duyệt màu xanh lá cây](../../../translated_images/extension-screenshot.0e7f5bfa110e92e3875e1bc9405edd45a3d2e02963e48900adb91926a62a5807.vi.png)
+![một tiện ích mở rộng trình duyệt màu xanh lá cây](../../../translated_images/vi/extension-screenshot.0e7f5bfa110e92e3.webp)
 
 ## Ghi nhận
 

@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "fab4e6b4f0efcd587a9029d82991f597",
-  "translation_date": "2025-08-27T22:18:11+00:00",
-  "source_file": "5-browser-extension/solution/README.md",
-  "language_code": "hr"
-}
--->
 # Carbon Trigger Browser Ekstenzija: Dovršeni Kod
 
 Koristeći tmrow-ov C02 Signal API za praćenje potrošnje električne energije, izradite ekstenziju za preglednik kako biste imali podsjetnik u svom pregledniku o tome koliko je velika potrošnja električne energije u vašoj regiji. Povremeno korištenje ove ekstenzije pomoći će vam da donesete odluke o svojim aktivnostima na temelju tih informacija.
 
-![screenshot ekstenzije](../../../../translated_images/extension-screenshot.0e7f5bfa110e92e3875e1bc9405edd45a3d2e02963e48900adb91926a62a5807.hr.png)
+![screenshot ekstenzije](../../../../translated_images/hr/extension-screenshot.0e7f5bfa110e92e3.webp)
 
 ## Početak
 
@@ -31,7 +22,7 @@ npm run build
 
 Za instalaciju na Edge pregledniku, koristite izbornik s 'tri točke' u gornjem desnom kutu preglednika kako biste pronašli panel Ekstenzije. Odatle odaberite 'Učitaj nepakirano' za učitavanje nove ekstenzije. Na upit otvorite mapu 'dist' i ekstenzija će se učitati. Za korištenje, trebat će vam API ključ za CO2 Signal API ([nabavite ga ovdje putem e-pošte](https://www.co2signal.com/) - unesite svoju e-poštu u okvir na ovoj stranici) i [kod za vašu regiju](http://api.electricitymap.org/v3/zones) koji odgovara [Electricity Map](https://www.electricitymap.org/map) (na primjer, u Bostonu koristim 'US-NEISO').
 
-![instalacija](../../../../translated_images/install-on-edge.78634f02842c48283726c531998679a6f03a45556b2ee99d8ff231fe41446324.hr.png)
+![instalacija](../../../../translated_images/hr/install-on-edge.78634f02842c4828.webp)
 
 Nakon što unesete API ključ i regiju u sučelje ekstenzije, obojena točka u traci ekstenzije preglednika trebala bi se promijeniti kako bi odražavala potrošnju energije u vašoj regiji i dala vam smjernice o tome koje aktivnosti s velikom potrošnjom energije bi bile prikladne za vas. Koncept iza ovog sustava 'točke' inspiriran je [Energy Lollipop ekstenzijom](https://energylollipop.com/) za emisije u Kaliforniji.
 

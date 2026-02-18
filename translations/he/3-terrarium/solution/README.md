@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-27T20:12:18+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "he"
-}
--->
 # הטרריום שלי: פרויקט ללמידת HTML, CSS ומניפולציה של DOM באמצעות JavaScript 🌵🌱
 
 תרגול קטן של גרירה ושחרור. עם מעט HTML, JS ו-CSS, תוכלו לבנות ממשק אינטרנט, לעצב אותו ולהוסיף אינטראקציה.
 
-![הטרריום שלי](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.he.png)
+![הטרריום שלי](../../../../translated_images/he/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## קרדיטים
 

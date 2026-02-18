@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-28T11:50:25+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "lt"
-}
--->
 # Mano Terariumas: Projektas mokytis apie HTML, CSS ir DOM manipuliavimą naudojant JavaScript 🌵🌱
 
 Maža vilkimo ir numetimo kodavimo meditacija. Naudodami šiek tiek HTML, JS ir CSS, galite sukurti internetinę sąsają, ją stilizuoti ir pridėti interaktyvumo.
 
-![mano terariumas](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.lt.png)
+![mano terariumas](../../../../translated_images/lt/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## Kreditas
 

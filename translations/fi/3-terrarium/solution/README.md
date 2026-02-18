@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-27T20:11:59+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "fi"
-}
--->
 # Minun Terraarioni: Projekti HTML:n, CSS:n ja DOM-manipulaation oppimiseen JavaScriptin avulla 🌵🌱
 
 Pieni vedä ja pudota -koodimeditaatio. Vähän HTML:ää, JS:ää ja CSS:ää käyttäen voit rakentaa verkkokäyttöliittymän, tyylitellä sen ja lisätä siihen vuorovaikutteisuutta.
 
-![minun terraarioni](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.fi.png)
+![minun terraarioni](../../../../translated_images/fi/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## Tekijät
 

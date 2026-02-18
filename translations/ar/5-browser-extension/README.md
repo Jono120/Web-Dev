@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b121a279a6ab39878491f3e572673515",
-  "translation_date": "2025-08-25T23:25:52+00:00",
-  "source_file": "5-browser-extension/README.md",
-  "language_code": "ar"
-}
--->
 # بناء إضافة للمتصفح
 
 يُعد بناء إضافات المتصفح طريقة ممتعة ومثيرة للتفكير في أداء تطبيقاتك أثناء إنشاء نوع مختلف من أصول الويب. يتضمن هذا الدرس دروسًا حول كيفية عمل المتصفحات وكيفية نشر إضافة للمتصفح، وكيفية بناء نموذج، واستدعاء واجهة برمجة التطبيقات (API)، واستخدام التخزين المحلي، وكيفية قياس أداء موقعك وتحسينه.
@@ -23,7 +14,7 @@ CO_OP_TRANSLATOR_METADATA:
 
 ### الشكر والتقدير
 
-![إضافة متصفح خضراء](../../../translated_images/extension-screenshot.0e7f5bfa110e92e3875e1bc9405edd45a3d2e02963e48900adb91926a62a5807.ar.png)
+![إضافة متصفح خضراء](../../../translated_images/ar/extension-screenshot.0e7f5bfa110e92e3.webp)
 
 ## الشكر والتقدير
 

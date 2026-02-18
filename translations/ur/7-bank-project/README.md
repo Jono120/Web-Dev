@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "830359535306594b448db6575ce5cdee",
-  "translation_date": "2025-08-26T00:02:42+00:00",
-  "source_file": "7-bank-project/README.md",
-  "language_code": "ur"
-}
--->
 # :dollar: ایک بینک بنائیں
 
 اس پروجیکٹ میں، آپ ایک خیالی بینک بنانے کا طریقہ سیکھیں گے۔ یہ اسباق آپ کو ویب ایپ کی ترتیب اور راستے فراہم کرنے، فارم بنانے، اسٹیٹ کو منظم کرنے، اور API سے ڈیٹا حاصل کرنے کے طریقے سکھائیں گے جس سے آپ بینک کا ڈیٹا حاصل کر سکتے ہیں۔
 
-| ![Screen1](../../../translated_images/screen1.baccbba0f1f93364672eb250d2fbd21574bb1caf79a2155022dc098a741cbdfe.ur.png) | ![Screen2](../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.ur.png) |
+| ![Screen1](../../../translated_images/ur/screen1.baccbba0f1f93364.webp) | ![Screen2](../../../translated_images/ur/screen2.123c82a831a1d14a.webp) |
 |--------------------------------|--------------------------------|
 
 ## اسباق

@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-25T21:31:13+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "pa"
-}
--->
 # ਮੇਰਾ ਟੈਰੀਰੀਅਮ: HTML, CSS, ਅਤੇ DOM ਮੈਨਿਪੂਲੇਸ਼ਨ ਨੂੰ ਜਾਵਾਸਕ੍ਰਿਪਟ ਨਾਲ ਸਿੱਖਣ ਲਈ ਇੱਕ ਪ੍ਰੋਜੈਕਟ 🌵🌱
 
 ਇੱਕ ਛੋਟਾ ਡ੍ਰੈਗ ਅਤੇ ਡ੍ਰਾਪ ਕੋਡ-ਮੈਡੀਟੇਸ਼ਨ। ਥੋੜ੍ਹਾ ਜਿਹਾ HTML, JS ਅਤੇ CSS ਦੀ ਵਰਤੋਂ ਕਰਕੇ, ਤੁਸੀਂ ਇੱਕ ਵੈੱਬ ਇੰਟਰਫੇਸ ਬਣਾਉਣ, ਇਸਨੂੰ ਸਜਾਉਣ ਅਤੇ ਇਸ ਵਿੱਚ ਇੰਟਰੈਕਸ਼ਨ ਸ਼ਾਮਲ ਕਰ ਸਕਦੇ ਹੋ।
 
-![ਮੇਰਾ ਟੈਰੀਰੀਅਮ](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.pa.png)
+![ਮੇਰਾ ਟੈਰੀਰੀਅਮ](../../../../translated_images/pa/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## ਸ਼੍ਰੇਯ
 

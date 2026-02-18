@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-25T21:31:05+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "ne"
-}
--->
 # मेरो टेरारियम: HTML, CSS, र DOM म्यानिपुलेसन सिक्नका लागि एक प्रोजेक्ट 🌵🌱
 
 सानो ड्र्याग र ड्रप कोड-मेडिटेसन। थोरै HTML, JS, र CSS प्रयोग गरेर तपाईं वेब इन्टरफेस बनाउन, यसलाई स्टाइल गर्न, र अन्तरक्रिया थप्न सक्नुहुन्छ।
 
-![मेरो टेरारियम](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.ne.png)
+![मेरो टेरारियम](../../../../translated_images/ne/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## श्रेय
 

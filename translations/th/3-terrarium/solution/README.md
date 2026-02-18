@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-26T21:38:52+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "th"
-}
--->
 # เทอร์ราเรียมของฉัน: โปรเจกต์เรียนรู้เกี่ยวกับ HTML, CSS และการจัดการ DOM ด้วย JavaScript 🌵🌱
 
 โค้ดเล็กๆ ที่สามารถลากและวางได้ พร้อมด้วย HTML, JS และ CSS คุณสามารถสร้างอินเทอร์เฟซเว็บ ออกแบบสไตล์ และเพิ่มการโต้ตอบได้
 
-![my terrarium](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.th.png)
+![my terrarium](../../../../translated_images/th/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## เครดิต
 

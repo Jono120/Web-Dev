@@ -1,88 +1,145 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "1b0aeccb600f83c603cd70cb42df594d",
-  "translation_date": "2025-08-29T10:58:32+00:00",
-  "source_file": "4-typing-game/typing-game/README.md",
-  "language_code": "cs"
-}
--->
-# Vytvoření hry pomocí událostí
+# Vytváření hry pomocí událostí
+
+Už jste se někdy divili, jak webové stránky poznají, kdy kliknete na tlačítko nebo píšete do textového pole? To je kouzlo programování řízeného událostmi! Co je lepšího způsobu, jak se naučit tuto základní dovednost, než vytvořit něco užitečného – hru na rychlost psaní, která reaguje na každý váš stisk klávesy.
+
+Uvidíte na vlastní oči, jak webové prohlížeče „komunikují“ s vaším kódem JavaScriptu. Když kliknete, napíšete nebo pohněte myší, prohlížeč posílá malá „zprávy“ (říkáme jim události) vašemu kódu a vy rozhodnete, jak na ně reagovat!
+
+Až tady skončíme, vytvoříte skutečnou hru na psaní, která sleduje vaši rychlost a přesnost. Ještě důležitější je, že pochopíte základní pojmy, které pohánějí každou interaktivní webovou stránku, kterou jste kdy použili. Pojďme na to!
 
 ## Kvíz před přednáškou
 
-[Kvíz před přednáškou](https://ff-quizzes.netlify.app/web/quiz/21)
+[Pre-lecture quiz](https://ff-quizzes.netlify.app/web/quiz/21)
 
 ## Programování řízené událostmi
 
-Při vytváření aplikace prohlížeče poskytujeme uživateli grafické uživatelské rozhraní (GUI), které může použít při interakci s tím, co jsme vytvořili. Nejčastějším způsobem interakce s prohlížečem je klikání a psaní do různých prvků. Výzvou, které čelíme jako vývojáři, je, že nevíme, kdy tyto operace provedou!
+Zamyslete se nad svou oblíbenou aplikací nebo webovou stránkou – co ji dělá živou a citlivou? Je to celé o tom, jak reaguje na to, co děláte! Každé klepnutí, kliknutí, přejetí nebo stisk klávesy vytváří to, čemu říkáme „událost“, a právě zde se odehrává opravdové kouzlo webového vývoje.
 
-[Programování řízené událostmi](https://en.wikipedia.org/wiki/Event-driven_programming) je název pro typ programování, který potřebujeme k vytvoření našeho GUI. Pokud tuto frázi trochu rozebereme, zjistíme, že klíčovým slovem je zde **událost**. [Událost](https://www.merriam-webster.com/dictionary/event) je podle Merriam-Webster definována jako „něco, co se stane“. To dokonale popisuje naši situaci. Víme, že se něco stane, na co chceme reagovat spuštěním kódu, ale nevíme, kdy k tomu dojde.
+Co dělá programování pro web tak zajímavým: nikdy nevíme, kdy někdo klikne na tlačítko nebo začne psát do textového pole. Může kliknout hned, počkat pět minut nebo třeba vůbec! Tato nepředvídatelnost znamená, že musíme o psaní kódu přemýšlet jinak.
 
-Část kódu, kterou chceme spustit, označíme vytvořením funkce. Když přemýšlíme o [procedurálním programování](https://en.wikipedia.org/wiki/Procedural_programming), funkce se volají ve specifickém pořadí. Totéž platí i pro programování řízené událostmi. Rozdíl je v tom, **jak** budou funkce volány.
+Místo psaní kódu, který se vykonává shora dolů jako recept, píšeme kód, který trpělivě čeká na to, až se něco stane. Je to podobné jako telegrafisté v 19. století, kteří seděli u svých strojů a byli připraveni zareagovat ve chvíli, kdy přišla zpráva přes drát.
 
-Pro zpracování událostí (klikání na tlačítka, psaní atd.) registrujeme **posluchače událostí**. Posluchač událostí je funkce, která čeká na výskyt události a reaguje na ni spuštěním kódu. Posluchači událostí mohou aktualizovat uživatelské rozhraní, provádět volání na server nebo cokoliv jiného, co je potřeba udělat v reakci na akci uživatele. Posluchače událostí přidáváme pomocí [addEventListener](https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener) a poskytnutím funkce, která se má spustit.
+Tak co přesně je „událost“? Jednoduše řečeno, je to něco, co se stane! Když kliknete na tlačítko – to je událost. Když napíšete písmeno – to je událost. Když pohněte myší – to je další událost.
 
-> **NOTE:** Stojí za zmínku, že existuje mnoho způsobů, jak vytvořit posluchače událostí. Můžete použít anonymní funkce nebo vytvořit pojmenované. Můžete použít různé zkratky, jako je nastavení vlastnosti `click`, nebo použít `addEventListener`. V našem cvičení se zaměříme na `addEventListener` a anonymní funkce, protože je to pravděpodobně nejběžnější technika, kterou weboví vývojáři používají. Je také nejflexibilnější, protože `addEventListener` funguje pro všechny události a název události lze zadat jako parametr.
+Programování řízené událostmi nám umožňuje nastavit náš kód tak, aby poslouchal a reagoval. Vytváříme speciální funkce nazývané **event listenery** (posluchače událostí), které trpělivě čekají na konkrétní situace a pak okamžitě reagují, když nastanou.
+
+Představte si posluchače událostí jako zvonek u dveří pro váš kód. Nastavíte zvonek (`addEventListener()`), řeknete mu, jaký zvuk má poslouchat (například „kliknutí“ nebo „stisk klávesy“) a pak určíme, co se má stát, když někdo zazvoní (vaše vlastní funkce).
+
+**Takto posluchače událostí fungují:**
+- **Poslouchají** specifické uživatelské akce jako kliknutí, stisky kláves či pohyby myši
+- **Spustí** váš vlastní kód, když nastane daná událost
+- **Okamžitě reagují** na uživatelské interakce a vytvářejí plynulý zážitek
+- **Řeší** více událostí na stejném prvku pomocí různých posluchačů
+
+> **POZNÁMKA:** Stojí za to zdůraznit, že existuje mnoho způsobů, jak vytvořit posluchače událostí. Můžete použít anonymní funkce nebo pojmenované funkce. Můžete využít různé zkratky, například nastavit vlastnost `click` nebo použít `addEventListener()`. V našem cvičení se zaměříme na `addEventListener()` a anonymní funkce, protože je to pravděpodobně nejběžnější technika používaná webovými vývojáři. Je také nejflexibilnější, protože `addEventListener()` funguje pro všechny události a název události lze předat jako parametr.
 
 ### Běžné události
 
-Existuje [desítky událostí](https://developer.mozilla.org/docs/Web/Events), které můžete poslouchat při vytváření aplikace. Prakticky cokoliv, co uživatel na stránce udělá, vyvolá událost, což vám dává velkou moc zajistit, že dostane požadovaný zážitek. Naštěstí obvykle budete potřebovat jen malý počet událostí. Zde je několik běžných (včetně dvou, které použijeme při vytváření naší hry):
+I když webové prohlížeče nabízejí desítky různých událostí, na které můžete poslouchat, většina interaktivních aplikací spoléhá jen na hrstku základních událostí. Pochopení těchto základních událostí vám dá základy pro vytváření sofistikovaných uživatelských interakcí.
 
-- [click](https://developer.mozilla.org/docs/Web/API/Element/click_event): Uživatel na něco klikl, obvykle na tlačítko nebo odkaz
-- [contextmenu](https://developer.mozilla.org/docs/Web/API/Element/contextmenu_event): Uživatel klikl pravým tlačítkem myši
-- [select](https://developer.mozilla.org/docs/Web/API/Element/select_event): Uživatel označil nějaký text
-- [input](https://developer.mozilla.org/docs/Web/API/Element/input_event): Uživatel zadal nějaký text
+Existuje [desítky událostí](https://developer.mozilla.org/docs/Web/Events), na které můžete při vytváření aplikace reagovat. Prakticky cokoli, co uživatel na stránce udělá, vyvolá událost, což vám dává spoustu možností, abyste zajistili požadovaný uživatelský zážitek. Naštěstí budete obvykle potřebovat jen pár událostí. Zde je několik běžných (včetně dvou, které použijeme při tvorbě naší hry):
+
+| Událost | Popis | Běžné použití |
+|---------|-------|---------------|
+| `click` | Uživatel kliknul na něco | Tlačítka, odkazy, interaktivní prvky |
+| `contextmenu` | Uživatel kliknul pravým tlačítkem myši | Vlastní kontextové menu na pravý klik |
+| `select` | Uživatel označil text | Úprava textu, kopírování |
+| `input` | Uživatel zadal text | Ověření formuláře, vyhledávání v reálném čase |
+
+**Pochopení těchto typů událostí:**
+- **Spouští se** při interakci uživatelů s konkrétními prvky na stránce
+- **Poskytují** podrobné informace o uživatelské akci prostřednictvím objektů událostí
+- **Umožňují** vytvářet citlivé a interaktivní webové aplikace
+- **Fungují** konzistentně napříč různými prohlížeči a zařízeními
 
 ## Vytvoření hry
 
-Vytvoříme hru, abychom prozkoumali, jak události fungují v JavaScriptu. Naše hra otestuje schopnost hráče psát, což je jedna z nejvíce podceňovaných dovedností, kterou by měl mít každý vývojář. Všichni bychom měli trénovat psaní! Obecný průběh hry bude vypadat takto:
+Nyní, když rozumíte tomu, jak události fungují, pojďme tuto znalost využít v praxi vytvářením něčeho užitečného. Vytvoříme hru na rychlost psaní, která demonstruje práci s událostmi a zároveň vám pomůže rozvinout důležitou dovednost programátora.
 
-- Hráč klikne na tlačítko start a zobrazí se mu citát k opsání
-- Hráč co nejrychleji napíše citát do textového pole
-  - Jakmile dokončí jedno slovo, další se zvýrazní
-  - Pokud hráč udělá překlep, textové pole se zbarví červeně
-  - Když hráč dokončí citát, zobrazí se zpráva o úspěchu s uplynulým časem
+Budeme vytvářet hru, abychom prozkoumali, jak události fungují v JavaScriptu. Naše hra otestuje hráčovu schopnost psaní, což je jedna z nejvíce podceňovaných dovedností, kterou by měl každý vývojář mít. Zajímavost: klávesnice QWERTY, kterou dnes používáme, byla ve skutečnosti navržena v 70. letech 19. století pro psací stroje – a dobré psací dovednosti jsou pro programátory stále stejně cenné! Obecný průběh hry bude vypadat takto:
 
-Pojďme vytvořit naši hru a naučit se něco o událostech!
+```mermaid
+flowchart TD
+    A[Hráč klikne na Start] --> B[Náhodný citát se zobrazí]
+    B --> C[Hráč píše do textového pole]
+    C --> D{Slovo je dokončeno?}
+    D -->|Ano| E[Zvýraznit další slovo]
+    D -->|Ne| F{Zatím správně?}
+    F -->|Ano| G[Udržet normální styl]
+    F -->|Ne| H[Zobrazit chybný styl]
+    E --> I{Citát dokončen?}
+    I -->|Ne| C
+    I -->|Ano| J[Zobrazit zprávu o úspěchu s časem]
+    G --> C
+    H --> C
+```
+**Takto bude naše hra fungovat:**
+- **Začne** po kliknutí hráče na tlačítko start a zobrazí náhodný citát
+- **Sleduje** postup psaní hráče slovo po slovu v reálném čase
+- **Zvýrazňuje** aktuální slovo pro lepší soustředění hráče
+- **Poskytuje** okamžitou vizuální zpětnou vazbu při chybách v psaní
+- **Vypočítá** a zobrazí celkový čas po dokončení citátu
+
+Pojďme postavit naši hru a naučit se o událostech!
 
 ### Struktura souborů
 
-Budeme potřebovat celkem tři soubory: **index.html**, **script.js** a **style.css**. Začněme jejich nastavením, abychom si usnadnili práci.
+Než začneme kódovat, zorganizujme si vše! Mít od začátku čistou strukturu souborů ušetří později spoustu starostí a udělá z vašeho projektu profesionálnější práci. 😊
 
-- Vytvořte novou složku pro svou práci otevřením konzole nebo terminálu a zadáním následujícího příkazu:
+Budeme to mít jednoduché – tři soubory: `index.html` pro strukturu stránky, `script.js` pro veškerou logiku hry a `style.css`, abychom vše krásně naformátovali. To je klasické trio, které pohání většinu webu!
+
+**Vytvořte novou složku pro svou práci otevřením konzole nebo terminálu a zadejte následující příkaz:**
 
 ```bash
-# Linux or macOS
+# Linux nebo macOS
 mkdir typing-game && cd typing-game
 
 # Windows
 md typing-game && cd typing-game
 ```
 
-- Otevřete Visual Studio Code
+**Co tyto příkazy dělají:**
+- **Vytvoří** novou složku s názvem `typing-game` pro vaše projekty
+- **Automaticky** přejde do nové složky
+- **Založí** čisté pracovní prostředí pro vývoj hry
+
+**Otevřete Visual Studio Code:**
 
 ```bash
 code .
 ```
 
-- Přidejte do složky ve Visual Studio Code tři soubory s následujícími názvy:
-  - index.html
-  - script.js
-  - style.css
+**Tento příkaz:**
+- **Spustí** Visual Studio Code v aktuálním adresáři
+- **Otevře** vaši projektovou složku v editoru
+- **Umožní** přístup ke všem vývojovým nástrojům, které budete potřebovat
+
+**Přidejte do složky ve Visual Studio Code tři soubory s těmito názvy:**
+- `index.html` – obsahuje strukturu a obsah vaší hry
+- `script.js` – řeší veškerou logiku hry a posluchače událostí
+- `style.css` – definuje vizuální podobu a stylování
 
 ## Vytvoření uživatelského rozhraní
 
-Pokud prozkoumáme požadavky, víme, že budeme potřebovat několik prvků na naší HTML stránce. Je to něco jako recept, kde potřebujeme nějaké ingredience:
+Teď postavme jeviště, kde se odehraje veškerá akce naší hry! Představte si to jako navrhování ovládacího panelu vesmírné lodi – musíme zajistit, aby vše, co hráči potřebují, bylo přesně tam, kde to čekají.
 
-- Místo pro zobrazení citátu, který má uživatel opsat
-- Místo pro zobrazení zpráv, jako je zpráva o úspěchu
-- Textové pole pro psaní
-- Tlačítko start
+Pojďme zjistit, co naše hra skutečně potřebuje. Kdybyste hráli hru na psaní, co byste chtěli vidět na obrazovce? Tady je to, co budeme potřebovat:
 
-Každý z těchto prvků bude potřebovat ID, abychom s nimi mohli pracovat v našem JavaScriptu. Přidáme také odkazy na soubory CSS a JavaScript, které vytvoříme.
+| Prvek UI | Účel | HTML prvek |
+|----------|-------|------------|
+| Zobrazení citátu | Ukazuje text k opsání | `<p>` s `id="quote"` |
+| Oblast zpráv | Zobrazuje stavové a úspěšné zprávy | `<p>` s `id="message"` |
+| Textové pole | Místo, kde hráči píší citát | `<input>` s `id="typed-value"` |
+| Tlačítko start | Spustí hru | `<button>` s `id="start"` |
 
-Vytvořte nový soubor s názvem **index.html**. Přidejte následující HTML:
+**Pochopení struktury UI:**
+- **Uspořádává** obsah logicky shora dolů
+- **Přiřazuje** unikátní ID prvkům pro cílení v JavaScriptu
+- **Poskytuje** jasnou vizuální hierarchii pro lepší uživatelský zážitek
+- **Zahrnuje** sémantické HTML prvky pro přístupnost
+
+Každý z těchto prvků bude potřebovat ID, abychom s nimi mohli v JavaScriptu pracovat. Přidáme také reference na CSS a JavaScriptové soubory, které vytvoříme.
+
+Vytvořte nový soubor s názvem `index.html`. Přidejte následující HTML:
 
 ```html
 <!-- inside index.html -->
@@ -105,26 +162,52 @@ Vytvořte nový soubor s názvem **index.html**. Přidejte následující HTML:
 </html>
 ```
 
+**Rozbor, co tato HTML struktura dělá:**
+- **Propojuje** CSS soubor ve `<head>` pro stylování
+- **Vytváří** jasný nadpis a instrukce pro uživatele
+- **Zřizuje** odstavce s konkrétními ID pro dynamický obsah
+- **Zahrnuje** vstupní pole s atributy pro přístupnost
+- **Poskytuje** tlačítko start pro spuštění hry
+- **Načítá** JavaScript na konci pro optimální výkon
+
 ### Spuštění aplikace
 
-Vždy je nejlepší vyvíjet iterativně, abychom viděli, jak věci vypadají. Spusťme naši aplikaci. Existuje skvělý doplněk pro Visual Studio Code s názvem [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon), který bude hostovat vaši aplikaci lokálně a aktualizovat prohlížeč pokaždé, když uložíte.
+Pravidelné testování aplikace během vývoje vám pomůže odhalit chyby včas a vidět svůj pokrok v reálném čase. Live Server je neocenitelný nástroj, který automaticky obnovuje prohlížeč při každém uložení změn, což značně zrychluje vývoj.
 
-- Nainstalujte [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon) podle odkazu a kliknutím na **Install**
-  - Prohlížeč vás vyzve k otevření Visual Studio Code a poté vás Visual Studio Code vyzve k provedení instalace
-  - Restartujte Visual Studio Code, pokud budete vyzváni
-- Po instalaci klikněte ve Visual Studio Code na Ctrl-Shift-P (nebo Cmd-Shift-P) pro otevření příkazové palety
-- Zadejte **Live Server: Open with Live Server**
-  - Live Server začne hostovat vaši aplikaci
-- Otevřete prohlížeč a přejděte na **https://localhost:5500**
-- Nyní byste měli vidět stránku, kterou jste vytvořili!
+Nejlepší je vyvíjet postupně, abyste viděli, jak to vypadá. Spusťme naši aplikaci. Ve Visual Studio Code existuje skvělá rozšíření s názvem [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon), které vaši aplikaci hostuje lokálně a zároveň obnovuje prohlížeč při každém uložení.
 
-Přidejme nějakou funkcionalitu.
+**Nainstalujte [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon) kliknutím na odkaz a tlačítko Instalovat:**
+
+**Co se děje během instalace:**
+- **Vyvolá** váš prohlížeč k otevření Visual Studio Code
+- **Provede** vás postupem instalace rozšíření
+- **Může vyžadovat** restart Visual Studio Code pro dokončení instalace
+
+**Po instalaci ve Visual Studio Code stiskněte Ctrl-Shift-P (nebo Cmd-Shift-P) pro otevření palety příkazů:**
+
+**Co paleta příkazů dělá:**
+- **Umožňuje** rychlý přístup ke všem příkazům VS Code
+- **Vyhledává** příkazy při psaní
+- **Nabízí** klávesové zkratky pro rychlejší vývoj
+
+**Napište „Live Server: Open with Live Server“:**
+
+**Co Live Server dělá:**
+- **Spustí** lokální vývojový server pro váš projekt
+- **Automaticky** obnovuje prohlížeč po uložení souborů
+- **Servíruje** vaše soubory přes lokální URL (obvykle `localhost:5500`)
+
+**Otevřete prohlížeč a přejděte na `https://localhost:5500`:**
+
+Nyní byste měli vidět stránku, kterou jste vytvořili! Přidáme nějakou funkčnost.
 
 ## Přidání CSS
 
-S naším HTML vytvořeným přidáme CSS pro základní stylování. Potřebujeme zvýraznit slovo, které by měl hráč psát, a obarvit textové pole, pokud to, co napsal, není správné. To uděláme pomocí dvou tříd.
+Teď to uděláme hezky vizuálně! Vizuální zpětná vazba je pro uživatelská rozhraní klíčová od počátků počítačové techniky. V 80. letech výzkumy ukázaly, že okamžitá vizuální odezva výrazně zlepšuje uživatelský výkon a snižuje chyby. To je přesně to, co vytvoříme.
 
-Vytvořte nový soubor s názvem **style.css** a přidejte následující syntaxi.
+Naše hra musí být krystalicky jasná o tom, co se děje. Hráči by měli okamžitě vědět, které slovo mají psát, a pokud udělají chybu, měli by to ihned vidět. Vytvoříme jednoduché, ale účinné stylování:
+
+Vytvořte nový soubor s názvem `style.css` a přidejte následující syntaxi.
 
 ```css
 /* inside style.css */
@@ -138,40 +221,60 @@ Vytvořte nový soubor s názvem **style.css** a přidejte následující syntax
 }
 ```
 
-✅ Co se týče CSS, můžete si stránku rozvrhnout, jak chcete. Věnujte trochu času a udělejte stránku vizuálně přitažlivější:
+**Co tyto CSS třídy znamenají:**
+- **Zvýrazňuje** aktuální slovo žlutým pozadím pro jasné vedení zraku
+- **Signalizuje** chyby v psaní světle korálovým pozadím
+- **Poskytuje** okamžitou odezvu, aniž by narušovalo plynulost psaní uživatele
+- **Používá** kontrastní barvy pro přístupnost a jasnou vizuální komunikaci
 
-- Vyberte jiný font
+✅ Pokud jde o CSS, můžete stránku rozvrhnout, jak chcete. Věnujte chvíli času a udělejte stránku atraktivnější:
+
+- Změňte písmo
 - Obarvěte nadpisy
-- Změňte velikost prvků
+- Přizpůsobte velikosti prvků
 
 ## JavaScript
 
-S naším uživatelským rozhraním vytvořeným je čas zaměřit naši pozornost na JavaScript, který poskytne logiku. Rozdělíme to na několik kroků:
+Teď to začne být zajímavé! 🎉 Máme HTML strukturu a CSS stylování, ale naše hra je zatím jako krásné auto bez motoru. JavaScript bude ten motor – to, co skutečně primárně funguje a reaguje na to, co hráč dělá.
 
-- [Vytvoření konstant](../../../../4-typing-game/typing-game)
-- [Posluchač událostí pro spuštění hry](../../../../4-typing-game/typing-game)
-- [Posluchač událostí pro psaní](../../../../4-typing-game/typing-game)
+Zde uvidíte svůj výtvor ožívat. Pustíme se do toho krok za krokem, aby to nebylo zahlcující:
 
-Nejprve ale vytvořte nový soubor s názvem **script.js**.
+| Krok | Cíl | Co se naučíte |
+|------|-----|---------------|
+| [Vytvoření konstant](../../../../4-typing-game/typing-game) | Nastavení citátů a referencí na DOM | Správa proměnných a výběr DOM prvků |
+| [Posluchač události pro start hry](../../../../4-typing-game/typing-game) | Zpracování inicializace hry | Práce s událostmi a aktualizace UI |
+| [Posluchač události pro psaní](../../../../4-typing-game/typing-game) | Zpracování vstupu uživatele v reálném čase | Validace vstupu a dynamická zpětná vazba |
+
+**Takto strukturovaný přístup vám pomůže:**
+- **Organizovat** kód do logických, zvládnutelných částí
+- **Postupně** budovat funkčnost pro snadnější ladění
+- **Porozumět**, jak spolu části aplikace fungují
+- **Vytvořit** znovupoužitelné vzory pro budoucí projekty
+
+Nejprve ale vytvořte nový soubor s názvem `script.js`.
 
 ### Přidání konstant
 
-Budeme potřebovat několik položek, které nám usnadní programování. Opět, podobně jako recept, zde je to, co budeme potřebovat:
+Než se pustíme do akce, shromáždíme všechny naše zdroje! Stejně jako NASA nastavuje všechny monitorovací systémy před startem, je mnohem snazší mít vše připravené, než později něco hledat a riskovat překlepy.
 
-- Pole se seznamem všech citátů
-- Prázdné pole pro uložení všech slov aktuálního citátu
-- Prostor pro uložení indexu slova, které hráč aktuálně píše
-- Čas, kdy hráč klikl na start
+Nejprve nastavíme toto:
 
-Budeme také chtít odkazy na prvky uživatelského rozhraní:
+| Typ dat | Účel | Příklad |
+| Pole citátů | Uložte všechny možné citáty pro hru | `['Quote 1', 'Quote 2', ...]` |
+| Pole slov | Rozdělte aktuální citát na jednotlivá slova | `['When', 'you', 'have', ...]` |
+| Index slova | Sleduje, které slovo hráč píše | `0, 1, 2, 3...` |
+| Čas začátku | Vypočítá uplynulý čas pro skórování | `Date.now()` |
 
-- Textové pole (**typed-value**)
-- Zobrazení citátu (**quote**)
-- Zpráva (**message**)
+**Budeme také potřebovat reference na naše prvky uživatelského rozhraní:**
+| Prvek | ID | Účel |
+|---------|----|---------|
+| Textový vstup | `typed-value` | Kde hráči píší |
+| Zobrazení citátu | `quote` | Zobrazuje citát k napsání |
+| Oblast zpráv | `message` | Zobrazuje aktualizace stavu |
 
 ```javascript
-// inside script.js
-// all of our quotes
+// uvnitř script.js
+// všechny naše citáty
 const quotes = [
     'When you have eliminated the impossible, whatever remains, however improbable, must be the truth.',
     'There is nothing more deceptive than an obvious fact.',
@@ -181,172 +284,320 @@ const quotes = [
     'Nothing clears up a case so much as stating it to another person.',
     'Education never ends, Watson. It is a series of lessons, with the greatest for the last.',
 ];
-// store the list of words and the index of the word the player is currently typing
+// uložit seznam slov a index slova, které hráč právě píše
 let words = [];
 let wordIndex = 0;
-// the starting time
+// počáteční čas
 let startTime = Date.now();
-// page elements
+// prvky stránky
 const quoteElement = document.getElementById('quote');
 const messageElement = document.getElementById('message');
 const typedValueElement = document.getElementById('typed-value');
 ```
 
-✅ Přidejte do své hry více citátů
+**Rozbor toho, co tento nastavitelný kód dělá:**
+- **Ukládá** pole citátů Sherlocka Holmese pomocí `const`, protože citáty se nebudou měnit
+- **Inicializuje** sledovací proměnné pomocí `let`, protože se jejich hodnoty během hry budou měnit
+- **Získává** reference na DOM prvky pomocí `document.getElementById()` pro efektivní přístup
+- **Nastavuje** základy veškeré herní funkčnosti s jasnými, popisnými názvy proměnných
+- **Organizuje** související data a prvky logicky pro snazší údržbu kódu
 
-> **NOTE:** Prvky můžeme kdykoliv v kódu získat pomocí `document.getElementById`. Protože se na tyto prvky budeme pravidelně odkazovat, vyhneme se překlepům ve stringových literálech použitím konstant. Frameworky jako [Vue.js](https://vuejs.org/) nebo [React](https://reactjs.org/) vám mohou pomoci lépe centralizovat váš kód.
+✅ Pokračujte a přidejte do své hry více citátů
 
-Podívejte se na video o používání `const`, `let` a `var`
+> 💡 **Tip:** Prvky můžeme získat kdykoli v kódu pomocí `document.getElementById()`. Protože na tyto prvky budeme odkazovat pravidelně, vyhneme se překlepům ve stringových literálech použitím konstant. Frameworky jako [Vue.js](https://vuejs.org/) nebo [React](https://reactjs.org/) mohou pomoci lepší centralizaci kódu.
+>
+**Proč tento přístup funguje tak dobře:**
+- **Zabraňuje** pravopisným chybám při opakovaném odkazování na prvky
+- **Zlepšuje** čitelnost kódu pomocí popisných názvů konstant
+- **Umožňuje** lepší podporu v IDE s automatickým doplňováním a kontrolou chyb
+- **Usnadňuje** refaktorování, pokud se ID prvků později změní
 
-[![Typy proměnných](https://img.youtube.com/vi/JNIXfGiDWM8/0.jpg)](https://youtube.com/watch?v=JNIXfGiDWM8 "Typy proměnných")
+Věnujte minutu sledování videa o použití `const`, `let` a `var`
+
+[![Druhy proměnných](https://img.youtube.com/vi/JNIXfGiDWM8/0.jpg)](https://youtube.com/watch?v=JNIXfGiDWM8 "Druhy proměnných")
 
 > 🎥 Klikněte na obrázek výše pro video o proměnných.
 
-### Přidání logiky spuštění
+### Přidejte startovní logiku
 
-Pro spuštění hry hráč klikne na start. Samozřejmě nevíme, kdy na start klikne. Zde přichází na řadu [posluchač událostí](https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener). Posluchač událostí nám umožní poslouchat, kdy se něco stane (událost), a reagovat na to spuštěním kódu. V našem případě chceme spustit kód, když uživatel klikne na start.
+Tady všechno začne dávat smysl! 🚀 Chystáte se napsat svůj první skutečný posluchač událostí a je to velmi uspokojující vidět kód reagovat na kliknutí tlačítka.
 
-Když uživatel klikne na **start**, musíme vybrat citát, nastavit uživatelské rozhraní a připravit sledování aktuálního slova a času. Níže je JavaScript, který budete muset přidat; rozebereme ho hned po bloku skriptu.
+Zamyslete se: někde tam venku hráč klikne na tlačítko "Start" a váš kód musí být připraven. Nevíme kdy přesně klikne – může to být okamžitě, nebo po kávě – ale jakmile klikne, hra ožije.
+
+Když uživatel klikne na `start`, musíme vybrat citát, připravit uživatelské rozhraní a nastavit sledování aktuálního slova a času. Níže je JavaScript, který je potřeba přidat; popisujeme ho těsně za blokem skriptu.
 
 ```javascript
-// at the end of script.js
+// na konci script.js
 document.getElementById('start').addEventListener('click', () => {
-  // get a quote
+  // získat citát
   const quoteIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[quoteIndex];
-  // Put the quote into an array of words
+  // Vložit citát do pole slov
   words = quote.split(' ');
-  // reset the word index for tracking
+  // resetovat index slova pro sledování
   wordIndex = 0;
 
-  // UI updates
-  // Create an array of span elements so we can set a class
+  // aktualizace uživatelského rozhraní
+  // Vytvořit pole span elementů, abychom mohli nastavit třídu
   const spanWords = words.map(function(word) { return `<span>${word} </span>`});
-  // Convert into string and set as innerHTML on quote display
+  // Převést na řetězec a nastavit jako innerHTML v zobrazení citátu
   quoteElement.innerHTML = spanWords.join('');
-  // Highlight the first word
+  // Zvýraznit první slovo
   quoteElement.childNodes[0].className = 'highlight';
-  // Clear any prior messages
+  // Vymazat jakékoliv předchozí zprávy
   messageElement.innerText = '';
 
-  // Setup the textbox
-  // Clear the textbox
+  // Nastavit textové pole
+  // Vymazat textové pole
   typedValueElement.value = '';
-  // set focus
+  // nastavit fokus
   typedValueElement.focus();
-  // set the event handler
+  // nastavit obsluhu události
 
-  // Start the timer
+  // Spustit časovač
   startTime = new Date().getTime();
 });
 ```
 
-Rozeberme si kód!
+**Rozdělme kód na logické části:**
 
-- Nastavení sledování slov
-  - Použití [Math.floor](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/floor) a [Math.random](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/random) nám umožní náhodně vybrat citát z pole `quotes`
-  - Převádíme `quote` na pole `words`, abychom mohli sledovat slovo, které hráč aktuálně píše
-  - `wordIndex` je nastaven na 0, protože hráč začne na prvním slově
-- Nastavení uživatelského rozhraní
-  - Vytvoříme pole `spanWords`, které obsahuje každé slovo uvnitř prvku `span`
-    - To nám umožní zvýraznit slovo na displeji
-  - `join` pole pro vytvoření řetězce, který můžeme použít k aktualizaci `innerHTML` na `quoteElement`
-    - To zobrazí citát hráči
-  - Nastavíme `className` prvního prvku `span` na `highlight`, aby byl zvýrazněn žlutě
-  - Vyčistíme `messageElement` nastavením `innerText` na `''`
-- Nastavení textového pole
-  - Vymažeme aktuální `value` na `typedValueElement`
-  - Nastavíme `focus` na `typedValueElement`
-- Spustíme časovač voláním `getTime`
+**📊 Nastavení sledování slov:**
+- **Vybere** náhodný citát pomocí `Math.floor()` a `Math.random()` pro rozmanitost
+- **Převede** citát na pole jednotlivých slov pomocí `split(' ')`
+- **Resetuje** `wordIndex` na 0, protože hráči začínají prvním slovem
+- **Připraví** herní stav pro novou hru
 
-### Přidání logiky psaní
+**🎨 Nastavení UI a zobrazení:**
+- **Vytvoří** pole elementů `<span>`, které obalí každé slovo pro individuální stylování
+- **Spojí** span elementy do jednoho řetězce pro efektivní aktualizaci DOM
+- **Zvýrazní** první slovo přidáním CSS třídy `highlight`
+- **Vyčistí** předchozí herní zprávy, aby byl začátek čistý
 
-Jak hráč píše, bude vyvolána událost `input`. Tento posluchač událostí zkontroluje, zda hráč píše slovo správně, a zpracuje aktuální stav hry. Vraťte se do **script.js** a přidejte následující kód na konec. Rozebereme ho poté.
+**⌨️ Příprava textového pole:**
+- **Vyčistí** existující text ve vstupním poli
+- **Nastaví fokus** na textové pole, aby hráči mohli začít psát okamžitě
+- **Připraví** oblast vstupu pro novou hru
+
+**⏱️ Inicializace časovače:**
+- **Zachytí** aktuální čas pomocí `new Date().getTime()`
+- **Umožní** přesné měření rychlosti psaní a času dokončení
+- **Spustí** sledování výkonu během hry
+
+### Přidejte logiku psaní
+
+Tady se pustíme do jádra naší hry! Nebojte se, jestli se to na první pohled zdá hodně – projdeme každý krok a na konci uvidíte, jak logické to vše je.
+
+Co stavíme, je docela sofistikované: pokaždé, když někdo napíše písmeno, náš kód zkontroluje, co bylo napsáno, poskytne zpětnou vazbu a rozhodne, co se má stát dál. Je to podobné jako rané textové editory typu WordStar v 70. letech, které poskytovaly okamžitou odezvu psavcům.
 
 ```javascript
-// at the end of script.js
+// na konci script.js
 typedValueElement.addEventListener('input', () => {
-  // Get the current word
+  // Získat aktuální slovo
   const currentWord = words[wordIndex];
-  // get the current value
+  // získat aktuální hodnotu
   const typedValue = typedValueElement.value;
 
   if (typedValue === currentWord && wordIndex === words.length - 1) {
-    // end of sentence
-    // Display success
+    // konec věty
+    // Zobrazit úspěch
     const elapsedTime = new Date().getTime() - startTime;
     const message = `CONGRATULATIONS! You finished in ${elapsedTime / 1000} seconds.`;
     messageElement.innerText = message;
   } else if (typedValue.endsWith(' ') && typedValue.trim() === currentWord) {
-    // end of word
-    // clear the typedValueElement for the new word
+    // konec slova
+    // vyčistit typedValueElement pro nové slovo
     typedValueElement.value = '';
-    // move to the next word
+    // přejít na další slovo
     wordIndex++;
-    // reset the class name for all elements in quote
+    // resetovat název třídy u všech prvků v citátu
     for (const wordElement of quoteElement.childNodes) {
       wordElement.className = '';
     }
-    // highlight the new word
+    // zvýraznit nové slovo
     quoteElement.childNodes[wordIndex].className = 'highlight';
   } else if (currentWord.startsWith(typedValue)) {
-    // currently correct
-    // highlight the next word
+    // aktuálně správně
+    // zvýraznit další slovo
     typedValueElement.className = '';
   } else {
-    // error state
+    // stav chyby
     typedValueElement.className = 'error';
   }
 });
 ```
 
-Rozeberme si kód! Začínáme tím, že získáme aktuální slovo a hodnotu, kterou hráč dosud napsal. Poté máme logiku ve stylu vodopádu, kde kontrolujeme, zda je citát dokončen, slovo dokončeno, slovo správné nebo (nakonec), zda je tam chyba.
+**Porozumění průběhu logiky psaní:**
 
-- Citát je dokončen, což je indikováno tím, že `typedValue` je rovno `currentWord` a `wordIndex` je rovno jednomu méně než `length` `words`
-  - Vypočítáme `elapsedTime` odečtením `startTime` od aktuálního času
-  - Dělíme `elapsedTime` 1 000, abychom převedli z milisekund na sekundy
-  - Zobrazíme zprávu o úspěchu
-- Slovo je dokončeno, což je indikováno tím, že `typedValue` končí mezerou (konec slova) a `typedValue` je rovno `currentWord`
-  - Nastavíme `value` na `typedElement` na `''`, abychom umožnili psaní dalšího slova
-  - Zvýšíme `wordIndex`, abychom přešli na další slovo
-  - Projdeme všechny `childNodes` `quoteElement` a nastavíme `className` na `''`, abychom obnovili výchozí zobrazení
-  - Nastavíme `className` aktuálního slova na `highlight`, abychom ho označili jako další slovo k napsání
-- Slovo je aktuálně napsáno správně (ale není dokončeno), což je indikováno tím, že `currentWord` začíná `typedValue`
-  - Zajistíme, že `typedValueElement` je zobrazen jako výchozí, vymazáním `className`
-- Pokud jsme se dostali až sem, máme chybu
-  - Nastavíme `className` na `typedValueElement` na `error`
+Tato funkce používá vodopádový přístup, kdy kontroluje podmínky od nejpřesnějších k obecnějším. Rozložme si každou situaci:
+
+```mermaid
+flowchart TD
+    A[Hráč zadává znak] --> B[Získat aktuální slovo a zadanou hodnotu]
+    B --> C{Citace dokončena?}
+    C -->|Ano| D[Zobrazit zprávu o dokončení s časem]
+    C -->|Ne| E{Slovo dokončeno mezerou?}
+    E -->|Ano| F[Vymazat vstup, přejít na další slovo, aktualizovat zvýraznění]
+    E -->|Ne| G{Dosud správné psaní?}
+    G -->|Ano| H[Odstranit chybové formátování]
+    G -->|Ne| I[Zobrazit chybové formátování]
+```
+**🏁 Dokončení citátu (Scénář 1):**
+- **Kontroluje**, zda napsaná hodnota odpovídá aktuálnímu slovu A jsme na posledním slově
+- **Vypočítá** uplynulý čas odečtením startovního času od aktuálního
+- **Převede** milisekundy na sekundy dělením 1 000
+- **Zobrazí** gratulační zprávu s časem dokončení
+
+**✅ Dokončení slova (Scénář 2):**
+- **Detekuje** dokončení slova, když vstup končí mezerou
+- **Ověřuje**, že oříznutý vstup přesně odpovídá aktuálnímu slovu
+- **Vyčistí** vstupní pole pro další slovo
+- **Posune** se na další slovo inkrementací `wordIndex`
+- **Aktualizuje** vizuální zvýraznění odstraněním všech tříd a zvýrazněním nového slova
+
+**📝 Psaní probíhá (Scénář 3):**
+- **Ověřuje**, že aktuální slovo začíná tím, co bylo zatím napsáno
+- **Odstraní** jakékoli chybové stylování, ukáže správný vstup
+- **Povolí** pokračovat v psaní bez přerušení
+
+**❌ Stav chyby (Scénář 4):**
+- **Spustí** se, když napsaný text neodpovídá očekávanému začátku slova
+- **Přidá** CSS třídu `error` pro okamžitou vizuální zpětnou vazbu
+- **Pomáhá** hráčům rychle identifikovat a opravit chyby
 
 ## Otestujte svou aplikaci
 
-Dostali jste se na konec! Posledním krokem je zajistit, aby naše aplikace fungovala. Vyzkoušejte ji! Nebojte se, pokud se objeví chyby; **všichni vývojáři** mají chyby. Prozkoumejte zprávy a laděte podle potřeby.
+Podívejte, čeho jste dosáhli! 🎉 Právě jste vytvořili skutečnou, funkční psací hru od základů pomocí programování řízeného událostmi. Věnujte si chvilku ocenění – není to maličkost!
 
-Klikněte na **start** a začněte psát! Mělo by to vypadat trochu jako animace, kterou jsme viděli dříve.
+Teď přichází fáze testování! Bude to fungovat, jak očekáváme? Něco nám chybí? Pokud něco nebude zpočátku fungovat dokonale, je to zcela normální. I zkušeným vývojářům se v kódu občas podaří chyby. To je součást vývojového procesu!
+
+Klikněte na `start` a začněte psát! Mělo by to vypadat trochu jako animace, kterou jsme viděli dříve.
 
 ![Animace hry v akci](../../../../4-typing-game/images/demo.gif)
 
+**Co otestovat ve vaší aplikaci:**
+- **Ověří**, že kliknutí na Start zobrazí náhodný citát
+- **Potvrdí**, že psaní správně zvýrazňuje aktuální slovo
+- **Zkontroluje**, že se při chybě objeví chybové stylování
+- **Zajistí**, že dokončení slov správně posune zvýraznění
+- **Otestuje**, že dokončení citátu zobrazí zprávu o dokončení s časem
+
+**Běžné tipy pro ladění:**
+- **Zkontrolujte** konzoli prohlížeče (F12) na chyby JavaScriptu
+- **Ověřte**, že všechny názvy souborů odpovídají přesně (case-sensitive)
+- **Ujistěte se**, že Live Server běží a stránky se správně obnovují
+- **Vyzkoušejte** různé citáty, abyste ověřili náhodný výběr
+
 ---
+
+## Výzva GitHub Copilot Agenta 🎮
+
+Použijte režim Agenta ke splnění následující výzvy:
+
+**Popis:** Rozšiřte hru psaní implementací systému obtížnosti, který se přizpůsobuje výkonu hráče. Tato výzva vám pomůže procvičit pokročilé zpracování událostí, analýzu dat a dynamické aktualizace UI.
+
+**Zadání:** Vytvořte systém úpravy obtížnosti pro hru psaní, který:
+1. Sleduje rychlost psaní hráče (slova za minutu) a procento přesnosti
+2. Automaticky přepíná mezi třemi úrovněmi obtížnosti: Snadná (jednoduché citáty), Střední (aktuální citáty) a Těžká (složitější citáty s interpunkcí)
+3. Zobrazuje aktuální úroveň obtížnosti a statistiky hráče v UI
+4. Implementuje počítadlo sérií, které po 3 po sobě jdoucích dobrých výkonech zvýší obtížnost
+5. Přidává vizuální zpětnou vazbu (barvy, animace) indikující změny obtížnosti
+
+Přidejte potřebné HTML prvky, CSS styly a JavaScript funkce pro implementaci této funkce. Zahrňte správné zacházení s chybami a zajistěte, aby hra zůstala přístupná s odpovídajícími ARIA popisy.
+
+Více o [režimu agenta](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) se dozvíte zde.
 
 ## 🚀 Výzva
 
-Přidejte více funkcionality
+Chcete posunout svou hru psaní na vyšší úroveň? Zkuste implementovat tyto pokročilé funkce a prohloubit tak své znalosti práce s událostmi a manipulace s DOM:
 
-- Deaktivujte posluchač událostí `input` po dokončení a znovu ho aktivujte, když je kliknuto na tlačítko
-- Deaktivujte textové pole, když hráč dokončí citát
-- Zobrazte modální dialogové okno se zprávou o úspěchu
-- Ukládejte nejlepší skóre pomocí [localStorage](https://developer.mozilla.org/docs/Web/API/Window/localStorage)
-## Kvíz po přednášce
+**Přidejte další funkce:**
 
-[Kvíz po přednášce](https://ff-quizzes.netlify.app/web/quiz/22)
+| Funkce | Popis | Dovednosti, které si procvičíte |
+|---------|-------------|------------------------|
+| **Ovládání vstupu** | Zakážte posluchač události `input` po dokončení a znovu jej povolte po kliknutí na tlačítko | Správa událostí a řízení stavu |
+| **Správa stavu UI** | Zakážte textové pole po dokončení citátu | Manipulace s vlastnostmi DOM |
+| **Modální dialog** | Zobrazte modální dialogové okno s úspěšnou zprávou | Pokročilé UI vzory a přístupnost |
+| **Systém nejvyšších skóre** | Uložte nejvyšší skóre pomocí `localStorage` | API pro ukládání prohlížeče a udržení dat |
 
-## Přehled a samostudium
+**Tipy pro implementaci:**
+- **Prozkoumejte** `localStorage.setItem()` a `localStorage.getItem()` pro trvalé uložení dat
+- **Procvičte** přidávání a odebírání event listenerů dynamicky
+- **Prozkoumejte** HTML dialogové prvky nebo CSS modální vzory
+- **Zvažte** přístupnost při zakazování a povolování ovládacích prvků formuláře
 
-Projděte si [všechny dostupné události](https://developer.mozilla.org/docs/Web/Events), které má vývojář k dispozici prostřednictvím webového prohlížeče, a zamyslete se nad situacemi, ve kterých byste každou z nich použili.
+## Test po přednášce
 
-## Úkol
+[Test po přednášce](https://ff-quizzes.netlify.app/web/quiz/22)
+
+---
+
+## 🚀 Váš časový plán mistrovství v psaní
+
+### ⚡ **Co můžete udělat během 5 minut**
+- [ ] Otestovat hru s různými citáty, aby vše běželo plynule
+- [ ] Experimentovat s CSS - zkoušet měnit barvy zvýraznění a chyby
+- [ ] Otevřít nástroje pro vývojáře (F12) a sledovat konzoli při hraní
+- [ ] Vyzkoušet dokončit citát co nejrychleji
+
+### ⏰ **Co můžete stihnout během hodiny**
+- [ ] Přidat více citátů do pole (například z oblíbených knih nebo filmů)
+- [ ] Implementovat systém nejvyšších skóre pomocí localStorage dle výzvy
+- [ ] Vytvořit kalkulačku slov za minutu, která se zobrazí po každé hře
+- [ ] Přidat zvukové efekty pro správné psaní, chyby a dokončení
+
+### 📅 **Vaše týdenní dobrodružství**
+- [ ] Postavit multiplayer verzi, kde si mohou přátelé soutěžit vedle sebe
+- [ ] Vytvořit různé úrovně obtížnosti s různou složitostí citátů
+- [ ] Přidat průběhový ukazatel, kolik citátu je dokončeno
+- [ ] Implementovat uživatelské účty se sledováním osobních statistik
+- [ ] Navrhnout vlastní témata a umožnit uživatelům volit preferovaný vzhled
+
+### 🗓️ **Měsíční transformace**
+- [ ] Vytvořit kurz psaní s lekcemi, které postupně učí správné umístění prstů
+- [ ] Postavit analytiku zobrazující, která písmena nebo slova způsobují nejvíce chyb
+- [ ] Přidat podporu pro různé jazyky a rozložení klávesnice
+- [ ] Integrovat se s edukativními API pro stahování citátů z literární databáze
+- [ ] Publikovat vylepšenou hru psaní pro ostatní ke hraní a užívání
+
+### 🎯 **Závěrečné zamyšlení**
+
+**Než půjdete dál, věnujte chvíli oslavě:**
+- Jaký byl nejnabitější moment při vytváření této hry?
+- Jak se nyní cítíte ohledně programování řízeného událostmi vs. na začátku?
+- Jaká je jedna funkce, na kterou se těšíte, že ji přidáte a tím hru uchopíte jedinečným stylem?
+- Jak můžete koncepty práce s událostmi použít v dalších projektech?
+
+```mermaid
+journey
+    title Vaše cesta k důvěře v programování událostí
+    section Dnes
+      Porozumění událostem: 3: You
+      Tvorba uživatelského rozhraní: 4: You
+      Psaní posluchačů událostí: 5: You
+    section Tento týden
+      Přidávání funkcí: 4: You
+      Ladění problémů: 5: You
+      Vylepšování uživatelského zážitku: 4: You
+    section Příští měsíc
+      Tvorba složitých aplikací: 5: You
+      Vyučování ostatních: 5: You
+      Vytváření frameworků: 5: You
+```
+> 🌟 **Pamatujte:** Právě jste zvládli jeden ze základních konceptů, který pohání každou interaktivní webovou stránku a aplikaci. Programování řízené událostmi je to, co dělá web živým a citlivým. Pokaždé, když vidíte rozbalovací menu, formulář kontrolující údaje při psaní nebo hru reagující na kliknutí, už rozumíte magii, která za tím stojí. Nejde jen o učení kódu – učíte se vytvářet zážitky, které jsou intuitivní a poutavé! 🎉
+
+---
+
+## Přehled & Samostudium
+
+Prostudujte si [všechny dostupné události](https://developer.mozilla.org/docs/Web/Events) webového prohlížeče a zvažte situace, kdy byste každou z nich použili.
+
+## Zadání
 
 [Vytvořte novou hru na klávesnici](assignment.md)
 
 ---
 
-**Prohlášení**:  
-Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádné nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Snažíme se o přesnost, avšak mějte na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za závazný zdroj. Pro důležité informace se doporučuje využít profesionální lidský překlad. Nejsme odpovědní za jakékoliv nepochopení nebo mylné interpretace vyplývající z použití tohoto překladu.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

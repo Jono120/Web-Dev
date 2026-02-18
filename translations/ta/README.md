@@ -1,0 +1,271 @@
+[![GitHub license](https://img.shields.io/github/license/microsoft/Web-Dev-For-Beginners.svg)](https://github.com/microsoft/Web-Dev-For-Beginners/blob/master/LICENSE)
+[![GitHub contributors](https://img.shields.io/github/contributors/microsoft/Web-Dev-For-Beginners.svg)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/graphs/contributors/)
+[![GitHub issues](https://img.shields.io/github/issues/microsoft/Web-Dev-For-Beginners.svg)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/issues/)
+[![GitHub pull-requests](https://img.shields.io/github/issues-pr/microsoft/Web-Dev-For-Beginners.svg)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/pulls/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
+[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/Web-Dev-For-Beginners.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/watchers/)
+[![GitHub forks](https://img.shields.io/github/forks/microsoft/Web-Dev-For-Beginners.svg?style=social&label=Fork&maxAge=2592000)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/network/)
+[![GitHub stars](https://img.shields.io/github/stars/microsoft/Web-Dev-For-Beginners.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/stargazers/)
+
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+
+# ஆரம்பநிலை குழுவினருக்கான வலைத்தளம் மேம்பாடு - ஒரு பாடத்திட்டம்
+
+Microsoft Cloud Advocates வழங்கும் 12 வார விரிவான படிப்பில் வலைத்தளம் மேம்பாட்டின் அடிப்படைகளை கற்றுக்கொள்ளவும். 24 பாடங்கள் ஒவ்வொன்றும் terrariums, browser extensions மற்றும் space games போன்ற தேர்வுசெய்யக்கூடிய திட்டங்களிலிருந்து JavaScript, CSS மற்றும் HTML களில் விரிவாக கற்றுத்தருகிறது. வினாக்கள், விவாதங்கள் மற்றும் நடைமுறைப் பண பணிகளை அடக்கம் செய்கிறது. உங்கள் திறன்களை மேம்படுத்தவும் மற்றும் அறிவு retention ஐ எங்கள் பயனுள்ள திட்ட அடிப்படையிலான கற்றல் முறையுடன் மேம்படுத்தவும். இன்று உங்கள் குறியீட்டு பயணத்தை துவங்குங்கள்!
+
+Azure AI Foundry Discord சமூகத்தில் சேரவும்
+
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+
+இந்த வளங்களை பயன்படுத்த தொடங்க கீழ்காணும் படிகளை பின்பற்றவும்:
+1. **கிடையறிப்பு படிமத்தை கிளோன் செய்க**: கிளிக் செய்க [![GitHub forks](https://img.shields.io/github/forks/microsoft/Web-Dev-For-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/fork)
+2. **கிடையறிப்பை உலா**: `git clone https://github.com/microsoft/Web-Dev-For-Beginners.git`
+3. [**Azure AI Foundry Discord ஐச் சேர்ந்து வல்லுநர்களையும் மற்ற டெவலப்பர்களையும் சந்திக்கவும்**](https://discord.com/invite/ByRwuEEgH4)
+
+### 🌐 பன்மொழி ஆதரவு
+
+#### GitHub Action மூலம் ஆதரிக்கப்படுகிறது (தானாகவும் எப்போதும் புதுப்பிக்கப்படுகிறது)
+
+<!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
+[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh-CN/README.md) | [Chinese (Traditional, Hong Kong)](../zh-HK/README.md) | [Chinese (Traditional, Macau)](../zh-MO/README.md) | [Chinese (Traditional, Taiwan)](../zh-TW/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../pt-BR/README.md) | [Portuguese (Portugal)](../pt-PT/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](./README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
+
+> **உள்ளூர் கிளோன் செய்வதில் சுவாரஸ்யமா?**
+
+> இந்த கிடையறுப்பு 50+ மொழி மொழிபெயர்ப்புகளை உள்ளடக்குகிறது, இது பதிவிறக்கம் அளவை மிகவும் அதிகரிக்கிறது. மொழிபெயர்ப்புகள் இல்லாமல் கிளோன் செய்ய sparse checkout பயன்படுத்தவும்:
+> ```bash
+> git clone --filter=blob:none --sparse https://github.com/microsoft/Web-Dev-For-Beginners.git
+> cd Web-Dev-For-Beginners
+> git sparse-checkout set --no-cone '/*' '!translations' '!translated_images'
+> ```
+> இது பாடத்திட்டத்தை முடிக்க தேவையான அனைத்தையும் தருகிறது, மேலும் வேகம் அதிகமாக பதிவிறக்கியிடும்.
+<!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
+
+**மேலும் மொழிபெயர்ப்புகள் ஆதரிக்கப்பட வேண்டுமானால் [இங்கே](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md) பட்டியலிடப்பட்டுள்ளது**
+
+[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/microsoft/Web-Dev-For-Beginners)
+
+#### 🧑‍🎓 _நீங்கள் ஒரு மாணவரா?_
+
+[**Student Hub பக்கம்**](https://docs.microsoft.com/learn/student-hub/?WT.mc_id=academic-77807-sagibbon) பார்வையிட்டு, அங்குள்ள ஆரம்பநிலை வளங்கள், மாணவர் பதிவுகள் மற்றும் இலவச சான்றிதழ் வவுச்சர் பெறும் வழிகளைக் காணலாம். மாதம் முறை மாற்றப்படும் எனவே இந்தப் பக்கத்தை புக் மார்க் செய்து கல்வி தொடருங்கள்.
+
+### 📣 அறிவிப்பு - புதிய GitHub Copilot Agent முறை சவால்கள்!
+
+புதிய சவால் சேர்க்கப்பட்டுள்ளது, பெரும்பாலான அத்தியாயங்களில் "GitHub Copilot Agent Challenge 🚀" தேடவும். இது GitHub Copilot மற்றும் Agent முறையை பயன்படுத்தி நீங்கள் நிறைவேற்ற வேண்டிய புதிய சவால். நீங்கள் Agent முறையை முன்பு பயன்படுத்தவில்லை என்றால், இது குறிப்புகள் உருவாக்குவதோடு மட்டுமல்லாமல் கோப்புகளை உருவாக்கவும் திருத்தவும், கட்டளைகளை இயக்கவும் திறன் வாய்ந்தது.
+
+### 📣 அறிவிப்பு - _Generative AI பயன்படுத்தி புதிய திட்டம் கட்டு_
+
+புதிய AI உதவியாளர் திட்டம் சேர்க்கப்பட்டுள்ளது, [திட்டத்தை](./9-chat-project/README.md) பார்க்கவும்
+
+### 📣 அறிவிப்பு - _Generative AI க்கு புதிய பாடத்திட்டம் JavaScript இல் வெளியிடப்பட்டது_
+
+எங்கள் புதிய Generative AI பாடத்திட்டத்தை தவறவிடாதீர்கள்!
+
+தொடங்க https://aka.ms/genai-js-course செல்லவும்!
+
+![இட பக்கம்](../../translated_images/ta/background.148a8d43afde5730.webp)
+
+- அடிப்படைகளிலிருந்து RAG வரை அனைத்து பாடங்களும்.
+- வரலாற்று கதாபாத்திரங்களுடன் GenAI மற்றும் எங்கள் செயலியுடன் தொடர்பு கொள்ளவும்.
+- வேடிக்கையான மற்றும் ஈடுபாட்டான கதை, நீங்கள் காலத்தில் பயணம் செய்வீர்கள்!
+
+![கதாபாத்திரம்](../../translated_images/ta/character.5c0dd8e067ffd693.webp)
+
+
+ஒவ்வொரு பாடமும் ஒரு பணியை நிறைவேற்ற, அறிவு சோதனை மற்றும் சவாலை உள்ளடக்கியது, இது கீழ்காணும் தலைப்புகளை கற்றுக்கொள்ள வழிகாட்டிறது:
+- கேட்டியலும் கேட்டியலியலமைப்பும்
+- உரை மற்றும் பட செயலி உருவாக்கம்
+- தேடல் செயலிகள்
+
+தொடங்க https://aka.ms/genai-js-course செல்லவும்!
+
+
+
+## 🌱 தொடங்குதல்
+
+> **ஆசிரியர்களுக்கு**, நாங்கள் [சிறந்த பரிந்துரைகளை](for-teachers.md) இந்த பாடத்திட்டம் பயன்படுத்துவதற்காக வழங்கியுள்ளோம். உங்கள் கருத்துகளை எங்கள் [விவாத மேடையில்](https://github.com/microsoft/Web-Dev-For-Beginners/discussions/categories/teacher-corner) பகிரவும்!
+
+**[கற்றவர்கள்](https://aka.ms/student-page/?WT.mc_id=academic-77807-sagibbon)**, ஒவ்வொரு பாடத்திலும் முன்-வாக்கிய வினாக்களில் தொடங்கி, ஆதரவுக் கட்டுரைகளை படித்து, பல செயல்களை முடித்து, பின்னர் வாக்கிய வினாக்களில் உங்கள் புரிதலை சரிபார்க்கவும்.
+
+உங்கள் கற்றல் அனுபவத்தை மேம்படுத்த, உங்கள் சகபாடிகளுடன் சேர்ந்து திட்டங்களில் வேலை செய்யுங்கள்! விவாதங்கள் நாங்கள் இயக்கும் [விவாத மேடையில்](https://github.com/microsoft/Web-Dev-For-Beginners/discussions) உண்டு, அங்கே நமது மத்தியஸ்தர்கள் உங்கள் கேள்விகளுக்கு பதிலளிக்க தயார்.
+
+மேலும் கல்விக்காக [Microsoft Learn](https://learn.microsoft.com/users/wirelesslife/collections/p1ddcy5jwy0jkm?WT.mc_id=academic-77807-sagibbon) ஐ ஆராய பரிந்துரைக்கின்றோம்.
+
+### 📋 சூழலை அமைத்தல்
+
+இந்த பாடத்திட்டத்துக்கு முன்னதாகுது மேம்பாட்டு சூழல் தயார் உள்ளது! துவங்கும்போது, பாடத்திட்டத்தை நீங்கள் [Codespace](https://github.com/features/codespaces/) (_ஒரு உலாவி அடிப்படையிலான, எந்த நிறுவலுமில்லாத சூழல்_) அல்லது உங்கள் கணினியில் உள்ள உரை தொகுத்தியகரை பயன்படுத்தி இயக்கலாம், உதாரணமாக [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon).
+
+#### உங்கள் கிடையறிப்பை உருவாக்குக
+உங்கள் பணிகளை எளிதாகச் சேமிக்க, இந்த கிடையறிப்பின் உங்கள் சொந்த நகலை உருவாக்க பரிந்துரைக்கப்படுகிறது. இதற்கு பக்கத்தின் மேல் பகுதியில் உள்ள **Use this template** பொத்தானை அழுத்தவும். இது உங்கள் GitHub கணக்கில் புதிய கிடையறிப்பை உருவாக்கி, பாடத்திட்டத்தின் நகலை வழங்கும்.
+
+வழிமுறைகள்:
+1. **கிடையறிப்பு கிளோன் செய்க**: இந்த பக்கத்தின் மேல்-வலது முடியில் உள்ள "Fork" பொத்தானை அழுத்தவும்.
+2. **கிடையறிப்பை கிளோன் செய்க**: `git clone https://github.com/microsoft/Web-Dev-For-Beginners.git`
+
+#### Codespace இல் பாடத்திட்டம் இயக்குதல்
+
+உங்கள் உருவாக்கிய கொப்பின் கிடையறிப்பில், **Code** பொத்தானை அழுத்தி **Open with Codespaces** என்பதை தேர்ந்தெடுக்கவும். இது உங்களுக்கு புதிய Codespace ஒன்றை உருவாக்கும்.
+
+![Codespace](../../translated_images/ta/createcodespace.0238bbf4d7a8d955.webp)
+
+#### உங்கள் கணினியில் உள்ளார் பாடத்திட்டத்தை இயக்குதல்
+
+நீங்கள் பாடத்திட்டத்தை உங்கள் கணினியில் இயக்க, ஒரு உரை தொகுப்பாளரை, ஒரு உலாவியை மற்றும் கட்டளை வரி கருவியைப் பயன்படுத்த வேண்டும். எமது முதல் பாடம் [Programming Languages and Tools of the Trade அறிமுகம்](../../1-getting-started-lessons/1-intro-to-programming-languages) பல்வேறு கருவிகள் மற்றும் எதுவும் உங்களுக்குச் சரியாக பொருந்தக்கூடியதை தேர்ந்தெடுக்கும் முறைகளை போக்குவிக்கும்.
+
+நாங்கள் பரிந்துரைக்கும் தொகுப்பாளர் [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon), இதில் இனிமேல் மேலோட்டமாக உள்ள [Terminal](https://code.visualstudio.com/docs/terminal/basics/?WT.mc_id=academic-77807-sagibbon) உள்ளது. Visual Studio Code ஐ [இங்கே](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) பதிவிறக்கம் செய்யலாம்.
+
+
+1. உங்கள் கிடையறிப்பை உங்கள் கணினியில் கிளோன் செய்யவும். இதற்கானதானது **Code** பொத்தானை கிளிக் செய்து URL ஐ நகலெடுக்கவும்:
+
+    [CodeSpace](./images/createcodespace.png)
+அதன்பிறகு, [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) இல் உள்ள [Terminal](https://code.visualstudio.com/docs/terminal/basics/?WT.mc_id=academic-77807-sagibbon) ஐ திறந்து, மேற்கோள் எடுத்த URL ஐ <your-repository-url> மாற்றி கீழ்காணும் கட்டளைச் செயலைப் பின்பற்றவும்:
+
+    ```bash 
+    git clone <your-repository-url>
+    ```
+
+2. Visual Studio Code இல் கோப்புறைத் திறக்கவும். நீங்கள் இவ்வாறு செய்யலாம்: **File** > **Open Folder** என்பதைக் கிளிக் செய்து, நீங்கள் அண்மை திறந்துள்ள கோப்புறையைத் தேர்ந்தெடுக்கவும்.
+
+
+> பரிந்துரைக்கப்பட்ட Visual Studio Code நீட்சிகள்:
+>
+> * [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon) - Visual Studio Code இல் HTML பக்கங்களை முன்னோட்டம் காண
+> * [Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot&WT.mc_id=academic-77807-sagibbon) - விரைவாகக் குறியீடு எழுதி உதவ
+
+## 📂 ஒவ்வொரு பாடத்திலும் அடங்கும்:
+
+- விருப்பமான ட்ராஃப்ட் நோட்
+- விருப்பமான ஆதார வீடியோ
+- பாடமுக்கு முன் முன்னிறுத்தும் வினாத்தாள்
+- எழுத்துப்பாடம்
+- திட்ட அடிப்படையிலான பாடங்களில், திட்டத்தை கட்டமைப்பதில் படி படி வழிகாட்டல்கள்
+- அறிவு சோதனை
+- ஒரு சவால்
+- ஆதாரப் படிப்புகள்
+- பணிகள்
+- [பாடம் முடிந்த பின் வினாத்தாள்](https://ff-quizzes.netlify.app/web/)
+
+> **வினாத்தாள்கள் குறித்த குறிப்பு**: அனைத்து வினாத்தாள்களும் Quiz-app என்ற கோப்புறையில் உள்ளன, மொத்தம் 48 வினாத்தாள்கள், ஒவ்வொன்றும் 3 கேள்விகள் கொண்டவை. அவை [இங்கே](https://ff-quizzes.netlify.app/web/) கிடைக்கின்றன. Quiz app உள்ளூர் இயங்கும் அல்லது Azure இல் வெளியிடலாம்; `quiz-app` கோப்புறையின் வழிகாட்டல்களைப் பின்தொடரவும்.
+
+## 🗃️ பாடங்கள்
+
+|     |                       திட்டத்தின் பெயர்                        |                            கல்வி கொடுக்கும் கருத்துக்கள்                             | கற்புத் திறன் குறிக்கோள்கள்                                                                                        |                                                         தொடர்புடைய பாடம்                                                          |         ஆசிரியர்          |
+| :-: | :----------------------------------------------------------: | :------------------------------------------------------------------------: | -----------------------------------------------------------------------------------------------------------------------------------------------------------------| :----------------------------------------------------------------------------------------------------------------------------: | :---------------------: |
+| 01  |                     துவக்கம்                      |           நிரலாக்க அறிமுகம் மற்றும் உபகரணங்கள்           | பல நிரலாக்க மொழிகளின் அடிப்படைகளை அறிந்து, தொழில்முறை அபிவிருத்தியாளர்களின் பணிகளை எளிதாக்கும் மென்பொருட்களைப் பற்றி தெரிந்து கொள்ளவும் | [Intro to Programming Languages and Tools of the Trade](./1-getting-started-lessons/1-intro-to-programming-languages/README.md) |         Jasmine         |
+| 02  |                     துவக்கம்                      |             GitHub அடிப்படைகள், குழுவுடன் வேலை செய்யும் முறைகள்             | உங்கள் திட்டத்தில் GitHub ஐ பயன்படுத்துவது எப்படி, குறியீட்டு அடித்தளத்தில் மற்றவர்களுடன் சேர்ந்து பணியாற்றுவது எப்படி என்பதை அறிக |                            [Intro to GitHub](./1-getting-started-lessons/2-github-basics/README.md)                             |          Floor          |
+| 03  |                     துவக்கம்                      |                             அணுகல் வசதிகள்                             | வலை அணுகல் வசதியின் அடிப்படைகளை கற்று கொள்ளவும்                                                                              |                       [Accessibility Fundamentals](./1-getting-started-lessons/3-accessibility/README.md)                       |       Christopher       |
+| 04  |                        JS அடிப்படைகள்                         |                         JavaScript தரவு வகைகள்                          | JavaScript தரவு வகைகளின் அடிப்படைகள்                                                                                                  |                                       [Data Types](./2-js-basics/1-data-types/README.md)                                        |         Jasmine         |
+| 05  |                        JS அடிப்படைகள்                         |                         செயல்பாடுகள் மற்றும் முறைகள்                          | செயலியின் தரவுத்தொகுப்பைக் கையாள செயல்பாடுகள் மற்றும் முறைகள் பற்றி கற்று கொள்ளவும்                                                            |                              [Functions and Methods](./2-js-basics/2-functions-methods/README.md)                               | Jasmine மற்றும் Christopher |
+| 06  |                        JS அடிப்படைகள்                         |                        JS மூலம் முடிவெடுக்கல்                        | உங்கள் குறியீட்டில் முடிவெடுத்தல் முறைமைகளைப் பயன்படுத்தி நிபந்தனைகளை உருவாக்குவது எப்படி என்பதை கற்றுக்கொள்ளவும்                                                           |                                 [Making Decisions](./2-js-basics/3-making-decisions/README.md)                                  |         Jasmine         |
+| 07  |                        JS அடிப்படைகள்                         |                            வரிசைகள் மற்றும் மடங்குகள்                            | JavaScript இல் வரிசைகள் மற்றும் மடங்குகளைப் பயன்படுத்தி தரவுடன் பணியாற்றவும்                                                                                |                                   [Arrays and Loops](./2-js-basics/4-arrays-loops/README.md)                                    |         Jasmine         |
+| 08  |       [Terrarium](./3-terrarium/solution/README.md)       |                            நடைமுறை HTML                            | ஆன்லைன் டெரேரியத்தை உருவாக்க HTML ஐ கட்டுமானத்தை கவனித்து அமைக்கவும்                                                         |                                 [Introduction to HTML](./3-terrarium/1-intro-to-html/README.md)                                 |           Jen           |
+| 09  |       [Terrarium](./3-terrarium/solution/README.md)       |                            நடைமுறை CSS                             | ஆன்லைன் டெரேரியத்தை அலங்கரிக்க CSS இன் அடிப்படைகளைப் பயன்படுத்தி பேஜ் பதிலளிப்பை உருவாக்கவும்                     |                                  [Introduction to CSS](./3-terrarium/2-intro-to-css/README.md)                                  |           Jen           |
+| 10  |            [Terrarium](./3-terrarium/solution/README.md)            |                 JavaScript மூடல்கள், DOM கையாளல்                  | டெரேரியத்தை இழுத்து விடும் இடைமுகமாக செயல்பட JavaScript எழுதி, மூடல்கள் மற்றும் DOM கையாள்வது பற்றிய கவனம் செலுத்தவும்             |                  [JavaScript Closures, DOM manipulation](./3-terrarium/3-intro-to-DOM-and-closures/README.md)                   |           Jen           |
+| 11  |          [Typing Game](./4-typing-game/solution/README.md)          |                          டைப் விளையாட்டை உருவாக்குதல்                           | உங்கள் JavaScript செயலியின் நிரலை இயக்குவதற்கு விசைத்தாள் நிகழ்வுகளைப் பயன்படுத்துவது எப்படி என்பதை கற்று கொள்ளவும்                                                          |                                [Event-Driven Programming](./4-typing-game/typing-game/README.md)                                |       Christopher       |
+| 12  | [Green Browser Extension](./5-browser-extension/solution/README.md) |                         உலாவியில் பணியாற்றுதல்                          | உலாவிகள் எப்படி செயல்படுகின்றன, அவற்றின் வரலாறு மற்றும் உலாவி நீட்டிப்பு முதல் கூறுக்களை உருவாக்குவது எப்படி என்பதை கற்று கொள்ளவும்                               |                               [About Browsers](./5-browser-extension/1-about-browsers/README.md)                                |           Jen           |
+| 13  | [Green Browser Extension](./5-browser-extension/solution/README.md) | படிவத்தை உருவாக்கல், API அழைப்பு மற்றும் உள்ளூர் சேமிப்பில் மாறிலிகள் சேமித்தல் | உள்ளூர் சேமிப்பில் மாறிலிகளைப் பயன்படுத்தி API-ஐ அழைக்கும் உலாவி நீட்டிப்பின் JavaScript கூறுகளை உருவாக்கவும்                      |                [APIs, Forms, and Local Storage](./5-browser-extension/2-forms-browsers-local-storage/README.md)                 |           Jen           |
+| 14  | [Green Browser Extension](./5-browser-extension/solution/README.md) |          உலாவியில் பின்னணி செயலிகள், வலை செயல்திறன்          | நீட்டிப்பின் ஐகானைக் கையாள உலாவியின் பின்னணி செயலிகளைப் பயன்படுத்தவும்; வலை செயல்திறன் மற்றும் சிறந்த முன்னேற்றங்களை அறியவும்   |             [Background Tasks and Performance](./5-browser-extension/3-background-tasks-and-performance/README.md)              |           Jen           |
+| 15  |           [Space Game](./6-space-game/solution/README.md)           |             JavaScript மூலம் மேம்பட்ட விளையாட்டு அபிவிருத்தி             | வகுப்பு மற்றும் தொகுப்பை பயன்படுத்தி மரபுரிமை மற்றும் Pub/Sub முறையைப் பற்றி கற்று, விளையாட்டு உருவாக்கத்திற்கு தயாராகவும்              |                      [Introduction to Advanced Game Development](./6-space-game/1-introduction/README.md)                       |          Chris          |
+| 16  |           [Space Game](./6-space-game/solution/README.md)           |                           கேன்வாஸ் வரைபடம்                            | திரையில் கூறுகளை வரைய பயன்படுத்தப்படும் கேன்வாஸ் API பற்றி அறிக                                                                       |                                [Drawing to Canvas](./6-space-game/2-drawing-to-canvas/README.md)                                |          Chris          |
+| 17  |           [Space Game](./6-space-game/solution/README.md)           |                   திரையின் சுற்றிலும் கூறுகளை நகர்த்துதல்                    | கார்டீசியன் நிரல்புள்ளிகள் மற்றும் கேன்வாஸ் API பயன்படுத்தி கூறுகளை இயக்குவதனை அறிக                                            |                           [Moving Elements Around](./6-space-game/3-moving-elements-around/README.md)                           |          Chris          |
+| 18  |           [Space Game](./6-space-game/solution/README.md)           |                          மோதல் கண்டறிதல்                           | விசை அழுத்தங்களைப் பயன்படுத்தி கூறுக்கள் ஒன்றுடன் ஒன்று மோதிச் செயல்பட வைக்கவும், விளையாட்டின் செயல்திறனை உறுதி செய்ய குளிர்ச்சி செயலியை வழங்கவும்    |                              [Collision Detection](./6-space-game/4-collision-detection/README.md)                              |          Chris          |
+| 19  |           [Space Game](./6-space-game/solution/README.md)           |                             கணக்கீடு பாதுகாப்பு                              | விளையாட்டின் நிலை மற்றும் செயல்திறனின் அடிப்படையில் கணிதக் கணக்கீடுகளைச் செய்யவும்                                                                |                                    [Keeping Score](./6-space-game/5-keeping-score/README.md)                                    |          Chris          |
+| 20  |           [Space Game](./6-space-game/solution/README.md)           |                     விளையாட்டை நிறுத்தல் மற்றும் மீண்டும் துவக்கம்                     | விளையாட்டை முடித்து மீண்டும் துவக்குவது எப்படி, உட்பட வளங்களைச் சுத்தம் செய்வதும் மாறிலிகளை மீட்டமைப்பதும் ஆகியவற்றை அறிக                              |                                [The Ending Condition](./6-space-game/6-end-condition/README.md)                                 |          Chris          |
+| 21  |         [Banking App](./7-bank-project/solution/README.md)          |                 வலை செயலியில் HTML மாதிரிகள் மற்றும் பாதைகள்                 | பன்முகப்புள்ளி இணையதளத்திற்கான கட்டமைப்பை உருவாக்க, பாதைகள் மற்றும் HTML மாதிரிகளைப் பயன்படுத்துவது எப்படி கண்டு கொள்                             |                            [HTML Templates and Routes](./7-bank-project/1-template-route/README.md)                             |          Yohan          |
+| 22  |         [Banking App](./7-bank-project/solution/README.md)          |                  உள்நுழைவு மற்றும் பதிவுக்கு படிவம் உருவாக்கல்                   | படிவங்களை உருவாக்கல் மற்றும் சரிபார்ப்பு முறைகளை கையாள்வது பற்றி அறியவும்                                                                          |                                           [Forms](./7-bank-project/2-forms/README.md)                                           |          Yohan          |
+| 23  |         [Banking App](./7-bank-project/solution/README.md)          |                   தரவு பெற்றல் மற்றும் பயன்படுத்தும் முறைகள்                   | உங்கள் செயலியில் தரவு எவ்வாறு ஓடும், அதை எப்படித் திரட்டுவது, சேமிப்பதலும் அகற்றுவதும்                                                                 |                                            [Data](./7-bank-project/3-data/README.md)                                            |          Yohan          |
+| 24  |         [Banking App](./7-bank-project/solution/README.md)          |                      நிலை மேலாண்மையின் கருத்துக்கள்                      | உங்கள் செயலி நிலையை எவ்வாறு பாதுகாக்கிறது மற்றும் அதை நிரல் மூலம் எவ்வாறு நிர்வகிக்கலாம் என்பதை கற்றுக் கொள்வது                                                              |                                [State Management](./7-bank-project/4-state-management/README.md)                                |          Yohan          |
+| 25 | [Browser/VScode Code](../../8-code-editor) | VScode உடன் பணியாற்றுதல் | குறியீடு ஆசிரியியைப் பயன்படுத்த கற்று கொள்ளவும் | [Use VScode Code Editor](./8-code-editor/1-using-a-code-editor/README.md) | Chris |
+| 26 | [AI Assistants](./9-chat-project/README.md) | AI உடன் பணியாற்றுதல் | உங்கள் சொந்த AI உதவியாளரை உருவாக்குவது பற்றி கற்று கொள்ளவும் | [AI Assistant project](./9-chat-project/README.md) | Chris |
+
+## 🏫 கல்வியியல்
+
+எமது பாடத்திட்டம் இரண்டு முக்கியக் கல்வி கோட்பாடுகளோடு வடிவமைக்கப்பட்டுள்ளது:
+* திட்ட அடிப்படையிலான கற்றல்
+* அடிக்கடி வினாத்தாள்கள்
+
+பாடத்திட்டம் JavaScript, HTML, மற்றும் CSS இன் அடிப்படைகள் மற்றும் இன்றைய வலை மேம்பாட்டாளர்களால் பயன்படுத்தப்படும் புதிய தொழில்நுட்பங்கள் மற்றும் கருவிகள் ஆகியவற்றை கற்றுத்தருகிறது. மாணவர்கள் தட்டச்சு விளையாட்டு, மெய்நிகர் டெரேரியம், சுற்றுச்சூழல் நட்பு உலாவி நீட்டிப்பு, விண்வெளி ஆக்கிரமிப்பான் மாதிரி விளையாட்டு மற்றும் வணிகங்களுக்கு வங்கி செயலியை உருவாக்குவதன் மூலம் பரிசோதனை அனுபவம் உருவாக்குவார்கள். தொடர் முடிவில், மாணவர்கள் வலை மேம்பாட்டின் வலுவான புரிதலைப் பெறுவார்கள்.
+
+> 🎓 இந்த பாடத்திட்டத்தில் முதல் சில பாடங்களை Microsoft Learn இல் உள்ள [Learn Path](https://docs.microsoft.com/learn/paths/web-development-101/?WT.mc_id=academic-77807-sagibbon) ஆக எடுத்துக் கொள்ளலாம்!
+
+தொடர்புடைய திட்டங்களுக்கு உள்ளடக்கம் ஒத்துழைப்பால் மாணவர்கள் அதிக ஆர்வமுடன் கற்றல் நிகழும், கருத்துகளின் நினைவுநிலத்தை மேம்படுத்தும். நாங்கள் சில JavaScript அடிப்படை பாடங்களை உருவாக்கினோம், அவற்றுடன் "[Beginners Series to: JavaScript](https://channel9.msdn.com/Series/Beginners-Series-to-JavaScript/?WT.mc_id=academic-77807-sagibbon)" வீடியோ தொடர் இணைக்கப்பட்டுள்ளன, சில ஆசிரியர்கள் இதை உருவாக்கும் குழுவில் உள்ளனர்.
+
+மேலும், வகுப்புக்கு முன் ஒரு குறைந்ததும் வின் வினாத்தாளும், வகுப்புக்குப்பின்னர் இன்னொரு வினாத்தாளும் கற்றலை ஊக்குவிக்கும். இந்த பாடத்திட்டம் திடமானதும், வேடிக்கையானதும் ஆகும் மற்றும் முழுமையாக அல்லது பகுதி பகுதியாக எடுத்துக்கொள்ளலாம். 12 வாரங்கள் முழுமையாக் கடந்தாலே திட்டங்கள் சீராகவும் சிக்கலானவையாகவும் மாறும்.
+
+JavaScript கட்டமைப்புகளை அறிமுகப்படுத்துவதை தவிர்த்து, அடிப்படை திறன்களை முதலில் கற்றுக்கொண்டு பின்னர் கட்டமைப்பை அணுகுவதே சிறந்தது என்று நாங்கள் கருதுகிறோம், இந்த பாடத் தொகுப்பை முடிப்பதற்கான அடுத்த படி ஒரு மற்றுமொரு வீடியோ தொடர் மூலம் Node.js கற்றுக்கொள்ளும் பதிலாகும்: "[Beginner Series to: Node.js](https://channel9.msdn.com/Series/Beginners-Series-to-Nodejs/?WT.mc_id=academic-77807-sagibbon)".
+
+> எங்கள் [Code of Conduct](CODE_OF_CONDUCT.md) மற்றும் [Contributing](CONTRIBUTING.md) வழிகாட்டுதல்களை பார்வையிடவும். உங்கள் கட்டுமானமான கருத்துக்களை வரவேற்கிறோம்!
+
+
+## 🧭 ஆஃப்-லைன் அணுகல்
+
+[Docsify](https://docsify.js.org/#/) ஐப் பயன்படுத்தி இந்த ஆவணங்களை ஆஃப்-லைன் இயங்கச் செய்யலாம். இந்தப் பழையது, [Docsify ஐ நிறுவி](https://docsify.js.org/#/quickstart) உங்கள் உள்ளூர் கணினியில், பின்னர் இந்த சம்பிரதாயத்தின் முக்கிய பொதி(ரூட்) கோப்புறையில் `docsify serve` என தட்டச்சு செய்யவும். இணையதளம் உங்கள் உள்ளூர் இயந்திரத்தில் போர்ட் 3000ல் சேவை செய்யப்படும்: `localhost:3000`.
+
+## 📘 PDF
+
+அனைத்து பாடங்களின் PDF இன் பிரதியை [இங்கே](https://microsoft.github.io/Web-Dev-For-Beginners/pdf/readme.pdf) காணலாம்.
+
+
+## 🎒 பிற பாடக்குறிப்புகள்
+எங்கள் குழு பிற பாடத்திட்டங்களையும் தயாரிக்கிறது! பார்க்கவும்:
+
+<!-- CO-OP TRANSLATOR OTHER COURSES START -->
+### LangChain
+[![LangChain4j for Beginners](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js for Beginners](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
+
+---
+
+### Azure / Edge / MCP / Agents
+[![AZD for Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Edge AI for Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![MCP for Beginners](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI Agents for Beginners](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### Generative AI Series
+[![Generative AI for Beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![Generative AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### Core Learning
+[![ML for Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![Data Science for Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI for Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![Cybersecurity for Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![Web Dev for Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![IoT for Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+[![XR Development for Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### Copilot Series
+[![Copilot for AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot for C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![Copilot Adventure](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+<!-- CO-OP TRANSLATOR OTHER COURSES END -->
+
+## உதவி பெறுதல்
+
+AI பயன்பாடுகளை உருவாக்குவதில் சிக்கல் அல்லது கேள்விகள் இருந்தால். MCP பற்றி பேசுவதற்கு மற்ற கற்க மாணவர்கள் மற்றும் அனுபவமிக்க டெவலப்பர்களுடன் சேர்ந்துகொள்ளுங்கள். கேள்விகளுக்கு வரவேற்பு அளிக்கப்படும் மற்றும் அறிவு சுதந்திரமாக பகிரப்படும் ஆதரவான சமூகமாக இது இருக்கும்.
+
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+
+உறுப்புப் பொறியியலாளர் கருத்துக்கள் அல்லது பிழைகள் இருந்தால் தயாரிப்பு உருவாக்கும் போது பார்வையிடுங்கள்:
+
+[![Microsoft Foundry Developer Forum](https://img.shields.io/badge/GitHub-Microsoft_Foundry_Developer_Forum-blue?style=for-the-badge&logo=github&color=000000&logoColor=fff)](https://aka.ms/foundry/forum)
+
+## உரிமம்
+
+இந்த ரிப்பாசிடரி MIT உரிமத்தின் கீழ் வரும்தாகும். மேலும் தகவலுக்கு [LICENSE](../../LICENSE) கோப்பை பார்க்கவும்.
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**பொறுப்புமுறை மறுப்பு**:  
+இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவை [Co-op Translator](https://github.com/Azure/co-op-translator) பயன்படுத்தி மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயலுகிறோம் என்றாலும், தானாக இயங்கும் மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறானவைகள் இருக்கக்கூடும் என்பதை தயவுசெய்து கவனிக்கவும். அசல் ஆவணம் அதன் சொந்த மொழியில் அதிகாரபூர்வ மூலமாகக் கருதப்பட வேண்டும். முக்கியமான தகவலுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பு பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பின் பயன்பாட்டால் ஏற்படும் எந்தவொரு நெருக்கடியும் அல்லது தவறான புரிந்துகொள்வுகளுக்காக நாங்கள் பொறுப்பேற்க மாட்டோம்.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

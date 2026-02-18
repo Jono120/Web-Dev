@@ -1,192 +1,186 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "687c62646ad5595f1ba733edc294cdae",
-  "translation_date": "2025-08-29T00:50:56+00:00",
-  "source_file": "README.md",
-  "language_code": "nl"
-}
--->
-[![GitHub license](https://img.shields.io/github/license/microsoft/Web-Dev-For-Beginners.svg)](https://github.com/microsoft/Web-Dev-For-Beginners/blob/master/LICENSE)  
-[![GitHub contributors](https://img.shields.io/github/contributors/microsoft/Web-Dev-For-Beginners.svg)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/graphs/contributors/)  
-[![GitHub issues](https://img.shields.io/github/issues/microsoft/Web-Dev-For-Beginners.svg)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/issues/)  
-[![GitHub pull-requests](https://img.shields.io/github/issues-pr/microsoft/Web-Dev-For-Beginners.svg)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/pulls/)  
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)  
+# Webontwikkeling voor Beginners - Een Curriculum
 
-[![GitHub watchers](https://img.shields.io/github/watchers/microsoft/Web-Dev-For-Beginners.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/watchers/)  
-[![GitHub forks](https://img.shields.io/github/forks/microsoft/Web-Dev-For-Beginners.svg?style=social&label=Fork&maxAge=2592000)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/network/)  
-[![GitHub stars](https://img.shields.io/github/stars/microsoft/Web-Dev-For-Beginners.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/stargazers/)  
+Leer de basisprincipes van webontwikkeling met onze 12-weekse uitgebreide cursus van Microsoft Cloud Advocates. Elk van de 24 lessen duikt in JavaScript, CSS en HTML door middel van praktijkprojecten zoals terraria, browserextensies en spacegames. Doe mee met quizzen, discussies en praktische opdrachten. Verhoog je vaardigheden en optimaliseer je kennisbehoud met onze effectieve project-gebaseerde leerwijze. Begin vandaag nog met coderen!
 
-[![](https://dcbadge.vercel.app/api/server/ByRwuEEgH4)](https://discord.gg/zxKYvhSnVp?WT.mc_id=academic-000002-leestott)  
+Word lid van de Azure AI Foundry Discord Community
 
-[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://open.vscode.dev/microsoft/Web-Dev-For-Beginners)  
+Volg deze stappen om aan de slag te gaan met deze bronnen:
+1. **Fork de repository**: Klik [![GitHub forks](https://img.shields.io/github/forks/microsoft/Web-Dev-For-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/fork)
+2. **Clone de repository**:   `git clone https://github.com/microsoft/Web-Dev-For-Beginners.git`
+3. [**Word lid van de Azure AI Foundry Discord en ontmoet experts en mede-ontwikkelaars**](https://discord.com/invite/ByRwuEEgH4)
 
-[![Microsoft Azure AI Foundry Discord](https://dcbadge.limes.pink/api/server/ByRwuEEgH4)](https://discord.com/invite/ByRwuEEgH4)  
+### 🌐 Meertalige Ondersteuning
 
-Volg deze stappen om aan de slag te gaan met deze bronnen:  
-1. **Fork de repository**: Klik [![GitHub forks](https://img.shields.io/github/forks/microsoft/Web-Dev-For-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/Web-Dev-For-Beginners/fork)  
-2. **Clone de repository**:   `git clone https://github.com/microsoft/Web-Dev-For-Beginners.git`  
-3. [**Word lid van de Azure AI Foundry Discord en ontmoet experts en mede-ontwikkelaars**](https://discord.com/invite/ByRwuEEgH4)  
+#### Ondersteund via GitHub Action (geautomatiseerd & altijd up-to-date)
 
-# Webontwikkeling voor Beginners - Een Curriculum  
+<!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
+[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh-CN/README.md) | [Chinese (Traditional, Hong Kong)](../zh-HK/README.md) | [Chinese (Traditional, Macau)](../zh-MO/README.md) | [Chinese (Traditional, Taiwan)](../zh-TW/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](./README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../pt-BR/README.md) | [Portuguese (Portugal)](../pt-PT/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
 
-Leer de basisprincipes van webontwikkeling met onze 12-weekse uitgebreide cursus van Microsoft Cloud Advocates. Elk van de 24 lessen behandelt JavaScript, CSS en HTML via praktische projecten zoals terrariums, browserextensies en ruimtegames. Doe mee met quizzen, discussies en praktische opdrachten. Verhoog je vaardigheden en optimaliseer je kennisbehoud met onze effectieve projectgebaseerde aanpak. Begin vandaag nog aan je codeeravontuur!  
+> **Lievere lokaal clonen?**
 
-### 🌐 Ondersteuning voor meerdere talen  
+> Deze repository bevat meer dan 50 taalvertalingen die de downloadgrootte aanzienlijk vergroten. Om zonder vertalingen te clonen, gebruik sparse checkout:
+> ```bash
+> git clone --filter=blob:none --sparse https://github.com/microsoft/Web-Dev-For-Beginners.git
+> cd Web-Dev-For-Beginners
+> git sparse-checkout set --no-cone '/*' '!translations' '!translated_images'
+> ```
+> Dit geeft je alles wat je nodig hebt om de cursus te voltooien met een veel snellere download.
+<!-- CO-OP TRANSLATOR LANGUAGES TABLE END -->
 
-#### Ondersteund via GitHub Action (Automatisch & Altijd up-to-date)  
+**Als je graag extra vertalingen wilt, staan de ondersteunde talen hier [hier](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**
 
-[Frans](../fr/README.md) | [Spaans](../es/README.md) | [Duits](../de/README.md) | [Russisch](../ru/README.md) | [Arabisch](../ar/README.md) | [Perzisch (Farsi)](../fa/README.md) | [Urdu](../ur/README.md) | [Chinees (Vereenvoudigd)](../zh/README.md) | [Chinees (Traditioneel, Macau)](../mo/README.md) | [Chinees (Traditioneel, Hong Kong)](../hk/README.md) | [Chinees (Traditioneel, Taiwan)](../tw/README.md) | [Japans](../ja/README.md) | [Koreaans](../ko/README.md) | [Hindi](../hi/README.md) | [Bengaals](../bn/README.md) | [Marathi](../mr/README.md) | [Nepalees](../ne/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Portugees (Portugal)](../pt/README.md) | [Portugees (Brazilië)](../br/README.md) | [Italiaans](../it/README.md) | [Pools](../pl/README.md) | [Turks](../tr/README.md) | [Grieks](../el/README.md) | [Thais](../th/README.md) | [Zweeds](../sv/README.md) | [Deens](../da/README.md) | [Noors](../no/README.md) | [Fins](../fi/README.md) | [Nederlands](./README.md) | [Hebreeuws](../he/README.md) | [Vietnamees](../vi/README.md) | [Indonesisch](../id/README.md) | [Maleis](../ms/README.md) | [Tagalog (Filipijns)](../tl/README.md) | [Swahili](../sw/README.md) | [Hongaars](../hu/README.md) | [Tsjechisch](../cs/README.md) | [Slowaaks](../sk/README.md) | [Roemeens](../ro/README.md) | [Bulgaars](../bg/README.md) | [Servisch (Cyrillisch)](../sr/README.md) | [Kroatisch](../hr/README.md) | [Sloveens](../sl/README.md) | [Oekraïens](../uk/README.md) | [Birmaans (Myanmar)](../my/README.md)  
+#### 🧑‍🎓 _Ben je een student?_
 
-**Als je wilt dat er extra vertalingen worden ondersteund, bekijk dan de lijst met talen [hier](https://github.com/Azure/co-op-translator/blob/main/getting_started/supported-languages.md)**  
+Bezoek de [**Student Hub pagina**](https://docs.microsoft.com/learn/student-hub/?WT.mc_id=academic-77807-sagibbon) waar je beginnersbronnen, studentenpakketten en zelfs manieren vindt om een gratis certificaatvoucher te krijgen. Dit is de pagina die je wilt bookmarken en af en toe wilt checken omdat we maandelijks content wisselen.
 
-#### 🧑‍🎓 _Ben je een student?_  
+### 📣 Aankondiging - Nieuwe GitHub Copilot Agent modus uitdagingen om te voltooien!
 
-Bezoek de [**Student Hub-pagina**](https://docs.microsoft.com/learn/student-hub/?WT.mc_id=academic-77807-sagibbon) waar je bronnen voor beginners, studentenpakketten en zelfs manieren vindt om een gratis certificaatvoucher te krijgen. Dit is de pagina die je wilt bookmarken en regelmatig wilt bekijken, omdat we de inhoud maandelijks wisselen.  
+Nieuwe uitdaging toegevoegd, zoek naar "GitHub Copilot Agent Challenge 🚀" in de meeste hoofdstukken. Dat is een nieuwe uitdaging die je kunt voltooien met GitHub Copilot en Agent-modus. Als je Agent-modus nog niet hebt gebruikt: het kan niet alleen tekst genereren, maar ook bestanden maken en bewerken, opdrachten uitvoeren en meer.
 
-### 📣 Aankondiging - _Nieuw project om te bouwen met Generatieve AI_  
+### 📣 Aankondiging - _Nieuw project om te bouwen met Generatieve AI_
 
-Nieuw AI-assistentproject zojuist toegevoegd, bekijk het [project](./09-chat-project/README.md)  
+Nieuw AI Assistant project zojuist toegevoegd, bekijk het [project](./9-chat-project/README.md)
 
-### 📣 Aankondiging - _Nieuw Curriculum_ over Generatieve AI voor JavaScript is zojuist uitgebracht  
+### 📣 Aankondiging - _Nieuw curriculum_ over Generatieve AI voor JavaScript is net uitgebracht
 
-Mis ons nieuwe curriculum over Generatieve AI niet!  
+Mis ons nieuwe Generative AI curriculum niet!
 
-Bezoek [https://aka.ms/genai-js-course](https://aka.ms/genai-js-course) om aan de slag te gaan!  
+Bezoek [https://aka.ms/genai-js-course](https://aka.ms/genai-js-course) om te beginnen!
 
-![Achtergrond](../../translated_images/background.148a8d43afde57303419a663f50daf586681bc2fabf833f66ef6954073983c66.nl.png)  
+![Background](../../translated_images/nl/background.148a8d43afde5730.webp)
 
-- Lessen die alles behandelen, van basisprincipes tot RAG.  
-- Interactie met historische personages met behulp van GenAI en onze begeleidende app.  
-- Leuk en boeiend verhaal, je gaat tijdreizen!  
+- Lessen die alles behandelen, van basis tot RAG.
+- Interacteer met historische personages met behulp van GenAI en onze begeleidende app.
+- Leuke en boeiende verhaallijn, je reist door de tijd!
 
-![personage](../../translated_images/character.5c0dd8e067ffd693c16e2c5b7412ab075a2215ce31f998305639fa3a05e14fbe.nl.png)  
+![character](../../translated_images/nl/character.5c0dd8e067ffd693.webp)
 
-Elke les bevat een opdracht om te voltooien, een kennischeck en een uitdaging om je te begeleiden bij het leren van onderwerpen zoals:  
-- Prompting en prompt engineering  
-- Tekst- en afbeeldingsapp-generatie  
-- Zoekapps  
 
-Bezoek [https://aka.ms/genai-js-course](https://aka.ms/genai-js-course) om aan de slag te gaan!  
+Elke les bevat een opdracht om te voltooien, een kenniscontrole en een uitdaging die je begeleidt bij het leren van onderwerpen zoals:
+- Prompting en prompt engineering
+- Tekst- en afbeeldingsapp-generatie
+- Zoekapps
 
-## 🌱 Aan de slag  
+Bezoek [https://aka.ms/genai-js-course](../../[https:/aka.ms/genai-js-course) om te beginnen!
 
-> **Docenten**, we hebben [enkele suggesties opgenomen](for-teachers.md) over hoe je dit curriculum kunt gebruiken. We horen graag je feedback [in ons discussieforum](https://github.com/microsoft/Web-Dev-For-Beginners/discussions/categories/teacher-corner)!  
 
-**[Leerlingen](https://aka.ms/student-page/?WT.mc_id=academic-77807-sagibbon)**, begin voor elke les met een quiz voorafgaand aan de lezing en ga verder met het lezen van het lesmateriaal, het voltooien van de verschillende activiteiten en controleer je begrip met de quiz na de lezing.  
+## 🌱 Aan de slag
 
-Om je leerervaring te verbeteren, werk samen met je medestudenten aan de projecten! Discussies worden aangemoedigd in ons [discussieforum](https://github.com/microsoft/Web-Dev-For-Beginners/discussions) waar ons team van moderators beschikbaar zal zijn om je vragen te beantwoorden.  
+> **Docenten**, we hebben [enkele suggesties opgenomen](for-teachers.md) over hoe dit curriculum te gebruiken. We horen graag jullie feedback [in ons discussieforum](https://github.com/microsoft/Web-Dev-For-Beginners/discussions/categories/teacher-corner)!
 
-Om je opleiding verder te verdiepen, raden we aan om [Microsoft Learn](https://learn.microsoft.com/users/wirelesslife/collections/p1ddcy5jwy0jkm?WT.mc_id=academic-77807-sagibbon) te verkennen voor aanvullende studiematerialen.  
+**[Leerlingen](https://aka.ms/student-page/?WT.mc_id=academic-77807-sagibbon)**, begin bij elke les met een pre-lecture quiz en volg deze met het lezen van het lesmateriaal, het voltooien van de verschillende activiteiten en controleer je begrip met de post-lecture quiz.
 
-### 📋 Je omgeving instellen  
+Om je leerervaring te verbeteren, maak verbinding met je medeleerlingen om samen aan de projecten te werken! Discussies worden aangemoedigd in ons [discussieforum](https://github.com/microsoft/Web-Dev-For-Beginners/discussions) waar ons team van moderators beschikbaar zal zijn om je vragen te beantwoorden.
 
-Dit curriculum heeft een ontwikkelomgeving die klaar is voor gebruik! Als je begint, kun je ervoor kiezen om het curriculum te draaien in een [Codespace](https://github.com/features/codespaces/) (_een browsergebaseerde omgeving zonder installaties_), of lokaal op je computer met behulp van een teksteditor zoals [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon).  
+Voor verdere scholing raden wij sterk aan om [Microsoft Learn](https://learn.microsoft.com/users/wirelesslife/collections/p1ddcy5jwy0jkm?WT.mc_id=academic-77807-sagibbon) te verkennen voor aanvullende studiematerialen.
 
-#### Maak je repository aan  
-Om je werk eenvoudig op te slaan, wordt aanbevolen om een eigen kopie van deze repository te maken. Dit kun je doen door op de knop **Use this template** bovenaan de pagina te klikken. Dit maakt een nieuwe repository in je GitHub-account met een kopie van het curriculum.  
+### 📋 Je omgeving instellen
 
-Volg deze stappen:  
-1. **Fork de repository**: Klik op de knop "Fork" rechtsboven op deze pagina.  
-2. **Clone de repository**:   `git clone https://github.com/microsoft/Web-Dev-For-Beginners.git`  
+Dit curriculum heeft een ontwikkelomgeving klaar voor gebruik! Als je begint, kun je ervoor kiezen om het curriculum te draaien in een [Codespace](https://github.com/features/codespaces/) (_een browser-gebaseerde, geen installaties benodigde omgeving_), of lokaal op je computer met een teksteditor zoals [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon).
 
-#### Het curriculum draaien in een Codespace  
+#### Maak je repository aan
+Om je werk gemakkelijk op te slaan, wordt aanbevolen om een eigen kopie van deze repository te maken. Dit kan je doen door op de knop **Use this template** bovenaan de pagina te klikken. Dit maakt een nieuwe repository aan in je GitHub-account met een kopie van het curriculum.
 
-In je kopie van deze repository die je hebt gemaakt, klik op de knop **Code** en selecteer **Open with Codespaces**. Dit maakt een nieuwe Codespace aan waarin je kunt werken.  
+Volg deze stappen:
+1. **Fork de repository**: Klik op de knop "Fork" rechtsboven op deze pagina.
+2. **Clone de repository**:   `git clone https://github.com/microsoft/Web-Dev-For-Beginners.git`
 
-[!Codespace](../..)./images/createcodespace.png)  
+#### Het curriculum draaien in een Codespace
 
-#### Het curriculum lokaal draaien op je computer  
+In je eigen kopie van deze repository, klik op de **Code**-knop en selecteer **Open with Codespaces**. Dit maakt een nieuwe Codespace voor je aan om in te werken.
 
-Om dit curriculum lokaal op je computer te draaien, heb je een teksteditor, een browser en een opdrachtregeltool nodig. Onze eerste les, [Introductie tot Programmeertalen en Tools](../../1-getting-started-lessons/1-intro-to-programming-languages), begeleidt je door verschillende opties voor elk van deze tools, zodat je kunt kiezen wat het beste bij je past.  
+![Codespace](../../translated_images/nl/createcodespace.0238bbf4d7a8d955.webp)
 
-Onze aanbeveling is om [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) te gebruiken als je editor, die ook een ingebouwde [Terminal](https://code.visualstudio.com/docs/terminal/basics/?WT.mc_id=academic-77807-sagibbon) heeft. Je kunt Visual Studio Code [hier downloaden](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon).  
+#### Het curriculum lokaal draaien op je computer
 
-1. Clone je repository naar je computer. Dit kun je doen door op de knop **Code** te klikken en de URL te kopiëren:  
+Om dit curriculum lokaal op je computer te draaien, heb je een teksteditor, een browser en een opdrachtregel-tool nodig. Onze eerste les, [Introductie tot programmeertalen en tools van het vak](../../1-getting-started-lessons/1-intro-to-programming-languages), leidt je door verschillende opties voor elk van deze tools, zodat je kunt kiezen wat het beste bij jou past.
 
-    [!CodeSpace](./images/createcodespace.png)  
+Wij raden aan om [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) als editor te gebruiken, die ook een ingebouwde [Terminal](https://code.visualstudio.com/docs/terminal/basics/?WT.mc_id=academic-77807-sagibbon) heeft. Je kunt Visual Studio Code [hier downloaden](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon).
 
-    Open vervolgens [Terminal](https://code.visualstudio.com/docs/terminal/basics/?WT.mc_id=academic-77807-sagibbon) binnen [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) en voer het volgende commando uit, waarbij je `<your-repository-url>` vervangt door de URL die je zojuist hebt gekopieerd:  
+1. Clone je repository naar je computer. Dit kan je doen door op de knop **Code** te klikken en de URL te kopiëren:
+
+    [CodeSpace](./images/createcodespace.png)
+Open vervolgens [Terminal](https://code.visualstudio.com/docs/terminal/basics/?WT.mc_id=academic-77807-sagibbon) binnen [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=academic-77807-sagibbon) en voer het volgende commando uit, waarbij je `<your-repository-url>` vervangt door de URL die je zojuist hebt gekopieerd:
 
     ```bash 
     git clone <your-repository-url>
-    ```  
+    ```
 
-2. Open de map in Visual Studio Code. Dit kun je doen door te klikken op **File**  
-> **Map openen** en de map selecteren die je zojuist hebt gekloond.
->  Aanbevolen Visual Studio Code-extensies:
+2. Open de map in Visual Studio Code. Dit kun je doen door te klikken op **Bestand** > **Map openen** en de zojuist gekloonde map te selecteren.
+
+
+>  Aanbevolen extensies voor Visual Studio Code:
 >
-> * [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon) - om HTML-pagina's te bekijken binnen Visual Studio Code
+> * [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer&WT.mc_id=academic-77807-sagibbon) - om HTML-pagina's binnen Visual Studio Code te bekijken
 > * [Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot&WT.mc_id=academic-77807-sagibbon) - om je te helpen sneller code te schrijven
 
 ## 📂 Elke les bevat:
 
-- optionele sketchnote
+- optionele schetsnotitie
 - optionele aanvullende video
-- opwarmquiz voorafgaand aan de les
-- geschreven les
-- voor projectgebaseerde lessen, stapsgewijze handleidingen om het project te bouwen
+- warming-up quiz voorafgaand aan de les
+- schriftelijke les
+- voor projectgebaseerde lessen, stapsgewijze handleidingen over hoe het project te bouwen
 - kenniscontroles
 - een uitdaging
-- aanvullende literatuur
-- opdracht
-- [quiz na de les](https://ff-quizzes.netlify.app/web/)
+- aanvullende lectuur
+- een [quiz na de les](https://ff-quizzes.netlify.app/web/)
 
-> **Een opmerking over quizzen**: Alle quizzen bevinden zich in de Quiz-app-map, in totaal 48 quizzen met elk drie vragen. Ze zijn beschikbaar [hier](https://ff-quizzes.netlify.app/web/). De quiz-app kan lokaal worden uitgevoerd of worden gedeployed naar Azure; volg de instructies in de `quiz-app`-map.
+> **Een opmerking over quizzes**: Alle quizzes bevinden zich in de Quiz-app map, in totaal 48 quizzes van elk drie vragen. Ze zijn beschikbaar [hier](https://ff-quizzes.netlify.app/web/), de quiz-app kan lokaal worden uitgevoerd of op Azure worden gedeployed; volg de instructies in de `quiz-app` map.
 
 ## 🗃️ Lessen
 
-|     |                       Projectnaam                       |                            Behandelde concepten                             | Leerdoelen                                                                                                                 |                                                         Gelinkte les                                                          |         Auteur          |
-| :-: | :-----------------------------------------------------: | :-------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------: | :---------------------: |
-| 01  |                     Aan de slag                        |           Introductie tot programmeren en tools van het vakgebied           | Leer de basisprincipes achter de meeste programmeertalen en over software die professionele ontwikkelaars helpt bij hun werk | [Introductie tot programmeertalen en tools van het vakgebied](./1-getting-started-lessons/1-intro-to-programming-languages/README.md) |         Jasmine         |
-| 02  |                     Aan de slag                        |             Basisprincipes van GitHub, inclusief samenwerken in een team    | Hoe je GitHub gebruikt in je project en hoe je samenwerkt met anderen aan een codebase                                       |                            [Introductie tot GitHub](./1-getting-started-lessons/2-github-basics/README.md)                             |          Floor          |
-| 03  |                     Aan de slag                        |                             Toegankelijkheid                               | Leer de basisprincipes van webtoegankelijkheid                                                                              |                       [Basisprincipes van toegankelijkheid](./1-getting-started-lessons/3-accessibility/README.md)                       |       Christopher       |
-| 04  |                        JS Basis                        |                         JavaScript Datatypes                               | De basisprincipes van JavaScript-datatypes                                                                                 |                                       [Datatypes](./2-js-basics/1-data-types/README.md)                                        |         Jasmine         |
-| 05  |                        JS Basis                        |                         Functies en Methodes                               | Leer over functies en methodes om de logische stroom van een applicatie te beheren                                          |                              [Functies en Methodes](./2-js-basics/2-functions-methods/README.md)                               | Jasmine en Christopher |
-| 06  |                        JS Basis                        |                        Beslissingen nemen met JS                           | Leer hoe je voorwaarden in je code maakt met behulp van besluitvormingsmethoden                                             |                                 [Beslissingen nemen](./2-js-basics/3-making-decisions/README.md)                                  |         Jasmine         |
-| 07  |                        JS Basis                        |                            Arrays en Lussen                                | Werk met data met behulp van arrays en lussen in JavaScript                                                                 |                                   [Arrays en Lussen](./2-js-basics/4-arrays-loops/README.md)                                    |         Jasmine         |
-| 08  |       [Terrarium](./3-terrarium/solution/README.md)       |                            HTML in de praktijk                             | Bouw de HTML om een online terrarium te maken, met de focus op het bouwen van een lay-out                                   |                                 [Introductie tot HTML](./3-terrarium/1-intro-to-html/README.md)                                 |           Jen           |
-| 09  |       [Terrarium](./3-terrarium/solution/README.md)       |                            CSS in de praktijk                              | Bouw de CSS om het online terrarium te stylen, met de focus op de basisprincipes van CSS, inclusief het responsief maken    |                                  [Introductie tot CSS](./3-terrarium/2-intro-to-css/README.md)                                  |           Jen           |
-| 10  |            [Terrarium](./3-terrarium/solution/README.md)            |                 JavaScript Closures, DOM-manipulatie                       | Bouw de JavaScript om het terrarium te laten functioneren als een drag/drop-interface, met de focus op closures en DOM-manipulatie |                  [JavaScript Closures, DOM-manipulatie](./3-terrarium/3-intro-to-DOM-and-closures/README.md)                   |           Jen           |
-| 11  |          [Typingspel](./4-typing-game/solution/README.md)          |                          Bouw een Typingspel                              | Leer hoe je toetsenbordgebeurtenissen gebruikt om de logica van je JavaScript-app aan te sturen                              |                                [Event-Driven Programming](./4-typing-game/typing-game/README.md)                                |       Christopher       |
-| 12  | [Groene Browserextensie](./5-browser-extension/solution/README.md) |                         Werken met Browsers                               | Leer hoe browsers werken, hun geschiedenis, en hoe je de eerste elementen van een browserextensie opzet                     |                               [Over Browsers](./5-browser-extension/1-about-browsers/README.md)                                |           Jen           |
-| 13  | [Groene Browserextensie](./5-browser-extension/solution/README.md) | Formulieren bouwen, een API aanroepen en variabelen opslaan in local storage | Bouw de JavaScript-elementen van je browserextensie om een API aan te roepen met variabelen opgeslagen in local storage      |                [API's, Formulieren en Local Storage](./5-browser-extension/2-forms-browsers-local-storage/README.md)                 |           Jen           |
-| 14  | [Groene Browserextensie](./5-browser-extension/solution/README.md) |          Achtergrondprocessen in de browser, webprestaties                | Gebruik de achtergrondprocessen van de browser om het pictogram van de extensie te beheren; leer over webprestaties en optimalisaties |             [Achtergrondtaken en Prestaties](./5-browser-extension/3-background-tasks-and-performance/README.md)              |           Jen           |
-| 15  |           [Ruimtespel](./6-space-game/solution/README.md)           |             Geavanceerdere Game Development met JavaScript                | Leer over overerving met zowel klassen als compositie en het Pub/Sub-patroon, ter voorbereiding op het bouwen van een spel   |                      [Introductie tot Geavanceerde Game Development](./6-space-game/1-introduction/README.md)                       |          Chris          |
-| 16  |           [Ruimtespel](./6-space-game/solution/README.md)           |                           Tekenen op canvas                              | Leer over de Canvas API, gebruikt om elementen op een scherm te tekenen                                                      |                                [Tekenen op Canvas](./6-space-game/2-drawing-to-canvas/README.md)                                |          Chris          |
-| 17  |           [Ruimtespel](./6-space-game/solution/README.md)           |                   Elementen over het scherm bewegen                      | Ontdek hoe elementen beweging kunnen krijgen met behulp van cartesiaanse coördinaten en de Canvas API                        |                           [Elementen Bewegen](./6-space-game/3-moving-elements-around/README.md)                           |          Chris          |
-| 18  |           [Ruimtespel](./6-space-game/solution/README.md)           |                          Botsingsdetectie                                | Laat elementen botsen en op elkaar reageren met behulp van toetsaanslagen en implementeer een cooldownfunctie voor prestaties |                              [Botsingsdetectie](./6-space-game/4-collision-detection/README.md)                              |          Chris          |
-| 19  |           [Ruimtespel](./6-space-game/solution/README.md)           |                             Score bijhouden                              | Voer wiskundige berekeningen uit op basis van de status en prestaties van het spel                                           |                                    [Score Bijhouden](./6-space-game/5-keeping-score/README.md)                                    |          Chris          |
-| 20  |           [Ruimtespel](./6-space-game/solution/README.md)           |                     Het spel beëindigen en opnieuw starten               | Leer hoe je het spel beëindigt en opnieuw start, inclusief het opruimen van assets en het resetten van variabelen            |                                [De Eindconditie](./6-space-game/6-end-condition/README.md)                                 |          Chris          |
-| 21  |         [Bankapp](./7-bank-project/solution/README.md)          |                 HTML-sjablonen en routes in een webapp                   | Leer hoe je de structuur van een meerpaginawebsite opzet met routing en HTML-sjablonen                                       |                            [HTML-sjablonen en Routes](./7-bank-project/1-template-route/README.md)                             |          Yohan          |
-| 22  |         [Bankapp](./7-bank-project/solution/README.md)          |                  Een inlog- en registratieformulier bouwen               | Leer hoe je formulieren bouwt en validatieroutines afhandelt                                                                 |                                           [Formulieren](./7-bank-project/2-forms/README.md)                                           |          Yohan          |
-| 23  |         [Bankapp](./7-bank-project/solution/README.md)          |                   Methoden voor het ophalen en gebruiken van data        | Hoe data in en uit je app stroomt, hoe je het ophaalt, opslaat en verwijdert                                                 |                                            [Data](./7-bank-project/3-data/README.md)                                            |          Yohan          |
-| 24  |         [Bankapp](./7-bank-project/solution/README.md)          |                      Concepten van State Management                      | Leer hoe je app de status behoudt en hoe je deze programmeerbaar beheert                                                     |                                [State Management](./7-bank-project/4-state-management/README.md)                                |          Yohan          |
+|     |                       Projectnaam                        |                            Geleerde Concepten                            | Leerdoelen                                                                                                                         |                                                         Gelinkte Les                                                          |         Auteur          |
+| :-: | :------------------------------------------------------: | :--------------------------------------------------------------------: | --------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------: | :---------------------: |
+| 01  |                     Aan de slag                         |           Introductie tot programmeren en tools van het vak            | Leer de basisprincipes achter de meeste programmeertalen en software die professionele ontwikkelaars helpt hun werk te doen      | [Introductie tot programmeertalen en tools van het vak](./1-getting-started-lessons/1-intro-to-programming-languages/README.md) |         Jasmine         |
+| 02  |                     Aan de slag                         |             Basiskennis van GitHub, inclusief samenwerken in een team   | Hoe je GitHub gebruikt in je project, hoe je met anderen samenwerkt aan een codebase                                              |                            [Introductie tot GitHub](./1-getting-started-lessons/2-github-basics/README.md)                             |          Floor          |
+| 03  |                     Aan de slag                         |                             Toegankelijkheid                           | Leer de basis van webtoegankelijkheid                                                                                            |                       [Toegankelijkheidsfundamentals](./1-getting-started-lessons/3-accessibility/README.md)                       |       Christopher       |
+| 04  |                        JS Basics                         |                         JavaScript-datatypes                            | De basis van JavaScript-datatypes                                                                                                |                                       [Datatypes](./2-js-basics/1-data-types/README.md)                                        |         Jasmine         |
+| 05  |                        JS Basics                         |                         Functies en methoden                            | Leer over functies en methoden om de logica van een applicatie te beheren                                                        |                              [Functies en methoden](./2-js-basics/2-functions-methods/README.md)                               | Jasmine en Christopher |
+| 06  |                        JS Basics                         |                        Beslissingen nemen met JS                        | Leer hoe je voorwaarden maakt in je code met besluitvormingsmethoden                                                            |                                 [Beslissingen maken](./2-js-basics/3-making-decisions/README.md)                                  |         Jasmine         |
+| 07  |                        JS Basics                         |                            Arrays en lussen                             | Werk met data met arrays en lussen in JavaScript                                                                                  |                                   [Arrays en lussen](./2-js-basics/4-arrays-loops/README.md)                                    |         Jasmine         |
+| 08  |       [Terrarium](./3-terrarium/solution/README.md)       |                            HTML in de praktijk                         | Bouw de HTML voor een online terrarium, met focus op het maken van een layout                                                   |                                 [Introductie tot HTML](./3-terrarium/1-intro-to-html/README.md)                                 |           Jen           |
+| 09  |       [Terrarium](./3-terrarium/solution/README.md)       |                            CSS in de praktijk                          | Bouw de CSS voor de styling van het online terrarium, met de nadruk op basisbeginselen van CSS inclusief een responsive pagina |                                  [Introductie tot CSS](./3-terrarium/2-intro-to-css/README.md)                                  |           Jen           |
+| 10  |            [Terrarium](./3-terrarium/solution/README.md)            |                 JavaScript Closures, DOM-manipulatie                  | Bouw de JavaScript om het terrarium functioneel te maken als een drag/drop interface, met focus op closures en DOM-manipulatie |                  [JavaScript Closures, DOM-manipulatie](./3-terrarium/3-intro-to-DOM-and-closures/README.md)                   |           Jen           |
+| 11  |          [Typen Spel](./4-typing-game/solution/README.md)          |                          Bouw een Typen Spel                           | Leer hoe je toetsenbordgebeurtenissen gebruikt om de logica van je JavaScript-app aan te sturen                                   |                                [Event-Driven Programming](./4-typing-game/typing-game/README.md)                                |       Christopher       |
+| 12  | [Groene Browser Extensie](./5-browser-extension/solution/README.md) |                         Werken met browsers                           | Leer hoe browsers werken, hun geschiedenis, en hoe je de eerste elementen van een browser extensie opzet                        |                               [Over browsers](./5-browser-extension/1-about-browsers/README.md)                                |           Jen           |
+| 13  | [Groene Browser Extensie](./5-browser-extension/solution/README.md) | Formulieren bouwen, een API aanroepen en variabelen lokaal opslaan     | Bouw de JavaScript-elementen van je browser extensie om een API aan te roepen met variabelen die lokaal zijn opgeslagen         |                [API's, formulieren en lokale opslag](./5-browser-extension/2-forms-browsers-local-storage/README.md)                 |           Jen           |
+| 14  | [Groene Browser Extensie](./5-browser-extension/solution/README.md) |          Achtergrondprocessen in de browser, webprestaties            | Gebruik de achtergrondprocessen van de browser om het icoon van de extensie te beheren; leer over webprestaties en optimalisaties |             [Achtergrondtaken en prestaties](./5-browser-extension/3-background-tasks-and-performance/README.md)              |           Jen           |
+| 15  |           [Ruimte Spel](./6-space-game/solution/README.md)           |             Meer geavanceerde spelontwikkeling met JavaScript          | Leer over overerving met zowel klassen als compositie en het Pub/Sub-patroon, ter voorbereiding op het bouwen van een spel      |                      [Introductie tot geavanceerde spelontwikkeling](./6-space-game/1-introduction/README.md)                       |          Chris          |
+| 16  |           [Ruimte Spel](./6-space-game/solution/README.md)           |                           Tekenen op canvas                          | Leer over de Canvas-API, gebruikt om elementen op een scherm te tekenen                                                        |                                [Tekenen op canvas](./6-space-game/2-drawing-to-canvas/README.md)                                |          Chris          |
+| 17  |           [Ruimte Spel](./6-space-game/solution/README.md)           |                   Elementen bewegen op het scherm                      | Ontdek hoe elementen beweging krijgen met behulp van de cartesiaanse coördinaten en de Canvas-API                              |                           [Elementen bewegen](./6-space-game/3-moving-elements-around/README.md)                           |          Chris          |
+| 18  |           [Ruimte Spel](./6-space-game/solution/README.md)           |                          Botsingdetectie                              | Laat elementen botsen en op elkaar reageren met keypresses en geef een cooldown-functie om de prestaties van het spel te waarborgen |                              [Botsingdetectie](./6-space-game/4-collision-detection/README.md)                              |          Chris          |
+| 19  |           [Ruimte Spel](./6-space-game/solution/README.md)           |                             Score bijhouden                           | Voer wiskundige berekeningen uit op basis van de status en prestaties van het spel                                             |                                    [Score bijhouden](./6-space-game/5-keeping-score/README.md)                                    |          Chris          |
+| 20  |           [Ruimte Spel](./6-space-game/solution/README.md)           |                     Het spel beëindigen en opnieuw starten             | Leer over het beëindigen en opnieuw starten van het spel, inclusief het opruimen van assets en het resetten van variabelen       |                                [De eindvoorwaarde](./6-space-game/6-end-condition/README.md)                                 |          Chris          |
+| 21  |         [Bankieren App](./7-bank-project/solution/README.md)          |                 HTML-sjablonen en routes in een webapp                 | Leer hoe je de basisstructuur van een multipagina-website creëert met routing en HTML-sjablonen                                 |                            [HTML-Sjablonen en routes](./7-bank-project/1-template-route/README.md)                             |          Yohan          |
+| 22  |         [Bankieren App](./7-bank-project/solution/README.md)          |                  Bouw een inlog- en registratieformulier                | Leer over het bouwen van formulieren en het afhandelen van validatieroutines                                                    |                                           [Formulieren](./7-bank-project/2-forms/README.md)                                           |          Yohan          |
+| 23  |         [Bankieren App](./7-bank-project/solution/README.md)          |                   Methoden voor ophalen en gebruiken van data           | Hoe data in en uit je app stroomt, hoe je het ophaalt, opslaat en verwijdert                                                    |                                            [Data](./7-bank-project/3-data/README.md)                                            |          Yohan          |
+| 24  |         [Bankieren App](./7-bank-project/solution/README.md)          |                      Concepten van state management                     | Leer hoe jouw app de status behoudt en hoe je die programmatisch beheert                                                       |                                [State management](./7-bank-project/4-state-management/README.md)                                |          Yohan          |
 | 25 | [Browser/VScode Code](../../8-code-editor) | Werken met VScode | Leer hoe je een code-editor gebruikt | [Gebruik VScode Code Editor](./8-code-editor/1-using-a-code-editor/README.md) | Chris |
-| 26 | [AI Assistenten](./9-chat-project/README.md) | Werken met AI | Leer hoe je je eigen AI-assistent bouwt | [AI Assistent Project](./9-chat-project/README.md) | Chris |
+| 26 | [AI Assistenten](./9-chat-project/README.md) | Werken met AI | Leer hoe je je eigen AI-assistent bouwt | [AI Assistent project](./9-chat-project/README.md) | Chris |
 
 ## 🏫 Pedagogiek
 
 Ons curriculum is ontworpen met twee belangrijke pedagogische principes in gedachten:
-* projectgebaseerd leren
-* frequente quizzen
+* leren door projecten
+* frequente quizzes
 
-Het programma leert de basisprincipes van JavaScript, HTML en CSS, evenals de nieuwste tools en technieken die door hedendaagse webontwikkelaars worden gebruikt. Studenten krijgen de kans om praktische ervaring op te doen door een typingspel, virtueel terrarium, milieuvriendelijke browserextensie, ruimte-invader-stijl spel en een bankapp voor bedrijven te bouwen. Aan het einde van de serie hebben studenten een solide begrip van webontwikkeling.
+Het programma leert de basisprincipes van JavaScript, HTML en CSS, evenals de nieuwste tools en technieken die tegenwoordig door webontwikkelaars worden gebruikt. Studenten krijgen de kans om praktische ervaring op te doen door het bouwen van een typenspel, een virtueel terrarium, een milieuvriendelijke browserextensie, een ruimte-invader-stijl spel en een bankapp voor bedrijven. Aan het einde van de serie zullen studenten een gedegen begrip van webontwikkeling hebben verworven.
 
-> 🎓 Je kunt de eerste paar lessen van dit curriculum volgen als een [Leerpad](https://docs.microsoft.com/learn/paths/web-development-101/?WT.mc_id=academic-77807-sagibbon) op Microsoft Learn!
+> 🎓 Je kunt de eerste paar lessen in dit curriculum volgen als een [Leerpad](https://docs.microsoft.com/learn/paths/web-development-101/?WT.mc_id=academic-77807-sagibbon) op Microsoft Learn!
 
-Door ervoor te zorgen dat de inhoud aansluit bij projecten, wordt het proces boeiender voor studenten en wordt het begrip van concepten vergroot. We hebben ook enkele startlessen in JavaScript-basisprincipes geschreven om concepten te introduceren, gecombineerd met een video uit de "[Beginnersserie: JavaScript](https://channel9.msdn.com/Series/Beginners-Series-to-JavaScript/?WT.mc_id=academic-77807-sagibbon)"-collectie van videotutorials, waarvan sommige auteurs hebben bijgedragen aan dit curriculum.
+Door ervoor te zorgen dat de inhoud aansluit bij projecten, wordt het proces leerzamer en boeiender voor de studenten en wordt het onthouden van concepten versterkt. We hebben ook verschillende startlessen geschreven in de basis van JavaScript om concepten te introduceren, gecombineerd met een video uit de "[Beginners Series to: JavaScript](https://channel9.msdn.com/Series/Beginners-Series-to-JavaScript/?WT.mc_id=academic-77807-sagibbon)" collectie van videotutorials, waarvan sommige auteurs bijdroegen aan dit curriculum.
 
-Daarnaast zet een laagdrempelige quiz voorafgaand aan een les de intentie van de student om een onderwerp te leren, terwijl een tweede quiz na de les zorgt voor verdere retentie. Dit curriculum is ontworpen om flexibel en leuk te zijn en kan in zijn geheel of gedeeltelijk worden gevolgd. De projecten beginnen klein en worden steeds complexer tegen het einde van de 12-weekse cyclus.
+Daarnaast zet een quiz met lage druk voor een les de intentie van de student voor het leren van een onderwerp, terwijl een tweede quiz na de les verdere retentie verzekert. Dit curriculum is ontworpen om flexibel en leuk te zijn en kan geheel of gedeeltelijk worden gevolgd. De projecten beginnen klein en worden steeds complexer aan het einde van de 12-weekse cyclus.
 
-Hoewel we bewust hebben vermeden om JavaScript-frameworks te introduceren om ons te concentreren op de basisvaardigheden die nodig zijn als webontwikkelaar voordat een framework wordt aangenomen, zou een goede volgende stap na het voltooien van dit curriculum zijn om meer te leren over Node.js via een andere collectie video's: "[Beginnersserie: Node.js](https://channel9.msdn.com/Series/Beginners-Series-to-Nodejs/?WT.mc_id=academic-77807-sagibbon)".
+Hoewel we er bewust voor hebben gekozen om geen JavaScript-frameworks te introduceren om ons te concentreren op de basisvaardigheden die je als webontwikkelaar nodig hebt voordat je een framework adopteert, is een goede volgende stap na dit curriculum het leren over Node.js via een andere collectie video’s: "[Beginner Series to: Node.js](https://channel9.msdn.com/Series/Beginners-Series-to-Nodejs/?WT.mc_id=academic-77807-sagibbon)".
 
 > Bezoek onze [Gedragscode](CODE_OF_CONDUCT.md) en [Bijdragen](CONTRIBUTING.md) richtlijnen. We verwelkomen je constructieve feedback!
 
 
 ## 🧭 Offline toegang
 
-Je kunt deze documentatie offline bekijken met behulp van [Docsify](https://docsify.js.org/#/). Fork deze repo, [installeer Docsify](https://docsify.js.org/#/quickstart) op je lokale machine, en typ vervolgens in de hoofdmap van deze repo `docsify serve`. De website wordt geserveerd op poort 3000 op je localhost: `localhost:3000`.
+Je kunt deze documentatie offline gebruiken door [Docsify](https://docsify.js.org/#/) te gebruiken. Fork deze repo, [installeer Docsify](https://docsify.js.org/#/quickstart) op je lokale machine en typ vervolgens in de hoofdmap van deze repo `docsify serve`. De website wordt dan bediend op poort 3000 op je localhost: `localhost:3000`.
 
 ## 📘 PDF
 
@@ -194,29 +188,65 @@ Een PDF van alle lessen is te vinden [hier](https://microsoft.github.io/Web-Dev-
 
 
 ## 🎒 Andere Cursussen
+Ons team maakt ook andere cursussen! Bekijk:
 
-Ons team produceert andere cursussen! Bekijk:
-
-- [Generatieve AI voor Beginners](https://aka.ms/genai-beginners)
-- [Generatieve AI voor Beginners .NET](https://github.com/microsoft/Generative-AI-for-beginners-dotnet)
-- [Generatieve AI met JavaScript](https://github.com/microsoft/generative-ai-with-javascript)
-- [Generatieve AI met Java](https://github.com/microsoft/Generative-AI-for-beginners-java)
-- [AI voor Beginners](https://aka.ms/ai-beginners)
-- [Datawetenschap voor beginners](https://aka.ms/datascience-beginners)  
-- [ML voor beginners](https://aka.ms/ml-beginners)  
-- [Cybersecurity voor beginners](https://github.com/microsoft/Security-101)  
-- [Webontwikkeling voor beginners](https://aka.ms/webdev-beginners)  
-- [IoT voor beginners](https://aka.ms/iot-beginners)  
-- [XR-ontwikkeling voor beginners](https://github.com/microsoft/xr-development-for-beginners)  
-- [GitHub Copilot beheersen voor agentisch gebruik](https://github.com/microsoft/Mastering-GitHub-Copilot-for-Paired-Programming)  
-- [GitHub Copilot beheersen voor C#/.NET-ontwikkelaars](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers)  
-- [Kies je eigen Copilot-avontuur](https://github.com/microsoft/CopilotAdventures)  
-
-## Licentie  
-
-Deze repository is gelicentieerd onder de MIT-licentie. Zie het [LICENSE](../../LICENSE)-bestand voor meer informatie.  
+<!-- CO-OP TRANSLATOR OTHER COURSES START -->
+### LangChain
+[![LangChain4j voor Beginners](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
+[![LangChain.js voor Beginners](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
 
 ---
 
-**Disclaimer**:  
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, willen we u erop wijzen dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet worden beschouwd als de gezaghebbende bron. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+### Azure / Edge / MCP / Agents
+[![AZD voor Beginners](https://img.shields.io/badge/AZD%20for%20Beginners-0078D4?style=for-the-badge&labelColor=E5E7EB&color=0078D4)](https://github.com/microsoft/AZD-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Edge AI voor Beginners](https://img.shields.io/badge/Edge%20AI%20for%20Beginners-00B8E4?style=for-the-badge&labelColor=E5E7EB&color=00B8E4)](https://github.com/microsoft/edgeai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![MCP voor Beginners](https://img.shields.io/badge/MCP%20for%20Beginners-009688?style=for-the-badge&labelColor=E5E7EB&color=009688)](https://github.com/microsoft/mcp-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI Agents voor Beginners](https://img.shields.io/badge/AI%20Agents%20for%20Beginners-00C49A?style=for-the-badge&labelColor=E5E7EB&color=00C49A)](https://github.com/microsoft/ai-agents-for-beginners?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### Generatieve AI Serie
+[![Generatieve AI voor Beginners](https://img.shields.io/badge/Generative%20AI%20for%20Beginners-8B5CF6?style=for-the-badge&labelColor=E5E7EB&color=8B5CF6)](https://github.com/microsoft/generative-ai-for-beginners?WT.mc_id=academic-105485-koreyst)
+[![Generatieve AI (.NET)](https://img.shields.io/badge/Generative%20AI%20(.NET)-9333EA?style=for-the-badge&labelColor=E5E7EB&color=9333EA)](https://github.com/microsoft/Generative-AI-for-beginners-dotnet?WT.mc_id=academic-105485-koreyst)
+[![Generatieve AI (Java)](https://img.shields.io/badge/Generative%20AI%20(Java)-C084FC?style=for-the-badge&labelColor=E5E7EB&color=C084FC)](https://github.com/microsoft/generative-ai-for-beginners-java?WT.mc_id=academic-105485-koreyst)
+[![Generatieve AI (JavaScript)](https://img.shields.io/badge/Generative%20AI%20(JavaScript)-E879F9?style=for-the-badge&labelColor=E5E7EB&color=E879F9)](https://github.com/microsoft/generative-ai-with-javascript?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### Core Learning
+[![ML voor Beginners](https://img.shields.io/badge/ML%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://aka.ms/ml-beginners?WT.mc_id=academic-105485-koreyst)
+[![Data Science voor Beginners](https://img.shields.io/badge/Data%20Science%20for%20Beginners-84CC16?style=for-the-badge&labelColor=E5E7EB&color=84CC16)](https://aka.ms/datascience-beginners?WT.mc_id=academic-105485-koreyst)
+[![AI voor Beginners](https://img.shields.io/badge/AI%20for%20Beginners-A3E635?style=for-the-badge&labelColor=E5E7EB&color=A3E635)](https://aka.ms/ai-beginners?WT.mc_id=academic-105485-koreyst)
+[![Cybersecurity voor Beginners](https://img.shields.io/badge/Cybersecurity%20for%20Beginners-F97316?style=for-the-badge&labelColor=E5E7EB&color=F97316)](https://github.com/microsoft/Security-101?WT.mc_id=academic-96948-sayoung)
+[![Web Dev voor Beginners](https://img.shields.io/badge/Web%20Dev%20for%20Beginners-EC4899?style=for-the-badge&labelColor=E5E7EB&color=EC4899)](https://aka.ms/webdev-beginners?WT.mc_id=academic-105485-koreyst)
+[![IoT voor Beginners](https://img.shields.io/badge/IoT%20for%20Beginners-14B8A6?style=for-the-badge&labelColor=E5E7EB&color=14B8A6)](https://aka.ms/iot-beginners?WT.mc_id=academic-105485-koreyst)
+[![XR Ontwikkeling voor Beginners](https://img.shields.io/badge/XR%20Development%20for%20Beginners-38BDF8?style=for-the-badge&labelColor=E5E7EB&color=38BDF8)](https://github.com/microsoft/xr-development-for-beginners?WT.mc_id=academic-105485-koreyst)
+
+---
+ 
+### Copilot Serie
+[![Copilot voor AI Paired Programming](https://img.shields.io/badge/Copilot%20for%20AI%20Paired%20Programming-FACC15?style=for-the-badge&labelColor=E5E7EB&color=FACC15)](https://aka.ms/GitHubCopilotAI?WT.mc_id=academic-105485-koreyst)
+[![Copilot voor C#/.NET](https://img.shields.io/badge/Copilot%20for%20C%23/.NET-FBBF24?style=for-the-badge&labelColor=E5E7EB&color=FBBF24)](https://github.com/microsoft/mastering-github-copilot-for-dotnet-csharp-developers?WT.mc_id=academic-105485-koreyst)
+[![Copilot Avontuur](https://img.shields.io/badge/Copilot%20Adventure-FDE68A?style=for-the-badge&labelColor=E5E7EB&color=FDE68A)](https://github.com/microsoft/CopilotAdventures?WT.mc_id=academic-105485-koreyst)
+<!-- CO-OP TRANSLATOR OTHER COURSES END -->
+
+## Hulp krijgen
+
+Als je vastloopt of vragen hebt over het bouwen van AI-apps. Doe mee met andere leerlingen en ervaren ontwikkelaars in discussies over MCP. Het is een ondersteunende gemeenschap waar vragen welkom zijn en kennis vrij gedeeld wordt.
+
+[![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
+
+Als je productfeedback hebt of fouten tegenkomt tijdens het bouwen, bezoek:
+
+[![Microsoft Foundry Developer Forum](https://img.shields.io/badge/GitHub-Microsoft_Foundry_Developer_Forum-blue?style=for-the-badge&logo=github&color=000000&logoColor=fff)](https://aka.ms/foundry/forum)
+
+## Licentie
+
+Deze repository is gelicentieerd onder de MIT-licentie. Zie het [LICENSE](../../LICENSE) bestand voor meer informatie.
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel wij streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal wordt beschouwd als de gezaghebbende bron. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerd geïnterpreteerde informatie voortkomend uit het gebruik van deze vertaling.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

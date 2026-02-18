@@ -1,12 +1,3 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "b121a279a6ab39878491f3e572673515",
-  "translation_date": "2025-08-27T20:42:44+00:00",
-  "source_file": "5-browser-extension/README.md",
-  "language_code": "nl"
-}
--->
 # Een browserextensie bouwen
 
 Het bouwen van browserextensies is een leuke en interessante manier om na te denken over de prestaties van je apps terwijl je een ander type webasset ontwikkelt. Deze module bevat lessen over hoe browsers werken, hoe je een browserextensie implementeert, hoe je een formulier bouwt, een API aanroept, lokale opslag gebruikt, en hoe je de prestaties van je website kunt beoordelen en verbeteren.
@@ -23,7 +14,7 @@ Deze extensie kan ad hoc door een gebruiker worden opgeroepen zodra een API-sleu
 
 ### Credits
 
-![een groene browserextensie](../../../translated_images/extension-screenshot.0e7f5bfa110e92e3875e1bc9405edd45a3d2e02963e48900adb91926a62a5807.nl.png)
+![een groene browserextensie](../../../translated_images/nl/extension-screenshot.0e7f5bfa110e92e3.webp)
 
 ## Credits
 

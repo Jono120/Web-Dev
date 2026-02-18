@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-28T08:13:28+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "bg"
-}
--->
 # Моето терариумче: Проект за изучаване на HTML, CSS и манипулация на DOM с JavaScript 🌵🌱
 
 Малка медитация с влачене и пускане на код. С малко HTML, JS и CSS можете да създадете уеб интерфейс, да го стилизирате и да добавите интеракция.
 
-![моето терариумче](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.bg.png)
+![моето терариумче](../../../../translated_images/bg/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## Кредити
 

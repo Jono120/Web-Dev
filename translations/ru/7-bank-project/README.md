@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "830359535306594b448db6575ce5cdee",
-  "translation_date": "2025-08-26T00:02:28+00:00",
-  "source_file": "7-bank-project/README.md",
-  "language_code": "ru"
-}
--->
 # :dollar: Создаем банк
 
 В этом проекте вы научитесь создавать вымышленный банк. Эти уроки включают инструкции по созданию макета веб-приложения, настройке маршрутов, созданию форм, управлению состоянием и получению данных из API, откуда можно извлечь данные банка.
 
-| ![Screen1](../../../translated_images/screen1.baccbba0f1f93364672eb250d2fbd21574bb1caf79a2155022dc098a741cbdfe.ru.png) | ![Screen2](../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.ru.png) |
+| ![Screen1](../../../translated_images/ru/screen1.baccbba0f1f93364.webp) | ![Screen2](../../../translated_images/ru/screen2.123c82a831a1d14a.webp) |
 |--------------------------------|--------------------------------|
 
 ## Уроки

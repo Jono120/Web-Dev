@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "6329fbe8bd936068debd78cca6f09c0a",
-  "translation_date": "2025-08-25T21:30:26+00:00",
-  "source_file": "3-terrarium/solution/README.md",
-  "language_code": "ur"
-}
--->
 # میرا ٹیریریم: ایک پروجیکٹ HTML، CSS، اور DOM مینپولیشن کو جاوا اسکرپٹ کے ذریعے سیکھنے کے لیے 🌵🌱
 
 ایک چھوٹا سا ڈریگ اینڈ ڈراپ کوڈ-میڈیٹیشن۔ تھوڑے سے HTML، JS اور CSS کے ساتھ، آپ ایک ویب انٹرفیس بنا سکتے ہیں، اسے اسٹائل دے سکتے ہیں، اور اس میں انٹریکشن شامل کر سکتے ہیں۔
 
-![میرا ٹیریریم](../../../../translated_images/screenshot_gray.0c796099a1f9f25e40aa55ead81f268434c00af30d7092490759945eda63067d.ur.png)
+![میرا ٹیریریم](../../../../translated_images/ur/screenshot_gray.0c796099a1f9f25e.webp)
 
 ## کریڈٹس
 

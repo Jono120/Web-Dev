@@ -1,31 +1,102 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "a7587943d38d095de8613e1b508609f5",
-  "translation_date": "2025-08-29T00:23:20+00:00",
-  "source_file": "5-browser-extension/2-forms-browsers-local-storage/README.md",
-  "language_code": "tr"
-}
--->
-# Tarayıcı Eklentisi Projesi Bölüm 2: Bir API Çağırma, Yerel Depolama Kullanma
+# Tarayıcı Uzantısı Projesi Bölüm 2: Bir API Çağırma, Yerel Depolama Kullanma
+
+```mermaid
+journey
+    title Your API Integration & Storage Journey
+    section Foundation
+      Setup DOM references: 3: Student
+      Add event listeners: 4: Student
+      Handle form submission: 4: Student
+    section Data Management
+      Implement local storage: 4: Student
+      Build API calls: 5: Student
+      Handle async operations: 5: Student
+    section User Experience
+      Add error handling: 5: Student
+      Create loading states: 4: Student
+      Polish interactions: 5: Student
+```
 
 ## Ders Öncesi Test
 
 [Ders öncesi test](https://ff-quizzes.netlify.app/web/quiz/25)
 
-### Giriş
+## Giriş
 
-Bu derste, tarayıcı eklentinizin formunu kullanarak bir API çağıracak ve sonuçları tarayıcı eklentinizde görüntüleyeceksiniz. Ayrıca, gelecekteki referanslar ve kullanım için verileri tarayıcınızın yerel deposunda nasıl saklayabileceğinizi öğreneceksiniz.
+Hatırlıyor musunuz, tarayıcı uzantınızı oluşturmaya başlamıştınız? Şu anda güzel görünümlü bir formunuz var, ancak bu form temelde statik. Bugün onu gerçek verilerle bağlayarak ve hafıza kazandırarak canlandıracağız.
 
-✅ Kodunuzu nereye yerleştireceğinizi öğrenmek için ilgili dosyalardaki numaralandırılmış bölümleri takip edin.
+Apollo görev kontrol bilgisayarlarını düşünün - sadece sabit bilgileri göstermiyorlardı. Sürekli olarak uzay aracıyla iletişim kuruyor, telemetri verileriyle güncelleniyor ve kritik görev parametrelerini hatırlıyorlardı. Bugün oluşturacağımız dinamik davranış tam olarak bu. Uzantınız internete bağlanacak, gerçek çevresel verileri alacak ve ayarlarınızı bir dahaki sefere hatırlayacak.
 
-### Eklentide manipüle edilecek öğeleri ayarlayın:
+API entegrasyonu karmaşık görünebilir, ancak aslında kodunuza diğer hizmetlerle nasıl iletişim kuracağını öğretmekten ibarettir. İster hava durumu verilerini, ister sosyal medya akışlarını, ister bugün yapacağımız gibi karbon ayak izi bilgilerini alıyor olun, hepsi bu dijital bağlantıları kurmakla ilgilidir. Ayrıca tarayıcıların bilgiyi nasıl saklayabileceğini keşfedeceğiz - tıpkı kütüphanelerin kitapların nerede olduğunu hatırlamak için kart kataloglarını kullanması gibi.
 
-Bu aşamaya kadar, tarayıcı eklentiniz için form ve sonuç `<div>` HTML'sini oluşturmuş olmalısınız. Bundan sonra, `/src/index.js` dosyasında çalışmanız ve eklentinizi adım adım oluşturmanız gerekecek. Projenizi kurma ve derleme süreci hakkında bilgi almak için [önceki derse](../1-about-browsers/README.md) başvurabilirsiniz.
+Bu dersin sonunda, gerçek verileri alan, kullanıcı tercihlerini saklayan ve sorunsuz bir deneyim sunan bir tarayıcı uzantısına sahip olacaksınız. Haydi başlayalım!
 
-`index.js` dosyanızda çalışarak, çeşitli alanlarla ilişkili değerleri tutmak için bazı `const` değişkenleri oluşturarak başlayın:
+```mermaid
+mindmap
+  root((Dynamic Extensions))
+    DOM Manipulation
+      Element Selection
+      Event Handling
+      State Management
+      UI Updates
+    Local Storage
+      Data Persistence
+      Key-Value Pairs
+      Session Management
+      User Preferences
+    API Integration
+      HTTP Requests
+      Authentication
+      Data Parsing
+      Error Handling
+    Async Programming
+      Promises
+      Async/Await
+      Error Catching
+      Non-blocking Code
+    User Experience
+      Loading States
+      Error Messages
+      Smooth Transitions
+      Data Validation
+```
 
-```JavaScript
+✅ Kodunuzu nereye yerleştireceğinizi bilmek için ilgili dosyalardaki numaralandırılmış segmentleri takip edin.
+
+## Uzantıda manipüle edilecek öğeleri ayarlayın
+
+JavaScript'in arayüzü manipüle edebilmesi için önce belirli HTML öğelerine referanslar oluşturması gerekir. Bunu, bir teleskopun belirli yıldızlara yönlendirilmesi gibi düşünün - Galileo, Jüpiter'in uydularını incelemeden önce Jüpiter'i bulmalı ve odaklanmalıydı.
+
+`index.js` dosyanızda, her önemli form öğesine referanslar yakalayan `const` değişkenleri oluşturacağız. Bu, bilim insanlarının ekipmanlarını etiketlemesine benzer - her seferinde tüm laboratuvarı aramak yerine, doğrudan ihtiyaç duydukları şeye erişebilirler.
+
+```mermaid
+flowchart LR
+    A[JavaScript Code] --> B[document.querySelector]
+    B --> C[CSS Selectors]
+    C --> D[HTML Elements]
+    
+    D --> E[".form-data"]
+    D --> F[".region-name"]
+    D --> G[".api-key"]
+    D --> H[".loading"]
+    D --> I[".errors"]
+    D --> J[".result-container"]
+    
+    E --> K[Form Element]
+    F --> L[Input Field]
+    G --> M[Input Field]
+    H --> N[UI Element]
+    I --> O[UI Element]
+    J --> P[UI Element]
+    
+    style A fill:#e1f5fe
+    style D fill:#e8f5e8
+    style K fill:#fff3e0
+    style L fill:#fff3e0
+    style M fill:#fff3e0
+```
+
+```javascript
 // form fields
 const form = document.querySelector('.form-data');
 const region = document.querySelector('.region-name');
@@ -41,186 +112,433 @@ const myregion = document.querySelector('.my-region');
 const clearBtn = document.querySelector('.clear-btn');
 ```
 
-Bu alanların tümü, önceki derste HTML'de ayarladığınız CSS sınıflarıyla referans alınır.
+**Bu kodun yaptığı şey:**
+- **Form öğelerini yakalar** `document.querySelector()` kullanarak CSS sınıf seçicileriyle
+- **Giriş alanlarına referanslar oluşturur** bölge adı ve API anahtarı için
+- **Sonuç görüntüleme öğelerine bağlantılar kurar** karbon kullanım verileri için
+- **UI öğelerine erişim sağlar** yükleme göstergeleri ve hata mesajları gibi
+- **Her öğe referansını bir `const` değişkeninde saklar** kodunuzda kolayca yeniden kullanmak için
 
-### Dinleyiciler ekleyin
+## Olay dinleyicileri ekleyin
 
-Sonraki adımda, formu ve formu sıfırlayan temizleme düğmesini dinleyen olay dinleyicileri ekleyin. Böylece bir kullanıcı formu gönderdiğinde veya sıfırlama düğmesine tıkladığında bir şeyler olur. Ayrıca dosyanın altına uygulamayı başlatma çağrısını ekleyin:
+Şimdi uzantınızı kullanıcı eylemlerine yanıt verecek hale getireceğiz. Olay dinleyiciler, kodunuzun kullanıcı etkileşimlerini izleme yöntemidir. Bunları, erken telefon santrallerindeki operatörler gibi düşünün - gelen çağrıları dinler ve bir bağlantı yapmak istendiğinde doğru devreleri bağlarlardı.
 
-```JavaScript
+```mermaid
+sequenceDiagram
+    participant User
+    participant Form
+    participant JavaScript
+    participant API
+    participant Storage
+    
+    User->>Form: Fills out region/API key
+    User->>Form: Clicks submit
+    Form->>JavaScript: Triggers submit event
+    JavaScript->>JavaScript: handleSubmit(e)
+    JavaScript->>Storage: Save user preferences
+    JavaScript->>API: Fetch carbon data
+    API->>JavaScript: Returns data
+    JavaScript->>Form: Update UI with results
+    
+    User->>Form: Clicks clear button
+    Form->>JavaScript: Triggers click event
+    JavaScript->>Storage: Clear saved data
+    JavaScript->>Form: Reset to initial state
+```
+
+```javascript
 form.addEventListener('submit', (e) => handleSubmit(e));
 clearBtn.addEventListener('click', (e) => reset(e));
 init();
 ```
 
-✅ Bir gönderme veya tıklama olayını dinlemek için kullanılan kısayola dikkat edin ve olayın handleSubmit veya reset fonksiyonlarına nasıl iletildiğini inceleyin. Bu kısayolun daha uzun bir formatını yazabilir misiniz? Hangisini tercih edersiniz?
+**Bu kavramları anlamak:**
+- **Form gönderme dinleyicisi ekler** kullanıcılar Enter tuşuna bastığında veya gönder düğmesine tıkladığında tetiklenir
+- **Temizleme düğmesine bir tıklama dinleyicisi bağlar** formu sıfırlamak için
+- **Olay nesnesini `(e)` işleyici fonksiyonlara iletir** ek kontrol için
+- **`init()` fonksiyonunu hemen çağırır** uzantınızın başlangıç durumunu ayarlamak için
 
-### init() ve reset() fonksiyonlarını oluşturun:
+✅ Burada kullanılan kısa ok fonksiyon sözdizimine dikkat edin. Bu modern JavaScript yaklaşımı, geleneksel fonksiyon ifadelerinden daha temizdir, ancak her ikisi de eşit derecede iyi çalışır!
 
-Şimdi, eklentiyi başlatan init() fonksiyonunu oluşturacaksınız:
+### 🔄 **Pedagojik Kontrol Noktası**
+**Olay İşleme Anlayışı**: Başlangıç işlemlerine geçmeden önce şunları açıklayabildiğinizden emin olun:
+- ✅ `addEventListener`'ın kullanıcı eylemlerini JavaScript fonksiyonlarına nasıl bağladığını açıklayın
+- ✅ Olay nesnesi `(e)`'nin neden işleyici fonksiyonlara iletildiğini anlayın
+- ✅ `submit` ve `click` olayları arasındaki farkı tanıyın
+- ✅ `init()` fonksiyonunun ne zaman çalıştığını ve nedenini açıklayın
 
-```JavaScript
+**Hızlı Kendini Test Et**: Bir form gönderiminde `e.preventDefault()`'u unutursanız ne olur?
+*Cevap: Sayfa yenilenir, tüm JavaScript durumu kaybolur ve kullanıcı deneyimi kesintiye uğrar.*
+
+## Başlatma ve sıfırlama fonksiyonlarını oluşturun
+
+Uzantınız için başlatma mantığını oluşturalım. `init()` fonksiyonu, bir geminin navigasyon sistemi gibi enstrümanlarını kontrol eder - mevcut durumu belirler ve arayüzü buna göre ayarlar. Birinin uzantınızı daha önce kullanıp kullanmadığını kontrol eder ve önceki ayarlarını yükler.
+
+`reset()` fonksiyonu, kullanıcılara temiz bir başlangıç sağlar - bilim insanlarının deneyler arasında enstrümanlarını sıfırlayarak temiz veri elde etmeleri gibi.
+
+```javascript
 function init() {
-	//if anything is in localStorage, pick it up
+	// Check if user has previously saved API credentials
 	const storedApiKey = localStorage.getItem('apiKey');
 	const storedRegion = localStorage.getItem('regionName');
 
-	//set icon to be generic green
-	//todo
+	// Set extension icon to generic green (placeholder for future lesson)
+	// TODO: Implement icon update in next lesson
 
 	if (storedApiKey === null || storedRegion === null) {
-		//if we don't have the keys, show the form
+		// First-time user: show the setup form
 		form.style.display = 'block';
 		results.style.display = 'none';
 		loading.style.display = 'none';
 		clearBtn.style.display = 'none';
 		errors.textContent = '';
 	} else {
-        //if we have saved keys/regions in localStorage, show results when they load
-        displayCarbonUsage(storedApiKey, storedRegion);
+		// Returning user: load their saved data automatically
+		displayCarbonUsage(storedApiKey, storedRegion);
 		results.style.display = 'none';
 		form.style.display = 'none';
 		clearBtn.style.display = 'block';
 	}
-};
+}
 
 function reset(e) {
 	e.preventDefault();
-	//clear local storage for region only
+	// Clear stored region to allow user to choose a new location
 	localStorage.removeItem('regionName');
+	// Restart the initialization process
 	init();
 }
-
 ```
 
-Bu fonksiyonda ilginç bir mantık var. Okuyarak neler olduğunu görebiliyor musunuz?
+**Burada olanları parçalayarak açıklayalım:**
+- **Tarayıcının yerel depolamasından** saklanan API anahtarı ve bölgeyi alır
+- **İlk kez kullanıcı mı yoksa geri dönen kullanıcı mı olduğunu kontrol eder**
+- **Yeni kullanıcılar için kurulum formunu gösterir** ve diğer arayüz öğelerini gizler
+- **Kaydedilmiş verileri otomatik olarak yükler** geri dönen kullanıcılar için ve sıfırlama seçeneğini gösterir
+- **Mevcut verilere dayalı olarak kullanıcı arayüzü durumunu yönetir**
 
-- Kullanıcının bir APIKey ve bölge kodunu yerel depolamada saklayıp saklamadığını kontrol etmek için iki `const` ayarlanır.
-- Eğer bunlardan biri null ise, formu 'block' olarak görüntüleyerek gösterin.
-- Sonuçları, yükleme durumunu ve clearBtn'i gizleyin ve hata metnini boş bir dizeye ayarlayın.
-- Eğer bir anahtar ve bölge varsa, şu rutini başlatın:
-  - API'yi çağırarak karbon kullanım verilerini alın.
-  - Sonuçlar alanını gizleyin.
-  - Formu gizleyin.
-  - Sıfırlama düğmesini gösterin.
+**Yerel Depolama Hakkında Temel Kavramlar:**
+- **Tarayıcı oturumları arasında veri saklar** (oturum depolamanın aksine)
+- **Veriyi anahtar-değer çiftleri olarak saklar** `getItem()` ve `setItem()` kullanarak
+- **Belirli bir anahtar için veri yoksa `null` döner**
+- **Kullanıcı tercihlerini ve ayarlarını hatırlamak için basit bir yol sağlar**
 
-Devam etmeden önce, tarayıcılarda mevcut olan çok önemli bir kavramı öğrenmek faydalı olacaktır: [LocalStorage](https://developer.mozilla.org/docs/Web/API/Window/localStorage). LocalStorage, tarayıcıda `anahtar-değer` çifti olarak dizeleri saklamak için kullanışlı bir yöntemdir. Bu tür bir web depolama, tarayıcıdaki verileri yönetmek için JavaScript tarafından manipüle edilebilir. LocalStorage süresiz olarak saklanırken, başka bir tür web depolama olan SessionStorage, tarayıcı kapatıldığında temizlenir. Depolama türlerinin kullanımına göre avantajları ve dezavantajları vardır.
+> 💡 **Tarayıcı Depolamasını Anlamak**: [LocalStorage](https://developer.mozilla.org/docs/Web/API/Window/localStorage), uzantınıza kalıcı bir hafıza kazandırmak gibidir. Antik İskenderiye Kütüphanesi'nin parşömenleri sakladığı gibi - bilgiler, bilim insanları ayrılıp geri döndüğünde bile erişilebilir kalır.
+>
+> **Anahtar özellikler:**
+> - **Veriyi tarayıcı kapandıktan sonra bile saklar**
+> - **Bilgisayar yeniden başlatıldığında ve tarayıcı çöktüğünde hayatta kalır**
+> - **Kullanıcı tercihleri için önemli bir depolama alanı sağlar**
+> - **Ağ gecikmeleri olmadan anında erişim sunar**
 
-> Not - tarayıcı eklentinizin kendi yerel deposu vardır; ana tarayıcı penceresi farklı bir örnektir ve ayrı davranır.
+> **Önemli Not**: Tarayıcı uzantınızın kendi izole edilmiş yerel depolaması vardır ve bu, normal web sayfalarından ayrı çalışır. Bu, güvenlik sağlar ve diğer web siteleriyle çakışmaları önler.
 
-APIKey'inizi bir dize değeri olarak ayarlayın ve bunun Edge'de nasıl ayarlandığını görmek için bir web sayfasını "inceleyerek" (tarayıcıya sağ tıklayıp inceleyebilirsiniz) ve Uygulamalar sekmesine giderek depolamayı görebilirsiniz.
+Saklanan verilerinizi tarayıcı Geliştirici Araçları'nı (F12) açarak, **Uygulama** sekmesine giderek ve **Yerel Depolama** bölümünü genişleterek görüntüleyebilirsiniz.
 
-![Yerel depolama paneli](../../../../translated_images/localstorage.472f8147b6a3f8d141d9551c95a2da610ac9a3c6a73d4a1c224081c98bae09d9.tr.png)
+```mermaid
+stateDiagram-v2
+    [*] --> CheckStorage: Extension starts
+    CheckStorage --> FirstTime: No stored data
+    CheckStorage --> Returning: Data found
+    
+    FirstTime --> ShowForm: Display setup form
+    ShowForm --> UserInput: User enters data
+    UserInput --> SaveData: Store in localStorage
+    SaveData --> FetchAPI: Get carbon data
+    
+    Returning --> LoadData: Read from localStorage
+    LoadData --> FetchAPI: Get carbon data
+    
+    FetchAPI --> ShowResults: Display data
+    ShowResults --> UserAction: User interacts
+    
+    UserAction --> Reset: Clear button clicked
+    UserAction --> ShowResults: View data
+    
+    Reset --> ClearStorage: Remove saved data
+    ClearStorage --> FirstTime: Back to setup
+```
 
-✅ Yerel Depolama'da hangi durumlarda veri saklamak istemeyeceğinizi düşünün. Genel olarak, API Anahtarlarını Yerel Depolama'da saklamak kötü bir fikirdir! Nedenini görebiliyor musunuz? Bizim durumumuzda, uygulamamız tamamen öğrenme amaçlı olduğu ve bir uygulama mağazasında dağıtılmayacağı için bu yöntemi kullanacağız.
+![Yerel depolama paneli](../../../../translated_images/tr/localstorage.472f8147b6a3f8d1.webp)
 
-Yerel Depolama'yı manipüle etmek için Web API'sini `getItem()`, `setItem()` veya `removeItem()` kullanarak kullandığınızı unutmayın. Bu yöntemler tarayıcılar arasında geniş bir destek görmektedir.
+> ⚠️ **Güvenlik Düşüncesi**: Üretim uygulamalarında, API anahtarlarını Yerel Depolama'da saklamak güvenlik riskleri taşır çünkü JavaScript bu verilere erişebilir. Öğrenme amacıyla bu yaklaşım uygundur, ancak gerçek uygulamalar hassas kimlik bilgileri için güvenli sunucu tarafı depolama kullanmalıdır.
 
-`displayCarbonUsage()` fonksiyonunu oluşturmadan önce, ilk form gönderimini işlemek için işlevselliği oluşturalım.
+## Form gönderimini işleme
 
-### Form gönderimini işleyin
+Şimdi birinin formunuzu gönderdiğinde ne olacağını ele alacağız. Varsayılan olarak, tarayıcılar form gönderildiğinde sayfayı yeniler, ancak bu davranışı kesintisiz bir deneyim oluşturmak için durduracağız.
 
-Bir `(e)` olay argümanını kabul eden `handleSubmit` adlı bir fonksiyon oluşturun. Olayın yayılmasını durdurun (bu durumda, tarayıcının yenilenmesini durdurmak istiyoruz) ve `setUpUser` adlı yeni bir fonksiyonu çağırarak `apiKey.value` ve `region.value` argümanlarını iletin. Bu şekilde, uygun alanlar doldurulduğunda ilk form aracılığıyla getirilen iki değeri kullanırsınız.
+Bu yaklaşım, görev kontrolünün uzay aracı iletişimlerini nasıl ele aldığına benzer - her iletim için tüm sistemi sıfırlamak yerine, yeni bilgileri işlerken sürekli operasyonu sürdürürler.
 
-```JavaScript
+Form gönderim olayını yakalayan ve kullanıcının girişini çıkaran bir fonksiyon oluşturun:
+
+```javascript
 function handleSubmit(e) {
 	e.preventDefault();
 	setUpUser(apiKey.value, region.value);
 }
 ```
 
-✅ Hafızanızı tazeleyin - Son derste ayarladığınız HTML, `const` ile dosyanın üst kısmında yakalanan iki giriş alanına sahiptir ve her ikisi de `required` olarak ayarlanmıştır, böylece tarayıcı kullanıcıların null değerler girmesini engeller.
+**Yukarıda şunları yaptık:**
+- **Varsayılan form gönderim davranışını engeller** sayfanın yenilenmesini önlemek için
+- **Kullanıcı giriş değerlerini çıkarır** API anahtarı ve bölge alanlarından
+- **Form verilerini `setUpUser()` fonksiyonuna iletir** işleme için
+- **Sayfa yenilemelerinden kaçınarak** tek sayfa uygulama davranışını sürdürür
 
-### Kullanıcıyı ayarlayın
+✅ HTML form alanlarınız `required` özelliğini içerir, bu nedenle tarayıcı, kullanıcıların bu fonksiyon çalışmadan önce hem API anahtarını hem de bölgeyi sağlamasını otomatik olarak doğrular.
 
-`setUpUser` fonksiyonuna geçerek, burada apiKey ve regionName için yerel depolama değerlerini ayarlarsınız. Yeni bir fonksiyon ekleyin:
+## Kullanıcı tercihlerini ayarlama
 
-```JavaScript
+`setUpUser` fonksiyonu, kullanıcının kimlik bilgilerini kaydetmek ve ilk API çağrısını başlatmaktan sorumludur. Bu, kurulumdan sonuçları görüntülemeye sorunsuz bir geçiş sağlar.
+
+```javascript
 function setUpUser(apiKey, regionName) {
+	// Save user credentials for future sessions
 	localStorage.setItem('apiKey', apiKey);
 	localStorage.setItem('regionName', regionName);
+	
+	// Update UI to show loading state
 	loading.style.display = 'block';
 	errors.textContent = '';
 	clearBtn.style.display = 'block';
-	//make initial call
+	
+	// Fetch carbon usage data with user's credentials
 	displayCarbonUsage(apiKey, regionName);
 }
 ```
 
-Bu fonksiyon, API çağrılırken bir yükleme mesajı gösterir. Bu noktada, bu tarayıcı eklentisinin en önemli fonksiyonunu oluşturmaya geldiniz!
+**Adım adım, burada olanlar:**
+- **API anahtarını ve bölge adını yerel depolamaya kaydeder** gelecekteki kullanım için
+- **Yükleme göstergesini gösterir** kullanıcıları veri alındığı konusunda bilgilendirmek için
+- **Önceki hata mesajlarını ekrandan temizler**
+- **Kullanıcıların ayarlarını daha sonra sıfırlamaları için temizleme düğmesini gösterir**
+- **Gerçek karbon kullanım verilerini almak için API çağrısını başlatır**
 
-### Karbon Kullanımını Göster
+Bu fonksiyon, hem veri kalıcılığını hem de kullanıcı arayüzü güncellemelerini bir arada yöneterek sorunsuz bir kullanıcı deneyimi oluşturur.
 
-Sonunda API'yi sorgulama zamanı geldi!
+## Karbon kullanım verilerini görüntüleme
 
-Daha ileri gitmeden önce, API'leri tartışmalıyız. API'ler veya [Uygulama Programlama Arayüzleri](https://www.webopedia.com/TERM/A/API.html), bir web geliştiricisinin araç kutusunun kritik bir unsurudur. Programların birbirleriyle etkileşimde bulunması ve arayüz oluşturması için standart yollar sağlarlar. Örneğin, bir veritabanını sorgulaması gereken bir web sitesi oluşturuyorsanız, birisi sizin için bir API oluşturmuş olabilir. Birçok API türü olmasına rağmen, en popüler olanlardan biri [REST API](https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/)’dir.
+Şimdi uzantınızı API'ler aracılığıyla harici veri kaynaklarına bağlayacağız. Bu, uzantınızı bağımsız bir araçtan, internet üzerinden gerçek zamanlı bilgilere erişebilen bir şeye dönüştürür.
 
-✅ 'REST' terimi 'Temsili Durum Transferi' anlamına gelir ve veri almak için çeşitli şekilde yapılandırılmış URL'ler kullanmayı içerir. Geliştiriciler için mevcut olan çeşitli API türleri hakkında biraz araştırma yapın. Hangi format size daha çekici geliyor?
+**API'leri Anlamak**
 
-Bu fonksiyonla ilgili önemli noktalar var. İlk olarak, [`async` anahtar kelimesine](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function) dikkat edin. Fonksiyonlarınızı asenkron çalışacak şekilde yazmak, bir eylemin (örneğin, verilerin döndürülmesi) tamamlanmasını beklemeden devam etmelerini sağlar.
+[API'ler](https://www.webopedia.com/TERM/A/API.html), farklı uygulamaların birbirleriyle nasıl iletişim kurduğudur. Bunları, 19. yüzyılda uzak şehirleri birbirine bağlayan telgraf sistemi gibi düşünün - operatörler uzak istasyonlara istek gönderir ve istenen bilgilerle yanıt alırlardı. Sosyal medyayı her kontrol ettiğinizde, bir sesli asistana soru sorduğunuzda veya bir teslimat uygulaması kullandığınızda, API'ler bu veri alışverişlerini kolaylaştırır.
 
-`async` hakkında hızlı bir video:
+```mermaid
+flowchart TD
+    A[Your Extension] --> B[HTTP Request]
+    B --> C[CO2 Signal API]
+    C --> D{Valid Request?}
+    D -->|Yes| E[Query Database]
+    D -->|No| F[Return Error]
+    E --> G[Carbon Data]
+    G --> H[JSON Response]
+    H --> I[Your Extension]
+    F --> I
+    I --> J[Update UI]
+    
+    subgraph "API Request"
+        K[Headers: auth-token]
+        L[Parameters: countryCode]
+        M[Method: GET]
+    end
+    
+    subgraph "API Response"
+        N[Carbon Intensity]
+        O[Fossil Fuel %]
+        P[Timestamp]
+    end
+    
+    style C fill:#e8f5e8
+    style G fill:#fff3e0
+    style I fill:#e1f5fe
+```
 
-[![Async ve Await ile vaatleri yönetme](https://img.youtube.com/vi/YwmlRkrxvkk/0.jpg)](https://youtube.com/watch?v=YwmlRkrxvkk "Async ve Await ile vaatleri yönetme")
+**REST API'ler hakkında temel kavramlar:**
+- **REST**, 'Temsili Durum Transferi' anlamına gelir
+- **Standart HTTP yöntemlerini kullanır** (GET, POST, PUT, DELETE) veriyle etkileşim için
+- **Veriyi tahmin edilebilir formatlarda döner**, genellikle JSON
+- **Farklı türde istekler için tutarlı, URL tabanlı uç noktalar sağlar**
+
+✅ Kullanacağımız [CO2 Signal API](https://www.co2signal.com/) dünya çapındaki elektrik şebekelerinden gerçek zamanlı karbon yoğunluğu verileri sağlar. Bu, kullanıcıların elektrik kullanımının çevresel etkisini anlamalarına yardımcı olur!
+
+> 💡 **Asenkron JavaScript'i Anlamak**: [`async` anahtar kelimesi](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function), kodunuzun aynı anda birden fazla işlemi yönetmesini sağlar. Bir sunucudan veri istediğinizde, tüm uzantınızın donmasını istemezsiniz - bu, hava trafik kontrolünün bir uçağın yanıtını beklerken tüm operasyonları durdurması gibi olurdu.
+>
+> **Anahtar faydalar:**
+> - **Uzantının yanıt verebilirliğini korur** veri yüklenirken
+> - **Diğer kodun** ağ istekleri sırasında çalışmaya devam etmesine izin verir
+> - **Kod okunabilirliğini artırır** geleneksel geri çağırma desenlerine kıyasla
+> - **Ağ sorunları için zarif hata işleme sağlar**
+
+İşte `async` hakkında hızlı bir video:
+
+[![Async ve Await ile sözleri yönetme](https://img.youtube.com/vi/YwmlRkrxvkk/0.jpg)](https://youtube.com/watch?v=YwmlRkrxvkk "Async ve Await ile sözleri yönetme")
 
 > 🎥 Yukarıdaki görüntüye tıklayarak async/await hakkında bir video izleyin.
 
-C02Signal API'sini sorgulamak için yeni bir fonksiyon oluşturun:
+### 🔄 **Pedagojik Kontrol Noktası**
+**Asenkron Programlama Anlayışı**: API fonksiyonuna dalmadan önce şunları anladığınızdan emin olun:
+- ✅ Neden `async/await` kullandığımızı ve uzantıyı neden dondurmadığımızı anlayın
+- ✅ `try/catch` bloklarının ağ hatalarını zarif bir şekilde nasıl ele aldığını anlayın
+- ✅ Senkron ve asenkron işlemler arasındaki farkı anlayın
+- ✅ API çağrılarının neden başarısız olabileceğini ve bu hataların nasıl ele alınacağını anlayın
 
-```JavaScript
-import axios from '../node_modules/axios';
+**Gerçek Dünya Bağlantısı**: İşte günlük asenkron örnekler:
+- **Yemek siparişi vermek**: Mutfağın yanında beklemezsiniz - bir fiş alır ve diğer aktivitelerinize devam edersiniz
+- **E-posta göndermek**: E-posta uygulamanız gönderirken donmaz - daha fazla e-posta yazabilirsiniz
+- **Web sayfalarını yüklemek**: Görseller kademeli olarak yüklenirken metni okuyabilirsiniz
 
+**API Kimlik Doğrulama Akışı**:
+```mermaid
+sequenceDiagram
+    participant Ext as Extension
+    participant API as CO2 Signal API
+    participant DB as Database
+    
+    Ext->>API: Request with auth-token
+    API->>API: Validate token
+    API->>DB: Query carbon data
+    DB->>API: Return data
+    API->>Ext: JSON response
+    Ext->>Ext: Update UI
+```
+
+Karbon kullanım verilerini almak ve görüntülemek için fonksiyonu oluşturun:
+
+```javascript
+// Modern fetch API approach (no external dependencies needed)
 async function displayCarbonUsage(apiKey, region) {
 	try {
-		await axios
-			.get('https://api.co2signal.com/v1/latest', {
-				params: {
-					countryCode: region,
-				},
-				headers: {
-					'auth-token': apiKey,
-				},
-			})
-			.then((response) => {
-				let CO2 = Math.floor(response.data.data.carbonIntensity);
+		// Fetch carbon intensity data from CO2 Signal API
+		const response = await fetch('https://api.co2signal.com/v1/latest', {
+			method: 'GET',
+			headers: {
+				'auth-token': apiKey,
+				'Content-Type': 'application/json'
+			},
+			// Add query parameters for the specific region
+			...new URLSearchParams({ countryCode: region }) && {
+				url: `https://api.co2signal.com/v1/latest?countryCode=${region}`
+			}
+		});
 
-				//calculateColor(CO2);
+		// Check if the API request was successful
+		if (!response.ok) {
+			throw new Error(`API request failed: ${response.status}`);
+		}
 
-				loading.style.display = 'none';
-				form.style.display = 'none';
-				myregion.textContent = region;
-				usage.textContent =
-					Math.round(response.data.data.carbonIntensity) + ' grams (grams C02 emitted per kilowatt hour)';
-				fossilfuel.textContent =
-					response.data.data.fossilFuelPercentage.toFixed(2) +
-					'% (percentage of fossil fuels used to generate electricity)';
-				results.style.display = 'block';
-			});
+		const data = await response.json();
+		const carbonData = data.data;
+
+		// Calculate rounded carbon intensity value
+		const carbonIntensity = Math.round(carbonData.carbonIntensity);
+
+		// Update the user interface with fetched data
+		loading.style.display = 'none';
+		form.style.display = 'none';
+		myregion.textContent = region.toUpperCase();
+		usage.textContent = `${carbonIntensity} grams (grams CO₂ emitted per kilowatt hour)`;
+		fossilfuel.textContent = `${carbonData.fossilFuelPercentage.toFixed(2)}% (percentage of fossil fuels used to generate electricity)`;
+		results.style.display = 'block';
+
+		// TODO: calculateColor(carbonIntensity) - implement in next lesson
+
 	} catch (error) {
-		console.log(error);
+		console.error('Error fetching carbon data:', error);
+		
+		// Show user-friendly error message
 		loading.style.display = 'none';
 		results.style.display = 'none';
-		errors.textContent = 'Sorry, we have no data for the region you have requested.';
+		errors.textContent = 'Sorry, we couldn\'t fetch data for that region. Please check your API key and region code.';
 	}
 }
 ```
 
-Bu büyük bir fonksiyon. Burada neler oluyor?
+**Burada olanları parçalayarak açıklayalım:**
+- **Modern `fetch()` API'sini kullanır** harici kütüphaneler yerine daha temiz, bağımlılıksız kod için
+- **`response.ok` ile doğru hata kontrolü uygular** API hatalarını erken yakalamak için
+- **Asenkron işlemleri `async/await` ile yönetir** daha okunabilir kod akışı için
+- **CO2 Signal API ile kimlik doğrulama yapar** `auth-token` başlığı kullanarak
+- **JSON yanıt verilerini ayrıştırır** ve karbon yoğunluğu bilgilerini çıkarır
+- **Birden fazla UI öğesini günceller** biçimlendirilmiş çevresel verilerle
+- **API çağrıları başarısız olduğunda kullanıcı dostu hata mesajları sağlar**
 
-- En iyi uygulamaları takip ederek, bu fonksiyonun asenkron davranmasını sağlamak için bir `async` anahtar kelimesi kullanıyorsunuz. Fonksiyon, API veri döndürdüğünde bir vaat döndüreceği için bir `try/catch` bloğu içerir. API'nin yanıt verme hızını kontrol edemediğinizden (hiç yanıt vermeyebilir!), bu belirsizliği asenkron olarak çağırarak ele almanız gerekir.
-- co2signal API'sini sorgulayarak bölgenizin verilerini alıyorsunuz ve API Anahtarınızı kullanıyorsunuz. Bu anahtarı kullanmak için, başlık parametrelerinizde bir tür kimlik doğrulama yapmanız gerekiyor.
-- API yanıt verdiğinde, yanıt verilerinin çeşitli öğelerini ekranınızda bu verileri göstermek için ayarladığınız bölümlere atıyorsunuz.
-- Bir hata varsa veya sonuç yoksa, bir hata mesajı gösteriyorsunuz.
+**Gösterilen modern JavaScript kavramları:**
+- **Şablon dizileri** `${}` sözdizimi ile temiz dize biçimlendirme için
+- **Hata işleme** try/catch blokları ile sağlam uygulamalar için
+- **Async/await** ağ isteklerini zarif bir şekilde yönetmek için
+- **Nesne yapılandırması** API yanıtlarından belirli verileri çıkarmak için
+- **Yöntem zincirleme** birden fazla DOM manipülasyonu için
 
-✅ Asenkron programlama desenlerini kullanmak, araç kutunuzda çok faydalı bir başka araçtır. Bu tür kodu yapılandırmanın [çeşitli yolları](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function) hakkında bilgi edinin.
+✅ Bu fonksiyon, profesyonel geliştiricilerin düzenli olarak kullandığı birkaç önemli web geliştirme kavramını gösterir - harici sunucularla iletişim kurma, kimlik doğrulama, veri işleme, arayüz güncelleme ve hataları zarif bir şekilde yönetme.
 
-Tebrikler! Eklentinizi oluşturursanız (`npm run build`) ve uzantılar panelinizde yenilerseniz, çalışan bir eklentiniz var! Çalışmayan tek şey simge ve bunu bir sonraki derste düzelteceksiniz.
+```mermaid
+flowchart TD
+    A[Start API Call] --> B[Fetch Request]
+    B --> C{Network Success?}
+    C -->|No| D[Network Error]
+    C -->|Yes| E{Response OK?}
+    E -->|No| F[API Error]
+    E -->|Yes| G[Parse JSON]
+    G --> H{Valid Data?}
+    H -->|No| I[Data Error]
+    H -->|Yes| J[Update UI]
+    
+    D --> K[Show Error Message]
+    F --> K
+    I --> K
+    J --> L[Hide Loading]
+    K --> L
+    
+    style A fill:#e1f5fe
+    style J fill:#e8f5e8
+    style K fill:#ffebee
+    style L fill:#f3e5f5
+```
+
+### 🔄 **Pedagojik Kontrol Noktası**
+**Tam Sistem Anlayışı**: Tüm akışın ustalığını doğrulayın:
+- ✅ DOM referanslarının JavaScript'in arayüzü kontrol etmesini nasıl sağladığını anlayın
+- ✅ Yerel depolamanın tarayıcı oturumları arasında kalıcılık oluşturduğunu anlayın
+- ✅ Async/await'in API çağrılarını uzantıyı dondurmadan nasıl yaptığını anlayın
+- ✅ API çağrıları başarısız olduğunda ne olduğunu ve hataların nasıl ele alındığını anlayın
+- ✅ Kullanıcı deneyiminin neden yükleme durumlarını ve hata mesajlarını içerdiğini anlayın
+
+🎉 **Başardığınız şey:** Şunları yapan bir tarayıcı uzantısı oluşturdunuz:
+- **İnternete bağlanır** ve gerçek çevresel verileri alır
+- **Kullanıcı ayarlarını oturumlar arasında saklar**
+- **Hataları zarif bir şekilde ele alır** çökmeden
+- **Sorunsuz, profesyonel bir kullanıcı deneyimi sağlar**
+
+Çalışmanızı `npm run build` çalıştırarak ve tarayıcıda uzantınızı yenileyerek test edin. Artık işlevsel bir karbon ayak izi takipçiniz var. Bir sonraki derste, uzantıyı tamamlamak için dinamik simge işlevselliği ekleyeceğiz.
 
 ---
 
-## 🚀 Meydan Okuma
+## GitHub Copilot Agent Challenge 🚀
 
-Bu derslerde şimdiye kadar birkaç API türünü tartıştık. Bir web API'si seçin ve sunduklarını derinlemesine araştırın. Örneğin, tarayıcılarda mevcut olan [HTML Sürükle ve Bırak API'sine](https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API) bir göz atın. Sizce harika bir API'yi ne oluşturur?
+Agent modunu kullanarak aşağıdaki meydan okumayı tamamlayın:
+**Açıklama:** Tarayıcı uzantısını hata yönetimi iyileştirmeleri ve kullanıcı deneyimi özellikleri ekleyerek geliştirin. Bu zorluk, API'lerle çalışma, yerel depolama ve modern JavaScript desenleri kullanarak DOM manipülasyonu pratiği yapmanıza yardımcı olacak.
+
+**Görev:** displayCarbonUsage fonksiyonunun geliştirilmiş bir versiyonunu oluşturun. Bu versiyon şunları içermelidir: 1) API çağrılarında başarısızlık durumunda üstel geri çekilme ile yeniden deneme mekanizması, 2) API çağrısından önce bölge kodu için giriş doğrulaması, 3) İlerleme göstergeleri içeren bir yükleme animasyonu, 4) API yanıtlarının localStorage'da 30 dakika süreyle geçerlilik zaman damgalarıyla önbelleğe alınması, ve 5) önceki API çağrılarından gelen geçmiş verileri görüntüleme özelliği. Ayrıca tüm fonksiyon parametrelerini ve dönüş türlerini belgelemek için TypeScript tarzı JSDoc yorumları ekleyin.
+
+[agent mode](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) hakkında daha fazla bilgi edinin.
+
+## 🚀 Zorluk
+
+Web geliştirme için mevcut tarayıcı tabanlı API'leri keşfederek API'ler hakkındaki bilginizi genişletin. Bu tarayıcı API'lerinden birini seçin ve küçük bir demo oluşturun:
+
+- [Geolocation API](https://developer.mozilla.org/docs/Web/API/Geolocation_API) - Kullanıcının mevcut konumunu alın
+- [Notification API](https://developer.mozilla.org/docs/Web/API/Notifications_API) - Masaüstü bildirimleri gönderin
+- [HTML Drag and Drop API](https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API) - Etkileşimli sürükleme arayüzleri oluşturun
+- [Web Storage API](https://developer.mozilla.org/docs/Web/API/Web_Storage_API) - Gelişmiş yerel depolama teknikleri
+- [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) - XMLHttpRequest için modern bir alternatif
+
+**Araştırma soruları:**
+- Bu API gerçek dünyada hangi sorunları çözüyor?
+- API hataları ve uç durumları nasıl ele alıyor?
+- Bu API'yi kullanırken hangi güvenlik hususları dikkate alınmalı?
+- Bu API farklı tarayıcılar arasında ne kadar yaygın destekleniyor?
+
+Araştırmanızdan sonra, bir API'yi geliştirici dostu ve güvenilir yapan özellikleri belirleyin.
 
 ## Ders Sonrası Test
 
@@ -228,7 +546,110 @@ Bu derslerde şimdiye kadar birkaç API türünü tartıştık. Bir web API'si s
 
 ## Gözden Geçirme ve Kendi Kendine Çalışma
 
-Bu derste Yerel Depolama ve API'ler hakkında bilgi edindiniz, her ikisi de profesyonel bir web geliştirici için çok kullanışlıdır. Bu iki şeyin birlikte nasıl çalıştığını düşünebilir misiniz? Bir API tarafından kullanılacak öğeleri saklayacak bir web sitesini nasıl tasarlayacağınızı düşünün.
+Bu derste LocalStorage ve API'ler hakkında bilgi edindiniz; her ikisi de profesyonel bir web geliştirici için oldukça kullanışlıdır. Bu iki şeyin birlikte nasıl çalıştığını düşünebilir misiniz? Bir API tarafından kullanılacak öğeleri depolayan bir web sitesi tasarlamayı düşünün.
+
+### ⚡ **Sonraki 5 Dakikada Yapabilecekleriniz**
+- [ ] DevTools Uygulama sekmesini açın ve herhangi bir web sitesinde localStorage'ı keşfedin
+- [ ] Basit bir HTML formu oluşturun ve tarayıcıda form doğrulamasını test edin
+- [ ] Tarayıcı konsolunda localStorage kullanarak veri depolamayı ve almayı deneyin
+- [ ] Ağ sekmesini kullanarak gönderilen form verilerini inceleyin
+
+### 🎯 **Bu Saatte Başarabilecekleriniz**
+- [ ] Ders sonrası testi tamamlayın ve form işleme kavramlarını anlayın
+- [ ] Kullanıcı tercihlerini kaydeden bir tarayıcı uzantısı formu oluşturun
+- [ ] Yardımcı hata mesajlarıyla istemci tarafı form doğrulamasını uygulayın
+- [ ] Uzantı veri kalıcılığı için chrome.storage API'sini kullanmayı deneyin
+- [ ] Kaydedilen kullanıcı ayarlarına yanıt veren bir kullanıcı arayüzü oluşturun
+
+### 📅 **Hafta Boyunca Uzantı Geliştirme**
+- [ ] Form işlevselliği ile tam özellikli bir tarayıcı uzantısı tamamlayın
+- [ ] Farklı depolama seçeneklerini öğrenin: local, sync ve session storage
+- [ ] Otomatik tamamlama ve doğrulama gibi gelişmiş form özelliklerini uygulayın
+- [ ] Kullanıcı verileri için içe/dışa aktarma işlevselliği ekleyin
+- [ ] Uzantınızı farklı tarayıcılarda kapsamlı bir şekilde test edin
+- [ ] Uzantınızın kullanıcı deneyimini ve hata yönetimini iyileştirin
+
+### 🌟 **Web API Uzmanlığı için Bir Aylık Plan**
+- [ ] Çeşitli tarayıcı depolama API'lerini kullanarak karmaşık uygulamalar oluşturun
+- [ ] Çevrimdışı öncelikli geliştirme desenlerini öğrenin
+- [ ] Veri kalıcılığı içeren açık kaynak projelerine katkıda bulunun
+- [ ] Gizlilik odaklı geliştirme ve GDPR uyumluluğunu öğrenin
+- [ ] Form işleme ve veri yönetimi için yeniden kullanılabilir kütüphaneler oluşturun
+- [ ] Web API'leri ve uzantı geliştirme hakkında bilgi paylaşın
+
+## 🎯 Uzantı Geliştirme Uzmanlığı Zaman Çizelgesi
+
+```mermaid
+timeline
+    title API Integration & Storage Learning Progression
+    
+    section DOM Fundamentals (15 minutes)
+        Element References: querySelector mastery
+                          : Event listener setup
+                          : State management basics
+        
+    section Local Storage (20 minutes)
+        Data Persistence: Key-value storage
+                        : Session management
+                        : User preference handling
+                        : Storage inspection tools
+        
+    section Form Handling (25 minutes)
+        User Input: Form validation
+                  : Event prevention
+                  : Data extraction
+                  : UI state transitions
+        
+    section API Integration (35 minutes)
+        External Communication: HTTP requests
+                              : Authentication patterns
+                              : JSON data parsing
+                              : Response handling
+        
+    section Async Programming (40 minutes)
+        Modern JavaScript: Promise handling
+                         : Async/await patterns
+                         : Error management
+                         : Non-blocking operations
+        
+    section Error Handling (30 minutes)
+        Robust Applications: Try/catch blocks
+                           : User-friendly messages
+                           : Graceful degradation
+                           : Debugging techniques
+        
+    section Advanced Patterns (1 week)
+        Professional Development: Caching strategies
+                                : Rate limiting
+                                : Retry mechanisms
+                                : Performance optimization
+        
+    section Production Skills (1 month)
+        Enterprise Features: Security best practices
+                           : API versioning
+                           : Monitoring & logging
+                           : Scalable architecture
+```
+
+### 🛠️ Tam Yığın Geliştirme Araç Seti Özeti
+
+Bu dersi tamamladıktan sonra artık şunlara sahipsiniz:
+- **DOM Uzmanlığı**: Hassas öğe hedefleme ve manipülasyonu
+- **Depolama Uzmanlığı**: localStorage ile kalıcı veri yönetimi
+- **API Entegrasyonu**: Gerçek zamanlı veri alma ve kimlik doğrulama
+- **Asenkron Programlama**: Modern JavaScript ile engellemeyen işlemler
+- **Hata Yönetimi**: Başarısızlıkları zarifçe ele alan sağlam uygulamalar
+- **Kullanıcı Deneyimi**: Yükleme durumları, doğrulama ve akıcı etkileşimler
+- **Modern Desenler**: fetch API, async/await ve ES6+ özellikleri
+
+**Profesyonel Beceriler Kazanıldı**: Şu alanlarda kullanılan desenleri uyguladınız:
+- **Web Uygulamaları**: Harici veri kaynaklarıyla tek sayfa uygulamalar
+- **Mobil Geliştirme**: Çevrimdışı özelliklere sahip API odaklı uygulamalar
+- **Masaüstü Yazılımı**: Kalıcı depolama ile Electron uygulamaları
+- **Kurumsal Sistemler**: Kimlik doğrulama, önbellekleme ve hata yönetimi
+- **Modern Çerçeveler**: React/Vue/Angular veri yönetimi desenleri
+
+**Bir Sonraki Seviye**: Önbellekleme stratejileri, gerçek zamanlı WebSocket bağlantıları veya karmaşık durum yönetimi gibi ileri düzey konuları keşfetmeye hazırsınız!
 
 ## Ödev
 

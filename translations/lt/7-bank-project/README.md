@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "830359535306594b448db6575ce5cdee",
-  "translation_date": "2025-08-28T11:13:59+00:00",
-  "source_file": "7-bank-project/README.md",
-  "language_code": "lt"
-}
--->
 # :dollar: Sukurkite Banką
 
 Šiame projekte išmoksite, kaip sukurti fiktyvų banką. Šios pamokos apima instrukcijas, kaip sukurti internetinės programos išdėstymą ir maršrutus, kurti formas, valdyti būseną ir gauti duomenis iš API, iš kurios galėsite gauti banko duomenis.
 
-| ![Screen1](../../../translated_images/screen1.baccbba0f1f93364672eb250d2fbd21574bb1caf79a2155022dc098a741cbdfe.lt.png) | ![Screen2](../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.lt.png) |
+| ![Screen1](../../../translated_images/lt/screen1.baccbba0f1f93364.webp) | ![Screen2](../../../translated_images/lt/screen2.123c82a831a1d14a.webp) |
 |--------------------------------|--------------------------------|
 
 ## Pamokos

@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "26fd39046d264ba185dcb086d3a8cf3e",
-  "translation_date": "2025-08-27T22:13:28+00:00",
-  "source_file": "5-browser-extension/start/README.md",
-  "language_code": "my"
-}
--->
 # Carbon Trigger Browser Extension: စတင်ရေးသားထားသော ကုဒ်
 
 tmrow ရဲ့ C02 Signal API ကို အသုံးပြုပြီး လျှပ်စစ်ဓာတ်အားအသုံးပြုမှုကို စောင့်ကြည့်နိုင်ရန် browser extension တစ်ခု တည်ဆောက်ပါ။ ဒါကို သင့် browser မှာ တိုက်ရိုက် သတိပေးအဖြစ် အသုံးပြုနိုင်ပါတယ်။ ဒီ extension ကို အခါအားလျော်စွာ အသုံးပြုခြင်းက သင့်ရဲ့ လုပ်ဆောင်မှုတွေကို ဒီအချက်အလက်အပေါ် အခြေခံပြီး ဆုံးဖြတ်နိုင်ဖို့ အထောက်အကူဖြစ်စေပါလိမ့်မယ်။
 
-![extension screenshot](../../../../translated_images/extension-screenshot.0e7f5bfa110e92e3875e1bc9405edd45a3d2e02963e48900adb91926a62a5807.my.png)
+![extension screenshot](../../../../translated_images/my/extension-screenshot.0e7f5bfa110e92e3.webp)
 
 ## စတင်အသုံးပြုခြင်း
 
@@ -31,7 +22,7 @@ npm run build
 
 Edge browser မှာ install လုပ်ဖို့အတွက် browser ရဲ့ အပေါ်ဘက်ညာထောင့်မှာရှိတဲ့ 'three dot' menu ကို အသုံးပြုပြီး Extensions panel ကို ရှာပါ။ 'Load Unpacked' ကို ရွေးချယ်ပြီး extension အသစ်တစ်ခုကို load လုပ်ပါ။ prompt မှာ 'dist' folder ကို ဖွင့်ပြီး extension ကို load လုပ်ပါ။ အသုံးပြုဖို့အတွက် CO2 Signal ရဲ့ API key ([ဒီမှာ email ဖြင့် ရယူပါ](https://www.co2signal.com/) - ဒီစာမျက်နှာမှာ သင့် email ကို box ထဲမှာ ထည့်ပါ) နဲ့ [Electricity Map](https://www.electricitymap.org/map) ရဲ့ သင့်ဒေသကို ကိုယ်စားပြုတဲ့ [region code](http://api.electricitymap.org/v3/zones) ကို ထည့်သွင်းဖို့ လိုအပ်ပါမယ်။ ဥပမာအားဖြင့် Boston မှာ 'US-NEISO' ကို အသုံးပြုပါတယ်။
 
-![installing](../../../../translated_images/install-on-edge.78634f02842c48283726c531998679a6f03a45556b2ee99d8ff231fe41446324.my.png)
+![installing](../../../../translated_images/my/install-on-edge.78634f02842c4828.webp)
 
 API key နဲ့ region ကို extension interface မှာ input လုပ်ပြီးရင် browser extension bar ရဲ့ အရောင် dot က သင့်ဒေသရဲ့ လျှပ်စစ်ဓာတ်အားအသုံးပြုမှုကို ပြောင်းလဲပြသပေးပါလိမ့်မယ်။ ဒါက သင့်အတွက် လျှပ်စစ်ဓာတ်အားများစွာ အသုံးပြုရမယ့် လုပ်ဆောင်မှုတွေကို ဘယ်လိုလုပ်ဆောင်ရမလဲဆိုတာ အညွှန်းပေးပါလိမ့်မယ်။ ဒီ 'dot' စနစ်ရဲ့ အကြံဉာဏ်ကို [Energy Lollipop extension](https://energylollipop.com/) က California emissions အတွက် ပေးခဲ့တာဖြစ်ပါတယ်။
 

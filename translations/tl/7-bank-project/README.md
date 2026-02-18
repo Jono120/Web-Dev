@@ -1,17 +1,8 @@
-<!--
-CO_OP_TRANSLATOR_METADATA:
-{
-  "original_hash": "830359535306594b448db6575ce5cdee",
-  "translation_date": "2025-08-27T22:00:53+00:00",
-  "source_file": "7-bank-project/README.md",
-  "language_code": "tl"
-}
--->
 # :dollar: Gumawa ng Bangko
 
 Sa proyektong ito, matututo kang gumawa ng isang kathang-isip na bangko. Kasama sa mga araling ito ang mga tagubilin kung paano mag-layout ng isang web app at magbigay ng mga ruta, gumawa ng mga form, pamahalaan ang estado, at kumuha ng data mula sa isang API kung saan maaari mong makuha ang datos ng bangko.
 
-| ![Screen1](../../../translated_images/screen1.baccbba0f1f93364672eb250d2fbd21574bb1caf79a2155022dc098a741cbdfe.tl.png) | ![Screen2](../../../translated_images/screen2.123c82a831a1d14ab2061994be2fa5de9cec1ce651047217d326d4773a6348e4.tl.png) |
+| ![Screen1](../../../translated_images/tl/screen1.baccbba0f1f93364.webp) | ![Screen2](../../../translated_images/tl/screen2.123c82a831a1d14a.webp) |
 |--------------------------------|--------------------------------|
 
 ## Mga Aralin
